@@ -1,3 +1,7 @@
+global:
+  header: true
+  js:
+    dist/js/global.bundle.js: {}
 editor:
   version: 2.*
   css:
@@ -24,10 +28,17 @@ frontend:
       dist/css/editor/style.css : {}
       dist/css/block-library/theme.css : {}
       dist/css/main.css : {}
-
 admin:
   css:
     base:
       dist/css/admin.css: {}
   js:
     dist/js/admin.bundle.js: {}
+blocks-edit:
+  css:
+    base: {}
+  js: {}
+blocks-view:
+  css:
+    base: {}
+  js: {}

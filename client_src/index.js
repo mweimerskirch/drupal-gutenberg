@@ -16,13 +16,13 @@ import './sass/index.scss';
       // Register store.
       registerDrupalStore(data);
 
-      // Initialize editor.
-      await initGutenberg(element);
-
       // Register blocks.
       // blocks.registerBlockType( storypage.blocks.section.name, storypage.blocks.section.settings );
       // blocks.registerBlockType( storypage.blocks.row.name, storypage.blocks.row.settings );
       await registerDrupalBlocks(blocks, editor);
+
+      // Initialize editor.
+      await initGutenberg(element);
 
       // On page load always select sidebar's document tab.
       data.dispatch('core/edit-post').openGeneralSidebar('edit-post/document');
@@ -160,7 +160,7 @@ import './sass/index.scss';
 
     return new Promise(resolve => {
       // Wait a tick for CKEditor(?) to finish its things.
-      setTimeout(() => {
+      setTimeout(() => {  
         editPost.initializeEditor( target, 'page', 1, editorSettings, {} );
         resolve();
       }, 0);

@@ -158,6 +158,7 @@ function gutenberg_preprocess_node(&$variables) {
 
   if ($gutenberg_enabled) {
     $variables['#attached']['library'][] = 'gutenberg/frontend';
+    $variables['#attached']['library'][] = 'gutenberg/blocks-view';
   }
 
   // if($variables['element']['#field_type'] === 'text_with_summary') {
@@ -316,5 +317,31 @@ function gutenberg_views_pre_render(ViewExecutable $view) {
     // Attached Gutenberg's basic style to reusable blocks view.
     $view->element['#attached']['library'][] = 'gutenberg/frontend';
     $view->element['#attached']['library'][] = 'gutenberg/admin';
+    $view->element['#attached']['library'][] = 'gutenberg/blocks-view';
+  }
+}
+
+/**
+ * Implements hook_library_info_alter().
+ */
+function gutenberg_library_info_alter(&$libraries, $extension) {
+  if ($extension === 'gutenberg') {
+    $moduleHandler = \Drupal::moduleHandler();
+    $js_files_edit = array();
+    $css_files_edit = array();
+    $css_files_view = array();
+    $moduleHandler->alter('gutenberg_blocks', $js_files_edit, $css_files_edit, $css_files_view);
+
+    foreach ($js_files_edit as $file) {
+      $libraries['blocks-edit']['js'][$file] = array();
+    }
+
+    foreach ($css_files_edit as $file) {
+      $libraries['blocks-edit']['css']['base'][$file] = array();
+    }
+
+    foreach ($css_files_view as $file) {
+      $libraries['blocks-view']['css']['base'][$file] = array();
+    }
   }
 }
