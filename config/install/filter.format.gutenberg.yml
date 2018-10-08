@@ -21,3 +21,9 @@ filters:
     status: true
     weight: 0
     settings: {  }
+  filter_reusable_block:
+    id: filter_reusable_block
+    provider: gutenberg
+    status: true
+    weight: 0
+    settings: {  }

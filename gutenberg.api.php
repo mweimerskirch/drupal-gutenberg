@@ -13,9 +13,6 @@
 /**
  * Modify the list of CSS and JS files for blocks.
  *
- * This hook may be used to modify plugin properties after they have been
- * specified by other modules.
- *
  * @param $js_files_edit
  *   An array of all js files to be included on the editor.
  * @param $css_files_edit
