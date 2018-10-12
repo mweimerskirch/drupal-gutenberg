@@ -16,9 +16,14 @@ export function addQueryArgs(url, args) {
   const parsedURL = parse(url, true);
   const query = { ...parsedURL.query, ...args };
   delete parsedURL.search;
+  const { Drupal } = window;
 
   if (parsedURL.path === 'post.php') {
     return '?save=1';
+  }
+
+  if (parsedURL.path === 'edit.php' && args.post_type && args.post_type === 'wp_block') {
+    return Drupal.url('') + 'admin/content/reusable-blocks';
   }
 
   return format({ ...parsedURL, query });

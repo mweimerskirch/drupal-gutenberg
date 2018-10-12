@@ -42,15 +42,15 @@ module.exports = {
     }),
     new CopyWebpackPlugin([
       {
-        from : 'node_modules/@frontkom/gutenberg-js/node_modules/tinymce/plugins/',
+        from : 'node_modules/@frontkom/gutenberg-js/node_modules/gutenberg/node_modules/tinymce/plugins/',
         to: 'js/plugins/'
       },
       {
-        from : 'node_modules/@frontkom/gutenberg-js/node_modules/tinymce/themes/',
+        from : 'node_modules/@frontkom/gutenberg-js/node_modules/gutenberg/node_modules/tinymce/themes/',
         to: 'js/themes/'
       },
       {
-        from : 'node_modules/@frontkom/gutenberg-js/node_modules/tinymce/skins/',
+        from : 'node_modules/@frontkom/gutenberg-js/node_modules/gutenberg/node_modules/tinymce/skins/',
         to: 'js/skins/'
       },
       {
