@@ -213,6 +213,7 @@ class Gutenberg extends EditorBase implements ContainerFactoryPluginInterface {
   public function getLibraries(Editor $editor) {
     $libraries = [
       'gutenberg/editor',
+      'gutenberg/blocks-view',
       'gutenberg/blocks-edit'
     ];
   
