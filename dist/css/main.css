@@ -64,12 +64,20 @@ body .gutenberg__editor .edit-post-header__settings .edit-post-pinned-plugins {
 
 @media (min-width: 782px) {
   body.toolbar-horizontal .edit-post-sidebar {
-    top: 134px !important; } }
+    top: 95px !important; } }
 
 @media (min-width: 782px) {
   body.toolbar-horizontal .edit-post-header {
-    top: 78px !important;
+    top: 39px !important;
     left: 0px !important; } }
+
+@media (min-width: 782px) {
+  body.toolbar-horizontal.toolbar-tray-open .edit-post-sidebar {
+    top: 134px !important; } }
+
+@media (min-width: 782px) {
+  body.toolbar-horizontal.toolbar-tray-open .edit-post-header {
+    top: 78px !important; } }
 
 @media (min-width: 782px) {
   body.toolbar-vertical .edit-post-sidebar {

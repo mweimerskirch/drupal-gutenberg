@@ -12,14 +12,28 @@ body .gutenberg__editor .edit-post-header__settings {
 body.toolbar-horizontal {
   .edit-post-sidebar {
     @media (min-width: 782px) {
-      top: 134px !important; //78px;
+      top: 95px !important;
     }
   }
 
   .edit-post-header {
     @media (min-width: 782px) {
-      top: 78px !important;
+      top: 39px !important;
       left: 0px !important;
+    }
+  }
+
+  &.toolbar-tray-open {
+    .edit-post-sidebar {
+      @media (min-width: 782px) {
+        top: 134px !important;
+      }
+    }
+
+    .edit-post-header {
+      @media (min-width: 782px) {
+        top: 78px !important;
+      }
     }
   }
 }
