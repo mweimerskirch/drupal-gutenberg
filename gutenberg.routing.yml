@@ -68,3 +68,10 @@ gutenberg.reusable_blocks.load_single:
   methods: 'GET'
   requirements:
     _permission: 'access content'
+gutenberg.oembed:
+  path: '/editor/oembed'
+  defaults:
+    _controller: '\Drupal\gutenberg\Controller\OEmbedProxyUrlController::request'
+  methods: 'GET'
+  requirements:
+    _permission: 'access content'
