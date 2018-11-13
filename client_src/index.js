@@ -7,7 +7,7 @@ import AdditionalFieldsPluginSidebar from './plugins/additional-fields';
 
 import './sass/index.scss';
 
-(($, Drupal, wp) => {
+(($, Drupal, wp, drupalSettings) => {
   Drupal.editors.gutenberg = {
     async attach(element) {
       // Register plugins.
