@@ -163,9 +163,8 @@ const requestPaths = {
       return new Promise((resolve, reject) => {
         jQuery.ajax({
           method: 'GET',
-          url: `//open.iframe.ly/api/oembed?${matches[1]}&origin=drupal`,
+          url: `/editor/oembed?url=` + encodeURIComponent(`http://open.iframe.ly/api/oembed?${matches[1]}&origin=drupal`),
           processData: false,
-          contentType: false,
           accepts: {
             json: 'application/json, text/javascript, */*; q=0.01'
           },

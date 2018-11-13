@@ -7,7 +7,6 @@
 
 use Drupal\Core\Entity\EntityFormInterface;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Entity\EntityFormBuilder;
 use Drupal\node\NodeInterface;
 use Drupal\views\ViewExecutable;
 use Drupal\Core\Theme\ThemeSettings;
@@ -104,6 +103,14 @@ function gutenberg_form_node_form_alter(&$form, FormStateInterface $form_state) 
     if ($gutenberg_enabled) {
       if ($text_fields[0] !== $fieldname) {
         $form[$fieldname]['widget']['#after_build'][] = 'gutenberg_form_node_form_after_build';
+      }
+
+      // Hide the field label.
+      $form[$fieldname]['widget'][0]['#title_display'] = 'hidden';
+
+      // Disable the summary field.
+      if (isset($form[$fieldname]['widget'][0]['summary'])) {
+        $form[$fieldname]['widget'][0]['summary']['#access'] = FALSE;
       }
     }
     else {

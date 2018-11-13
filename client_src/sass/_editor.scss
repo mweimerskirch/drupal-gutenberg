@@ -59,6 +59,10 @@ body .gutenberg__editor .edit-post-layout .edit-post-sidebar {
   }
 }
 
+.wp-block-embed iframe {
+  border: none;
+}
+
 .editor-block-contextual-toolbar {
   .editor-block-toolbar {
     button[aria-label="Edit image"] {
