@@ -121,6 +121,8 @@ import './sass/index.scss';
       allowedBlockTypes: true, 
       disableCustomColors: false, 
       disablePostFormats: false,
+      colors: {...drupalSettings.gutenberg['theme-support']['colors']},
+      fontSizes: {...drupalSettings.gutenberg['theme-support']['font-sizes']},
       mediaLibrary: false,
       titlePlaceholder: Drupal.t('Add title'),
       bodyPlaceholder: Drupal.t('Add text or type / to add content'),

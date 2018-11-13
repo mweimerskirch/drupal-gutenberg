@@ -10,6 +10,8 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Entity\EntityFormBuilder;
 use Drupal\node\NodeInterface;
 use Drupal\views\ViewExecutable;
+use Drupal\Core\Theme\ThemeSettings;
+use Symfony\Component\Yaml\Yaml;
 
 /**
  * Implements hook_form_alter().
@@ -46,6 +48,21 @@ function gutenberg_form_node_form_alter(&$form, FormStateInterface $form_state) 
 
   $gutenberg_enabled = $config->get($node_type . '_enable_full');
 
+  // Leave early if Gutenberg not enabled.
+  if(!$gutenberg_enabled) {
+    return;
+  }
+
+  $theme_settings = _gutenberg_get_default_theme_settings();
+  if (isset($theme_settings['editor-libraries-extend'])) {
+    foreach ($theme_settings['editor-libraries-extend'] as $key => $value) {
+      $form['#attached']['library'][] = $value;
+    }
+  }
+  if (isset($theme_settings['theme-support'])) {
+    $form['#attached']['drupalSettings']['gutenberg']['theme-support'] = $theme_settings['theme-support'];
+  }
+
   $text_fields = array();
 
   // Iterate over all node fields and apply gutenberg text format
@@ -73,10 +90,8 @@ function gutenberg_form_node_form_alter(&$form, FormStateInterface $form_state) 
     return;
   }
 
-  if ($gutenberg_enabled) {
-    $form[$text_fields[0]]['widget'][0]['#format'] = 'gutenberg';
-    $form[$text_fields[0]]['#attributes']['class'][] = 'field--gutenberg';
-  }
+  $form[$text_fields[0]]['widget'][0]['#format'] = 'gutenberg';
+  $form[$text_fields[0]]['#attributes']['class'][] = 'field--gutenberg';
 
   // TODO: Need to solve form validation with react components.
   if (!$node->nid->getString()) {
@@ -156,15 +171,33 @@ function gutenberg_preprocess_node(&$variables) {
 
   $gutenberg_enabled = $config->get($node_type . '_enable_full');
 
-  if ($gutenberg_enabled) {
-    $variables['#attached']['library'][] = 'gutenberg/frontend';
-    $variables['#attached']['library'][] = 'gutenberg/blocks-view';
+  if (!$gutenberg_enabled) {
+    return;
   }
+
+  $variables['#attached']['library'][] = 'gutenberg/frontend';
+  $variables['#attached']['library'][] = 'gutenberg/blocks-view';
+
 
   // if($variables['element']['#field_type'] === 'text_with_summary') {
   //   $element = $variables['element'];
   //   dsm($element);
   // }
+}
+
+function _gutenberg_get_default_theme_settings() {
+  $settings = &drupal_static(__FUNCTION__);
+
+  if (!isset($settings)) {
+    $theme_name = \Drupal::config('system.theme')->get('default');
+    $theme_path = drupal_get_path('theme', $theme_name);
+  
+    $file_path = DRUPAL_ROOT . '/' . $theme_path . '/' . $theme_name . '.gutenberg.yml';
+    $file_contents = file_get_contents($file_path);
+    $settings = Yaml::parse($file_contents);
+  }
+
+  return $settings;
 }
 
 /**
@@ -187,9 +220,19 @@ function gutenberg_theme_suggestions_node_edit_form_alter(array &$suggestions, a
 
   $gutenberg_enabled = $config->get($node_type . '_enable_full');
 
-  if ($gutenberg_enabled) {
-    $suggestions = ['node_edit_form__gutenberg'];
+  if(!$gutenberg_enabled) {
+    return;
   }
+
+  $suggestions = ['node_edit_form__gutenberg'];  
+}
+
+/**
+ * Implements hook_theme_registry_alter
+ */
+function gutenberg_theme_registry_alter(&$theme_registry) {
+  // dsm($theme_registry);
+  // $theme_registry['page']['path'] = drupal_get_path('module', 'my_module') . '/templates';
 }
 
 /**
