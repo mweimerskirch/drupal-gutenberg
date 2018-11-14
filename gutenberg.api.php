@@ -19,7 +19,6 @@
  *   An array of all css files to be included on the editor.
  * @param $css_files_view
  *   An array of all css files to be included on the node view.
- *
  */
 function hook_gutenberg_blocks_alter(array &$js_files_edit, array &$css_files_edit, array &$css_files_view) {
   $js_files_edit[] = '/path/to/js/files';

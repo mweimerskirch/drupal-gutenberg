@@ -58,7 +58,7 @@ class Gutenberg extends EditorBase implements ContainerFactoryPluginInterface {
   protected $renderer;
 
   /**
-   * Constructs a Drupal\Component\Plugin\PluginBase object.
+   * Constructs a Gutenberg object.
    *
    * @param array $configuration
    *   A configuration array containing information about the plugin instance.
@@ -66,7 +66,7 @@ class Gutenberg extends EditorBase implements ContainerFactoryPluginInterface {
    *   The plugin_id for the plugin instance.
    * @param mixed $plugin_definition
    *   The plugin implementation definition.
-   * @param \Drupal\ckeditor\GutenbergPluginManager $gutenberg_plugin_manager
+   * @param GutenbergPluginManager $gutenberg_plugin_manager
    *   The Gutenberg plugin manager.
    * @param \Drupal\Core\Extension\ModuleHandlerInterface $module_handler
    *   The module handler to invoke hooks on.
@@ -75,7 +75,6 @@ class Gutenberg extends EditorBase implements ContainerFactoryPluginInterface {
    * @param \Drupal\Core\Render\RendererInterface $renderer
    *   The renderer.
    */
-  // public function __construct(array $configuration, $plugin_id, $plugin_definition, ModuleHandlerInterface $module_handler, LanguageManagerInterface $language_manager, RendererInterface $renderer) {
   public function __construct(array $configuration, $plugin_id, $plugin_definition, GutenbergPluginManager $gutenberg_plugin_manager, ModuleHandlerInterface $module_handler, LanguageManagerInterface $language_manager, RendererInterface $renderer) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->gutenbergPluginManager = $gutenberg_plugin_manager;
@@ -139,12 +138,10 @@ class Gutenberg extends EditorBase implements ContainerFactoryPluginInterface {
     // // $form_state->getValue(array('editor', 'settings')) will be saved directly
     // // by editor_form_filter_admin_format_submit().
     // $toolbar_settings = &$form_state->getValue(['editor', 'settings', 'toolbar']);
-
     // // The rows key is not built into the form structure, so decode the button
     // // groups data into this new key and remove the button_groups key.
     // $toolbar_settings['rows'] = json_decode($toolbar_settings['button_groups'], TRUE);
     // unset($toolbar_settings['button_groups']);
-
     // // Remove the plugin settings' vertical tabs state; no need to save that.
     // if ($form_state->hasValue(['editor', 'settings', 'plugins'])) {
     //   $form_state->unsetValue(['editor', 'settings', 'plugin_settings']);
@@ -178,7 +175,6 @@ class Gutenberg extends EditorBase implements ContainerFactoryPluginInterface {
     //   }
     //   \Drupal::cache()->set('ckeditor.langcodes', $langcodes);
     // }
-
     // // Get language mapping if available to map to Drupal language codes.
     // // This is configurable in the user interface and not expensive to get, so
     // // we don't include it in the cached language list.
@@ -196,11 +192,13 @@ class Gutenberg extends EditorBase implements ContainerFactoryPluginInterface {
     //     unset($langcodes[$langcode]);
     //   }
     // }
-
     // return $langcodes;
     return ['en' => 'en'];
   }
 
+  /**
+   *
+   */
   public function getJSSettings(Editor $editor) {
     $settings = [];
 
@@ -214,7 +212,7 @@ class Gutenberg extends EditorBase implements ContainerFactoryPluginInterface {
     $libraries = [
       'gutenberg/editor',
       'gutenberg/blocks-view',
-      'gutenberg/blocks-edit'
+      'gutenberg/blocks-edit',
     ];
   
     return $libraries;
@@ -227,6 +225,7 @@ class Gutenberg extends EditorBase implements ContainerFactoryPluginInterface {
    *
    * @param \Drupal\editor\Entity\Editor $editor
    *   A configured text editor object.
+   *
    * @return array
    *   An array containing the "toolbar" configuration.
    */
@@ -243,6 +242,7 @@ class Gutenberg extends EditorBase implements ContainerFactoryPluginInterface {
    *
    * @param \Drupal\editor\Entity\Editor $editor
    *   A configured text editor object.
+   *
    * @return array
    *   An array containing the "contentsCss" configuration.
    */

@@ -11,7 +11,6 @@ use Drupal\editor\Entity\Editor;
  * This allows a Gutenberg plugin to define a settings form. These settings can
  * then be automatically passed on to the corresponding Gutenberg instance via
  * GutenbergPluginInterface::getConfig().
- *
  */
 interface GutenbergPluginConfigurableInterface extends GutenbergPluginInterface {
 

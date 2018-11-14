@@ -26,7 +26,6 @@ class ReusableBlockDelete extends ActionBase {
     //   $entity->field_push->value = 1;
     //   $entity->save();
     // }
-
   }
 
   /**
@@ -36,7 +35,6 @@ class ReusableBlockDelete extends ActionBase {
     /** @var \Drupal\block_content\BlockContentInterface $object */
     // $result = $object->access('update', $account, TRUE)
     //   ->andIf($object->field_push->access('edit', $account, TRUE));
-
     // return $return_as_object ? $result : $result->isAllowed();
     return TRUE;
   }

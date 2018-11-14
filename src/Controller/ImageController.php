@@ -12,13 +12,14 @@ use Drupal\file\Entity\File;
  * Returns responses for our image routes.
  */
 class ImageController extends ControllerBase {
+
   /**
    * Returns JSON representing the new file upload, or validation errors.
    *
    * @param \Symfony\Component\HttpFoundation\Request $request
    *   The request.
    * @param \Drupal\editor\Entity\Editor $editor
-   *   The editor
+   *   The editor.
    *
    * @return \Symfony\Component\HttpFoundation\JsonResponse
    *   The JSON response.
@@ -30,15 +31,15 @@ class ImageController extends ControllerBase {
     $directory = "{$imageSettings['scheme']}://{$imageSettings['directory']}";
     $data = file_get_contents($_FILES['files']['tmp_name']['fid']);
 
-    //TODO: File size and image dimensions validations.
+    // TODO: File size and image dimensions validations.
     //      Better error handling?
-    if(file_prepare_directory($directory, FILE_CREATE_DIRECTORY)) {
+    if (file_prepare_directory($directory, FILE_CREATE_DIRECTORY)) {
       $file = file_save_data($data, "{$directory}/{$filename}", FILE_EXISTS_RENAME);
       $file->setTemporary();
       $file->save();
     }
     else {
-      return new JsonResponse(null, 500);
+      return new JsonResponse(NULL, 500);
     }
 
     $image_src = file_create_url($file->getFileUri());
@@ -50,8 +51,8 @@ class ImageController extends ControllerBase {
       'title' => '',
       'data' => [
         'entity_type' => 'file',
-        'entity_uuid' => $file->uuid()
-      ]
+        'entity_uuid' => $file->uuid(),
+      ],
     ]);
   }
 
@@ -61,7 +62,7 @@ class ImageController extends ControllerBase {
    * @param \Symfony\Component\HttpFoundation\Request $request
    *   The request.
    * @param \Drupal\editor\Entity\Editor $editor
-   *   The editor
+   *   The editor.
    *
    * @return \Symfony\Component\HttpFoundation\JsonResponse
    *   The JSON response.
@@ -76,8 +77,9 @@ class ImageController extends ControllerBase {
       'media_type' => 'image',
       'data' => [
         'entity_type' => 'file',
-        'entity_uuid' => $file->uuid()
-      ]
+        'entity_uuid' => $file->uuid(),
+      ],
     ]);
   }
+
 }

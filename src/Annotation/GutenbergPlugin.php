@@ -7,7 +7,7 @@ use Drupal\Component\Annotation\Plugin;
 /**
  * Defines a GutenbergPlugin annotation object.
  *
- * Plugin Namespace: Plugin\GutenbergPlugin
+ * Plugin Namespace: Plugin\GutenbergPlugin.
  *
  * For a working example, see \Drupal\gutenberg\Plugin\GutenbergPlugin\DrupalImage
  *

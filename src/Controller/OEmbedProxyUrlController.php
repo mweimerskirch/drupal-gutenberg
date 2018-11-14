@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 /**
- * Class OEmbedProxyUrlController
+ * Class OEmbedProxyUrlController.
  *
  * @package Drupal\gutenberg\Controller
  */
@@ -20,6 +20,7 @@ class OEmbedProxyUrlController extends ControllerBase {
    * HTTP request.
    *
    * @return bool|\Symfony\Component\HttpFoundation\JsonResponse
+   *
    * @throws \GuzzleHttp\Exception\GuzzleException
    */
   public function request() {
@@ -36,10 +37,12 @@ class OEmbedProxyUrlController extends ControllerBase {
       $json    = !empty($headers['Content-Type']) ? $headers['Content-Type'][0] == 'application/json' : FALSE;
 
       return new JsonResponse($data, $status, $headers, $json);
-    } catch (RequestException $e) {
+    }
+    catch (RequestException $e) {
       watchdog_exception('Gutenberg Editor', $e->getMessage());
 
       throw new NotFoundException("The provided URL was not found.");
     }
   }
+
 }

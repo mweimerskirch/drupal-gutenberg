@@ -1,10 +1,9 @@
-<?php 
+<?php
 
 namespace Drupal\gutenberg\Plugin\Filter;
 
 use Drupal\filter\FilterProcessResult;
 use Drupal\filter\Plugin\FilterBase;
-use Drupal\Core\Form\FormStateInterface;
 use Drupal\block_content\Entity\BlockContent;
 
 /**
@@ -18,10 +17,14 @@ use Drupal\block_content\Entity\BlockContent;
  * )
  */
 class ReusableBlockFilter extends FilterBase {
+
+  /**
+   * Process each block.
+   */
   public function process($text, $langcode) {
     $lines = explode("\n", $text);
 
-    $lines = preg_replace_callback('#^<!-- wp:block.*\s(.*)\s\/-->$#', array($this, 'renderBlock'), $lines);
+    $lines = preg_replace_callback('#^<!-- wp:block.*\s(.*)\s\/-->$#', [$this, 'renderBlock'], $lines);
 
     $text = implode("\n", $lines);
 
@@ -29,7 +32,7 @@ class ReusableBlockFilter extends FilterBase {
   }
 
   /**
-   * Callback function to process each block
+   * Callback function to process each block.
    */
   private function renderBlock($match) {
     $comment = $match[0];
@@ -41,11 +44,11 @@ class ReusableBlockFilter extends FilterBase {
       return $comment;
     }
 
-    $render = \Drupal::entityTypeManager()->
-      getViewBuilder('block_content')->view($block, 'reusable_block');
+    $render = \Drupal::entityTypeManager()
+      ->getViewBuilder('block_content')->view($block, 'reusable_block');
 
     $content = \Drupal::service('renderer')->render($render);
     return $comment . $content;
   }
-}
 
+}

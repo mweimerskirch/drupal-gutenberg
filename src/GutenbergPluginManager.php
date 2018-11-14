@@ -2,7 +2,6 @@
 
 namespace Drupal\gutenberg;
 
-use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\DefaultPluginManager;
 use Drupal\Core\Cache\CacheBackendInterface;
@@ -13,6 +12,7 @@ use Drupal\editor\Entity\Editor;
  * Provides a Gutenberg Plugin plugin manager.
  */
 class GutenbergPluginManager extends DefaultPluginManager {
+
   /**
    * Constructs a GutenbergPluginManager object.
    *
@@ -69,6 +69,5 @@ class GutenbergPluginManager extends DefaultPluginManager {
       }
     }
   }
-
 
 }

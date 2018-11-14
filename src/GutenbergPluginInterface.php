@@ -18,6 +18,7 @@ interface GutenbergPluginInterface extends PluginInspectionInterface {
    *
    * @param \Drupal\editor\Entity\Editor $editor
    *   A configured text editor object.
+   *
    * @return array
    *   An array of libraries suitable for usage in a render API #attached
    *   property.
@@ -42,7 +43,7 @@ interface GutenbergPluginInterface extends PluginInspectionInterface {
    * aware that it may not yet contain plugin-specific settings, because the
    * user may not yet have configured the form.
    * If there are plugin-specific settings (verify with isset()), they can be
-   * found at
+   * found at.
    * @code
    * $settings = $editor->getSettings();
    * $plugin_specific_settings = $settings['plugins'][$plugin_id];
@@ -50,6 +51,7 @@ interface GutenbergPluginInterface extends PluginInspectionInterface {
    *
    * @param \Drupal\editor\Entity\Editor $editor
    *   A configured text editor object.
+   *
    * @return array
    *   A keyed array, whose keys will end up as keys under CKEDITOR.config.
    */

@@ -5,12 +5,12 @@ namespace Drupal\gutenberg\Controller;
 use Drupal\Core\Controller\ControllerBase;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Drupal\block\Entity\Block;
 
 /**
  * Returns responses for our blocks routes.
  */
 class BlocksController extends ControllerBase {
+
   /**
    * Returns JSON representing the loaded blocks.
    *
@@ -23,7 +23,7 @@ class BlocksController extends ControllerBase {
   public function load(Request $request) {
     $blockManager = \Drupal::service('plugin.manager.block');
     $contextRepository = \Drupal::service('context.repository');
-    // Get blocks definition
+    // Get blocks definition.
     $definitions = $blockManager->getDefinitionsForContexts($contextRepository->getAvailableContexts());
     $definitions = $blockManager->getSortedDefinitions($definitions);
     return new JsonResponse($definitions);
@@ -49,7 +49,7 @@ class BlocksController extends ControllerBase {
     $access_result = $plugin_block->access(\Drupal::currentUser());
 
     // Return empty render array if user doesn't have access.
-    // $access_result can be boolean or an AccessResult class
+    // $access_result can be boolean or an AccessResult class.
     if (is_object($access_result) && $access_result->isForbidden() || is_bool($access_result) && !$access_result) {
       // You might need to add some cache tags/contexts.
       return new JsonResponse(['html' => 'No access.']);
