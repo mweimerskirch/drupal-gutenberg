@@ -121,8 +121,6 @@ import './sass/index.scss';
       allowedBlockTypes: true, 
       disableCustomColors: false, 
       disablePostFormats: false,
-      colors: {...drupalSettings.gutenberg['theme-support']['colors']},
-      fontSizes: {...drupalSettings.gutenberg['theme-support']['font-sizes']},
       mediaLibrary: false,
       titlePlaceholder: Drupal.t('Add title'),
       bodyPlaceholder: Drupal.t('Add text or type / to add content'),
@@ -132,6 +130,17 @@ import './sass/index.scss';
       canPublish: false,  // to disable Editor Publish featured (default: true)
       canSave: false,     // to disable Editor Save featured (default: true)    };
     };
+
+    const colors = drupalSettings.gutenberg && drupalSettings.gutenberg['theme-support'] ? {...drupalSettings.gutenberg['theme-support']['colors']} : null;
+    const fontSizes = drupalSettings.gutenberg && drupalSettings.gutenberg['theme-support'] ? {...drupalSettings.gutenberg['theme-support']['fontSizes']} : null;
+
+    if (colors) {
+      editorSettings.colors = colors;
+    }
+
+    if (fontSizes) {
+      editorSettings.fontSizes = fontSizes;
+    }
 
     window.customGutenberg = {
       events: {
