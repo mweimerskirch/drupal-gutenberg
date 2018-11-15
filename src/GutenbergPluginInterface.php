@@ -43,7 +43,7 @@ interface GutenbergPluginInterface extends PluginInspectionInterface {
    * aware that it may not yet contain plugin-specific settings, because the
    * user may not yet have configured the form.
    * If there are plugin-specific settings (verify with isset()), they can be
-   * found at.
+   * found at:
    * @code
    * $settings = $editor->getSettings();
    * $plugin_specific_settings = $settings['plugins'][$plugin_id];
