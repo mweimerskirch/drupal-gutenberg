@@ -15,7 +15,7 @@ use Symfony\Component\Yaml\Yaml;
  * Implements hook_form_alter().
  */
 function gutenberg_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-  if ($form_id == 'node_type_edit_form') {
+  if ($form_id == 'node_type_edit_form' || $form_id == 'node_type_add_form') {
     $config = \Drupal::service('config.factory')->getEditable('gutenberg.settings');
 
     $form['gutenberg'] = [
@@ -27,7 +27,7 @@ function gutenberg_form_alter(&$form, FormStateInterface $form_state, $form_id) 
       'enable_gutenberg_experience' => [
         '#type' => 'checkbox',
         '#title' => t('Enable Gutenberg experience'),
-        '#description' => t('If node has a long text field with Gutenberg text format, the edit form will turn into a full Gutenberg UI experience.'),
+        '#description' => t('Turn the node edit form into a full Gutenberg UI experience. At least one field of long text type is necessary.'),
         '#default_value' => $config->get($form['type']['#default_value'] . '_enable_full'),
       ],
     ];
