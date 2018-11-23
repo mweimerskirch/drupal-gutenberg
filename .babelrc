@@ -1,15 +1,16 @@
 {
-  "presets": ["stage-2",
-    ["env", {
-      "targets": {
-        "browsers": ["last 2 Chrome versions"]
-      }
-    }]
-  ],
-  "plugins": [
-    ["transform-async-generator-functions"],
-    ["transform-react-jsx", {
-      "pragma": "wp.element.createElement"
-    }]
+  "presets": [
+		[
+			"env", {
+				"targets": {
+					"browsers": [
+						"last 2 versions",
+						"IE >= 9"
+					]
+				}
+			}
+		],
+    "stage-0",
+    "react" 
   ]
 }
