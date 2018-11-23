@@ -1,0 +1,54 @@
+body .gutenberg__editor .edit-post-layout .edit-post-header {
+  position: fixed;
+  font-family: inherit;
+}
+
+// body .gutenberg__editor .edit-post-header__settings {
+//   .edit-post-pinned-plugins {
+//     display: none;
+//   }
+// }
+
+body.toolbar-horizontal {
+  .edit-post-sidebar {
+    @media (min-width: 782px) {
+      top: 95px !important;
+    }
+  }
+
+  .edit-post-header {
+    @media (min-width: 782px) {
+      top: 39px !important;
+      left: 0 !important;
+    }
+  }
+
+  &.toolbar-tray-open {
+    .edit-post-sidebar {
+      @media (min-width: 782px) {
+        top: 134px !important;
+      }
+    }
+
+    .edit-post-header {
+      @media (min-width: 782px) {
+        top: 78px !important;
+      }
+    }
+  }
+}
+
+body.toolbar-vertical {
+  .edit-post-sidebar {
+    @media (min-width: 782px) {
+      top: 95px !important; //39px !important;
+    }
+  }
+
+  .edit-post-header {
+    @media (min-width: 782px) {
+      top: 39px !important;
+      left: 240px !important;
+    }
+  }
+}

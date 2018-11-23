@@ -1,25 +1,46 @@
-global:
+react:
   header: true
+  version: 16.6.3
   js:
-    dist/js/global.bundle.js: {}
-editor:
-  version: 2.*
+    assets/vendor/react/react.production.min.js: { minified: true }
+react-dom:
+  header: true
+  version: 16.6.3
+  js:
+    assets/vendor/react-dom/react-dom.production.min.js: { minified: true }
+moment:
+  header: true
+  version: 2.22.2
+  js:
+    assets/vendor/moment/moment.min.js: { minified: true }
+gutenberg-js:
+  version: 3.0.1
   css:
     base:
-      dist/css/block-library/style.css : {}
-      dist/css/components/style.css : {}
-      dist/css/style.css : {}
-      dist/css/nux/style.css : {}
-      dist/css/editor/style.css : {}
-      dist/css/block-library/edit-blocks.css : {}
-      dist/css/block-library/theme.css : {}
-      dist/css/main.css : {}
+      assets/vendor/gutenberg-js/css/style.css: {}
+      assets/vendor/gutenberg-js/css/block-library/style.css: {}
   js:
-    dist/js/main.bundle.js: {}
-    dist/js/vendor.bundle.js : {}
+    assets/vendor/gutenberg-js/js/gutenberg-js.js: { minified: true }
+global:
+  version: 1.0.0
+  js:
+    assets/vendor/regenerator-runtime/runtime.js: {}
+    js/global.js: {}
+editor:
+  version: 1.0.0
+  css:
+    theme:
+      css/editor.css: {}
+  js:
+    js/drupal-store.js: {}
+    js/components/drupal-icon.js: {}
+    js/components/drupal-block.js: {}
+    js/plugins/additional-fields.js: {}
+    js/drupal-blocks.js: {}
+    js/gutenberg.js: {}
 
 frontend:
-  version: 2.*
+  version: 1.0.0
   css:
     base:
       dist/css/block-library/style.css : {}
@@ -31,9 +52,9 @@ frontend:
 admin:
   css:
     base:
-      dist/css/admin.css: {}
+      css/admin.css: {}
   js:
-    dist/js/admin.bundle.js: {}
+    dist/js/admin.js: {}
 blocks-edit:
   css:
     base: {}
