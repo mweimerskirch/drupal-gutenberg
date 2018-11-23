@@ -153,6 +153,13 @@ function gutenberg_form_node_form_alter(&$form, FormStateInterface $form_state) 
       $form[$value]['#group'] = 'additional_fields';
     }
   }
+
+  // Is Bartik the default theme? Add some custom styles
+  // to look even better.
+  $default_theme = \Drupal::config('system.theme')->get('default');
+  if ($default_theme === 'bartik') {
+    $form['#attached']['library'][] = 'gutenberg/bartik';
+  }
 }
 
 /**
