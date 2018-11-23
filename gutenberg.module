@@ -121,10 +121,11 @@ function gutenberg_form_node_form_alter(&$form, FormStateInterface $form_state) 
   // form group that can be used lated by JS to move to
   // Gutenberg's sidebar.
   $form['additional_fields'] = [
-    '#type' => 'container',
+    '#type' => 'details',
     '#access' => TRUE,
-    '#title' => t('Additional Fields'),
+    '#title' => t('More settings'),
     '#weight' => 99,
+    '#group' => 'advanced',
   ];
 
   // Move status to Published/meta pane.
