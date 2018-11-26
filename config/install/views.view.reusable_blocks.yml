@@ -357,20 +357,7 @@ display:
           plugin_id: string
       sorts: {  }
       title: 'Reusable Blocks'
-      header:
-        area:
-          id: area
-          table: views
-          field: area
-          relationship: none
-          group_type: group
-          admin_label: ''
-          empty: false
-          tokenize: false
-          content:
-            value: '<a href="/drupal-gutenberg-demo/block/add/reusable_block?_wrapper_format=drupal_ajax" class="button button-action button--primary use-ajax" data-dialog-type="modal" data-dialog-options="{&quot;dialogClass&quot;:&quot;media-library-widget-modal&quot;,&quot;height&quot;:&quot;75%&quot;,&quot;width&quot;:&quot;75%&quot;,&quot;title&quot;:&quot;Add block&quot;}">Add block</a>'
-            format: full_html
-          plugin_id: text
+      header: {  }
       footer: {  }
       empty:
         area:
