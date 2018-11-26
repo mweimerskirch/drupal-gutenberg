@@ -55,7 +55,7 @@ admin:
     base:
       css/admin.css: {}
   js:
-    dist/js/admin.js: {}
+    js/admin.js: {}
 blocks-edit:
   css:
     base: {}
