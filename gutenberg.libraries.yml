@@ -38,17 +38,18 @@ editor:
     js/plugins/additional-fields.js: {}
     js/drupal-blocks.js: {}
     js/gutenberg.js: {}
+bartik:
+  version: 1.0.0
+  css:
+    theme:
+      css/bartik.css: {}
 
 frontend:
   version: 1.0.0
   css:
     base:
-      dist/css/block-library/style.css : {}
-      dist/css/style.css : {}
-      dist/css/nux/style.css : {}
-      dist/css/editor/style.css : {}
-      dist/css/block-library/theme.css : {}
-      dist/css/main.css : {}
+      assets/vendor/gutenberg-js/css/style.css: {}
+      assets/vendor/gutenberg-js/css/block-library/style.css: {}
 admin:
   css:
     base:

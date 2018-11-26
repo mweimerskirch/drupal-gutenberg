@@ -4,7 +4,6 @@
   top: 0;
   right: 0;
   bottom: 0;
-  
   display: flex;
   align-items: center;
   justify-content: center;
@@ -22,7 +21,7 @@
 
 .layout-container {
   &.full-width {
-    margin: 0px;
+    margin: 0;
   }
 }
 
@@ -51,7 +50,8 @@ body .gutenberg__editor .edit-post-layout .edit-post-sidebar {
   }
 }
 
-.wp-block-image, .wp-block-cover-image {
+.wp-block-image,
+.wp-block-cover-image {
   .components-placeholder__fieldset {
     button:not(.editor-media-placeholder__upload-button) {
       display: none;
@@ -76,6 +76,6 @@ body .gutenberg__editor .edit-post-layout .edit-post-sidebar {
 }
 
 .editor-rich-text__tinymce ~ .editor-rich-text__tinymce {
-  opacity:.5;
-  pointer-events:none;
+  opacity: 0.5;
+  pointer-events: none;
 }

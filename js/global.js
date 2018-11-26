@@ -215,7 +215,7 @@
           $.ajax({
             method: 'GET',
 
-            url: '/editor/oembed?url=' + encodeURIComponent('http://open.iframe.ly/api/oembed?' + matches[1] + '&origin=drupal'),
+            url: drupalSettings.path.baseUrl + '/editor/oembed?url=' + encodeURIComponent('http://open.iframe.ly/api/oembed?' + matches[1] + '&origin=drupal'),
 
             processData: false,
             accepts: {

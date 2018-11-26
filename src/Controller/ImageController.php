@@ -35,7 +35,8 @@ class ImageController extends ControllerBase {
     //      Better error handling?
     if (file_prepare_directory($directory, FILE_CREATE_DIRECTORY)) {
       $file = file_save_data($data, "{$directory}/{$filename}", FILE_EXISTS_RENAME);
-      $file->setTemporary();
+      // $file->setTemporary();
+      $file->setPermanent();
       $file->save();
     }
     else {
@@ -48,7 +49,10 @@ class ImageController extends ControllerBase {
       'source_url' => $image_src,
       'link' => $image_src,
       'media_type' => 'image',
-      'title' => '',
+      'title' => [
+        'raw' => ''
+      ],
+      'alt_text' => '',
       'data' => [
         'entity_type' => 'file',
         'entity_uuid' => $file->uuid(),
@@ -75,6 +79,10 @@ class ImageController extends ControllerBase {
       'source_url' => $image_src,
       'link' => $image_src,
       'media_type' => 'image',
+      'title' => [
+        'raw' => ''
+      ],
+      'alt_text' => '',
       'data' => [
         'entity_type' => 'file',
         'entity_uuid' => $file->uuid(),

@@ -28,7 +28,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
         switch (action.type) {
           case 'SET_BLOCK':
-            console.log(state, action);
             return _extends({}, state, {
               blocks: _extends({}, state.blocks, _defineProperty({}, action.item, action.block))
             });

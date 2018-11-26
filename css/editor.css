@@ -10,6 +10,10 @@ body .gutenberg__editor .edit-post-layout .components-popover {
   min-height: 68px;
 }
 
+.wp-block[data-type="core-embed/youtube"] iframe {
+  width: 100%;
+}
+
 body .gutenberg__editor .edit-post-layout .edit-post-header {
   position: fixed;
   font-family: inherit;
@@ -57,8 +61,19 @@ body .gutenberg__editor .edit-post-layout .edit-post-header {
   padding: 80px 0;
 }
 
+.edit-post-visual-editor .editor-block-list__block[data-align="full"] {
+  margin-left: -46px !important;
+  margin-right: -46px !important;
+}
+
 .edit-post-layout__content {
   padding-bottom: 4px;
+}
+
+@media (min-width: 600px) {
+  .edit-post-layout__content {
+    overscroll-behavior-y: auto !important;
+  }
 }
 
 .edit-post-sidebar {

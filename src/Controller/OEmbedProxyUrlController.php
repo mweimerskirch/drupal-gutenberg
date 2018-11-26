@@ -36,7 +36,7 @@ class OEmbedProxyUrlController extends ControllerBase {
       $headers = $response->getHeaders();
       $json    = !empty($headers['Content-Type']) ? $headers['Content-Type'][0] == 'application/json' : FALSE;
 
-      return new JsonResponse($data, $status, $headers, $json);
+      return new JsonResponse(json_decode($data));
     }
     catch (RequestException $e) {
       watchdog_exception('Gutenberg Editor', $e->getMessage());
