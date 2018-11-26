@@ -195,10 +195,10 @@ function gutenberg_preprocess_node(&$variables) {
   $variables['#attached']['library'][] = 'gutenberg/frontend';
   $variables['#attached']['library'][] = 'gutenberg/blocks-view';
 
-  // if($variables['element']['#field_type'] === 'text_with_summary') {
-  //   $element = $variables['element'];
-  //   dsm($element);
-  // }
+  $default_theme = \Drupal::config('system.theme')->get('default');
+  if ($default_theme === 'bartik') {
+    $variables['#attached']['library'][] = 'gutenberg/bartik';
+  }
 }
 
 /**
