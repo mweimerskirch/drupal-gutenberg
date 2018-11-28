@@ -4,16 +4,7 @@
  */
 
 /* eslint func-names: ["error", "never"] */
-(function(
-  Drupal,
-  DrupalGutenberg,
-  drupalSettings,
-  debounce,
-  wp,
-  $,
-  displace,
-  AjaxCommands,
-) {
+(function(Drupal, DrupalGutenberg, drupalSettings, wp, $) {
   /**
    * @namespace
    */
@@ -29,7 +20,7 @@
      * @return {bool}
      *   Whether the call to `CKEDITOR.replace()` created an editor or not.
      */
-    attach(element, format) {
+    async attach(element, format) {
       const { data, blocks, editor } = wp;
       const { registerDrupalStore, registerDrupalBlocks } = DrupalGutenberg;
 
@@ -41,8 +32,8 @@
       //   render: AdditionalFieldsPluginSidebar,
       // });
 
-      registerDrupalStore(data);
-      registerDrupalBlocks(blocks, editor);
+      await registerDrupalStore(data);
+      await registerDrupalBlocks(blocks, editor);
 
       this._initGutenberg(element);
 
@@ -226,13 +217,4 @@
       return editPost.initializeEditor(target, 'page', 1, editorSettings, {});
     },
   };
-})(
-  Drupal,
-  DrupalGutenberg,
-  drupalSettings,
-  Drupal.debounce,
-  window.wp,
-  jQuery,
-  Drupal.displace,
-  Drupal.AjaxCommands,
-);
+})(Drupal, DrupalGutenberg, drupalSettings, window.wp, jQuery);

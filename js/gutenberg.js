@@ -5,62 +5,81 @@
 * @preserve
 **/'use strict';
 
-(function (Drupal, DrupalGutenberg, drupalSettings, debounce, wp, $, displace, AjaxCommands) {
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+(function (Drupal, DrupalGutenberg, drupalSettings, wp, $) {
   Drupal.editors.gutenberg = {
     attach: function attach(element, format) {
-      var data = wp.data,
-          blocks = wp.blocks,
-          editor = wp.editor;
-      var registerDrupalStore = DrupalGutenberg.registerDrupalStore,
-          registerDrupalBlocks = DrupalGutenberg.registerDrupalBlocks;
+      var _this = this;
 
+      return _asyncToGenerator(regeneratorRuntime.mark(function _callee() {
+        var data, blocks, editor, registerDrupalStore, registerDrupalBlocks;
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                data = wp.data, blocks = wp.blocks, editor = wp.editor;
+                registerDrupalStore = DrupalGutenberg.registerDrupalStore, registerDrupalBlocks = DrupalGutenberg.registerDrupalBlocks;
+                _context.next = 4;
+                return registerDrupalStore(data);
 
-      registerDrupalStore(data);
-      registerDrupalBlocks(blocks, editor);
+              case 4:
+                _context.next = 6;
+                return registerDrupalBlocks(blocks, editor);
 
-      this._initGutenberg(element);
+              case 6:
 
-      data.dispatch('core/edit-post').openGeneralSidebar('edit-post/document');
+                _this._initGutenberg(element);
 
-      data.dispatch('core/nux').disableTips();
+                data.dispatch('core/edit-post').openGeneralSidebar('edit-post/document');
 
-      blocks.registerBlockStyle('core/image', {
-        name: 'colorbox',
-        label: 'Colorbox image'
-      });
+                data.dispatch('core/nux').disableTips();
 
-      setTimeout(function () {
-        $('.edit-post-header__settings').append($('.gutenberg-header-settings'));
-        $('.gutenberg-full-editor').addClass('ready');
-        $('#gutenberg-loading').addClass('hide');
-      }, 0);
+                blocks.registerBlockStyle('core/image', {
+                  name: 'colorbox',
+                  label: 'Colorbox image'
+                });
 
-      $(document.forms[0]).on('submit', function (e) {
-        $(element).val(data.select('core/editor').getEditedPostContent());
+                setTimeout(function () {
+                  $('.edit-post-header__settings').append($('.gutenberg-header-settings'));
+                  $('.gutenberg-full-editor').addClass('ready');
+                  $('#gutenberg-loading').addClass('hide');
+                }, 0);
 
-        $(element).data({ 'editor-value-is-changed': true });
-        $(element).attr('data-editor-value-is-changed', true);
+                $(document.forms[0]).on('submit', function (e) {
+                  $(element).val(data.select('core/editor').getEditedPostContent());
 
-        data.dispatch('core/edit-post').openGeneralSidebar('edit-post/document');
+                  $(element).data({ 'editor-value-is-changed': true });
+                  $(element).attr('data-editor-value-is-changed', true);
 
-        data.dispatch('core/editor').savePost();
+                  data.dispatch('core/edit-post').openGeneralSidebar('edit-post/document');
 
-        var $source = $('[id^="edit-"]:focus');
+                  data.dispatch('core/editor').savePost();
 
-        if (!$source.length) {
-          $source = $(e.originalEvent.explicitOriginalTarget);
-        }
+                  var $source = $('[id^="edit-"]:focus');
 
-        if ($source.attr('id') === 'edit-submit' || $source.attr('id') === 'edit-preview' || $source.attr('id') === 'edit-delete') {
-          return true;
-        }
+                  if (!$source.length) {
+                    $source = $(e.originalEvent.explicitOriginalTarget);
+                  }
 
-        e.preventDefault();
-        e.stopPropagation();
-        return false;
-      });
+                  if ($source.attr('id') === 'edit-submit' || $source.attr('id') === 'edit-preview' || $source.attr('id') === 'edit-delete') {
+                    return true;
+                  }
 
-      return true;
+                  e.preventDefault();
+                  e.stopPropagation();
+                  return false;
+                });
+
+                return _context.abrupt('return', true);
+
+              case 13:
+              case 'end':
+                return _context.stop();
+            }
+          }
+        }, _callee, _this);
+      }))();
     },
     detach: function detach(element, format, trigger) {
       return true;
@@ -143,4 +162,4 @@
       return editPost.initializeEditor(target, 'page', 1, editorSettings, {});
     }
   };
-})(Drupal, DrupalGutenberg, drupalSettings, Drupal.debounce, window.wp, jQuery, Drupal.displace, Drupal.AjaxCommands);
+})(Drupal, DrupalGutenberg, drupalSettings, window.wp, jQuery);
