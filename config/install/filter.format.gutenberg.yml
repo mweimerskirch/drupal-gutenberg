@@ -27,3 +27,9 @@ filters:
     status: true
     weight: 0
     settings: {  }
+  filter_comment_delimiter:
+    id: filter_comment_delimiter
+    provider: gutenberg
+    status: true
+    weight: 1
+    settings: {  }
