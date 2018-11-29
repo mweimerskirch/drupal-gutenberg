@@ -26,10 +26,17 @@
             title: Drupal.t('Drupal Blocks'),
           };
 
-          const categories = [
-            category,
-            ...data.select('core/blocks').getCategories(),
-          ];
+          const baseCategories = data
+            .select('core/blocks')
+            .getCategories()
+            .filter(item => {
+              if (item.slug === 'widgets') {
+                return false;
+              }
+              return true;
+            });
+
+          const categories = [...baseCategories, category];
 
           data.dispatch('core/blocks').setCategories(categories);
 
