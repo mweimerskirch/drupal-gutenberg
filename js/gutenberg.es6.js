@@ -37,6 +37,19 @@
 
       this._initGutenberg(element);
 
+      // Remove unused blocks.
+      const categories = data
+        .select('core/blocks')
+        .getCategories()
+        .filter(item => {
+          if (item.slug === 'widgets') {
+            return false;
+          }
+          return true;
+        });
+
+      data.dispatch('core/blocks').setCategories(categories);
+
       // On page load always select sidebar's document tab.
       data.dispatch('core/edit-post').openGeneralSidebar('edit-post/document');
 

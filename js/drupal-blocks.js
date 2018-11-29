@@ -34,14 +34,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
           title: Drupal.t('Drupal Blocks')
         };
 
-        var baseCategories = data.select('core/blocks').getCategories().filter(function (item) {
-          if (item.slug === 'widgets') {
-            return false;
-          }
-          return true;
-        });
-
-        var categories = [].concat(_toConsumableArray(baseCategories), [category]);
+        var categories = [].concat(_toConsumableArray(data.select('core/blocks').getCategories()), [category]);
 
         data.dispatch('core/blocks').setCategories(categories);
 

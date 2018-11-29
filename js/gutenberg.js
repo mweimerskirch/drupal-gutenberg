@@ -15,7 +15,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
       var _this = this;
 
       return _asyncToGenerator(regeneratorRuntime.mark(function _callee() {
-        var data, blocks, editor, registerDrupalStore, registerDrupalBlocks;
+        var data, blocks, editor, registerDrupalStore, registerDrupalBlocks, categories;
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -32,6 +32,16 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
               case 6:
 
                 _this._initGutenberg(element);
+
+                categories = data.select('core/blocks').getCategories().filter(function (item) {
+                  if (item.slug === 'widgets') {
+                    return false;
+                  }
+                  return true;
+                });
+
+
+                data.dispatch('core/blocks').setCategories(categories);
 
                 data.dispatch('core/edit-post').openGeneralSidebar('edit-post/document');
 
@@ -77,7 +87,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
                 return _context.abrupt('return', true);
 
-              case 14:
+              case 16:
               case 'end':
                 return _context.stop();
             }
