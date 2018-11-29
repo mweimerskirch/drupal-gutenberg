@@ -63,6 +63,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                   data.dispatch('core/editor').savePost();
 
                   var $source = $('input[active="true"]');
+
                   $source.removeAttr('active');
 
                   if ($source.attr('id') === 'edit-submit' || $source.attr('id') === 'edit-preview' || $source.attr('id') === 'edit-delete') {

@@ -80,8 +80,9 @@
         // Clear content "dirty" state.
         data.dispatch('core/editor').savePost();
 
-        // Get the original button clicked.
+        // Get the original button clicked...
         const $source = $('input[active="true"]');
+        // ...and reset its active state.
         $source.removeAttr('active');
 
         // Only these buttons are allowed to submit.
@@ -141,6 +142,9 @@
      *
      * @param {HTMLElement} element
      *   The element where the editor will be initialized.
+     *
+     * @return {any}
+     *   Returns whatever from initializeEditor().
      */
     _initGutenberg(element) {
       const { editPost } = wp;
@@ -218,7 +222,7 @@
             $(document.body).removeClass('gutenberg-sidedar-open');
             // Move tab before sidebar is "destroyed".
             $('.gutenberg-sidebar').append(
-              $('.edit-post-sidebar .components-panel .tab')
+              $('.edit-post-sidebar .components-panel .tab'),
             );
           },
         },
