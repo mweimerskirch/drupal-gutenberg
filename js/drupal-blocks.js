@@ -21,6 +21,59 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
     core: DrupalIcon
   };
 
+  function isBlackListed(definition, blackList) {
+    for (var key in blackList) {
+      if (blackList.hasOwnProperty(key)) {
+        var values = blackList[key];
+
+        var _iteratorNormalCompletion = true;
+        var _didIteratorError = false;
+        var _iteratorError = undefined;
+
+        try {
+          for (var _iterator = values[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+            var value = _step.value;
+
+            if (definition[key] === value) {
+              return true;
+            }
+          }
+        } catch (err) {
+          _didIteratorError = true;
+          _iteratorError = err;
+        } finally {
+          try {
+            if (!_iteratorNormalCompletion && _iterator.return) {
+              _iterator.return();
+            }
+          } finally {
+            if (_didIteratorError) {
+              throw _iteratorError;
+            }
+          }
+        }
+      }
+    }
+
+    return false;
+  }
+
+  function filterBlackList(definitions, blackList) {
+    var result = {};
+
+    for (var key in definitions) {
+      if (definitions.hasOwnProperty(key)) {
+        var definition = definitions[key];
+
+        if (!isBlackListed(definition, blackList)) {
+          result[key] = definition;
+        }
+      }
+    }
+
+    return result;
+  }
+
   function registerDrupalBlocks(blocks, editor) {
     return new Promise(function (resolve) {
       var BlockAlignmentToolbar = editor.BlockAlignmentToolbar,
@@ -37,6 +90,13 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
         var categories = [].concat(_toConsumableArray(data.select('core/blocks').getCategories()), [category]);
 
         data.dispatch('core/blocks').setCategories(categories);
+
+        var blackList = {
+          category: ['core'],
+          id: ['system_messages_block', 'system_main_block', 'shortcuts', 'system_menu_block_admin', 'help_block']
+        };
+
+        definitions = filterBlackList(definitions, blackList);
 
         var _loop = function _loop(id) {
           if ({}.hasOwnProperty.call(definitions, id)) {
