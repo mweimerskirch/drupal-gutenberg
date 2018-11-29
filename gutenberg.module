@@ -212,8 +212,10 @@ function _gutenberg_get_default_theme_settings() {
     $theme_path = drupal_get_path('theme', $theme_name);
 
     $file_path = DRUPAL_ROOT . '/' . $theme_path . '/' . $theme_name . '.gutenberg.yml';
-    $file_contents = file_get_contents($file_path);
-    $settings = Yaml::parse($file_contents);
+    if (file_exists($file_path)) {
+      $file_contents = file_get_contents($file_path);
+      $settings = Yaml::parse($file_contents);
+    }
   }
 
   return $settings;
