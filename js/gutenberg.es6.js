@@ -179,8 +179,14 @@
         canSave: false, // to disable Editor Save featured (default: true)    };
       };
 
-      const colors = drupalSettings.gutenberg && drupalSettings.gutenberg['theme-support'] ? { ...drupalSettings.gutenberg['theme-support']['colors'] } : null;
-      const fontSizes = drupalSettings.gutenberg && drupalSettings.gutenberg['theme-support'] ? { ...drupalSettings.gutenberg['theme-support']['fontSizes'] } : null;
+      const colors =
+        drupalSettings.gutenberg && drupalSettings.gutenberg['theme-support']
+          ? { ...drupalSettings.gutenberg['theme-support'].colors }
+          : null;
+      const fontSizes =
+        drupalSettings.gutenberg && drupalSettings.gutenberg['theme-support']
+          ? { ...drupalSettings.gutenberg['theme-support'].fontSizes }
+          : null;
 
       if (colors) {
         editorSettings.colors = colors;
