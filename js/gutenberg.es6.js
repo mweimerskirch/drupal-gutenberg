@@ -59,6 +59,10 @@
         $('#gutenberg-loading').addClass('hide');
       }, 0);
 
+      $('#edit-submit, #edit-preview, #edit-delete').on('click', e => {
+        $(e.currentTarget).attr('active', true);
+      });
+
       // Gutenberg is full of buttons which cause the form
       // to submit (no default prevent).
       $(document.forms[0]).on('submit', e => {
@@ -77,12 +81,8 @@
         data.dispatch('core/editor').savePost();
 
         // Get the original button clicked.
-        let $source = $('[id^="edit-"]:focus');
-
-        // For Firefox...
-        if (!$source.length) {
-          $source = $(e.originalEvent.explicitOriginalTarget);
-        }
+        const $source = $('input[active="true"]');
+        $source.removeAttr('active');
 
         // Only these buttons are allowed to submit.
         if (

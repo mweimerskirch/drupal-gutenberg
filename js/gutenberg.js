@@ -46,6 +46,10 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                   $('#gutenberg-loading').addClass('hide');
                 }, 0);
 
+                $('#edit-submit, #edit-preview, #edit-delete').on('click', function (e) {
+                  $(e.currentTarget).attr('active', true);
+                });
+
                 $(document.forms[0]).on('submit', function (e) {
                   $(element).val(data.select('core/editor').getEditedPostContent());
 
@@ -56,11 +60,8 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
                   data.dispatch('core/editor').savePost();
 
-                  var $source = $('[id^="edit-"]:focus');
-
-                  if (!$source.length) {
-                    $source = $(e.originalEvent.explicitOriginalTarget);
-                  }
+                  var $source = $('input[active="true"]');
+                  $source.removeAttr('active');
 
                   if ($source.attr('id') === 'edit-submit' || $source.attr('id') === 'edit-preview' || $source.attr('id') === 'edit-delete') {
                     return true;
@@ -73,7 +74,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
                 return _context.abrupt('return', true);
 
-              case 13:
+              case 14:
               case 'end':
                 return _context.stop();
             }
