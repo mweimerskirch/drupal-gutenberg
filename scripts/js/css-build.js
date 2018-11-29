@@ -36,9 +36,9 @@ const processFiles = (error, filePaths) => {
       }
     });
 
-    fs.writeFile(`./css/${filename}.map`, result.map, err => {
+    fs.writeFile(`./css/${filename}.css.map`, result.map, err => {
       if (!err) {
-        log(`./css/${filename}.map`);
+        log(`./css/${filename}.css.map`);
       }
     });
 
