@@ -197,11 +197,11 @@
       };
 
       const colors =
-        drupalSettings.gutenberg && drupalSettings.gutenberg['theme-support']
+        drupalSettings.gutenberg && drupalSettings.gutenberg['theme-support'] && drupalSettings.gutenberg['theme-support'].colors
           ? { ...drupalSettings.gutenberg['theme-support'].colors }
           : null;
       const fontSizes =
-        drupalSettings.gutenberg && drupalSettings.gutenberg['theme-support']
+        drupalSettings.gutenberg && drupalSettings.gutenberg['theme-support'] && drupalSettings.gutenberg['theme-support'].fontSizes
           ? { ...drupalSettings.gutenberg['theme-support'].fontSizes }
           : null;
 
