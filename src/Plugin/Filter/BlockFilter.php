@@ -54,7 +54,14 @@ class BlockFilter extends FilterBase {
     // $render['#printed'] = TRUE;
     $content = \Drupal::service('renderer')->render($render);
 
-    return $comment . $content;
+    // Render the css class if available.
+    $prefix = $suffix = '';
+    if (!empty($attributes->className)) {
+      $prefix = '<div class="' . $attributes->className . '">';
+      $suffix = '</div>';
+    }
+
+    return $comment . $prefix . $content . $suffix;
   }
 
   /**
