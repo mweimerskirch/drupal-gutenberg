@@ -24,7 +24,7 @@ class CommentDelimiterFilter extends FilterBase {
 
     $lines = explode("\n", $text);
 
-    $lines = preg_replace_callback('#^<!-- \/?wp:.* \/?-->$#', [$this, 'renderContent'], $lines);
+    $lines = preg_replace_callback('#<!-- \/?wp:.* \/?-->#', [$this, 'renderContent'], $lines);
 
     $text = implode("\n", $lines);
 
