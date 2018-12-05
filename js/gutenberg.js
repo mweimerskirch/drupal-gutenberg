@@ -15,7 +15,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
       var _this = this;
 
       return _asyncToGenerator(regeneratorRuntime.mark(function _callee() {
-        var data, blocks, editor, registerDrupalStore, registerDrupalBlocks, categories;
+        var data, blocks, editor, registerDrupalStore, registerDrupalBlocks, categories, isFormValid;
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -58,8 +58,28 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                   $('#gutenberg-loading').addClass('hide');
                 }, 0);
 
-                $('#edit-submit, #edit-preview, #edit-delete').on('click', function (e) {
+                isFormValid = false;
+
+
+                $('#edit-submit, #edit-preview').on('click', function (e) {
                   $(e.currentTarget).attr('active', true);
+                  data.dispatch('core/edit-post').openGeneralSidebar('edit-post/document');
+
+                  $('#edit-additional-fields').attr('open', '');
+
+                  setTimeout(function () {
+                    isFormValid = document.forms[0].reportValidity();
+
+                    if (isFormValid) {
+                      $(e.currentTarget).click();
+                    }
+                  });
+
+                  if (!isFormValid) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return false;
+                  }
                 });
 
                 $(document.forms[0]).on('submit', function (e) {
@@ -87,7 +107,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
                 return _context.abrupt('return', true);
 
-              case 16:
+              case 17:
               case 'end':
                 return _context.stop();
             }

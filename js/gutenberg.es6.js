@@ -72,8 +72,40 @@
         $('#gutenberg-loading').addClass('hide');
       }, 0);
 
-      $('#edit-submit, #edit-preview, #edit-delete').on('click', e => {
+      let isFormValid = false;
+
+      $('#edit-submit, #edit-preview').on('click', e => {
         $(e.currentTarget).attr('active', true);
+        data
+          .dispatch('core/edit-post')
+          .openGeneralSidebar('edit-post/document');
+
+        // Expand "More Settings" set.
+        $('#edit-additional-fields').attr('open', '');
+
+        // Wait for the next tick, react/gutenberg is
+        // doing its DOM stuff.
+        setTimeout(() => {
+          // This will not work on IE. But it's ok because
+          // we have the server side validation fallback.
+          isFormValid = document.forms[0].reportValidity();
+
+          if (isFormValid) {
+            // We need to submit the form via button click.
+            // Drupal's form submit handler needs it.
+            // TODO: Could we submit and passing the button reference to formState?
+            $(e.currentTarget).click();
+          }
+        });
+
+        // No need to proceed to form validation,
+        // it'll just throw a "not focusable" console
+        // error.
+        if (!isFormValid) {
+          e.preventDefault();
+          e.stopPropagation();
+          return false;
+        }
       });
 
       // Gutenberg is full of buttons which cause the form
@@ -197,11 +229,15 @@
       };
 
       const colors =
-        drupalSettings.gutenberg && drupalSettings.gutenberg['theme-support'] && drupalSettings.gutenberg['theme-support'].colors
+        drupalSettings.gutenberg &&
+        drupalSettings.gutenberg['theme-support'] &&
+        drupalSettings.gutenberg['theme-support'].colors
           ? { ...drupalSettings.gutenberg['theme-support'].colors }
           : null;
       const fontSizes =
-        drupalSettings.gutenberg && drupalSettings.gutenberg['theme-support'] && drupalSettings.gutenberg['theme-support'].fontSizes
+        drupalSettings.gutenberg &&
+        drupalSettings.gutenberg['theme-support'] &&
+        drupalSettings.gutenberg['theme-support'].fontSizes
           ? { ...drupalSettings.gutenberg['theme-support'].fontSizes }
           : null;
 
