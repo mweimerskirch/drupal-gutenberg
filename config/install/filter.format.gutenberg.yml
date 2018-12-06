@@ -3,6 +3,9 @@ status: true
 dependencies:
   module:
     - gutenberg
+  enforced:
+    module:
+      - gutenberg
 name: 'Gutenberg Blocks'
 format: gutenberg
 weight: 0

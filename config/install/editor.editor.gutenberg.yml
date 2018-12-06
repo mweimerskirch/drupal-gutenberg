@@ -5,6 +5,9 @@ dependencies:
     - filter.format.gutenberg
   module:
     - gutenberg
+  enforced:
+    module:
+      - gutenberg
 format: gutenberg
 editor: gutenberg
 settings:

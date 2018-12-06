@@ -7,6 +7,9 @@ dependencies:
   module:
     - block_content
     - text
+  enforced:
+    module:
+      - gutenberg
 _core:
   default_config_hash: Ikr-YepS9tM83KmOB2xZe2wuMBxYj_GfHQBn_hzdC_w
 id: reusable_blocks
