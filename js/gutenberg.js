@@ -52,6 +52,8 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                   label: 'Colorbox image'
                 });
 
+                $(document.forms[0]).attr('novalidate', true);
+
                 setTimeout(function () {
                   $('.edit-post-header__settings').append($('.gutenberg-header-settings'));
                   $('.gutenberg-full-editor').addClass('ready');
@@ -63,16 +65,23 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
                 $('#edit-submit, #edit-preview').on('click', function (e) {
                   $(e.currentTarget).attr('active', true);
+
                   data.dispatch('core/edit-post').openGeneralSidebar('edit-post/document');
 
                   $('#edit-additional-fields').attr('open', '');
+
+                  $(document.forms[0]).removeAttr('novalidate');
 
                   setTimeout(function () {
                     isFormValid = document.forms[0].reportValidity();
 
                     if (isFormValid) {
                       $(e.currentTarget).click();
+                    } else {
+                      $(e.currentTarget).removeAttr('active');
                     }
+
+                    $(document.forms[0]).attr('novalidate', true);
                   });
 
                   if (!isFormValid) {
@@ -83,6 +92,16 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                 });
 
                 $(document.forms[0]).on('submit', function (e) {
+                  var $source = $('input[active="true"]');
+
+                  $source.removeAttr('active');
+
+                  if ($source.attr('id') !== 'edit-submit' && $source.attr('id') !== 'edit-preview' && $source.attr('id') !== 'edit-delete') {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return false;
+                  }
+
                   $(element).val(data.select('core/editor').getEditedPostContent());
 
                   $(element).data({ 'editor-value-is-changed': true });
@@ -92,22 +111,12 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
                   data.dispatch('core/editor').savePost();
 
-                  var $source = $('input[active="true"]');
-
-                  $source.removeAttr('active');
-
-                  if ($source.attr('id') === 'edit-submit' || $source.attr('id') === 'edit-preview' || $source.attr('id') === 'edit-delete') {
-                    return true;
-                  }
-
-                  e.preventDefault();
-                  e.stopPropagation();
-                  return false;
+                  return true;
                 });
 
                 return _context.abrupt('return', true);
 
-              case 17:
+              case 18:
               case 'end':
                 return _context.stop();
             }

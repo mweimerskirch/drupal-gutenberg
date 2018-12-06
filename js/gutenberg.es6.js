@@ -64,6 +64,11 @@
       // Disable inline image block.
       // data.dispatch('core/editor').unregisterToken('core/image');
 
+      // Disable form validation
+      // We need some ninja hacks because every button in Gutenberg will
+      // cause the form to submit.
+      $(document.forms[0]).attr('novalidate', true);
+
       setTimeout(() => {
         $('.edit-post-header__settings').append(
           $('.gutenberg-header-settings'),
@@ -76,6 +81,9 @@
 
       $('#edit-submit, #edit-preview').on('click', e => {
         $(e.currentTarget).attr('active', true);
+
+        // TODO: check if document tab and More Settings field set
+        // are already open to avoid sidebar visual flicker.
         data
           .dispatch('core/edit-post')
           .openGeneralSidebar('edit-post/document');
@@ -83,10 +91,13 @@
         // Expand "More Settings" set.
         $('#edit-additional-fields').attr('open', '');
 
-        // Wait for the next tick, react/gutenberg is
+        // For these buttons enable form validation.
+        $(document.forms[0]).removeAttr('novalidate');
+
+        // Wait for the next tick, React/Gutenberg is
         // doing its DOM stuff.
         setTimeout(() => {
-          // This will not work on IE. But it's ok because
+          // This will not work on IE (<10?). But it's ok because
           // we have the server side validation fallback.
           isFormValid = document.forms[0].reportValidity();
 
@@ -95,7 +106,13 @@
             // Drupal's form submit handler needs it.
             // TODO: Could we submit and passing the button reference to formState?
             $(e.currentTarget).click();
+          } else {
+            // Not active anymore.
+            $(e.currentTarget).removeAttr('active');
           }
+
+          // Then disable form validation again :(
+          $(document.forms[0]).attr('novalidate', true);
         });
 
         // No need to proceed to form validation,
@@ -111,6 +128,23 @@
       // Gutenberg is full of buttons which cause the form
       // to submit (no default prevent).
       $(document.forms[0]).on('submit', e => {
+        // Get the original button clicked...
+        const $source = $('input[active="true"]');
+        // ...and reset its active state.
+        $source.removeAttr('active');
+
+        // If none of those buttons were clicked...
+        if (
+          $source.attr('id') !== 'edit-submit' &&
+          $source.attr('id') !== 'edit-preview' &&
+          $source.attr('id') !== 'edit-delete'
+        ) {
+          // Just stop everything.
+          e.preventDefault();
+          e.stopPropagation();
+          return false;
+        }
+
         // Update editor textarea with gutenberg content.
         $(element).val(data.select('core/editor').getEditedPostContent());
 
@@ -125,24 +159,7 @@
         // Clear content "dirty" state.
         data.dispatch('core/editor').savePost();
 
-        // Get the original button clicked...
-        const $source = $('input[active="true"]');
-        // ...and reset its active state.
-        $source.removeAttr('active');
-
-        // Only these buttons are allowed to submit.
-        if (
-          $source.attr('id') === 'edit-submit' ||
-          $source.attr('id') === 'edit-preview' ||
-          $source.attr('id') === 'edit-delete'
-        ) {
-          return true;
-        }
-
-        // Just stop everything.
-        e.preventDefault();
-        e.stopPropagation();
-        return false;
+        return true;
       });
 
       return true;
