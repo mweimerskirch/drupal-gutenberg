@@ -1,9 +1,6 @@
 langcode: en
 status: true
-dependencies:
-  enforced:
-    module:
-      - gutenberg
+dependencies: {  }
 id: reusable_block
 label: 'Reusable block'
 revision: 0

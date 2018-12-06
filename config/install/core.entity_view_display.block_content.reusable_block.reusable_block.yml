@@ -7,9 +7,6 @@ dependencies:
     - field.field.block_content.reusable_block.body
   module:
     - text
-  enforced:
-    module:
-      - gutenberg
 id: block_content.reusable_block.reusable_block
 targetEntityType: block_content
 bundle: reusable_block

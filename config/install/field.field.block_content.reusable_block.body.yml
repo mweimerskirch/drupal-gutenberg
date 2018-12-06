@@ -6,9 +6,6 @@ dependencies:
     - field.storage.block_content.body
   module:
     - text
-  enforced:
-    module:
-      - gutenberg
 id: block_content.reusable_block.body
 field_name: body
 entity_type: block_content
