@@ -84,6 +84,10 @@ body .gutenberg__editor .edit-post-layout .edit-post-header {
   padding-right: 16px;
 }
 
+.edit-post-sidebar .components-button:focus {
+  background: none !important;
+}
+
 .edit-post-sidebar .edit-post-sidebar-header {
   background: #ececec !important;
   height: auto;
@@ -96,20 +100,20 @@ body .gutenberg__editor .edit-post-layout .edit-post-header {
 
 .edit-post-sidebar button.edit-post-sidebar__panel-tab {
   color: #0074bd;
-  background-color: #eeeeee;
+  background-color: #eee;
   height: 36px;
 }
 
 .edit-post-sidebar button.edit-post-sidebar__panel-tab.is-active {
   border-color: transparent !important;
-  background-color: #ffffff;
+  background-color: #fff;
 }
 
 .edit-post-sidebar .edit-post-post-status {
   display: none;
 }
 
-.edit-post-sidebar [class^="field--"] .form-item {
+.edit-post-sidebar .field--name-title {
   padding: 10px;
 }
 
@@ -118,19 +122,27 @@ body .gutenberg__editor .edit-post-layout .edit-post-header {
 }
 
 .edit-post-sidebar .components-panel__body .components-panel__body {
-  background-color: #f7f7f7;
+  background-color: #fcfcfa;
   border-top: 1px solid #fff;
   border-bottom: 1px solid #bfbfbf;
 }
 
 .edit-post-sidebar .components-panel__body .components-panel__body .components-panel__body-title button {
+  color: #0074bd;
   font-weight: bold;
   text-transform: uppercase;
   text-shadow: 0 1px 0 white;
 }
 
+.edit-post-sidebar .components-panel__body .components-panel__body .components-panel__body-title button:before {
+  content: '\25BA';
+  font-size: 10px;
+  line-height: 22px;
+  margin-right: 6px;
+}
+
 .edit-post-sidebar .components-panel__body .components-panel__body .components-panel__body-title button:hover {
-  text-decoration: underline;
+  color: #004f80;
 }
 
 .edit-post-sidebar .components-panel__body .components-panel__body .components-panel__body-title button svg {
@@ -142,6 +154,29 @@ body .gutenberg__editor .edit-post-layout .edit-post-header {
   background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.125), transparent 4px);
   border-top-width: 0;
   padding-top: 17px;
+}
+
+.edit-post-sidebar .components-panel__body .components-panel__body.is-opened .components-panel__body-title button {
+  color: #004f80;
+}
+
+.edit-post-sidebar .components-panel__body .components-panel__body.is-opened .components-panel__body-title button:before {
+  content: '\25BC';
+}
+
+.edit-post-sidebar .entity-meta {
+  border: none;
+}
+
+.edit-post-sidebar .entity-meta .entity-meta__header {
+  background-color: white;
+  border-top: none;
+  border-radius: 0;
+  padding: 0 10px;
+}
+
+.edit-post-sidebar .entity-meta .seven-details > summary {
+  padding: 1.25em;
 }
 
 .edit-post-sidebar select {
