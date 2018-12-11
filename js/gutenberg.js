@@ -124,6 +124,9 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
         }, _callee, _this);
       }))();
     },
+    attachInlineEditor: function attachInlineEditor(element, format, mainToolbarId, floatedToolbarId) {
+      return false;
+    },
     detach: function detach(element, format, trigger) {
       return true;
     },

@@ -166,6 +166,26 @@
     },
 
     /**
+     * Attaches an inline editor to a DOM element.
+     *
+     * @param {HTMLElement} element
+     *   The element to attach the editor to.
+     * @param {object} format
+     *   The text format used in the editor.
+     * @param {string} [mainToolbarId]
+     *   The id attribute for the main editor toolbar, if any.
+     * @param {string} [floatedToolbarId]
+     *   The id attribute for the floated editor toolbar, if any.
+     *
+     * @return {bool}
+     *   Whether the call to `CKEDITOR.replace()` created an editor or not.
+     */
+    attachInlineEditor(element, format, mainToolbarId, floatedToolbarId) {
+      // We define this function so that quickedit doesn't throw an error.
+      return false;
+    },
+
+    /**
      * Editor detach callback.
      *
      * @param {HTMLElement} element
