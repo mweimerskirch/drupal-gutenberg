@@ -1,20 +1,22 @@
 react:
-  header: true
   version: 16.6.3
   js:
     assets/vendor/react/react.production.min.js: { minified: true }
 react-dom:
-  header: true
   version: 16.6.3
   js:
     assets/vendor/react-dom/react-dom.production.min.js: { minified: true }
 moment:
-  header: true
   version: 2.22.2
   js:
     assets/vendor/moment/moment.min.js: { minified: true }
 gutenberg-js:
   version: 3.0.1
+  dependencies:
+    - gutenberg/react
+    - gutenberg/react-dom
+    - gutenberg/moment
+    - gutenberg/global
   css:
     base:
       assets/vendor/gutenberg-js/css/style.css: {}
@@ -28,6 +30,11 @@ global:
     js/global.js: {}
 editor:
   version: 1.0.0
+  dependencies:
+    - core/drupal
+    - core/drupalSettings
+    - editor/drupal.editor
+    - gutenberg/gutenberg-js
   css:
     theme:
       css/editor.css: {}
@@ -57,6 +64,8 @@ admin:
   js:
     js/admin.js: {}
 blocks-edit:
+  dependencies:
+    - gutenberg/editor
   css:
     base: {}
   js: {}
