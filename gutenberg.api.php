@@ -11,6 +11,8 @@
  */
 
 /**
+ * ☠️ DEPRECATED ☠️
+ * You can use Drupal libraries. Check gutenberg.libraries.yml for an example.
  * Modify the list of CSS and JS files for blocks.
  *
  * @param $js_files_edit

@@ -73,3 +73,22 @@ blocks-view:
   css:
     base: {}
   js: {}
+
+# # Loading your block script and style files:
+# my-block:
+#   # With this dependency, this library will be loaded only when editing
+#   # with Gutenberg.
+#   dependencies:
+#     - gutenberg/editor
+#   js:
+#     path-to-my-js-file/myfile.js: {}
+#   css:
+#     theme:
+#       path-to-my-css-file/myfile.css: {}
+# # If any js or css to be loaded on frontend, just do it without dependencies.
+# my-block:
+#   js:
+#     path-to-my-js-file/myfile.js: {}
+#   css:
+#     theme:
+#       path-to-my-css-file/myfile.css: {}
