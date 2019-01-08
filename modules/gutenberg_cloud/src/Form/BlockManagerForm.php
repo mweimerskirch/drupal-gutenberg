@@ -121,6 +121,7 @@ class BlockManagerForm extends ConfigFormBase {
 
     foreach ($blocks_enabled as $block) {
       if ($block) {
+        unset($blocks_array[$block]['description']);
         $block_config[$block] = $blocks_array[$block];
       }
     }
