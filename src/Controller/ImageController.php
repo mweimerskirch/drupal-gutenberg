@@ -45,7 +45,7 @@ class ImageController extends ControllerBase {
 
     $image_src = file_create_url($file->getFileUri());
     return new JsonResponse([
-      'id' => $file->id(),
+      'id' => (int) $file->id(),
       'source_url' => $image_src,
       'link' => $image_src,
       'media_type' => $file->getMimeType(),
