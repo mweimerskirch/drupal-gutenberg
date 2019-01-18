@@ -94,7 +94,7 @@
     }
   },
   "dependencies": {
-    "@frontkom/gutenberg-js": "^3.0.1",
+    "@frontkom/gutenberg-js": "^4.0.0-rc.0",
     "moment": "^2.22.2",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
