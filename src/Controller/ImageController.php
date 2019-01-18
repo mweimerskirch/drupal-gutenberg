@@ -48,7 +48,7 @@ class ImageController extends ControllerBase {
       'id' => (int) $file->id(),
       'source_url' => $image_src,
       'link' => $image_src,
-      'media_type' => $file->getMimeType(),
+      'media_type' => explode('/', $file->getMimeType())[0],
       'title' => [
         'raw' => ''
       ],
