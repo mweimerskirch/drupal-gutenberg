@@ -10,6 +10,8 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\node\NodeInterface;
 use Drupal\views\ViewExecutable;
 use Symfony\Component\Yaml\Yaml;
+use Drupal\Core\Plugin\Discovery\YamlDiscovery;
+use Drupal\Core\Plugin\Discovery\ContainerDerivativeDiscoveryDecorator;
 
 /**
  * Implements hook_form_alter().
@@ -49,6 +51,13 @@ function gutenberg_form_node_form_alter(&$form, FormStateInterface $form_state) 
   // Leave early if Gutenberg not enabled.
   if (!$gutenberg_enabled) {
     return;
+  }
+
+  $module_settings = _gutenberg_get_all_modules_settings();
+  if (isset($module_settings['editor-libraries-extend'])) {
+    foreach ($module_settings['editor-libraries-extend'] as $key => $value) {
+      $form['#attached']['library'][] = $value;
+    }
   }
 
   $theme_settings = _gutenberg_get_default_theme_settings();
@@ -211,6 +220,21 @@ function _gutenberg_get_default_theme_settings() {
       $file_contents = file_get_contents($file_path);
       $settings = Yaml::parse($file_contents);
     }
+  }
+
+  return $settings;
+}
+
+/**
+ * 
+ */
+function _gutenberg_get_all_modules_settings() {
+  $settings = &drupal_static(__FUNCTION__);
+
+  if(!isset($settings)) {
+    $directories = \Drupal::service('module_handler')->getModuleDirectories();
+    $discovery = new YamlDiscovery('gutenberg', $directories);
+    $settings = $discovery->getDefinitions();
   }
 
   return $settings;
