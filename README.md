@@ -61,4 +61,9 @@ Then go to any content type edit page and enable *Gutenberg Experience*.
 ## Development
 `npm install`
 
-`npm run watch`
+`npx drupal-js-build --css`
+
+or
+
+`npx drupal-js-build watch --css`
+
