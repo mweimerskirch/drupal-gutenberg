@@ -76,6 +76,12 @@ body .gutenberg__editor .edit-post-layout .edit-post-header {
   }
 }
 
+@media (min-width: 782px) {
+  .edit-post-layout__content {
+    margin-left: 0px;
+  }
+}
+
 .edit-post-sidebar {
   background: #ececec !important;
 }
