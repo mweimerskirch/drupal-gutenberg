@@ -10,8 +10,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\node\NodeInterface;
 use Drupal\views\ViewExecutable;
 use Symfony\Component\Yaml\Yaml;
-use Drupal\Core\Plugin\Discovery\YamlDiscovery;
-use Drupal\Core\Plugin\Discovery\ContainerDerivativeDiscoveryDecorator;
+use Drupal\Core\Discovery\YamlDiscovery;
 
 /**
  * Implements hook_form_alter().
@@ -54,15 +53,17 @@ function gutenberg_form_node_form_alter(&$form, FormStateInterface $form_state) 
   }
 
   $module_settings = _gutenberg_get_all_modules_settings();
-  if (isset($module_settings['editor-libraries-extend'])) {
-    foreach ($module_settings['editor-libraries-extend'] as $key => $value) {
-      $form['#attached']['library'][] = $value;
+  foreach ($module_settings as $provider => $settings) {
+    if (isset($settings['libraries-edit'])) {
+      foreach($settings['libraries-edit'] as $library) {
+        $form['#attached']['library'][] = $library;
+      }
     }
   }
 
   $theme_settings = _gutenberg_get_default_theme_settings();
-  if (isset($theme_settings['editor-libraries-extend'])) {
-    foreach ($theme_settings['editor-libraries-extend'] as $key => $value) {
+  if (isset($theme_settings['libraries-edit'])) {
+    foreach ($theme_settings['libraries-edit'] as $key => $value) {
       $form['#attached']['library'][] = $value;
     }
   }
@@ -199,6 +200,15 @@ function gutenberg_preprocess_node(&$variables) {
   $variables['#attached']['library'][] = 'gutenberg/frontend';
   $variables['#attached']['library'][] = 'gutenberg/blocks-view';
 
+  $module_settings = _gutenberg_get_all_modules_settings();
+  foreach ($module_settings as $provider => $settings) {
+    if (isset($settings['libraries-view'])) {
+      foreach($settings['libraries-view'] as $library) {
+        $variables['#attached']['library'][] = $library;
+      }
+    }
+  }
+
   $default_theme = \Drupal::config('system.theme')->get('default');
   if ($default_theme === 'bartik') {
     $variables['#attached']['library'][] = 'gutenberg/bartik';
@@ -234,7 +244,7 @@ function _gutenberg_get_all_modules_settings() {
   if(!isset($settings)) {
     $directories = \Drupal::service('module_handler')->getModuleDirectories();
     $discovery = new YamlDiscovery('gutenberg', $directories);
-    $settings = $discovery->getDefinitions();
+    $settings = $discovery->findAll();
   }
 
   return $settings;
