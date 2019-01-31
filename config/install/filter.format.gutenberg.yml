@@ -6,7 +6,7 @@ dependencies:
   enforced:
     module:
       - gutenberg
-name: 'Gutenberg Blocks'
+name: 'Gutenberg Blocks text format'
 format: gutenberg
 weight: 0
 filters:
