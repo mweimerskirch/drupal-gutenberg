@@ -9,13 +9,13 @@ function gutenberg_cloud_gutenberg_blocks_alter(array &$js_files_edit, array &$c
 
   foreach ($config_cloud as $block) {
     if ($block['edit_css']) {
-      $css_files_edit[] = 'https://unpkg.com/' . $block['name'] . '@' . $block['version'] . '/' . $block['edit_css'];
+      $css_files_edit[] = 'https://cdn.jsdelivr.net/npm/' . $block['name'] . '@' . $block['version'] . '/' . $block['edit_css'];
     }
     if ($block['js']) {
-      $js_files_edit[] = 'https://unpkg.com/' . $block['name'] . '@' . $block['version'] . '/' . $block['js'];
+      $js_files_edit[] = 'https://cdn.jsdelivr.net/npm/' . $block['name'] . '@' . $block['version'] . '/' . $block['js'];
     }
     if ($block['view_css']) {
-      $css_files_view[] =  'https://unpkg.com/' . $block['name'] . '@' . $block['version'] . '/' . $block['view_css'];
+      $css_files_view[] =  'https://cdn.jsdelivr.net/npm/' . $block['name'] . '@' . $block['version'] . '/' . $block['view_css'];
     }
   }
 }
