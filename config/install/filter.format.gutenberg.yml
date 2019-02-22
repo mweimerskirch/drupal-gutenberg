@@ -1,11 +1,12 @@
 langcode: en
 status: true
 dependencies:
-  module:
-    - gutenberg
   enforced:
     module:
       - gutenberg
+  module:
+    - editor
+    - gutenberg
 name: 'Gutenberg Blocks text format'
 format: gutenberg
 weight: 0
@@ -35,4 +36,10 @@ filters:
     provider: gutenberg
     status: true
     weight: 1
+    settings: {  }
+  editor_file_reference:
+    id: editor_file_reference
+    provider: editor
+    status: true
+    weight: 0
     settings: {  }

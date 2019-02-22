@@ -22,7 +22,8 @@
         'custom-fields': true,
         document: false,
         editor: true,
-        'media-library': false,
+        mediaLibrary: true,
+        'media-library': true,
         'page-attributes': false,
         posts: false,
         revisions: false,
@@ -106,7 +107,7 @@
         return new Promise(function (resolve, reject) {
           $.ajax({
             method: 'GET',
-            url: drupalSettings.path.baseUrl + 'editor/image/load/' + matches[1],
+            url: drupalSettings.path.baseUrl + 'editor/media/load/' + matches[1],
             accepts: {
               json: 'application/json, text/javascript, */*; q=0.01'
             }
@@ -164,7 +165,7 @@
 
           $.ajax({
             method: 'POST',
-            url: drupalSettings.path.baseUrl + 'editor/image/upload/gutenberg',
+            url: drupalSettings.path.baseUrl + 'editor/media/upload/gutenberg',
 
             data: formData,
             processData: false,
@@ -177,6 +178,15 @@
           }).fail(function (err) {
             reject(err);
           });
+        });
+      }
+    },
+    'load-medias': {
+      method: 'GET',
+      regex: /\/wp\/v2\/media/g,
+      process: function process() {
+        return new Promise(function (resolve) {
+          resolve([]);
         });
       }
     },
@@ -194,7 +204,7 @@
       regex: /\/wp\/v2\/users\/\?(.*)/g,
       process: function process() {
         return new Promise(function (resolve) {
-          resolve([]);
+          resolve([{ id: 1, name: 'internal' }]);
         });
       }
     },

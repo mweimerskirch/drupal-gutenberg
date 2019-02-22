@@ -30,7 +30,11 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
       key: 'render',
       value: function render() {
         if (this.props.blockContent) {
-          return React.createElement('div', { className: this.props.className, dangerouslySetInnerHTML: { __html: this.props.blockContent.html } });
+          return React.createElement(
+            'div',
+            null,
+            React.createElement('div', { className: this.props.className, dangerouslySetInnerHTML: { __html: this.props.blockContent.html } })
+          );
         }
 
         return React.createElement(

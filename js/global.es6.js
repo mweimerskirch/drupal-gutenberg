@@ -17,7 +17,8 @@
         'custom-fields': true,
         document: false, // * hide document tab
         editor: true,
-        'media-library': false, // * hide media library
+        mediaLibrary: true,
+        'media-library': true, // * hide media library
         'page-attributes': false, // hide page-attributes panel
         posts: false, // * hide posts-panel
         revisions: false,
@@ -101,7 +102,7 @@
         return new Promise((resolve, reject) => {
           $.ajax({
             method: 'GET',
-            url: `${drupalSettings.path.baseUrl}editor/image/load/${
+            url: `${drupalSettings.path.baseUrl}editor/media/load/${
               matches[1]
             }`,
             accepts: {
@@ -143,7 +144,7 @@
 
           $.ajax({
             method: 'POST',
-            url: `${drupalSettings.path.baseUrl}editor/image/upload/gutenberg`,
+            url: `${drupalSettings.path.baseUrl}editor/media/upload/gutenberg`,
             // url: drupalSettings.path.baseUrl + 'editor/dialog/image/gutenberg?ajax_form=0&element_parents=fid',
             data: formData,
             processData: false,
@@ -161,6 +162,15 @@
         });
       },
     },
+    'load-medias': {
+      method: 'GET',
+      regex: /\/wp\/v2\/media/g,
+      process() {
+        return new Promise(resolve => {
+          resolve([]);
+        });
+      },
+    },
     categories: {
       method: 'GET',
       regex: /\/wp\/v2\/categories\?(.*)/g,
@@ -175,7 +185,7 @@
       regex: /\/wp\/v2\/users\/\?(.*)/g,
       process() {
         return new Promise(resolve => {
-          resolve([]);
+          resolve([{ id: 1, name: 'internal' }]);
         });
       },
     },

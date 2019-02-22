@@ -52,6 +52,8 @@ function gutenberg_form_node_form_alter(&$form, FormStateInterface $form_state) 
     return;
   }
 
+  $form['#attached']['library'][] = 'gutenberg/editor';
+
   $module_settings = _gutenberg_get_all_modules_settings();
   foreach ($module_settings as $provider => $settings) {
     if (isset($settings['libraries-edit'])) {

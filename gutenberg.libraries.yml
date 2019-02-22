@@ -23,6 +23,12 @@ gutenberg-js:
       assets/vendor/gutenberg-js/css/block-library/style.css: {}
   js:
     assets/vendor/gutenberg-js/js/gutenberg-js.js: { minified: true }
+g-media-attributes:
+  version: 1.0.1
+  dependencies:
+    - gutenberg/gutenberg-js
+  js:
+    assets/vendor/g-media-attributes/index.js: { minified: true }
 global:
   version: 1.0.0
   js:
@@ -32,9 +38,17 @@ editor:
   version: 1.0.0
   dependencies:
     - core/drupal
+    - core/drupal.once
+    - core/drupal.ajax
+    - core/drupal.dialog
+    - core/drupal.dialog.ajax
+    - core/jquery
+    - core/jquery.form
     - core/drupalSettings
     - editor/drupal.editor
     - gutenberg/gutenberg-js
+    - gutenberg/g-media-attributes
+    - gutenberg/admin
   css:
     theme:
       css/editor.css: {}
@@ -42,9 +56,15 @@ editor:
     js/drupal-store.js: {}
     js/components/drupal-icon.js: {}
     js/components/drupal-block.js: {}
+    js/components/media-browser-details.js: {}
+    js/components/media-browser.js: {}
     js/plugins/additional-fields.js: {}
     js/drupal-blocks.js: {}
     js/gutenberg.js: {}
+    js/filters/media-upload.js: {}
+# media-browser-modal:
+#   js:
+#     js/media-browser-modal.js: {}
 bartik:
   version: 1.0.0
   css:

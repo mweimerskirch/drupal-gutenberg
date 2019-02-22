@@ -21,7 +21,8 @@
     "matchMedia": true,
     "Backbone": true,
     "Modernizr": true,
-    "CKEDITOR": true
+    "CKEDITOR": true,
+    "moment": true
   },
   "rules": {
     "prettier/prettier": "error",
@@ -42,6 +43,9 @@
       "requireReturn": false
     }],
     "no-unused-vars": ["warn"],
+    "react/react-in-jsx-scope": ["off"],
+    "react/jsx-filename-extension": ["off"],
+    "react/prop-types": ["off"],
     "operator-linebreak": ["error", "after", { "overrides": { "?": "ignore", ":": "ignore" } }]
   }
 }

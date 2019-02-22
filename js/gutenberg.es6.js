@@ -255,7 +255,7 @@
         allowedBlockTypes: true,
         disableCustomColors: false,
         disablePostFormats: false,
-        mediaLibrary: false,
+        mediaLibrary: true,
         titlePlaceholder: Drupal.t('Add title'),
         bodyPlaceholder: Drupal.t('Add text or type / to add content'),
         isRTL: false,

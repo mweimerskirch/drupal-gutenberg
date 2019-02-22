@@ -7,7 +7,9 @@
     render() {
       if (this.props.blockContent) {
         return (
-          <div className={this.props.className} dangerouslySetInnerHTML={{__html: this.props.blockContent.html}} />
+          <div>
+            <div className={this.props.className} dangerouslySetInnerHTML={{__html: this.props.blockContent.html}} />
+          </div>
         );
       }
 

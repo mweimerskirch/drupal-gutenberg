@@ -1,3 +1,6 @@
+// @import './modal-media-browser';
+@import './media-browser';
+
 #views-form-reusable-blocks-page-1 {
   display: flex;
   flex-wrap: wrap;
@@ -32,12 +35,12 @@
     transition: border-color 0.2s, color 0.2s;
 
     &:hover {
-      margin: 14px 14px 0px 0px;
+      margin: 14px 14px 0 0;
       border: solid 3px #40b6ff;
     }
 
     .views-field-info {
-      padding: 0px 10px;
+      padding: 0 10px;
       border-bottom: 1px solid #dbdbdb;
     }
 
@@ -51,7 +54,7 @@
     .views-field-block-content-bulk-form {
       .field-content {
         position: absolute;
-        top: 0px;
+        top: 0;
         right: 10px;
       }
     }
