@@ -8,11 +8,12 @@
 (function (Drupal, drupalSettingsl, $) {
   var types = {
     page: {
+      id: 1,
       labels: {
         Document: Drupal.t('Node'),
         document: Drupal.t('Node'),
-        posts: Drupal.t('Nodes'),
-        extras: Drupal.t('Fields') },
+        posts: Drupal.t('Nodes')
+      },
       name: 'Page',
       rest_base: 'pages',
       slug: 'page',
@@ -20,18 +21,14 @@
         author: false,
         comments: false,
         'custom-fields': true,
-        document: false,
         editor: true,
-        mediaLibrary: true,
-        'media-library': true,
+        excerpt: false,
+        discussion: false,
         'page-attributes': false,
-        posts: false,
         revisions: false,
-        'template-settings': false,
         thumbnail: false,
-        title: false,
-        extras: false
-      },
+        title: false },
+      taxonomies: [],
       viewable: false,
       saveable: false,
       publishable: false,
@@ -48,7 +45,7 @@
         title: true,
         editor: true
       },
-      viewable: false
+      viewable: true
     }
   };
 
@@ -204,7 +201,24 @@
       regex: /\/wp\/v2\/users\/\?(.*)/g,
       process: function process() {
         return new Promise(function (resolve) {
-          resolve([{ id: 1, name: 'internal' }]);
+          resolve([{
+            id: 1,
+            name: 'Human Made',
+            url: '',
+            description: '',
+            link: 'https://demo.wp-api.org/author/humanmade/',
+            slug: 'humanmade',
+            avatar_urls: {
+              24: 'http://2.gravatar.com/avatar/83888eb8aea456e4322577f96b4dbaab?s=24&d=mm&r=g',
+              48: 'http://2.gravatar.com/avatar/83888eb8aea456e4322577f96b4dbaab?s=48&d=mm&r=g',
+              96: 'http://2.gravatar.com/avatar/83888eb8aea456e4322577f96b4dbaab?s=96&d=mm&r=g'
+            },
+            meta: [],
+            _links: {
+              self: [],
+              collection: []
+            }
+          }]);
         });
       }
     },
@@ -261,7 +275,8 @@
           return resolve([{
             theme_supports: {
               formats: ['standard', 'aside', 'image', 'video', 'quote', 'link', 'gallery', 'audio'],
-              'post-thumbnails': true
+              'post-thumbnails': true,
+              'responsive-embeds': false
             }
           }]);
         });
@@ -446,7 +461,6 @@
   }
 
   window.wp = {
-    apiFetch: apiFetch,
-    url: { addQueryArgs: addQueryArgs }
+    apiFetch: apiFetch
   };
 })(Drupal, drupalSettings, jQuery);

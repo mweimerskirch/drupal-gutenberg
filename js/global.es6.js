@@ -2,11 +2,11 @@
 (function(Drupal, drupalSettingsl, $) {
   const types = {
     page: {
+      id: 1,
       labels: {
         Document: Drupal.t('Node'),
         document: Drupal.t('Node'),
         posts: Drupal.t('Nodes'),
-        extras: Drupal.t('Fields'), // extra tab label in sidebar
       },
       name: 'Page',
       rest_base: 'pages',
@@ -15,18 +15,15 @@
         author: false,
         comments: false, // hide discussion-panel
         'custom-fields': true,
-        document: false, // * hide document tab
         editor: true,
-        mediaLibrary: true,
-        'media-library': true, // * hide media library
+        excerpt: false,
+        discussion: false,
         'page-attributes': false, // hide page-attributes panel
-        posts: false, // * hide posts-panel
         revisions: false,
-        'template-settings': false, // * hide template-settings panel
         thumbnail: false, // featured-image panel
         title: false, // show title on editor
-        extras: false,
       },
+      taxonomies:[ ],
       viewable: false,
       saveable: false,
       publishable: false,
@@ -43,7 +40,7 @@
         title: true,
         editor: true,
       },
-      viewable: false,
+      viewable: true,
     },
   };
 
@@ -185,7 +182,26 @@
       regex: /\/wp\/v2\/users\/\?(.*)/g,
       process() {
         return new Promise(resolve => {
-          resolve([{ id: 1, name: 'internal' }]);
+          resolve([
+            {
+              id: 1,
+              name: 'Human Made',
+              url: '',
+              description: '',
+              link: 'https://demo.wp-api.org/author/humanmade/',
+              slug: 'humanmade',
+              avatar_urls: {
+                24: 'http://2.gravatar.com/avatar/83888eb8aea456e4322577f96b4dbaab?s=24&d=mm&r=g',
+                48: 'http://2.gravatar.com/avatar/83888eb8aea456e4322577f96b4dbaab?s=48&d=mm&r=g',
+                96: 'http://2.gravatar.com/avatar/83888eb8aea456e4322577f96b4dbaab?s=96&d=mm&r=g',
+              },
+              meta: [],
+              _links: {
+                self: [],
+                collection: [],
+              },
+            },
+          ]);
         });
       },
     },
@@ -264,6 +280,7 @@
                   'audio',
                 ],
                 'post-thumbnails': true,
+                'responsive-embeds': false,
               },
             },
           ]),
@@ -472,6 +489,6 @@
 
   window.wp = {
     apiFetch,
-    url: { addQueryArgs },
+    // url: { addQueryArgs },
   };
 })(Drupal, drupalSettings, jQuery);

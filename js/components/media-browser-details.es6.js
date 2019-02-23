@@ -47,8 +47,8 @@
           {media.media_type === 'image' && (
             <Fragment>
               <figure>
-                <img alt={media.media_details.filename} src={media.url} />
-                <figcaption>{media.media_details.filename}</figcaption>
+                <img alt={media.media_details.file} src={media.source_url} />
+                <figcaption>{media.media_details.file}</figcaption>
               </figure>
               <div>{`${media.media_details.width} x ${media.media_details.height}`}</div>
               <div>{toSize(media.media_details.filesize)}</div>
@@ -57,8 +57,8 @@
           {media.media_type === 'video' && (
             <Fragment>
               <figure>
-                <video onLoadedData={this.updateVideo} controls src={media.url} />
-                <figcaption>{media.media_details.filename}</figcaption>
+                <video onLoadedData={this.updateVideo} controls src={media.source_url} />
+                <figcaption>{media.media_details.file}</figcaption>
               </figure>
               <div>{`${width} x ${height}`}</div>
               <div>{toSize(media.media_details.filesize)}</div>
@@ -68,8 +68,8 @@
           {media.media_type === 'audio' && (
             <Fragment>
               <figure>
-                <audio onLoadedData={this.updateAudio} controls src={media.url} />
-                <figcaption>{media.media_details.filename}</figcaption>
+                <audio onLoadedData={this.updateAudio} controls src={media.source_url} />
+                <figcaption>{media.media_details.file}</figcaption>
               </figure>
               <div>{toSize(media.media_details.filesize)}</div>
               <div>{`${duration}`}</div>
@@ -78,7 +78,7 @@
 
           {!customTypes.includes(media.media_type) && (
             <Fragment>
-              <div className="filename">{media.media_details.filename}</div>
+              <div className="filename">{media.media_details.file}</div>
               <div>{toSize(media.media_details.filesize)}</div>
             </Fragment>
           )}

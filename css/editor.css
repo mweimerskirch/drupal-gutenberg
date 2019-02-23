@@ -232,10 +232,6 @@ body .gutenberg__editor .edit-post-layout .edit-post-sidebar {
   border: none;
 }
 
-.editor-block-contextual-toolbar .editor-block-toolbar button[aria-label="Edit image"] {
-  display: none;
-}
-
 .editor-rich-text__tinymce[data-is-placeholder-visible="true"] {
   z-index: 2;
 }

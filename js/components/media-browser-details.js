@@ -80,11 +80,11 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
             React.createElement(
               'figure',
               null,
-              React.createElement('img', { alt: media.media_details.filename, src: media.url }),
+              React.createElement('img', { alt: media.media_details.file, src: media.source_url }),
               React.createElement(
                 'figcaption',
                 null,
-                media.media_details.filename
+                media.media_details.file
               )
             ),
             React.createElement(
@@ -104,11 +104,11 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
             React.createElement(
               'figure',
               null,
-              React.createElement('video', { onLoadedData: this.updateVideo, controls: true, src: media.url }),
+              React.createElement('video', { onLoadedData: this.updateVideo, controls: true, src: media.source_url }),
               React.createElement(
                 'figcaption',
                 null,
-                media.media_details.filename
+                media.media_details.file
               )
             ),
             React.createElement(
@@ -133,11 +133,11 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
             React.createElement(
               'figure',
               null,
-              React.createElement('audio', { onLoadedData: this.updateAudio, controls: true, src: media.url }),
+              React.createElement('audio', { onLoadedData: this.updateAudio, controls: true, src: media.source_url }),
               React.createElement(
                 'figcaption',
                 null,
-                media.media_details.filename
+                media.media_details.file
               )
             ),
             React.createElement(
@@ -157,7 +157,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
             React.createElement(
               'div',
               { className: 'filename' },
-              media.media_details.filename
+              media.media_details.file
             ),
             React.createElement(
               'div',

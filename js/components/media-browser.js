@@ -18,13 +18,17 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 (function (wp, Drupal, DrupalGutenberg, drupalSettings) {
-  var components = wp.components,
-      element = wp.element;
+  var data = wp.data,
+      components = wp.components,
+      element = wp.element,
+      editor = wp.editor;
+  var select = data.select;
   var Component = element.Component,
       Fragment = element.Fragment;
   var MediaBrowserDetails = DrupalGutenberg.Components.MediaBrowserDetails;
   var Button = components.Button,
       FormFileUpload = components.FormFileUpload;
+  var mediaUpload = editor.mediaUpload;
 
 
   var __ = Drupal.t;
@@ -65,6 +69,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
         active: null,
         search: ''
       };
+      _this.uploadFromFiles = _this.uploadFromFiles.bind(_this);
+      _this.addFiles = _this.addFiles.bind(_this);
       _this.selectMedia = _this.selectMedia.bind(_this);
       _this.canToggle = _this.canToggle.bind(_this);
       _this.toggleMedia = _this.toggleMedia.bind(_this);
@@ -72,8 +78,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
     }
 
     _createClass(MediaBrowser, [{
-      key: 'componentWillMount',
-      value: function componentWillMount() {
+      key: 'getMediaFiles',
+      value: function getMediaFiles() {
         var _this2 = this;
 
         var allowedTypes = this.props.allowedTypes;
@@ -84,6 +90,11 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
         }).then(function (json) {
           _this2.setState({ data: json });
         });
+      }
+    }, {
+      key: 'componentWillMount',
+      value: function componentWillMount() {
+        this.getMediaFiles();
       }
     }, {
       key: 'componentDidMount',
@@ -97,16 +108,35 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
           return result;
         }, {})) : _defineProperty({}, value, true));
 
-        console.log(selected, Object.keys(selected)[0]);
         this.setState({
           selected: selected,
           active: Object.keys(selected)[0]
         });
       }
     }, {
-      key: 'onFilesUpload',
-      value: function onFilesUpload(files) {
+      key: 'uploadFromFiles',
+      value: function uploadFromFiles(event) {
         var multiple = this.props.multiple;
+
+        this.addFiles(event.target.files);
+      }
+    }, {
+      key: 'addFiles',
+      value: function addFiles(files) {
+        var _this3 = this;
+
+        var allowedTypes = this.props.allowedTypes;
+        var data = this.state.data;
+
+
+        mediaUpload({
+          allowedTypes: allowedTypes,
+          filesList: files,
+          onFileChange: function onFileChange(files) {
+            console.log(data.concat(files));
+            _this3.getMediaFiles();
+          }
+        });
       }
     }, {
       key: 'selectMedia',
@@ -131,9 +161,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
         this.setState({ active: id });
 
-        console.log(multiple, selected[id], this);
         if (multiple && selected[id]) {
-          console.log('prevented');
           ev.preventDefault();
         }
 
@@ -160,7 +188,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
     }, {
       key: 'render',
       value: function render() {
-        var _this3 = this;
+        var _this4 = this;
 
         var _state2 = this.state,
             data = _state2.data,
@@ -195,7 +223,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                   placeHolder: __('Search'),
                   type: 'text',
                   onChange: function onChange(value) {
-                    _this3.setState({ search: value.target.value.toLowerCase() });
+                    _this4.setState({ search: value.target.value.toLowerCase() });
                   }
                 })
               )
@@ -204,7 +232,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
               'ul',
               { className: 'list' },
               data.filter(function (item) {
-                return item.filename.toLowerCase().includes(search);
+                return item.media_details.file.toLowerCase().includes(search);
               }).map(function (media) {
                 return React.createElement(
                   'li',
@@ -213,21 +241,24 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                   },
                   React.createElement(
                     'label',
-                    { 'for': 'media-browser-selector-' + media.id, className: 'thumbnail ' + media.media_type, onClick: function onClick(ev) {
-                        return _this3.canToggle(ev, media.id);
-                      } },
+                    {
+                      'for': 'media-browser-selector-' + media.id,
+                      className: 'thumbnail ' + media.media_type,
+                      onClick: function onClick(ev) {
+                        return _this4.canToggle(ev, media.id);
+                      }
+                    },
                     React.createElement(MediaBrowserThumbnail, {
                       mediaType: media.media_type,
-                      url: media.url,
-                      filename: media.filename
+                      url: media.source_url,
+                      filename: media.media_details.file
                     })
                   ),
                   React.createElement('input', {
                     id: 'media-browser-selector-' + media.id,
-                    name: 'media-browser-selector[' + media.id + ']',
-
+                    name: 'media-browser-selector',
                     onClick: function onClick(ev) {
-                      return _this3.toggleMedia(ev, media.id);
+                      return _this4.toggleMedia(ev, media.id);
                     },
                     type: multiple ? 'checkbox' : 'radio',
                     checked: selected[media.id]
@@ -256,9 +287,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
             multiple && React.createElement(
               'div',
               { className: 'selected-summary' },
-              __('Total selected'),
-              ':',
-              Object.values(selected).filter(function (item) {
+              __('Total selected') + ': ' + Object.values(selected).filter(function (item) {
                 return item;
               }).length
             ),
@@ -270,7 +299,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                 {
                   isLarge: true,
                   className: 'editor-media-placeholder__button',
-
+                  onChange: this.uploadFromFiles,
                   accept: 'image',
                   multiple: multiple
                 },

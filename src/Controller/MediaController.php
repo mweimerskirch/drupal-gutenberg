@@ -12,7 +12,58 @@ use Drupal\file\Entity\File;
  * Returns responses for our image routes.
  */
 class MediaController extends ControllerBase {
+  /**
+   * Returns a parsed array from File object.
+   *
+   * @param \Drupal\file\Entity\File $file
+   *   The editor.
+   *
+   * @return Array
+   *   The parsed array.
+   */
+  private function _parse(File $file) {
+    $media_src = file_create_url($file->getFileUri());
+    $image = \Drupal::service('image.factory')->get($file->getFileUri());
 
+    $result = [
+      'id' => (Integer) $file->id(),
+      'source_url' => $media_src,
+      'url' => $media_src,
+      'media_type' => explode('/', $file->getMimeType())[0],
+      'mime_type' => $file->getMimeType(),
+      'author' => 1,
+      'status' => 'inherit',
+      'type' => 'attachment',
+      'date_gmt' => date('c', $file->getCreatedTime()),
+      'date' => date('c', $file->getCreatedTime()),
+      'title' => [
+        'raw' => '',
+        'rendered' => '',
+      ],
+      'caption' => [
+        'raw' => '',
+        'rendered' => '',
+      ],
+      'alt_text' => '',
+      'data' => [
+        'entity_type' => 'file',
+        'entity_uuid' => $file->uuid(),
+        'image_style' => NULL,
+      ],
+      'media_details' => [
+        'file' => $file->getFilename(),
+        'width' => $image->getWidth(),
+        'height' => $image->getHeight(),
+        'filesize' => $file->getSize(),
+        'image_meta' => [],
+        'sizes' => [
+          'thumbnail' => $media_src,
+        ],
+      ],  
+    ];
+
+    return $result;
+  }
   /**
    * Returns JSON representing the new file upload, or validation errors.
    *
@@ -42,22 +93,7 @@ class MediaController extends ControllerBase {
       return new JsonResponse(NULL, 500);
     }
 
-    $media_src = file_create_url($file->getFileUri());
-    return new JsonResponse([
-      'id' => (int) $file->id(),
-      'url' => $media_src,
-      'source_url' => $media_src,
-      'link' => $media_src,
-      'media_type' => explode('/', $file->getMimeType())[0],
-      'title' => [
-        'raw' => ''
-      ],
-      'alt_text' => '',
-      'data' => [
-        'entity_type' => 'file',
-        'entity_uuid' => $file->uuid(),
-      ],
-    ]);
+    return new JsonResponse($this->_parse($file));
   }
 
   /**
@@ -72,38 +108,7 @@ class MediaController extends ControllerBase {
    *   The JSON response.
    */
   public function load(Request $request, File $file = NULL) {
-    $media_src = file_create_url($file->getFileUri());
-
-    return new JsonResponse([
-      'id' => $file->id(),
-      'source_url' => $media_src,
-      'url' => $media_src,
-      'link' => $media_src,
-      'media_type' => explode('/', $file->getMimeType())[0],
-      'mime_type' => $file->getMimeType(),
-      'title' => [
-        'raw' => '',
-        'rendered' => '',
-      ],
-      'caption' => [
-        'raw' => '',
-        'rendered' => '',
-      ],
-      'alt_text' => '',
-      'data' => [
-        'entity_type' => 'file',
-        'entity_uuid' => $file->uuid(),
-        'image_style' => NULL,
-      ],
-      'media_details' => [
-        'file' => '',
-        'width' => 0,
-        'height' => 0,
-        'image_meta' => [],
-        'sizes' => [],
-      ],
-  
-    ]);
+    return new JsonResponse($this->_parse($file));
   }
 
   /**
@@ -140,40 +145,7 @@ class MediaController extends ControllerBase {
       $media_src = file_create_url($file->getFileUri());
       $image = \Drupal::service('image.factory')->get($file->getFileUri());
 
-      $result[] = [
-        'id' => $file->id(),
-        'filename' => $file->getFilename(),
-        'source_url' => $media_src,
-        'url' => $media_src,
-        'link' => $media_src,
-        'media_type' => explode('/', $file->getMimeType())[0],
-        'mime_type' => $file->getMimeType(),
-        'author' => 1,
-        'status' => 'inherit',
-        'type' => 'attachment',
-        // 'title' => [
-        //   'raw' => '',
-        //   'rendered' => '',
-        // ],
-        // 'caption' => [
-        //   'raw' => '',
-        //   'rendered' => '',
-        // ],
-        'alt_text' => '',
-        'data' => [
-          'entity_type' => 'file',
-          'entity_uuid' => $file->uuid(),
-          'image_style' => NULL,
-        ],
-        'media_details' => [
-          'filename' => $file->getFilename(),
-          'width' => $image->getWidth(),
-          'height' => $image->getHeight(),
-          'filesize' => $file->getSize(),
-          'image_meta' => [],
-          'sizes' => [],
-        ],  
-      ];
+      $result[] = $this->_parse($file);
     }
 
     return new JsonResponse($result);

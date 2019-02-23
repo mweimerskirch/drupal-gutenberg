@@ -1,8 +1,10 @@
 ((wp, Drupal, DrupalGutenberg, drupalSettings) => {
-  const { components, element } = wp;
+  const { data, components, element, editor } = wp;
+  const { select } = data;
   const { Component, Fragment } = element;
   const { MediaBrowserDetails } = DrupalGutenberg.Components;
   const { Button, FormFileUpload } = components;
+  const { mediaUpload } = editor;
 
   const __ = Drupal.t;
 
@@ -31,12 +33,14 @@
         active: null,
         search: '',
       };
+      this.uploadFromFiles = this.uploadFromFiles.bind(this);
+      this.addFiles = this.addFiles.bind(this);
       this.selectMedia = this.selectMedia.bind(this);
       this.canToggle = this.canToggle.bind(this);
       this.toggleMedia = this.toggleMedia.bind(this);
     }
 
-    componentWillMount() {
+    getMediaFiles() {
       const { allowedTypes } = this.props;
 
       fetch(`
@@ -47,6 +51,10 @@
         .then(json => {
           this.setState({ data: json });
         });
+    }
+
+    componentWillMount() {
+      this.getMediaFiles();
     }
 
     componentDidMount() {
@@ -62,18 +70,32 @@
             }
           : { [value]: true });
 
-      console.log(selected, Object.keys(selected)[0]);
       this.setState({
         selected,
         active: Object.keys(selected)[0],
       });
     }
 
-    onFilesUpload(files) {
+    uploadFromFiles(event) {
       const { multiple } = this.props;
-      // console.log(files);
+      this.addFiles( event.target.files );
     }
 
+    addFiles( files ) {
+      const { allowedTypes } = this.props;
+      const { data } = this.state;
+
+      mediaUpload( {
+        allowedTypes: allowedTypes,
+        filesList: files,
+        onFileChange: ( files ) => {
+          console.log(data.concat(files));
+          this.getMediaFiles();
+        },
+        // onError: noticeOperations.createErrorNotice,
+      } );
+    }
+  
     selectMedia() {
       const { selected, data } = this.state;
       const { onSelect } = this.props;
@@ -88,10 +110,8 @@
 
       this.setState({ active: id });
 
-      console.log(multiple, selected[id], this);
       if (multiple && selected[id]) {
         // Stop bubbling down the tree (checkbox).
-        console.log('prevented');
         ev.preventDefault();
       }
 
@@ -139,22 +159,25 @@
             </div>
             <ul className="list">
               {data
-                .filter(item => item.filename.toLowerCase().includes(search))
+                .filter(item => item.media_details.file.toLowerCase().includes(search))
                 .map(media => (
                   <li
                     className={`item ${active === media.id ? 'selected' : ''}`}
                   >
-                    <label for={`media-browser-selector-${media.id}`} className={`thumbnail ${media.media_type}`} onClick={ev => this.canToggle(ev, media.id)}>
+                    <label
+                      for={`media-browser-selector-${media.id}`}
+                      className={`thumbnail ${media.media_type}`}
+                      onClick={ev => this.canToggle(ev, media.id)}
+                    >
                       <MediaBrowserThumbnail
                         mediaType={media.media_type}
-                        url={media.url}
-                        filename={media.filename}
+                        url={media.source_url}
+                        filename={media.media_details.file}
                       />
                     </label>
                     <input
                       id={`media-browser-selector-${media.id}`}
-                      name={`media-browser-selector[${media.id}]`}
-                      // name="media-browser-selector"
+                      name="media-browser-selector"
                       onClick={ev => this.toggleMedia(ev, media.id)}
                       type={multiple ? 'checkbox' : 'radio'}
                       checked={selected[media.id]}
@@ -174,15 +197,16 @@
           <div className="form-actions">
             {multiple && (
               <div className="selected-summary">
-                {__('Total selected')}:
-                {Object.values(selected).filter(item => item).length}
+                {`${__('Total selected')}: ${
+                  Object.values(selected).filter(item => item).length
+                }`}
               </div>
             )}
             <div className="buttons">
               <FormFileUpload
                 isLarge
                 className="editor-media-placeholder__button"
-                // onChange={ this.onUpload }
+                onChange={ this.uploadFromFiles }
                 accept="image" // { accept }
                 multiple={multiple}
               >
