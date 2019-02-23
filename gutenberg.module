@@ -11,6 +11,7 @@ use Drupal\node\NodeInterface;
 use Drupal\views\ViewExecutable;
 use Symfony\Component\Yaml\Yaml;
 use Drupal\Core\Discovery\YamlDiscovery;
+use Drupal\image\Entity\ImageStyle;
 
 /**
  * Implements hook_form_alter().
@@ -72,6 +73,22 @@ function gutenberg_form_node_form_alter(&$form, FormStateInterface $form_state) 
   if (isset($theme_settings['theme-support'])) {
     $form['#attached']['drupalSettings']['gutenberg']['theme-support'] = $theme_settings['theme-support'];
   }
+
+  // Set available image sizes for editor.
+  $styles = ImageStyle::loadMultiple();
+  $sizes = [
+    [
+      'slug' => 'full',
+      'name' => t('Original'),
+    ],
+  ];
+  foreach ($styles as $key => $style) {
+    $sizes[] = [
+      'slug' => $style->getName(),
+      'name' => $style->label(),
+    ];
+  }
+  $form['#attached']['drupalSettings']['gutenberg']['image-sizes'] = $sizes;
 
   $text_fields = [];
 
@@ -238,7 +255,7 @@ function _gutenberg_get_default_theme_settings() {
 }
 
 /**
- * 
+ *
  */
 function _gutenberg_get_all_modules_settings() {
   $settings = &drupal_static(__FUNCTION__);

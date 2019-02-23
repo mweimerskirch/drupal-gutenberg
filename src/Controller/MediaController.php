@@ -7,11 +7,16 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Drupal\editor\Entity\Editor;
 use Drupal\file\Entity\File;
-
+use Drupal\image\Entity\ImageStyle;
 /**
  * Returns responses for our image routes.
  */
 class MediaController extends ControllerBase {
+  private function _getImageStyles() {
+    $styles = ImageStyle::loadMultiple();
+    return $styles;
+  }
+
   /**
    * Returns a parsed array from File object.
    *
@@ -22,8 +27,23 @@ class MediaController extends ControllerBase {
    *   The parsed array.
    */
   private function _parse(File $file) {
-    $media_src = file_create_url($file->getFileUri());
-    $image = \Drupal::service('image.factory')->get($file->getFileUri());
+    $uri = $file->getFileUri();
+    $media_src = file_create_url($uri);
+    $image = \Drupal::service('image.factory')->get($uri);
+
+    $styles = $this->_getImageStyles();
+    $sizes = [
+      'full' => [
+        'source_url' => $media_src,
+      ],
+    ];
+
+    foreach ($styles as $key => $style) {
+      $url = ImageStyle::load($style->getName())->buildUrl($uri);
+      $sizes[$style->getName()] = [
+        'source_url' => $url,
+      ];
+    }
 
     $result = [
       'id' => (Integer) $file->id(),
@@ -56,10 +76,8 @@ class MediaController extends ControllerBase {
         'height' => $image->getHeight(),
         'filesize' => $file->getSize(),
         'image_meta' => [],
-        'sizes' => [
-          'thumbnail' => $media_src,
-        ],
-      ],  
+        'sizes' => $sizes,
+      ],
     ];
 
     return $result;
