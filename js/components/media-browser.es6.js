@@ -40,19 +40,6 @@
       this.toggleMedia = this.toggleMedia.bind(this);
     }
 
-    getMediaFiles() {
-      const { allowedTypes } = this.props;
-
-      fetch(`
-        ${drupalSettings.path.baseUrl}editor/media/search/${allowedTypes.join(
-        '+',
-      )}/*`)
-        .then(response => response.json())
-        .then(json => {
-          this.setState({ data: json });
-        });
-    }
-
     componentWillMount() {
       this.getMediaFiles();
     }
@@ -76,6 +63,20 @@
       });
     }
 
+    getMediaFiles() {
+      const { allowedTypes } = this.props;
+      console.log(['image'] || allowedTypes);
+
+      fetch(`
+        ${drupalSettings.path.baseUrl}editor/media/search/${allowedTypes.join(
+        '+',
+      )}/*`)
+        .then(response => response.json())
+        .then(json => {
+          this.setState({ data: json });
+        });
+    }
+
     uploadFromFiles(event) {
       const { multiple } = this.props;
       this.addFiles( event.target.files );
@@ -95,7 +96,7 @@
         // onError: noticeOperations.createErrorNotice,
       } );
     }
-  
+
     selectMedia() {
       const { selected, data } = this.state;
       const { onSelect } = this.props;
@@ -222,6 +223,10 @@
       );
     }
   }
+
+  MediaBrowser.defaultProps = {
+    allowedTypes: ['image'],
+  };
 
   window.DrupalGutenberg = window.DrupalGutenberg || {};
   window.DrupalGutenberg.Components = window.DrupalGutenberg.Components || {};

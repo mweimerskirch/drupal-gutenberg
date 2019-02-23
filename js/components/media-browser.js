@@ -78,20 +78,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
     }
 
     _createClass(MediaBrowser, [{
-      key: 'getMediaFiles',
-      value: function getMediaFiles() {
-        var _this2 = this;
-
-        var allowedTypes = this.props.allowedTypes;
-
-
-        fetch('\n        ' + drupalSettings.path.baseUrl + 'editor/media/search/' + allowedTypes.join('+') + '/*').then(function (response) {
-          return response.json();
-        }).then(function (json) {
-          _this2.setState({ data: json });
-        });
-      }
-    }, {
       key: 'componentWillMount',
       value: function componentWillMount() {
         this.getMediaFiles();
@@ -111,6 +97,21 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
         this.setState({
           selected: selected,
           active: Object.keys(selected)[0]
+        });
+      }
+    }, {
+      key: 'getMediaFiles',
+      value: function getMediaFiles() {
+        var _this2 = this;
+
+        var allowedTypes = this.props.allowedTypes;
+
+        console.log(['image'] || allowedTypes);
+
+        fetch('\n        ' + drupalSettings.path.baseUrl + 'editor/media/search/' + allowedTypes.join('+') + '/*').then(function (response) {
+          return response.json();
+        }).then(function (json) {
+          _this2.setState({ data: json });
         });
       }
     }, {
@@ -318,6 +319,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
     return MediaBrowser;
   }(Component);
+
+  MediaBrowser.defaultProps = {
+    allowedTypes: ['image']
+  };
 
   window.DrupalGutenberg = window.DrupalGutenberg || {};
   window.DrupalGutenberg.Components = window.DrupalGutenberg.Components || {};
