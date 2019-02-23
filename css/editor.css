@@ -187,6 +187,8 @@ body .gutenberg__editor .edit-post-layout .edit-post-header {
 
 .edit-post-sidebar select {
   width: 100%;
+  background-repeat: no-repeat;
+  background-position: center right;
 }
 
 .gutenberg-sidebar {
