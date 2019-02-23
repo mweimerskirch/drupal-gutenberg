@@ -195,10 +195,10 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
               $('.edit-post-sidebar .components-panel').append($tabD);
             }, 0);
 
-            $(document.body).addClass('gutenberg-sidedar-open');
+            $(document.body).addClass('gutenberg-sidebar-open');
           },
           CLOSE_GENERAL_SIDEBAR: function CLOSE_GENERAL_SIDEBAR() {
-            $(document.body).removeClass('gutenberg-sidedar-open');
+            $(document.body).removeClass('gutenberg-sidebar-open');
 
             $('.gutenberg-sidebar').append($('.edit-post-sidebar .components-panel .tab'));
           }

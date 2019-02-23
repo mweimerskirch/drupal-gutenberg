@@ -302,10 +302,10 @@
               $('.edit-post-sidebar .components-panel').append($tabD);
             }, 0);
 
-            $(document.body).addClass('gutenberg-sidedar-open');
+            $(document.body).addClass('gutenberg-sidebar-open');
           },
           CLOSE_GENERAL_SIDEBAR: () => {
-            $(document.body).removeClass('gutenberg-sidedar-open');
+            $(document.body).removeClass('gutenberg-sidebar-open');
             // Move tab before sidebar is "destroyed".
             $('.gutenberg-sidebar').append(
               $('.edit-post-sidebar .components-panel .tab'),
