@@ -30,7 +30,10 @@ class ReusableBlocksController extends ControllerBase {
       return new JsonResponse([
         'id' => (int) $block->id(),
         'title' => ['raw' => $block->info->value],
-        'content' => ['raw' => $block->body->value],
+        'content' => ['protected' => false, 'raw' => $block->body->value],
+        'type' => 'block',
+        'status' => 'publish',
+        'slug' => 'reusable_block_' . $block->id(),
       ]);
     }
 
@@ -45,7 +48,10 @@ class ReusableBlocksController extends ControllerBase {
       $result[] = [
         'id' => (int) $block->id(),
         'title' => ['raw' => $block->info->value],
-        'content' => ['raw' => $block->body->value],
+        'content' => ['protected' => false, 'raw' => $block->body->value],
+        'type' => 'block',
+        'status' => 'publish',
+        'slug' => 'reusable_block_' . $block->id(),
       ];
     }
 

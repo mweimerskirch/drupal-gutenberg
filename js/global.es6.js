@@ -33,7 +33,7 @@
       capabilities: {},
       name: 'Blocks',
       rest_base: 'blocks',
-      slug: 'wp_block',
+      slug: 'block',
       description: '',
       hierarchical: false,
       supports: {
