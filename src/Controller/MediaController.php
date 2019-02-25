@@ -60,11 +60,11 @@ class MediaController extends ControllerBase {
         'raw' => '',
         'rendered' => '',
       ],
-      'caption' => [
-        'raw' => '',
-        'rendered' => '',
-      ],
-      'alt_text' => '',
+      // 'caption' => [
+      //   'raw' => NULL,
+      //   'rendered' => NULL,
+      // ],
+      'alt_text' => NULL,
       'data' => [
         'entity_type' => 'file',
         'entity_uuid' => $file->uuid(),
