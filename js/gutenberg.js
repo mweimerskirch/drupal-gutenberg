@@ -162,7 +162,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
         disableCustomColors: false,
         disablePostFormats: false,
         mediaLibrary: true,
-        imageSizes: drupalSettings.gutenberg['image-sizes'],
+
         titlePlaceholder: Drupal.t('Add title'),
         bodyPlaceholder: Drupal.t('Add text or type / to add content'),
         isRTL: false,

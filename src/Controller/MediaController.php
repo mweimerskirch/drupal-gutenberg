@@ -76,7 +76,8 @@ class MediaController extends ControllerBase {
         'height' => $image->getHeight(),
         'filesize' => $file->getSize(),
         'image_meta' => [],
-        'sizes' => $sizes,
+        // See issue: https://www.drupal.org/project/gutenberg/issues/3035313
+        // 'sizes' => $sizes,
       ],
     ];
 
