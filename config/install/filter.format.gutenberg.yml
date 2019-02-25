@@ -37,9 +37,3 @@ filters:
     status: true
     weight: 1
     settings: {  }
-  editor_file_reference:
-    id: editor_file_reference
-    provider: editor
-    status: true
-    weight: 0
-    settings: {  }

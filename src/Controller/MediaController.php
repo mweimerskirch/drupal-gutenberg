@@ -47,6 +47,7 @@ class MediaController extends ControllerBase {
 
     $result = [
       'id' => (Integer) $file->id(),
+      'link' => $media_src,
       'source_url' => $media_src,
       'url' => $media_src,
       'media_type' => explode('/', $file->getMimeType())[0],
@@ -60,15 +61,11 @@ class MediaController extends ControllerBase {
         'raw' => '',
         'rendered' => '',
       ],
-      // 'caption' => [
-      //   'raw' => NULL,
-      //   'rendered' => NULL,
-      // ],
       'alt_text' => NULL,
       'data' => [
         'entity_type' => 'file',
         'entity_uuid' => $file->uuid(),
-        'image_style' => NULL,
+        'image_style' => 'original',
       ],
       'media_details' => [
         'file' => $file->getFilename(),
@@ -77,7 +74,7 @@ class MediaController extends ControllerBase {
         'filesize' => $file->getSize(),
         'image_meta' => [],
         // See issue: https://www.drupal.org/project/gutenberg/issues/3035313
-        // 'sizes' => $sizes,
+        'sizes' => $sizes,
       ],
     ];
 

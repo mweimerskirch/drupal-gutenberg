@@ -257,7 +257,7 @@
         disablePostFormats: false,
         mediaLibrary: true,
         // See issue: https://www.drupal.org/project/gutenberg/issues/3035313
-        // imageSizes: drupalSettings.gutenberg['image-sizes'],
+        imageSizes: drupalSettings.gutenberg['image-sizes'],
         titlePlaceholder: Drupal.t('Add title'),
         bodyPlaceholder: Drupal.t('Add text or type / to add content'),
         isRTL: false,
