@@ -172,7 +172,12 @@
                     >
                       <MediaBrowserThumbnail
                         mediaType={media.media_type}
-                        url={media.source_url}
+                        url={
+                          media.media_details.sizes &&
+                          media.media_details.sizes.large
+                            ? media.media_details.sizes.large.source_url
+                            : media.source_url
+                        }
                         filename={media.media_details.file}
                       />
                     </label>
