@@ -111,7 +111,7 @@
       background-position: 50% 10%;
       background-repeat: no-repeat;
       background-color: #dbdbdb;
-      outline: solid 2px #dbdbdb;
+      // outline: solid 2px #dbdbdb;
 
       .filename {
         background-color: #fff;
@@ -126,8 +126,8 @@
 
     input {
       position: absolute;
-      right: 7px;
-      top: 0;
+      right: 2px;
+      top: -5px;
       &:after {
         content: " ";
         position: absolute;

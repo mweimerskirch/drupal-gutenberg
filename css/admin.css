@@ -96,7 +96,6 @@
   background-position: 50% 10%;
   background-repeat: no-repeat;
   background-color: #dbdbdb;
-  outline: solid 2px #dbdbdb;
 }
 
 .media-browser li.item .thumbnail .filename {
@@ -111,8 +110,8 @@
 
 .media-browser li.item input {
   position: absolute;
-  right: 7px;
-  top: 0;
+  right: 2px;
+  top: -5px;
 }
 
 .media-browser li.item input:after {
