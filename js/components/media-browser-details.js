@@ -14,9 +14,13 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 (function (wp, Drupal, moment) {
-  var element = wp.element;
+  var element = wp.element,
+      components = wp.components;
   var Component = element.Component,
       Fragment = element.Fragment;
+  var TextControl = components.TextControl,
+      TextareaControl = components.TextareaControl,
+      SelectControl = components.SelectControl;
 
   var customTypes = ['image', 'audio', 'video'];
   var __ = Drupal.t;
@@ -35,10 +39,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
       var _this = _possibleConstructorReturn(this, (MediaBrowserDetails.__proto__ || Object.getPrototypeOf(MediaBrowserDetails)).apply(this, arguments));
 
+      var media = _this.props.media;
+
       _this.state = {
         width: null,
         height: null,
-        duration: null
+        duration: null,
+        title: media.title ? media.title.raw : null,
+        altText: media.alt_text,
+        caption: media.caption ? media.caption.raw : null
       };
       _this.updateVideo = _this.updateVideo.bind(_this);
       _this.updateAudio = _this.updateAudio.bind(_this);
@@ -46,6 +55,18 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
     }
 
     _createClass(MediaBrowserDetails, [{
+      key: 'componentDidUpdate',
+      value: function componentDidUpdate(prevProps) {
+        var onChange = this.props.onChange;
+        var _state = this.state,
+            title = _state.title,
+            altText = _state.altText,
+            caption = _state.caption;
+
+
+        onChange({ title: title, altText: altText, caption: caption });
+      }
+    }, {
       key: 'updateVideo',
       value: function updateVideo(ev) {
         this.setState({
@@ -64,11 +85,16 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
     }, {
       key: 'render',
       value: function render() {
+        var _this2 = this;
+
         var media = this.props.media;
-        var _state = this.state,
-            width = _state.width,
-            height = _state.height,
-            duration = _state.duration;
+        var _state2 = this.state,
+            width = _state2.width,
+            height = _state2.height,
+            duration = _state2.duration,
+            title = _state2.title,
+            altText = _state2.altText,
+            caption = _state2.caption;
 
 
         return React.createElement(
@@ -96,7 +122,28 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
               'div',
               null,
               toSize(media.media_details.filesize)
-            )
+            ),
+            React.createElement(TextControl, {
+              value: title,
+              onChange: function onChange(value) {
+                return _this2.setState({ title: value });
+              },
+              label: 'Title'
+            }),
+            React.createElement(TextControl, {
+              value: altText,
+              onChange: function onChange(value) {
+                return _this2.setState({ altText: value });
+              },
+              label: 'Alt text'
+            }),
+            React.createElement(TextareaControl, {
+              value: caption,
+              onChange: function onChange(value) {
+                return _this2.setState({ caption: value });
+              },
+              label: 'Caption'
+            })
           ),
           media.media_type === 'video' && React.createElement(
             Fragment,

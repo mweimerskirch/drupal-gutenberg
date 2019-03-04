@@ -18,6 +18,26 @@ class MediaController extends ControllerBase {
   }
 
   /**
+   * Returns the serialized file data.
+   *
+   * @param Integer $fid
+   *   The file ID
+   *
+   * @return Array
+   *   The parsed array.
+   */
+  private function _getFileData($fid) {
+    $connection = \Drupal::database();
+    $query = $connection->select('file_managed_data', 'data', []);
+    $query->condition('data.fid', $fid);
+    $query->fields('data', ['fid', 'data']);
+    $result = $query->execute();
+    foreach ($result as $record) {
+      return unserialize($record->data);
+    }
+  }
+
+  /**
    * Returns a parsed array from File object.
    *
    * @param \Drupal\file\Entity\File $file
@@ -45,6 +65,8 @@ class MediaController extends ControllerBase {
       ];
     }
 
+    $data = $this->_getFileData($file->id());
+
     $result = [
       'id' => (Integer) $file->id(),
       'link' => $media_src,
@@ -58,15 +80,20 @@ class MediaController extends ControllerBase {
       'date_gmt' => date('c', $file->getCreatedTime()),
       'date' => date('c', $file->getCreatedTime()),
       'title' => [
-        'raw' => '',
-        'rendered' => '',
+        'raw' => $data['title'],
+        'rendered' => $data['title'],
       ],
-      'alt_text' => NULL,
+      'caption' => [
+        'raw' => $data['caption'],
+        'rendered' => $data['caption'],
+      ],
+      'alt_text' => $data['alt_text'],
       'data' => [
         'entity_type' => 'file',
         'entity_uuid' => $file->uuid(),
         'image_style' => 'original',
       ],
+      'media_data' => $data,
       'media_details' => [
         'file' => $file->getFilename(),
         'width' => $image->getWidth(),
@@ -165,5 +192,29 @@ class MediaController extends ControllerBase {
     }
 
     return new JsonResponse($result);
+  }
+
+  /**
+   * Updates file data.
+   *
+   * @param String $fid
+   *   File id.
+   *
+   * @return \Symfony\Component\HttpFoundation\JsonResponse
+   *   The JSON response.
+   */
+  public function updateData($fid) {
+    $request = \Drupal::request();
+    $data = json_decode($request->getContent(), true);
+
+    $connection = \Drupal::database();
+    $connection->merge('file_managed_data')
+    ->key(['fid' => $fid])
+    ->fields([
+        'data' => serialize($data),
+    ])
+    ->execute();
+
+    return new JsonResponse(['status' => 'ok']);
   }
 }

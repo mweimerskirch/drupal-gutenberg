@@ -125,14 +125,15 @@
     }
 
     input {
+      visibility: hidden;
       position: absolute;
-      right: 2px;
-      top: -5px;
+      right: -2px;
+      top: -9px;
       &:after {
         content: " ";
         position: absolute;
-        width: 16px;
-        height: 16px;
+        width: 20px;
+        height: 20px;
         background-color: #fff;
         border: solid 2px #ccc;
         margin-left: -1px;
@@ -144,8 +145,18 @@
         background-color: #0071b8;
         border: solid 2px #0071b8;
         fill: currentColor;
-        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="white" d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z"/></svg>');
-        background-size: contain;
+        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path fill="white" d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z"/></svg>');
+        background-size: auto;
+        background-position: center center;
+        background-repeat: no-repeat;
+      }
+
+      &[type="checkbox"]:hover:after {
+        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path fill="white" d="M0 10h24v4h-24z"/></svg>');
+      }
+
+      &:checked {
+        visibility: visible;
       }
     }
 
@@ -182,6 +193,10 @@
   .details {
     video {
       width: 100%;
+    }
+
+    .components-base-control {
+      margin-right: 20px;
     }
   }
 }

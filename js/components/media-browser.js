@@ -9,6 +9,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -106,7 +108,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
         var allowedTypes = this.props.allowedTypes;
 
-        console.log(['image'] || allowedTypes);
 
         fetch('\n        ' + drupalSettings.path.baseUrl + 'editor/media/search/' + allowedTypes.join('+') + '/*').then(function (response) {
           return response.json();
@@ -141,18 +142,72 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
       }
     }, {
       key: 'selectMedia',
-      value: function selectMedia() {
-        var _state = this.state,
-            selected = _state.selected,
-            data = _state.data;
-        var onSelect = this.props.onSelect;
+      value: function () {
+        var _ref2 = _asyncToGenerator(regeneratorRuntime.mark(function _callee2() {
+          var _this4 = this;
 
-        var medias = data.filter(function (item) {
-          return selected[item.id];
-        });
+          var _state, selected, data, onSelect, medias;
 
-        onSelect(medias);
-      }
+          return regeneratorRuntime.wrap(function _callee2$(_context2) {
+            while (1) {
+              switch (_context2.prev = _context2.next) {
+                case 0:
+                  _state = this.state, selected = _state.selected, data = _state.data;
+                  onSelect = this.props.onSelect;
+                  medias = data.filter(function (item) {
+                    return selected[item.id];
+                  });
+
+
+                  medias.map(function () {
+                    var _ref3 = _asyncToGenerator(regeneratorRuntime.mark(function _callee(media) {
+                      var result;
+                      return regeneratorRuntime.wrap(function _callee$(_context) {
+                        while (1) {
+                          switch (_context.prev = _context.next) {
+                            case 0:
+                              _context.next = 2;
+                              return fetch(drupalSettings.path.baseUrl + 'editor/media/update_data/' + media.id, {
+                                method: 'post',
+                                body: JSON.stringify({
+                                  title: media.title.raw,
+                                  caption: media.caption.raw,
+                                  alt_text: media.alt_text
+                                })
+                              });
+
+                            case 2:
+                              result = _context.sent;
+
+                            case 3:
+                            case 'end':
+                              return _context.stop();
+                          }
+                        }
+                      }, _callee, _this4);
+                    }));
+
+                    return function (_x) {
+                      return _ref3.apply(this, arguments);
+                    };
+                  }());
+
+                  onSelect(medias);
+
+                case 5:
+                case 'end':
+                  return _context2.stop();
+              }
+            }
+          }, _callee2, this);
+        }));
+
+        function selectMedia() {
+          return _ref2.apply(this, arguments);
+        }
+
+        return selectMedia;
+      }()
     }, {
       key: 'canToggle',
       value: function canToggle(ev, id) {
@@ -189,7 +244,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
     }, {
       key: 'render',
       value: function render() {
-        var _this4 = this;
+        var _this5 = this;
 
         var _state2 = this.state,
             data = _state2.data,
@@ -205,6 +260,27 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
           })[0];
         };
         var activeMedia = getMedia(active);
+
+        function updateMedia(attributes) {
+          var title = attributes.title,
+              altText = attributes.altText,
+              caption = attributes.caption;
+
+
+          activeMedia.title = {
+            raw: title,
+            rendered: title
+          };
+
+          if (caption) {
+            activeMedia.caption = {
+              raw: caption,
+              rendered: '<p>' + caption + '</p>'
+            };
+          }
+
+          activeMedia.alt_text = altText;
+        }
 
         return React.createElement(
           'div',
@@ -224,7 +300,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                   placeHolder: __('Search'),
                   type: 'text',
                   onChange: function onChange(value) {
-                    _this4.setState({ search: value.target.value.toLowerCase() });
+                    _this5.setState({ search: value.target.value.toLowerCase() });
                   }
                 })
               )
@@ -246,7 +322,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                       'for': 'media-browser-selector-' + media.id,
                       className: 'thumbnail ' + media.media_type,
                       onClick: function onClick(ev) {
-                        return _this4.canToggle(ev, media.id);
+                        return _this5.canToggle(ev, media.id);
                       }
                     },
                     React.createElement(MediaBrowserThumbnail, {
@@ -259,7 +335,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                     id: 'media-browser-selector-' + media.id,
                     name: 'media-browser-selector',
                     onClick: function onClick(ev) {
-                      return _this4.toggleMedia(ev, media.id);
+                      return _this5.toggleMedia(ev, media.id);
                     },
                     type: multiple ? 'checkbox' : 'radio',
                     checked: selected[media.id]
@@ -278,7 +354,11 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                   null,
                   __('Media details')
                 ),
-                React.createElement(MediaBrowserDetails, { media: activeMedia })
+                React.createElement(MediaBrowserDetails, {
+                  key: activeMedia.id,
+                  onChange: updateMedia,
+                  media: activeMedia
+                })
               )
             )
           ),

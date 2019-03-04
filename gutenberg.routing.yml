@@ -23,6 +23,13 @@ gutenberg.media.search:
   requirements:
     _permission: 'access content'
     _method: 'GET'
+gutenberg.media.update_data:
+  path: '/editor/media/update_data/{fid}'
+  defaults:
+    _controller: '\Drupal\gutenberg\Controller\MediaController::updateData'
+  requirements:
+    _permission: 'access content'
+    _method: 'POST'
 gutenberg.blocks.load:
   path: '/editor/blocks/load'
   defaults:

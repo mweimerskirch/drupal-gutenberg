@@ -65,7 +65,6 @@
 
     getMediaFiles() {
       const { allowedTypes } = this.props;
-      console.log(['image'] || allowedTypes);
 
       fetch(`
         ${drupalSettings.path.baseUrl}editor/media/search/${allowedTypes.join(
@@ -97,10 +96,24 @@
       } );
     }
 
-    selectMedia() {
+    async selectMedia() {
       const { selected, data } = this.state;
       const { onSelect } = this.props;
       const medias = data.filter(item => selected[item.id]);
+
+      medias.map(async media => {
+        const result = await fetch(
+          `${drupalSettings.path.baseUrl}editor/media/update_data/${media.id}`,
+          {
+            method: 'post',
+            body: JSON.stringify({
+              title: media.title.raw,
+              caption: media.caption.raw,
+              alt_text: media.alt_text,
+            }),
+          },
+        );
+      });
 
       onSelect(medias);
     }
@@ -141,6 +154,24 @@
 
       const getMedia = id => data.filter(item => item.id === id)[0];
       const activeMedia = getMedia(active);
+
+      function updateMedia(attributes) {
+        const { title, altText, caption } = attributes;
+
+        activeMedia.title = {
+          raw: title,
+          rendered: title,
+        };
+
+        if (caption) {
+          activeMedia.caption = {
+            raw: caption,
+            rendered: `<p>${caption}</p>`,
+          };
+        }
+
+        activeMedia.alt_text = altText;
+      }
 
       return (
         <div className="media-browser">
@@ -195,7 +226,11 @@
               {activeMedia && (
                 <Fragment>
                   <h2>{__('Media details')}</h2>
-                  <MediaBrowserDetails media={activeMedia} />
+                  <MediaBrowserDetails
+                    key={activeMedia.id}
+                    onChange={updateMedia}
+                    media={activeMedia}
+                  />
                 </Fragment>
               )}
             </div>

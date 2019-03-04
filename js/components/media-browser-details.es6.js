@@ -1,6 +1,7 @@
 ((wp, Drupal, moment) => {
-  const { element } = wp;
+  const { element, components } = wp;
   const { Component, Fragment } = element;
+  const { TextControl, TextareaControl, SelectControl } = components;
   const customTypes = ['image', 'audio', 'video'];
   const __ = Drupal.t;
 
@@ -13,13 +14,24 @@
   class MediaBrowserDetails extends Component {
     constructor() {
       super(...arguments);
+      const { media } = this.props;
       this.state = {
         width: null,
         height: null,
         duration: null,
+        title: media.title ? media.title.raw : null,
+        altText: media.alt_text,
+        caption: media.caption ? media.caption.raw : null,
       };
       this.updateVideo = this.updateVideo.bind(this);
       this.updateAudio = this.updateAudio.bind(this);
+    }
+
+    componentDidUpdate(prevProps) {
+      const { onChange } = this.props;
+      const { title, altText, caption } = this.state;
+
+      onChange({ title, altText, caption });
     }
 
     updateVideo(ev) {
@@ -40,7 +52,7 @@
 
     render() {
       const { media } = this.props;
-      const { width, height, duration } = this.state;
+      const { width, height, duration, title, altText, caption } = this.state;
 
       return (
         <Fragment>
@@ -52,6 +64,21 @@
               </figure>
               <div>{`${media.media_details.width} x ${media.media_details.height}`}</div>
               <div>{toSize(media.media_details.filesize)}</div>
+              <TextControl
+                value={title}
+                onChange={value => this.setState({ title: value })}
+                label="Title"
+              />
+              <TextControl
+                value={altText}
+                onChange={value => this.setState({ altText: value })}
+                label="Alt text"
+              />
+              <TextareaControl
+                value={caption}
+                onChange={value => this.setState({ caption: value })}
+                label="Caption"
+              />
             </Fragment>
           )}
           {media.media_type === 'video' && (
