@@ -179,6 +179,7 @@ class MediaController extends ControllerBase {
       }
       $query->condition($group);
     }
+    $query->sort('created', 'DESC');
 
     $file_ids = $query->execute();
     $files = File::loadMultiple($file_ids);
