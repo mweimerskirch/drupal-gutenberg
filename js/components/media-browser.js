@@ -135,7 +135,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
           allowedTypes: allowedTypes,
           filesList: files,
           onFileChange: function onFileChange(files) {
-            console.log(data.concat(files));
             _this3.getMediaFiles();
           }
         });
@@ -170,9 +169,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                               return fetch(drupalSettings.path.baseUrl + 'editor/media/update_data/' + media.id, {
                                 method: 'post',
                                 body: JSON.stringify({
-                                  title: media.title.raw,
-                                  caption: media.caption.raw,
-                                  alt_text: media.alt_text
+                                  title: media.title,
+                                  caption: media.caption,
+                                  alt_text: media.alt
                                 })
                               });
 

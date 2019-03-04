@@ -89,7 +89,6 @@
         allowedTypes: allowedTypes,
         filesList: files,
         onFileChange: ( files ) => {
-          console.log(data.concat(files));
           this.getMediaFiles();
         },
         // onError: noticeOperations.createErrorNotice,
@@ -107,9 +106,9 @@
           {
             method: 'post',
             body: JSON.stringify({
-              title: media.title.raw,
-              caption: media.caption.raw,
-              alt_text: media.alt_text,
+              title: media.title,
+              caption: media.caption,
+              alt_text: media.alt,
             }),
           },
         );

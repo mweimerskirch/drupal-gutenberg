@@ -19,7 +19,6 @@
 
     onSelect(medias) {
       const { multiple, onSelect } = this.props;
-      console.log(medias);
       onSelect(multiple ? medias : medias[0]);
       this.frame.close();
     }
