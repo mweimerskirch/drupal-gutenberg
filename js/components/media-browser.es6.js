@@ -158,19 +158,14 @@
       function updateMedia(attributes) {
         const { title, altText, caption } = attributes;
 
-        activeMedia.title = {
-          raw: title,
-          rendered: title,
-        };
+        activeMedia.title = title;
 
         if (caption) {
-          activeMedia.caption = {
-            raw: caption,
-            rendered: `<p>${caption}</p>`,
-          };
+          activeMedia.caption = caption;
         }
 
         activeMedia.alt_text = altText;
+        activeMedia.alt = altText;
       }
 
       return (

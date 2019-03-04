@@ -50,6 +50,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
             multiple = _props.multiple,
             onSelect = _props.onSelect;
 
+        console.log(medias);
         onSelect(multiple ? medias : medias[0]);
         this.frame.close();
       }

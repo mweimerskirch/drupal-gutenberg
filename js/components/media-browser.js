@@ -267,19 +267,14 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
               caption = attributes.caption;
 
 
-          activeMedia.title = {
-            raw: title,
-            rendered: title
-          };
+          activeMedia.title = title;
 
           if (caption) {
-            activeMedia.caption = {
-              raw: caption,
-              rendered: '<p>' + caption + '</p>'
-            };
+            activeMedia.caption = caption;
           }
 
           activeMedia.alt_text = altText;
+          activeMedia.alt = altText;
         }
 
         return React.createElement(
