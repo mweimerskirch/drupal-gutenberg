@@ -185,7 +185,12 @@
             </div>
             <ul className="list">
               {data
-                .filter(item => item.media_details.file.toLowerCase().includes(search))
+                .filter(
+                  item =>
+                    item.media_details.file.toLowerCase().includes(search) ||
+                    (item.title.raw &&
+                      item.title.raw.toLowerCase().includes(search)),
+                )
                 .map(media => (
                   <li
                     className={`item ${active === media.id ? 'selected' : ''}`}
