@@ -83,10 +83,6 @@ class MediaController extends ControllerBase {
         'raw' => $data['title'],
         'rendered' => $data['title'],
       ],
-      'caption' => [
-        'raw' => $data['caption'],
-        'rendered' => $data['caption'],
-      ],
       'alt_text' => $data['alt_text'],
       'data' => [
         'entity_type' => 'file',
@@ -104,6 +100,13 @@ class MediaController extends ControllerBase {
         'sizes' => $sizes,
       ],
     ];
+
+    if ($data['caption']) {
+      $result['caption'] = [
+        'raw' => $data['caption'],
+        'rendered' => $data['caption'],
+      ];
+    }
 
     return $result;
   }
