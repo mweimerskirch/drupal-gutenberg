@@ -165,7 +165,7 @@ class MediaController extends ControllerBase {
    * @return \Symfony\Component\HttpFoundation\JsonResponse
    *   The JSON response.
    */
-  public function search(Request $request, String $type = '', String $search = '') {
+  public function search(Request $request, String $type = NULL, String $search = NULL) {
     $query = \Drupal::entityQuery('file');
 
     if ($search !== '*') {
