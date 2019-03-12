@@ -239,4 +239,18 @@
   right: 10px;
 }
 
+#edit-allowed-blocks-details .details-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+#edit-allowed-blocks-details .details-wrapper fieldset {
+  flex: 1;
+  margin-right: 10px;
+}
+
+#edit-allowed-blocks-details .details-wrapper fieldset:last-child {
+  margin-right: 0;
+}
+
 /*# sourceMappingURL=admin.css.map */

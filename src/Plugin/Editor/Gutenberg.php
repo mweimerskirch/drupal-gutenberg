@@ -4,6 +4,7 @@ namespace Drupal\gutenberg\Plugin\Editor;
 
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\gutenberg\GutenbergPluginManager;
+use Drupal\gutenberg\Controller\UtilsController;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\Render\Element;
@@ -200,7 +201,30 @@ class Gutenberg extends EditorBase implements ContainerFactoryPluginInterface {
    *
    */
   public function getJSSettings(Editor $editor) {
-    $settings = [];
+    $config = \Drupal::service('config.factory')->getEditable('gutenberg.settings');
+
+    $node = \Drupal::routeMatch()->getParameter('node');
+
+    if (!$node) {
+      $route_match = \Drupal::service('current_route_match');
+      if (!$route_match->getParameter('node_type')) {
+        return;
+      }
+      $node_type = $route_match->getParameter('node_type')->get('type');
+    }
+    else {
+      $node_type = $node->type->getString();
+    }
+  
+    // $node = \Drupal::request()->attributes->get('node');
+    // $type_name = $node->bundle();
+
+    $blocks_settings = UtilsController::getBlocksSettings();
+
+    $settings = [
+      'allowedBlocks' => $config->get($node_type . '_allowed_blocks'),
+      'blackList' => $blocks_settings['blacklist'],
+    ];
 
     return $settings;
   }

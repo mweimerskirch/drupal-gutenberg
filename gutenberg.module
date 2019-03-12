@@ -12,6 +12,7 @@ use Drupal\views\ViewExecutable;
 use Symfony\Component\Yaml\Yaml;
 use Drupal\Core\Discovery\YamlDiscovery;
 use Drupal\image\Entity\ImageStyle;
+use Drupal\gutenberg\Controller\UtilsController;
 
 /**
  * Implements hook_form_alter().
@@ -34,6 +35,66 @@ function gutenberg_form_alter(&$form, FormStateInterface $form_state, $form_id) 
       ],
     ];
 
+    $form['gutenberg']['categories'] = [
+      '#type' => 'hidden',
+      '#default_value' => [],
+    ];
+
+    $form['gutenberg']['allowed_blocks_details'] = [
+      '#type' => 'details',
+      '#title' => t('Allowed blocks'),
+      '#states' => [
+        'visible' => [
+          'input[name="enable_gutenberg_experience"]' => ['checked' => TRUE],
+        ]
+      ],
+    ];
+
+    $settings = _gutenberg_get_allowed_blocks();
+    $blocks_settings = UtilsController::getBlocksSettings();
+
+    foreach ($settings['categories'] as $category) {
+      $category['reference'] = str_replace('/', '-', $category['reference']);
+      $form['gutenberg']['categories']['#default_value'][] = $category['reference'];
+
+      $form['gutenberg']['allowed_blocks_details'][$category['reference']] = [
+        '#type' => 'fieldset',
+        '#title' => $category['name'],
+      ];
+
+      $options = [$category['reference'] . '/all' => t('All')];
+      foreach ($category['blocks'] as $block) {
+        if (!in_array($block['id'], $blocks_settings['blacklist'])) {
+          $options[$block['id']] = $block['name'];
+        }
+      }
+
+      $default_values = array_combine(
+        array_map(
+          function($block){
+            return $block['id'];
+          }, 
+          $category['blocks']
+        ),
+        array_map(
+          function($block){
+            return $block['default'] ? $block['id'] : 0;
+          }, 
+          $category['blocks']
+        )
+      );
+
+      $config_values = $config->get($form['type']['#default_value'] . '_allowed_blocks');
+
+      $form['gutenberg']['allowed_blocks_details'][$category['reference']]['allowed_blocks_' . $category['reference']] = [
+        '#type' => 'checkboxes',
+        '#options' => $options,
+        '#default_value' => array_merge($default_values, $config_values ? $config_values : []),
+      ];
+
+    }
+
+    $form['#attached']['library'][] = 'gutenberg/admin';
     $form['actions']['submit']['#submit'][] = '_gutenberg_node_form_submit';
   }
 }
@@ -198,8 +259,22 @@ function gutenberg_form_node_form_after_build(array $element, FormStateInterface
  *
  */
 function _gutenberg_node_form_submit(array $form, FormStateInterface $form_state) {
+  $gutenberg_enabled =  $form_state->getValue('enable_gutenberg_experience');
+
   $config = \Drupal::service('config.factory')->getEditable('gutenberg.settings');
-  $config->set($form_state->getValue('type') . '_enable_full', $form_state->getValue('enable_gutenberg_experience'))->save();
+  $config->set($form_state->getValue('type') . '_enable_full', $gutenberg_enabled)->save();
+
+  if (!$gutenberg_enabled) {
+    $config->delete($form_state->getValue('type') . '_allowed_blocks')->save();
+    return;
+  }
+
+  $categories = explode(' ', $form_state->getValue('categories'));
+  $values = [];
+  foreach ($categories as $category) {
+    $values = array_merge($values, $form_state->getValue('allowed_blocks_' . $category));
+  }
+  $config->set($form_state->getValue('type') . '_allowed_blocks', $values)->save();
 }
 
 /**
@@ -264,6 +339,23 @@ function _gutenberg_get_all_modules_settings() {
     $directories = \Drupal::service('module_handler')->getModuleDirectories();
     $discovery = new YamlDiscovery('gutenberg', $directories);
     $settings = $discovery->findAll();
+  }
+
+  return $settings;
+}
+
+function _gutenberg_get_allowed_blocks() {
+  $settings = &drupal_static(__FUNCTION__);
+
+  if(!isset($settings)) {
+    $module_handler = \Drupal::service('module_handler');
+    $path = $module_handler->getModule('gutenberg')->getPath();
+
+    $file_path = DRUPAL_ROOT . '/' . $path . '/' . 'gutenberg.blocks.yml';
+    if (file_exists($file_path)) {
+      $file_contents = file_get_contents($file_path);
+      $settings = Yaml::parse($file_contents);
+    }  
   }
 
   return $settings;

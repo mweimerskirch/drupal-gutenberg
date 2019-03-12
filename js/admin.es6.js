@@ -20,6 +20,34 @@
           .find('input[type="checkbox"]')
           .click();
       });
+
+      $('input[name*="allowed_blocks_"]:not([value*="/all"])').click(ev => {
+        const category = $(ev.currentTarget)
+          .val()
+          .split('/')[0];
+        const checked = $(ev.currentTarget).is(':checked');
+
+        if (checked) {
+          return;
+        }
+
+        $(`input[name="allowed_blocks_${category}[${category}/all]"]`).prop(
+          'checked',
+          checked,
+        );
+      });
+
+      $('input[name*="allowed_blocks_core"][value*="/all"]').click(ev => {
+        const category = $(ev.currentTarget)
+          .val()
+          .split('/')[0];
+        const checked = $(ev.currentTarget).is(':checked');
+
+        $(`input[name*="allowed_blocks_${category}[${category}"]`).prop(
+          'checked',
+          checked,
+        );
+      });
     },
   };
 })(jQuery, Drupal);

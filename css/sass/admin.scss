@@ -60,3 +60,19 @@
     }
   }
 }
+
+#edit-allowed-blocks-details {
+  .details-wrapper {
+    display: flex;
+    flex-direction: row;
+
+    fieldset {
+      flex: 1;
+      margin-right: 10px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}

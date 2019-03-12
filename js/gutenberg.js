@@ -15,23 +15,40 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
       var _this = this;
 
       return _asyncToGenerator(regeneratorRuntime.mark(function _callee() {
-        var data, blocks, editor, registerDrupalStore, registerDrupalBlocks, categories, isFormValid;
+        var _format$editorSetting, allowedBlocks, blackList, data, blocks, editor, unregisterBlockType, registerDrupalStore, registerDrupalBlocks, key, value, categories, isFormValid;
+
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
+                _format$editorSetting = format.editorSettings, allowedBlocks = _format$editorSetting.allowedBlocks, blackList = _format$editorSetting.blackList;
                 data = wp.data, blocks = wp.blocks, editor = wp.editor;
+                unregisterBlockType = blocks.unregisterBlockType;
                 registerDrupalStore = DrupalGutenberg.registerDrupalStore, registerDrupalBlocks = DrupalGutenberg.registerDrupalBlocks;
-                _context.next = 4;
+                _context.next = 6;
                 return registerDrupalStore(data);
 
-              case 4:
-                _context.next = 6;
+              case 6:
+                _context.next = 8;
                 return registerDrupalBlocks(blocks, editor);
 
-              case 6:
+              case 8:
 
                 _this._initGutenberg(element);
+
+                blackList.forEach(function (value) {
+                  unregisterBlockType(value);
+                });
+
+                for (key in allowedBlocks) {
+                  if (allowedBlocks.hasOwnProperty(key)) {
+                    value = allowedBlocks[key];
+
+                    if (!value && !key.includes('/all') && !blackList.includes(key)) {
+                      unregisterBlockType(key);
+                    }
+                  }
+                }
 
                 categories = data.select('core/blocks').getCategories().filter(function (item) {
                   if (item.slug === 'widgets') {
@@ -116,7 +133,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
                 return _context.abrupt('return', true);
 
-              case 18:
+              case 22:
               case 'end':
                 return _context.stop();
             }

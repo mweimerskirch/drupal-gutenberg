@@ -21,7 +21,9 @@
      *   Whether the call to `CKEDITOR.replace()` created an editor or not.
      */
     async attach(element, format) {
+      const { allowedBlocks, blackList } = format.editorSettings;
       const { data, blocks, editor } = wp;
+      const { unregisterBlockType } = blocks;
       const { registerDrupalStore, registerDrupalBlocks } = DrupalGutenberg;
 
       // Register plugins.
@@ -36,6 +38,21 @@
       await registerDrupalBlocks(blocks, editor);
 
       this._initGutenberg(element);
+
+      // Process blacklist.
+      blackList.forEach(value => {
+        unregisterBlockType(value);
+      });
+
+      // Process allowed blocks.
+      for (const key in allowedBlocks) {
+        if (allowedBlocks.hasOwnProperty(key)) {
+          const value = allowedBlocks[key];
+          if (!value && !key.includes('/all') && !blackList.includes(key)) {
+            unregisterBlockType(key);
+          }
+        }
+      }
 
       // Remove unused blocks.
       const categories = data
