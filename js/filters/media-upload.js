@@ -76,6 +76,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
             value = _props2.value;
 
         var mediaBrowser = document.createElement('div');
+
         mediaBrowser.setAttribute('id', 'media-browser-modal');
         element.render(React.createElement(MediaBrowser, {
           multiple: multiple,
@@ -87,7 +88,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
         this.frame = Drupal.dialog(mediaBrowser, {
           title: __('Media library'),
           width: '95%',
-          height: document.documentElement.scrollHeight - 100,
+          height: document.documentElement.clientHeight - 100,
           buttons: _defineProperty({}, __('Cancel'), function () {
             _this2.frame.close();
           }),

@@ -8,22 +8,6 @@
 
   const __ = Drupal.t;
 
-  function MediaBrowserThumbnail(props) {
-    const { mediaType, filename, url } = props;
-
-    return (
-      <Fragment>
-        {mediaType === 'image' && (
-          <div className="center">
-            <img alt={filename} src={url} />
-          </div>
-        )}
-
-        {mediaType !== 'image' && <div className="filename">{filename}</div>}
-      </Fragment>
-    );
-  }
-
   class MediaBrowser extends Component {
     constructor() {
       super(...arguments);
@@ -36,8 +20,8 @@
       this.uploadFromFiles = this.uploadFromFiles.bind(this);
       this.addFiles = this.addFiles.bind(this);
       this.selectMedia = this.selectMedia.bind(this);
-      this.canToggle = this.canToggle.bind(this);
       this.toggleMedia = this.toggleMedia.bind(this);
+      this.uncheckMedia = this.uncheckMedia.bind(this);
     }
 
     componentWillMount() {
@@ -117,34 +101,33 @@
       onSelect(medias);
     }
 
-    canToggle(ev, id) {
-      const { multiple } = this.props;
-      const { selected } = this.state;
-
-      this.setState({ active: id });
-
-      if (multiple && selected[id]) {
-        // Stop bubbling down the tree (checkbox).
-        ev.preventDefault();
-      }
-
-      return true;
-    }
-
     toggleMedia(ev, id) {
-      const { selected } = this.state;
+      const { selected, active } = this.state;
       const { multiple } = this.props;
       this.setState({ active: id });
 
       if (multiple) {
         this.setState({
-          selected: { ...selected, [id]: ev.target.checked },
+          selected: { ...selected, [id]: active === id ? !selected[id] : true },
         });
       } else {
         this.setState({
-          selected: { [id]: ev.target.checked },
+          selected: { [id]: active === id ? !selected[id] : true },
         });
       }
+    }
+
+    uncheckMedia(ev, id) {
+      const { selected } = this.state;
+      const { multiple } = this.props;
+
+      if (multiple) {
+        this.setState({
+          selected: { ...selected, [id]: false },
+        });
+      }
+
+      ev.stopPropagation();
     }
 
     render() {
@@ -191,37 +174,50 @@
                     (item.title.raw &&
                       item.title.raw.toLowerCase().includes(search)),
                 )
-                .map(media => (
+                .map((media, index) => (
                   <li
-                    className={`item ${active === media.id ? 'selected' : ''}`}
+                    tabIndex={index}
+                    role="checkbox"
+                    onClick={ev => this.toggleMedia(ev, media.id)}
+                    aria-label={media.filename}
+                    aria-checked="true"
+                    data-id={media.id}
+                    className={`attachment save-ready ${active === media.id ? 'details' : ''} ${selected[media.id] ? 'selected' : ''}`}
                   >
-                    <label
-                      for={`media-browser-selector-${media.id}`}
-                      className={`thumbnail ${media.media_type}`}
-                      onClick={ev => this.canToggle(ev, media.id)}
+                    <div className="attachment-preview js--select-attachment type-image subtype-jpeg landscape">
+                      <div className="thumbnail">
+                        <div className="centered">
+                          {media.media_type === 'image' && (
+                            <img
+                              src={
+                                media.media_details.sizes &&
+                                media.media_details.sizes.large
+                                  ? media.media_details.sizes.large.source_url
+                                  : media.source_url
+                              }
+                              draggable="false"
+                              alt={media.filename}
+                            />
+                          )}
+                          {media.media_type !== 'image' && (
+                            <div className="filename">{media.filename}</div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                    <button
+                      type="button"
+                      className="check"
+                      tabIndex={index}
+                      onClick={ev => this.uncheckMedia(ev, media.id)}
                     >
-                      <MediaBrowserThumbnail
-                        mediaType={media.media_type}
-                        url={
-                          media.media_details.sizes &&
-                          media.media_details.sizes.large
-                            ? media.media_details.sizes.large.source_url
-                            : media.source_url
-                        }
-                        filename={media.media_details.file}
-                      />
-                    </label>
-                    <input
-                      id={`media-browser-selector-${media.id}`}
-                      name="media-browser-selector"
-                      onClick={ev => this.toggleMedia(ev, media.id)}
-                      type={multiple ? 'checkbox' : 'radio'}
-                      checked={selected[media.id]}
-                    />
+                      <span className="media-modal-icon" />
+                      <span className="screen-reader-text">Deselect</span>
+                    </button>
                   </li>
                 ))}
             </ul>
-            <div className="details">
+            <div className="media-details">
               {activeMedia && (
                 <Fragment>
                   <h2>{__('Media details')}</h2>

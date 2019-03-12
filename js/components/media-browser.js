@@ -35,28 +35,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
   var __ = Drupal.t;
 
-  function MediaBrowserThumbnail(props) {
-    var mediaType = props.mediaType,
-        filename = props.filename,
-        url = props.url;
-
-
-    return React.createElement(
-      Fragment,
-      null,
-      mediaType === 'image' && React.createElement(
-        'div',
-        { className: 'center' },
-        React.createElement('img', { alt: filename, src: url })
-      ),
-      mediaType !== 'image' && React.createElement(
-        'div',
-        { className: 'filename' },
-        filename
-      )
-    );
-  }
-
   var MediaBrowser = function (_Component) {
     _inherits(MediaBrowser, _Component);
 
@@ -74,8 +52,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
       _this.uploadFromFiles = _this.uploadFromFiles.bind(_this);
       _this.addFiles = _this.addFiles.bind(_this);
       _this.selectMedia = _this.selectMedia.bind(_this);
-      _this.canToggle = _this.canToggle.bind(_this);
       _this.toggleMedia = _this.toggleMedia.bind(_this);
+      _this.uncheckMedia = _this.uncheckMedia.bind(_this);
       return _this;
     }
 
@@ -208,48 +186,50 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
         return selectMedia;
       }()
     }, {
-      key: 'canToggle',
-      value: function canToggle(ev, id) {
-        var multiple = this.props.multiple;
-        var selected = this.state.selected;
-
-
-        this.setState({ active: id });
-
-        if (multiple && selected[id]) {
-          ev.preventDefault();
-        }
-
-        return true;
-      }
-    }, {
       key: 'toggleMedia',
       value: function toggleMedia(ev, id) {
-        var selected = this.state.selected;
+        var _state2 = this.state,
+            selected = _state2.selected,
+            active = _state2.active;
         var multiple = this.props.multiple;
 
         this.setState({ active: id });
 
         if (multiple) {
           this.setState({
-            selected: _extends({}, selected, _defineProperty({}, id, ev.target.checked))
+            selected: _extends({}, selected, _defineProperty({}, id, active === id ? !selected[id] : true))
           });
         } else {
           this.setState({
-            selected: _defineProperty({}, id, ev.target.checked)
+            selected: _defineProperty({}, id, active === id ? !selected[id] : true)
           });
         }
+      }
+    }, {
+      key: 'uncheckMedia',
+      value: function uncheckMedia(ev, id) {
+        var selected = this.state.selected;
+        var multiple = this.props.multiple;
+
+
+        if (multiple) {
+          this.setState({
+            selected: _extends({}, selected, _defineProperty({}, id, false))
+          });
+        }
+
+        ev.stopPropagation();
       }
     }, {
       key: 'render',
       value: function render() {
         var _this5 = this;
 
-        var _state2 = this.state,
-            data = _state2.data,
-            selected = _state2.selected,
-            active = _state2.active,
-            search = _state2.search;
+        var _state3 = this.state,
+            data = _state3.data,
+            selected = _state3.selected,
+            active = _state3.active,
+            search = _state3.search;
         var multiple = this.props.multiple;
 
 
@@ -304,42 +284,65 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
               { className: 'list' },
               data.filter(function (item) {
                 return item.media_details.file.toLowerCase().includes(search) || item.title.raw && item.title.raw.toLowerCase().includes(search);
-              }).map(function (media) {
+              }).map(function (media, index) {
                 return React.createElement(
                   'li',
                   {
-                    className: 'item ' + (active === media.id ? 'selected' : '')
-                  },
-                  React.createElement(
-                    'label',
-                    {
-                      'for': 'media-browser-selector-' + media.id,
-                      className: 'thumbnail ' + media.media_type,
-                      onClick: function onClick(ev) {
-                        return _this5.canToggle(ev, media.id);
-                      }
-                    },
-                    React.createElement(MediaBrowserThumbnail, {
-                      mediaType: media.media_type,
-                      url: media.media_details.sizes && media.media_details.sizes.large ? media.media_details.sizes.large.source_url : media.source_url,
-                      filename: media.media_details.file
-                    })
-                  ),
-                  React.createElement('input', {
-                    id: 'media-browser-selector-' + media.id,
-                    name: 'media-browser-selector',
+                    tabIndex: index,
+                    role: 'checkbox',
                     onClick: function onClick(ev) {
                       return _this5.toggleMedia(ev, media.id);
                     },
-                    type: multiple ? 'checkbox' : 'radio',
-                    checked: selected[media.id]
-                  })
+                    'aria-label': media.filename,
+                    'aria-checked': 'true',
+                    'data-id': media.id,
+                    className: 'attachment save-ready ' + (active === media.id ? 'details' : '') + ' ' + (selected[media.id] ? 'selected' : '')
+                  },
+                  React.createElement(
+                    'div',
+                    { className: 'attachment-preview js--select-attachment type-image subtype-jpeg landscape' },
+                    React.createElement(
+                      'div',
+                      { className: 'thumbnail' },
+                      React.createElement(
+                        'div',
+                        { className: 'centered' },
+                        media.media_type === 'image' && React.createElement('img', {
+                          src: media.media_details.sizes && media.media_details.sizes.large ? media.media_details.sizes.large.source_url : media.source_url,
+                          draggable: 'false',
+                          alt: media.filename
+                        }),
+                        media.media_type !== 'image' && React.createElement(
+                          'div',
+                          { className: 'filename' },
+                          media.filename
+                        )
+                      )
+                    )
+                  ),
+                  React.createElement(
+                    'button',
+                    {
+                      type: 'button',
+                      className: 'check',
+                      tabIndex: index,
+                      onClick: function onClick(ev) {
+                        return _this5.uncheckMedia(ev, media.id);
+                      }
+                    },
+                    React.createElement('span', { className: 'media-modal-icon' }),
+                    React.createElement(
+                      'span',
+                      { className: 'screen-reader-text' },
+                      'Deselect'
+                    )
+                  )
                 );
               })
             ),
             React.createElement(
               'div',
-              { className: 'details' },
+              { className: 'media-details' },
               activeMedia && React.createElement(
                 Fragment,
                 null,

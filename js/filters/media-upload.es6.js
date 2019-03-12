@@ -36,6 +36,7 @@
     openModal() {
       const { multiple, allowedTypes, value } = this.props;
       const mediaBrowser = document.createElement('div');
+
       mediaBrowser.setAttribute('id', 'media-browser-modal');
       element.render(
         <MediaBrowser
@@ -50,7 +51,7 @@
       this.frame = Drupal.dialog(mediaBrowser, {
         title: __('Media library'),
         width: '95%',
-        height: document.documentElement.scrollHeight - 100,
+        height: document.documentElement.clientHeight - 100,
         buttons: {
           // This is mainly a placeholder button to force the dialog
           // to create a buttonset pane. Not really used.
