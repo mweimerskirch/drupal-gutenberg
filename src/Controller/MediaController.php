@@ -48,7 +48,7 @@ class MediaController extends ControllerBase {
    */
   private function _parse(File $file) {
     $uri = $file->getFileUri();
-    $media_src = file_create_url($uri);
+    $media_src = file_url_transform_relative(file_create_url($uri));
     $image = \Drupal::service('image.factory')->get($uri);
 
     $styles = $this->_getImageStyles();
@@ -61,7 +61,7 @@ class MediaController extends ControllerBase {
     foreach ($styles as $key => $style) {
       $url = ImageStyle::load($style->getName())->buildUrl($uri);
       $sizes[$style->getName()] = [
-        'source_url' => $url,
+        'source_url' => file_url_transform_relative($url),
       ];
     }
 
