@@ -242,14 +242,21 @@
               <FormFileUpload
                 isLarge
                 className="editor-media-placeholder__button"
-                onChange={ this.uploadFromFiles }
+                onChange={this.uploadFromFiles}
                 accept="image" // { accept }
                 multiple={multiple}
               >
                 {__('Upload')}
               </FormFileUpload>
 
-              <Button isLarge isPrimary onClick={this.selectMedia}>
+              <Button
+                isLarge
+                disabled={
+                  Object.values(selected).filter(item => item).length === 0
+                }
+                isPrimary
+                onClick={this.selectMedia}
+              >
                 {__('Select')}
               </Button>
             </div>

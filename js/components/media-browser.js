@@ -385,7 +385,14 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
               ),
               React.createElement(
                 Button,
-                { isLarge: true, isPrimary: true, onClick: this.selectMedia },
+                {
+                  isLarge: true,
+                  disabled: Object.values(selected).filter(function (item) {
+                    return item;
+                  }).length === 0,
+                  isPrimary: true,
+                  onClick: this.selectMedia
+                },
                 __('Select')
               )
             )
