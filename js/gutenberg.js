@@ -69,6 +69,17 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                   label: 'Colorbox image'
                 });
 
+                data.dispatch('core/edit-post').setAvailableMetaBoxesPerLocation({
+                  advanced: ['drupalSettings']
+                });
+
+
+                setTimeout(function () {
+                  drupalSettings.gutenberg.metaboxes.forEach(function (id) {
+                    $('.edit-post-meta-boxes-area__container').append($('#' + id));
+                  });
+                }, 0);
+
                 $(document.forms[0]).attr('novalidate', true);
 
                 setTimeout(function () {
@@ -133,7 +144,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
                 return _context.abrupt('return', true);
 
-              case 22:
+              case 24:
               case 'end':
                 return _context.stop();
             }

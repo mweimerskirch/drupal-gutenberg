@@ -78,6 +78,18 @@
         label: 'Colorbox image',
       });
 
+      data.dispatch('core/edit-post').setAvailableMetaBoxesPerLocation({
+        advanced: ['drupalSettings'],
+      });
+      // console.log('metabox locations', data.select('core/edit-post').getActiveMetaBoxLocations());
+
+      setTimeout(() => {
+        drupalSettings.gutenberg.metaboxes.forEach(id => {
+          $('.edit-post-meta-boxes-area__container')
+          .append($(`#${id}`));
+        });
+      }, 0);
+
       // Disable inline image block.
       // data.dispatch('core/editor').unregisterToken('core/image');
 

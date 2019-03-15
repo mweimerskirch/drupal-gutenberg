@@ -205,12 +205,20 @@ function gutenberg_form_node_form_alter(&$form, FormStateInterface $form_state) 
   // Let's move the remaining fields to a "special"
   // form group that can be used lated by JS to move to
   // Gutenberg's sidebar.
-  $form['additional_fields'] = [
+  // $form['additional_fields'] = [
+  //   '#type' => 'details',
+  //   '#access' => TRUE,
+  //   '#title' => t('More settings'),
+  //   '#weight' => 99,
+  //   '#group' => 'advanced',
+  // ];
+
+  $form['metabox_fields'] = [
     '#type' => 'details',
     '#access' => TRUE,
     '#title' => t('More settings'),
     '#weight' => 99,
-    '#group' => 'advanced',
+    // '#group' => 'advanced',
   ];
 
   // Move status to Published/meta pane.
@@ -227,24 +235,39 @@ function gutenberg_form_node_form_alter(&$form, FormStateInterface $form_state) 
     'path',
     'comment',
     'revision_log',
+    'langcode',
   ];
 
+  // Move all fields and containers to metabox area.
+  $metaboxHasFields = FALSE;
   foreach ($field_names as $key => $value) {
     if (
       array_key_exists($value, $form)
       && $value !== $text_fields[0]
       && !in_array($value, $excluded_fields)
+      // don't move containers, use js settings like shown below
+      && $form[$value]['#type'] !== 'container'
     ) {
-      $form[$value]['#group'] = 'additional_fields';
+      $form[$value]['#group'] = 'metabox_fields';
+      $metaboxHasFields = TRUE;
     }
   }
 
+  if (!$metaboxHasFields) {
+    unset($form['metabox_fields']);
+  }
   // Is Bartik the default theme? Add some custom styles
   // to look even better.
   $default_theme = \Drupal::config('system.theme')->get('default');
   if ($default_theme === 'bartik') {
     $form['#attached']['library'][] = 'gutenberg/bartik';
   }
+
+  // Move containers to metaboxes by DOM node id.
+  $form['#attached']['drupalSettings']['gutenberg']['metaboxes'] = [
+    'edit-metabox-fields',
+    'edit-field-meta-tags-0', // In case Metatag module is installed.
+  ];
 }
 
 /**
