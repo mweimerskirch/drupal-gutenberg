@@ -245,8 +245,8 @@ function gutenberg_form_node_form_alter(&$form, FormStateInterface $form_state) 
       array_key_exists($value, $form)
       && $value !== $text_fields[0]
       && !in_array($value, $excluded_fields)
-      // don't move containers, use js settings like shown below
-      && $form[$value]['#type'] !== 'container'
+      // don't move containers/details, use js settings like shown below
+      && $form[$value]['widget'][0]['#type'] !== 'details'
     ) {
       $form[$value]['#group'] = 'metabox_fields';
       $metaboxHasFields = TRUE;
