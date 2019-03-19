@@ -76,7 +76,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
                 setTimeout(function () {
                   drupalSettings.gutenberg.metaboxes.forEach(function (id) {
-                    $('.edit-post-meta-boxes-area__container').append($('#' + id));
+                    $('#' + id).appendTo($('.edit-post-meta-boxes-area__container'));
                   });
                 }, 0);
 

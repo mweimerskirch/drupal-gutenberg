@@ -218,7 +218,7 @@ function gutenberg_form_node_form_alter(&$form, FormStateInterface $form_state) 
     '#access' => TRUE,
     '#title' => t('More settings'),
     '#weight' => 99,
-    // '#group' => 'advanced',
+    '#group' => 'advanced', // group fallback in case JS fails to move to metaboxes.
   ];
 
   // Move status to Published/meta pane.
@@ -258,7 +258,7 @@ function gutenberg_form_node_form_alter(&$form, FormStateInterface $form_state) 
         $fields_with_details[] = $value;
       } else {
         $form[$value]['#group'] = 'metabox_fields';
-        $metabox_has_fields = TRUE;  
+        $metabox_has_fields = TRUE;
       }
     }
   }

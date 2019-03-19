@@ -85,8 +85,7 @@
 
       setTimeout(() => {
         drupalSettings.gutenberg.metaboxes.forEach(id => {
-          $('.edit-post-meta-boxes-area__container')
-          .append($(`#${id}`));
+          $(`#${id}`).appendTo($('.edit-post-meta-boxes-area__container'));
         });
       }, 0);
 
