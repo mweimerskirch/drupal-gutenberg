@@ -238,22 +238,35 @@ function gutenberg_form_node_form_alter(&$form, FormStateInterface $form_state) 
     'langcode',
   ];
 
-  // Move all fields and containers to metabox area.
-  $metaboxHasFields = FALSE;
+  /**
+   * Rationale behind this "messy" algo:
+   * If there's any details fieldset on the form, add it to a special array
+   * and then, on the form after build, add its #id to a JS array.
+   * For any other type of fields, group them on the metabox_fields fieldset.
+   * This fieldset will also move to metaboxes area. 
+   */
+  $metabox_has_fields = FALSE;
+  $fields_with_details = [];
   foreach ($field_names as $key => $value) {
     if (
       array_key_exists($value, $form)
       && $value !== $text_fields[0]
       && !in_array($value, $excluded_fields)
-      // don't move containers/details, use js settings like shown below
-      && $form[$value]['widget'][0]['#type'] !== 'details'
     ) {
-      $form[$value]['#group'] = 'metabox_fields';
-      $metaboxHasFields = TRUE;
+      if (isset($form[$value]['widget'][0])
+        && $form[$value]['widget'][0]['#type'] === 'details') {
+        $fields_with_details[] = $value;
+      } else {
+        $form[$value]['#group'] = 'metabox_fields';
+        $metabox_has_fields = TRUE;  
+      }
     }
   }
 
-  if (!$metaboxHasFields) {
+  $form['#after_build'][] = 'gutenberg_form_node_form_details_after_build';
+  $form['#fields_with_details'] = $fields_with_details;
+
+  if (!$metabox_has_fields) {
     unset($form['metabox_fields']);
   }
   // Is Bartik the default theme? Add some custom styles
@@ -263,11 +276,7 @@ function gutenberg_form_node_form_alter(&$form, FormStateInterface $form_state) 
     $form['#attached']['library'][] = 'gutenberg/bartik';
   }
 
-  // Move containers to metaboxes by DOM node id.
-  $form['#attached']['drupalSettings']['gutenberg']['metaboxes'] = [
-    'edit-metabox-fields',
-    'edit-field-meta-tags-0', // In case Metatag module is installed.
-  ];
+  $form['#attached']['drupalSettings']['gutenberg']['metaboxes'][] = 'edit-metabox-fields';
 }
 
 /**
@@ -278,6 +287,15 @@ function gutenberg_form_node_form_after_build(array $element, FormStateInterface
   return $element;
 }
 
+/**
+ * Called by form after build.
+ */
+function gutenberg_form_node_form_details_after_build(array $element, FormStateInterface $form_state) {
+  foreach ($element['#fields_with_details'] as $key => $value) {
+    $element['#attached']['drupalSettings']['gutenberg']['metaboxes'][] = $element[$value]['widget'][0]['#id'];
+  }
+  return $element;
+}
 /**
  *
  */
