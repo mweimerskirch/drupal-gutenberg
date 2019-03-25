@@ -221,6 +221,12 @@ function gutenberg_form_node_form_alter(&$form, FormStateInterface $form_state) 
     '#group' => 'advanced', // group fallback in case JS fails to move to metaboxes.
   ];
 
+  $form['additional_fields'] = [
+    '#type' => 'container',
+    '#title' => 'Additional',
+    '#weight' => -100,
+  ];
+
   // Move status to Published/meta pane.
   $form['status']['#group'] = 'meta';
 

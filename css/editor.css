@@ -120,7 +120,7 @@ body .gutenberg__editor .edit-post-layout .edit-post-header {
 }
 
 .edit-post-sidebar .field--name-title {
-  padding: 10px;
+  padding: 0 10px;
 }
 
 .edit-post-sidebar .editor-block-inspector__card {
@@ -189,8 +189,12 @@ body .gutenberg__editor .edit-post-layout .edit-post-header {
   width: 100%;
   background-repeat: no-repeat;
   background-position: center right;
-  padding: 0px 5px;
+  padding: 5px 5px;
   line-height: 1.3em;
+}
+
+.edit-post-sidebar #edit-additional-fields {
+  padding: 0 10px 10px;
 }
 
 .gutenberg-sidebar {

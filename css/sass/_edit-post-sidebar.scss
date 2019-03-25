@@ -37,7 +37,7 @@
   }
 
   .field--name-title {
-    padding: 10px;
+    padding: 0 10px;
   }
 
   .editor-block-inspector__card {
@@ -111,8 +111,12 @@
     width: 100%;
     background-repeat: no-repeat;
     background-position: center right;
-    padding: 0px 5px;
+    padding: 5px 5px;
     line-height: 1.3em;
+  }
+
+  #edit-additional-fields {
+    padding: 0 10px 10px;
   }
 }
 
