@@ -101,7 +101,7 @@ class MediaController extends ControllerBase {
       ],
     ];
 
-    if ($data['caption']) {
+    if (isset($data['caption'])) {
       $result['caption'] = [
         'raw' => $data['caption'],
         'rendered' => $data['caption'],
