@@ -61,6 +61,10 @@
         figcaption {
           overflow-wrap: break-word;
         }
+
+        video {
+          width: 100%;
+        }
       }
     }
   }
@@ -141,6 +145,14 @@
         box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
         overflow: hidden;
       }
+
+      .filename {
+        position: absolute;
+        bottom: 0;
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 5px;
+        border-top: solid 1px #eee;
+      }
     }
 
     .check {
@@ -194,6 +206,12 @@
     box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.1), inset 0 0 0 1px rgba(0, 0, 0, 0.05);
     background: #eee;
     cursor: pointer;
+    background-position: top center;
+    background-repeat: no-repeat;
+
+    &.type-application { background-image: url(../assets/images/application.png); }
+    &.type-audio { background-image: url(../assets/images/audio.png); }
+    &.type-video { background-image: url(../assets/images/video.png); }
 
     &:before {
       content: "";

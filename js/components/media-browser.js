@@ -147,9 +147,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                               return fetch(drupalSettings.path.baseUrl + 'editor/media/update_data/' + media.id, {
                                 method: 'post',
                                 body: JSON.stringify({
-                                  title: media.title,
-                                  caption: media.caption,
-                                  alt_text: media.alt
+                                  title: media.title.raw || media.title,
+                                  caption: media.caption.raw || media.caption,
+                                  alt_text: media.alt || media.alt_text
                                 })
                               });
 
@@ -300,7 +300,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                   },
                   React.createElement(
                     'div',
-                    { className: 'attachment-preview js--select-attachment type-image subtype-jpeg landscape' },
+                    {
+                      className: ['attachment-preview', 'js--select-attachment', 'type-' + media.media_type, 'subtype-' + media.mime_type.split('/')[1], media.media_details.width < media.media_details.height ? 'portrait' : 'landscape'].join(' ')
+                    },
                     React.createElement(
                       'div',
                       { className: 'thumbnail' },
@@ -311,12 +313,12 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                           src: media.media_details.sizes && media.media_details.sizes.large ? media.media_details.sizes.large.source_url : media.source_url,
                           draggable: 'false',
                           alt: media.filename
-                        }),
-                        media.media_type !== 'image' && React.createElement(
-                          'div',
-                          { className: 'filename' },
-                          media.filename
-                        )
+                        })
+                      ),
+                      media.media_type !== 'image' && React.createElement(
+                        'div',
+                        { className: 'filename' },
+                        media.media_details.file
                       )
                     )
                   ),

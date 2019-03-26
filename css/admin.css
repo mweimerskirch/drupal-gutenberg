@@ -65,6 +65,10 @@
   overflow-wrap: break-word;
 }
 
+.media-browser .content .media-details figure video {
+  width: 100%;
+}
+
 .media-browser ul.list {
   padding: 2px;
   margin: 0;
@@ -140,6 +144,14 @@
   overflow: hidden;
 }
 
+.media-browser li.attachment .thumbnail .filename {
+  position: absolute;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 5px;
+  border-top: solid 1px #eee;
+}
+
 .media-browser li.attachment .check {
   display: none;
   height: 24px;
@@ -185,6 +197,20 @@
   box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.1), inset 0 0 0 1px rgba(0, 0, 0, 0.05);
   background: #eee;
   cursor: pointer;
+  background-position: top center;
+  background-repeat: no-repeat;
+}
+
+.media-browser .attachment-preview.type-application {
+  background-image: url(../assets/images/application.png);
+}
+
+.media-browser .attachment-preview.type-audio {
+  background-image: url(../assets/images/audio.png);
+}
+
+.media-browser .attachment-preview.type-video {
+  background-image: url(../assets/images/video.png);
 }
 
 .media-browser .attachment-preview:before {

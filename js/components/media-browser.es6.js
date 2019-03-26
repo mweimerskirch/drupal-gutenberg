@@ -90,9 +90,9 @@
           {
             method: 'post',
             body: JSON.stringify({
-              title: media.title,
-              caption: media.caption,
-              alt_text: media.alt,
+              title: media.title.raw || media.title,
+              caption: media.caption.raw || media.caption,
+              alt_text: media.alt || media.alt_text,
             }),
           },
         );
@@ -184,7 +184,17 @@
                     data-id={media.id}
                     className={`attachment save-ready ${active === media.id ? 'details' : ''} ${selected[media.id] ? 'selected' : ''}`}
                   >
-                    <div className="attachment-preview js--select-attachment type-image subtype-jpeg landscape">
+                    <div
+                      className={[
+                        'attachment-preview',
+                        'js--select-attachment',
+                        `type-${media.media_type}`,
+                        `subtype-${media.mime_type.split('/')[1]}`,
+                        media.media_details.width < media.media_details.height
+                          ? 'portrait'
+                          : 'landscape',
+                      ].join(' ')}
+                    >
                       <div className="thumbnail">
                         <div className="centered">
                           {media.media_type === 'image' && (
@@ -199,10 +209,12 @@
                               alt={media.filename}
                             />
                           )}
-                          {media.media_type !== 'image' && (
-                            <div className="filename">{media.filename}</div>
-                          )}
                         </div>
+                        {media.media_type !== 'image' && (
+                          <div className="filename">
+                            {media.media_details.file}
+                          </div>
+                        )}
                       </div>
                     </div>
                     <button
