@@ -1,5 +1,5 @@
 /* eslint func-names: ["error", "never"] */
-(function(Drupal, drupalSettingsl, $) {
+(function(Drupal, drupalSettings, $) {
   const types = {
     page: {
       id: 1,

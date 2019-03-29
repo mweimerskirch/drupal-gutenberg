@@ -5,7 +5,7 @@
 * @preserve
 **/'use strict';
 
-(function (Drupal, drupalSettingsl, $) {
+(function (Drupal, drupalSettings, $) {
   var types = {
     page: {
       id: 1,
