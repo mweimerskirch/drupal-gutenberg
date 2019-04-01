@@ -73,13 +73,13 @@ function gutenberg_form_alter(&$form, FormStateInterface $form_state, $form_id) 
         array_map(
           function($block){
             return $block['id'];
-          }, 
+          },
           $category['blocks']
         ),
         array_map(
           function($block){
             return $block['default'] ? $block['id'] : 0;
-          }, 
+          },
           $category['blocks']
         )
       );
@@ -230,7 +230,6 @@ function gutenberg_form_node_form_alter(&$form, FormStateInterface $form_state) 
     ];
   }
 
-  $form['additional_fields']['field_top_menu_style'] = $form['field_top_menu_style'];
   // Move status to Published/meta pane.
   $form['status']['#group'] = 'meta';
 
@@ -253,7 +252,7 @@ function gutenberg_form_node_form_alter(&$form, FormStateInterface $form_state) 
    * If there's any details fieldset on the form, add it to a special array
    * and then, on the form after build, add its #id to a JS array.
    * For any other type of fields, group them on the metabox_fields fieldset.
-   * This fieldset will also move to metaboxes area. 
+   * This fieldset will also move to metaboxes area.
    */
   $metabox_has_fields = FALSE;
   $fields_with_details = [];
@@ -406,7 +405,7 @@ function _gutenberg_get_allowed_blocks() {
     if (file_exists($file_path)) {
       $file_contents = file_get_contents($file_path);
       $settings = Yaml::parse($file_contents);
-    }  
+    }
   }
 
   return $settings;
