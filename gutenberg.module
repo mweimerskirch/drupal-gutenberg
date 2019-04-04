@@ -262,7 +262,9 @@ function gutenberg_form_node_form_alter(&$form, FormStateInterface $form_state) 
       && $value !== $text_fields[0]
       && !in_array($value, $excluded_fields)
     ) {
-      if (isset($form[$value]['widget'][0])
+      if (isset($form[$value]['widget'])
+        && isset($form[$value]['widget'][0])
+        && isset($form[$value]['widget'][0]['#type'])
         && $form[$value]['widget'][0]['#type'] === 'details') {
         $fields_with_details[] = $value;
       } else {
