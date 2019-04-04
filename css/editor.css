@@ -15,8 +15,30 @@ body .gutenberg__editor .edit-post-layout .components-popover {
 }
 
 body .gutenberg__editor .edit-post-layout .edit-post-header {
-  position: fixed;
   font-family: inherit;
+}
+
+@media (min-width: 782px) {
+  body .gutenberg__editor .edit-post-layout .edit-post-header {
+    position: fixed;
+  }
+}
+
+body .gutenberg__editor .edit-post-layout .edit-post-header .gutenberg-header-settings #edit-actions {
+  display: flex;
+  flex-direction: row;
+}
+
+@media screen and (max-width: 600px) {
+  body .gutenberg__editor .edit-post-layout .edit-post-header .gutenberg-header-settings #edit-actions input[type="submit"] {
+    float: none;
+    width: auto;
+    margin-top: 0;
+    margin-right: 10px;
+  }
+  body .gutenberg__editor .edit-post-layout .edit-post-header .gutenberg-header-settings #edit-actions a.button {
+    padding: 5px 0;
+  }
 }
 
 @media (min-width: 782px) {

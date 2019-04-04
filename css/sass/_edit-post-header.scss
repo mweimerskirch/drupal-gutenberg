@@ -1,6 +1,29 @@
 body .gutenberg__editor .edit-post-layout .edit-post-header {
-  position: fixed;
   font-family: inherit;
+
+  @media (min-width: 782px) {
+    position: fixed;
+  }
+
+  .gutenberg-header-settings {
+    #edit-actions {
+      display: flex;
+      flex-direction: row;
+
+      @media screen and (max-width: 600px) {
+        input[type="submit"] {
+          float: none;
+          width: auto;
+          margin-top: 0;
+          margin-right: 10px;
+        }
+
+        a.button {
+          padding: 5px 0;
+        }
+      }
+    }
+  }
 }
 
 // body .gutenberg__editor .edit-post-header__settings {
