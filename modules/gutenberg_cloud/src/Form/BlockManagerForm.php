@@ -42,54 +42,56 @@ class BlockManagerForm extends ConfigFormBase {
       $blocks = NULL;
     }
 
-    $blocks = json_decode($blocks_json->getBody())->rows;
+    if ($blocks_json) {
+      $blocks = json_decode($blocks_json->getBody())->rows;
 
-    $header = [
-      'name' => $this
-        ->t('Block name'),
-      'version' => $this
-        ->t('Version'),
-      'description' => $this
-        ->t('Description'),
-    ];
-
-    $blocks_array = [];
-    $blocks_defaults = [];
-
-    $config = $this->config('gutenberg_cloud.blocks');
-    $blocks_enabled = array_keys($config->get());
-
-    foreach ($blocks as $block) {
-      $blocks_array[$block->name] = [
-        'name' => $block->name,
-        'description' => $block->package->description,
-        'version' => $block->version,
-        'js' => $block->config->js,
-        'edit_css' => (isset($block->config->editor)) ? $block->config->editor : NULL,
-        'view_css' => (isset($block->config->css)) ? $block->config->css : NULL,
+      $header = [
+        'name' => $this
+          ->t('Block name'),
+        'version' => $this
+          ->t('Version'),
+        'description' => $this
+          ->t('Description'),
       ];
 
-      $blocks_defaults[$block->name] = (in_array($block->name, $blocks_enabled)) ? ['name' => $block->name] : NULL;
+      $blocks_array = [];
+      $blocks_defaults = [];
+
+      $config = $this->config('gutenberg_cloud.blocks');
+      $blocks_enabled = array_keys($config->get());
+
+      foreach ($blocks as $block) {
+        $blocks_array[$block->name] = [
+          'name' => $block->name,
+          'description' => $block->package->description,
+          'version' => $block->version,
+          'js' => $block->config->js,
+          'edit_css' => (isset($block->config->editor)) ? $block->config->editor : NULL,
+          'view_css' => (isset($block->config->css)) ? $block->config->css : NULL,
+        ];
+
+        $blocks_defaults[$block->name] = (in_array($block->name, $blocks_enabled)) ? ['name' => $block->name] : NULL;
+      }
+
+      $form['cloud_blocks'] = [
+        '#type' => 'tableselect',
+        '#header' => $header,
+        '#options' => $blocks_array,
+        '#default_value' => $blocks_defaults,
+      ];
+
+      $form['actions'] = [
+        '#type' => 'actions',
+      ];
+
+      $form['actions']['submit'] = [
+        '#type' => 'submit',
+        '#value' => $this->t('Apply configuration'),
+        '#button_type' => 'primary',
+      ];
+
+      return $form;
     }
-
-    $form['cloud_blocks'] = [
-      '#type' => 'tableselect',
-      '#header' => $header,
-      '#options' => $blocks_array,
-      '#default_value' => $blocks_defaults,
-    ];
-
-    $form['actions'] = [
-      '#type' => 'actions',
-    ];
-
-    $form['actions']['submit'] = [
-      '#type' => 'submit',
-      '#value' => $this->t('Apply configuration'),
-      '#button_type' => 'primary',
-    ];
-
-    return $form;
   }
 
   public function submitForm(array &$form, FormStateInterface $form_state) {
