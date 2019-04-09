@@ -16,17 +16,30 @@ class BlocksController extends ControllerBase {
    *
    * @param \Symfony\Component\HttpFoundation\Request $request
    *   The request.
+   * @param \Symfony\Component\HttpFoundation\Request $request
+   *   The request.
    *
    * @return \Symfony\Component\HttpFoundation\JsonResponse
    *   The JSON response.
    */
-  public function load(Request $request) {
+  public function loadByType(Request $request, $content_type) {
     $blockManager = \Drupal::service('plugin.manager.block');
     $contextRepository = \Drupal::service('context.repository');
+    $config = \Drupal::service('config.factory')->getEditable('gutenberg.settings');
+    $config_values = $config->get($content_type . '_allowed_drupal_blocks');
+
     // Get blocks definition.
     $definitions = $blockManager->getDefinitionsForContexts($contextRepository->getAvailableContexts());
     $definitions = $blockManager->getSortedDefinitions($definitions);
-    return new JsonResponse($definitions);
+
+    $return = [];
+    foreach ($config_values as $key => $value) {
+      if ($value) {
+        $return[$key] = $definitions[$key];
+      }
+    }
+
+    return new JsonResponse($return);
   }
 
   /**

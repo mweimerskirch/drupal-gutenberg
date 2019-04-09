@@ -9,3 +9,5 @@ dependencies:
   - drupal:views
   - drupal:user
   - drupal:block_content
+  - drupal:image
+  - drupal:file

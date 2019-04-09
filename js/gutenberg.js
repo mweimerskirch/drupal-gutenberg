@@ -15,13 +15,13 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
       var _this = this;
 
       return _asyncToGenerator(regeneratorRuntime.mark(function _callee() {
-        var _format$editorSetting, allowedBlocks, blackList, data, blocks, editor, unregisterBlockType, registerDrupalStore, registerDrupalBlocks, key, value, categories, isFormValid;
+        var _format$editorSetting, contentType, allowedBlocks, blackList, data, blocks, editor, unregisterBlockType, registerDrupalStore, registerDrupalBlocks, key, value, categories, isFormValid;
 
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _format$editorSetting = format.editorSettings, allowedBlocks = _format$editorSetting.allowedBlocks, blackList = _format$editorSetting.blackList;
+                _format$editorSetting = format.editorSettings, contentType = _format$editorSetting.contentType, allowedBlocks = _format$editorSetting.allowedBlocks, blackList = _format$editorSetting.blackList;
                 data = wp.data, blocks = wp.blocks, editor = wp.editor;
                 unregisterBlockType = blocks.unregisterBlockType;
                 registerDrupalStore = DrupalGutenberg.registerDrupalStore, registerDrupalBlocks = DrupalGutenberg.registerDrupalBlocks;
@@ -30,13 +30,15 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
               case 6:
                 _context.next = 8;
-                return registerDrupalBlocks(blocks, editor);
+                return registerDrupalBlocks(blocks, editor, contentType);
 
               case 8:
 
                 _this._initGutenberg(element);
 
-                blackList.forEach(function (value) {
+                blackList.filter(function (value) {
+                  return !value.includes('drupalblock/');
+                }).forEach(function (value) {
                   unregisterBlockType(value);
                 });
 

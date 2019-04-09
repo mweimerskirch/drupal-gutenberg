@@ -222,6 +222,7 @@ class Gutenberg extends EditorBase implements ContainerFactoryPluginInterface {
     $blocks_settings = UtilsController::getBlocksSettings();
 
     $settings = [
+      'contentType' => $node_type,
       'allowedBlocks' => $config->get($node_type . '_allowed_blocks'),
       'blackList' => $blocks_settings['blacklist'],
     ];

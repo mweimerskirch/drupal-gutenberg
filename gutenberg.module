@@ -42,7 +42,7 @@ function gutenberg_form_alter(&$form, FormStateInterface $form_state, $form_id) 
 
     $form['gutenberg']['allowed_blocks_details'] = [
       '#type' => 'details',
-      '#title' => t('Allowed blocks'),
+      '#title' => t('Allowed Gutenberg blocks'),
       '#states' => [
         'visible' => [
           'input[name="enable_gutenberg_experience"]' => ['checked' => TRUE],
@@ -91,12 +91,104 @@ function gutenberg_form_alter(&$form, FormStateInterface $form_state, $form_id) 
         '#options' => $options,
         '#default_value' => array_merge($default_values, $config_values ? $config_values : []),
       ];
+    }
 
+    $form['gutenberg']['allowed_drupal_blocks_details'] = [
+      '#type' => 'details',
+      '#title' => t('Allowed Drupal blocks'),
+      '#states' => [
+        'visible' => [
+          'input[name="enable_gutenberg_experience"]' => ['checked' => TRUE],
+        ]
+      ],
+    ];
+
+    $blockManager = \Drupal::service('plugin.manager.block');
+    $contextRepository = \Drupal::service('context.repository');
+
+    // Get blocks definition
+    // $definitions = $blockManager->getDefinitionsForContexts($contextRepository->getAvailableContexts());
+    $definitions = $blockManager->getDefinitions($contextRepository->getAvailableContexts());
+    $groups = $blockManager->getGroupedDefinitions($definitions);
+
+    $form['gutenberg']['categories_drupal'] = [
+      '#type' => 'hidden',
+      '#default_value' => [],
+    ];
+
+    $default_values = array_fill_keys(
+      array_map(function($key){
+        return str_replace('drupalblock/', '', $key);
+      }, $settings['default_drupal_blocks']),
+      true
+    );
+
+    foreach ($groups as $key => $blocks) {
+      $group_reference = preg_replace('@[^a-z0-9-]+@','_', strtolower($key));
+      $options = [];
+      $input_default_values = [];
+
+      foreach ($blocks as $key_block => $block) {
+        if (!in_array('drupalblock/' . $key_block, $blocks_settings['blacklist'])) {
+          $options[$key_block] = $block['admin_label'];
+          if ($default_values[$key_block]) {
+            $input_default_values[$key_block] = $key_block;
+          }
+        }
+      }
+
+      if (count($options) > 0) {
+        $form['gutenberg']['categories_drupal']['#default_value'][] = $group_reference;
+        $form['gutenberg']['allowed_drupal_blocks_details'][$group_reference] = [
+          '#type' => 'fieldset',
+          '#title' => $key,
+        ];
+  
+        $config_values = $config->get($form['type']['#default_value'] . '_allowed_drupal_blocks');
+  
+        $form['gutenberg']['allowed_drupal_blocks_details'][$group_reference]['allowed_drupal_blocks_' . $group_reference] = [
+          '#type' => 'checkboxes',
+          '#options' => $options,
+          '#default_value' => array_merge($input_default_values, $config_values ? $config_values : []),
+        ];
+      }
     }
 
     $form['#attached']['library'][] = 'gutenberg/admin';
     $form['actions']['submit']['#submit'][] = '_gutenberg_node_form_submit';
   }
+}
+
+/**
+ *
+ */
+function _gutenberg_node_form_submit(array $form, FormStateInterface $form_state) {
+  $gutenberg_enabled =  $form_state->getValue('enable_gutenberg_experience');
+
+  $config = \Drupal::service('config.factory')->getEditable('gutenberg.settings');
+  $config->set($form_state->getValue('type') . '_enable_full', $gutenberg_enabled)->save();
+
+  if (!$gutenberg_enabled) {
+    $config->delete($form_state->getValue('type') . '_allowed_blocks')->save();
+    $config->delete($form_state->getValue('type') . '_allowed_drupal_blocks')->save();
+    return;
+  }
+
+  // Save Gutenberg core blocks settings.
+  $categories = explode(' ', $form_state->getValue('categories'));
+  $values = [];
+  foreach ($categories as $category) {
+    $values = array_merge($values, $form_state->getValue('allowed_blocks_' . $category));
+  }
+  $config->set($form_state->getValue('type') . '_allowed_blocks', $values)->save();
+
+  // Save Drupal blocks settings.
+  $categories = explode(' ', $form_state->getValue('categories_drupal'));
+  $values = [];
+  foreach ($categories as $category) {
+    $values = array_merge($values, $form_state->getValue('allowed_drupal_blocks_' . $category));
+  }
+  $config->set($form_state->getValue('type') . '_allowed_drupal_blocks', $values)->save();
 }
 
 /**
@@ -306,27 +398,6 @@ function gutenberg_form_node_form_details_after_build(array $element, FormStateI
     $element['#attached']['drupalSettings']['gutenberg']['metaboxes'][] = $element[$value]['widget'][0]['#id'];
   }
   return $element;
-}
-/**
- *
- */
-function _gutenberg_node_form_submit(array $form, FormStateInterface $form_state) {
-  $gutenberg_enabled =  $form_state->getValue('enable_gutenberg_experience');
-
-  $config = \Drupal::service('config.factory')->getEditable('gutenberg.settings');
-  $config->set($form_state->getValue('type') . '_enable_full', $gutenberg_enabled)->save();
-
-  if (!$gutenberg_enabled) {
-    $config->delete($form_state->getValue('type') . '_allowed_blocks')->save();
-    return;
-  }
-
-  $categories = explode(' ', $form_state->getValue('categories'));
-  $values = [];
-  foreach ($categories as $category) {
-    $values = array_merge($values, $form_state->getValue('allowed_blocks_' . $category));
-  }
-  $config->set($form_state->getValue('type') . '_allowed_blocks', $values)->save();
 }
 
 /**

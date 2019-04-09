@@ -310,4 +310,18 @@
   margin-right: 0;
 }
 
+#edit-allowed-drupal-blocks-details .details-wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+#edit-allowed-drupal-blocks-details .details-wrapper fieldset {
+  margin-right: 10px;
+}
+
+#edit-allowed-drupal-blocks-details .details-wrapper fieldset:last-child {
+  margin-right: 0;
+}
+
 /*# sourceMappingURL=admin.css.map */

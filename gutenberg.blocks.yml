@@ -215,6 +215,9 @@ categories:
       - id: "core-embed/wordpress-tv"
         name: "WordPress TV"
         default: false
+default_drupal_blocks:
+  - drupalblock/system_breadcrumb_block
+  - drupalblock/search_form_block
 blacklist:
   - core/categories
   - core/latest-posts
@@ -223,3 +226,10 @@ blacklist:
   - core/shortcode
   - core/more
   - core/nextpage
+  - drupalblock/system_main_block
+  - drupalblock/system_menu_block:tools
+  - drupalblock/local_actions_block
+  - drupalblock/local_tasks_block
+  - drupalblock/system_menu_block:admin
+  - drupalblock/shortcuts
+  - drupalblock/views_block:who_s_new-block_1

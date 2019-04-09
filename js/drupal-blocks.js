@@ -74,14 +74,14 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
     return result;
   }
 
-  function registerDrupalBlocks(blocks, editor) {
+  function registerDrupalBlocks(blocks, editor, contentType) {
     return new Promise(function (resolve) {
       var BlockAlignmentToolbar = editor.BlockAlignmentToolbar,
           BlockControls = editor.BlockControls;
       var Fragment = wp.element.Fragment;
 
 
-      $.ajax(drupalSettings.path.baseUrl + 'editor/blocks/load').done(function (definitions) {
+      $.ajax(drupalSettings.path.baseUrl + 'editor/blocks/load_by_type/' + contentType).done(function (definitions) {
         var category = {
           slug: 'drupal',
           title: Drupal.t('Drupal Blocks')
@@ -90,13 +90,6 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
         var categories = [].concat(_toConsumableArray(data.select('core/blocks').getCategories()), [category]);
 
         data.dispatch('core/blocks').setCategories(categories);
-
-        var blackList = {
-          category: ['core'],
-          id: ['system_messages_block', 'system_main_block', 'shortcuts', 'system_menu_block_admin', 'help_block']
-        };
-
-        definitions = filterBlackList(definitions, blackList);
 
         var _loop = function _loop(id) {
           if ({}.hasOwnProperty.call(definitions, id)) {
@@ -143,7 +136,11 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
                       controls: ['left', 'right', 'center', 'wide', 'full']
                     })
                   ),
-                  React.createElement(DrupalBlock, { className: className, id: id, url: drupalSettings.path.baseUrl + 'editor/blocks/load/' + id })
+                  React.createElement(DrupalBlock, {
+                    className: className,
+                    id: id,
+                    url: drupalSettings.path.baseUrl + 'editor/blocks/load/' + id
+                  })
                 );
               },
               save: function save() {

@@ -31,9 +31,10 @@ gutenberg.media.update_data:
     _permission: 'access content'
     _method: 'POST'
 gutenberg.blocks.load:
-  path: '/editor/blocks/load'
+  path: '/editor/blocks/load_by_type/{content_type}'
   defaults:
-    _controller: '\Drupal\gutenberg\Controller\BlocksController::load'
+    _controller: '\Drupal\gutenberg\Controller\BlocksController::loadByType'
+    content_type: 'none'
   requirements:
     _permission: 'access content'
     _method: 'GET'
