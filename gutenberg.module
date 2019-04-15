@@ -131,7 +131,7 @@ function gutenberg_form_alter(&$form, FormStateInterface $form_state, $form_id) 
       foreach ($blocks as $key_block => $block) {
         if (!in_array('drupalblock/' . $key_block, $blocks_settings['blacklist'])) {
           $options[$key_block] = $block['admin_label'];
-          if ($default_values[$key_block]) {
+          if (isset($default_values[$key_block]) && $default_values[$key_block]) {
             $input_default_values[$key_block] = $key_block;
           }
         }
