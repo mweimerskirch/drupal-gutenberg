@@ -14,9 +14,8 @@ INTRODUCTION
  * Drupal Gutenberg brings the powerful content editing experience of Gutenberg
    to Drupal.
 
- * [Drupal](https://www.drupal.org/)) +
-   [Gutenberg](https://wordpress.org/gutenberg/) is a powerful combo. Drupal 8
-   is a rock solid CMS framework packed with powerful admin features.
+ * [Drupal](https://www.drupal.org/) +
+   [Gutenberg](https://wordpress.org/gutenberg/) is a powerful combo. Drupal 8 is a rock solid CMS framework packed with powerful admin features.
    Our only complaint? Drupal 8 is missing a modern UI for rich content
    creation. Let’s change this!
 
@@ -44,13 +43,6 @@ INSTALLATION
  * Install normally as other modules are installed. For Support:
    https://www.drupal.org/docs/8/extending-drupal/installing-contributed-modules
 
- * For Development:
-
-   `npm install`
-
-   `npx drupal-js-build --css`
-
-
 CONFIGURATION
 -------------
 
@@ -59,6 +51,16 @@ CONFIGURATION
    and enable it.
 
  * Then go to any content type edit page and enable *Gutenberg Experience*.
+
+DEVELOPMENT
+-----------
+
+  NodeJS 8.11+ and NPM 6.0+ are required. Alternatively Yarn 1.6+ can be used.
+  * `npm install`
+  * Watching file while developing: `npm start`
+  * Build: `npm run build`
+
+For custom block development, check the `example_block` sub-module.
 
 
 MAINTAINERS
