@@ -152,9 +152,9 @@ categories:
       - id: "core-embed/dailymotion"
         name: "Daily Motion"
         default: false
-      - id: "core-embed/funnyordie"
-        name: "Funny Or Die"
-        default: false
+      # - id: "core-embed/funnyordie"
+      #   name: "Funny Or Die"
+      #   default: false
       - id: "core-embed/hulu"
         name: "Hulu"
         default: false
@@ -173,9 +173,9 @@ categories:
       - id: "core-embed/mixcloud"
         name: "MixCloud"
         default: false
-      - id: "core-embed/photobucket"
-        name: "Photo Bucket"
-        default: false
+      # - id: "core-embed/photobucket"
+      #   name: "Photo Bucket"
+      #   default: false
       - id: "core-embed/polldaddy"
         name: "Poll Daddy"
         default: false

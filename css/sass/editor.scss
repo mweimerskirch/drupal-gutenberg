@@ -1,9 +1,11 @@
+@import 'gutenberg-js-legacy';
 @import 'components-popover';
 @import 'block-types';
 @import 'blocks-overrides';
 @import 'edit-post-header';
 @import 'edit-post';
 @import 'edit-post-sidebar';
+@import 'edit-post-metaboxes';
 
 #gutenberg-loading {
   position: absolute;
@@ -68,4 +70,26 @@ body .gutenberg__editor .edit-post-layout .edit-post-sidebar {
 .editor-rich-text__tinymce ~ .editor-rich-text__tinymce {
   opacity: 0.5;
   pointer-events: none;
+}
+
+.edit-post-header__settings {
+  .editor-post-save-draft {
+    display: none;
+  }
+
+  .editor-post-publish-panel__toggle {
+    display: none !important;
+  }
+
+  .editor-post-saved-state {
+    display: none;
+  }
+}
+
+.wp-block {
+  max-width: 810px;
+}
+
+.wp-block[data-align=wide] {
+  max-width: 810px;
 }

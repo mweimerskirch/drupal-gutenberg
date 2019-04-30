@@ -202,15 +202,15 @@
 }
 
 .media-browser .attachment-preview.type-application {
-  background-image: url(../assets/images/application.png);
+  background-image: url(../images/application.png);
 }
 
 .media-browser .attachment-preview.type-audio {
-  background-image: url(../assets/images/audio.png);
+  background-image: url(../images/audio.png);
 }
 
 .media-browser .attachment-preview.type-video {
-  background-image: url(../assets/images/video.png);
+  background-image: url(../images/video.png);
 }
 
 .media-browser .attachment-preview:before {
@@ -322,6 +322,10 @@
 
 #edit-allowed-drupal-blocks-details .details-wrapper fieldset:last-child {
   margin-right: 0;
+}
+
+.ajax-progress-throbber .throbber {
+  padding: 1px 7px 2px !important;
 }
 
 /*# sourceMappingURL=admin.css.map */

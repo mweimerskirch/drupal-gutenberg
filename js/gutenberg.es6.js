@@ -47,6 +47,7 @@
         });
 
       // Process allowed blocks.
+      /* eslint no-restricted-syntax: ["error", "never"] */
       for (const key in allowedBlocks) {
         if (allowedBlocks.hasOwnProperty(key)) {
           const value = allowedBlocks[key];
@@ -74,6 +75,10 @@
 
       // Disable tips.
       data.dispatch('core/nux').disableTips();
+
+      // Unregister Blck Manager plugin.
+      // const { unregisterPlugin } = wp.plugins;
+      // unregisterPlugin('edit-post');
 
       blocks.registerBlockStyle('core/image', {
         name: 'colorbox',
@@ -259,7 +264,7 @@
      *   Returns whatever from initializeEditor().
      */
     _initGutenberg(element) {
-      const { editPost } = wp;
+      const { editPost, data } = wp;
       const $textArea = $(element);
       const target = `editor-${$textArea.data('drupal-selector')}`; // 'editor-' + $textArea.data('drupal-selector');
       const $editor = $(`<div id="${target}" class="gutenberg__editor"></div>`); // $('<div id="' + target + '" class="gutenberg__editor"></div>');
@@ -292,9 +297,10 @@
         bodyPlaceholder: Drupal.t('Add text or type / to add content'),
         isRTL: false,
         autosaveInterval: 0,
-        canAutosave: false, // to disable Editor Autosave featured (default: true)
-        canPublish: false, // to disable Editor Publish featured (default: true)
-        canSave: false, // to disable Editor Save featured (default: true)    };
+        // Following properties were from G-JS.
+        // canAutosave: false, // to disable Editor Autosave featured (default: true)
+        // canPublish: false, // to disable Editor Publish featured (default: true)
+        // canSave: false, // to disable Editor Save featured (default: true)    };
       };
 
       const colors =
@@ -318,33 +324,51 @@
         editorSettings.fontSizes = fontSizes;
       }
 
-      window.customGutenberg = {
-        events: {
-          OPEN_GENERAL_SIDEBAR: action => {
-            let tab = action.name.replace(/edit-post\//g, '');
-            tab = tab.replace(/drupal\//g, '');
+      function hasOpenedSidebar(sidebarName) {
+        if ($(document.body).hasClass('gutenberg-sidebar-open')) {
+          return;
+        }
 
-            // Make sure node's "tabs" are in the original placeholder.
-            const $tabG = $('.edit-post-sidebar .components-panel .tab');
-            $('.gutenberg-sidebar').append($tabG);
+        let tab = sidebarName.replace(/edit-post\//g, '');
+        tab = tab.replace(/drupal\//g, '');
 
-            // Should move tab only when sidebar is fully generated.
-            setTimeout(() => {
-              const $tabD = $(`.gutenberg-sidebar .tab.${tab}`);
-              $('.edit-post-sidebar .components-panel').append($tabD);
-            }, 0);
+        // Make sure node's "tabs" are in the original placeholder.
+        const $tabG = $('.edit-post-sidebar .components-panel .tab');
+        $('.gutenberg-sidebar').append($tabG);
 
-            $(document.body).addClass('gutenberg-sidebar-open');
-          },
-          CLOSE_GENERAL_SIDEBAR: () => {
-            $(document.body).removeClass('gutenberg-sidebar-open');
-            // Move tab before sidebar is "destroyed".
-            $('.gutenberg-sidebar').append(
-              $('.edit-post-sidebar .components-panel .tab'),
-            );
-          },
-        },
-      };
+        // Should move tab only when sidebar is fully generated.
+        setTimeout(() => {
+          const $tabD = $(`.gutenberg-sidebar .tab.${tab}`);
+          $('.edit-post-sidebar .components-panel').append($tabD);
+        }, 0);
+
+        $(document.body).addClass('gutenberg-sidebar-open');
+      }
+
+      function hasClosedSidebar() {
+        if (!$(document.body).hasClass('gutenberg-sidebar-open')) {
+          return;
+        }
+
+        $(document.body).removeClass('gutenberg-sidebar-open');
+        // Move tab before sidebar is "destroyed".
+        $('.gutenberg-sidebar').append(
+          $('.edit-post-sidebar .components-panel .tab'),
+        );
+      }
+
+      data.subscribe(() => {
+        const isOpen = data.select('core/edit-post').isEditorSidebarOpened();
+        const sidebar = data
+          .select('core/edit-post')
+          .getActiveGeneralSidebarName();
+
+        if (isOpen && sidebar === 'edit-post/document') {
+          hasOpenedSidebar(sidebar);
+        } else {
+          hasClosedSidebar();
+        }
+      });
 
       return editPost.initializeEditor(target, 'page', 1, editorSettings, {});
     },

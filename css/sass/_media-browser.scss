@@ -209,9 +209,9 @@
     background-position: top center;
     background-repeat: no-repeat;
 
-    &.type-application { background-image: url(../assets/images/application.png); }
-    &.type-audio { background-image: url(../assets/images/audio.png); }
-    &.type-video { background-image: url(../assets/images/video.png); }
+    &.type-application { background-image: url(../images/application.png); }
+    &.type-audio { background-image: url(../images/audio.png); }
+    &.type-video { background-image: url(../images/video.png); }
 
     &:before {
       content: "";

@@ -164,7 +164,8 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
       return true;
     },
     _initGutenberg: function _initGutenberg(element) {
-      var editPost = wp.editPost;
+      var editPost = wp.editPost,
+          data = wp.data;
 
       var $textArea = $(element);
       var target = 'editor-' + $textArea.data('drupal-selector');
@@ -197,10 +198,8 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
         titlePlaceholder: Drupal.t('Add title'),
         bodyPlaceholder: Drupal.t('Add text or type / to add content'),
         isRTL: false,
-        autosaveInterval: 0,
-        canAutosave: false,
-        canPublish: false,
-        canSave: false };
+        autosaveInterval: 0
+      };
 
       var colors = drupalSettings.gutenberg && drupalSettings.gutenberg['theme-support'] && drupalSettings.gutenberg['theme-support'].colors ? _extends({}, drupalSettings.gutenberg['theme-support'].colors) : null;
       var fontSizes = drupalSettings.gutenberg && drupalSettings.gutenberg['theme-support'] && drupalSettings.gutenberg['theme-support'].fontSizes ? _extends({}, drupalSettings.gutenberg['theme-support'].fontSizes) : null;
@@ -213,29 +212,45 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
         editorSettings.fontSizes = fontSizes;
       }
 
-      window.customGutenberg = {
-        events: {
-          OPEN_GENERAL_SIDEBAR: function OPEN_GENERAL_SIDEBAR(action) {
-            var tab = action.name.replace(/edit-post\//g, '');
-            tab = tab.replace(/drupal\//g, '');
-
-            var $tabG = $('.edit-post-sidebar .components-panel .tab');
-            $('.gutenberg-sidebar').append($tabG);
-
-            setTimeout(function () {
-              var $tabD = $('.gutenberg-sidebar .tab.' + tab);
-              $('.edit-post-sidebar .components-panel').append($tabD);
-            }, 0);
-
-            $(document.body).addClass('gutenberg-sidebar-open');
-          },
-          CLOSE_GENERAL_SIDEBAR: function CLOSE_GENERAL_SIDEBAR() {
-            $(document.body).removeClass('gutenberg-sidebar-open');
-
-            $('.gutenberg-sidebar').append($('.edit-post-sidebar .components-panel .tab'));
-          }
+      function hasOpenedSidebar(sidebarName) {
+        if ($(document.body).hasClass('gutenberg-sidebar-open')) {
+          return;
         }
-      };
+
+        var tab = sidebarName.replace(/edit-post\//g, '');
+        tab = tab.replace(/drupal\//g, '');
+
+        var $tabG = $('.edit-post-sidebar .components-panel .tab');
+        $('.gutenberg-sidebar').append($tabG);
+
+        setTimeout(function () {
+          var $tabD = $('.gutenberg-sidebar .tab.' + tab);
+          $('.edit-post-sidebar .components-panel').append($tabD);
+        }, 0);
+
+        $(document.body).addClass('gutenberg-sidebar-open');
+      }
+
+      function hasClosedSidebar() {
+        if (!$(document.body).hasClass('gutenberg-sidebar-open')) {
+          return;
+        }
+
+        $(document.body).removeClass('gutenberg-sidebar-open');
+
+        $('.gutenberg-sidebar').append($('.edit-post-sidebar .components-panel .tab'));
+      }
+
+      data.subscribe(function () {
+        var isOpen = data.select('core/edit-post').isEditorSidebarOpened();
+        var sidebar = data.select('core/edit-post').getActiveGeneralSidebarName();
+
+        if (isOpen && sidebar === 'edit-post/document') {
+          hasOpenedSidebar(sidebar);
+        } else {
+          hasClosedSidebar();
+        }
+      });
 
       return editPost.initializeEditor(target, 'page', 1, editorSettings, {});
     }

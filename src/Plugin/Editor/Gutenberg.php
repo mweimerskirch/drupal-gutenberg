@@ -235,14 +235,16 @@ class Gutenberg extends EditorBase implements ContainerFactoryPluginInterface {
    */
   public function getLibraries(Editor $editor) {
     $libraries = [
-      'gutenberg/react',
-      'gutenberg/react-dom',
-      'gutenberg/moment',
-      'gutenberg/lodash',
-      'gutenberg/global',
-      'gutenberg/gutenberg-js',
-      'gutenberg/editor',
-      'gutenberg/blocks-view',
+      // 'gutenberg/regenerator-runtime',
+      // 'gutenberg/tinymce',
+      // 'gutenberg/global',
+      // 'gutenberg/init',
+      // 'gutenberg/block-editor',
+      // 'gutenberg/block-library',
+      'gutenberg/edit-node',
+      // Media attributes overrides must come after all 
+      // Gutenberg initialization.
+      'gutenberg/g-media-attributes',
       'gutenberg/blocks-edit',
     ];
   

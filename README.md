@@ -22,7 +22,7 @@ INTRODUCTION
  * More functionality wrapped in a smooth UI. Hundreds of hours with user
    testing. Decoupled. React.js. Clean output. Open source.
 
- * [Gutenberg JS on NPM](https://www.npmjs.com/package/@frontkom/gutenberg-js)
+ * [Gutenberg on GitHub](https://github.com/WordPress/gutenberg/)
 
  * For a full description:
    https://www.drupal.org/project/gutenberg
@@ -30,6 +30,7 @@ INTRODUCTION
  * Issue queue for Gutenberg:
    https://www.drupal.org/project/issues/gutenberg
 
+  * Also check [Gutenberg-JS](https://www.npmjs.com/package/@frontkom/gutenberg-js), a stand-alone Gutenberg editor for your custom sites or web apps.
 
 REQUIREMENTS
 ------------

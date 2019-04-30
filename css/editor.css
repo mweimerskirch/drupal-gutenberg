@@ -1,6 +1,189 @@
 /**
  * Don't edit this file. Find all style at ./sass folder.
  **/
+@media (min-width: 600px) {
+  body .gutenberg__editor {
+    position: relative;
+  }
+}
+
+@media (min-width: 782px) {
+  .gutenberg__editor .edit-post-sidebar {
+    top: 56px;
+  }
+}
+
+.components-modal__content ul {
+  list-style: none;
+}
+
+.gutenberg__editor {
+  position: relative;
+}
+
+.gutenberg__editor * {
+  box-sizing: border-box;
+}
+
+.gutenberg__editor *:focus {
+  outline-width: 0;
+}
+
+.gutenberg__editor ul {
+  list-style: none;
+}
+
+.gutenberg__editor input[type=checkbox] {
+  border: 1px solid #b4b9be;
+  background: #fff;
+  color: #555;
+  clear: none;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 0;
+  height: 16px;
+  margin: -4px 4px 0 0;
+  outline: 0;
+  padding: 0 !important;
+  text-align: center;
+  vertical-align: middle;
+  width: 16px;
+  min-width: 16px;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  transition: 0.05s border-color ease-in-out;
+}
+
+.gutenberg__editor .edit-post-layout {
+  padding-top: 0;
+  /**
+      * Hide Block Manager menu item.
+      * To properly override this, a new edit-post component
+      * is needed. Maybe a TODO.
+      */
+}
+
+@media (min-width: 960px) {
+  .gutenberg__editor .edit-post-layout {
+    padding-top: 0;
+  }
+}
+
+@media (min-width: 600px) {
+  .gutenberg__editor .edit-post-layout {
+    padding-top: 0;
+  }
+}
+
+.gutenberg__editor .edit-post-layout .edit-post-header,
+.gutenberg__editor .edit-post-layout .edit-post-sidebar,
+.gutenberg__editor .edit-post-layout .components-popover {
+  font-family: inherit;
+  font-size: 13px;
+}
+
+@media (min-width: 782px) {
+  .gutenberg__editor .edit-post-layout .edit-post-header {
+    position: sticky;
+    left: 0;
+    top: 0;
+  }
+}
+
+@media (min-width: 782px) {
+  .gutenberg__editor .edit-post-layout .components-notice-list {
+    left: 0;
+  }
+}
+
+.gutenberg__editor .edit-post-layout .components-notice-list .notice,
+.gutenberg__editor .edit-post-layout .components-notice-list div.error,
+.gutenberg__editor .edit-post-layout .components-notice-list div.updated {
+  background: #fff;
+  border-left: 4px solid #fff;
+}
+
+.gutenberg__editor .edit-post-layout .components-notice-list .notice-alt {
+  box-shadow: none;
+}
+
+.gutenberg__editor .edit-post-layout .components-notice-list .notice-success.notice-alt {
+  background-color: #ecf7ed;
+}
+
+.gutenberg__editor .edit-post-layout .components-notice-list .notice-success,
+.gutenberg__editor .edit-post-layout .components-notice-list div.updated {
+  border-left-color: #46b450;
+}
+
+.gutenberg__editor .edit-post-layout .components-notice-list .notice-dismiss {
+  position: absolute;
+  top: 0;
+  right: 1px;
+  border: none;
+  margin: 5px;
+  padding: 9px;
+  background: 0 0;
+  color: #72777c;
+  cursor: pointer;
+}
+
+.gutenberg__editor .edit-post-layout .edit-post-sidebar .edit-post-sidebar__panel-tabs ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.gutenberg__editor .edit-post-layout .edit-post-more-menu__content .components-popover__content .components-menu-group:nth-child(3) div[role='menu'] > button:first-child {
+  display: none;
+}
+
+.gutenberg__editor .screen-reader-text,
+.gutenberg__editor .screen-reader-text span,
+.gutenberg__editor .ui-helper-hidden-accessible {
+  border: 0;
+  clip: rect(1px, 1px, 1px, 1px);
+  -webkit-clip-path: inset(50%);
+  clip-path: inset(50%);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+  word-wrap: normal !important;
+}
+
+.gutenberg__editor .edit-post-visual-editor {
+  font-family: inherit;
+}
+
+.gutenberg__editor .edit-post-visual-editor p {
+  font-family: inherit;
+  line-height: 1.2em;
+}
+
+.gutenberg__editor .edit-post-visual-editor .editor-post-title .editor-post-title__input {
+  font-family: inherit;
+}
+
+.gutenberg__editor .edit-post-visual-editor .editor-block-list__layout .editor-block-list__block.is-selected, .gutenberg__editor .edit-post-visual-editor .editor-block-list__layout .editor-block-list__block.is-hovered {
+  outline-width: 0;
+}
+
+.gutenberg__editor .edit-post-visual-editor .editor-block-list__layout .editor-default-block-appender__content {
+  font-family: inherit;
+}
+
+.gutenberg__editor .components-range-control .components-base-control__label {
+  width: auto;
+  flex: 1;
+}
+
+.gutenberg__editor .components-color-palette__item:focus:after {
+  top: -3px;
+  left: -3px;
+}
+
 body .gutenberg__editor .edit-post-layout .components-popover {
   font-family: inherit;
 }
@@ -223,6 +406,12 @@ body .gutenberg__editor .edit-post-layout .edit-post-header .gutenberg-header-se
   display: none;
 }
 
+.edit-post-meta-boxes-area__container {
+  margin: auto auto;
+  max-width: 810px;
+  padding: 0 14px;
+}
+
 #gutenberg-loading {
   position: absolute;
   left: 0;
@@ -269,6 +458,26 @@ body .gutenberg__editor .edit-post-layout .edit-post-sidebar {
 .editor-rich-text__tinymce ~ .editor-rich-text__tinymce {
   opacity: 0.5;
   pointer-events: none;
+}
+
+.edit-post-header__settings .editor-post-save-draft {
+  display: none;
+}
+
+.edit-post-header__settings .editor-post-publish-panel__toggle {
+  display: none !important;
+}
+
+.edit-post-header__settings .editor-post-saved-state {
+  display: none;
+}
+
+.wp-block {
+  max-width: 810px;
+}
+
+.wp-block[data-align=wide] {
+  max-width: 810px;
 }
 
 /*# sourceMappingURL=editor.css.map */
