@@ -23,6 +23,7 @@
     async attach(element, format) {
       const { contentType, allowedBlocks, blackList } = format.editorSettings;
       const { data, blocks, editor } = wp;
+      const { dispatch } = data;
       const { unregisterBlockType } = blocks;
       const { registerDrupalStore, registerDrupalBlocks } = DrupalGutenberg;
 
@@ -38,6 +39,27 @@
       await registerDrupalBlocks(blocks, editor, contentType);
 
       this._initGutenberg(element);
+
+      if (drupalSettings.gutenberg.messages) {
+        Object.keys(drupalSettings.gutenberg.messages).forEach(key => {
+          drupalSettings.gutenberg.messages[key].forEach(message => {
+            switch (key) {
+              case 'error':
+                dispatch('core/notices').createErrorNotice(message);
+                break;
+              case 'warning':
+                dispatch('core/notices').createWarningNotice(message);
+                break;
+              case 'success':
+                dispatch('core/notices').createSuccessNotice(message);
+                break;
+              default:
+                dispatch('core/notices').createWarningNotice(message);
+                break;
+            }
+          });
+        });
+      }
 
       // Process blacklist.
       blackList

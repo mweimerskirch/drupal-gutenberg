@@ -188,6 +188,10 @@ body .gutenberg__editor .edit-post-layout .components-popover {
   font-family: inherit;
 }
 
+.components-notice-list {
+  top: 56px !important;
+}
+
 .editor-block-types-list__item-title {
   padding: 4px 2px;
   min-height: 68px;

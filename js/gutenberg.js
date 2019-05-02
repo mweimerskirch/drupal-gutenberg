@@ -15,7 +15,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
       var _this = this;
 
       return _asyncToGenerator(regeneratorRuntime.mark(function _callee() {
-        var _format$editorSetting, contentType, allowedBlocks, blackList, data, blocks, editor, unregisterBlockType, registerDrupalStore, registerDrupalBlocks, key, value, categories, isFormValid;
+        var _format$editorSetting, contentType, allowedBlocks, blackList, data, blocks, editor, dispatch, unregisterBlockType, registerDrupalStore, registerDrupalBlocks, key, value, categories, isFormValid;
 
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
@@ -23,18 +23,40 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
               case 0:
                 _format$editorSetting = format.editorSettings, contentType = _format$editorSetting.contentType, allowedBlocks = _format$editorSetting.allowedBlocks, blackList = _format$editorSetting.blackList;
                 data = wp.data, blocks = wp.blocks, editor = wp.editor;
+                dispatch = data.dispatch;
                 unregisterBlockType = blocks.unregisterBlockType;
                 registerDrupalStore = DrupalGutenberg.registerDrupalStore, registerDrupalBlocks = DrupalGutenberg.registerDrupalBlocks;
-                _context.next = 6;
+                _context.next = 7;
                 return registerDrupalStore(data);
 
-              case 6:
-                _context.next = 8;
+              case 7:
+                _context.next = 9;
                 return registerDrupalBlocks(blocks, editor, contentType);
 
-              case 8:
+              case 9:
 
                 _this._initGutenberg(element);
+
+                if (drupalSettings.gutenberg.messages) {
+                  Object.keys(drupalSettings.gutenberg.messages).forEach(function (key) {
+                    drupalSettings.gutenberg.messages[key].forEach(function (message) {
+                      switch (key) {
+                        case 'error':
+                          dispatch('core/notices').createErrorNotice(message);
+                          break;
+                        case 'warning':
+                          dispatch('core/notices').createWarningNotice(message);
+                          break;
+                        case 'success':
+                          dispatch('core/notices').createSuccessNotice(message);
+                          break;
+                        default:
+                          dispatch('core/notices').createWarningNotice(message);
+                          break;
+                      }
+                    });
+                  });
+                }
 
                 blackList.filter(function (value) {
                   return !value.includes('drupalblock/');
@@ -146,7 +168,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
                 return _context.abrupt('return', true);
 
-              case 24:
+              case 26:
               case 'end':
                 return _context.stop();
             }

@@ -206,6 +206,14 @@ function gutenberg_form_node_form_alter(&$form, FormStateInterface $form_state) 
     return;
   }
 
+  // Remove system messages and pass to Gutenberg notices list.
+  // \Drupal::messenger()->addMessage(t('An error occurred and processing did not complete.'), 'error');
+  // \Drupal::messenger()->addMessage(t('A warning.'), 'warning');
+  // \Drupal::messenger()->addMessage(t('SUCCESS!'), 'success');
+  // \Drupal::messenger()->addMessage(t('SUCCESS TWICE!'), 'success');
+  $messages = \Drupal::messenger()->deleteAll();
+  $form['#attached']['drupalSettings']['gutenberg']['messages'] = $messages;
+  
   $module_settings = _gutenberg_get_all_modules_settings();
   foreach ($module_settings as $provider => $settings) {
     if (isset($settings['libraries-edit'])) {
