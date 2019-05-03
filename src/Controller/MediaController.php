@@ -83,7 +83,9 @@ class MediaController extends ControllerBase {
         'raw' => $data['title'],
         'rendered' => $data['title'],
       ],
+      'alt' => $data['alt_text'], // prop used on inline-image
       'alt_text' => $data['alt_text'],
+      'width' => $image->getWidth(), // prop used on inline-image
       'data' => [
         'entity_type' => 'file',
         'entity_uuid' => $file->uuid(),

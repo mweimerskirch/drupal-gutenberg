@@ -51,7 +51,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
             onSelect = _props.onSelect;
 
         onSelect(multiple ? medias : medias[0]);
-        this.frame.close();
+        this.onClose();
       }
     }, {
       key: 'onClose',
@@ -59,7 +59,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
         var onClose = this.props.onClose;
 
 
-        document.getElementById('media-browser-modal').remove();
+        this.frame.close();
+
 
         if (onClose) {
           onClose();
@@ -83,26 +84,26 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
           allowedTypes: allowedTypes,
           value: value,
           onSelect: this.onSelect
-        }), mediaBrowser);
+        }), mediaBrowser, function () {
+          _this2.frame = Drupal.dialog(mediaBrowser, {
+            title: __('Media library'),
+            width: '95%',
+            height: document.documentElement.clientHeight - 100,
+            buttons: _defineProperty({}, __('Cancel'), function () {
+              _this2.frame.close();
+            }),
+            close: _this2.onClose,
+            create: function create(event) {
+              var $buttons = $(event.target).find('.form-actions');
+              var $dialogButtons = $buttons.closest('.ui-dialog').find('.ui-dialog-buttonpane');
 
-        this.frame = Drupal.dialog(mediaBrowser, {
-          title: __('Media library'),
-          width: '95%',
-          height: document.documentElement.clientHeight - 100,
-          buttons: _defineProperty({}, __('Cancel'), function () {
-            _this2.frame.close();
-          }),
-          close: this.onClose,
-          create: function create(event) {
-            var $buttons = $(event.target).find('.form-actions');
-            var $dialogButtons = $buttons.closest('.ui-dialog').find('.ui-dialog-buttonpane');
+              $dialogButtons.empty();
+              $dialogButtons.append($buttons);
+            }
+          });
 
-            $dialogButtons.empty();
-            $dialogButtons.append($buttons);
-          }
+          _this2.frame.showModal();
         });
-
-        this.frame.showModal();
       }
     }, {
       key: 'render',
