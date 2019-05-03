@@ -201,6 +201,10 @@ body .gutenberg__editor .edit-post-layout .components-popover {
   width: 100%;
 }
 
+.wp-block-cover .block-editor-url-input input {
+  color: #000;
+}
+
 body .gutenberg__editor .edit-post-layout .edit-post-header {
   font-family: inherit;
 }
