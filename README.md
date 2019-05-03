@@ -63,6 +63,18 @@ DEVELOPMENT
 
 For custom block development, check the `example_block` sub-module.
 
+Vendor packages
+-----
+
+- React: [Build file](https://unpkg.com/react@16.8.6/umd/react.production.min.js), [project page](https://github.com/facebook/react)
+- React DOM: [Build file](https://unpkg.com/react-dom@16.8.6/umd/react-dom.production.min.js), [project page](https://github.com/facebook/react)
+- Lodash: [Build file](https://raw.githubusercontent.com/lodash/lodash/4.17.11-npm/lodash.min.js), [project page](https://lodash.com/)
+- MomentJS: [Build file](https://momentjs.com/downloads/moment.min.js), [project page](https://momentjs.com/)
+- Regenerator Runtime: [Build file](https://github.com/facebook/regenerator/blob/master/packages/regenerator-runtime/runtime.js), [project page](https://github.com/facebook/regenerator/tree/master/packages/regenerator-runtime)
+- G-Media-Attributes: [Build file](https://unpkg.com/@frontkom/g-media-attributes@1.0.2/build/index.js), [project page](https://github.com/front/g-media-attributes)
+- TinyMCE: [Build package](http://download.tiny.cloud/tinymce/community/tinymce_4.9.4.zip), [project page](https://www.tiny.cloud/get-tiny/)
+- Gutenberg: [Project page](https://github.com/WordPress/gutenberg)
+  Drupal Gutenberg relies on some JSON files (dependencies tree) generated when building Gutenberg. So, to get the correct files, the git repository must be cloned and built.
 
 MAINTAINERS
 -----------
