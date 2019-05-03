@@ -51,7 +51,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
             onSelect = _props.onSelect;
 
         onSelect(multiple ? medias : medias[0]);
-        this.onClose();
+        this.frame.close();
       }
     }, {
       key: 'onClose',
@@ -59,8 +59,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
         var onClose = this.props.onClose;
 
 
-        this.frame.close();
-
+        document.getElementById('media-browser-modal').remove();
 
         if (onClose) {
           onClose();

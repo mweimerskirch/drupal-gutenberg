@@ -22,14 +22,14 @@
 
       // Adding this try-catch because of a know issue with inline-images.
       onSelect(multiple ? medias : medias[0]);
-      this.onClose();
+      this.frame.close();
+      // this.onClose();
     }
 
     onClose() {
       const { onClose } = this.props;
 
-      this.frame.close();
-      // document.getElementById('media-browser-modal').remove();
+      document.getElementById('media-browser-modal').remove();
 
       if (onClose) {
         onClose();

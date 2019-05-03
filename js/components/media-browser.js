@@ -157,7 +157,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                                 body: JSON.stringify({
                                   title: media.title.raw || media.title,
                                   caption: media.caption.raw || media.caption,
-                                  alt_text: media.alt || media.alt_text
+                                  alt_text: media.alt || media.alt_text || ''
                                 })
                               });
 
