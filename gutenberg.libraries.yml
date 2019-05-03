@@ -93,6 +93,7 @@ edit-node:
     - gutenberg/drupal-url
     - gutenberg/editor
     - gutenberg/edit-post
+    - gutenberg/format-library
     - gutenberg/drupal-data
     - gutenberg/g-media-attributes
 drupal-url:
