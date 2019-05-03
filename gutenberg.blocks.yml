@@ -140,6 +140,9 @@ categories:
       - id: "core-embed/vimeo"
         name: "Vimeo"
         default: true
+      - id: "core-embed/amazon-kindle"
+        name: "Amazon Kindle"
+        default: false
       - id: "core-embed/animoto"
         name: "Animoto"
         default: false
@@ -149,12 +152,15 @@ categories:
       - id: "core-embed/collegehumor"
         name: "College Humor"
         default: false
+      - id: "core-embed/crowdsignal"
+        name: "Crowdsignal"
+        default: false
       - id: "core-embed/dailymotion"
         name: "Daily Motion"
         default: false
-      # - id: "core-embed/funnyordie"
-      #   name: "Funny Or Die"
-      #   default: false
+      - id: "embed"
+        name: "Embed"
+        default: true
       - id: "core-embed/hulu"
         name: "Hulu"
         default: false
@@ -173,9 +179,6 @@ categories:
       - id: "core-embed/mixcloud"
         name: "MixCloud"
         default: false
-      # - id: "core-embed/photobucket"
-      #   name: "Photo Bucket"
-      #   default: false
       - id: "core-embed/polldaddy"
         name: "Poll Daddy"
         default: false
