@@ -143,7 +143,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                         while (1) {
                           switch (_context.prev = _context.next) {
                             case 0:
-                              _context.next = 2;
+                              if (!media.title) {
+                                media.title = { raw: '' };
+                              }
+
+                              if (!media.caption) {
+                                media.caption = { raw: '' };
+                              }
+
+                              _context.next = 4;
                               return fetch(drupalSettings.path.baseUrl + 'editor/media/update_data/' + media.id, {
                                 method: 'post',
                                 body: JSON.stringify({
@@ -153,10 +161,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                                 })
                               });
 
-                            case 2:
+                            case 4:
                               result = _context.sent;
 
-                            case 3:
+                            case 5:
                             case 'end':
                               return _context.stop();
                           }

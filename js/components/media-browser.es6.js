@@ -85,6 +85,14 @@
       const medias = data.filter(item => selected[item.id]);
 
       medias.map(async media => {
+        if (!media.title) {
+          media.title = { raw: '' };
+        }
+
+        if (!media.caption) {
+          media.caption = { raw: '' };
+        }
+
         const result = await fetch(
           `${drupalSettings.path.baseUrl}editor/media/update_data/${media.id}`,
           {
@@ -93,6 +101,9 @@
               title: media.title.raw || media.title,
               caption: media.caption.raw || media.caption,
               alt_text: media.alt || media.alt_text,
+              // title: media.title.raw || media.title,
+              // caption: media.caption.raw || media.caption,
+              // alt_text: media.alt || media.alt_text,
             }),
           },
         );
