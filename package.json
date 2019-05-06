@@ -12,14 +12,6 @@
     "build": "./node_modules/.bin/drupal-js-build --css"
   },
   "devDependencies": {
-    "drupal-js-build": "^1.1.0"
-  },
-  "dependencies": {
-    "@frontkom/g-media-attributes": "^1.0.1",
-    "@frontkom/gutenberg-js": "^4.0.0",
-    "moment": "^2.22.2",
-    "react": "^16.6.3",
-    "react-dom": "^16.6.3",
-    "regenerator": "^0.13.3"
+    "drupal-js-build": "^1.1.1"
   }
 }
