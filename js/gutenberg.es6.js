@@ -40,6 +40,12 @@
 
       this._initGutenberg(element);
 
+      if (drupalSettings.gutenberg._listeners.init) {
+        drupalSettings.gutenberg._listeners.init.forEach(callback => {
+          callback();
+        });
+      }
+
       if (drupalSettings.gutenberg.messages) {
         Object.keys(drupalSettings.gutenberg.messages).forEach(key => {
           drupalSettings.gutenberg.messages[key].forEach(message => {

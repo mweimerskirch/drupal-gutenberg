@@ -37,6 +37,12 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
                 _this._initGutenberg(element);
 
+                if (drupalSettings.gutenberg._listeners.init) {
+                  drupalSettings.gutenberg._listeners.init.forEach(function (callback) {
+                    callback();
+                  });
+                }
+
                 if (drupalSettings.gutenberg.messages) {
                   Object.keys(drupalSettings.gutenberg.messages).forEach(function (key) {
                     drupalSettings.gutenberg.messages[key].forEach(function (message) {
@@ -168,7 +174,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
                 return _context.abrupt('return', true);
 
-              case 26:
+              case 27:
               case 'end':
                 return _context.stop();
             }
