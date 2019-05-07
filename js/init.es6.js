@@ -38,12 +38,16 @@
     },
   };
 
+  drupalSettings.gutenberg._listeners = {
+    init: [],
+  };
+
   drupalSettings.gutenberg.addListener = (type, callback) => {
-    if (!drupalSettings.gutenberg._listeners) {
-      drupalSettings.gutenberg._listeners = {
-        init: [],
-      };
-    }
+    // if (!drupalSettings.gutenberg._listeners) {
+    //   drupalSettings.gutenberg._listeners = {
+    //     init: [],
+    //   };
+    // }
 
     if (!drupalSettings.gutenberg._listeners[type]) {
       throw new Error(
