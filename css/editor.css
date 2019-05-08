@@ -29,10 +29,6 @@
   outline-width: 0;
 }
 
-.gutenberg__editor ul {
-  list-style: none;
-}
-
 .gutenberg__editor input[type=checkbox] {
   border: 1px solid #b4b9be;
   background: #fff;
