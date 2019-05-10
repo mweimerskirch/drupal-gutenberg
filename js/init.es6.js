@@ -22,17 +22,15 @@
     },
   };
 
+  drupalSettings.gutenberg = drupalSettings.gutenberg || {
+    _listeners: {},
+  };
+
   drupalSettings.gutenberg._listeners = {
     init: [],
   };
 
   drupalSettings.gutenberg.addListener = (type, callback) => {
-    // if (!drupalSettings.gutenberg._listeners) {
-    //   drupalSettings.gutenberg._listeners = {
-    //     init: [],
-    //   };
-    // }
-
     if (!drupalSettings.gutenberg._listeners[type]) {
       throw new Error(
         `Type ${type} not defined as an event listener type for Drupal Gutenberg.`,

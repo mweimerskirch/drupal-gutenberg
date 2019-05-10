@@ -64,6 +64,27 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                   });
                 }
 
+                $('div[data-drupal-messages] .messages--error').each(function (index, el) {
+                  dispatch('core/notices').createErrorNotice($(el).html(), {
+                    __unstableHTML: $(el).html()
+                  });
+                  $(el).remove();
+                });
+
+                $('div[data-drupal-messages] .messages--warning').each(function (index, el) {
+                  dispatch('core/notices').createWarningNotice($(el).html(), {
+                    __unstableHTML: $(el).html()
+                  });
+                  $(el).remove();
+                });
+
+                $('div[data-drupal-messages] .messages--success').each(function (index, el) {
+                  dispatch('core/notices').createSuccessNotice($(el).html(), {
+                    __unstableHTML: $(el).html()
+                  });
+                  $(el).remove();
+                });
+
                 blackList.filter(function (value) {
                   return !value.includes('drupalblock/');
                 }).forEach(function (value) {
@@ -174,7 +195,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
                 return _context.abrupt('return', true);
 
-              case 27:
+              case 30:
               case 'end':
                 return _context.stop();
             }

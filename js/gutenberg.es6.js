@@ -67,6 +67,30 @@
         });
       }
 
+      // Handle late messages, i.e. processed after node edit form hook.
+      // Example: System update messages are coming after node edit form.
+      // TODO: There must be a better way to do this on server side.
+      $('div[data-drupal-messages] .messages--error').each((index, el) => {
+        dispatch('core/notices').createErrorNotice($(el).html(), {
+          __unstableHTML: $(el).html(),
+        });
+        $(el).remove();
+      });
+
+      $('div[data-drupal-messages] .messages--warning').each((index, el) => {
+        dispatch('core/notices').createWarningNotice($(el).html(), {
+          __unstableHTML: $(el).html(),
+        });
+        $(el).remove();
+      });
+
+      $('div[data-drupal-messages] .messages--success').each((index, el) => {
+        dispatch('core/notices').createSuccessNotice($(el).html(), {
+          __unstableHTML: $(el).html(),
+        });
+        $(el).remove();
+      });
+
       // Process blacklist.
       blackList
         .filter(value => !value.includes('drupalblock/'))

@@ -23,12 +23,15 @@
     add_postbox_toggles: function add_postbox_toggles(page, args) {}
   };
 
+  drupalSettings.gutenberg = drupalSettings.gutenberg || {
+    _listeners: {}
+  };
+
   drupalSettings.gutenberg._listeners = {
     init: []
   };
 
   drupalSettings.gutenberg.addListener = function (type, callback) {
-
     if (!drupalSettings.gutenberg._listeners[type]) {
       throw new Error('Type ' + type + ' not defined as an event listener type for Drupal Gutenberg.');
     }
