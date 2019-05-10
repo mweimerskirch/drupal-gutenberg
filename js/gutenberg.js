@@ -64,21 +64,21 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                   });
                 }
 
-                $('div[data-drupal-messages] .messages--error').each(function (index, el) {
+                $('div.messages--error').each(function (index, el) {
                   dispatch('core/notices').createErrorNotice($(el).html(), {
                     __unstableHTML: $(el).html()
                   });
                   $(el).remove();
                 });
 
-                $('div[data-drupal-messages] .messages--warning').each(function (index, el) {
+                $('div.messages--warning').each(function (index, el) {
                   dispatch('core/notices').createWarningNotice($(el).html(), {
                     __unstableHTML: $(el).html()
                   });
                   $(el).remove();
                 });
 
-                $('div[data-drupal-messages] .messages--success').each(function (index, el) {
+                $('div.messages--success').each(function (index, el) {
                   dispatch('core/notices').createSuccessNotice($(el).html(), {
                     __unstableHTML: $(el).html()
                   });
