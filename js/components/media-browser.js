@@ -87,6 +87,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
         var allowedTypes = this.props.allowedTypes;
 
 
+        if (allowedTypes.length === 0) {
+          allowedTypes.push('*');
+        }
+
         fetch('\n        ' + drupalSettings.path.baseUrl + 'editor/media/search/' + allowedTypes.join('+') + '/*').then(function (response) {
           return response.json();
         }).then(function (json) {

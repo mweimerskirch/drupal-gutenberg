@@ -50,6 +50,10 @@
     getMediaFiles() {
       const { allowedTypes } = this.props;
 
+      if (allowedTypes.length === 0) {
+        allowedTypes.push('*');
+      }
+
       fetch(`
         ${drupalSettings.path.baseUrl}editor/media/search/${allowedTypes.join(
         '+',
