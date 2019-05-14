@@ -5,7 +5,7 @@
 * @preserve
 **/'use strict';
 
-(function (Drupal, drupalSettings, $) {
+(function (wp, Drupal, drupalSettings, $) {
   var types = {
     page: {
       id: 1,
@@ -464,10 +464,5 @@
     });
   }
 
-  function apiFetch(options) {
-    return processPath(options);
-  }
-
-  window.wp = window.wp || {};
-  window.wp.apiFetch = apiFetch;
-})(Drupal, drupalSettings, jQuery);
+  wp.apiFetch = processPath;
+})(wp, Drupal, drupalSettings, jQuery);

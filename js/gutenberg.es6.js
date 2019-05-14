@@ -348,7 +348,7 @@
         titlePlaceholder: Drupal.t('Add title'),
         bodyPlaceholder: Drupal.t('Add text or type / to add content'),
         isRTL: false,
-        autosaveInterval: 0,
+        autosaveInterval: 10000, // Must set > 0 for undo and redo to work.
         // Following properties were from G-JS.
         // canAutosave: false, // to disable Editor Autosave featured (default: true)
         // canPublish: false, // to disable Editor Publish featured (default: true)

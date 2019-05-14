@@ -82,13 +82,15 @@ edit-node:
     - core/drupal.displace
     - editor/drupal.editor
     - gutenberg/init
-    - gutenberg/api-fetch
+    # - gutenberg/drupal-i18n
+    # - gutenberg/api-fetch
+    - gutenberg/url
     - gutenberg/drupal-api-fetch
     - gutenberg/drupal-url
+    - gutenberg/drupal-data
     - gutenberg/editor
     - gutenberg/edit-post
     - gutenberg/format-library
-    - gutenberg/drupal-data
     - gutenberg/g-media-attributes
 drupal-url:
   js:
@@ -96,9 +98,18 @@ drupal-url:
 drupal-api-fetch:
   js:
     js/api-fetch.js: {  }
+  dependencies:
+    - gutenberg/api-fetch
 drupal-data:
   js:
     js/data.js: {  }
+  dependencies:
+    - gutenberg/data
+drupal-i18n:
+  js:
+    js/i18n.js: {  }
+  dependencies:
+    - gutenberg/i18n
 
 # Gutenberg Packages
 a11y:

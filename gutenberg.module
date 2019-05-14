@@ -206,14 +206,6 @@ function gutenberg_form_node_form_alter(&$form, FormStateInterface $form_state) 
     return;
   }
 
-  // Remove system messages and pass to Gutenberg notices list.
-  // \Drupal::messenger()->addMessage(t('An error occurred and processing did not complete.'), 'error');
-  // \Drupal::messenger()->addMessage(t('A warning.'), 'warning');
-  // \Drupal::messenger()->addMessage(t('SUCCESS!'), 'success');
-  // \Drupal::messenger()->addMessage(t('SUCCESS TWICE!'), 'success');
-  $messages = \Drupal::messenger()->deleteAll();
-  $form['#attached']['drupalSettings']['gutenberg']['messages'] = $messages;
-  
   $module_settings = _gutenberg_get_all_modules_settings();
   foreach ($module_settings as $provider => $settings) {
     if (isset($settings['libraries-edit'])) {
@@ -388,6 +380,11 @@ function gutenberg_form_node_form_alter(&$form, FormStateInterface $form_state) 
   $form['#attached']['drupalSettings']['gutenberg']['metaboxes'][] = 'edit-metabox-fields';
 }
 
+function gutenberg_handle_messages(&$form) {
+  $messages = \Drupal::messenger()->deleteAll();
+  $form['#attached']['drupalSettings']['gutenberg']['messages'] = $messages;
+}
+
 /**
  * Called by after build text fields on the form.
  */
@@ -400,6 +397,8 @@ function gutenberg_form_node_form_after_build(array $element, FormStateInterface
  * Called by form after build.
  */
 function gutenberg_form_node_form_details_after_build(array $element, FormStateInterface $form_state) {
+  // gutenberg_handle_messages($element);
+
   foreach ($element['#fields_with_details'] as $key => $value) {
     $element['#attached']['drupalSettings']['gutenberg']['metaboxes'][] = $element[$value]['widget'][0]['#id'];
   }

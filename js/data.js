@@ -5,12 +5,12 @@
 * @preserve
 **/"use strict";
 
-(function (wp) {
-  var uid = window.userSettings ? window.userSettings.uid || 1 : 1;
+(function (wp, drupalSettings) {
+  var uid = drupalSettings.user ? drupalSettings.user.uid || 1 : 1;
   var storageKey = "WP_DATA_USER_" + uid;
   var data = wp.data;
 
 
   data.use(data.plugins.persistence, { storageKey: storageKey });
-  data.use(data.plugins.controls);
-})(wp);
+  data.plugins.persistence.__unstableMigrate({ storageKey: storageKey });
+})(wp, drupalSettings);
