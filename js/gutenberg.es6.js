@@ -132,10 +132,10 @@
       // const { unregisterPlugin } = wp.plugins;
       // unregisterPlugin('edit-post');
 
-      blocks.registerBlockStyle('core/image', {
-        name: 'colorbox',
-        label: 'Colorbox image',
-      });
+      // blocks.registerBlockStyle('core/image', {
+      //   name: 'colorbox',
+      //   label: 'Colorbox image',
+      // });
 
       data.dispatch('core/edit-post').setAvailableMetaBoxesPerLocation({
         advanced: ['drupalSettings'],

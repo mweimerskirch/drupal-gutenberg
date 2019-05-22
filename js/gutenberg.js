@@ -115,11 +115,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
                 data.dispatch('core/nux').disableTips();
 
-                blocks.registerBlockStyle('core/image', {
-                  name: 'colorbox',
-                  label: 'Colorbox image'
-                });
-
                 data.dispatch('core/edit-post').setAvailableMetaBoxesPerLocation({
                   advanced: ['drupalSettings']
                 });
@@ -195,7 +190,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
                 return _context.abrupt('return', true);
 
-              case 30:
+              case 29:
               case 'end':
                 return _context.stop();
             }
