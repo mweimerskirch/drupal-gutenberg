@@ -295,7 +295,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
               'ul',
               { className: 'list' },
               data.filter(function (item) {
-                return item.media_details.file.toLowerCase().includes(search) || item.title.raw && item.title.raw.toLowerCase().includes(search);
+                return item.media_details.file.toLowerCase().includes(search) || item.title && item.title.raw && typeof item.title.raw === 'string' && item.title.raw.toLowerCase().includes(search);
               }).map(function (media, index) {
                 return React.createElement(
                   'li',

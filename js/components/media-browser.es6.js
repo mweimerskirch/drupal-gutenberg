@@ -186,7 +186,9 @@
                 .filter(
                   item =>
                     item.media_details.file.toLowerCase().includes(search) ||
-                    (item.title.raw &&
+                    (item.title &&
+                      item.title.raw &&
+                      typeof item.title.raw === 'string' &&
                       item.title.raw.toLowerCase().includes(search)),
                 )
                 .map((media, index) => (
