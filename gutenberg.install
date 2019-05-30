@@ -44,6 +44,15 @@ function gutenberg_schema() {
 }
 
 /**
+ * Add file_managed_data table to database when updating from RC1.
+ */
+function gutenberg_update_8001() {
+  $spec = gutenberg_schema();
+  $schema = Database::getConnection()->schema();
+  $schema->createTable('file_managed_data', $spec['file_managed_data']);
+}
+
+/**
  * Implements hook_uninstall().
  */
 function gutenberg_uninstall() {
