@@ -143,9 +143,9 @@ function gutenberg_form_alter(&$form, FormStateInterface $form_state, $form_id) 
           '#type' => 'fieldset',
           '#title' => $key,
         ];
-  
+
         $config_values = $config->get($form['type']['#default_value'] . '_allowed_drupal_blocks');
-  
+
         $form['gutenberg']['allowed_drupal_blocks_details'][$group_reference]['allowed_drupal_blocks_' . $group_reference] = [
           '#type' => 'checkboxes',
           '#options' => $options,
@@ -672,6 +672,7 @@ function gutenberg_library_info_alter(&$libraries, $extension) {
     }
 
     foreach ($css_files_view as $file) {
+      $libraries['blocks-edit']['css']['base'][$file] = [];
       $libraries['blocks-view']['css']['base'][$file] = [];
     }
   }
