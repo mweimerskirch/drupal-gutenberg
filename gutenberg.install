@@ -49,7 +49,10 @@ function gutenberg_schema() {
 function gutenberg_update_8001() {
   $spec = gutenberg_schema();
   $schema = Database::getConnection()->schema();
-  $schema->createTable('file_managed_data', $spec['file_managed_data']);
+
+  if (!$schema->tableExists('file_managed_data')) {
+    $schema->createTable('file_managed_data', $spec['file_managed_data']);
+  }
 }
 
 /**
