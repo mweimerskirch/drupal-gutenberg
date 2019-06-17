@@ -24,6 +24,13 @@ class ReusableBlocksController extends ControllerBase {
    *   The JSON response.
    */
   public function load(Request $request, $block_id = NULL) {
+    $headers = [
+      'Allow' => 'GET, POST, PUT, PATCH, DELETE',
+      'Access-Control-Allow-Methods' => 'OPTIONS, GET, POST, PUT, PATCH, DELETE',
+      'Access-Control-Allow-Credentials' => 'true',
+      'Access-Control-Allow-Headers' => 'Authorization, Content-Type',
+    ];
+
     if ($block_id && $block_id > 0) {
       $block = BlockContent::load($block_id);
 
@@ -31,10 +38,11 @@ class ReusableBlocksController extends ControllerBase {
         'id' => (int) $block->id(),
         'title' => ['raw' => $block->info->value],
         'content' => ['protected' => false, 'raw' => $block->body->value],
-        'type' => 'block',
+        'type' => 'wp_block',
         'status' => 'publish',
         'slug' => 'reusable_block_' . $block->id(),
-      ]);
+        'headers' => $headers, // kind of a hack but accepted by Gutenberg ;)
+      ], 200, $headers);
     }
 
     $ids = \Drupal::entityQuery('block_content')
@@ -49,13 +57,13 @@ class ReusableBlocksController extends ControllerBase {
         'id' => (int) $block->id(),
         'title' => ['raw' => $block->info->value],
         'content' => ['protected' => false, 'raw' => $block->body->value],
-        'type' => 'block',
+        'type' => 'wp_block',
         'status' => 'publish',
         'slug' => 'reusable_block_' . $block->id(),
       ];
     }
 
-    return new JsonResponse($result);
+    return new JsonResponse($result, 200, $headers);
   }
 
   /**
@@ -70,6 +78,7 @@ class ReusableBlocksController extends ControllerBase {
    *   The JSON response.
    */
   public function save(Request $request, $block_id = NULL) {
+
     if ($block_id && $block_id > 0) {
       $data = json_decode($request->getContent(), TRUE);
       $block = BlockContent::load($block_id);
@@ -90,11 +99,23 @@ class ReusableBlocksController extends ControllerBase {
 
     $block->save();
 
+    $headers = [
+      'Allow' => 'GET, POST',
+      'Access-Control-Allow-Methods' => 'OPTIONS, GET, POST, PUT, PATCH, DELETE',
+    ];
+
     return new JsonResponse([
       'id' => (int) $block->id(),
       'title' => ['raw' => $block->info->value],
-      'content' => ['raw' => $block->body->value],
-    ]);
+      'content' => [
+        'block_version' => 1,
+        'protected' => FALSE,
+        'raw' => $block->body->value,
+      ],
+      'slug' => 'reusable_block_' . $block->id(),
+      'type' => 'wp_block',
+      'status' => 'publish',
+    ], ($block_id && $block_id > 0 ? 200 : 201), $headers);
   }
 
   /**

@@ -33,7 +33,7 @@
       capabilities: {},
       name: 'Blocks',
       rest_base: 'blocks',
-      slug: 'block',
+      slug: 'wp_block',
       description: '',
       hierarchical: false,
       supports: {
@@ -43,6 +43,26 @@
       viewable: true,
     },
   };
+
+  const user = {
+    id: 1,
+    name: 'Human Made',
+    url: '',
+    description: '',
+    link: 'https://demo.wp-api.org/author/humanmade/',
+    slug: 'humanmade',
+    avatar_urls: {
+      24: 'http://2.gravatar.com/avatar/83888eb8aea456e4322577f96b4dbaab?s=24&d=mm&r=g',
+      48: 'http://2.gravatar.com/avatar/83888eb8aea456e4322577f96b4dbaab?s=48&d=mm&r=g',
+      96: 'http://2.gravatar.com/avatar/83888eb8aea456e4322577f96b4dbaab?s=96&d=mm&r=g',
+    },
+    meta: [],
+    _links: {
+      self: [],
+      collection: [],
+    },
+  };
+
 
   const requestPaths = {
     'save-page': {
@@ -182,26 +202,7 @@
       regex: /\/wp\/v2\/users\/\?(.*)/g,
       process() {
         return new Promise(resolve => {
-          resolve([
-            {
-              id: 1,
-              name: 'Human Made',
-              url: '',
-              description: '',
-              link: 'https://demo.wp-api.org/author/humanmade/',
-              slug: 'humanmade',
-              avatar_urls: {
-                24: 'http://2.gravatar.com/avatar/83888eb8aea456e4322577f96b4dbaab?s=24&d=mm&r=g',
-                48: 'http://2.gravatar.com/avatar/83888eb8aea456e4322577f96b4dbaab?s=48&d=mm&r=g',
-                96: 'http://2.gravatar.com/avatar/83888eb8aea456e4322577f96b4dbaab?s=96&d=mm&r=g',
-              },
-              meta: [],
-              _links: {
-                self: [],
-                collection: [],
-              },
-            },
-          ]);
+          resolve([user]);
         });
       },
     },
@@ -436,6 +437,24 @@
         });
       },
     },
+    'block-options': {
+      method: 'OPTIONS',
+      regex: /\/wp\/v2\/blocks/g,
+      process() {
+        return new Promise(resolve => {
+          resolve({
+            headers: {
+              get: value => {
+                if (value === 'allow') {
+                  return ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'];
+                }
+              },
+            },
+          });
+        });
+      },
+    },
+
     'load-autosaves': {
       method: 'GET',
       regex: /\/wp\/v2\/(.*)\/autosaves\?(.*)/g,
@@ -450,7 +469,7 @@
       regex: /\/wp\/v2\/users\/me/g,
       process() {
         return new Promise(resolve => {
-          resolve({});
+          resolve(user);
         });
       },
     },

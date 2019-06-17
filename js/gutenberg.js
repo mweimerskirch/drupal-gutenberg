@@ -15,7 +15,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
       var _this = this;
 
       return _asyncToGenerator(regeneratorRuntime.mark(function _callee() {
-        var _format$editorSetting, contentType, allowedBlocks, blackList, data, blocks, editor, dispatch, unregisterBlockType, registerDrupalStore, registerDrupalBlocks, key, value, categories, isFormValid;
+        var _format$editorSetting, contentType, allowedBlocks, blackList, data, blocks, editor, dispatch, unregisterBlockType, registerBlockType, getBlockType, registerDrupalStore, registerDrupalBlocks, coreBlock, key, value, categories, isFormValid;
 
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
@@ -24,7 +24,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                 _format$editorSetting = format.editorSettings, contentType = _format$editorSetting.contentType, allowedBlocks = _format$editorSetting.allowedBlocks, blackList = _format$editorSetting.blackList;
                 data = wp.data, blocks = wp.blocks, editor = wp.editor;
                 dispatch = data.dispatch;
-                unregisterBlockType = blocks.unregisterBlockType;
+                unregisterBlockType = blocks.unregisterBlockType, registerBlockType = blocks.registerBlockType, getBlockType = blocks.getBlockType;
                 registerDrupalStore = DrupalGutenberg.registerDrupalStore, registerDrupalBlocks = DrupalGutenberg.registerDrupalBlocks;
                 _context.next = 7;
                 return registerDrupalStore(data);
@@ -90,6 +90,16 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                 }).forEach(function (value) {
                   unregisterBlockType(value);
                 });
+
+                coreBlock = getBlockType('core/block');
+
+                unregisterBlockType('core/block');
+                coreBlock.attributes = {
+                  ref: {
+                    type: 'number'
+                  }
+                };
+                registerBlockType('core/block', coreBlock);
 
                 for (key in allowedBlocks) {
                   if (allowedBlocks.hasOwnProperty(key)) {
@@ -190,7 +200,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
                 return _context.abrupt('return', true);
 
-              case 29:
+              case 33:
               case 'end':
                 return _context.stop();
             }

@@ -24,7 +24,7 @@
       const { contentType, allowedBlocks, blackList } = format.editorSettings;
       const { data, blocks, editor } = wp;
       const { dispatch } = data;
-      const { unregisterBlockType } = blocks;
+      const { unregisterBlockType, registerBlockType, getBlockType } = blocks;
       const { registerDrupalStore, registerDrupalBlocks } = DrupalGutenberg;
 
       // Register plugins.
@@ -97,6 +97,16 @@
         .forEach(value => {
           unregisterBlockType(value);
         });
+
+      // Add `ref` attribute to core/block.
+      const coreBlock = getBlockType('core/block');
+      unregisterBlockType('core/block');
+      coreBlock.attributes = {
+        ref: {
+          type: 'number',
+        },
+      };
+      registerBlockType('core/block', coreBlock);
 
       // Process allowed blocks.
       /* eslint no-restricted-syntax: ["error", "never"] */
