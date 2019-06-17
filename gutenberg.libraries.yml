@@ -24,6 +24,10 @@ regenerator-runtime:
   version: 1.0.0
   js:
     vendor/regenerator-runtime.js: {  }
+polyfill:
+  version: 1.0.0
+  js:
+    vendor/regenerator-runtime.js: {  }
 g-media-attributes:
   version: 1.0.1
   js:
@@ -82,8 +86,6 @@ edit-node:
     - core/drupal.displace
     - editor/drupal.editor
     - gutenberg/init
-    # - gutenberg/drupal-i18n
-    # - gutenberg/api-fetch
     - gutenberg/url
     - gutenberg/drupal-api-fetch
     - gutenberg/drupal-url
@@ -119,6 +121,7 @@ a11y:
     theme: {  }
   dependencies:
     - gutenberg/dom-ready
+    - gutenberg/polyfill
 annotations:
   js:
     vendor/gutenberg/annotations/index.js: {  }
@@ -129,6 +132,7 @@ annotations:
     - gutenberg/data
     - gutenberg/hooks
     - gutenberg/i18n
+    - gutenberg/polyfill
     - gutenberg/rich-text
 api-fetch:
   js:
@@ -144,11 +148,15 @@ autop:
     vendor/gutenberg/autop/index.js: {  }
   css:
     theme: {  }
+  dependencies:
+    - gutenberg/polyfill
 blob:
   js:
     vendor/gutenberg/blob/index.js: {  }
   css:
     theme: {  }
+  dependencies:
+    - gutenberg/polyfill
 block-editor:
   js:
     vendor/gutenberg/block-editor/index.js: {  }
@@ -165,7 +173,6 @@ block-editor:
     - gutenberg/compose
     - gutenberg/core-data
     - gutenberg/data
-    - gutenberg/deprecated
     - gutenberg/dom
     - gutenberg/element
     - gutenberg/hooks
@@ -207,7 +214,9 @@ block-library:
     - gutenberg/i18n
     - gutenberg/is-shallow-equal
     - gutenberg/keycodes
+    - gutenberg/polyfill
     - gutenberg/rich-text
+    - gutenberg/server-side-render
     - gutenberg/url
     - gutenberg/viewport
 block-serialization-default-parser:
@@ -215,11 +224,15 @@ block-serialization-default-parser:
     vendor/gutenberg/block-serialization-default-parser/index.js: {  }
   css:
     theme: {  }
+  dependencies:
+    - gutenberg/polyfill
 block-serialization-spec-parser:
   js:
     vendor/gutenberg/block-serialization-spec-parser/index.js: {  }
   css:
     theme: {  }
+  dependencies:
+    - gutenberg/polyfill
 blocks:
   js:
     vendor/gutenberg/blocks/index.js: {  }
@@ -238,6 +251,7 @@ blocks:
     - gutenberg/html-entities
     - gutenberg/i18n
     - gutenberg/is-shallow-equal
+    - gutenberg/polyfill
     - gutenberg/shortcode
 components:
   js:
@@ -251,7 +265,6 @@ components:
     - gutenberg/react
     - gutenberg/react-dom
     - gutenberg/a11y
-    - gutenberg/api-fetch
     - gutenberg/compose
     - gutenberg/dom
     - gutenberg/element
@@ -259,8 +272,8 @@ components:
     - gutenberg/i18n
     - gutenberg/is-shallow-equal
     - gutenberg/keycodes
+    - gutenberg/polyfill
     - gutenberg/rich-text
-    - gutenberg/url
 compose:
   js:
     vendor/gutenberg/compose/index.js: {  }
@@ -270,6 +283,7 @@ compose:
     - gutenberg/lodash
     - gutenberg/element
     - gutenberg/is-shallow-equal
+    - gutenberg/polyfill
 core-data:
   js:
     vendor/gutenberg/core-data/index.js: {  }
@@ -296,6 +310,15 @@ data:
     - gutenberg/polyfill
     - gutenberg/priority-queue
     - gutenberg/redux-routine
+data-controls:
+  js:
+    vendor/gutenberg/data-controls/index.js: {  }
+  css:
+    theme: {  }
+  dependencies:
+    - gutenberg/api-fetch
+    - gutenberg/data
+    - gutenberg/polyfill
 date:
   js:
     vendor/gutenberg/date/index.js: {  }
@@ -303,6 +326,7 @@ date:
     theme: {  }
   dependencies:
     - gutenberg/moment
+    - gutenberg/polyfill
 deprecated:
   js:
     vendor/gutenberg/deprecated/index.js: {  }
@@ -310,6 +334,7 @@ deprecated:
     theme: {  }
   dependencies:
     - gutenberg/hooks
+    - gutenberg/polyfill
 dom:
   js:
     vendor/gutenberg/dom/index.js: {  }
@@ -317,11 +342,14 @@ dom:
     theme: {  }
   dependencies:
     - gutenberg/lodash
+    - gutenberg/polyfill
 dom-ready:
   js:
     vendor/gutenberg/dom-ready/index.js: {  }
   css:
     theme: {  }
+  dependencies:
+    - gutenberg/polyfill
 edit-post:
   js:
     vendor/gutenberg/edit-post/index.js: {  }
@@ -344,9 +372,11 @@ edit-post:
     - gutenberg/hooks
     - gutenberg/i18n
     - gutenberg/keycodes
+    - gutenberg/media-utils
     - gutenberg/notices
     - gutenberg/nux
     - gutenberg/plugins
+    - gutenberg/polyfill
     - gutenberg/url
     - gutenberg/viewport
 edit-widgets:
@@ -356,11 +386,19 @@ edit-widgets:
     theme:
       vendor/gutenberg/edit-widgets/style.css: {  }
   dependencies:
+    - gutenberg/lodash
     - gutenberg/block-editor
     - gutenberg/block-library
+    - gutenberg/blocks
     - gutenberg/components
+    - gutenberg/compose
+    - gutenberg/data
+    - gutenberg/data-controls
     - gutenberg/element
+    - gutenberg/hooks
     - gutenberg/i18n
+    - gutenberg/media-utils
+    - gutenberg/polyfill
 editor:
   js:
     vendor/gutenberg/editor/index.js: {  }
@@ -373,13 +411,13 @@ editor:
     - gutenberg/react
     - gutenberg/api-fetch
     - gutenberg/autop
-    - gutenberg/blob
     - gutenberg/block-editor
     - gutenberg/blocks
     - gutenberg/components
     - gutenberg/compose
     - gutenberg/core-data
     - gutenberg/data
+    - gutenberg/data-controls
     - gutenberg/date
     - gutenberg/deprecated
     - gutenberg/element
@@ -387,10 +425,12 @@ editor:
     - gutenberg/html-entities
     - gutenberg/i18n
     - gutenberg/keycodes
+    - gutenberg/media-utils
     - gutenberg/notices
     - gutenberg/nux
     - gutenberg/polyfill
     - gutenberg/rich-text
+    - gutenberg/server-side-render
     - gutenberg/url
     - gutenberg/viewport
     - gutenberg/wordcount
@@ -404,11 +444,14 @@ element:
     - gutenberg/react
     - gutenberg/react-dom
     - gutenberg/escape-html
+    - gutenberg/polyfill
 escape-html:
   js:
     vendor/gutenberg/escape-html/index.js: {  }
   css:
     theme: {  }
+  dependencies:
+    - gutenberg/polyfill
 format-library:
   js:
     vendor/gutenberg/format-library/index.js: {  }
@@ -423,6 +466,7 @@ format-library:
     - gutenberg/element
     - gutenberg/i18n
     - gutenberg/keycodes
+    - gutenberg/polyfill
     - gutenberg/rich-text
     - gutenberg/url
 hooks:
@@ -430,21 +474,29 @@ hooks:
     vendor/gutenberg/hooks/index.js: {  }
   css:
     theme: {  }
+  dependencies:
+    - gutenberg/polyfill
 html-entities:
   js:
     vendor/gutenberg/html-entities/index.js: {  }
   css:
     theme: {  }
+  dependencies:
+    - gutenberg/polyfill
 i18n:
   js:
     vendor/gutenberg/i18n/index.js: {  }
   css:
     theme: {  }
+  dependencies:
+    - gutenberg/polyfill
 is-shallow-equal:
   js:
     vendor/gutenberg/is-shallow-equal/index.js: {  }
   css:
     theme: {  }
+  dependencies:
+    - gutenberg/polyfill
 keycodes:
   js:
     vendor/gutenberg/keycodes/index.js: {  }
@@ -453,6 +505,7 @@ keycodes:
   dependencies:
     - gutenberg/lodash
     - gutenberg/i18n
+    - gutenberg/polyfill
 list-reusable-blocks:
   js:
     vendor/gutenberg/list-reusable-blocks/index.js: {  }
@@ -464,6 +517,18 @@ list-reusable-blocks:
     - gutenberg/api-fetch
     - gutenberg/components
     - gutenberg/compose
+    - gutenberg/element
+    - gutenberg/i18n
+    - gutenberg/polyfill
+media-utils:
+  js:
+    vendor/gutenberg/media-utils/index.js: {  }
+  css:
+    theme: {  }
+  dependencies:
+    - gutenberg/lodash
+    - gutenberg/api-fetch
+    - gutenberg/blob
     - gutenberg/element
     - gutenberg/i18n
     - gutenberg/polyfill
@@ -490,6 +555,7 @@ nux:
     - gutenberg/data
     - gutenberg/element
     - gutenberg/i18n
+    - gutenberg/polyfill
 plugins:
   js:
     vendor/gutenberg/plugins/index.js: {  }
@@ -500,11 +566,14 @@ plugins:
     - gutenberg/compose
     - gutenberg/element
     - gutenberg/hooks
+    - gutenberg/polyfill
 priority-queue:
   js:
     vendor/gutenberg/priority-queue/index.js: {  }
   css:
     theme: {  }
+  dependencies:
+    - gutenberg/polyfill
 redux-routine:
   js:
     vendor/gutenberg/redux-routine/index.js: {  }
@@ -512,6 +581,7 @@ redux-routine:
     theme: {  }
   dependencies:
     - gutenberg/lodash
+    - gutenberg/polyfill
 rich-text:
   js:
     vendor/gutenberg/rich-text/index.js: {  }
@@ -524,6 +594,21 @@ rich-text:
     - gutenberg/element
     - gutenberg/escape-html
     - gutenberg/hooks
+    - gutenberg/polyfill
+server-side-render:
+  js:
+    vendor/gutenberg/server-side-render/index.js: {  }
+  css:
+    theme: {  }
+  dependencies:
+    - gutenberg/lodash
+    - gutenberg/api-fetch
+    - gutenberg/components
+    - gutenberg/data
+    - gutenberg/element
+    - gutenberg/i18n
+    - gutenberg/polyfill
+    - gutenberg/url
 shortcode:
   js:
     vendor/gutenberg/shortcode/index.js: {  }
@@ -531,6 +616,7 @@ shortcode:
     theme: {  }
   dependencies:
     - gutenberg/lodash
+    - gutenberg/polyfill
 token-list:
   js:
     vendor/gutenberg/token-list/index.js: {  }
@@ -544,6 +630,8 @@ url:
     vendor/gutenberg/url/index.js: {  }
   css:
     theme: {  }
+  dependencies:
+    - gutenberg/polyfill
 viewport:
   js:
     vendor/gutenberg/viewport/index.js: {  }
@@ -553,6 +641,7 @@ viewport:
     - gutenberg/lodash
     - gutenberg/compose
     - gutenberg/data
+    - gutenberg/polyfill
 wordcount:
   js:
     vendor/gutenberg/wordcount/index.js: {  }
@@ -560,5 +649,5 @@ wordcount:
     theme: {  }
   dependencies:
     - gutenberg/lodash
-
+    - gutenberg/polyfill
 # End Gutenberg packages
