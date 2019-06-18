@@ -22,7 +22,7 @@
      */
     async attach(element, format) {
       const { contentType, allowedBlocks, blackList } = format.editorSettings;
-      const { data, blocks, editor } = wp;
+      const { data, blocks } = wp;
       const { dispatch } = data;
       const { unregisterBlockType, registerBlockType, getBlockType } = blocks;
       const { registerDrupalStore, registerDrupalBlocks } = DrupalGutenberg;
@@ -36,7 +36,7 @@
       // });
 
       await registerDrupalStore(data);
-      await registerDrupalBlocks(blocks, editor, contentType);
+      await registerDrupalBlocks(contentType);
 
       this._initGutenberg(element);
 

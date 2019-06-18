@@ -8,7 +8,12 @@
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 (function (wp, $, Drupal, drupalSettings) {
-  var data = wp.data;
+  var data = wp.data,
+      blocks = wp.blocks,
+      editor = wp.editor;
+  var BlockAlignmentToolbar = editor.BlockAlignmentToolbar,
+      BlockControls = editor.BlockControls;
+  var Fragment = wp.element.Fragment;
   var _window$DrupalGutenbe = window.DrupalGutenberg.Components,
       DrupalIcon = _window$DrupalGutenbe.DrupalIcon,
       DrupalBlock = _window$DrupalGutenbe.DrupalBlock;
@@ -74,13 +79,62 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
     return result;
   }
 
-  function registerDrupalBlocks(blocks, editor, contentType) {
+  function registerBlock(id, definition) {
+    var blockId = ('drupalblock/' + id).replace(/_/g, '-').replace(/:/g, '-');
+
+    blocks.registerBlockType(blockId, {
+      title: definition.admin_label + ' [' + definition.category + ']',
+      icon: providerIcons[definition.provider] || DrupalIcon,
+      category: 'drupal',
+      supports: {
+        html: false,
+        reusable: false
+      },
+      attributes: {
+        blockId: {
+          type: 'string'
+        },
+        align: {
+          type: 'string'
+        }
+      },
+      edit: function edit(_ref) {
+        var attributes = _ref.attributes,
+            className = _ref.className,
+            setAttributes = _ref.setAttributes;
+        var align = attributes.align;
+
+        setAttributes({ blockId: id });
+
+        return React.createElement(
+          Fragment,
+          null,
+          React.createElement(
+            BlockControls,
+            null,
+            React.createElement(BlockAlignmentToolbar, {
+              value: align,
+              onChange: function onChange(nextAlign) {
+                setAttributes({ align: nextAlign });
+              },
+              controls: ['left', 'right', 'center', 'wide', 'full']
+            })
+          ),
+          React.createElement(DrupalBlock, {
+            className: className,
+            id: id,
+            url: drupalSettings.path.baseUrl + 'editor/blocks/load/' + id
+          })
+        );
+      },
+      save: function save() {
+        return null;
+      }
+    });
+  }
+
+  function registerDrupalBlocks(contentType) {
     return new Promise(function (resolve) {
-      var BlockAlignmentToolbar = editor.BlockAlignmentToolbar,
-          BlockControls = editor.BlockControls;
-      var Fragment = wp.element.Fragment;
-
-
       $.ajax(drupalSettings.path.baseUrl + 'editor/blocks/load_by_type/' + contentType).done(function (definitions) {
         var category = {
           slug: 'drupal',
@@ -91,67 +145,13 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
         data.dispatch('core/blocks').setCategories(categories);
 
-        var _loop = function _loop(id) {
+        for (var id in definitions) {
           if ({}.hasOwnProperty.call(definitions, id)) {
             var definition = definitions[id];
-            var blockId = 'drupalblock/' + id;
-            blockId = blockId.replace(/_/g, '-');
-            blockId = blockId.replace(/:/g, '-');
-
-            blocks.registerBlockType(blockId, {
-              title: definition.admin_label + ' [' + definition.category + ']',
-              icon: providerIcons[definition.provider] || DrupalIcon,
-              category: 'drupal',
-              supports: {
-                html: false,
-                reusable: false
-              },
-              attributes: {
-                blockId: {
-                  type: 'string'
-                },
-                align: {
-                  type: 'string'
-                }
-              },
-              edit: function edit(_ref) {
-                var attributes = _ref.attributes,
-                    className = _ref.className,
-                    setAttributes = _ref.setAttributes;
-                var align = attributes.align;
-
-                setAttributes({ blockId: id });
-
-                return React.createElement(
-                  Fragment,
-                  null,
-                  React.createElement(
-                    BlockControls,
-                    null,
-                    React.createElement(BlockAlignmentToolbar, {
-                      value: align,
-                      onChange: function onChange(nextAlign) {
-                        setAttributes({ align: nextAlign });
-                      },
-                      controls: ['left', 'right', 'center', 'wide', 'full']
-                    })
-                  ),
-                  React.createElement(DrupalBlock, {
-                    className: className,
-                    id: id,
-                    url: drupalSettings.path.baseUrl + 'editor/blocks/load/' + id
-                  })
-                );
-              },
-              save: function save() {
-                return null;
-              }
-            });
+            if (definition) {
+              registerBlock(id, definition);
+            }
           }
-        };
-
-        for (var id in definitions) {
-          _loop(id);
         }
         resolve();
       });
