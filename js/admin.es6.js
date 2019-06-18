@@ -14,7 +14,11 @@
    *   Attaches summary behavior to book outline forms.
    */
   Drupal.behaviors.gutenbergAdmin = {
-    attach() {
+    attach(context) {
+      if (context !== document) {
+        return;
+      }
+
       $('.view-reusable-blocks .views-row').click(e => {
         $(e.currentTarget)
           .find('input[type="checkbox"]')

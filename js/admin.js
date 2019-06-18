@@ -7,7 +7,11 @@
 
 (function ($, Drupal) {
   Drupal.behaviors.gutenbergAdmin = {
-    attach: function attach() {
+    attach: function attach(context) {
+      if (context !== document) {
+        return;
+      }
+
       $('.view-reusable-blocks .views-row').click(function (e) {
         $(e.currentTarget).find('input[type="checkbox"]').click();
       });
