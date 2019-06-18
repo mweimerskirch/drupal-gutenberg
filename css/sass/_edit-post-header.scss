@@ -9,6 +9,7 @@ body .gutenberg__editor .edit-post-layout .edit-post-header {
     #edit-actions {
       display: flex;
       flex-direction: row;
+      align-items: center;
 
       @media screen and (max-width: 600px) {
         input[type="submit"] {

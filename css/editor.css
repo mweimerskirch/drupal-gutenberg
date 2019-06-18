@@ -214,6 +214,7 @@ body .gutenberg__editor .edit-post-layout .edit-post-header {
 body .gutenberg__editor .edit-post-layout .edit-post-header .gutenberg-header-settings #edit-actions {
   display: flex;
   flex-direction: row;
+  align-items: center;
 }
 
 @media screen and (max-width: 600px) {
