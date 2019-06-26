@@ -109,17 +109,6 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
         return React.createElement(
           Fragment,
           null,
-          React.createElement(
-            BlockControls,
-            null,
-            React.createElement(BlockAlignmentToolbar, {
-              value: align,
-              onChange: function onChange(nextAlign) {
-                setAttributes({ align: nextAlign });
-              },
-              controls: ['left', 'right', 'center', 'wide', 'full']
-            })
-          ),
           React.createElement(DrupalBlock, {
             className: className,
             id: id,

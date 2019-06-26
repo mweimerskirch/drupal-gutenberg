@@ -73,15 +73,6 @@
 
         return (
           <Fragment>
-            <BlockControls>
-              <BlockAlignmentToolbar
-                value={align}
-                onChange={nextAlign => {
-                  setAttributes({ align: nextAlign });
-                }}
-                controls={['left', 'right', 'center', 'wide', 'full']}
-              />
-            </BlockControls>
             <DrupalBlock
               className={className}
               id={id}
