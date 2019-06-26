@@ -87,6 +87,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       icon: providerIcons[definition.provider] || DrupalIcon,
       category: 'drupal',
       supports: {
+        align: true,
         html: false,
         reusable: false
       },

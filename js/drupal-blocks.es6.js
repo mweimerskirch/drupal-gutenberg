@@ -56,6 +56,7 @@
       icon: providerIcons[definition.provider] || DrupalIcon,
       category: 'drupal',
       supports: {
+        align: true,
         html: false,
         reusable: false,
       },
