@@ -14,23 +14,23 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     attach: function attach(element, format) {
       var _this = this;
 
-      return _asyncToGenerator(regeneratorRuntime.mark(function _callee() {
-        var _format$editorSetting, contentType, allowedBlocks, blackList, data, blocks, dispatch, unregisterBlockType, registerBlockType, getBlockType, registerDrupalStore, registerDrupalBlocks, coreBlock, key, value, categories, isFormValid;
+      return _asyncToGenerator(regeneratorRuntime.mark(function _callee2() {
+        var _format$editorSetting, contentType, allowedBlocks, blackList, data, blocks, dispatch, unregisterBlockType, registerBlockType, getBlockType, registerDrupalStore, registerDrupalBlocks, coreBlock, key, value, categories, metaboxesContainer, metaboxForm, isFormValid, formSubmitted;
 
-        return regeneratorRuntime.wrap(function _callee$(_context) {
+        return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
-            switch (_context.prev = _context.next) {
+            switch (_context2.prev = _context2.next) {
               case 0:
                 _format$editorSetting = format.editorSettings, contentType = _format$editorSetting.contentType, allowedBlocks = _format$editorSetting.allowedBlocks, blackList = _format$editorSetting.blackList;
                 data = wp.data, blocks = wp.blocks;
                 dispatch = data.dispatch;
                 unregisterBlockType = blocks.unregisterBlockType, registerBlockType = blocks.registerBlockType, getBlockType = blocks.getBlockType;
                 registerDrupalStore = DrupalGutenberg.registerDrupalStore, registerDrupalBlocks = DrupalGutenberg.registerDrupalBlocks;
-                _context.next = 7;
+                _context2.next = 7;
                 return registerDrupalStore(data);
 
               case 7:
-                _context.next = 9;
+                _context2.next = 9;
                 return registerDrupalBlocks(contentType);
 
               case 9:
@@ -136,6 +136,15 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                   });
                 }, 0);
 
+                metaboxesContainer = $(document.createElement('div'));
+
+                metaboxesContainer.attr('id', 'metaboxes');
+                $('body').append(metaboxesContainer);
+                metaboxForm = $(document.createElement('form'));
+
+                metaboxForm.addClass('metabox-location-advanced');
+                metaboxesContainer.append(metaboxForm);
+
                 $(document.forms[0]).attr('novalidate', true);
 
                 setTimeout(function () {
@@ -154,10 +163,10 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
                   $('#edit-additional-fields').attr('open', '');
 
-                  $(document.forms[0]).removeAttr('novalidate');
+                  $(element.form).removeAttr('novalidate');
 
                   setTimeout(function () {
-                    isFormValid = document.forms[0].reportValidity();
+                    isFormValid = element.form.reportValidity();
 
                     if (isFormValid) {
                       $(e.currentTarget).click();
@@ -165,7 +174,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                       $(e.currentTarget).removeAttr('active');
                     }
 
-                    $(document.forms[0]).attr('novalidate', true);
+                    $(element.form).attr('novalidate', true);
                   });
 
                   if (!isFormValid) {
@@ -175,7 +184,9 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                   }
                 });
 
-                $(document.forms[0]).on('submit', function (e) {
+                formSubmitted = false;
+
+                $(element.form).on('submit', function (e) {
                   var $source = $('input[active="true"]');
 
                   $source.removeAttr('active');
@@ -193,19 +204,41 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
                   data.dispatch('core/edit-post').openGeneralSidebar('edit-post/document');
 
-                  data.dispatch('core/editor').savePost();
+                  if (!formSubmitted) {
+                    _asyncToGenerator(regeneratorRuntime.mark(function _callee() {
+                      return regeneratorRuntime.wrap(function _callee$(_context) {
+                        while (1) {
+                          switch (_context.prev = _context.next) {
+                            case 0:
+                              _context.next = 2;
+                              return data.dispatch('core/editor').savePost();
 
-                  return true;
+                            case 2:
+                              formSubmitted = true;
+
+                              element.form.submit();
+
+                            case 4:
+                            case 'end':
+                              return _context.stop();
+                          }
+                        }
+                      }, _callee, _this);
+                    }))();
+
+                    e.preventDefault();
+                    e.stopPropagation();
+                  }
                 });
 
-                return _context.abrupt('return', true);
+                return _context2.abrupt('return', true);
 
-              case 33:
+              case 40:
               case 'end':
-                return _context.stop();
+                return _context2.stop();
             }
           }
-        }, _callee, _this);
+        }, _callee2, _this);
       }))();
     },
     attachInlineEditor: function attachInlineEditor(element, format, mainToolbarId, floatedToolbarId) {

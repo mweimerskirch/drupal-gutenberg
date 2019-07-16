@@ -158,6 +158,18 @@
         });
       }, 0);
 
+      // Create fake form for metabox.
+      // On post save, REQUEST_META_BOX_UPDATES action is called and
+      // it relies on metaboxes forms.
+      // The only way to bypass an exception is to create the "advanced" metabox form.
+      // It has no other practical use.
+      const metaboxesContainer = $(document.createElement('div'));
+      metaboxesContainer.attr('id', 'metaboxes');
+      $('body').append(metaboxesContainer);
+      const metaboxForm = $(document.createElement('form'));
+      metaboxForm.addClass('metabox-location-advanced');
+      metaboxesContainer.append(metaboxForm);
+
       // Disable inline image block.
       // data.dispatch('core/editor').unregisterToken('core/image');
 
@@ -189,14 +201,14 @@
         $('#edit-additional-fields').attr('open', '');
 
         // For these buttons enable form validation.
-        $(document.forms[0]).removeAttr('novalidate');
+        $(element.form).removeAttr('novalidate');
 
         // Wait for the next tick, React/Gutenberg is
         // doing its DOM stuff.
         setTimeout(() => {
           // This will not work on IE (<10?). But it's ok because
           // we have the server side validation fallback.
-          isFormValid = document.forms[0].reportValidity();
+          isFormValid = element.form.reportValidity();
 
           if (isFormValid) {
             // We need to submit the form via button click.
@@ -209,7 +221,7 @@
           }
 
           // Then disable form validation again :(
-          $(document.forms[0]).attr('novalidate', true);
+          $(element.form).attr('novalidate', true);
         });
 
         // No need to proceed to form validation,
@@ -222,9 +234,10 @@
         }
       });
 
+      let formSubmitted = false;
       // Gutenberg is full of buttons which cause the form
       // to submit (no default prevent).
-      $(document.forms[0]).on('submit', e => {
+      $(element.form).on('submit', e => {
         // Get the original button clicked...
         const $source = $('input[active="true"]');
         // ...and reset its active state.
@@ -253,10 +266,21 @@
         data
           .dispatch('core/edit-post')
           .openGeneralSidebar('edit-post/document');
-        // Clear content "dirty" state.
-        data.dispatch('core/editor').savePost();
 
-        return true;
+        // Clear content "dirty" state.
+        if (!formSubmitted) {
+          (async () => {
+            await data.dispatch('core/editor').savePost();
+            formSubmitted = true;
+            // Submit again to save content on Drupal.
+            element.form.submit();
+          })();
+
+          // savePost() is async so we must cancel form submission
+          // to avoid to "changes not saved" alert.
+          e.preventDefault();
+          e.stopPropagation();
+        }
       });
 
       return true;

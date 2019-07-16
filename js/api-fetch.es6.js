@@ -69,15 +69,22 @@
       method: 'PUT',
       regex: /\/wp\/v2\/page\/(\d*)/g,
       process(matches, data) {
+        const date = (new Date()).toISOString();
+
         window.wp.node = {
           pathType: 'save-post',
           id: 1,
           type: 'page',
+          date,
+          date_gmt: date,
           title: {
             raw: document.title,
+            rendered: document.title,
           },
+          status: 'pending',
           content: {
             raw: data,
+            rendered: data,
           },
         };
 
