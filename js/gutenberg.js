@@ -287,8 +287,8 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
         isRTL: false,
         autosaveInterval: 10000 };
 
-      var colors = drupalSettings.gutenberg && drupalSettings.gutenberg['theme-support'] && drupalSettings.gutenberg['theme-support'].colors ? _extends({}, drupalSettings.gutenberg['theme-support'].colors) : null;
-      var fontSizes = drupalSettings.gutenberg && drupalSettings.gutenberg['theme-support'] && drupalSettings.gutenberg['theme-support'].fontSizes ? _extends({}, drupalSettings.gutenberg['theme-support'].fontSizes) : null;
+      var colors = drupalSettings.gutenberg && drupalSettings.gutenberg['theme-support'] && drupalSettings.gutenberg['theme-support'].colors ? [].concat(_toConsumableArray(drupalSettings.gutenberg['theme-support'].colors)) : null;
+      var fontSizes = drupalSettings.gutenberg && drupalSettings.gutenberg['theme-support'] && drupalSettings.gutenberg['theme-support'].fontSizes ? [].concat(_toConsumableArray(drupalSettings.gutenberg['theme-support'].fontSizes)) : null;
 
       if (colors) {
         editorSettings.colors = colors;
