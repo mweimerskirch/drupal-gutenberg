@@ -273,7 +273,10 @@
             await data.dispatch('core/editor').savePost();
             formSubmitted = true;
             // Submit again to save content on Drupal.
-            element.form.submit();
+            // We need to submit the form via button click.
+            // Drupal's form submit handler needs it.
+            // TODO: Could we submit and passing the button reference to formState?
+            $source.click();
           })();
 
           // savePost() is async so we must cancel form submission
