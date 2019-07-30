@@ -1,0 +1,8 @@
+{% for color in colors %}
+  .has-{{ color.name|clean_class }}-color {
+    color: {{ color.color }};
+  }
+  .has-{{ color.name|clean_class }}-background-color {
+    background-color: {{ color.color }};
+  }
+{% endfor %}
