@@ -156,6 +156,10 @@ function gutenberg_form_alter(&$form, FormStateInterface $form_state, $form_id) 
 
     $form['#attached']['library'][] = 'gutenberg/admin';
     $form['actions']['submit']['#submit'][] = '_gutenberg_node_form_submit';
+
+    if (isset($form['actions']['save_continue']['#submit'])) {
+      $form['actions']['save_continue']['#submit'][] = '_gutenberg_node_form_submit';
+    }
   }
 }
 
