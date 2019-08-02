@@ -180,6 +180,7 @@ block-editor:
     - gutenberg/compose
     - gutenberg/core-data
     - gutenberg/data
+    - gutenberg/deprecated
     - gutenberg/dom
     - gutenberg/element
     - gutenberg/hooks
@@ -405,6 +406,7 @@ edit-widgets:
     - gutenberg/hooks
     - gutenberg/i18n
     - gutenberg/media-utils
+    - gutenberg/notices
     - gutenberg/polyfill
 editor:
   js:
@@ -431,6 +433,7 @@ editor:
     - gutenberg/hooks
     - gutenberg/html-entities
     - gutenberg/i18n
+    - gutenberg/is-shallow-equal
     - gutenberg/keycodes
     - gutenberg/media-utils
     - gutenberg/notices
@@ -471,6 +474,7 @@ format-library:
     - gutenberg/components
     - gutenberg/dom
     - gutenberg/element
+    - gutenberg/html-entities
     - gutenberg/i18n
     - gutenberg/keycodes
     - gutenberg/polyfill
@@ -598,9 +602,12 @@ rich-text:
     - gutenberg/lodash
     - gutenberg/compose
     - gutenberg/data
+    - gutenberg/dom
     - gutenberg/element
     - gutenberg/escape-html
     - gutenberg/hooks
+    - gutenberg/is-shallow-equal
+    - gutenberg/keycodes
     - gutenberg/polyfill
 server-side-render:
   js:
