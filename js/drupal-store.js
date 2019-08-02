@@ -79,7 +79,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                     block = _context.sent;
 
                     dispatch('drupal').setBlock(item, block);
-                    return _context.abrupt('return', block);
+                    return _context.abrupt('return', {
+                      type: 'GET_BLOCK',
+                      item: item,
+                      block: block
+                    });
 
                   case 8:
                   case 'end':

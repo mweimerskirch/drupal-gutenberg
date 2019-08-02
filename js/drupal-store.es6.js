@@ -49,28 +49,12 @@
           `);
           const block = await response.json();
           dispatch('drupal').setBlock(item, block);
-          return block;
+          return {
+            type: 'GET_BLOCK',
+            item,
+            block,
+          };
         },
-        // getBlock(item) {
-        //   return new Promise((resolve, reject) => {
-        //     fetch(`${drupalSettings.path.baseUrl}editor/blocks/load/${item}`)
-        //       .then(response => {
-        //         response
-        //           .json()
-        //           .then(block => {
-        //             console.log(item, block);
-        //             dispatch('drupal').setBlock(item, block);
-        //             resolve(block);
-        //           })
-        //           .catch(err => {
-        //             reject(err);
-        //           });
-        //       })
-        //       .catch(err => {
-        //         reject(err);
-        //       });
-        //   });
-        // },
       },
     });
   }
