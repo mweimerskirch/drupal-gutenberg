@@ -25,6 +25,10 @@
           .click();
       });
 
+      $('.view-reusable-blocks .views-row input[type="checkbox"]').click(e => {
+        e.stopPropagation();
+      });
+
       $('input[name*="allowed_blocks_"]:not([value*="/all"])').click(ev => {
         const category = $(ev.currentTarget)
           .val()

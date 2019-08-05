@@ -16,6 +16,10 @@
         $(e.currentTarget).find('input[type="checkbox"]').click();
       });
 
+      $('.view-reusable-blocks .views-row input[type="checkbox"]').click(function (e) {
+        e.stopPropagation();
+      });
+
       $('input[name*="allowed_blocks_"]:not([value*="/all"])').click(function (ev) {
         var category = $(ev.currentTarget).val().split('/')[0];
         var checked = $(ev.currentTarget).is(':checked');
