@@ -2,8 +2,12 @@
 
 namespace Drupal\gutenberg\Plugin\Filter;
 
+use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\Core\Render\RendererInterface;
 use Drupal\filter\FilterProcessResult;
 use Drupal\filter\Plugin\FilterBase;
+use Drupal\gutenberg\BlocksRendererHelper;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * @Filter(
@@ -15,7 +19,43 @@ use Drupal\filter\Plugin\FilterBase;
  *   type = Drupal\filter\Plugin\FilterInterface::TYPE_MARKUP_LANGUAGE,
  * )
  */
-class BlockFilter extends FilterBase {
+class BlockFilter extends FilterBase implements ContainerFactoryPluginInterface {
+
+  /**
+   * Drupal\gutenberg\BlocksRendererHelper instance.
+   *
+   * @var \Drupal\gutenberg\BlocksRendererHelper
+   */
+  protected $blocksRenderer;
+
+  /**
+   * Drupal\Core\Render\RendererInterface instance.
+   *
+   * @var \Drupal\Core\Render\RendererInterface
+   */
+  protected $renderer;
+
+  /**
+   * {@inheritdoc}
+   */
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, BlocksRendererHelper $blocks_renderer, RendererInterface $renderer) {
+    parent::__construct($configuration, $plugin_id, $plugin_definition);
+    $this->blocksRenderer = $blocks_renderer;
+    $this->renderer = $renderer;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    return new static(
+      $configuration,
+      $plugin_id,
+      $plugin_definition,
+      $container->get('gutenberg.blocks_renderer'),
+      $container->get('renderer')
+    );
+  }
 
   /**
    * Process each URL.
@@ -38,30 +78,38 @@ class BlockFilter extends FilterBase {
     $comment = $match[0];
     $attributes = json_decode($match[1]);
     $plugin_id = $attributes->blockId;
-    $block_manager = \Drupal::service('plugin.manager.block');
     // You can hard code configuration or you load from settings.
     $config = [];
-    $plugin_block = $block_manager->createInstance($plugin_id, $config);
-    // Some blocks might implement access check.
-    $access_result = $plugin_block->access(\Drupal::currentUser());
-    // Return empty render array if user doesn't have access.
-    // $access_result can be boolean or an AccessResult class.
-    if (is_object($access_result) && $access_result->isForbidden() || is_bool($access_result) && !$access_result) {
-      // You might need to add some cache tags/contexts.
-      return '<h2>Access required.</h2>';
+    $plugin_block = $this->blocksRenderer->getBlockFromPluginId($plugin_id, $config);
+
+    $content = '';
+
+    if (!empty($plugin_block)) {
+      if ($this->blocksRenderer->isAccessForbidden($plugin_block)) {
+        return [
+          '#type' => 'html_tag',
+          '#tag' => 'h2',
+          '#value' => $this->t('Access required'),
+        ];
+      }
+
+      $content = $this->blocksRenderer->getRenderFromBlockPlugin($plugin_block);
     }
-    $render = $plugin_block->build();
-    // $render['#printed'] = TRUE;
-    $content = \Drupal::service('renderer')->render($render);
 
     // Render the css class if available.
-    $prefix = $suffix = '';
     if (!empty($attributes->className)) {
-      $prefix = '<div class="' . $attributes->className . '">';
-      $suffix = '</div>';
+      $prefixed = [
+        '#type' => 'html_tag',
+        '#tag' => 'div',
+        '#value' => $content,
+        '#attributes' => [
+          'class' => [$attributes->className],
+        ],
+      ];
+      $content = $this->renderer->render($prefixed);
     }
 
-    return $comment . $prefix . $content . $suffix;
+    return $comment . $content;
   }
 
   /**

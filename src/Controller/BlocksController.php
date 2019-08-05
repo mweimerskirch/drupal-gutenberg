@@ -2,7 +2,11 @@
 
 namespace Drupal\gutenberg\Controller;
 
+use Drupal\Core\Block\BlockManagerInterface;
+use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\gutenberg\BlocksRendererHelper;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -10,6 +14,57 @@ use Symfony\Component\HttpFoundation\Request;
  * Returns responses for our blocks routes.
  */
 class BlocksController extends ControllerBase {
+
+  /**
+   * Drupal\Core\Block\BlockManagerInterface instance.
+   *
+   * @var \Drupal\Core\Block\BlockManagerInterface
+   */
+  protected $blockManager;
+
+  /**
+   * Drupal\Core\Config\ConfigFactoryInterface instance.
+   *
+   * @var \Drupal\Core\Config\ConfigFactoryInterface
+   */
+  protected $configFactory;
+
+  /**
+   * Drupal\gutenberg\BlocksRendererHelper instance.
+   *
+   * @var \Drupal\gutenberg\BlocksRendererHelper
+   */
+  protected $blocksRenderer;
+
+  /**
+   * BlocksController constructor.
+   *
+   * @param \Drupal\Core\Block\BlockManagerInterface $block_manager
+   *   Block manager service.
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
+   *   Config factory service.
+   * @param \Drupal\gutenberg\BlocksRendererHelper $blocks_renderer
+   *   Blocks renderer helper service.
+   */
+  public function __construct(
+    BlockManagerInterface $block_manager,
+    ConfigFactoryInterface $config_factory,
+    BlocksRendererHelper $blocks_renderer) {
+    $this->blockManager = $block_manager;
+    $this->configFactory = $config_factory;
+    $this->blocksRenderer = $blocks_renderer;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('plugin.manager.block'),
+      $container->get('config.factory'),
+      $container->get('gutenberg.blocks_renderer')
+    );
+  }
 
   /**
    * Returns JSON representing the loaded blocks.
@@ -45,37 +100,33 @@ class BlocksController extends ControllerBase {
   /**
    * Returns JSON representing the loaded blocks.
    *
-   * @param \Symfony\Component\HttpFoundation\Request $request
-   *   The request.
    * @param string $plugin_id
    *   Plugin ID.
    *
    * @return \Symfony\Component\HttpFoundation\JsonResponse
    *   The JSON response.
    */
-  public function loadById(Request $request, $plugin_id) {
-    $block_manager = \Drupal::service('plugin.manager.block');
+  public function loadById($plugin_id) {
+    /* TODO: We can get a specific instance/derivative of block and load it's config */
     $config = [];
-    $plugin_block = $block_manager->createInstance($plugin_id, $config);
+    $plugin_block = $this->blocksRenderer->getBlockFromPluginId($plugin_id, $config);
 
-    // Some blocks might implement access check.
-    $access_result = $plugin_block->access(\Drupal::currentUser());
+    $content = '';
 
-    // Return empty render array if user doesn't have access.
-    // $access_result can be boolean or an AccessResult class.
-    if (is_object($access_result) && $access_result->isForbidden() || is_bool($access_result) && !$access_result) {
-      // You might need to add some cache tags/contexts.
-      return new JsonResponse(['html' => 'No access.']);
+    if (!empty($plugin_block)) {
+      if ($this->blocksRenderer->isAccessForbidden($plugin_block)) {
+        // You might need to add some cache tags/contexts.
+        return new JsonResponse(['html' => $this->t('No access.')]);
+      }
+
+      $content = $this->blocksRenderer->getRenderFromBlockPlugin($plugin_block);
     }
-
-    $render = $plugin_block->build();
-    $content = \Drupal::service('renderer')->render($render);
 
     // If the block is a view with contexts defined, it may
     // not render on the editor because of, for example, the
     // node path. Let's just write some warning if no content.
     if ($content === '') {
-      $content = t('Not able to render the content on editor possibiliy due to path restrictions.');
+      $content = $this->t('Not able to render the content on editor possibly due to path restrictions.');
     }
 
     return new JsonResponse(['html' => $content]);
