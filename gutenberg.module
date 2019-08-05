@@ -7,6 +7,7 @@
 
 use Drupal\Core\Entity\EntityFormInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\node\NodeInterface;
 use Drupal\views\ViewExecutable;
 use Symfony\Component\Yaml\Yaml;
@@ -211,7 +212,7 @@ function gutenberg_form_node_form_alter(&$form, FormStateInterface $form_state) 
   }
 
   $module_settings = _gutenberg_get_all_modules_settings();
-  foreach ($module_settings as $provider => $settings) {
+  foreach ($module_settings as $settings) {
     if (isset($settings['libraries-edit'])) {
       foreach($settings['libraries-edit'] as $library) {
         $form['#attached']['library'][] = $library;
@@ -221,7 +222,7 @@ function gutenberg_form_node_form_alter(&$form, FormStateInterface $form_state) 
 
   $theme_settings = _gutenberg_get_default_theme_settings();
   if (isset($theme_settings['libraries-edit'])) {
-    foreach ($theme_settings['libraries-edit'] as $key => $value) {
+    foreach ($theme_settings['libraries-edit'] as $value) {
       $form['#attached']['library'][] = $value;
     }
   }
@@ -237,7 +238,7 @@ function gutenberg_form_node_form_alter(&$form, FormStateInterface $form_state) 
       'name' => t('Original'),
     ],
   ];
-  foreach ($styles as $key => $style) {
+  foreach ($styles as $style) {
     $sizes[] = [
       'slug' => $style->getName(),
       'name' => $style->label(),
@@ -251,8 +252,8 @@ function gutenberg_form_node_form_alter(&$form, FormStateInterface $form_state) 
   // on first text field found.
   $field_names = array_keys($node->getFields());
 
-  foreach ($field_names as $key => $value) {
-    $field = $node
+  foreach ($field_names as $value) {
+    $node
       ->getFieldDefinition($value)
       ->getFieldStorageDefinition()
       ->getPropertyDefinitions();
@@ -308,7 +309,6 @@ function gutenberg_form_node_form_alter(&$form, FormStateInterface $form_state) 
   //   '#weight' => 99,
   //   '#group' => 'advanced',
   // ];
-
   $form['metabox_fields'] = [
     '#type' => 'details',
     '#access' => TRUE,
@@ -352,7 +352,7 @@ function gutenberg_form_node_form_alter(&$form, FormStateInterface $form_state) 
    */
   $metabox_has_fields = FALSE;
   $fields_with_details = [];
-  foreach ($field_names as $key => $value) {
+  foreach ($field_names as $value) {
     if (
       array_key_exists($value, $form)
       && $value !== $text_fields[0]
@@ -404,8 +404,7 @@ function gutenberg_form_node_form_after_build(array $element, FormStateInterface
  */
 function gutenberg_form_node_form_details_after_build(array $element, FormStateInterface $form_state) {
   // gutenberg_handle_messages($element);
-
-  foreach ($element['#fields_with_details'] as $key => $value) {
+  foreach ($element['#fields_with_details'] as $value) {
     $element['#attached']['drupalSettings']['gutenberg']['metaboxes'][] = $element[$value]['widget'][0]['#id'];
   }
   return $element;
@@ -428,7 +427,7 @@ function gutenberg_preprocess_node(&$variables) {
   $variables['#attached']['library'][] = 'gutenberg/blocks-view';
 
   $module_settings = _gutenberg_get_all_modules_settings();
-  foreach ($module_settings as $provider => $settings) {
+  foreach ($module_settings as $settings) {
     if (isset($settings['libraries-view'])) {
       foreach($settings['libraries-view'] as $library) {
         $variables['#attached']['library'][] = $library;
@@ -716,4 +715,29 @@ function gutenberg_library_info_alter(&$libraries, $extension) {
       $libraries['blocks-view']['css']['base'][$file] = [];
     }
   }
+}
+
+/**
+ * Implements hook_help().
+ */
+function gutenberg_help($route_name, RouteMatchInterface $route_match) {
+  if ($route_name === 'help.page.gutenberg') {
+    $readme_file = file_exists(__DIR__ . '/README.md') ? __DIR__ . '/README.md' : __DIR__ . '/README.txt';
+    if (!file_exists($readme_file)) {
+      return NULL;
+    }
+    $text = file_get_contents($readme_file);
+    if (!\Drupal::moduleHandler()->moduleExists('markdown')) {
+      return '<pre>' . $text . '</pre>';
+    }
+    else {
+      // Use the Markdown filter to render the README.
+      $filter_manager = \Drupal::service('plugin.manager.filter');
+      $settings = \Drupal::configFactory()->get('markdown.settings')->getRawData();
+      $config = ['settings' => $settings];
+      $filter = $filter_manager->createInstance('markdown', $config);
+      return $filter->process($text, 'en');
+    }
+  }
+  return NULL;
 }
