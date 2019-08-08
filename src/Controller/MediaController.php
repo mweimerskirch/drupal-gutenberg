@@ -67,6 +67,20 @@ class MediaController extends ControllerBase {
 
     $data = $this->_getFileData($file->id());
 
+    if (!isset($data['title']['raw'])) {
+      $data['title'] = [
+        'raw' => $data['title'],
+        'rendered' => $data['title'],
+      ];
+    }
+
+    if (!isset($data['caption']['raw'])) {
+      $data['caption'] = [
+        'raw' => $data['caption'],
+        'rendered' => $data['caption'],
+      ];
+    }
+
     $result = [
       'id' => (Integer) $file->id(),
       'link' => $media_src,
@@ -79,10 +93,8 @@ class MediaController extends ControllerBase {
       'type' => 'attachment',
       'date_gmt' => date('c', $file->getCreatedTime()),
       'date' => date('c', $file->getCreatedTime()),
-      'title' => [
-        'raw' => $data['title'],
-        'rendered' => $data['title'],
-      ],
+      'title' => $data['title'],
+      'caption' => $data['caption'],
       'alt' => $data['alt_text'], // prop used on inline-image
       'alt_text' => $data['alt_text'],
       'width' => $image->getWidth(), // prop used on inline-image
@@ -103,12 +115,16 @@ class MediaController extends ControllerBase {
       ],
     ];
 
-    if (isset($data['caption'])) {
-      $result['caption'] = [
-        'raw' => $data['caption'],
-        'rendered' => $data['caption'],
-      ];
+    if (!isset($data['caption'])) {
+      unset($result['caption']);
     }
+
+    // if (isset($data['caption'])) {
+    //   $result['caption'] = [
+    //     'raw' => $data['caption'],
+    //     'rendered' => $data['caption'],
+    //   ];
+    // }
 
     return $result;
   }

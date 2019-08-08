@@ -1,6 +1,5 @@
 ((wp, Drupal, DrupalGutenberg, drupalSettings) => {
-  const { data, components, element, editor } = wp;
-  const { select } = data;
+  const { components, element, editor } = wp;
   const { Component, Fragment } = element;
   const { MediaBrowserDetails } = DrupalGutenberg.Components;
   const { Button, FormFileUpload } = components;
@@ -10,6 +9,7 @@
 
   class MediaBrowser extends Component {
     constructor() {
+      // eslint-disable-next-line prefer-rest-params
       super(...arguments);
       this.state = {
         data: [],
@@ -65,22 +65,19 @@
     }
 
     uploadFromFiles(event) {
-      const { multiple } = this.props;
-      this.addFiles( event.target.files );
+      this.addFiles(event.target.files);
     }
 
-    addFiles( files ) {
+    addFiles(files) {
       const { allowedTypes } = this.props;
-      const { data } = this.state;
 
-      mediaUpload( {
-        allowedTypes: allowedTypes,
+      mediaUpload({
+        allowedTypes,
         filesList: files,
-        onFileChange: ( files ) => {
+        onFileChange: () => {
           this.getMediaFiles();
         },
-        // onError: noticeOperations.createErrorNotice,
-      } );
+      });
     }
 
     async selectMedia() {
@@ -89,22 +86,36 @@
       const medias = data.filter(item => selected[item.id]);
 
       medias.map(async media => {
-        if (!media.title) {
-          media.title = { raw: '' };
+        const title = { raw: null, rendered: null };
+        const caption = { raw: null, rendered: null };
+
+        if (typeof media.title === 'string') {
+          title.raw = media.title;
+        } else if (media.title && media.title.raw) {
+          title.raw = media.title.raw;
+        } else if (!media.title.raw) {
+          media.title = '';
         }
 
-        if (!media.caption) {
-          media.caption = { raw: '' };
+        if (typeof media.caption === 'string') {
+          caption.raw = media.caption;
+        } else if (media.caption && media.caption.raw) {
+          caption.raw = media.caption.raw;
+        } else if (!media.caption.raw) {
+          media.caption = '';
         }
 
-        const result = await fetch(
+        // eslint-disable-next-line camelcase
+        const { alt_text } = media;
+
+        await fetch(
           `${drupalSettings.path.baseUrl}editor/media/update_data/${media.id}`,
           {
             method: 'post',
             body: JSON.stringify({
-              title: media.title.raw || media.title,
-              caption: media.caption.raw || media.caption,
-              alt_text: media.alt || media.alt_text || '',
+              title: title.raw,
+              caption: caption.raw,
+              alt_text,
               // title: media.title.raw || media.title,
               // caption: media.caption.raw || media.caption,
               // alt_text: media.alt || media.alt_text,
@@ -112,6 +123,8 @@
           },
         );
       });
+
+      console.log(medias);
 
       onSelect(medias);
     }
@@ -192,14 +205,18 @@
                       item.title.raw.toLowerCase().includes(search)),
                 )
                 .map((media, index) => (
+                  // eslint-disable-next-line jsx-a11y/click-events-have-key-events
                   <li
                     tabIndex={index}
+                    // eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role
                     role="checkbox"
                     onClick={ev => this.toggleMedia(ev, media.id)}
                     aria-label={media.filename}
                     aria-checked="true"
                     data-id={media.id}
-                    className={`attachment save-ready ${active === media.id ? 'details' : ''} ${selected[media.id] ? 'selected' : ''}`}
+                    className={`attachment save-ready ${
+                      active === media.id ? 'details' : ''
+                    } ${selected[media.id] ? 'selected' : ''}`}
                   >
                     <div
                       className={[

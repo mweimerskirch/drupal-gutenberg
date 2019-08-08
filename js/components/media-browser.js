@@ -20,11 +20,9 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 (function (wp, Drupal, DrupalGutenberg, drupalSettings) {
-  var data = wp.data,
-      components = wp.components,
+  var components = wp.components,
       element = wp.element,
       editor = wp.editor;
-  var select = data.select;
   var Component = element.Component,
       Fragment = element.Fragment;
   var MediaBrowserDetails = DrupalGutenberg.Components.MediaBrowserDetails;
@@ -100,8 +98,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
     }, {
       key: 'uploadFromFiles',
       value: function uploadFromFiles(event) {
-        var multiple = this.props.multiple;
-
         this.addFiles(event.target.files);
       }
     }, {
@@ -110,13 +106,12 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
         var _this3 = this;
 
         var allowedTypes = this.props.allowedTypes;
-        var data = this.state.data;
 
 
         mediaUpload({
           allowedTypes: allowedTypes,
           filesList: files,
-          onFileChange: function onFileChange(files) {
+          onFileChange: function onFileChange() {
             _this3.getMediaFiles();
           }
         });
@@ -142,33 +137,43 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
                   medias.map(function () {
                     var _ref3 = _asyncToGenerator(regeneratorRuntime.mark(function _callee(media) {
-                      var result;
+                      var title, caption, alt_text;
                       return regeneratorRuntime.wrap(function _callee$(_context) {
                         while (1) {
                           switch (_context.prev = _context.next) {
                             case 0:
-                              if (!media.title) {
-                                media.title = { raw: '' };
+                              title = { raw: null, rendered: null };
+                              caption = { raw: null, rendered: null };
+
+
+                              if (typeof media.title === 'string') {
+                                title.raw = media.title;
+                              } else if (media.title && media.title.raw) {
+                                title.raw = media.title.raw;
+                              } else if (!media.title.raw) {
+                                media.title = '';
                               }
 
-                              if (!media.caption) {
-                                media.caption = { raw: '' };
+                              if (typeof media.caption === 'string') {
+                                caption.raw = media.caption;
+                              } else if (media.caption && media.caption.raw) {
+                                caption.raw = media.caption.raw;
+                              } else if (!media.caption.raw) {
+                                media.caption = '';
                               }
 
-                              _context.next = 4;
+                              alt_text = media.alt_text;
+                              _context.next = 7;
                               return fetch(drupalSettings.path.baseUrl + 'editor/media/update_data/' + media.id, {
                                 method: 'post',
                                 body: JSON.stringify({
-                                  title: media.title.raw || media.title,
-                                  caption: media.caption.raw || media.caption,
-                                  alt_text: media.alt || media.alt_text || ''
+                                  title: title.raw,
+                                  caption: caption.raw,
+                                  alt_text: alt_text
                                 })
                               });
 
-                            case 4:
-                              result = _context.sent;
-
-                            case 5:
+                            case 7:
                             case 'end':
                               return _context.stop();
                           }
@@ -181,9 +186,11 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                     };
                   }());
 
+                  console.log(medias);
+
                   onSelect(medias);
 
-                case 5:
+                case 6:
                 case 'end':
                   return _context2.stop();
               }
@@ -301,6 +308,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                   'li',
                   {
                     tabIndex: index,
+
                     role: 'checkbox',
                     onClick: function onClick(ev) {
                       return _this5.toggleMedia(ev, media.id);

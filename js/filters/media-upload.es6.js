@@ -7,6 +7,7 @@
 
   class MediaUpload extends Component {
     constructor() {
+      // eslint-disable-next-line prefer-rest-params
       super(...arguments);
       this.onSelect = this.onSelect.bind(this);
       this.onClose = this.onClose.bind(this);
