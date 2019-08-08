@@ -462,6 +462,28 @@
       },
     },
 
+    'search-content': {
+      method: 'GET',
+      regex: /\/wp\/v2\/search\?(.*)/g,
+      process(matches) {
+        return new Promise((resolve, reject) => {
+          $.ajax({
+            method: 'GET',
+            url: `${drupalSettings.path.baseUrl}editor/search?${matches[1]}`,
+            accepts: {
+              json: 'application/json, text/javascript, */*; q=0.01',
+            },
+          })
+            .done(result => {
+              resolve(result);
+            })
+            .fail(err => {
+              reject(err);
+            });
+        });
+      },
+    },
+
     'load-autosaves': {
       method: 'GET',
       regex: /\/wp\/v2\/(.*)\/autosaves\?(.*)/g,

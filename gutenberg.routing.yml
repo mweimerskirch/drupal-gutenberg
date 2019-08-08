@@ -90,3 +90,10 @@ gutenberg.oembed:
   methods: 'GET'
   requirements:
     _permission: 'access content'
+gutenberg.content.search:
+  path: '/editor/search'
+  defaults:
+    _controller: '\Drupal\gutenberg\Controller\SearchController::search'
+  methods: 'GET'
+  requirements:
+    _permission: 'access content'

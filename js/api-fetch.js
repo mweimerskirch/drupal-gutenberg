@@ -447,6 +447,26 @@
       }
     },
 
+    'search-content': {
+      method: 'GET',
+      regex: /\/wp\/v2\/search\?(.*)/g,
+      process: function process(matches) {
+        return new Promise(function (resolve, reject) {
+          $.ajax({
+            method: 'GET',
+            url: drupalSettings.path.baseUrl + 'editor/search?' + matches[1],
+            accepts: {
+              json: 'application/json, text/javascript, */*; q=0.01'
+            }
+          }).done(function (result) {
+            resolve(result);
+          }).fail(function (err) {
+            reject(err);
+          });
+        });
+      }
+    },
+
     'load-autosaves': {
       method: 'GET',
       regex: /\/wp\/v2\/(.*)\/autosaves\?(.*)/g,
