@@ -12,13 +12,12 @@
 }
 
 .ui-dialog .form-actions .buttons {
-  float: right;
-  text-align: right;
-  width: 50%;
+  display: flex;
+  justify-content: flex-end;
 }
 
-.ui-dialog .form-actions .buttons .components-form-file-upload {
-  display: inline-block;
+.ui-dialog .form-actions .buttons > * {
+  margin: 0 5px;
 }
 
 .media-browser {

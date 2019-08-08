@@ -11,12 +11,11 @@
     }
 
     .buttons {
-      float: right;
-      text-align: right;
-      width: 50%;
+      display: flex;
+      justify-content: flex-end;
 
-      .components-form-file-upload {
-        display: inline-block;
+      & > * {
+        margin: 0 5px;
       }
     }
   }
