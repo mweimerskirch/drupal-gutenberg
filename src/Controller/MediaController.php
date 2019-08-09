@@ -69,15 +69,15 @@ class MediaController extends ControllerBase {
 
     if (!isset($data['title']['raw'])) {
       $data['title'] = [
-        'raw' => $data['title'],
-        'rendered' => $data['title'],
+        'raw' => is_null($data['title']) ? '' : $data['title'],
+        'rendered' => is_null($data['title']) ? '' : $data['title'],
       ];
     }
 
     if (!isset($data['caption']['raw'])) {
       $data['caption'] = [
-        'raw' => $data['caption'],
-        'rendered' => $data['caption'],
+        'raw' => is_null($data['caption']) ? '' : $data['caption'],
+        'rendered' => is_null($data['caption']) ? '' : $data['caption'],
       ];
     }
 
