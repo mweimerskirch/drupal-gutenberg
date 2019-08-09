@@ -79,3 +79,11 @@ body .gutenberg__editor .edit-post-layout .edit-post-sidebar {
   opacity: 0.5;
   pointer-events: none;
 }
+
+.edit-post-more-menu__content {
+  .components-dropdown-menu__menu {
+    .components-menu-group:last-child {
+      display: none;
+    }
+  }
+}

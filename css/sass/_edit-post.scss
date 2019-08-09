@@ -23,3 +23,11 @@
     margin-left: 0px;
   }
 }
+
+.edit-post-more-menu__content {
+  .components-dropdown-menu__menu {
+    .components-menu-group:last-child {
+      display: none;
+    }
+  }
+}

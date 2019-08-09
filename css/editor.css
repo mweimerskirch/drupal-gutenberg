@@ -292,6 +292,10 @@ body .gutenberg__editor .edit-post-layout .edit-post-header .gutenberg-header-se
   }
 }
 
+.edit-post-more-menu__content .components-dropdown-menu__menu .components-menu-group:last-child {
+  display: none;
+}
+
 .edit-post-sidebar {
   background: #ececec !important;
 }
