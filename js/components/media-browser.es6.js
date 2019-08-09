@@ -93,6 +93,7 @@
           title.raw = media.title;
         } else if (media.title && media.title.raw) {
           title.raw = media.title.raw;
+          media.title = media.title.raw;
         } else if (!media.title.raw) {
           media.title = '';
         }
@@ -101,6 +102,7 @@
           caption.raw = media.caption;
         } else if (media.caption && media.caption.raw) {
           caption.raw = media.caption.raw;
+          media.caption = media.caption.raw;
         } else if (!media.caption.raw) {
           media.caption = '';
         }
