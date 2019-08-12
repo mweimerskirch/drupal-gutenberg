@@ -3,15 +3,45 @@
 namespace Drupal\gutenberg\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Drupal\editor\Entity\Editor;
 use Drupal\file\Entity\File;
 use Drupal\image\Entity\ImageStyle;
+use Drupal\Core\File\FileSystemInterface;
+
 /**
  * Returns responses for our image routes.
  */
 class MediaController extends ControllerBase {
+
+  /**
+   * The file system.
+   *
+   * @var \Drupal\Core\File\FileSystemInterface
+   */
+  protected $fileSystem;
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('file_system')
+    );
+  }
+
+  /**
+   * Constructs a MediaController object.
+   *
+   * @param \Drupal\Core\File\FileSystemInterface $file_system
+   *   The file system.
+   */
+  public function __construct(FileSystemInterface $file_system) {
+    $this->fileSystem = $file_system;
+  }
+
   private function _getImageStyles() {
     $styles = ImageStyle::loadMultiple();
     return $styles;
@@ -148,7 +178,7 @@ class MediaController extends ControllerBase {
 
     // TODO: File size and image dimensions validations.
     //      Better error handling?
-    if (file_prepare_directory($directory, FILE_CREATE_DIRECTORY)) {
+    if ($this->fileSystem->prepareDirectory($directory, FileSystemInterface::CREATE_DIRECTORY)) {
       $file = file_save_data($data, "{$directory}/{$filename}", FILE_EXISTS_RENAME);
       $file->setTemporary();
       $file->save();
