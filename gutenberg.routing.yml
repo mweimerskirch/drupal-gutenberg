@@ -4,8 +4,8 @@ gutenberg.media.upload:
     _controller: '\Drupal\gutenberg\Controller\MediaController::upload'
   requirements:
     _entity_access: 'editor.use'
-    _permission: 'gutenberg administer'
-    _method: 'POST's
+    _permission: 'access content'
+    _method: 'POST'
 gutenberg.media.load:
   path: '/editor/media/load/{file}'
   defaults:
@@ -14,21 +14,21 @@ gutenberg.media.load:
       file:
         type: entity:file
   requirements:
-    _permission: 'gutenberg administer'
+    _permission: 'access content'
     _method: 'GET'
 gutenberg.media.search:
   path: '/editor/media/search/{type}/{search}'
   defaults:
     _controller: '\Drupal\gutenberg\Controller\MediaController::search'
   requirements:
-    _permission: 'gutenberg administer'
+    _permission: 'access content'
     _method: 'GET'
 gutenberg.media.update_data:
   path: '/editor/media/update_data/{fid}'
   defaults:
     _controller: '\Drupal\gutenberg\Controller\MediaController::updateData'
   requirements:
-    _permission: 'gutenberg administer'
+    _permission: 'access content'
     _method: 'POST'
 gutenberg.blocks.load:
   path: '/editor/blocks/load_by_type/{content_type}'
@@ -36,7 +36,7 @@ gutenberg.blocks.load:
     _controller: '\Drupal\gutenberg\Controller\BlocksController::loadByType'
     content_type: 'none'
   requirements:
-    _permission: 'gutenberg administer'
+    _permission: 'access content'
     _method: 'GET'
 gutenberg.blocks.load_single:
   path: '/editor/blocks/load/{plugin_id}'
@@ -46,7 +46,7 @@ gutenberg.blocks.load_single:
     #   block:
     #     type: entity:block
   requirements:
-    _permission: 'gutenberg administer'
+    _permission: 'access content'
     _method: 'GET'
 gutenberg.reusable_blocks.create:
   path: '/editor/reusable-blocks'
@@ -54,46 +54,46 @@ gutenberg.reusable_blocks.create:
     _controller: '\Drupal\gutenberg\Controller\ReusableBlocksController::save'
   methods: 'POST'
   requirements:
-    _permission: 'gutenberg administer'
+    _permission: 'access content'
 gutenberg.reusable_blocks.update:
   path: '/editor/reusable-blocks/{block_id}'
   defaults:
     _controller: '\Drupal\gutenberg\Controller\ReusableBlocksController::save'
   methods: 'PUT'
   requirements:
-    _permission: 'gutenberg administer'
+    _permission: 'access content'
 gutenberg.reusable_blocks.delete:
   path: '/editor/reusable-blocks/{block_id}'
   defaults:
     _controller: '\Drupal\gutenberg\Controller\ReusableBlocksController::delete'
   methods: 'DELETE'
   requirements:
-    _permission: 'gutenberg administer'
+    _permission: 'access content'
 gutenberg.reusable_blocks.load:
   path: '/editor/reusable-blocks'
   defaults:
     _controller: '\Drupal\gutenberg\Controller\ReusableBlocksController::load'
   methods: 'GET'
   requirements:
-    _permission: 'gutenberg administer'
+    _permission: 'access content'
 gutenberg.reusable_blocks.load_single:
   path: '/editor/reusable-blocks/{block_id}'
   defaults:
     _controller: '\Drupal\gutenberg\Controller\ReusableBlocksController::load'
   methods: 'GET'
   requirements:
-    _permission: 'gutenberg administer'
+    _permission: 'access content'
 gutenberg.oembed:
   path: '/editor/oembed'
   defaults:
     _controller: '\Drupal\gutenberg\Controller\OEmbedProxyUrlController::request'
   methods: 'GET'
   requirements:
-    _permission: 'gutenberg administer'
+    _permission: 'access content'
 gutenberg.content.search:
   path: '/editor/search'
   defaults:
     _controller: '\Drupal\gutenberg\Controller\SearchController::search'
   methods: 'GET'
   requirements:
-    _permission: 'gutenberg administer'
+    _permission: 'access content'
