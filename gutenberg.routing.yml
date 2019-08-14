@@ -5,7 +5,7 @@ gutenberg.media.upload:
   requirements:
     _entity_access: 'editor.use'
     _permission: 'gutenberg administer'
-    _method: 'POST'
+    _method: 'POST's
 gutenberg.media.load:
   path: '/editor/media/load/{file}'
   defaults:
