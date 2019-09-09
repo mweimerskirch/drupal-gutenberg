@@ -11,6 +11,24 @@
  */
 
 /**
+ * Perform alterations to a gutenberg's media (file entity) search query.
+ *
+ * @param \Symfony\Component\HttpFoundation\Request $request
+ *   The request.
+ * @param string $type
+ *   MIME type search string.
+ * @param string $search
+ *   Filename search string.
+ * @param \Drupal\Core\Entity\Query\Sql\Query $query
+ *   Entity query object.
+ */
+function hook_gutenberg_media_search_query_alter(Symfony\Component\HttpFoundation\Request $request, string $type = NULL, string $search = NULL, Drupal\Core\Entity\Query\Sql\Query $query) {
+  if ($type == 'image') {
+    $query->condition('uri', 'public://avatars/%', 'NOT LIKE');
+  }
+}
+
+/**
  * ☠️ DEPRECATED ☠️
  * You can use Drupal libraries. Check gutenberg.libraries.yml for an example.
  * Modify the list of CSS and JS files for blocks.
