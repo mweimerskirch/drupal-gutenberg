@@ -103,12 +103,7 @@ class BlocksRendererHelper {
 
     $render['content'] = $content;
 
-    try {
-      return $this->renderer->render($render);
-    }
-    catch (\Exception $e) {
-      return [];
-    }
+    return $this->renderer->renderRoot($render);
   }
 
   /**
