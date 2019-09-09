@@ -34,7 +34,7 @@ class SearchController extends ControllerBase {
       $result[] = [
         'id' => $node->id(),
         'title' => $node->getTitle(),
-        'url' => $node->toUrl('canonical', ['absolute' => true])->toString(),
+        'url' => $node->toUrl('canonical', ['absolute' => FALSE])->toString(),
       ];
     }
 
