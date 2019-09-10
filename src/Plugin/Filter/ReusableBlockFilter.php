@@ -24,7 +24,7 @@ class ReusableBlockFilter extends FilterBase {
   public function process($text, $langcode) {
     $lines = explode("\n", $text);
 
-    $lines = preg_replace_callback('#^<!-- wp:block.*\s(.*)\s\/-->$#', [$this, 'renderBlock'], $lines);
+    $lines = preg_replace_callback('#<!-- wp:block.*\s(.*)\s\/-->#', [$this, 'renderBlock'], $lines);
 
     $text = implode("\n", $lines);
 
