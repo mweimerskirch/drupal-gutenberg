@@ -3,7 +3,9 @@
 namespace Drupal\gutenberg\Controller;
 
 use Drupal\block_content\Entity\BlockContent;
+use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\Session\AccountInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -136,6 +138,39 @@ class ReusableBlocksController extends ControllerBase {
     return new JsonResponse([
       'id' => (int) $block_id,
     ]);
+  }
+
+  /**
+   * Controller routes access callback.
+   *
+   * @param \Drupal\Core\Session\AccountInterface $account
+   *   Current user.
+   * @param string $block_id
+   *   Block id from route parameter.
+   *
+   * @return \Drupal\Core\Access\AccessResult
+   *   Allowed access result if all conditions are met.
+   */
+  public function access(AccountInterface $account, $block_id) {
+    return AccessResult::allowedIf(
+      $account->hasPermission('gutenberg administer')
+      && $this->isBundleOfReusableBlock($block_id)
+    );
+  }
+
+  /**
+   * Creates block from given id and check its bundle.
+   *
+   * @param string $block_id
+   *   Block ID.
+   *
+   * @return bool
+   *   TRUE if the block is bundle of reusable_block, FALSE otherwise.
+   */
+  protected function isBundleOfReusableBlock($block_id) {
+    $block = BlockContent::load($block_id);
+
+    return $block->bundle() === 'reusable_block';
   }
 
 }
