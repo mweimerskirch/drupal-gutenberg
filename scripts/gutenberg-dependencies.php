@@ -41,10 +41,12 @@ foreach ($files as $file) {
 foreach ($packages as $package) {
   unset($yaml[$package]);
 
-  $deps = file_get_contents('../vendor/gutenberg/' . $package . '/index.deps.json');
-  if (!empty($deps)) {
-    $deps = json_decode($deps);
-  }
+  $deps = include('../vendor/gutenberg/' . $package . '/index.asset.php');
+  $deps = $deps['dependencies'];
+  // $deps = file_get_contents('../vendor/gutenberg/' . $package . '/index.deps.json');
+  // if (!empty($deps)) {
+  //   $deps = json_decode($deps);
+  // }
 
   $jsFiles = ScanDir::scan('../vendor/gutenberg/' . $package, 'js');
   $cssFiles = ScanDir::scan('../vendor/gutenberg/' . $package, 'css');
@@ -67,5 +69,7 @@ foreach ($packages as $package) {
     $yaml[$package]['dependencies'][] = 'gutenberg/' . $dep;
   }
 }
+
+// echo Yaml::dump($yaml, 4, 2, false, true);
 
 file_put_contents('../gutenberg.libraries.yml', Yaml::dump($yaml, 4, 2, false, true));
