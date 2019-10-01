@@ -164,6 +164,23 @@ blob:
     theme: {  }
   dependencies:
     - gutenberg/polyfill
+block-directory:
+  js:
+    vendor/gutenberg/block-directory/index.js: {  }
+  css:
+    theme:
+      vendor/gutenberg/block-directory/style.css: {  }
+  dependencies:
+    - gutenberg/lodash
+    - gutenberg/api-fetch
+    - gutenberg/block-editor
+    - gutenberg/blocks
+    - gutenberg/components
+    - gutenberg/compose
+    - gutenberg/data
+    - gutenberg/element
+    - gutenberg/i18n
+    - gutenberg/polyfill
 block-editor:
   js:
     vendor/gutenberg/block-editor/index.js: {  }
@@ -178,7 +195,6 @@ block-editor:
     - gutenberg/blocks
     - gutenberg/components
     - gutenberg/compose
-    - gutenberg/core-data
     - gutenberg/data
     - gutenberg/deprecated
     - gutenberg/dom
@@ -274,6 +290,7 @@ components:
     - gutenberg/react-dom
     - gutenberg/a11y
     - gutenberg/compose
+    - gutenberg/deprecated
     - gutenberg/dom
     - gutenberg/element
     - gutenberg/hooks
@@ -302,6 +319,7 @@ core-data:
     - gutenberg/api-fetch
     - gutenberg/data
     - gutenberg/deprecated
+    - gutenberg/is-shallow-equal
     - gutenberg/polyfill
     - gutenberg/url
 data:
@@ -420,6 +438,7 @@ editor:
     - gutenberg/react
     - gutenberg/api-fetch
     - gutenberg/autop
+    - gutenberg/block-directory
     - gutenberg/block-editor
     - gutenberg/blocks
     - gutenberg/components
@@ -602,7 +621,7 @@ rich-text:
     - gutenberg/lodash
     - gutenberg/compose
     - gutenberg/data
-    - gutenberg/dom
+    - gutenberg/deprecated
     - gutenberg/element
     - gutenberg/escape-html
     - gutenberg/hooks
@@ -619,6 +638,7 @@ server-side-render:
     - gutenberg/api-fetch
     - gutenberg/components
     - gutenberg/data
+    - gutenberg/deprecated
     - gutenberg/element
     - gutenberg/i18n
     - gutenberg/polyfill
