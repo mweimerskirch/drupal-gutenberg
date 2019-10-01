@@ -14,7 +14,7 @@ function gutenberg_cloud_gutenberg_blocks_alter(array &$js_files_edit, array &$c
       $css_files_edit[] = $block->getAssetUrl('edit_css', $base_url);
     }
     if ($block->getViewCss()) {
-      $css_files_edit[] = $block->getAssetUrl('view_css', $base_url);
+      $css_files_view[] = $block->getAssetUrl('view_css', $base_url);
     }
     if ($block->getJs()) {
       $js_files_edit[] = $block->getAssetUrl('js', $base_url);
