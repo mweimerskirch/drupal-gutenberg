@@ -51,11 +51,13 @@ function gutenberg_render_block_core_categories( $attributes ) {
 		$class .= " {$attributes['className']}";
 	}
 
-	return sprintf(
+	$block_content = sprintf(
 		$wrapper_markup,
 		esc_attr( $class ),
 		$items_markup
 	);
+
+	return $block_content;
 }
 
 /**
