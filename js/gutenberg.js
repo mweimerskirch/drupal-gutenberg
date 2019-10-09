@@ -21,19 +21,29 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
+                if (!drupalSettings.gutenbergLoaded) {
+                  _context2.next = 2;
+                  break;
+                }
+
+                return _context2.abrupt('return', false);
+
+              case 2:
+                drupalSettings.gutenbergLoaded = true;
+
                 _format$editorSetting = format.editorSettings, contentType = _format$editorSetting.contentType, allowedBlocks = _format$editorSetting.allowedBlocks, blackList = _format$editorSetting.blackList;
                 data = wp.data, blocks = wp.blocks;
                 dispatch = data.dispatch;
                 unregisterBlockType = blocks.unregisterBlockType, registerBlockType = blocks.registerBlockType, getBlockType = blocks.getBlockType;
                 registerDrupalStore = DrupalGutenberg.registerDrupalStore, registerDrupalBlocks = DrupalGutenberg.registerDrupalBlocks;
-                _context2.next = 7;
+                _context2.next = 10;
                 return registerDrupalStore(data);
 
-              case 7:
-                _context2.next = 9;
+              case 10:
+                _context2.next = 12;
                 return registerDrupalBlocks(contentType);
 
-              case 9:
+              case 12:
 
                 _this._initGutenberg(element);
 
@@ -233,7 +243,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
                 return _context2.abrupt('return', true);
 
-              case 40:
+              case 43:
               case 'end':
                 return _context2.stop();
             }

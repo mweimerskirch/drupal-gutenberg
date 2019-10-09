@@ -21,6 +21,13 @@
      *   Whether the call to `CKEDITOR.replace()` created an editor or not.
      */
     async attach(element, format) {
+      // A bit of a hack. This avoids Gutenberg to be reinit'd on AJAX calls.
+      // TODO: could be done in another way?
+      if (drupalSettings.gutenbergLoaded) {
+        return false;
+      }
+      drupalSettings.gutenbergLoaded = true;
+
       const { contentType, allowedBlocks, blackList } = format.editorSettings;
       const { data, blocks } = wp;
       const { dispatch } = data;
