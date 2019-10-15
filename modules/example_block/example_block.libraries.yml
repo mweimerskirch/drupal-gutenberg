@@ -8,7 +8,6 @@ block-edit:
       css/edit.css: { }
   dependencies:
     - gutenberg/edit-node
-    - drupal/core
 block-view:
   version: VERSION
   css:
