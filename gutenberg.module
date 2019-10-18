@@ -41,6 +41,37 @@ function gutenberg_form_alter(&$form, FormStateInterface $form_state, $form_id) 
       '#default_value' => [],
     ];
 
+    $example_code = "<br/><code>[<br/>&nbsp;&nbsp;[\"core/heading\", {}],<br/>&nbsp;&nbsp;[\"core/paragraph\", {\"placeholder\": \"Insert text\"}]<br/>]</code>";
+
+    $form['gutenberg']['gutenberg_template'] = [
+      '#type' => 'textarea',
+      '#description' => t('JSON structure of blocks. Example:') . $example_code,
+      '#title' => t('Template'),
+      '#default_value' => $config->get($form['type']['#default_value'] . '_template'),
+      '#states' => [
+        'visible' => [
+          'input[name="enable_gutenberg_experience"]' => ['checked' => TRUE],
+        ]
+      ],
+    ];
+
+    $form['gutenberg']['gutenberg_template_lock'] = [
+      '#type' => 'select',
+      '#title' => t('Template lock'),
+      '#description' => t('<code>All</code> will fully lock the page template, not able to delete, create or move blocks just edit the content.<br/><code>Insert</code> will allow moving blocks.'),
+      '#default_value' => $config->get($form['type']['#default_value'] . '_template_lock'),
+      '#options' => [
+        'none' => t('None'),
+        'insert' => t('Insert'),
+        'all' => t('All'),
+      ],
+      '#states' => [
+        'visible' => [
+          'input[name="enable_gutenberg_experience"]' => ['checked' => TRUE],
+        ]
+      ],
+    ];
+
     $form['gutenberg']['allowed_blocks_details'] = [
       '#type' => 'details',
       '#title' => t('Allowed Gutenberg blocks'),
@@ -169,6 +200,8 @@ function gutenberg_form_alter(&$form, FormStateInterface $form_state, $form_id) 
  */
 function _gutenberg_node_form_submit(array $form, FormStateInterface $form_state) {
   $gutenberg_enabled =  $form_state->getValue('enable_gutenberg_experience');
+  $template =  $form_state->getValue('gutenberg_template');
+  $template_lock =  $form_state->getValue('gutenberg_template_lock');
 
   $config = \Drupal::service('config.factory')->getEditable('gutenberg.settings');
   $config->set($form_state->getValue('type') . '_enable_full', $gutenberg_enabled)->save();
@@ -176,8 +209,13 @@ function _gutenberg_node_form_submit(array $form, FormStateInterface $form_state
   if (!$gutenberg_enabled) {
     $config->clear($form_state->getValue('type') . '_allowed_blocks')->save();
     $config->clear($form_state->getValue('type') . '_allowed_drupal_blocks')->save();
+    $config->clear($form_state->getValue('type') . '_gutenberg_template')->save();
+    $config->clear($form_state->getValue('type') . '_gutenberg_template_lock')->save();
     return;
   }
+  //Save template settings
+  $config->set($form_state->getValue('type') . '_template', $template)->save();
+  $config->set($form_state->getValue('type') . '_template_lock', $template_lock)->save();
 
   // Save Gutenberg core blocks settings.
   $categories = explode(' ', $form_state->getValue('categories'));
@@ -210,6 +248,10 @@ function gutenberg_form_node_form_alter(&$form, FormStateInterface $form_state) 
   if (!$gutenberg_enabled) {
     return;
   }
+
+  // Set template options to global var
+  $form['#attached']['drupalSettings']['gutenberg']['template'] = json_decode($config->get($node_type . '_template'));
+  $form['#attached']['drupalSettings']['gutenberg']['template-lock'] = $config->get($node_type . '_template_lock');
 
   $module_settings = _gutenberg_get_all_modules_settings();
   foreach ($module_settings as $settings) {
@@ -372,6 +414,20 @@ function gutenberg_form_node_form_alter(&$form, FormStateInterface $form_state) 
 
   $form['#after_build'][] = 'gutenberg_form_node_form_details_after_build';
   $form['#fields_with_details'] = $fields_with_details;
+
+  // $form['in_editor_fields'] = [
+  //   '#type' => 'container',
+  //   '#value' => 'Fields',
+  //   '#attributes' => [
+  //     // 'class' => 'block-editor-block-list__block',
+  //     'style' => 'padding: 0 43px',
+  //   ],
+  // ];
+
+  // $form['in_editor_fields']['title'] = $form['title'];
+  // $form['in_editor_fields']['title']['#attributes']['style'] = 'color: #000; font-weight:bold; font-size: 48px; border: none; background: none; box-shadow: none;';
+  // $form['in_editor_fields']['title']['#attributes']['placeholder'] = 'Insert title';
+  // unset($form['title']);
 
   if (!$metabox_has_fields) {
     unset($form['metabox_fields']);

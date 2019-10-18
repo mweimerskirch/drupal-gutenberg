@@ -15,7 +15,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
       var _this = this;
 
       return _asyncToGenerator(regeneratorRuntime.mark(function _callee2() {
-        var _format$editorSetting, contentType, allowedBlocks, blackList, data, blocks, dispatch, unregisterBlockType, registerBlockType, getBlockType, registerDrupalStore, registerDrupalBlocks, coreBlock, key, value, categories, metaboxesContainer, metaboxForm, isFormValid, formSubmitted;
+        var _format$editorSetting, contentType, allowedBlocks, blackList, data, blocks, hooks, dispatch, unregisterBlockType, registerBlockType, getBlockType, registerDrupalStore, registerDrupalBlocks, addFilter, coreBlock, key, value, categories, metaboxesContainer, metaboxForm, isFormValid, formSubmitted;
 
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
@@ -32,18 +32,32 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                 drupalSettings.gutenbergLoaded = true;
 
                 _format$editorSetting = format.editorSettings, contentType = _format$editorSetting.contentType, allowedBlocks = _format$editorSetting.allowedBlocks, blackList = _format$editorSetting.blackList;
-                data = wp.data, blocks = wp.blocks;
+                data = wp.data, blocks = wp.blocks, hooks = wp.hooks;
                 dispatch = data.dispatch;
                 unregisterBlockType = blocks.unregisterBlockType, registerBlockType = blocks.registerBlockType, getBlockType = blocks.getBlockType;
                 registerDrupalStore = DrupalGutenberg.registerDrupalStore, registerDrupalBlocks = DrupalGutenberg.registerDrupalBlocks;
-                _context2.next = 10;
+                addFilter = hooks.addFilter;
+                _context2.next = 11;
                 return registerDrupalStore(data);
 
-              case 10:
-                _context2.next = 12;
+              case 11:
+                _context2.next = 13;
                 return registerDrupalBlocks(contentType);
 
-              case 12:
+              case 13:
+                addFilter('blocks.registerBlockType', 'drupalgutenberg/custom-attributes', function (settings) {
+                  settings.attributes = Object.assign(settings.attributes, {
+                    mappingField: {
+                      type: 'string',
+                      default: ''
+                    },
+                    mappingAttribute: {
+                      type: 'string',
+                      default: ''
+                    }
+                  });
+                  return settings;
+                });
 
                 _this._initGutenberg(element);
 
@@ -243,7 +257,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
                 return _context2.abrupt('return', true);
 
-              case 43:
+              case 45:
               case 'end':
                 return _context2.stop();
             }
@@ -272,15 +286,21 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
       wp.node = {
         categories: [],
-        content: { raw: $(element).val(), rendered: '' },
+        content: {
+          block_version: 0,
+          protected: false,
+          raw: $(element).val(),
+          rendered: ''
+        },
         featured_media: 0,
         id: 1,
         parent: 0,
         permalink_template: '',
         revisions: { count: 0, last_id: 0 },
-        status: 'draft',
+        status: 'auto-draft',
         theme_style: true,
-        type: 'page'
+        type: 'page',
+        slug: ''
       };
 
       var editorSettings = {
@@ -295,7 +315,10 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
         titlePlaceholder: Drupal.t('Add title'),
         bodyPlaceholder: Drupal.t('Add text or type / to add content'),
         isRTL: false,
-        autosaveInterval: 10000 };
+        autosaveInterval: 10000,
+        template: drupalSettings.gutenberg.template || '',
+        templateLock: drupalSettings.gutenberg['template-lock'] || false
+      };
 
       var colors = drupalSettings.gutenberg && drupalSettings.gutenberg['theme-support'] && drupalSettings.gutenberg['theme-support'].colors ? [].concat(_toConsumableArray(drupalSettings.gutenberg['theme-support'].colors)) : null;
       var fontSizes = drupalSettings.gutenberg && drupalSettings.gutenberg['theme-support'] && drupalSettings.gutenberg['theme-support'].fontSizes ? [].concat(_toConsumableArray(drupalSettings.gutenberg['theme-support'].fontSizes)) : null;
@@ -348,7 +371,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
         }
       });
 
-      return editPost.initializeEditor(target, 'page', 1, editorSettings, {});
+      return editPost.initializeEditor(target, 'page', 1, editorSettings);
     }
   };
 })(Drupal, DrupalGutenberg, drupalSettings, window.wp, jQuery);

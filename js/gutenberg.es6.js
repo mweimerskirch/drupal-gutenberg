@@ -29,10 +29,11 @@
       drupalSettings.gutenbergLoaded = true;
 
       const { contentType, allowedBlocks, blackList } = format.editorSettings;
-      const { data, blocks } = wp;
+      const { data, blocks, hooks } = wp;
       const { dispatch } = data;
       const { unregisterBlockType, registerBlockType, getBlockType } = blocks;
       const { registerDrupalStore, registerDrupalBlocks } = DrupalGutenberg;
+      const { addFilter } = hooks;
 
       // Register plugins.
       // Not needed now. Leaving it here for reference.
@@ -44,6 +45,25 @@
 
       await registerDrupalStore(data);
       await registerDrupalBlocks(contentType);
+
+      // Add 'mapping field' and 'mapping attribute' attributes to all blocks.
+      addFilter(
+        'blocks.registerBlockType',
+        'drupalgutenberg/custom-attributes',
+        settings => {
+          settings.attributes = Object.assign(settings.attributes, {
+            mappingField: {
+              type: 'string',
+              default: '',
+            },
+            mappingAttribute: {
+              type: 'string',
+              default: '',
+            },
+          });
+          return settings;
+        },
+      );
 
       this._initGutenberg(element);
 
@@ -367,17 +387,27 @@
       $editor.insertAfter($textArea);
       $textArea.hide();
 
+      // setTimeout(() => {
+      //   $('.block-editor-block-list__layout').prepend($('#edit-in-editor-fields'));
+      // }, 500);
+
       wp.node = {
         categories: [],
-        content: { raw: $(element).val(), rendered: '' },
+        content: {
+          block_version: 0,
+          protected: false,
+          raw: $(element).val(),
+          rendered: '',
+        },
         featured_media: 0,
         id: 1,
         parent: 0,
         permalink_template: '',
         revisions: { count: 0, last_id: 0 },
-        status: 'draft',
+        status: 'auto-draft',
         theme_style: true,
         type: 'page',
+        slug: '',
       };
 
       const editorSettings = {
@@ -397,6 +427,8 @@
         // canAutosave: false, // to disable Editor Autosave featured (default: true)
         // canPublish: false, // to disable Editor Publish featured (default: true)
         // canSave: false, // to disable Editor Save featured (default: true)    };
+        template: drupalSettings.gutenberg.template || '',
+        templateLock: drupalSettings.gutenberg['template-lock'] || false,
       };
 
       const colors =
@@ -466,7 +498,7 @@
         }
       });
 
-      return editPost.initializeEditor(target, 'page', 1, editorSettings, {});
+      return editPost.initializeEditor(target, 'page', 1, editorSettings);
     },
   };
 })(Drupal, DrupalGutenberg, drupalSettings, window.wp, jQuery);
