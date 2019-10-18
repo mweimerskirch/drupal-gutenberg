@@ -415,20 +415,6 @@ function gutenberg_form_node_form_alter(&$form, FormStateInterface $form_state) 
   $form['#after_build'][] = 'gutenberg_form_node_form_details_after_build';
   $form['#fields_with_details'] = $fields_with_details;
 
-  // $form['in_editor_fields'] = [
-  //   '#type' => 'container',
-  //   '#value' => 'Fields',
-  //   '#attributes' => [
-  //     // 'class' => 'block-editor-block-list__block',
-  //     'style' => 'padding: 0 43px',
-  //   ],
-  // ];
-
-  // $form['in_editor_fields']['title'] = $form['title'];
-  // $form['in_editor_fields']['title']['#attributes']['style'] = 'color: #000; font-weight:bold; font-size: 48px; border: none; background: none; box-shadow: none;';
-  // $form['in_editor_fields']['title']['#attributes']['placeholder'] = 'Insert title';
-  // unset($form['title']);
-
   if (!$metabox_has_fields) {
     unset($form['metabox_fields']);
   }

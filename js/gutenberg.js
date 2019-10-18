@@ -317,7 +317,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
         isRTL: false,
         autosaveInterval: 10000,
         template: drupalSettings.gutenberg.template || '',
-        templateLock: drupalSettings.gutenberg['template-lock'] || false
+        templateLock: drupalSettings.gutenberg['template-lock'] === 'none' ? false : drupalSettings.gutenberg['template-lock'] || false
       };
 
       var colors = drupalSettings.gutenberg && drupalSettings.gutenberg['theme-support'] && drupalSettings.gutenberg['theme-support'].colors ? [].concat(_toConsumableArray(drupalSettings.gutenberg['theme-support'].colors)) : null;

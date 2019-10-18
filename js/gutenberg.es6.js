@@ -387,9 +387,6 @@
       $editor.insertAfter($textArea);
       $textArea.hide();
 
-      // setTimeout(() => {
-      //   $('.block-editor-block-list__layout').prepend($('#edit-in-editor-fields'));
-      // }, 500);
 
       wp.node = {
         categories: [],
@@ -428,7 +425,9 @@
         // canPublish: false, // to disable Editor Publish featured (default: true)
         // canSave: false, // to disable Editor Save featured (default: true)    };
         template: drupalSettings.gutenberg.template || '',
-        templateLock: drupalSettings.gutenberg['template-lock'] || false,
+        templateLock:
+          drupalSettings.gutenberg['template-lock'] === 'none'
+            ? false : drupalSettings.gutenberg['template-lock'] || false,
       };
 
       const colors =
