@@ -127,6 +127,18 @@ class MediaController extends ControllerBase {
     }
   }
 
+  /**
+   * Load media data.
+   *
+   * @param \Symfony\Component\HttpFoundation\Request $request
+   *   Current request.
+   * @param \Drupal\media\Entity\Media|null $media
+   *   Loaded media entity instance.
+   *
+   * @return \Symfony\Component\HttpFoundation\JsonResponse
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+   */
   public function loadMedia(Request $request, ?Media $media) {
     if (!$media) {
       return new JsonResponse(['error' => $this->t('Media entity not found.')], 404);
@@ -161,23 +173,27 @@ class MediaController extends ControllerBase {
   /**
    * Updates file data.
    *
-   * @param String $fid
+   * @param \Symfony\Component\HttpFoundation\Request $request
+   *   Current request.
+   * @param string|int $fid
    *   File id.
    *
    * @return \Symfony\Component\HttpFoundation\JsonResponse
    *   The JSON response.
+   * @throws \Exception
    */
-  public function updateData($fid) {
-    $request = \Drupal::request();
+  public function updateData(Request $request, $fid) {
     $data = json_decode($request->getContent(), true);
 
-    $connection = \Drupal::database();
-    $connection->merge('file_managed_data')
-      ->key(['fid' => $fid])
-      ->fields([
-        'data' => serialize($data),
-      ])
-      ->execute();
+    if (json_last_error() !== JSON_ERROR_NONE) {
+      throw new \Exception("Request data couldn't be parsed.");
+    }
+
+    try {
+      $this->mediaService->updateMediaData($fid, $data);
+    } catch (\Throwable $exception) {
+      return new JsonResponse(['error' => $this->t("Data couldn't be updated")], 500);
+    }
 
     return new JsonResponse(['status' => 'ok']);
   }

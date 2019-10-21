@@ -2,6 +2,7 @@
 
 namespace Drupal\gutenberg\Service;
 
+use Drupal\Core\Database\Connection;
 use Drupal\Core\Entity\EntityTypeBundleInfoInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
@@ -71,6 +72,11 @@ class MediaService {
   protected $builder;
 
   /**
+   * @var \Drupal\Core\Database\Connection
+   */
+  protected $connection;
+
+  /**
    * MediaController constructor.
    *
    * @param \Drupal\gutenberg\MediaTypeGuesserInterface $media_type_guesser
@@ -82,6 +88,7 @@ class MediaService {
    * @param \Drupal\Core\Render\RendererInterface $renderer
    * @param \Drupal\Core\Entity\EntityTypeBundleInfoInterface $entity_type_bundle_info
    * @param \Drupal\gutenberg\MediaEntityRendererInterface $media_entity_renderer
+   * @param \Drupal\Core\Database\Connection $connection
    */
   public function __construct(
     MediaTypeGuesserInterface $media_type_guesser,
@@ -92,7 +99,8 @@ class MediaService {
     MediaUploaderInterface $media_uploader,
     RendererInterface $renderer,
     EntityTypeBundleInfoInterface $entity_type_bundle_info,
-    MediaEntityRendererInterface $media_entity_renderer
+    MediaEntityRendererInterface $media_entity_renderer,
+    Connection $connection
   ) {
     $this->mediaTypeGuesser = $media_type_guesser;
     $this->entityTypeManager = $entity_type_manager;
@@ -103,6 +111,7 @@ class MediaService {
     $this->renderer = $renderer;
     $this->entityTypeBundleInfo = $entity_type_bundle_info;
     $this->mediaEntityRenderer = $media_entity_renderer;
+    $this->connection = $connection;
 
     if ($this->moduleHandler->moduleExists('media_library')) {
       $this->builder = \Drupal::getContainer()->get('media_library.ui_builder');
@@ -233,7 +242,7 @@ class MediaService {
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
-  public function search(Request $request, string $type = NULL, string $search = NULL) {
+  public function search(Request $request, string $type = '', string $search = '') {
     $query = $this->entityTypeManager->getStorage('file')->getQuery('AND');
     $query->addTag('gutenberg_media_search');
 
@@ -260,6 +269,24 @@ class MediaService {
     }
 
     return $result;
+  }
+
+  /**
+   * Update media data.
+   *
+   * @param string $fid
+   *   File entity ID.
+   *
+   * @return void
+   * @throws \Exception
+   */
+  public function updateMediaData(string $fid, array $data) {
+    $this->connection->merge('file_managed_data')
+      ->key(['fid' => $fid])
+      ->fields([
+        'data' => serialize($data),
+      ])
+      ->execute();
   }
 
 }
