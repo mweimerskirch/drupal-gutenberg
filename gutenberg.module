@@ -426,6 +426,11 @@ function gutenberg_form_node_form_alter(&$form, FormStateInterface $form_state) 
   }
 
   $form['#attached']['drupalSettings']['gutenberg']['metaboxes'][] = 'edit-metabox-fields';
+
+  /** @var \Drupal\Core\Extension\ModuleHandlerInterface $module_handler */
+  $module_handler = \Drupal::service('module_handler');
+  $form['#attached']['drupalSettings']['gutenberg']['media-enabled'] = $module_handler->moduleExists('media');
+  $form['#attached']['drupalSettings']['gutenberg']['media-library-enabled'] = $module_handler->moduleExists('media_library');
 }
 
 function gutenberg_handle_messages(&$form) {

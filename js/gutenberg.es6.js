@@ -5,6 +5,38 @@
 
 /* eslint func-names: ["error", "never"] */
 (function(Drupal, DrupalGutenberg, drupalSettings, wp, $) {
+
+  /**
+   * Check if Drupal's media module is enabled.
+   *
+   * @returns {*|boolean}
+   */
+  Drupal.isMediaEnabled = () => (drupalSettings.gutenberg || false) && drupalSettings.gutenberg['media-enabled'];
+
+  /**
+   * Check if Drupal's media_library module is enabled.
+   *
+   * @returns {*|boolean}
+   */
+  Drupal.isMediaLibraryEnabled = () => (drupalSettings.gutenberg || false) && drupalSettings.gutenberg['media-library-enabled'];
+
+  /**
+   * Toggles Gutenberg loader.
+   *
+   * @param state
+   */
+  Drupal.toggleGutenbergLoader = (state) => {
+    const $gutenbergLoader = $('#gutenberg-loading');
+    switch (state) {
+      case 'show':
+        $gutenbergLoader.removeClass('hide');
+        break;
+      case 'hide':
+        $gutenbergLoader.addClass('hide');
+        break;
+    }
+  };
+
   /**
    * @namespace
    */
@@ -29,11 +61,10 @@
       drupalSettings.gutenbergLoaded = true;
 
       const { contentType, allowedBlocks, blackList } = format.editorSettings;
-      const { data, blocks, hooks } = wp;
+      const { data, blocks } = wp;
       const { dispatch } = data;
       const { unregisterBlockType, registerBlockType, getBlockType } = blocks;
-      const { registerDrupalStore, registerDrupalBlocks } = DrupalGutenberg;
-      const { addFilter } = hooks;
+      const { registerDrupalStore, registerDrupalBlocks, registerDrupalMedia } = DrupalGutenberg;
 
       // Register plugins.
       // Not needed now. Leaving it here for reference.
@@ -45,25 +76,7 @@
 
       await registerDrupalStore(data);
       await registerDrupalBlocks(contentType);
-
-      // Add 'mapping field' and 'mapping attribute' attributes to all blocks.
-      addFilter(
-        'blocks.registerBlockType',
-        'drupalgutenberg/custom-attributes',
-        settings => {
-          settings.attributes = Object.assign(settings.attributes, {
-            mappingField: {
-              type: 'string',
-              default: '',
-            },
-            mappingAttribute: {
-              type: 'string',
-              default: '',
-            },
-          });
-          return settings;
-        },
-      );
+      await registerDrupalMedia();
 
       this._initGutenberg(element);
 
@@ -210,7 +223,7 @@
           $('.gutenberg-header-settings'),
         );
         $('.gutenberg-full-editor').addClass('ready');
-        $('#gutenberg-loading').addClass('hide');
+        Drupal.toggleGutenbergLoader('hide');
       }, 0);
 
       let isFormValid = false;
@@ -387,7 +400,6 @@
       $editor.insertAfter($textArea);
       $textArea.hide();
 
-
       wp.node = {
         categories: [],
         content: {
@@ -500,4 +512,22 @@
       return editPost.initializeEditor(target, 'page', 1, editorSettings);
     },
   };
+
+  /**
+   * Gutenberg media library behavior.
+   *
+   * @type {{attach(): (undefined)}}
+   */
+  Drupal.behaviors.gutenbergMediaLibrary = {
+    attach() {
+      const $form = $('#media-entity-browser-modal .media-library-add-form');
+
+      if (!$form.length) {
+        return;
+      }
+
+      $form.find('[data-drupal-selector="edit-save-insert"]').css('display', 'none');
+    }
+  };
+
 })(Drupal, DrupalGutenberg, drupalSettings, window.wp, jQuery);

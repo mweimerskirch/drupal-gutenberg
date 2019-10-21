@@ -18,7 +18,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
     var DEFAULT_STATE = {
-      blocks: {}
+      blocks: {},
+      mediaEntities: {}
     };
 
     return registerStore('drupal', {
@@ -30,6 +31,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           case 'SET_BLOCK':
             return _extends({}, state, {
               blocks: _extends({}, state.blocks, _defineProperty({}, action.item, action.block))
+            });
+          case 'SET_MEDIA_ENTITY':
+            return _extends({}, state, {
+              mediaEntities: _extends({}, state.mediaEntities, _defineProperty({}, action.ids, action.mediaEntity))
             });
           default:
             return state;
@@ -44,6 +49,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             item: item,
             block: block
           };
+        },
+        setMediaEntities: function setMediaEntities(ids, mediaEntity) {
+          return {
+            type: 'SET_MEDIA_ENTITY',
+            ids: ids,
+            mediaEntity: mediaEntity
+          };
         }
       },
 
@@ -54,6 +66,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           var block = blocks[item];
 
           return block;
+        },
+        getMediaEntities: function getMediaEntities(state, item) {
+          var mediaEntities = state.mediaEntities;
+
+          return mediaEntities[item];
         }
       },
 
@@ -91,6 +108,38 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 }
               }
             }, _callee, _this);
+          }))();
+        },
+        getMediaEntities: function getMediaEntities(mediaEntityIds) {
+          var _this2 = this;
+
+          return _asyncToGenerator(regeneratorRuntime.mark(function _callee2() {
+            var ids, response, entity;
+            return regeneratorRuntime.wrap(function _callee2$(_context2) {
+              while (1) {
+                switch (_context2.prev = _context2.next) {
+                  case 0:
+                    ids = mediaEntityIds.join(',');
+                    _context2.next = 3;
+                    return fetch('\n            ' + drupalSettings.path.baseUrl + 'editor/media/render/' + ids + '\n          ');
+
+                  case 3:
+                    response = _context2.sent;
+                    _context2.next = 6;
+                    return response.json();
+
+                  case 6:
+                    entity = _context2.sent;
+
+                    dispatch('drupal').setMediaEntities(ids, entity);
+                    return _context2.abrupt('return', entity);
+
+                  case 9:
+                  case 'end':
+                    return _context2.stop();
+                }
+              }
+            }, _callee2, _this2);
           }))();
         }
       }

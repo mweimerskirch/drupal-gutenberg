@@ -5,6 +5,7 @@
 
     const DEFAULT_STATE = {
       blocks: {},
+      mediaEntities: {},
     };
 
     return registerStore('drupal', {
@@ -17,6 +18,14 @@
                 ...state.blocks,
                 [action.item]: action.block,
               },
+            };
+          case 'SET_MEDIA_ENTITY':
+            return {
+              ...state,
+              mediaEntities: {
+                ...state.mediaEntities,
+                [action.ids]: action.mediaEntity,
+              }
             };
           default:
             return state;
@@ -31,6 +40,13 @@
             block,
           };
         },
+        setMediaEntities(ids, mediaEntity) {
+          return {
+            type: 'SET_MEDIA_ENTITY',
+            ids,
+            mediaEntity,
+          };
+        }
       },
 
       selectors: {
@@ -40,6 +56,10 @@
 
           return block;
         },
+        getMediaEntities(state, item) {
+          const { mediaEntities } = state;
+          return mediaEntities[item];
+        }
       },
 
       resolvers: {
@@ -55,6 +75,15 @@
             block,
           };
         },
+        async getMediaEntities(mediaEntityIds) {
+          const ids = mediaEntityIds.join(',');
+          const response = await fetch(`
+            ${drupalSettings.path.baseUrl}editor/media/render/${ids}
+          `);
+          const entity = await response.json();
+          dispatch('drupal').setMediaEntities(ids, entity);
+          return entity;
+        }
       },
     });
   }

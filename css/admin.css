@@ -237,6 +237,23 @@
   word-wrap: normal !important;
 }
 
+#media-entity-browser-modal {
+  padding: 0;
+}
+
+#media-entity-browser-modal > div {
+  height: 100%;
+}
+
+#media-entity-browser-modal .media-library-wrapper {
+  height: 100%;
+  margin: 0;
+}
+
+#media-entity-browser-modal .media-library-select.form-submit {
+  display: none;
+}
+
 #views-form-reusable-blocks-page-1 {
   display: flex;
   flex-wrap: wrap;

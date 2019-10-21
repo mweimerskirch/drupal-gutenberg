@@ -80,9 +80,14 @@ edit-node:
     js/components/drupal-icon.js: {  }
     js/components/media-browser-details.js: {  }
     js/components/media-browser.js: {  }
+    js/components/media-library.js: {  }
+    js/components/drupal-media-entity.js: {  }
+    js/hoc/gutenberg-dialog.js: {  }
+    js/hoc/native-dialog.js: {  }
     js/filters/media-upload.js: {  }
     js/drupal-store.js: {  }
     js/drupal-blocks.js: {  }
+    js/drupal-media.js: {  }
     js/gutenberg.js: {  }
     js/admin.js: {  }
   dependencies:
@@ -91,6 +96,7 @@ edit-node:
     - core/drupalSettings
     - core/drupal.debounce
     - core/drupal.displace
+    - media_library/ui
     - editor/drupal.editor
     - gutenberg/init
     - gutenberg/url
@@ -108,6 +114,7 @@ drupal-api-fetch:
   js:
     js/api-fetch.js: {  }
   dependencies:
+    - gutenberg/data
     - gutenberg/api-fetch
 drupal-data:
   js:

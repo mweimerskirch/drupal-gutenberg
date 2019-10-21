@@ -16,20 +16,30 @@ gutenberg.media.load:
   requirements:
     _permission: 'gutenberg administer'
     _method: 'GET'
-gutenberg.media.search:
-  path: '/editor/media/search/{type}/{search}'
+gutenberg.media.load_media:
+  path: '/editor/media/load-media/{media}'
   defaults:
-    _controller: '\Drupal\gutenberg\Controller\MediaController::search'
+    _controller: '\Drupal\gutenberg\Controller\MediaController::loadMedia'
+    parameters:
+      media:
+        type: entity:media
   requirements:
     _permission: 'gutenberg administer'
     _method: 'GET'
-gutenberg.media.update_data:
-  path: '/editor/media/update_data/{fid}'
+gutenberg.media.dialog:
+  path: '/editor/media/dialog'
   defaults:
-    _controller: '\Drupal\gutenberg\Controller\MediaController::updateData'
+    _controller: '\Drupal\gutenberg\Controller\MediaController::dialog'
   requirements:
     _permission: 'gutenberg administer'
-    _method: 'POST'
+    _method: 'GET'
+gutenberg.media.render:
+  path: '/editor/media/render/{media_entity_ids}'
+  defaults:
+    _controller: '\Drupal\gutenberg\Controller\MediaController::render'
+  requirements:
+    _permission: 'gutenberg administer'
+    _method: 'GET'
 gutenberg.blocks.load:
   path: '/editor/blocks/load_by_type/{content_type}'
   defaults:
@@ -97,3 +107,17 @@ gutenberg.content.search:
   methods: 'GET'
   requirements:
     _permission: 'gutenberg administer'
+gutenberg.media.search:
+  path: '/editor/media/search/{type}/{search}'
+  defaults:
+    _controller: '\Drupal\gutenberg\Controller\MediaController::search'
+  requirements:
+    _permission: 'gutenberg administer'
+    _method: 'GET'
+gutenberg.media.update_data:
+  path: '/editor/media/update_data/{fid}'
+  defaults:
+    _controller: '\Drupal\gutenberg\Controller\MediaController::updateData'
+  requirements:
+    _permission: 'gutenberg administer'
+    _method: 'POST'
