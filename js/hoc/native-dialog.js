@@ -75,6 +75,18 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
       }, 0);
     };
 
+    var onDialogClose = function onDialogClose() {
+      var modal = document.getElementById('media-entity-browser-modal');
+      if (modal) {
+        modal.remove();
+      }
+
+      var nodes = document.querySelectorAll('[aria-describedby="media-entity-browser-modal"]');
+      nodes.forEach(function (node) {
+        return node.remove();
+      });
+    };
+
     var getDialog = function getDialog(_ref2) {
       var allowedTypes = _ref2.allowedTypes;
 
@@ -98,8 +110,8 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
       return React.createElement(Component, _extends({}, props, {
         onDialogCreate: onDialogCreate,
         onDialogInsert: onDialogInsert,
-        getDialog: getDialog
-      }));
+        onDialogClose: onDialogClose,
+        getDialog: getDialog }));
     };
   };
 

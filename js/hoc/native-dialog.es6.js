@@ -32,6 +32,16 @@
       }
     }
 
+    const onDialogClose = () => {
+      const modal = document.getElementById('media-entity-browser-modal');
+      if (modal) {
+        modal.remove();
+      }
+
+      const nodes = document.querySelectorAll('[aria-describedby="media-entity-browser-modal"]');
+      nodes.forEach(node => node.remove());
+    };
+
     const getDialog = ({ allowedTypes }) => {
       return new Promise((resolve, reject) => {
         wp.apiFetch({
@@ -55,8 +65,8 @@
       <Component {...props}
                  onDialogCreate={onDialogCreate}
                  onDialogInsert={onDialogInsert}
-                 getDialog={getDialog}
-      />
+                 onDialogClose={onDialogClose}
+                 getDialog={getDialog} />
     );
   };
 

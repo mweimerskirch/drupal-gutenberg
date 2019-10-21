@@ -12,10 +12,16 @@
     }
 
     closeDialog() {
-      this.frame && this.frame.close();
-      this.mediaBrowserWrapper && this.mediaBrowserWrapper.remove();
-      delete this.frame;
-      delete this.mediaBrowserWrapper;
+      if (this.frame) {
+        this.frame.close();
+        delete this.frame;
+      }
+      if (this.mediaBrowserWrapper) {
+        Drupal.detachBehaviors(this.mediaBrowserWrapper);
+        this.mediaBrowserWrapper.remove();
+        delete this.mediaBrowserWrapper;
+      }
+      this.props.onDialogClose && this.props.onDialogClose();
     }
 
     openDialog() {
