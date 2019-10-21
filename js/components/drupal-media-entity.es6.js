@@ -69,7 +69,7 @@
       const content = isMediaLibraryEnabled
         ? (
           <MediaUpload onSelect={this.insertMedia}
-                       allowedTypes={['image', 'video', 'audio']}
+                       allowedTypes={['image', 'video', 'audio', 'application']}
                        multiple={false}
                        omitFetchOnSelect={true}/>
         )
