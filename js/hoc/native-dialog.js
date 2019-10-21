@@ -69,6 +69,10 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     var onDialogCreate = function onDialogCreate() {
       drupalSettings.media_library = drupalSettings.media_library || {};
       drupalSettings.media_library.selection_remaining = drupalSettings.media_library.selection_remaining || 1;
+
+      setTimeout(function () {
+        $('#media-library-wrapper li:first-child a').click();
+      }, 0);
     };
 
     var getDialog = function getDialog(_ref2) {

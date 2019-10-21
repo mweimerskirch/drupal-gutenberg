@@ -3,6 +3,11 @@
     const onDialogCreate = () => {
       drupalSettings.media_library = drupalSettings.media_library || {};
       drupalSettings.media_library.selection_remaining = drupalSettings.media_library.selection_remaining || 1;
+
+      // @todo: it's temporary bugfix for the issue with initial loading (cannot upload a file in media library dialog).
+      setTimeout(() => {
+        $('#media-library-wrapper li:first-child a').click();
+      }, 0);
     };
 
     async function onDialogInsert (element, props) {
