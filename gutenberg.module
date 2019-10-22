@@ -187,10 +187,10 @@ function gutenberg_form_alter(&$form, FormStateInterface $form_state, $form_id) 
     }
 
     $form['#attached']['library'][] = 'gutenberg/admin';
-    $form['actions']['submit']['#submit'][] = '_gutenberg_node_form_submit';
+    $form['actions']['submit']['#submit'][] = '_gutenberg_node_type_form_submit';
 
     if (isset($form['actions']['save_continue']['#submit'])) {
-      $form['actions']['save_continue']['#submit'][] = '_gutenberg_node_form_submit';
+      $form['actions']['save_continue']['#submit'][] = '_gutenberg_node_type_form_submit';
     }
   }
 }
@@ -198,7 +198,7 @@ function gutenberg_form_alter(&$form, FormStateInterface $form_state, $form_id) 
 /**
  *
  */
-function _gutenberg_node_form_submit(array $form, FormStateInterface $form_state) {
+function _gutenberg_node_type_form_submit(array $form, FormStateInterface $form_state) {
   $gutenberg_enabled =  $form_state->getValue('enable_gutenberg_experience');
   $template =  $form_state->getValue('gutenberg_template');
   $template_lock =  $form_state->getValue('gutenberg_template_lock');
@@ -252,6 +252,11 @@ function gutenberg_form_node_form_alter(&$form, FormStateInterface $form_state) 
   // Set template options to global var
   $form['#attached']['drupalSettings']['gutenberg']['template'] = json_decode($config->get($node_type . '_template'));
   $form['#attached']['drupalSettings']['gutenberg']['template-lock'] = $config->get($node_type . '_template_lock');
+
+  $mapped_fields = _gutenberg_get_mapped_fields(json_decode($config->get($node_type . '_template')));
+  foreach ($mapped_fields as $item) {
+    $form[$item['field']]['#access'] = FALSE;
+  }
 
   $module_settings = _gutenberg_get_all_modules_settings();
   foreach ($module_settings as $settings) {
@@ -426,6 +431,18 @@ function gutenberg_form_node_form_alter(&$form, FormStateInterface $form_state) 
   }
 
   $form['#attached']['drupalSettings']['gutenberg']['metaboxes'][] = 'edit-metabox-fields';
+
+  array_unshift($form['actions']['submit']['#submit'], '_gutenberg_node_form_submit');
+  // $form['actions']['submit']['#submit'][] = '_gutenberg_node_form_submit';
+}
+
+/**
+ *
+ */
+function _gutenberg_node_form_submit(array $form, FormStateInterface $form_state) {
+  // var_dump($form_state);
+  $form_state->setValue('title', 'HERES THE TITLE');
+  // die('');
 }
 
 function gutenberg_handle_messages(&$form) {
@@ -481,6 +498,28 @@ function gutenberg_preprocess_node(&$variables) {
   if ($default_theme === 'bartik') {
     $variables['#attached']['library'][] = 'gutenberg/bartik';
   }
+}
+
+/**
+ * 
+ */
+function _gutenberg_get_mapped_fields($template, &$result = []) {
+  foreach ($template as $key => $block) {
+    if (isset($block[1]) && isset($block[1]->mappingField)) {
+      $item = [];
+      $item['field'] = $block[1]->mappingField;
+      if (isset($block[1]->mappingAttribute)) {
+        $item['attribute'] = $block[1]->mappingAttribute;
+      }
+      $result[] = $item;
+    }
+
+    if (isset($block[2])) {
+      _gutenberg_get_mapped_fields($block[2], $result);
+    }
+  }
+
+  return $result;
 }
 
 /**

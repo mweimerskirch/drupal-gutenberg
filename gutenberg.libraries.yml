@@ -85,6 +85,8 @@ edit-node:
     js/drupal-blocks.js: {  }
     js/gutenberg.js: {  }
     js/admin.js: {  }
+    js/blocks/section/index.js: {  }
+    js/blocks/simple-text/index.js: {  }
   dependencies:
     - core/jquery
     - core/drupal

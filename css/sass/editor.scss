@@ -90,6 +90,12 @@ body .gutenberg__editor .edit-post-layout .edit-post-sidebar {
 
 .wp-block {
   max-width: 810px;
+
+  &[data-type='core/heading'] {
+    h1 {
+      font-size: 4em;
+    }
+  }
 }
 
 .wp-block[data-align=wide] {
