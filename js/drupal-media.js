@@ -7,12 +7,14 @@
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
-(function (wp, $, Drupal, drupalSettings) {
+(function (wp, $, Drupal, drupalSettings, DrupalGutenberg) {
   var data = wp.data,
-      blocks = wp.blocks;
-  var _window$DrupalGutenbe = window.DrupalGutenberg.Components,
-      DrupalIcon = _window$DrupalGutenbe.DrupalIcon,
-      DrupalMediaEntity = _window$DrupalGutenbe.DrupalMediaEntity;
+      blocks = wp.blocks,
+      element = wp.element;
+  var Fragment = element.Fragment;
+  var _DrupalGutenberg$Comp = DrupalGutenberg.Components,
+      DrupalIcon = _DrupalGutenberg$Comp.DrupalIcon,
+      DrupalMediaEntity = _DrupalGutenberg$Comp.DrupalMediaEntity;
 
 
   var gutenberg = drupalSettings.gutenberg || {};
@@ -80,4 +82,4 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
   window.DrupalGutenberg = window.DrupalGutenberg || {};
   window.DrupalGutenberg.registerDrupalMedia = registerDrupalMedia;
-})(wp, jQuery, Drupal, drupalSettings);
+})(wp, jQuery, Drupal, drupalSettings, DrupalGutenberg);
