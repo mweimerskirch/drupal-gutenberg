@@ -15,13 +15,6 @@
       };
       this.insertMedia = this.insertMedia.bind(this);
       this.onUpload = this.onUpload.bind(this);
-      this.onFileChange = this.onFileChange.bind(this);
-    }
-
-    onFileChange(fileData) {
-      if (fileData && fileData[0] && fileData[0].id) {
-        this.insertMedia([fileData[0].id]);
-      }
     }
 
     insertMedia(mediaEntityIds) {
@@ -43,9 +36,9 @@
         allowedTypes,
         filesList: event.target.files,
         onError,
-        onFileChange: (fileData) => {
-          if (fileData && fileData[0] && fileData[0].id) {
-            this.insertMedia([fileData[0].id]);
+        onFileChange: fileData => {
+          if (fileData && fileData[0] && fileData[0].media_entity && fileData[0].media_entity.id) {
+            this.insertMedia([fileData[0].media_entity.id]);
           }
         },
       });

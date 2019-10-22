@@ -25,7 +25,7 @@ class MediaEntityDataProvider extends BaseDataProvider {
     $file_data = $this->getFileData($entity->id());
 
     $result = [
-      'id' => (int) $data['media_id'],
+      'id' => (int) $entity->id(),
       'link' => $source_url,
       'source_url' => $source_url,
       'url' => $source_url,
@@ -51,6 +51,10 @@ class MediaEntityDataProvider extends BaseDataProvider {
       'media_details' => [
         'file' => $entity->getFilename(),
         'filesize' => $entity->getSize(),
+      ],
+      'media_entity' => [
+        'id' => $data['media_id'] ?? 0,
+        'type' => $data['media_type'] ?? '',
       ],
     ];
 

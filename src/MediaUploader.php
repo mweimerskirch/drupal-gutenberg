@@ -2,6 +2,7 @@
 
 namespace Drupal\gutenberg;
 
+use Drupal\Component\Utility\Random;
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\editor\Entity\Editor;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -11,8 +12,8 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  *
  * @package Drupal\gutenberg
  */
-class MediaUploader implements MediaUploaderInterface
-{
+class MediaUploader implements MediaUploaderInterface {
+
   /**
    * @var \Drupal\Core\File\FileSystemInterface
    */
@@ -39,10 +40,11 @@ class MediaUploader implements MediaUploaderInterface
     }
 
     // @todo: find better solution for saving file itself.
-    $filename = $uploaded_file->getClientOriginalName();
     $data = file_get_contents($uploaded_file->getPathname());
-    $file = file_save_data($data, "{$directory}/{$filename}", FileSystemInterface::EXISTS_RENAME);
+    $file_name = $this->getRandomFileName($uploaded_file->getClientOriginalExtension() ?: '');
+    $file = file_save_data($data, "{$directory}/{$file_name}", FileSystemInterface::EXISTS_RENAME);
     $file->setTemporary();
+    $file->setFilename($uploaded_file->getClientOriginalName());
 
     try {
       $file->save();
@@ -51,6 +53,19 @@ class MediaUploader implements MediaUploaderInterface
     }
 
     return $file;
+  }
+
+  /**
+   * Generate random file name.
+   *
+   * @param \Drupal\gutenberg\string $extension
+   *   (optional) File extension.
+   *
+   * @return string
+   */
+  protected function getRandomFileName(string $extension = '') {
+    $name = (new Random())->name(50, TRUE);
+    return $extension ? sprintf('%s.%s', $name, $extension) : $name;
   }
 
 }

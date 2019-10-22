@@ -43,18 +43,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
       };
       _this.insertMedia = _this.insertMedia.bind(_this);
       _this.onUpload = _this.onUpload.bind(_this);
-      _this.onFileChange = _this.onFileChange.bind(_this);
       return _this;
     }
 
     _createClass(DrupalMediaEntity, [{
-      key: 'onFileChange',
-      value: function onFileChange(fileData) {
-        if (fileData && fileData[0] && fileData[0].id) {
-          this.insertMedia([fileData[0].id]);
-        }
-      }
-    }, {
       key: 'insertMedia',
       value: function insertMedia(mediaEntityIds) {
         if (!mediaEntityIds.length) {
@@ -79,8 +71,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
           filesList: event.target.files,
           onError: onError,
           onFileChange: function onFileChange(fileData) {
-            if (fileData && fileData[0] && fileData[0].id) {
-              _this2.insertMedia([fileData[0].id]);
+            if (fileData && fileData[0] && fileData[0].media_entity && fileData[0].media_entity.id) {
+              _this2.insertMedia([fileData[0].media_entity.id]);
             }
           }
         });
