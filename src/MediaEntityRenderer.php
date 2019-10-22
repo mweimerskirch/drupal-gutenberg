@@ -37,9 +37,14 @@ class MediaEntityRenderer implements MediaEntityRendererInterface {
    * {@inheritDoc}
    */
   public function render(array $media_entity_ids) {
-    $media_entities = $this->entityTypeManager
-      ->getStorage('media')
-      ->loadMultiple($media_entity_ids);
+    try {
+      $media_entities = $this->entityTypeManager
+        ->getStorage('media')
+        ->loadMultiple($media_entity_ids);
+    }
+    catch (\Throwable $exception) {
+      return '';
+    }
 
     if (!$media_entity = reset($media_entities)) {
       return '';

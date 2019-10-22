@@ -55,7 +55,8 @@ class MediaController extends ControllerBase {
       return new JsonResponse([
         'html' => $this->mediaService->renderDialog(explode(',', $request->get('types', []))),
       ]);
-    } catch (MediaTypeNotFoundException $exception) {
+    }
+    catch (MediaTypeNotFoundException $exception) {
       return new JsonResponse(['error' => $this->t($exception->getMessage())], 404);
     }
   }
@@ -73,7 +74,8 @@ class MediaController extends ControllerBase {
       return new JsonResponse([
         'html' => $this->mediaService->renderMediaEntities(explode(',', $media_entity_ids))
       ]);
-    } catch (MediaEntityNotFoundException $exception) {
+    }
+    catch (MediaEntityNotFoundException $exception) {
       return new JsonResponse(['error' => $this->t($exception->getMessage())], 404);
     }
   }
@@ -99,7 +101,8 @@ class MediaController extends ControllerBase {
 
     try {
       return new JsonResponse($this->mediaService->processMediaEntityUpload($uploaded_file, $editor));
-    } catch (\Exception $exception) {
+    }
+    catch (\Exception $exception) {
       return new JsonResponse(['error' => $this->t($exception->getMessage())], 500);
     }
   }
@@ -122,7 +125,8 @@ class MediaController extends ControllerBase {
 
     try {
       return new JsonResponse($this->mediaService->loadFileData($file));
-    } catch (FileEntityNotFoundException $exception) {
+    }
+    catch (FileEntityNotFoundException $exception) {
       return new JsonResponse($this->t($exception->getMessage()), 404);
     }
   }
@@ -146,7 +150,8 @@ class MediaController extends ControllerBase {
 
     try {
       return new JsonResponse($this->mediaService->loadMediaData($media));
-    } catch (MediaEntityNotFoundException $exception) {
+    }
+    catch (MediaEntityNotFoundException $exception) {
       return new JsonResponse($this->t($exception->getMessage()), 404);
     }
   }
@@ -191,7 +196,8 @@ class MediaController extends ControllerBase {
 
     try {
       $this->mediaService->updateMediaData($fid, $data);
-    } catch (\Throwable $exception) {
+    }
+    catch (\Throwable $exception) {
       return new JsonResponse(['error' => $this->t("Data couldn't be updated")], 500);
     }
 

@@ -8,18 +8,6 @@
 (function (wp, Drupal, drupalSettings, $) {
   var __ = Drupal.t;
 
-  var notifyError = function notifyError(message) {
-    return wp.data.dispatch('core/notices').createErrorNotice(message, {
-      isDismissible: true
-    });
-  };
-
-  var notifySuccess = function notifySuccess(message) {
-    return wp.data.dispatch('core/notices').createSuccessNotice(message, {
-      isDismissible: true
-    });
-  };
-
   var types = {
     page: {
       id: 1,
@@ -152,7 +140,7 @@
           }).done(function (result) {
             resolve(result);
           }).fail(function (error) {
-            error && error.responseJSON && error.responseJSON.error && notifyError(error.responseJSON.error);
+            error && error.responseJSON && error.responseJSON.error && Drupal.notifyError(error.responseJSON.error);
             reject(error);
           }).always(function () {
             Drupal.toggleGutenbergLoader('hide');
@@ -217,13 +205,13 @@
             }
           }).done(function (result) {
             if (Drupal.isMediaEnabled()) {
-              notifySuccess(__('File and media entity have been created successfully.'));
+              Drupal.notifySuccess(__('File and media entity have been created successfully.'));
             } else {
-              notifySuccess(__('File entity has been created successfully.'));
+              Drupal.notifySuccess(__('File entity has been created successfully.'));
             }
             resolve(result);
           }).fail(function (error) {
-            error && error.responseJSON && error.responseJSON.error && notifyError(error.responseJSON.error);
+            error && error.responseJSON && error.responseJSON.error && Drupal.notifyError(error.responseJSON.error);
             reject(error);
           }).always(function () {
             Drupal.toggleGutenbergLoader('hide');
@@ -257,7 +245,7 @@
           }).done(function (result) {
             resolve(result);
           }).fail(function (error) {
-            error && error.responseJSON && error.responseJSON.error && notifyError(error.responseJSON.error);
+            error && error.responseJSON && error.responseJSON.error && Drupal.notifyError(error.responseJSON.error);
             reject(error);
           }).always(function () {
             Drupal.toggleGutenbergLoader('hide');

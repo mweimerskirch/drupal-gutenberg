@@ -2,24 +2,6 @@
 (function(wp, Drupal, drupalSettings, $) {
   const __ = Drupal.t;
 
-  /**
-   * Display error message.
-   *
-   * @return void
-   */
-  const notifyError = message => wp.data.dispatch('core/notices').createErrorNotice(message, {
-    isDismissible: true,
-  });
-
-  /**
-   * Display success message.
-   *
-   * @return void
-   */
-  const notifySuccess = message => wp.data.dispatch('core/notices').createSuccessNotice(message, {
-    isDismissible: true,
-  });
-
   const types = {
     page: {
       id: 1,
@@ -158,7 +140,7 @@
               resolve(result);
             })
             .fail(error => {
-              error && error.responseJSON && error.responseJSON.error && notifyError(error.responseJSON.error);
+              error && error.responseJSON && error.responseJSON.error && Drupal.notifyError(error.responseJSON.error);
               reject(error);
             })
             .always(() => {
@@ -205,14 +187,14 @@
             })
             .done(result => {
               if (Drupal.isMediaEnabled()) {
-                notifySuccess(__('File and media entity have been created successfully.'));
+                Drupal.notifySuccess(__('File and media entity have been created successfully.'));
               } else {
-                notifySuccess(__('File entity has been created successfully.'));
+                Drupal.notifySuccess(__('File entity has been created successfully.'));
               }
               resolve(result);
             })
             .fail(error => {
-              error && error.responseJSON && error.responseJSON.error && notifyError(error.responseJSON.error);
+              error && error.responseJSON && error.responseJSON.error && Drupal.notifyError(error.responseJSON.error);
               reject(error);
             })
             .always(() => {
@@ -251,7 +233,7 @@
               resolve(result);
             })
             .fail(error => {
-              error && error.responseJSON && error.responseJSON.error && notifyError(error.responseJSON.error);
+              error && error.responseJSON && error.responseJSON.error && Drupal.notifyError(error.responseJSON.error);
               reject(error);
             })
             .always(() => {

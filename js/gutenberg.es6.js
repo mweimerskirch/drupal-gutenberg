@@ -38,6 +38,24 @@
   };
 
   /**
+   * Display error message.
+   *
+   * @return void
+   */
+  Drupal.notifyError = message => wp.data.dispatch('core/notices').createErrorNotice(message, {
+    isDismissible: true,
+  });
+
+  /**
+   * Display success message.
+   *
+   * @return void
+   */
+  Drupal.notifySuccess = message => wp.data.dispatch('core/notices').createSuccessNotice(message, {
+    isDismissible: true,
+  });
+
+  /**
    * @namespace
    */
   Drupal.editors.gutenberg = {

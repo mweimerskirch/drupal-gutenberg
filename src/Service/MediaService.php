@@ -233,9 +233,9 @@ class MediaService {
    *
    * @param \Symfony\Component\HttpFoundation\Request $request
    *   Current request.
-   * @param \Drupal\gutenberg\Service\string|NULL $type
+   * @param string $type
    *   Mime type of searched files.
-   * @param \Drupal\gutenberg\Service\string|NULL $search
+   * @param string $search
    *   Specific filename to search for.
    *
    * @return array

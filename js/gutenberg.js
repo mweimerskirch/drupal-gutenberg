@@ -30,6 +30,18 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     }
   };
 
+  Drupal.notifyError = function (message) {
+    return wp.data.dispatch('core/notices').createErrorNotice(message, {
+      isDismissible: true
+    });
+  };
+
+  Drupal.notifySuccess = function (message) {
+    return wp.data.dispatch('core/notices').createSuccessNotice(message, {
+      isDismissible: true
+    });
+  };
+
   Drupal.editors.gutenberg = {
     attach: function attach(element, format) {
       var _this = this;

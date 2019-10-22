@@ -80,9 +80,22 @@
           const response = await fetch(`
             ${drupalSettings.path.baseUrl}editor/media/render/${ids}
           `);
-          const entity = await response.json();
-          dispatch('drupal').setMediaEntities(ids, entity);
-          return entity;
+
+          if (response.ok) {
+            const entity = await response.json();
+            dispatch('drupal').setMediaEntities(ids, entity);
+            return entity;
+          }
+
+          if (response.status === 404) {
+            Drupal.notifyError("Media entity couldn't be found.");
+            return null;
+          }
+
+          if (!response.ok) {
+            Drupal.notifyError("An error occurred while fetching data.");
+            return null;
+          }
         }
       },
     });

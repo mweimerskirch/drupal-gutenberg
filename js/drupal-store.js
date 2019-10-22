@@ -125,16 +125,40 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
                   case 3:
                     response = _context2.sent;
-                    _context2.next = 6;
+
+                    if (!response.ok) {
+                      _context2.next = 10;
+                      break;
+                    }
+
+                    _context2.next = 7;
                     return response.json();
 
-                  case 6:
+                  case 7:
                     entity = _context2.sent;
 
                     dispatch('drupal').setMediaEntities(ids, entity);
                     return _context2.abrupt('return', entity);
 
-                  case 9:
+                  case 10:
+                    if (!(response.status === 404)) {
+                      _context2.next = 13;
+                      break;
+                    }
+
+                    Drupal.notifyError("Media entity couldn't be found.");
+                    return _context2.abrupt('return', null);
+
+                  case 13:
+                    if (response.ok) {
+                      _context2.next = 16;
+                      break;
+                    }
+
+                    Drupal.notifyError("An error occurred while fetching data.");
+                    return _context2.abrupt('return', null);
+
+                  case 16:
                   case 'end':
                     return _context2.stop();
                 }
