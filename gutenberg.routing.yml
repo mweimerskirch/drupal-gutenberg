@@ -121,3 +121,10 @@ gutenberg.media.update_data:
   requirements:
     _permission: 'gutenberg administer'
     _method: 'POST'
+gutenberg.media.autocomplete:
+  path: '/editor/media/autocomplete'
+  defaults:
+    _controller: '\Drupal\gutenberg\Controller\MediaController::autocomplete'
+  requirements:
+    _permission: 'gutenberg administer'
+    _method: 'GET'

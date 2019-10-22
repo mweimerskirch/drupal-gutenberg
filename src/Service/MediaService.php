@@ -4,6 +4,7 @@ namespace Drupal\gutenberg\Service;
 
 use Drupal\Core\Database\Connection;
 use Drupal\Core\Entity\EntityDisplayRepositoryInterface;
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityTypeBundleInfoInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
@@ -270,7 +271,7 @@ class MediaService {
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
   public function search(Request $request, string $type = '', string $search = '') {
-    $query = $this->entityTypeManager->getStorage('file')->getQuery('AND');
+    $query = $this->entityTypeManager->getStorage('file')->getQuery();
     $query->addTag('gutenberg_media_search');
 
     if ($search !== '*') {
@@ -314,6 +315,38 @@ class MediaService {
         'data' => serialize($data),
       ])
       ->execute();
+  }
+
+  /**
+   * Get media entity results for autocomplete endpoint.
+   *
+   * @param \Drupal\gutenberg\Service\string $filename
+   *   Filename to search.
+   *
+   * @return array
+   */
+  public function getMediaEntityAutoCompleteData(string $filename) {
+    try {
+      $query = $this->entityTypeManager->getStorage('media')->getQuery();
+      $query->condition('name', $filename, 'CONTAINS');
+      $query->condition('uid', \Drupal::currentUser()->id());
+      $query->sort('created', 'DESC');
+      $media_ids = $query->execute();
+      $media_entities = $this->entityTypeManager->getStorage('media')->loadMultiple($media_ids ?: []);
+
+      return array_values(
+        array_map(function (MediaInterface $media_entity) {
+          return [
+            'name' => $media_entity->getName(),
+            'media_id' => $media_entity->id(),
+            'media_type' => $media_entity->bundle(),
+            'file_id' => $media_entity->getSource()->getSourceFieldValue($media_entity),
+          ];
+        }, $media_entities)
+      );
+    } catch (\Throwable $exception) {
+        return [];
+    }
   }
 
 }

@@ -208,4 +208,18 @@ class MediaController extends ControllerBase {
     return new JsonResponse(['status' => 'ok']);
   }
 
+  /**
+   * Get data for autocomplete.
+   *
+   * @param \Symfony\Component\HttpFoundation\Request $request
+   *   Current request.
+   *
+   * @return \Symfony\Component\HttpFoundation\JsonResponse
+   */
+  public function autocomplete(Request $request) {
+    return new JsonResponse(
+      $this->mediaService->getMediaEntityAutoCompleteData($request->get('filename', ''))
+    );
+  }
+
 }
