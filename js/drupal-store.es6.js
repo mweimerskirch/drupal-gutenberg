@@ -76,6 +76,7 @@
           };
         },
         async getMediaEntities(mediaEntityIds) {
+          // @todo: add support for multi selection
           const ids = mediaEntityIds.join(',');
           const response = await fetch(`
             ${drupalSettings.path.baseUrl}editor/media/render/${ids}
@@ -83,8 +84,10 @@
 
           if (response.ok) {
             const entity = await response.json();
-            dispatch('drupal').setMediaEntities(ids, entity);
-            return entity;
+            if (entity && entity.length) {
+              dispatch('drupal').setMediaEntities(ids, entity);
+              return entity;
+            }
           }
 
           if (response.status === 404) {

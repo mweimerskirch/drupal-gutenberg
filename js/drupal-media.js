@@ -53,8 +53,9 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
         mediaEntityIds: {
           type: 'array'
         },
-        align: {
-          type: 'string'
+        viewMode: {
+          type: 'string',
+          default: 'default'
         }
       },
       edit: function edit(_ref) {

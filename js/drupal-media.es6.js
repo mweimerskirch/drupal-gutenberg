@@ -44,8 +44,9 @@
         mediaEntityIds: {
           type: 'array',
         },
-        align: {
+        viewMode: {
           type: 'string',
+          default: 'default',
         },
       },
       edit({ attributes, className, setAttributes }) {

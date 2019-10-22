@@ -12,6 +12,8 @@ use Drupal\Core\Render\RendererInterface;
  */
 class MediaEntityRenderer implements MediaEntityRendererInterface {
 
+  use AssertMediaTrait;
+
   /**
    * @var \Drupal\Core\Render\RendererInterface
    */
@@ -36,23 +38,21 @@ class MediaEntityRenderer implements MediaEntityRendererInterface {
   /**
    * {@inheritDoc}
    */
-  public function render(array $media_entity_ids) {
+  public function render($media_entity, string $view_mode = 'full') {
     try {
-      $media_entities = $this->entityTypeManager
-        ->getStorage('media')
-        ->loadMultiple($media_entity_ids);
+      if (is_numeric($media_entity)) {
+        $media_entity = $this->entityTypeManager->getStorage('media')->load($media_entity);
+      }
+
+      $this->assertIsMediaEntity($media_entity);
+
+      return (string) $this->renderer->render(
+        $this->entityTypeManager->getViewBuilder('media')->view($media_entity, $view_mode)
+      );
     }
     catch (\Throwable $exception) {
       return '';
     }
-
-    if (!$media_entity = reset($media_entities)) {
-      return '';
-    }
-
-    return $this->renderer->render(
-      $this->entityTypeManager->getViewBuilder('media')->view($media_entity)
-    );
   }
 
 }

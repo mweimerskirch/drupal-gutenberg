@@ -3,6 +3,7 @@
 namespace Drupal\gutenberg\Service;
 
 use Drupal\Core\Database\Connection;
+use Drupal\Core\Entity\EntityDisplayRepositoryInterface;
 use Drupal\Core\Entity\EntityTypeBundleInfoInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
@@ -77,6 +78,11 @@ class MediaService {
   protected $connection;
 
   /**
+   * @var \Drupal\Core\Entity\EntityDisplayRepositoryInterface
+   */
+  protected $entityDisplayRepository;
+
+  /**
    * MediaController constructor.
    *
    * @param \Drupal\gutenberg\MediaTypeGuesserInterface $media_type_guesser
@@ -89,6 +95,7 @@ class MediaService {
    * @param \Drupal\Core\Entity\EntityTypeBundleInfoInterface $entity_type_bundle_info
    * @param \Drupal\gutenberg\MediaEntityRendererInterface $media_entity_renderer
    * @param \Drupal\Core\Database\Connection $connection
+   * @param \Drupal\Core\Entity\EntityDisplayRepositoryInterface $entity_display_repository
    */
   public function __construct(
     MediaTypeGuesserInterface $media_type_guesser,
@@ -100,7 +107,8 @@ class MediaService {
     RendererInterface $renderer,
     EntityTypeBundleInfoInterface $entity_type_bundle_info,
     MediaEntityRendererInterface $media_entity_renderer,
-    Connection $connection
+    Connection $connection,
+    EntityDisplayRepositoryInterface $entity_display_repository
   ) {
     $this->mediaTypeGuesser = $media_type_guesser;
     $this->entityTypeManager = $entity_type_manager;
@@ -112,6 +120,7 @@ class MediaService {
     $this->entityTypeBundleInfo = $entity_type_bundle_info;
     $this->mediaEntityRenderer = $media_entity_renderer;
     $this->connection = $connection;
+    $this->entityDisplayRepository = $entity_display_repository;
 
     if ($this->moduleHandler->moduleExists('media_library')) {
       $this->builder = \Drupal::getContainer()->get('gutenberg.media_library.ui_builder');
@@ -153,12 +162,30 @@ class MediaService {
    * @return mixed
    * @throws \Drupal\gutenberg\Service\MediaEntityNotFoundException
    */
-  public function renderMediaEntities(array $media_entity_ids) {
-    if (!$html = $this->mediaEntityRenderer->render($media_entity_ids)) {
+  public function getRenderedMediaEntity(string $media_entity_id) {
+    if (!$media_entity = $this->entityTypeManager->getStorage('media')->load($media_entity_id)) {
       throw new MediaEntityNotFoundException();
     }
 
-    return $html;
+    $rendered_view_modes = [];
+
+    try {
+      /** @var \Drupal\media\Entity\Media $media_entity */
+      $view_modes = $this->entityDisplayRepository->getViewModeOptionsByBundle('media', $media_entity->bundle());
+
+      foreach ($view_modes as $view_mode => $view_mode_name) {
+        $rendered_view_modes[$view_mode] = [
+          'view_mode' => $view_mode,
+          'view_mode_name' => (string) $view_mode_name,
+          'html' => $this->mediaEntityRenderer->render($media_entity, $view_mode),
+        ];
+      }
+    }
+    catch (\Throwable $exception) {
+      // Catch silently.
+    }
+
+    return $rendered_view_modes;
   }
 
   /**

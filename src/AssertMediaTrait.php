@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\gutenberg\DataProvider;
+namespace Drupal\gutenberg;
 
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\file\FileInterface;
@@ -11,7 +11,7 @@ use Drupal\media\MediaInterface;
  *
  * @package Drupal\gutenberg\DataProvider
  */
-trait AssertDataProviderTrait {
+trait AssertMediaTrait {
 
   /**
    * Assert if provided entity is type of FileInterface.

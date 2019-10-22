@@ -12,11 +12,14 @@ interface MediaEntityRendererInterface {
   /**
    * Render media entities.
    *
-   * @param array $media_entity_ids
-   *   Media entity IDs.
+   * @param \Drupal\media\Entity\Media|string $media_entity
+   *   Media entity ID or loaded media entity instance.
+   * @param string $view_mode
+   *   (optional) View mode of media entity, 'full' is default.
    *
-   * @return mixed
+   * @return string
+   *   Rendered HTML of the media entity.
    */
-  public function render(array $media_entity_ids);
+  public function render($media_entity, string $view_mode = 'full');
 
 }

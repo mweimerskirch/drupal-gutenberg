@@ -5,6 +5,8 @@
 * @preserve
 **/'use strict';
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -20,9 +22,11 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
       data = wp.data;
   var Placeholder = components.Placeholder,
       Button = components.Button,
-      FormFileUpload = components.FormFileUpload;
+      FormFileUpload = components.FormFileUpload,
+      SelectControl = components.SelectControl;
   var BlockIcon = blockEditor.BlockIcon,
-      MediaUpload = blockEditor.MediaUpload;
+      MediaUpload = blockEditor.MediaUpload,
+      InspectorControls = blockEditor.InspectorControls;
   var Component = element.Component,
       Fragment = element.Fragment;
   var DrupalIcon = DrupalGutenberg.Components.DrupalIcon;
@@ -43,6 +47,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
       };
       _this.insertMedia = _this.insertMedia.bind(_this);
       _this.onUpload = _this.onUpload.bind(_this);
+      _this.changeViewMode = _this.changeViewMode.bind(_this);
       return _this;
     }
 
@@ -53,7 +58,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
           return;
         }
 
-        this.props.setAttributes({ mediaEntityIds: mediaEntityIds });
+        this.props.setAttributes({
+          mediaEntityIds: mediaEntityIds
+        });
       }
     }, {
       key: 'onUpload',
@@ -78,6 +85,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
         });
       }
     }, {
+      key: 'changeViewMode',
+      value: function changeViewMode(viewMode) {
+        this.props.setAttributes({
+          viewMode: viewMode
+        });
+      }
+    }, {
       key: 'render',
       value: function render() {
         var _this3 = this;
@@ -85,13 +99,33 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
         var _props2 = this.props,
             className = _props2.className,
             isMediaLibraryEnabled = _props2.isMediaLibraryEnabled,
-            mediaContent = _props2.mediaContent;
+            mediaContent = _props2.mediaContent,
+            mediaViewModes = _props2.mediaViewModes,
+            attributes = _props2.attributes;
 
         var instructions = __('Upload a media file or pick one from your media library.');
         var placeholderClassName = ['block-editor-media-placeholder', 'editor-media-placeholder', className].join(' ');
 
-        if (mediaContent && mediaContent.html) {
-          return React.createElement('div', { dangerouslySetInnerHTML: { __html: mediaContent.html } });
+        if (Array.isArray(mediaViewModes) && mediaViewModes.length) {
+          var inspectorControls = React.createElement(
+            InspectorControls,
+            null,
+            React.createElement(
+              PanelBody,
+              { title: __('Media entity settings') },
+              React.createElement(SelectControl, { label: __('View mode'),
+                value: attributes.viewMode,
+                options: mediaViewModes,
+                onChange: this.changeViewMode })
+            )
+          );
+
+          return React.createElement(
+            Fragment,
+            null,
+            React.createElement('div', { dangerouslySetInnerHTML: { __html: mediaContent[attributes.viewMode].processedHtml } }),
+            inspectorControls
+          );
         }
 
         var content = isMediaLibraryEnabled ? React.createElement(MediaUpload, { onSelect: this.insertMedia,
@@ -164,29 +198,47 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
     if (!mediaEntityIds.length) {
       return {
-        mediaContent: { html: '' },
+        mediaContent: {},
+        mediaViewModes: [],
         mediaUpload: getSettings().__experimentalMediaUpload
       };
     }
 
-    var media = getMediaEntities(mediaEntityIds);
-    var node = document.createElement('div');
+    var medias = getMediaEntities(mediaEntityIds);
+    var mediaViewModes = [];
+    var mediaContent = {};
 
-    if (media && media.html) {
-      node.innerHTML = media.html;
-      var formElements = node.querySelectorAll('input, select, button, textarea, a');
-      formElements.forEach(function (element) {
-        element.setAttribute('readonly', true);
-        element.setAttribute('required', false);
+    if (medias && medias.length) {
+      mediaContent = _extends({}, medias[0]);
 
-        if (element.tagName === 'A') {
-          element.removeAttribute('href');
+      for (var viewMode in mediaContent) {
+        if (!mediaContent.hasOwnProperty(viewMode)) {
+          continue;
         }
-      });
+
+        mediaViewModes.push({
+          value: mediaContent[viewMode]['view_mode'],
+          label: mediaContent[viewMode]['view_mode_name']
+        });
+
+        var node = document.createElement('div');
+        node.innerHTML = mediaContent[viewMode].html;
+        var formElements = node.querySelectorAll('input, select, button, textarea, a');
+        formElements.forEach(function (element) {
+          element.setAttribute('readonly', true);
+          element.setAttribute('required', false);
+
+          if (element.tagName === 'A') {
+            element.removeAttribute('href');
+          }
+        });
+        mediaContent[viewMode].processedHtml = node.innerHTML;
+      }
     }
 
     return {
-      mediaContent: { html: node.innerHTML },
+      mediaContent: mediaContent,
+      mediaViewModes: mediaViewModes,
       mediaUpload: getSettings().__experimentalMediaUpload
     };
   })(DrupalMediaEntity);

@@ -1,7 +1,7 @@
 (function (wp, $, Drupal, DrupalGutenberg, drupalSettings) {
   const {element, blockEditor, components, data} = wp;
-  const {Placeholder, Button, FormFileUpload} = components;
-  const {BlockIcon, MediaUpload} = blockEditor;
+  const {Placeholder, Button, FormFileUpload, SelectControl} = components;
+  const {BlockIcon, MediaUpload, InspectorControls} = blockEditor;
   const {Component, Fragment} = element;
   const {DrupalIcon} = DrupalGutenberg.Components;
   const __ = Drupal.t;
@@ -15,6 +15,7 @@
       };
       this.insertMedia = this.insertMedia.bind(this);
       this.onUpload = this.onUpload.bind(this);
+      this.changeViewMode = this.changeViewMode.bind(this);
     }
 
     insertMedia(mediaEntityIds) {
@@ -22,7 +23,9 @@
         return;
       }
 
-      this.props.setAttributes({mediaEntityIds});
+      this.props.setAttributes({
+        mediaEntityIds
+      });
     }
 
     onUpload(event) {
@@ -44,8 +47,20 @@
       });
     }
 
+    changeViewMode(viewMode) {
+      this.props.setAttributes({
+        viewMode
+      });
+    }
+
     render() {
-      const {className, isMediaLibraryEnabled, mediaContent} = this.props;
+      const {
+        className,
+        isMediaLibraryEnabled,
+        mediaContent,
+        mediaViewModes,
+        attributes,
+      } = this.props;
       const instructions = __('Upload a media file or pick one from your media library.');
       const placeholderClassName = [
         'block-editor-media-placeholder',
@@ -53,9 +68,23 @@
         className,
       ].join(' ');
 
-      if (mediaContent && mediaContent.html) {
+      if (Array.isArray(mediaViewModes) && mediaViewModes.length) {
+        const inspectorControls = (
+          <InspectorControls>
+            <PanelBody title={__('Media entity settings')}>
+              <SelectControl label={__('View mode')}
+                             value={attributes.viewMode}
+                             options={mediaViewModes}
+                             onChange={this.changeViewMode}/>
+            </PanelBody>
+          </InspectorControls>
+        );
+
         return (
-          <div dangerouslySetInnerHTML={{__html: mediaContent.html}}></div>
+          <Fragment>
+            <div dangerouslySetInnerHTML={{__html: mediaContent[attributes.viewMode].processedHtml}}/>
+            {inspectorControls}
+          </Fragment>
         );
       }
 
@@ -119,29 +148,48 @@
 
     if (!mediaEntityIds.length) {
       return {
-        mediaContent: {html: '',},
+        mediaContent: {},
+        mediaViewModes: [],
         mediaUpload: getSettings().__experimentalMediaUpload,
       };
     }
 
-    const media = getMediaEntities(mediaEntityIds);
-    const node = document.createElement('div');
+    const medias = getMediaEntities(mediaEntityIds);
+    const mediaViewModes = [];
+    let mediaContent = {};
 
-    if (media && media.html) {
-      node.innerHTML = media.html;
-      const formElements = node.querySelectorAll('input, select, button, textarea, a');
-      formElements.forEach(element => {
-        element.setAttribute('readonly', true);
-        element.setAttribute('required', false);
+    if (medias && medias.length) {
+      mediaContent = {...medias[0]};
 
-        if (element.tagName === 'A') {
-          element.removeAttribute('href');
+      for (let viewMode in mediaContent) {
+        if (!mediaContent.hasOwnProperty(viewMode)) {
+          continue;
         }
-      });
+
+        mediaViewModes.push({
+          value: mediaContent[viewMode]['view_mode'],
+          label: mediaContent[viewMode]['view_mode_name'],
+        });
+
+        // Process media HTML.
+        const node = document.createElement('div');
+        node.innerHTML = mediaContent[viewMode].html;
+        const formElements = node.querySelectorAll('input, select, button, textarea, a');
+        formElements.forEach(element => {
+          element.setAttribute('readonly', true);
+          element.setAttribute('required', false);
+
+          if (element.tagName === 'A') {
+            element.removeAttribute('href');
+          }
+        });
+        mediaContent[viewMode].processedHtml = node.innerHTML;
+      }
     }
 
     return {
-      mediaContent: {html: node.innerHTML},
+      mediaContent,
+      mediaViewModes,
       mediaUpload: getSettings().__experimentalMediaUpload,
     };
   })(DrupalMediaEntity);

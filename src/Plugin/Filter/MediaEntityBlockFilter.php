@@ -69,7 +69,7 @@ class MediaEntityBlockFilter extends FilterBase implements ContainerFactoryPlugi
     if (json_last_error() !== JSON_ERROR_NONE || empty($block_config['mediaEntityIds'])) {
       return '';
     }
-    return $this->mediaEntityRenderer->render($block_config['mediaEntityIds']);
+    return $this->mediaEntityRenderer->render(reset($block_config['mediaEntityIds']), $block_config['viewMode'] ?? 'default');
   }
 
 }

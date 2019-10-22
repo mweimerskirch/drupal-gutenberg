@@ -67,12 +67,16 @@ class MediaController extends ControllerBase {
    * @param string $media_entity_ids
    *   Comma-separated media entity IDs.
    *
+   * @todo: handle multiple rendering in the future.
+   *
    * @return \Symfony\Component\HttpFoundation\JsonResponse
    */
   public function render(string $media_entity_ids) {
     try {
+      $media_entity_ids = explode(',', $media_entity_ids);
+
       return new JsonResponse([
-        'html' => $this->mediaService->renderMediaEntities(explode(',', $media_entity_ids))
+        $this->mediaService->getRenderedMediaEntity(reset($media_entity_ids))
       ]);
     }
     catch (MediaEntityNotFoundException $exception) {

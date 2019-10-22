@@ -24,7 +24,7 @@ class GutenbergMediaLibraryUiBuilder extends MediaLibraryUiBuilder {
 
     // @todo: this is temporary fix that allows for rendering at least one tab
     //   to make it clickable on frontend side by Gutenberg.
-    if (count($allowed_type_ids) <= 0) {
+    if (!$allowed_type_ids) {
       return [];
     }
 

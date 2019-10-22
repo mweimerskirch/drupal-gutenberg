@@ -3,6 +3,7 @@
 namespace Drupal\gutenberg\DataProvider;
 
 use Drupal\Core\Entity\ContentEntityInterface;
+use Drupal\gutenberg\AssertMediaTrait;
 
 /**
  * Provides data for media entity type for Gutenberg editor.
@@ -11,7 +12,7 @@ use Drupal\Core\Entity\ContentEntityInterface;
  */
 class MediaEntityDataProvider extends BaseDataProvider {
 
-  use AssertDataProviderTrait;
+  use AssertMediaTrait;
 
   /**
    * {@inheritDoc}
