@@ -39,3 +39,6 @@ services:
   gutenberg.media_service:
     class: Drupal\gutenberg\Service\MediaService
     arguments: ['@gutenberg.media_type.guesser', '@entity_type.manager', '@gutenberg.media_type.persistence_manager', '@gutenberg.entity_type.data_provider_manager', '@module_handler', '@gutenberg.media_uploader', '@renderer', '@entity_type.bundle.info', '@gutenberg.media_entity.renderer', '@database']
+  gutenberg.media_library.ui_builder:
+    class: Drupal\gutenberg\GutenbergMediaLibraryUiBuilder
+    arguments: ['@entity_type.manager', '@request_stack', '@views.executable', '@form_builder', '@media_library.opener_resolver']
