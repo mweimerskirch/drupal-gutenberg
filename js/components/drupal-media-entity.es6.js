@@ -80,9 +80,14 @@
           </InspectorControls>
         );
 
+        let html = mediaContent.default.processedHtml;
+        if (mediaContent[attributes.viewMode]) {
+          html = mediaContent[attributes.viewMode].processedHtml;
+        }
+
         return (
           <Fragment>
-            <div dangerouslySetInnerHTML={{__html: mediaContent[attributes.viewMode].processedHtml}}/>
+            <div dangerouslySetInnerHTML={{__html: html}}/>
             {inspectorControls}
           </Fragment>
         );

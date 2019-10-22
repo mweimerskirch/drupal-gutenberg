@@ -120,10 +120,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
             )
           );
 
+          var html = mediaContent.default.processedHtml;
+          if (mediaContent[attributes.viewMode]) {
+            html = mediaContent[attributes.viewMode].processedHtml;
+          }
+
           return React.createElement(
             Fragment,
             null,
-            React.createElement('div', { dangerouslySetInnerHTML: { __html: mediaContent[attributes.viewMode].processedHtml } }),
+            React.createElement('div', { dangerouslySetInnerHTML: { __html: html } }),
             inspectorControls
           );
         }
