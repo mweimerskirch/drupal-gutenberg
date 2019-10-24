@@ -1,6 +1,7 @@
+/* eslint func-names: ["error", "never"] */
 (function (wp, $, Drupal, DrupalGutenberg, drupalSettings) {
   const {element, blockEditor, components, data} = wp;
-  const {Placeholder, Button, FormFileUpload, SelectControl} = components;
+  const {Placeholder, Button, FormFileUpload, SelectControl, IconButton} = components;
   const {BlockIcon, MediaUpload, InspectorControls} = blockEditor;
   const {Component, Fragment} = element;
   const {DrupalIcon} = DrupalGutenberg.Components;

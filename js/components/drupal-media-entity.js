@@ -23,7 +23,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
   var Placeholder = components.Placeholder,
       Button = components.Button,
       FormFileUpload = components.FormFileUpload,
-      SelectControl = components.SelectControl;
+      SelectControl = components.SelectControl,
+      IconButton = components.IconButton;
   var BlockIcon = blockEditor.BlockIcon,
       MediaUpload = blockEditor.MediaUpload,
       InspectorControls = blockEditor.InspectorControls;

@@ -1,7 +1,8 @@
 /* eslint func-names: ["error", "never"] */
-(function(wp, $, Drupal, drupalSettings) {
-  const { data, blocks } = wp;
-  const { DrupalIcon, DrupalMediaEntity } = window.DrupalGutenberg.Components;
+(function(wp, $, Drupal, drupalSettings, DrupalGutenberg) {
+  const { data, blocks, element } = wp;
+  const { Fragment } = element;
+  const { DrupalIcon, DrupalMediaEntity } = DrupalGutenberg.Components;
 
   const gutenberg = drupalSettings.gutenberg || {};
   const isMediaLibraryEnabled = gutenberg['media-library-enabled'] || false;
@@ -67,4 +68,4 @@
 
   window.DrupalGutenberg = window.DrupalGutenberg || {};
   window.DrupalGutenberg.registerDrupalMedia = registerDrupalMedia;
-})(wp, jQuery, Drupal, drupalSettings);
+})(wp, jQuery, Drupal, drupalSettings, DrupalGutenberg);
