@@ -320,6 +320,8 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
         templateLock: drupalSettings.gutenberg['template-lock'] === 'none' ? false : drupalSettings.gutenberg['template-lock'] || false
       };
 
+      console.log(editorSettings);
+
       var colors = drupalSettings.gutenberg && drupalSettings.gutenberg['theme-support'] && drupalSettings.gutenberg['theme-support'].colors ? [].concat(_toConsumableArray(drupalSettings.gutenberg['theme-support'].colors)) : null;
       var fontSizes = drupalSettings.gutenberg && drupalSettings.gutenberg['theme-support'] && drupalSettings.gutenberg['theme-support'].fontSizes ? [].concat(_toConsumableArray(drupalSettings.gutenberg['theme-support'].fontSizes)) : null;
 

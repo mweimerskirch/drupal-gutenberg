@@ -441,7 +441,7 @@ function gutenberg_form_node_form_alter(&$form, FormStateInterface $form_state) 
  */
 function _gutenberg_node_form_submit(array $form, FormStateInterface $form_state) {
   // var_dump($form_state);
-  $form_state->setValue('title', 'HERES THE TITLE');
+  // $form_state->setValue('title', 'HERES THE TITLE');
   // die('');
 }
 

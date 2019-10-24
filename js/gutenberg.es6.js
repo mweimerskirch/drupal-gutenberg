@@ -430,6 +430,8 @@
             ? false : drupalSettings.gutenberg['template-lock'] || false,
       };
 
+      console.log(editorSettings);
+
       const colors =
         drupalSettings.gutenberg &&
         drupalSettings.gutenberg['theme-support'] &&

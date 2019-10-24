@@ -1,7 +1,6 @@
-const { blocks, data, element, editor } = wp;
+const { blocks, data, editor } = wp;
 const { registerBlockType } = blocks;
 const { dispatch, select } = data;
-const { Fragment } = element;
 const { InnerBlocks } = editor;
 const __ = Drupal.t;
 
@@ -13,19 +12,17 @@ const settings = {
 
   edit({ className }) {
     return (
-      <Fragment>
-        <div className={className}>
-          <InnerBlocks templateLock={false} />
-        </div>
-      </Fragment>
+      <div className={className}>
+        <InnerBlocks templateLock={false} />
+      </div>
     );
   },
 
   save({ className }) {
     return (
-      <div className={className}>
+      <main className={className}>
         <InnerBlocks.Content />
-      </div>
+      </main>
     );
   },
 };

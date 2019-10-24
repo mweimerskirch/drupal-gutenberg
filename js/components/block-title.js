@@ -41,6 +41,5 @@ Object.defineProperty(wp.blockEditor, 'BlockTitle', {
     return {
       name: getBlockName(clientId) + ' - from Drupal!!!'
     };
-  })(BlockTitle),
-  configurable: true
+  })(BlockTitle)
 });

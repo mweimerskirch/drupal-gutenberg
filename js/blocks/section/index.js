@@ -12,12 +12,10 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 var _wp = wp,
     blocks = _wp.blocks,
     data = _wp.data,
-    element = _wp.element,
     editor = _wp.editor;
 var registerBlockType = blocks.registerBlockType;
 var dispatch = data.dispatch,
     select = data.select;
-var Fragment = element.Fragment;
 var InnerBlocks = editor.InnerBlocks;
 
 var __ = Drupal.t;
@@ -32,20 +30,16 @@ var settings = {
     var className = _ref.className;
 
     return React.createElement(
-      Fragment,
-      null,
-      React.createElement(
-        'div',
-        { className: className },
-        React.createElement(InnerBlocks, { templateLock: false })
-      )
+      'div',
+      { className: className },
+      React.createElement(InnerBlocks, { templateLock: false })
     );
   },
   save: function save(_ref2) {
     var className = _ref2.className;
 
     return React.createElement(
-      'div',
+      'main',
       { className: className },
       React.createElement(InnerBlocks.Content, null)
     );
