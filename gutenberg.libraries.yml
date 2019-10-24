@@ -47,6 +47,12 @@ bartik:
   css:
     theme:
       css/bartik.css: {  }
+drupal-blocks:
+  js:
+    js/blocks/section/index.js: {  }
+    js/blocks/simple-text/index.js: {  }
+  dependencies:
+    - gutenberg/blocks-edit
 blocks-edit:
   dependencies:
     - gutenberg/edit-node
@@ -85,8 +91,6 @@ edit-node:
     js/drupal-blocks.js: {  }
     js/gutenberg.js: {  }
     js/admin.js: {  }
-    js/blocks/section/index.js: {  }
-    js/blocks/simple-text/index.js: {  }
   dependencies:
     - core/jquery
     - core/drupal

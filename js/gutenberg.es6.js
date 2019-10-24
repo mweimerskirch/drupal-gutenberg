@@ -44,10 +44,9 @@
       // });
 
       await registerDrupalStore(data);
-      await registerDrupalBlocks(contentType);
 
       // Add 'mapping field' and 'mapping attribute' attributes to all blocks.
-      addFilter(
+      await addFilter(
         'blocks.registerBlockType',
         'drupalgutenberg/custom-attributes',
         settings => {
@@ -61,9 +60,12 @@
               default: '',
             },
           });
+          console.log(settings);
           return settings;
         },
       );
+
+      await registerDrupalBlocks(contentType);
 
       this._initGutenberg(element);
 

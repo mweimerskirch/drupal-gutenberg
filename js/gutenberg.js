@@ -42,10 +42,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
               case 11:
                 _context2.next = 13;
-                return registerDrupalBlocks(contentType);
-
-              case 13:
-                addFilter('blocks.registerBlockType', 'drupalgutenberg/custom-attributes', function (settings) {
+                return addFilter('blocks.registerBlockType', 'drupalgutenberg/custom-attributes', function (settings) {
                   settings.attributes = Object.assign(settings.attributes, {
                     mappingField: {
                       type: 'string',
@@ -56,8 +53,15 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                       default: ''
                     }
                   });
+                  console.log(settings);
                   return settings;
                 });
+
+              case 13:
+                _context2.next = 15;
+                return registerDrupalBlocks(contentType);
+
+              case 15:
 
                 _this._initGutenberg(element);
 
@@ -257,7 +261,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
                 return _context2.abrupt('return', true);
 
-              case 45:
+              case 46:
               case 'end':
                 return _context2.stop();
             }

@@ -29,11 +29,7 @@ var settings = {
   edit: function edit(_ref) {
     var className = _ref.className;
 
-    return React.createElement(
-      'div',
-      { className: className },
-      React.createElement(InnerBlocks, { templateLock: false })
-    );
+    return React.createElement(InnerBlocks, { templateLock: false });
   },
   save: function save(_ref2) {
     var className = _ref2.className;

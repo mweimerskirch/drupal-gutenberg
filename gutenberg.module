@@ -6,6 +6,7 @@
  */
 
 use Drupal\Core\Entity\EntityFormInterface;
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\node\NodeInterface;
@@ -497,6 +498,71 @@ function gutenberg_preprocess_node(&$variables) {
   $default_theme = \Drupal::config('system.theme')->get('default');
   if ($default_theme === 'bartik') {
     $variables['#attached']['library'][] = 'gutenberg/bartik';
+  }
+}
+
+/**
+ * Implements hook_entity_presave().
+ */
+function gutenberg_entity_presave($entity) {
+  if (!$entity->getEntityTypeId() === 'node') {
+    return;
+  }
+
+  $config = \Drupal::service('config.factory')->getEditable('gutenberg.settings');
+  $node = $variables['elements']['#node'];
+  $node_type = $entity->bundle();
+
+  $gutenberg_enabled = $config->get($node_type . '_enable_full');
+
+  if (!$gutenberg_enabled) {
+    return;
+  }
+
+  // get first text field, that's the one that'll have
+  // gutenberg text format
+  // TODO: We already have this on node_edit_form_alter,
+  //       let's move it to a function.
+  $text_fields = [];
+
+  // Iterate over all node fields and apply gutenberg text format
+  // on first text field found.
+  $field_names = array_keys($entity->getFields());
+
+  foreach ($field_names as $value) {
+    $entity
+      ->getFieldDefinition($value)
+      ->getFieldStorageDefinition()
+      ->getPropertyDefinitions();
+
+    $field_properties = array_keys($entity
+      ->getFieldDefinition($value)
+      ->getFieldStorageDefinition()
+      ->getPropertyDefinitions());
+
+    if (in_array('format', $field_properties)) {
+      $text_fields[] = $value;
+    }
+  }
+
+  if (count($text_fields) === 0) {
+    return;
+  }
+
+  $str = $entity->get($text_fields[0])->getString();
+  // iterate over all mapped fields and set its values
+  $mapped_fields = _gutenberg_get_mapped_fields(json_decode($config->get($node_type . '_template')));
+  foreach ($mapped_fields as $item) {
+    $re = '/(<!-- .*\{.*"mappingField":"' . $item['field']  . '".*} -->)([\s\S]*?)(<!-- \/[\s\S]*?-->|\/-->)/m';
+    // $re = '/(<!--[\s\S]+?\{[\s\S]+?"mappingField":"' . $item['field']  . '"[\s\S]+?} -->)([\s\S]+?)(<!-- \/[\s\S]+?-->|\/-->)/m';
+    // matches:
+    // 0: all block
+    // 1: opening block comment tag (get attributes from here)
+    // 2: content
+    // 3: closing block comment tag
+    preg_match_all($re, $str, $matches, PREG_SET_ORDER, 0);
+
+    $entity->set($item['field'], $matches[0][2]);
   }
 }
 

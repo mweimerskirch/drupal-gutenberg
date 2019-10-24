@@ -11,11 +11,7 @@ const settings = {
   attributes: {},
 
   edit({ className }) {
-    return (
-      <div className={className}>
-        <InnerBlocks templateLock={false} />
-      </div>
-    );
+    return <InnerBlocks templateLock={false} />;
   },
 
   save({ className }) {
