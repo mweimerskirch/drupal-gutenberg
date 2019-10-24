@@ -124,7 +124,7 @@ class MediaService {
     $this->entityDisplayRepository = $entity_display_repository;
 
     if ($this->moduleHandler->moduleExists('media_library')) {
-      $this->builder = \Drupal::getContainer()->get('media_library.ui_builder');
+      $this->builder = \Drupal::getContainer()->get('gutenberg.media_library.ui_builder');
     }
   }
 
