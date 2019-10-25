@@ -86,9 +86,14 @@ edit-node:
     js/components/drupal-icon.js: {  }
     js/components/media-browser-details.js: {  }
     js/components/media-browser.js: {  }
+    js/components/media-library.js: {  }
+    js/components/drupal-media-entity.js: {  }
+    js/hoc/gutenberg-dialog.js: {  }
+    js/hoc/native-dialog.js: {  }
     js/filters/media-upload.js: {  }
     js/drupal-store.js: {  }
     js/drupal-blocks.js: {  }
+    js/drupal-media.js: {  }
     js/gutenberg.js: {  }
     js/admin.js: {  }
   dependencies:
@@ -97,6 +102,7 @@ edit-node:
     - core/drupalSettings
     - core/drupal.debounce
     - core/drupal.displace
+    - media_library/ui
     - editor/drupal.editor
     - gutenberg/init
     - gutenberg/url
@@ -107,6 +113,7 @@ edit-node:
     - gutenberg/edit-post
     - gutenberg/format-library
     - gutenberg/g-media-attributes
+    - gutenberg/special-media-selection
 drupal-url:
   js:
     js/url.js: {  }
@@ -114,6 +121,7 @@ drupal-api-fetch:
   js:
     js/api-fetch.js: {  }
   dependencies:
+    - gutenberg/data
     - gutenberg/api-fetch
 drupal-data:
   js:
@@ -637,6 +645,9 @@ shortcode:
   dependencies:
     - gutenberg/lodash
     - gutenberg/polyfill
+special-media-selection:
+  js:
+    js/special-media-selection.js: {  }
 token-list:
   js:
     vendor/gutenberg/token-list/index.js: {  }

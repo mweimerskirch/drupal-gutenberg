@@ -1,5 +1,7 @@
 /* eslint func-names: ["error", "never"] */
 (function(wp, Drupal, drupalSettings, $) {
+  const __ = Drupal.t;
+
   const types = {
     page: {
       id: 1,
@@ -124,20 +126,25 @@
       regex: /\/wp\/v2\/media\/(\d*)/g,
       process(matches) {
         return new Promise((resolve, reject) => {
+          Drupal.toggleGutenbergLoader('show');
           $.ajax({
-            method: 'GET',
-            url: `${drupalSettings.path.baseUrl}editor/media/load/${
-              matches[1]
-            }`,
-            accepts: {
-              json: 'application/json, text/javascript, */*; q=0.01',
-            },
-          })
+              method: 'GET',
+              url: `${drupalSettings.path.baseUrl}editor/media/load/${
+                matches[1]
+              }`,
+              accepts: {
+                json: 'application/json, text/javascript, */*; q=0.01',
+              },
+            })
             .done(result => {
               resolve(result);
             })
-            .fail(() => {
-              reject(Error);
+            .fail(error => {
+              error && error.responseJSON && error.responseJSON.error && Drupal.notifyError(error.responseJSON.error);
+              reject(error);
+            })
+            .always(() => {
+              Drupal.toggleGutenbergLoader('hide');
             });
         });
       },
@@ -166,22 +173,32 @@
           formData.append('form_build_id', $('[name="form_build_id"]').val());
           formData.append('form_token', $('[name="form_token"]').val());
 
+          Drupal.toggleGutenbergLoader('show');
           $.ajax({
-            method: 'POST',
-            url: `${drupalSettings.path.baseUrl}editor/media/upload/gutenberg`,
-            // url: drupalSettings.path.baseUrl + 'editor/dialog/image/gutenberg?ajax_form=0&element_parents=fid',
-            data: formData,
-            processData: false,
-            contentType: false,
-            accepts: {
-              json: 'application/json, text/javascript, */*; q=0.01',
-            },
-          })
+              method: 'POST',
+              url: `${drupalSettings.path.baseUrl}editor/media/upload/gutenberg`,
+              // url: drupalSettings.path.baseUrl + 'editor/dialog/image/gutenberg?ajax_form=0&element_parents=fid',
+              data: formData,
+              processData: false,
+              contentType: false,
+              accepts: {
+                json: 'application/json, text/javascript, */*; q=0.01',
+              },
+            })
             .done(result => {
+              if (Drupal.isMediaEnabled()) {
+                Drupal.notifySuccess(__('File and media entity have been created successfully.'));
+              } else {
+                Drupal.notifySuccess(__('File entity has been created successfully.'));
+              }
               resolve(result);
             })
-            .fail(err => {
-              reject(err);
+            .fail(error => {
+              error && error.responseJSON && error.responseJSON.error && Drupal.notifyError(error.responseJSON.error);
+              reject(error);
+            })
+            .always(() => {
+              Drupal.toggleGutenbergLoader('hide');
             });
         });
       },
@@ -194,6 +211,36 @@
           resolve([]);
         });
       },
+    },
+    'load-media-library-dialog': {
+      method: 'GET',
+      regex: /load-media-library-dialog/g,
+      process(matches, data) {
+        Drupal.toggleGutenbergLoader('show');
+        return new Promise((resolve, reject) => {
+          $.ajax({
+              method: 'GET',
+              url: `${drupalSettings.path.baseUrl}editor/media/dialog?types=${
+                (data.allowedTypes || []).join(',')
+              }`,
+              processData: false,
+              contentType: false,
+              accepts: {
+                json: 'application/json, text/javascript, */*; q=0.01',
+              },
+            })
+            .done(result => {
+              resolve(result);
+            })
+            .fail(error => {
+              error && error.responseJSON && error.responseJSON.error && Drupal.notifyError(error.responseJSON.error);
+              reject(error);
+            })
+            .always(() => {
+              Drupal.toggleGutenbergLoader('hide');
+            });
+        });
+      }
     },
     categories: {
       method: 'GET',

@@ -5,6 +5,7 @@
 
     const DEFAULT_STATE = {
       blocks: {},
+      mediaEntities: {},
     };
 
     return registerStore('drupal', {
@@ -17,6 +18,14 @@
                 ...state.blocks,
                 [action.item]: action.block,
               },
+            };
+          case 'SET_MEDIA_ENTITY':
+            return {
+              ...state,
+              mediaEntities: {
+                ...state.mediaEntities,
+                [action.id]: action.mediaEntity,
+              }
             };
           default:
             return state;
@@ -31,15 +40,24 @@
             block,
           };
         },
+        setMediaEntity(id, mediaEntity) {
+          return {
+            type: 'SET_MEDIA_ENTITY',
+            id,
+            mediaEntity,
+          };
+        }
       },
 
       selectors: {
         getBlock(state, item) {
           const { blocks } = state;
-          const block = blocks[item];
-
-          return block;
+          return blocks[item];
         },
+        getMediaEntity(state, id) {
+          const { mediaEntities } = state;
+          return mediaEntities[id];
+        }
       },
 
       resolvers: {
@@ -55,6 +73,30 @@
             block,
           };
         },
+        async getMediaEntity(entityId) {
+          const response = await fetch(`
+            ${drupalSettings.path.baseUrl}editor/media/render/${entityId}
+          `);
+
+          if (response.ok) {
+            const entity = await response.json();
+
+            if (Object.keys(entity).length) {
+              dispatch('drupal').setMediaEntity(entityId, entity);
+              return entity;
+            }
+          }
+
+          if (response.status === 404) {
+            Drupal.notifyError("Media entity couldn't be found.");
+            return null;
+          }
+
+          if (!response.ok) {
+            Drupal.notifyError("An error occurred while fetching data.");
+            return null;
+          }
+        }
       },
     });
   }

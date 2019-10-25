@@ -11,3 +11,4 @@ dependencies:
   - drupal:block_content
   - drupal:image
   - drupal:file
+  - drupal:filter

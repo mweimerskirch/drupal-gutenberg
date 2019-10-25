@@ -45,3 +45,15 @@ function hook_gutenberg_blocks_alter(array &$js_files_edit, array &$css_files_ed
   $css_files_edit[] = '/path/to/css/files';
   $css_files_view[] = '/path/to/css/files';
 }
+
+/**
+ * Alter render array of Gutenberg Media Library dialog.
+ *
+ * @param array $build_ui
+ *   Build array of media library dialog.
+ *
+ * @see \Drupal\gutenberg\GutenbergMediaLibraryUiBuilder
+ */
+function hook_gutenberg_media_library_view_alter(array &$build_ui) {
+  // @todo: provide some example.
+}

@@ -6,6 +6,8 @@
 **/'use strict';
 
 (function (wp, Drupal, drupalSettings, $) {
+  var __ = Drupal.t;
+
   var types = {
     page: {
       id: 1,
@@ -128,6 +130,7 @@
       regex: /\/wp\/v2\/media\/(\d*)/g,
       process: function process(matches) {
         return new Promise(function (resolve, reject) {
+          Drupal.toggleGutenbergLoader('show');
           $.ajax({
             method: 'GET',
             url: drupalSettings.path.baseUrl + 'editor/media/load/' + matches[1],
@@ -136,8 +139,11 @@
             }
           }).done(function (result) {
             resolve(result);
-          }).fail(function () {
-            reject(Error);
+          }).fail(function (error) {
+            error && error.responseJSON && error.responseJSON.error && Drupal.notifyError(error.responseJSON.error);
+            reject(error);
+          }).always(function () {
+            Drupal.toggleGutenbergLoader('hide');
           });
         });
       }
@@ -186,6 +192,7 @@
           formData.append('form_build_id', $('[name="form_build_id"]').val());
           formData.append('form_token', $('[name="form_token"]').val());
 
+          Drupal.toggleGutenbergLoader('show');
           $.ajax({
             method: 'POST',
             url: drupalSettings.path.baseUrl + 'editor/media/upload/gutenberg',
@@ -197,9 +204,17 @@
               json: 'application/json, text/javascript, */*; q=0.01'
             }
           }).done(function (result) {
+            if (Drupal.isMediaEnabled()) {
+              Drupal.notifySuccess(__('File and media entity have been created successfully.'));
+            } else {
+              Drupal.notifySuccess(__('File entity has been created successfully.'));
+            }
             resolve(result);
-          }).fail(function (err) {
-            reject(err);
+          }).fail(function (error) {
+            error && error.responseJSON && error.responseJSON.error && Drupal.notifyError(error.responseJSON.error);
+            reject(error);
+          }).always(function () {
+            Drupal.toggleGutenbergLoader('hide');
           });
         });
       }
@@ -210,6 +225,31 @@
       process: function process() {
         return new Promise(function (resolve) {
           resolve([]);
+        });
+      }
+    },
+    'load-media-library-dialog': {
+      method: 'GET',
+      regex: /load-media-library-dialog/g,
+      process: function process(matches, data) {
+        Drupal.toggleGutenbergLoader('show');
+        return new Promise(function (resolve, reject) {
+          $.ajax({
+            method: 'GET',
+            url: drupalSettings.path.baseUrl + 'editor/media/dialog?types=' + (data.allowedTypes || []).join(','),
+            processData: false,
+            contentType: false,
+            accepts: {
+              json: 'application/json, text/javascript, */*; q=0.01'
+            }
+          }).done(function (result) {
+            resolve(result);
+          }).fail(function (error) {
+            error && error.responseJSON && error.responseJSON.error && Drupal.notifyError(error.responseJSON.error);
+            reject(error);
+          }).always(function () {
+            Drupal.toggleGutenbergLoader('hide');
+          });
         });
       }
     },

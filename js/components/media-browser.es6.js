@@ -126,8 +126,6 @@
         );
       });
 
-      console.log(medias);
-
       onSelect(medias);
     }
 

@@ -188,11 +188,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                     };
                   }());
 
-                  console.log(medias);
-
                   onSelect(medias);
 
-                case 6:
+                case 5:
                 case 'end':
                   return _context2.stop();
               }
