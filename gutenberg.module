@@ -301,11 +301,6 @@ function gutenberg_form_node_form_alter(&$form, FormStateInterface $form_state) 
   $field_names = array_keys($node->getFields());
 
   foreach ($field_names as $value) {
-    $node
-      ->getFieldDefinition($value)
-      ->getFieldStorageDefinition()
-      ->getPropertyDefinitions();
-
     $field_properties = array_keys($node
       ->getFieldDefinition($value)
       ->getFieldStorageDefinition()
@@ -528,21 +523,22 @@ function gutenberg_entity_presave($entity) {
   // Iterate over all node fields and apply gutenberg text format
   // on first text field found.
   $field_names = array_keys($entity->getFields());
-
   foreach ($field_names as $value) {
-    $entity
+    $field_properties = $entity
       ->getFieldDefinition($value)
       ->getFieldStorageDefinition()
       ->getPropertyDefinitions();
 
-    $field_properties = array_keys($entity
-      ->getFieldDefinition($value)
-      ->getFieldStorageDefinition()
-      ->getPropertyDefinitions());
-
-    if (in_array('format', $field_properties)) {
+    // Check for "rich-text" fields
+    if (in_array('format', array_keys($field_properties))) {
       $text_fields[] = $value;
     }
+
+    // Check for images
+    // if (isset($field_properties['entity'])) {
+    //   // $type = $field_properties['entity']->getSetting();
+    //   var_dump($field_properties['entity']->getTargetDefinition());
+    // }
   }
 
   if (count($text_fields) === 0) {
