@@ -45,10 +45,8 @@ class MediaEntityRenderer implements MediaEntityRendererInterface {
       }
 
       $this->assertIsMediaEntity($media_entity);
-
-      return (string) $this->renderer->render(
-        $this->entityTypeManager->getViewBuilder('media')->view($media_entity, $view_mode)
-      );
+      $build = $this->entityTypeManager->getViewBuilder('media')->view($media_entity, $view_mode);
+      return (string) $this->renderer->render($build);
     }
     catch (\Throwable $exception) {
       return '';

@@ -147,27 +147,24 @@ class MediaService {
       throw new MediaTypeNotFoundException();
     }
 
-    $builtUi = $this->builder->buildUi(
+    $buildUi = $this->builder->buildUi(
       MediaLibraryState::create('gutenberg.media_library.opener', array_unique($allowed_media_type_ids), reset($allowed_media_type_ids), 1)
     );
+    $this->moduleHandler->alter('gutenberg_media_library_view', $buildUi);
 
-    return $this->renderer->render($builtUi);
+    return $this->renderer->render($buildUi);
   }
 
   /**
    * Render media entities.
    *
-   * @param array $media_entity_ids
-   *   Array of media entity IDs.
+   * @param \Drupal\media\MediaInterface $media_entity
+   *   Media entity instance.
    *
-   * @return mixed
-   * @throws \Drupal\gutenberg\Service\MediaEntityNotFoundException
+   *
+   * @return array
    */
-  public function getRenderedMediaEntity(string $media_entity_id) {
-    if (!$media_entity = $this->entityTypeManager->getStorage('media')->load($media_entity_id)) {
-      throw new MediaEntityNotFoundException();
-    }
-
+  public function getRenderedMediaEntity(MediaInterface $media_entity) {
     $rendered_view_modes = [];
 
     try {

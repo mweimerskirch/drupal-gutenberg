@@ -1,7 +1,7 @@
 /* eslint func-names: ["error", "never"] */
 (function (wp, $, Drupal, DrupalGutenberg, drupalSettings) {
   const {element, blockEditor, components, data} = wp;
-  const {Placeholder, Button, FormFileUpload, SelectControl, IconButton} = components;
+  const {Placeholder, Button, FormFileUpload, SelectControl, IconButton, PanelBody} = components;
   const {BlockIcon, MediaUpload, InspectorControls} = blockEditor;
   const {Component, Fragment} = element;
   const {DrupalIcon} = DrupalGutenberg.Components;
@@ -19,13 +19,9 @@
       this.changeViewMode = this.changeViewMode.bind(this);
     }
 
-    insertMedia(mediaEntityIds) {
-      if (!mediaEntityIds.length) {
-        return;
-      }
-
+    insertMedia(mediaEntityId) {
       this.props.setAttributes({
-        mediaEntityIds
+        mediaEntityIds: [mediaEntityId]
       });
     }
 
@@ -148,38 +144,42 @@
 
   const createClass = withSelect((select, props) => {
     const {getSettings} = select('core/block-editor');
-    const {getMediaEntities} = select('drupal');
+    const {getMediaEntity} = select('drupal');
     const {attributes} = props;
     const mediaEntityIds = attributes.mediaEntityIds || [];
 
+    const defaultData = {
+      mediaContent: {},
+      mediaViewModes: [],
+      mediaUpload: getSettings().__experimentalMediaUpload,
+    };
+
     if (!mediaEntityIds.length) {
-      return {
-        mediaContent: {},
-        mediaViewModes: [],
-        mediaUpload: getSettings().__experimentalMediaUpload,
-      };
+      return defaultData;
     }
 
-    const medias = getMediaEntities(mediaEntityIds);
+    const mediaEntity = getMediaEntity(mediaEntityIds[0]);
+
+    if (!mediaEntity) {
+      return defaultData;
+    }
+
     const mediaViewModes = [];
-    let mediaContent = {};
 
-    if (medias && medias.length) {
-      mediaContent = {...medias[0]};
-
-      for (let viewMode in mediaContent) {
-        if (!mediaContent.hasOwnProperty(viewMode)) {
+    if (Object.keys(mediaEntity).length) {
+      for (let viewMode in mediaEntity) {
+        if (!mediaEntity.hasOwnProperty(viewMode)) {
           continue;
         }
 
         mediaViewModes.push({
-          value: mediaContent[viewMode]['view_mode'],
-          label: mediaContent[viewMode]['view_mode_name'],
+          value: mediaEntity[viewMode]['view_mode'],
+          label: mediaEntity[viewMode]['view_mode_name'],
         });
 
         // Process media HTML.
         const node = document.createElement('div');
-        node.innerHTML = mediaContent[viewMode].html;
+        node.innerHTML = mediaEntity[viewMode].html;
         const formElements = node.querySelectorAll('input, select, button, textarea, a');
         formElements.forEach(element => {
           element.setAttribute('readonly', true);
@@ -189,12 +189,12 @@
             element.removeAttribute('href');
           }
         });
-        mediaContent[viewMode].processedHtml = node.innerHTML;
+        mediaEntity[viewMode].processedHtml = node.innerHTML;
       }
     }
 
     return {
-      mediaContent,
+      mediaContent: mediaEntity,
       mediaViewModes,
       mediaUpload: getSettings().__experimentalMediaUpload,
     };

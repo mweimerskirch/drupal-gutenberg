@@ -20,9 +20,6 @@ gutenberg.media.load_media:
   path: '/editor/media/load-media/{media}'
   defaults:
     _controller: '\Drupal\gutenberg\Controller\MediaController::loadMedia'
-    parameters:
-      media:
-        type: entity:media
   requirements:
     _permission: 'gutenberg administer'
     _method: 'GET'
@@ -34,7 +31,7 @@ gutenberg.media.dialog:
     _permission: 'gutenberg administer'
     _method: 'GET'
 gutenberg.media.render:
-  path: '/editor/media/render/{media_entity_ids}'
+  path: '/editor/media/render/{media}'
   defaults:
     _controller: '\Drupal\gutenberg\Controller\MediaController::render'
   requirements:

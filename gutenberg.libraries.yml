@@ -107,6 +107,7 @@ edit-node:
     - gutenberg/edit-post
     - gutenberg/format-library
     - gutenberg/g-media-attributes
+    - gutenberg/special-media-selection
 drupal-url:
   js:
     js/url.js: {  }
@@ -638,6 +639,9 @@ shortcode:
   dependencies:
     - gutenberg/lodash
     - gutenberg/polyfill
+special-media-selection:
+  js:
+    js/special-media-selection.js: {  }
 token-list:
   js:
     vendor/gutenberg/token-list/index.js: {  }

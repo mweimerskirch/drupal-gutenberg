@@ -4,6 +4,7 @@ namespace Drupal\gutenberg\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\file\Entity\File;
+use Drupal\gutenberg\MediaSelectionProcessor\MediaSelectionProcessorManagerInterface;
 use Drupal\gutenberg\Service\FileEntityNotFoundException;
 use Drupal\gutenberg\Service\MediaEntityNotFoundException;
 use Drupal\gutenberg\Service\MediaService;
@@ -26,19 +27,29 @@ class MediaController extends ControllerBase {
   protected $mediaService;
 
   /**
+   * @var \Drupal\gutenberg\MediaSelectionProcessor\MediaSelectionProcessorManagerInterface
+   */
+  protected $mediaSelectionProcessorManager;
+
+  /**
    * MediaController constructor.
    *
    * @param \Drupal\gutenberg\Service\MediaService $media_service
+   * @param \Drupal\gutenberg\MediaSelectionProcessor\MediaSelectionProcessorManagerInterface $media_selection_processor_manager
    */
-  public function __construct(MediaService $media_service) {
+  public function __construct(MediaService $media_service, MediaSelectionProcessorManagerInterface $media_selection_processor_manager) {
     $this->mediaService = $media_service;
+    $this->mediaSelectionProcessorManager = $media_selection_processor_manager;
   }
 
   /**
    * {@inheritDoc}
    */
   public static function create(ContainerInterface $container) {
-    return new static($container->get('gutenberg.media_service'));
+    return new static(
+      $container->get('gutenberg.media_service'),
+      $container->get('gutenberg.media_selection_processor_manager')
+    );
   }
 
   /**
@@ -62,22 +73,48 @@ class MediaController extends ControllerBase {
   }
 
   /**
-   * Render provided media entities.
+   * Load media data.
    *
-   * @param string $media_entity_ids
-   *   Comma-separated media entity IDs.
+   * @param \Symfony\Component\HttpFoundation\Request $request
+   *   Current request.
+   * @param string $media
+   *   Media data (numeric or stringified JSON for media data processing).
    *
-   * @todo: handle multiple rendering in the future.
+   * @return \Symfony\Component\HttpFoundation\JsonResponse
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+   */
+  public function loadMedia(Request $request, string $media) {
+    $media_entities = $this->mediaSelectionProcessorManager->processData($media);
+    try {
+      if (!$media_entities) {
+        throw new MediaEntityNotFoundException();
+      }
+
+      return new JsonResponse($this->mediaService->loadMediaData(reset($media_entities)));
+    }
+    catch (MediaEntityNotFoundException $exception) {
+      return new JsonResponse($this->t($exception->getMessage()), 404);
+    }
+  }
+
+  /**
+   * Render provided media entity.
+   *
+   * @param string $media
+   *   Media data (numeric or stringified JSON for media data processing).
    *
    * @return \Symfony\Component\HttpFoundation\JsonResponse
    */
-  public function render(string $media_entity_ids) {
-    try {
-      $media_entity_ids = explode(',', $media_entity_ids);
+  public function render(string $media) {
+    $media_entities = $this->mediaSelectionProcessorManager->processData($media);
 
-      return new JsonResponse([
-        $this->mediaService->getRenderedMediaEntity(reset($media_entity_ids))
-      ]);
+    try {
+      if (!$media_entities) {
+        throw new MediaEntityNotFoundException();
+      }
+
+      return new JsonResponse($this->mediaService->getRenderedMediaEntity(reset($media_entities)));
     }
     catch (MediaEntityNotFoundException $exception) {
       return new JsonResponse(['error' => $this->t($exception->getMessage())], 404);
@@ -131,31 +168,6 @@ class MediaController extends ControllerBase {
       return new JsonResponse($this->mediaService->loadFileData($file));
     }
     catch (FileEntityNotFoundException $exception) {
-      return new JsonResponse($this->t($exception->getMessage()), 404);
-    }
-  }
-
-  /**
-   * Load media data.
-   *
-   * @param \Symfony\Component\HttpFoundation\Request $request
-   *   Current request.
-   * @param \Drupal\media\Entity\Media|null $media
-   *   Loaded media entity instance.
-   *
-   * @return \Symfony\Component\HttpFoundation\JsonResponse
-   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
-   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
-   */
-  public function loadMedia(Request $request, ?Media $media) {
-    if (!$media) {
-      return new JsonResponse(['error' => $this->t('Media entity not found.')], 404);
-    }
-
-    try {
-      return new JsonResponse($this->mediaService->loadMediaData($media));
-    }
-    catch (MediaEntityNotFoundException $exception) {
       return new JsonResponse($this->t($exception->getMessage()), 404);
     }
   }

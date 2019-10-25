@@ -1,4 +1,4 @@
-((wp, $, drupalSettings) => {
+((wp, $, drupalSettings, Drupal) => {
   const withNativeDialog = Component => {
     const onDialogCreate = () => {
       drupalSettings.media_library = drupalSettings.media_library || {};
@@ -10,23 +10,31 @@
       }, 0);
     };
 
+    const getDefaultMediaSelections = () => {
+      return Drupal.MediaLibrary.currentSelection || [];
+    };
+
+    const getSpecialMediaSelections = () => {
+      return [...Drupal.SpecialMediaSelection.currentSelection || []].map(selection => {
+        return JSON.stringify({
+          [selection.processor]: selection.data,
+        });
+      });
+    };
+
     async function onDialogInsert (element, props) {
       const { onSelect, omitFetchOnSelect } = props;
-      const $form = $(element).find('.media-library-views-form');
-      const serializeArray = $form.serializeArray();
-      let entityIds = [];
 
-      serializeArray.map(item => {
-        if (item.name === 'media_library_select_form_selection' && item.value) {
-          entityIds = item.value.split(',')
-        }
-      });
+      let selections = [...getDefaultMediaSelections(), ...getSpecialMediaSelections()];
+
+      // @todo: handle multiple selections.
+      selections = encodeURIComponent(selections[0]);
 
       if (omitFetchOnSelect) {
-        onSelect(entityIds);
+        onSelect(selections);
       } else {
         const response = await fetch(
-          `${drupalSettings.path.baseUrl}editor/media/load-media/${entityIds}`,
+          `${drupalSettings.path.baseUrl}editor/media/load-media/${selections}`,
         );
         onSelect(await response.json());
       }
@@ -73,4 +81,4 @@
   window.DrupalGutenberg = window.DrupalGutenberg || {};
   window.DrupalGutenberg.Components = window.DrupalGutenberg.Components || {};
   window.DrupalGutenberg.Components.withNativeDialog = withNativeDialog;
-})(wp, jQuery, drupalSettings);
+})(wp, jQuery, drupalSettings, Drupal);

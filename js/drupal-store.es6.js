@@ -24,7 +24,7 @@
               ...state,
               mediaEntities: {
                 ...state.mediaEntities,
-                [action.ids]: action.mediaEntity,
+                [action.id]: action.mediaEntity,
               }
             };
           default:
@@ -40,10 +40,10 @@
             block,
           };
         },
-        setMediaEntities(ids, mediaEntity) {
+        setMediaEntity(id, mediaEntity) {
           return {
             type: 'SET_MEDIA_ENTITY',
-            ids,
+            id,
             mediaEntity,
           };
         }
@@ -52,13 +52,11 @@
       selectors: {
         getBlock(state, item) {
           const { blocks } = state;
-          const block = blocks[item];
-
-          return block;
+          return blocks[item];
         },
-        getMediaEntities(state, item) {
+        getMediaEntity(state, id) {
           const { mediaEntities } = state;
-          return mediaEntities[item];
+          return mediaEntities[id];
         }
       },
 
@@ -75,17 +73,16 @@
             block,
           };
         },
-        async getMediaEntities(mediaEntityIds) {
-          // @todo: add support for multi selection
-          const ids = mediaEntityIds.join(',');
+        async getMediaEntity(entityId) {
           const response = await fetch(`
-            ${drupalSettings.path.baseUrl}editor/media/render/${ids}
+            ${drupalSettings.path.baseUrl}editor/media/render/${entityId}
           `);
 
           if (response.ok) {
             const entity = await response.json();
-            if (entity && entity.length) {
-              dispatch('drupal').setMediaEntities(ids, entity);
+
+            if (Object.keys(entity).length) {
+              dispatch('drupal').setMediaEntity(entityId, entity);
               return entity;
             }
           }

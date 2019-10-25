@@ -9,51 +9,48 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
-(function (wp, $, drupalSettings) {
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+(function (wp, $, drupalSettings, Drupal) {
   var withNativeDialog = function withNativeDialog(Component) {
     var onDialogInsert = function () {
       var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee(element, props) {
-        var onSelect, omitFetchOnSelect, $form, serializeArray, entityIds, response;
+        var onSelect, omitFetchOnSelect, selections, response;
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 onSelect = props.onSelect, omitFetchOnSelect = props.omitFetchOnSelect;
-                $form = $(element).find('.media-library-views-form');
-                serializeArray = $form.serializeArray();
-                entityIds = [];
+                selections = [].concat(_toConsumableArray(getDefaultMediaSelections()), _toConsumableArray(getSpecialMediaSelections()));
 
-
-                serializeArray.map(function (item) {
-                  if (item.name === 'media_library_select_form_selection' && item.value) {
-                    entityIds = item.value.split(',');
-                  }
-                });
+                selections = encodeURIComponent(selections[0]);
 
                 if (!omitFetchOnSelect) {
-                  _context.next = 9;
+                  _context.next = 7;
                   break;
                 }
 
-                onSelect(entityIds);
-                _context.next = 17;
+                onSelect(selections);
+                _context.next = 15;
                 break;
 
-              case 9:
-                _context.next = 11;
-                return fetch(drupalSettings.path.baseUrl + 'editor/media/load-media/' + entityIds);
+              case 7:
+                _context.next = 9;
+                return fetch(drupalSettings.path.baseUrl + 'editor/media/load-media/' + selections);
 
-              case 11:
+              case 9:
                 response = _context.sent;
                 _context.t0 = onSelect;
-                _context.next = 15;
+                _context.next = 13;
                 return response.json();
 
-              case 15:
+              case 13:
                 _context.t1 = _context.sent;
                 (0, _context.t0)(_context.t1);
 
-              case 17:
+              case 15:
               case 'end':
                 return _context.stop();
             }
@@ -73,6 +70,16 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
       setTimeout(function () {
         $('#media-library-wrapper li:first-child a').click();
       }, 0);
+    };
+
+    var getDefaultMediaSelections = function getDefaultMediaSelections() {
+      return Drupal.MediaLibrary.currentSelection || [];
+    };
+
+    var getSpecialMediaSelections = function getSpecialMediaSelections() {
+      return [].concat(_toConsumableArray(Drupal.SpecialMediaSelection.currentSelection || [])).map(function (selection) {
+        return JSON.stringify(_defineProperty({}, selection.processor, selection.data));
+      });
     };
 
     var onDialogClose = function onDialogClose() {
@@ -118,4 +125,4 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
   window.DrupalGutenberg = window.DrupalGutenberg || {};
   window.DrupalGutenberg.Components = window.DrupalGutenberg.Components || {};
   window.DrupalGutenberg.Components.withNativeDialog = withNativeDialog;
-})(wp, jQuery, drupalSettings);
+})(wp, jQuery, drupalSettings, Drupal);
