@@ -146,7 +146,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
               isPrimary: true,
               title: __('Insert'),
               onClick: function onClick() {
-                return _this3.insertMedia([_this3.state.value]);
+                return _this3.insertMedia(_this3.state.value);
               } },
             __('Insert')
           )

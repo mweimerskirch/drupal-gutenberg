@@ -105,7 +105,7 @@
             <Button isLarge
                     isPrimary
                     title={__('Insert')}
-                    onClick={() => this.insertMedia([this.state.value])}>
+                    onClick={() => this.insertMedia(this.state.value)}>
               {__('Insert')}
             </Button>
           </Fragment>
