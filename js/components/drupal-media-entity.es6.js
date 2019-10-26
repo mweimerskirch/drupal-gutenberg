@@ -25,6 +25,12 @@
       });
     }
 
+    changeViewMode(viewMode) {
+      this.props.setAttributes({
+        viewMode
+      });
+    }
+
     onUpload(event) {
       const {
         allowedTypes,
@@ -38,15 +44,9 @@
         onError,
         onFileChange: fileData => {
           if (fileData && fileData[0] && fileData[0].media_entity && fileData[0].media_entity.id) {
-            this.insertMedia([fileData[0].media_entity.id]);
+            this.insertMedia(fileData[0].media_entity.id);
           }
         },
-      });
-    }
-
-    changeViewMode(viewMode) {
-      this.props.setAttributes({
-        viewMode
       });
     }
 

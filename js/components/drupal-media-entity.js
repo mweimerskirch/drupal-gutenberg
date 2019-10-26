@@ -59,6 +59,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
         });
       }
     }, {
+      key: 'changeViewMode',
+      value: function changeViewMode(viewMode) {
+        this.props.setAttributes({
+          viewMode: viewMode
+        });
+      }
+    }, {
       key: 'onUpload',
       value: function onUpload(event) {
         var _this2 = this;
@@ -75,16 +82,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
           onError: onError,
           onFileChange: function onFileChange(fileData) {
             if (fileData && fileData[0] && fileData[0].media_entity && fileData[0].media_entity.id) {
-              _this2.insertMedia([fileData[0].media_entity.id]);
+              _this2.insertMedia(fileData[0].media_entity.id);
             }
           }
-        });
-      }
-    }, {
-      key: 'changeViewMode',
-      value: function changeViewMode(viewMode) {
-        this.props.setAttributes({
-          viewMode: viewMode
         });
       }
     }, {

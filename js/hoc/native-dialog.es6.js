@@ -22,8 +22,8 @@
       });
     };
 
-    async function onDialogInsert (element, props) {
-      const { onSelect, handlesMediaEntity } = props;
+    async function onDialogInsert(element, props) {
+      const {onSelect, handlesMediaEntity} = props;
 
       let selections = [...getDefaultMediaSelections(), ...getSpecialMediaSelections()];
 
@@ -54,16 +54,16 @@
       nodes.forEach(node => node.remove());
     };
 
-    const getDialog = ({ allowedTypes }) => {
+    const getDialog = ({allowedTypes}) => {
       return new Promise((resolve, reject) => {
         wp.apiFetch({
-            path: 'load-media-library-dialog',
-            data: { allowedTypes }
-          })
+          path: 'load-media-library-dialog',
+          data: {allowedTypes}
+        })
           .then(result => {
             resolve({
               component: props => (
-                <div {...props} dangerouslySetInnerHTML={{__html: result.html}} />
+                <div {...props} dangerouslySetInnerHTML={{__html: result.html}}/>
               )
             });
           })
@@ -78,7 +78,7 @@
                  onDialogCreate={onDialogCreate}
                  onDialogInsert={onDialogInsert}
                  onDialogClose={onDialogClose}
-                 getDialog={getDialog} />
+                 getDialog={getDialog}/>
     );
   };
 
