@@ -23,15 +23,19 @@
     };
 
     async function onDialogInsert (element, props) {
-      const { onSelect, omitFetchOnSelect } = props;
+      const { onSelect, handlesMediaEntity } = props;
 
       let selections = [...getDefaultMediaSelections(), ...getSpecialMediaSelections()];
 
       // @todo: handle multiple selections.
       selections = encodeURIComponent(selections[0]);
 
-      if (omitFetchOnSelect) {
-        onSelect(selections);
+      if (handlesMediaEntity) {
+        const response = await fetch(
+          `${drupalSettings.path.baseUrl}editor/media/render/${selections}`,
+        );
+        const data = await response.json();
+        data && data.media_entity && data.media_entity.id && onSelect(data.media_entity.id);
       } else {
         const response = await fetch(
           `${drupalSettings.path.baseUrl}editor/media/load-media/${selections}`,

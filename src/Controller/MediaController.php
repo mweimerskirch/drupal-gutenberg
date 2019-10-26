@@ -114,7 +114,15 @@ class MediaController extends ControllerBase {
         throw new MediaEntityNotFoundException();
       }
 
-      return new JsonResponse($this->mediaService->getRenderedMediaEntity(reset($media_entities)));
+      $media_entity = reset($media_entities);
+
+      return new JsonResponse([
+        'view_modes' => $this->mediaService->getRenderedMediaEntity($media_entity),
+        'media_entity' => [
+          'id' => $media_entity->id(),
+          'type' => $media_entity->bundle(),
+        ],
+      ]);
     }
     catch (MediaEntityNotFoundException $exception) {
       return new JsonResponse(['error' => $this->t($exception->getMessage())], 404);

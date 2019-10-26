@@ -79,11 +79,11 @@
           `);
 
           if (response.ok) {
-            const entity = await response.json();
+            const data = await response.json();
 
-            if (Object.keys(entity).length) {
-              dispatch('drupal').setMediaEntity(entityId, entity);
-              return entity;
+            if (data && data.view_modes) {
+              dispatch('drupal').setMediaEntity(entityId, data.view_modes);
+              return data.view_modes;
             }
           }
 

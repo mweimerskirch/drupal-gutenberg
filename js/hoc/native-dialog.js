@@ -17,40 +17,52 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
   var withNativeDialog = function withNativeDialog(Component) {
     var onDialogInsert = function () {
       var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee(element, props) {
-        var onSelect, omitFetchOnSelect, selections, response;
+        var onSelect, handlesMediaEntity, selections, response, data, _response;
+
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                onSelect = props.onSelect, omitFetchOnSelect = props.omitFetchOnSelect;
+                onSelect = props.onSelect, handlesMediaEntity = props.handlesMediaEntity;
                 selections = [].concat(_toConsumableArray(getDefaultMediaSelections()), _toConsumableArray(getSpecialMediaSelections()));
 
                 selections = encodeURIComponent(selections[0]);
 
-                if (!omitFetchOnSelect) {
-                  _context.next = 7;
+                if (!handlesMediaEntity) {
+                  _context.next = 13;
                   break;
                 }
 
-                onSelect(selections);
-                _context.next = 15;
-                break;
+                _context.next = 6;
+                return fetch(drupalSettings.path.baseUrl + 'editor/media/render/' + selections);
 
-              case 7:
-                _context.next = 9;
-                return fetch(drupalSettings.path.baseUrl + 'editor/media/load-media/' + selections);
-
-              case 9:
+              case 6:
                 response = _context.sent;
-                _context.t0 = onSelect;
-                _context.next = 13;
+                _context.next = 9;
                 return response.json();
 
+              case 9:
+                data = _context.sent;
+
+                data && data.media_entity && data.media_entity.id && onSelect(data.media_entity.id);
+                _context.next = 21;
+                break;
+
               case 13:
+                _context.next = 15;
+                return fetch(drupalSettings.path.baseUrl + 'editor/media/load-media/' + selections);
+
+              case 15:
+                _response = _context.sent;
+                _context.t0 = onSelect;
+                _context.next = 19;
+                return _response.json();
+
+              case 19:
                 _context.t1 = _context.sent;
                 (0, _context.t0)(_context.t1);
 
-              case 15:
+              case 21:
               case 'end':
                 return _context.stop();
             }

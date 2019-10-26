@@ -112,7 +112,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           var _this2 = this;
 
           return _asyncToGenerator(regeneratorRuntime.mark(function _callee2() {
-            var response, entity;
+            var response, _data;
+
             return regeneratorRuntime.wrap(function _callee2$(_context2) {
               while (1) {
                 switch (_context2.prev = _context2.next) {
@@ -132,15 +133,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                     return response.json();
 
                   case 6:
-                    entity = _context2.sent;
+                    _data = _context2.sent;
 
-                    if (!Object.keys(entity).length) {
+                    if (!(_data && _data.view_modes)) {
                       _context2.next = 10;
                       break;
                     }
 
-                    dispatch('drupal').setMediaEntity(entityId, entity);
-                    return _context2.abrupt('return', entity);
+                    dispatch('drupal').setMediaEntity(entityId, _data.view_modes);
+                    return _context2.abrupt('return', _data.view_modes);
 
                   case 10:
                     if (!(response.status === 404)) {
