@@ -1,8 +1,8 @@
 ((wp, $, drupalSettings, Drupal) => {
   const withNativeDialog = Component => {
-    const onDialogCreate = () => {
+    const onDialogCreate = (element, multiple) => {
       drupalSettings.media_library = drupalSettings.media_library || {};
-      drupalSettings.media_library.selection_remaining = drupalSettings.media_library.selection_remaining || 1;
+      drupalSettings.media_library.selection_remaining = multiple ? 1000 : 1;
 
       // @todo: it's temporary bugfix for the issue with initial loading (cannot upload a file in media library dialog).
       setTimeout(() => {
@@ -23,25 +23,32 @@
     };
 
     async function onDialogInsert(element, props) {
-      const {onSelect, handlesMediaEntity} = props;
+      const {
+        onSelect,
+        handlesMediaEntity,
+        multiple,
+      } = props;
 
+      let selectionData = [];
       let selections = [...getDefaultMediaSelections(), ...getSpecialMediaSelections()];
+      selections = multiple ? selections : selections.slice(0, 1);
 
-      // @todo: handle multiple selections.
-      selections = encodeURIComponent(selections[0]);
+      const endpointUrl = handlesMediaEntity
+        ? `${drupalSettings.path.baseUrl}editor/media/render`
+        : `${drupalSettings.path.baseUrl}editor/media/load-media`;
+
+      for (let selection of selections) {
+        const response = await fetch(
+          `${endpointUrl}/${encodeURIComponent(selection)}`,
+        );
+        selectionData.push(await response.json());
+      }
 
       if (handlesMediaEntity) {
-        const response = await fetch(
-          `${drupalSettings.path.baseUrl}editor/media/render/${selections}`,
-        );
-        const data = await response.json();
-        data && data.media_entity && data.media_entity.id && onSelect(data.media_entity.id);
-      } else {
-        const response = await fetch(
-          `${drupalSettings.path.baseUrl}editor/media/load-media/${selections}`,
-        );
-        onSelect(await response.json());
+          selectionData = selectionData.map(selectionItem => selectionItem.media_entity && selectionItem.media_entity.id);
       }
+
+      onSelect(multiple ? selectionData : selectionData[0]);
     }
 
     const onDialogClose = () => {

@@ -15,7 +15,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-(function (wp, Drupal, DrupalGutenberg, $, drupalSettings) {
+(function (wp, Drupal) {
   var element = wp.element,
       components = wp.components;
   var Button = components.Button;
@@ -60,7 +60,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
             allowedTypes = _props$allowedTypes === undefined ? [] : _props$allowedTypes,
             onDialogInsert = _props.onDialogInsert,
             onDialogCreate = _props.onDialogCreate,
-            getDialog = _props.getDialog;
+            getDialog = _props.getDialog,
+            multiple = _props.multiple;
 
 
         getDialog({
@@ -82,7 +83,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                 _this2.closeDialog();
               }), _defineProperty(_buttons, __('Cancel'), _this2.closeDialog), _buttons),
               create: function create(event) {
-                return onDialogCreate(event.target);
+                return onDialogCreate(event.target, multiple);
               },
               close: _this2.closeDialog
             });

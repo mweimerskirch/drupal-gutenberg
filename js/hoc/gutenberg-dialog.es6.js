@@ -17,14 +17,13 @@
         resolve({
           component: props => (
             <MediaBrowser {...props}
-                          multiple={false}
                           allowedTypes={allowedTypes}
                           value={[]}
                           onSelect={media => {
-                            media && media[0] && props.onSelect(media[0]);
+                            props.onSelect(props.multiple ? media : media[0]);
                             onSelect();
                           }} />
-          )
+            )
         });
       });
     };

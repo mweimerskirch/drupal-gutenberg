@@ -28,11 +28,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         resolve({
           component: function component(props) {
             return React.createElement(MediaBrowser, _extends({}, props, {
-              multiple: false,
               allowedTypes: allowedTypes,
               value: [],
               onSelect: function onSelect(media) {
-                media && media[0] && props.onSelect(media[0]);
+                props.onSelect(props.multiple ? media : media[0]);
                 _onSelect();
               } }));
           }

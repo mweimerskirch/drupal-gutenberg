@@ -1,4 +1,4 @@
-((wp, Drupal, DrupalGutenberg, $, drupalSettings) => {
+((wp, Drupal) => {
   const {element, components} = wp;
   const {Button} = components;
   const {Component} = element;
@@ -30,6 +30,7 @@
         onDialogInsert,
         onDialogCreate,
         getDialog,
+        multiple,
       } = this.props;
 
       getDialog({
@@ -54,7 +55,7 @@
                 },
                 [__('Cancel')]: this.closeDialog,
               },
-              create: event => onDialogCreate(event.target),
+              create: event => onDialogCreate(event.target, multiple),
               close: this.closeDialog,
             });
 
