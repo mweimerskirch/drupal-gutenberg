@@ -9,7 +9,6 @@ use Drupal\gutenberg\Service\FileEntityNotFoundException;
 use Drupal\gutenberg\Service\MediaEntityNotFoundException;
 use Drupal\gutenberg\Service\MediaService;
 use Drupal\gutenberg\Service\MediaTypeNotFoundException;
-use Drupal\media\Entity\Media;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -86,6 +85,7 @@ class MediaController extends ControllerBase {
    */
   public function loadMedia(Request $request, string $media) {
     $media_entities = $this->mediaSelectionProcessorManager->processData($media);
+
     try {
       if (!$media_entities) {
         throw new MediaEntityNotFoundException();
@@ -193,7 +193,7 @@ class MediaController extends ControllerBase {
    * @return \Symfony\Component\HttpFoundation\JsonResponse
    *   The JSON response.
    */
-  public function search(Request $request, string $type = NULL, string $search = NULL) {
+  public function search(Request $request, string $type = '', string $search = '') {
     return new JsonResponse(
       $this->mediaService->search($request, $type, $search)
     );

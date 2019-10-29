@@ -129,7 +129,9 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
     };
 
     var getDefaultMediaSelections = function getDefaultMediaSelections() {
-      return Drupal.MediaLibrary.currentSelection || [];
+      return (Drupal.MediaLibrary.currentSelection || []).filter(function (selection) {
+        return +selection;
+      });
     };
 
     var getSpecialMediaSelections = function getSpecialMediaSelections() {

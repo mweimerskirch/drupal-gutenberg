@@ -11,7 +11,7 @@
     };
 
     const getDefaultMediaSelections = () => {
-      return Drupal.MediaLibrary.currentSelection || [];
+      return (Drupal.MediaLibrary.currentSelection || []).filter(selection => +selection);
     };
 
     const getSpecialMediaSelections = () => {
