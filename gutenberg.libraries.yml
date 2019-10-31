@@ -53,6 +53,7 @@ drupal-blocks:
     js/blocks/simple-text/index.js: {  }
   dependencies:
     - gutenberg/blocks-edit
+    # - gutenberg/g-media-attributes
 blocks-edit:
   dependencies:
     - gutenberg/edit-node

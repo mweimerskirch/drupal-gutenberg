@@ -498,7 +498,6 @@ function gutenberg_entity_presave($entity) {
   }
 
   $config = \Drupal::service('config.factory')->getEditable('gutenberg.settings');
-  $node = $variables['elements']['#node'];
   $node_type = $entity->bundle();
 
   $gutenberg_enabled = $config->get($node_type . '_enable_full');
@@ -512,13 +511,14 @@ function gutenberg_entity_presave($entity) {
   // TODO: We already have this on node_edit_form_alter,
   //       let's move it to a function.
   $text_fields = [];
+  $file_fields = []; // used for media
 
   // Iterate over all node fields and apply gutenberg text format
   // on first text field found.
   $field_names = array_keys($entity->getFields());
   foreach ($field_names as $value) {
-    $field_properties = $entity
-      ->getFieldDefinition($value)
+    $definition = $entity->getFieldDefinition($value);
+    $field_properties = $definition
       ->getFieldStorageDefinition()
       ->getPropertyDefinitions();
 
@@ -528,10 +528,12 @@ function gutenberg_entity_presave($entity) {
     }
 
     // Check for images
-    // if (isset($field_properties['entity'])) {
-    //   // $type = $field_properties['entity']->getSetting();
-    //   var_dump($field_properties['entity']->getTargetDefinition());
-    // }
+    if (isset($field_properties['entity'])) {
+      $settings = $definition->getSettings();
+      if ($settings['target_type'] === 'file') {
+        $file_fields[] = $value;
+      }
+    }
   }
 
   if (count($text_fields) === 0) {
@@ -542,7 +544,7 @@ function gutenberg_entity_presave($entity) {
   // iterate over all mapped fields and set its values
   $mapped_fields = _gutenberg_get_mapped_fields(json_decode($config->get($node_type . '_template')));
   foreach ($mapped_fields as $item) {
-    $re = '/(<!-- .*\{.*"mappingField":"' . $item['field']  . '".*} -->)([\s\S]*?)(<!-- \/[\s\S]*?-->|\/-->)/m';
+    $re = '/(<!-- .*?\{.*"mappingField":"' . $item['field']  . '".*} -->)([\s\S]*?)(<!-- \/[\s\S]*?-->|\/-->)/m';
     // $re = '/(<!--[\s\S]+?\{[\s\S]+?"mappingField":"' . $item['field']  . '"[\s\S]+?} -->)([\s\S]+?)(<!-- \/[\s\S]+?-->|\/-->)/m';
     // matches:
     // 0: all block
@@ -551,7 +553,19 @@ function gutenberg_entity_presave($entity) {
     // 3: closing block comment tag
     preg_match_all($re, $str, $matches, PREG_SET_ORDER, 0);
 
-    $entity->set($item['field'], $matches[0][2]);
+    // get block attributes
+    $re = '/<!-- .*?({[\s\S]*}) -->/m';
+    preg_match_all($re, $matches[0][1], $attrs, PREG_SET_ORDER, 0);
+    $attributes = json_decode($attrs[0][1], true);
+    
+    // Set text fields
+    if (in_array($item['field'], $text_fields)) {
+      $entity->set($item['field'], $matches[0][2]);
+    }
+
+    if (in_array($item['field'], $file_fields)) {
+      $entity->set($item['field'], ['target_id' => $attributes['id']]);
+    }
   }
 }
 
