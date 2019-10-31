@@ -47,7 +47,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
       var _this = this;
 
       return _asyncToGenerator(regeneratorRuntime.mark(function _callee2() {
-        var _format$editorSetting, contentType, allowedBlocks, blackList, data, blocks, dispatch, unregisterBlockType, registerBlockType, getBlockType, registerDrupalStore, registerDrupalBlocks, registerDrupalMedia, coreBlock, key, value, categories, metaboxesContainer, metaboxForm, isFormValid, formSubmitted;
+        var _format$editorSetting, contentType, allowedBlocks, blackList, data, blocks, hooks, dispatch, addFilter, unregisterBlockType, registerBlockType, getBlockType, registerDrupalStore, registerDrupalBlocks, registerDrupalMedia, coreBlock, key, value, categories, metaboxesContainer, metaboxForm, isFormValid, formSubmitted;
 
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
@@ -64,22 +64,39 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                 drupalSettings.gutenbergLoaded = true;
 
                 _format$editorSetting = format.editorSettings, contentType = _format$editorSetting.contentType, allowedBlocks = _format$editorSetting.allowedBlocks, blackList = _format$editorSetting.blackList;
-                data = wp.data, blocks = wp.blocks;
+                data = wp.data, blocks = wp.blocks, hooks = wp.hooks;
                 dispatch = data.dispatch;
+                addFilter = hooks.addFilter;
                 unregisterBlockType = blocks.unregisterBlockType, registerBlockType = blocks.registerBlockType, getBlockType = blocks.getBlockType;
                 registerDrupalStore = DrupalGutenberg.registerDrupalStore, registerDrupalBlocks = DrupalGutenberg.registerDrupalBlocks, registerDrupalMedia = DrupalGutenberg.registerDrupalMedia;
-                _context2.next = 10;
+                _context2.next = 11;
                 return registerDrupalStore(data);
 
-              case 10:
-                _context2.next = 12;
+              case 11:
+                _context2.next = 13;
+                return addFilter('blocks.registerBlockType', 'drupalgutenberg/custom-attributes', function (settings) {
+                  settings.attributes = Object.assign(settings.attributes, {
+                    mappingField: {
+                      type: 'string',
+                      default: ''
+                    },
+                    mappingAttribute: {
+                      type: 'string',
+                      default: ''
+                    }
+                  });
+                  return settings;
+                });
+
+              case 13:
+                _context2.next = 15;
                 return registerDrupalBlocks(contentType);
 
-              case 12:
-                _context2.next = 14;
+              case 15:
+                _context2.next = 17;
                 return registerDrupalMedia();
 
-              case 14:
+              case 17:
 
                 _this._initGutenberg(element);
 
@@ -279,7 +296,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
                 return _context2.abrupt('return', true);
 
-              case 45:
+              case 48:
               case 'end':
                 return _context2.stop();
             }

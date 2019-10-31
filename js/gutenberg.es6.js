@@ -79,10 +79,15 @@
       drupalSettings.gutenbergLoaded = true;
 
       const { contentType, allowedBlocks, blackList } = format.editorSettings;
-      const { data, blocks } = wp;
+      const { data, blocks, hooks } = wp;
       const { dispatch } = data;
+      const { addFilter } = hooks;
       const { unregisterBlockType, registerBlockType, getBlockType } = blocks;
-      const { registerDrupalStore, registerDrupalBlocks, registerDrupalMedia } = DrupalGutenberg;
+      const {
+        registerDrupalStore,
+        registerDrupalBlocks,
+        registerDrupalMedia,
+      } = DrupalGutenberg;
 
       // Register plugins.
       // Not needed now. Leaving it here for reference.
@@ -93,6 +98,26 @@
       // });
 
       await registerDrupalStore(data);
+
+      // Add 'mapping field' and 'mapping attribute' attributes to all blocks.
+      await addFilter(
+        'blocks.registerBlockType',
+        'drupalgutenberg/custom-attributes',
+        settings => {
+          settings.attributes = Object.assign(settings.attributes, {
+            mappingField: {
+              type: 'string',
+              default: '',
+            },
+            mappingAttribute: {
+              type: 'string',
+              default: '',
+            },
+          });
+          return settings;
+        },
+      );
+
       await registerDrupalBlocks(contentType);
       await registerDrupalMedia();
 
