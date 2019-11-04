@@ -1,1 +1,582 @@
-this.wp=this.wp||{},this.wp.shortcode=function(t){var e={};function n(r){if(e[r])return e[r].exports;var i=e[r]={i:r,l:!1,exports:{}};return t[r].call(i.exports,i,i.exports,n),i.l=!0,i.exports}return n.m=t,n.c=e,n.d=function(t,e,r){n.o(t,e)||Object.defineProperty(t,e,{configurable:!1,enumerable:!0,get:r})},n.r=function(t){Object.defineProperty(t,"__esModule",{value:!0})},n.n=function(t){var e=t&&t.__esModule?function(){return t.default}:function(){return t};return n.d(e,"a",e),e},n.o=function(t,e){return Object.prototype.hasOwnProperty.call(t,e)},n.p="",n(n.s=236)}({2:function(t,e){!function(){t.exports=this.lodash}()},236:function(t,e,n){"use strict";n.r(e),n.d(e,"next",function(){return s}),n.d(e,"replace",function(){return u}),n.d(e,"string",function(){return c}),n.d(e,"regexp",function(){return o}),n.d(e,"attrs",function(){return a}),n.d(e,"fromMatch",function(){return f});var r=n(2),i=n(44);function s(t,e){var n=arguments.length>2&&void 0!==arguments[2]?arguments[2]:0,r=o(t);r.lastIndex=n;var i=r.exec(e);if(i){if("["===i[1]&&"]"===i[7])return s(t,e,r.lastIndex);var u={index:i.index,content:i[0],shortcode:f(i)};return i[1]&&(u.content=u.content.slice(1),u.index++),i[7]&&(u.content=u.content.slice(0,-1)),u}}function u(t,e,n){return e.replace(o(t),function(t,e,r,i,s,u,c,o){if("["===e&&"]"===o)return t;var a=n(f(arguments));return a?e+a+o:t})}function c(t){return new l(t).string()}function o(t){return new RegExp("\\[(\\[?)("+t+")(?![\\w-])([^\\]\\/]*(?:\\/(?!\\])[^\\]\\/]*)*?)(?:(\\/)\\]|\\](?:([^\\[]*(?:\\[(?!\\/\\2\\])[^\\[]*)*)(\\[\\/\\2\\]))?)(\\]?)","g")}var a=n.n(i)()(function(t){var e,n={},r=[],i=/([\w-]+)\s*=\s*"([^"]*)"(?:\s|$)|([\w-]+)\s*=\s*'([^']*)'(?:\s|$)|([\w-]+)\s*=\s*([^\s'"]+)(?:\s|$)|"([^"]*)"(?:\s|$)|'([^']*)'(?:\s|$)|(\S+)(?:\s|$)/g;for(t=t.replace(/[\u00a0\u200b]/g," ");e=i.exec(t);)e[1]?n[e[1].toLowerCase()]=e[2]:e[3]?n[e[3].toLowerCase()]=e[4]:e[5]?n[e[5].toLowerCase()]=e[6]:e[7]?r.push(e[7]):e[8]?r.push(e[8]):e[9]&&r.push(e[9]);return{named:n,numeric:r}});function f(t){var e;return e=t[4]?"self-closing":t[6]?"closed":"single",new l({tag:t[2],attrs:t[3],type:e,content:t[5]})}var l=Object(r.extend)(function(t){var e=this;Object(r.extend)(this,Object(r.pick)(t||{},"tag","attrs","type","content"));var n=this.attrs;this.attrs={named:{},numeric:[]},n&&(Object(r.isString)(n)?this.attrs=a(n):Object(r.isEqual)(Object.keys(n),["named","numeric"])?this.attrs=n:Object(r.forEach)(n,function(t,n){e.set(n,t)}))},{next:s,replace:u,string:c,regexp:o,attrs:a,fromMatch:f});Object(r.extend)(l.prototype,{get:function(t){return this.attrs[Object(r.isNumber)(t)?"numeric":"named"][t]},set:function(t,e){return this.attrs[Object(r.isNumber)(t)?"numeric":"named"][t]=e,this},string:function(){var t="["+this.tag;return Object(r.forEach)(this.attrs.numeric,function(e){/\s/.test(e)?t+=' "'+e+'"':t+=" "+e}),Object(r.forEach)(this.attrs.named,function(e,n){t+=" "+n+'="'+e+'"'}),"single"===this.type?t+"]":"self-closing"===this.type?t+" /]":(t+="]",this.content&&(t+=this.content),t+"[/"+this.tag+"]")}}),e.default=l},44:function(t,e,n){t.exports=function(t,e){var n,r,i,s=0;function u(){var e,u,c=r,o=arguments.length;t:for(;c;){if(c.args.length===arguments.length){for(u=0;u<o;u++)if(c.args[u]!==arguments[u]){c=c.next;continue t}return c!==r&&(c===i&&(i=c.prev),c.prev.next=c.next,c.next&&(c.next.prev=c.prev),c.next=r,c.prev=null,r.prev=c,r=c),c.val}c=c.next}for(e=new Array(o),u=0;u<o;u++)e[u]=arguments[u];return c={args:e,val:t.apply(null,e)},r?(r.prev=c,c.next=r):i=c,s===n?(i=i.prev).next=null:s++,r=c,c.val}return e&&e.maxSize&&(n=e.maxSize),u.clear=function(){r=null,i=null,s=0},u}}}).default;
+this["wp"] = this["wp"] || {}; this["wp"]["shortcode"] =
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = "./packages/shortcode/build-module/index.js");
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ "./node_modules/memize/index.js":
+/*!**************************************!*\
+  !*** ./node_modules/memize/index.js ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = function memize( fn, options ) {
+	var size = 0,
+		maxSize, head, tail;
+
+	if ( options && options.maxSize ) {
+		maxSize = options.maxSize;
+	}
+
+	function memoized( /* ...args */ ) {
+		var node = head,
+			len = arguments.length,
+			args, i;
+
+		searchCache: while ( node ) {
+			// Perform a shallow equality test to confirm that whether the node
+			// under test is a candidate for the arguments passed. Two arrays
+			// are shallowly equal if their length matches and each entry is
+			// strictly equal between the two sets. Avoid abstracting to a
+			// function which could incur an arguments leaking deoptimization.
+
+			// Check whether node arguments match arguments length
+			if ( node.args.length !== arguments.length ) {
+				node = node.next;
+				continue;
+			}
+
+			// Check whether node arguments match arguments values
+			for ( i = 0; i < len; i++ ) {
+				if ( node.args[ i ] !== arguments[ i ] ) {
+					node = node.next;
+					continue searchCache;
+				}
+			}
+
+			// At this point we can assume we've found a match
+
+			// Surface matched node to head if not already
+			if ( node !== head ) {
+				// As tail, shift to previous. Must only shift if not also
+				// head, since if both head and tail, there is no previous.
+				if ( node === tail ) {
+					tail = node.prev;
+				}
+
+				// Adjust siblings to point to each other. If node was tail,
+				// this also handles new tail's empty `next` assignment.
+				node.prev.next = node.next;
+				if ( node.next ) {
+					node.next.prev = node.prev;
+				}
+
+				node.next = head;
+				node.prev = null;
+				head.prev = node;
+				head = node;
+			}
+
+			// Return immediately
+			return node.val;
+		}
+
+		// No cached value found. Continue to insertion phase:
+
+		// Create a copy of arguments (avoid leaking deoptimization)
+		args = new Array( len );
+		for ( i = 0; i < len; i++ ) {
+			args[ i ] = arguments[ i ];
+		}
+
+		node = {
+			args: args,
+
+			// Generate the result from original function
+			val: fn.apply( null, args )
+		};
+
+		// Don't need to check whether node is already head, since it would
+		// have been returned above already if it was
+
+		// Shift existing head down list
+		if ( head ) {
+			head.prev = node;
+			node.next = head;
+		} else {
+			// If no head, follows that there's no tail (at initial or reset)
+			tail = node;
+		}
+
+		// Trim tail if we're reached max size and are pending cache insertion
+		if ( size === maxSize ) {
+			tail = tail.prev;
+			tail.next = null;
+		} else {
+			size++;
+		}
+
+		head = node;
+
+		return node.val;
+	}
+
+	memoized.clear = function() {
+		head = null;
+		tail = null;
+		size = 0;
+	};
+
+	if ( false ) {}
+
+	return memoized;
+};
+
+
+/***/ }),
+
+/***/ "./packages/shortcode/build-module/index.js":
+/*!**************************************************!*\
+  !*** ./packages/shortcode/build-module/index.js ***!
+  \**************************************************/
+/*! exports provided: next, replace, string, regexp, attrs, fromMatch, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "next", function() { return next; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "replace", function() { return replace; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "string", function() { return string; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "regexp", function() { return regexp; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "attrs", function() { return attrs; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fromMatch", function() { return fromMatch; });
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ "lodash");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var memize__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! memize */ "./node_modules/memize/index.js");
+/* harmony import */ var memize__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(memize__WEBPACK_IMPORTED_MODULE_1__);
+/**
+ * External dependencies
+ */
+
+
+/**
+ * Shortcode attributes object.
+ *
+ * @typedef {Object} WPShortcodeAttrs
+ *
+ * @property {Object} named   Object with named attributes.
+ * @property {Array}  numeric Array with numeric attributes.
+ */
+
+/**
+ * Shortcode object.
+ *
+ * @typedef {Object} WPShortcode
+ *
+ * @property {string}           tag     Shortcode tag.
+ * @property {WPShortcodeAttrs} attrs   Shortcode attributes.
+ * @property {string}           content Shortcode content.
+ * @property {string}           type    Shortcode type: `self-closing`,
+ *                                      `closed`, or `single`.
+ */
+
+/**
+ * @typedef {Object} WPShortcodeMatch
+ *
+ * @property {number}      index     Index the shortcode is found at.
+ * @property {string}      content   Matched content.
+ * @property {WPShortcode} shortcode Shortcode instance of the match.
+ */
+
+/**
+ * Find the next matching shortcode.
+ *
+ * @param {string} tag   Shortcode tag.
+ * @param {string} text  Text to search.
+ * @param {number} index Index to start search from.
+ *
+ * @return {?WPShortcodeMatch} Matched information.
+ */
+
+function next(tag, text) {
+  var index = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+  var re = regexp(tag);
+  re.lastIndex = index;
+  var match = re.exec(text);
+
+  if (!match) {
+    return;
+  } // If we matched an escaped shortcode, try again.
+
+
+  if ('[' === match[1] && ']' === match[7]) {
+    return next(tag, text, re.lastIndex);
+  }
+
+  var result = {
+    index: match.index,
+    content: match[0],
+    shortcode: fromMatch(match)
+  }; // If we matched a leading `[`, strip it from the match and increment the
+  // index accordingly.
+
+  if (match[1]) {
+    result.content = result.content.slice(1);
+    result.index++;
+  } // If we matched a trailing `]`, strip it from the match.
+
+
+  if (match[7]) {
+    result.content = result.content.slice(0, -1);
+  }
+
+  return result;
+}
+/**
+ * Replace matching shortcodes in a block of text.
+ *
+ * @param {string}   tag      Shortcode tag.
+ * @param {string}   text     Text to search.
+ * @param {Function} callback Function to process the match and return
+ *                            replacement string.
+ *
+ * @return {string} Text with shortcodes replaced.
+ */
+
+function replace(tag, text, callback) {
+  return text.replace(regexp(tag), function (match, left, $3, attrs, slash, content, closing, right) {
+    // If both extra brackets exist, the shortcode has been properly
+    // escaped.
+    if (left === '[' && right === ']') {
+      return match;
+    } // Create the match object and pass it through the callback.
+
+
+    var result = callback(fromMatch(arguments)); // Make sure to return any of the extra brackets if they weren't used to
+    // escape the shortcode.
+
+    return result ? left + result + right : match;
+  });
+}
+/**
+ * Generate a string from shortcode parameters.
+ *
+ * Creates a shortcode instance and returns a string.
+ *
+ * Accepts the same `options` as the `shortcode()` constructor, containing a
+ * `tag` string, a string or object of `attrs`, a boolean indicating whether to
+ * format the shortcode using a `single` tag, and a `content` string.
+ *
+ * @param {Object} options
+ *
+ * @return {string} String representation of the shortcode.
+ */
+
+function string(options) {
+  return new shortcode(options).string();
+}
+/**
+ * Generate a RegExp to identify a shortcode.
+ *
+ * The base regex is functionally equivalent to the one found in
+ * `get_shortcode_regex()` in `wp-includes/shortcodes.php`.
+ *
+ * Capture groups:
+ *
+ * 1. An extra `[` to allow for escaping shortcodes with double `[[]]`
+ * 2. The shortcode name
+ * 3. The shortcode argument list
+ * 4. The self closing `/`
+ * 5. The content of a shortcode when it wraps some content.
+ * 6. The closing tag.
+ * 7. An extra `]` to allow for escaping shortcodes with double `[[]]`
+ *
+ * @param {string} tag Shortcode tag.
+ *
+ * @return {RegExp} Shortcode RegExp.
+ */
+
+function regexp(tag) {
+  return new RegExp('\\[(\\[?)(' + tag + ')(?![\\w-])([^\\]\\/]*(?:\\/(?!\\])[^\\]\\/]*)*?)(?:(\\/)\\]|\\](?:([^\\[]*(?:\\[(?!\\/\\2\\])[^\\[]*)*)(\\[\\/\\2\\]))?)(\\]?)', 'g');
+}
+/**
+ * Parse shortcode attributes.
+ *
+ * Shortcodes accept many types of attributes. These can chiefly be divided into
+ * named and numeric attributes:
+ *
+ * Named attributes are assigned on a key/value basis, while numeric attributes
+ * are treated as an array.
+ *
+ * Named attributes can be formatted as either `name="value"`, `name='value'`,
+ * or `name=value`. Numeric attributes can be formatted as `"value"` or just
+ * `value`.
+ *
+ * @param {string} text Serialised shortcode attributes.
+ *
+ * @return {WPShortcodeAttrs} Parsed shortcode attributes.
+ */
+
+var attrs = memize__WEBPACK_IMPORTED_MODULE_1___default()(function (text) {
+  var named = {};
+  var numeric = []; // This regular expression is reused from `shortcode_parse_atts()` in
+  // `wp-includes/shortcodes.php`.
+  //
+  // Capture groups:
+  //
+  // 1. An attribute name, that corresponds to...
+  // 2. a value in double quotes.
+  // 3. An attribute name, that corresponds to...
+  // 4. a value in single quotes.
+  // 5. An attribute name, that corresponds to...
+  // 6. an unquoted value.
+  // 7. A numeric attribute in double quotes.
+  // 8. A numeric attribute in single quotes.
+  // 9. An unquoted numeric attribute.
+
+  var pattern = /([\w-]+)\s*=\s*"([^"]*)"(?:\s|$)|([\w-]+)\s*=\s*'([^']*)'(?:\s|$)|([\w-]+)\s*=\s*([^\s'"]+)(?:\s|$)|"([^"]*)"(?:\s|$)|'([^']*)'(?:\s|$)|(\S+)(?:\s|$)/g; // Map zero-width spaces to actual spaces.
+
+  text = text.replace(/[\u00a0\u200b]/g, ' ');
+  var match; // Match and normalize attributes.
+
+  while (match = pattern.exec(text)) {
+    if (match[1]) {
+      named[match[1].toLowerCase()] = match[2];
+    } else if (match[3]) {
+      named[match[3].toLowerCase()] = match[4];
+    } else if (match[5]) {
+      named[match[5].toLowerCase()] = match[6];
+    } else if (match[7]) {
+      numeric.push(match[7]);
+    } else if (match[8]) {
+      numeric.push(match[8]);
+    } else if (match[9]) {
+      numeric.push(match[9]);
+    }
+  }
+
+  return {
+    named: named,
+    numeric: numeric
+  };
+});
+/**
+ * Generate a Shortcode Object from a RegExp match.
+ *
+ * Accepts a `match` object from calling `regexp.exec()` on a `RegExp` generated
+ * by `regexp()`. `match` can also be set to the `arguments` from a callback
+ * passed to `regexp.replace()`.
+ *
+ * @param {Array} match Match array.
+ *
+ * @return {WPShortcode} Shortcode instance.
+ */
+
+function fromMatch(match) {
+  var type;
+
+  if (match[4]) {
+    type = 'self-closing';
+  } else if (match[6]) {
+    type = 'closed';
+  } else {
+    type = 'single';
+  }
+
+  return new shortcode({
+    tag: match[2],
+    attrs: match[3],
+    type: type,
+    content: match[5]
+  });
+}
+/**
+ * Creates a shortcode instance.
+ *
+ * To access a raw representation of a shortcode, pass an `options` object,
+ * containing a `tag` string, a string or object of `attrs`, a string indicating
+ * the `type` of the shortcode ('single', 'self-closing', or 'closed'), and a
+ * `content` string.
+ *
+ * @param {Object} options Options as described.
+ *
+ * @return {WPShortcode} Shortcode instance.
+ */
+
+var shortcode = Object(lodash__WEBPACK_IMPORTED_MODULE_0__["extend"])(function (options) {
+  var _this = this;
+
+  Object(lodash__WEBPACK_IMPORTED_MODULE_0__["extend"])(this, Object(lodash__WEBPACK_IMPORTED_MODULE_0__["pick"])(options || {}, 'tag', 'attrs', 'type', 'content'));
+  var attributes = this.attrs; // Ensure we have a correctly formatted `attrs` object.
+
+  this.attrs = {
+    named: {},
+    numeric: []
+  };
+
+  if (!attributes) {
+    return;
+  } // Parse a string of attributes.
+
+
+  if (Object(lodash__WEBPACK_IMPORTED_MODULE_0__["isString"])(attributes)) {
+    this.attrs = attrs(attributes); // Identify a correctly formatted `attrs` object.
+  } else if (Object(lodash__WEBPACK_IMPORTED_MODULE_0__["isEqual"])(Object.keys(attributes), ['named', 'numeric'])) {
+    this.attrs = attributes; // Handle a flat object of attributes.
+  } else {
+    Object(lodash__WEBPACK_IMPORTED_MODULE_0__["forEach"])(attributes, function (value, key) {
+      _this.set(key, value);
+    });
+  }
+}, {
+  next: next,
+  replace: replace,
+  string: string,
+  regexp: regexp,
+  attrs: attrs,
+  fromMatch: fromMatch
+});
+Object(lodash__WEBPACK_IMPORTED_MODULE_0__["extend"])(shortcode.prototype, {
+  /**
+   * Get a shortcode attribute.
+   *
+   * Automatically detects whether `attr` is named or numeric and routes it
+   * accordingly.
+   *
+   * @param {(number|string)} attr Attribute key.
+   *
+   * @return {string} Attribute value.
+   */
+  get: function get(attr) {
+    return this.attrs[Object(lodash__WEBPACK_IMPORTED_MODULE_0__["isNumber"])(attr) ? 'numeric' : 'named'][attr];
+  },
+
+  /**
+   * Set a shortcode attribute.
+   *
+   * Automatically detects whether `attr` is named or numeric and routes it
+   * accordingly.
+   *
+   * @param {(number|string)} attr  Attribute key.
+   * @param {string}          value Attribute value.
+   *
+   * @return {WPShortcode} Shortcode instance.
+   */
+  set: function set(attr, value) {
+    this.attrs[Object(lodash__WEBPACK_IMPORTED_MODULE_0__["isNumber"])(attr) ? 'numeric' : 'named'][attr] = value;
+    return this;
+  },
+
+  /**
+   * Transform the shortcode into a string.
+   *
+   * @return {string} String representation of the shortcode.
+   */
+  string: function string() {
+    var text = '[' + this.tag;
+    Object(lodash__WEBPACK_IMPORTED_MODULE_0__["forEach"])(this.attrs.numeric, function (value) {
+      if (/\s/.test(value)) {
+        text += ' "' + value + '"';
+      } else {
+        text += ' ' + value;
+      }
+    });
+    Object(lodash__WEBPACK_IMPORTED_MODULE_0__["forEach"])(this.attrs.named, function (value, name) {
+      text += ' ' + name + '="' + value + '"';
+    }); // If the tag is marked as `single` or `self-closing`, close the tag and
+    // ignore any additional content.
+
+    if ('single' === this.type) {
+      return text + ']';
+    } else if ('self-closing' === this.type) {
+      return text + ' /]';
+    } // Complete the opening tag.
+
+
+    text += ']';
+
+    if (this.content) {
+      text += this.content;
+    } // Add the closing tag.
+
+
+    return text + '[/' + this.tag + ']';
+  }
+});
+/* harmony default export */ __webpack_exports__["default"] = (shortcode);
+
+
+/***/ }),
+
+/***/ "lodash":
+/*!**********************************!*\
+  !*** external {"this":"lodash"} ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(function() { module.exports = this["lodash"]; }());
+
+/***/ })
+
+/******/ })["default"];
+//# sourceMappingURL=index.js.map

@@ -1,1 +1,540 @@
-this.wp=this.wp||{},this.wp.wordcount=function(e){var t={};function n(r){if(t[r])return t[r].exports;var c=t[r]={i:r,l:!1,exports:{}};return e[r].call(c.exports,c,c.exports,n),c.l=!0,c.exports}return n.m=e,n.c=t,n.d=function(e,t,r){n.o(e,t)||Object.defineProperty(e,t,{configurable:!1,enumerable:!0,get:r})},n.r=function(e){Object.defineProperty(e,"__esModule",{value:!0})},n.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return n.d(t,"a",t),t},n.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},n.p="",n(n.s=219)}({2:function(e,t){!function(){e.exports=this.lodash}()},219:function(e,t,n){"use strict";n.r(t);var r=n(2),c={HTMLRegExp:/<\/?[a-z][^>]*?>/gi,HTMLcommentRegExp:/<!--[\s\S]*?-->/g,spaceRegExp:/&nbsp;|&#160;/gi,HTMLEntityRegExp:/&\S+?;/g,connectorRegExp:/--|\u2014/g,removeRegExp:new RegExp(["[","!-@[-`{-~","-¿×÷"," -⯿","⸀-⹿","]"].join(""),"g"),astralRegExp:/[\uD800-\uDBFF][\uDC00-\uDFFF]/g,wordsRegExp:/\S\s+/g,characters_excluding_spacesRegExp:/\S/g,characters_including_spacesRegExp:/[^\f\n\r\t\v\u00AD\u2028\u2029]/g,l10n:{type:"words"}},o=function(e,t){if(e.HTMLRegExp)return t.replace(e.HTMLRegExp,"\n")},i=function(e,t){return e.astralRegExp?t.replace(e.astralRegExp,"a"):t},p=function(e,t){return e.HTMLEntityRegExp?t.replace(e.HTMLEntityRegExp,""):t},s=function(e,t){return e.connectorRegExp?t.replace(e.connectorRegExp," "):t},u=function(e,t){return e.removeRegExp?t.replace(e.removeRegExp,""):t},g=function(e,t){return e.HTMLcommentRegExp?t.replace(e.HTMLcommentRegExp,""):t},a=function(e,t){return e.shortcodesRegExp?t.replace(e.shortcodesRegExp,"\n"):t},x=function(e,t){if(e.spaceRegExp)return t.replace(e.spaceRegExp," ")},d=function(e,t){return e.HTMLEntityRegExp?t.replace(e.HTMLEntityRegExp,"a"):t};function f(e,t,n){if(""===e)return 0;if(e){var f=function(e,t){var n=Object(r.extend)(c,t);return n.shortcodes=n.l10n.shortcodes||{},n.shortcodes&&n.shortcodes.length&&(n.shortcodesRegExp=new RegExp("\\[\\/?(?:"+n.shortcodes.join("|")+")[^\\]]*?\\]","g")),n.type=e||n.l10n.type,"characters_excluding_spaces"!==n.type&&"characters_including_spaces"!==n.type&&(n.type="words"),n}(t,n),E=f[t+"RegExp"],l="words"===f.type?function(e,t,n){return e=Object(r.flow)(o.bind(this,n),g.bind(this,n),a.bind(this,n),x.bind(this,n),p.bind(this,n),s.bind(this,n),u.bind(this,n))(e),(e+="\n").match(t)}(e,E,f):function(e,t,n){return e=Object(r.flow)(o.bind(this,n),g.bind(this,n),a.bind(this,n),x.bind(this,n),i.bind(this,n),d.bind(this,n))(e),(e+="\n").match(t)}(e,E,f);return l?l.length:0}}n.d(t,"count",function(){return f})}});
+this["wp"] = this["wp"] || {}; this["wp"]["wordcount"] =
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = "./packages/wordcount/build-module/index.js");
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ "./packages/wordcount/build-module/defaultSettings.js":
+/*!************************************************************!*\
+  !*** ./packages/wordcount/build-module/defaultSettings.js ***!
+  \************************************************************/
+/*! exports provided: defaultSettings */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "defaultSettings", function() { return defaultSettings; });
+var defaultSettings = {
+  HTMLRegExp: /<\/?[a-z][^>]*?>/gi,
+  HTMLcommentRegExp: /<!--[\s\S]*?-->/g,
+  spaceRegExp: /&nbsp;|&#160;/gi,
+  HTMLEntityRegExp: /&\S+?;/g,
+  // \u2014 = em-dash
+  connectorRegExp: /--|\u2014/g,
+  // Characters to be removed from input text.
+  removeRegExp: new RegExp(['[', // Basic Latin (extract)
+  "!-@[-`{-~", // Latin-1 Supplement (extract)
+  "\x80-\xBF\xD7\xF7",
+  /*
+   * The following range consists of:
+   * General Punctuation
+   * Superscripts and Subscripts
+   * Currency Symbols
+   * Combining Diacritical Marks for Symbols
+   * Letterlike Symbols
+   * Number Forms
+   * Arrows
+   * Mathematical Operators
+   * Miscellaneous Technical
+   * Control Pictures
+   * Optical Character Recognition
+   * Enclosed Alphanumerics
+   * Box Drawing
+   * Block Elements
+   * Geometric Shapes
+   * Miscellaneous Symbols
+   * Dingbats
+   * Miscellaneous Mathematical Symbols-A
+   * Supplemental Arrows-A
+   * Braille Patterns
+   * Supplemental Arrows-B
+   * Miscellaneous Mathematical Symbols-B
+   * Supplemental Mathematical Operators
+   * Miscellaneous Symbols and Arrows
+   */
+  "\u2000-\u2BFF", // Supplemental Punctuation
+  "\u2E00-\u2E7F", ']'].join(''), 'g'),
+  // Remove UTF-16 surrogate points, see https://en.wikipedia.org/wiki/UTF-16#U.2BD800_to_U.2BDFFF
+  astralRegExp: /[\uD800-\uDBFF][\uDC00-\uDFFF]/g,
+  wordsRegExp: /\S\s+/g,
+  characters_excluding_spacesRegExp: /\S/g,
+
+  /*
+   * Match anything that is not a formatting character, excluding:
+   * \f = form feed
+   * \n = new line
+   * \r = carriage return
+   * \t = tab
+   * \v = vertical tab
+   * \u00AD = soft hyphen
+   * \u2028 = line separator
+   * \u2029 = paragraph separator
+   */
+  characters_including_spacesRegExp: /[^\f\n\r\t\v\u00AD\u2028\u2029]/g,
+  l10n: {
+    type: 'words'
+  }
+};
+
+
+/***/ }),
+
+/***/ "./packages/wordcount/build-module/index.js":
+/*!**************************************************!*\
+  !*** ./packages/wordcount/build-module/index.js ***!
+  \**************************************************/
+/*! exports provided: count */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "count", function() { return count; });
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ "lodash");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _defaultSettings__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./defaultSettings */ "./packages/wordcount/build-module/defaultSettings.js");
+/* harmony import */ var _stripTags__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./stripTags */ "./packages/wordcount/build-module/stripTags.js");
+/* harmony import */ var _transposeAstralsToCountableChar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./transposeAstralsToCountableChar */ "./packages/wordcount/build-module/transposeAstralsToCountableChar.js");
+/* harmony import */ var _stripHTMLEntities__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./stripHTMLEntities */ "./packages/wordcount/build-module/stripHTMLEntities.js");
+/* harmony import */ var _stripConnectors__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./stripConnectors */ "./packages/wordcount/build-module/stripConnectors.js");
+/* harmony import */ var _stripRemovables__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./stripRemovables */ "./packages/wordcount/build-module/stripRemovables.js");
+/* harmony import */ var _stripHTMLComments__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./stripHTMLComments */ "./packages/wordcount/build-module/stripHTMLComments.js");
+/* harmony import */ var _stripShortcodes__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./stripShortcodes */ "./packages/wordcount/build-module/stripShortcodes.js");
+/* harmony import */ var _stripSpaces__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./stripSpaces */ "./packages/wordcount/build-module/stripSpaces.js");
+/* harmony import */ var _transposeHTMLEntitiesToCountableChars__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./transposeHTMLEntitiesToCountableChars */ "./packages/wordcount/build-module/transposeHTMLEntitiesToCountableChars.js");
+/**
+ * External dependencies
+ */
+
+/**
+ * Internal dependencies
+ */
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * Private function to manage the settings.
+ *
+ * @param {string} type         The type of count to be done.
+ * @param {Object} userSettings Custom settings for the count.
+ *
+ * @return {void|Object|*} The combined settings object to be used.
+ */
+
+function loadSettings(type, userSettings) {
+  var settings = Object(lodash__WEBPACK_IMPORTED_MODULE_0__["extend"])(_defaultSettings__WEBPACK_IMPORTED_MODULE_1__["defaultSettings"], userSettings);
+  settings.shortcodes = settings.l10n.shortcodes || {};
+
+  if (settings.shortcodes && settings.shortcodes.length) {
+    settings.shortcodesRegExp = new RegExp('\\[\\/?(?:' + settings.shortcodes.join('|') + ')[^\\]]*?\\]', 'g');
+  }
+
+  settings.type = type || settings.l10n.type;
+
+  if (settings.type !== 'characters_excluding_spaces' && settings.type !== 'characters_including_spaces') {
+    settings.type = 'words';
+  }
+
+  return settings;
+}
+/**
+ * Match the regex for the type 'words'
+ *
+ * @param {string} text     The text being processed
+ * @param {string} regex    The regular expression pattern being matched
+ * @param {Object} settings Settings object containing regular expressions for each strip function
+ *
+ * @return {Array|{index: number, input: string}} The matched string.
+ */
+
+
+function matchWords(text, regex, settings) {
+  text = Object(lodash__WEBPACK_IMPORTED_MODULE_0__["flow"])(_stripTags__WEBPACK_IMPORTED_MODULE_2__["default"].bind(this, settings), _stripHTMLComments__WEBPACK_IMPORTED_MODULE_7__["default"].bind(this, settings), _stripShortcodes__WEBPACK_IMPORTED_MODULE_8__["default"].bind(this, settings), _stripSpaces__WEBPACK_IMPORTED_MODULE_9__["default"].bind(this, settings), _stripHTMLEntities__WEBPACK_IMPORTED_MODULE_4__["default"].bind(this, settings), _stripConnectors__WEBPACK_IMPORTED_MODULE_5__["default"].bind(this, settings), _stripRemovables__WEBPACK_IMPORTED_MODULE_6__["default"].bind(this, settings))(text);
+  text = text + '\n';
+  return text.match(regex);
+}
+/**
+ * Match the regex for either 'characters_excluding_spaces' or 'characters_including_spaces'
+ *
+ * @param {string} text     The text being processed
+ * @param {string} regex    The regular expression pattern being matched
+ * @param {Object} settings Settings object containing regular expressions for each strip function
+ *
+ * @return {Array|{index: number, input: string}} The matched string.
+ */
+
+
+function matchCharacters(text, regex, settings) {
+  text = Object(lodash__WEBPACK_IMPORTED_MODULE_0__["flow"])(_stripTags__WEBPACK_IMPORTED_MODULE_2__["default"].bind(this, settings), _stripHTMLComments__WEBPACK_IMPORTED_MODULE_7__["default"].bind(this, settings), _stripShortcodes__WEBPACK_IMPORTED_MODULE_8__["default"].bind(this, settings), _stripSpaces__WEBPACK_IMPORTED_MODULE_9__["default"].bind(this, settings), _transposeAstralsToCountableChar__WEBPACK_IMPORTED_MODULE_3__["default"].bind(this, settings), _transposeHTMLEntitiesToCountableChars__WEBPACK_IMPORTED_MODULE_10__["default"].bind(this, settings))(text);
+  text = text + '\n';
+  return text.match(regex);
+}
+/**
+ * Count some words.
+ *
+ * @param {string} text         The text being processed
+ * @param {string} type         The type of count. Accepts ;words', 'characters_excluding_spaces', or 'characters_including_spaces'.
+ * @param {Object} userSettings Custom settings object.
+ *
+ * @example
+ * ```js
+ * import { count } from '@wordpress/wordcount';
+ * const numberOfWords = count( 'Words to count', 'words', {} )
+ * ```
+ *
+ * @return {number} The word or character count.
+ */
+
+
+function count(text, type, userSettings) {
+  if ('' === text) {
+    return 0;
+  }
+
+  if (text) {
+    var settings = loadSettings(type, userSettings);
+    var matchRegExp = settings[type + 'RegExp'];
+    var results = 'words' === settings.type ? matchWords(text, matchRegExp, settings) : matchCharacters(text, matchRegExp, settings);
+    return results ? results.length : 0;
+  }
+}
+
+
+/***/ }),
+
+/***/ "./packages/wordcount/build-module/stripConnectors.js":
+/*!************************************************************!*\
+  !*** ./packages/wordcount/build-module/stripConnectors.js ***!
+  \************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/**
+ * Replaces items matched in the regex with spaces.
+ *
+ * @param {Object} settings The main settings object containing regular expressions
+ * @param {string} text     The string being counted.
+ *
+ * @return {string} The manipulated text.
+ */
+/* harmony default export */ __webpack_exports__["default"] = (function (settings, text) {
+  if (settings.connectorRegExp) {
+    return text.replace(settings.connectorRegExp, ' ');
+  }
+
+  return text;
+});
+
+
+/***/ }),
+
+/***/ "./packages/wordcount/build-module/stripHTMLComments.js":
+/*!**************************************************************!*\
+  !*** ./packages/wordcount/build-module/stripHTMLComments.js ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/**
+ * Removes items matched in the regex.
+ *
+ * @param {Object} settings The main settings object containing regular expressions
+ * @param {string} text     The string being counted.
+ *
+ * @return {string} The manipulated text.
+ */
+/* harmony default export */ __webpack_exports__["default"] = (function (settings, text) {
+  if (settings.HTMLcommentRegExp) {
+    return text.replace(settings.HTMLcommentRegExp, '');
+  }
+
+  return text;
+});
+
+
+/***/ }),
+
+/***/ "./packages/wordcount/build-module/stripHTMLEntities.js":
+/*!**************************************************************!*\
+  !*** ./packages/wordcount/build-module/stripHTMLEntities.js ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/**
+ * Removes items matched in the regex.
+ *
+ * @param {Object} settings The main settings object containing regular expressions
+ * @param {string} text     The string being counted.
+ *
+ * @return {string} The manipulated text.
+ */
+/* harmony default export */ __webpack_exports__["default"] = (function (settings, text) {
+  if (settings.HTMLEntityRegExp) {
+    return text.replace(settings.HTMLEntityRegExp, '');
+  }
+
+  return text;
+});
+
+
+/***/ }),
+
+/***/ "./packages/wordcount/build-module/stripRemovables.js":
+/*!************************************************************!*\
+  !*** ./packages/wordcount/build-module/stripRemovables.js ***!
+  \************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/**
+ * Removes items matched in the regex.
+ *
+ * @param {Object} settings The main settings object containing regular expressions
+ * @param {string} text     The string being counted.
+ *
+ * @return {string} The manipulated text.
+ */
+/* harmony default export */ __webpack_exports__["default"] = (function (settings, text) {
+  if (settings.removeRegExp) {
+    return text.replace(settings.removeRegExp, '');
+  }
+
+  return text;
+});
+
+
+/***/ }),
+
+/***/ "./packages/wordcount/build-module/stripShortcodes.js":
+/*!************************************************************!*\
+  !*** ./packages/wordcount/build-module/stripShortcodes.js ***!
+  \************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/**
+ * Replaces items matched in the regex with a new line.
+ *
+ * @param {Object} settings The main settings object containing regular expressions
+ * @param {string} text     The string being counted.
+ *
+ * @return {string} The manipulated text.
+ */
+/* harmony default export */ __webpack_exports__["default"] = (function (settings, text) {
+  if (settings.shortcodesRegExp) {
+    return text.replace(settings.shortcodesRegExp, '\n');
+  }
+
+  return text;
+});
+
+
+/***/ }),
+
+/***/ "./packages/wordcount/build-module/stripSpaces.js":
+/*!********************************************************!*\
+  !*** ./packages/wordcount/build-module/stripSpaces.js ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/**
+ * Replaces items matched in the regex with spaces.
+ *
+ * @param {Object} settings The main settings object containing regular expressions
+ * @param {string} text     The string being counted.
+ *
+ * @return {string} The manipulated text.
+ */
+/* harmony default export */ __webpack_exports__["default"] = (function (settings, text) {
+  if (settings.spaceRegExp) {
+    return text.replace(settings.spaceRegExp, ' ');
+  }
+});
+
+
+/***/ }),
+
+/***/ "./packages/wordcount/build-module/stripTags.js":
+/*!******************************************************!*\
+  !*** ./packages/wordcount/build-module/stripTags.js ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/**
+ * Replaces items matched in the regex with new line
+ *
+ * @param {Object} settings The main settings object containing regular expressions
+ * @param {string} text     The string being counted.
+ *
+ * @return {string} The manipulated text.
+ */
+/* harmony default export */ __webpack_exports__["default"] = (function (settings, text) {
+  if (settings.HTMLRegExp) {
+    return text.replace(settings.HTMLRegExp, '\n');
+  }
+});
+
+
+/***/ }),
+
+/***/ "./packages/wordcount/build-module/transposeAstralsToCountableChar.js":
+/*!****************************************************************************!*\
+  !*** ./packages/wordcount/build-module/transposeAstralsToCountableChar.js ***!
+  \****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/**
+ * Replaces items matched in the regex with character.
+ *
+ * @param {Object} settings The main settings object containing regular expressions
+ * @param {string} text     The string being counted.
+ *
+ * @return {string} The manipulated text.
+ */
+/* harmony default export */ __webpack_exports__["default"] = (function (settings, text) {
+  if (settings.astralRegExp) {
+    return text.replace(settings.astralRegExp, 'a');
+  }
+
+  return text;
+});
+
+
+/***/ }),
+
+/***/ "./packages/wordcount/build-module/transposeHTMLEntitiesToCountableChars.js":
+/*!**********************************************************************************!*\
+  !*** ./packages/wordcount/build-module/transposeHTMLEntitiesToCountableChars.js ***!
+  \**********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/**
+ * Replaces items matched in the regex with a single character.
+ *
+ * @param {Object} settings The main settings object containing regular expressions
+ * @param {string} text     The string being counted.
+ *
+ * @return {string} The manipulated text.
+ */
+/* harmony default export */ __webpack_exports__["default"] = (function (settings, text) {
+  if (settings.HTMLEntityRegExp) {
+    return text.replace(settings.HTMLEntityRegExp, 'a');
+  }
+
+  return text;
+});
+
+
+/***/ }),
+
+/***/ "lodash":
+/*!**********************************!*\
+  !*** external {"this":"lodash"} ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(function() { module.exports = this["lodash"]; }());
+
+/***/ })
+
+/******/ });
+//# sourceMappingURL=index.js.map

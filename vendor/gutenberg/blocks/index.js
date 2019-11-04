@@ -1,2 +1,13684 @@
-this.wp=this.wp||{},this.wp.blocks=function(e){var t={};function r(n){if(t[n])return t[n].exports;var g=t[n]={i:n,l:!1,exports:{}};return e[n].call(g.exports,g,g.exports,r),g.l=!0,g.exports}return r.m=e,r.c=t,r.d=function(e,t,n){r.o(e,t)||Object.defineProperty(e,t,{configurable:!1,enumerable:!0,get:n})},r.r=function(e){Object.defineProperty(e,"__esModule",{value:!0})},r.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return r.d(t,"a",t),t},r.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},r.p="",r(r.s=225)}({0:function(e,t){!function(){e.exports=this.wp.element}()},1:function(e,t){!function(){e.exports=this.wp.i18n}()},10:function(e,t,r){"use strict";function n(e,t){for(var r=0;r<t.length;r++){var n=t[r];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(e,n.key,n)}}function g(e,t,r){return t&&n(e.prototype,t),r&&n(e,r),e}r.d(t,"a",function(){return g})},11:function(e,t,r){"use strict";function n(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}r.d(t,"a",function(){return n})},135:function(e,t){!function(){e.exports=this.wp.shortcode}()},15:function(e,t,r){"use strict";function n(e,t,r){return t in e?Object.defineProperty(e,t,{value:r,enumerable:!0,configurable:!0,writable:!0}):e[t]=r,e}r.d(t,"a",function(){return n})},17:function(e,t,r){"use strict";var n=r(32);function g(e){return function(e){if(Array.isArray(e)){for(var t=0,r=new Array(e.length);t<e.length;t++)r[t]=e[t];return r}}(e)||Object(n.a)(e)||function(){throw new TypeError("Invalid attempt to spread non-iterable instance")}()}r.d(t,"a",function(){return g})},18:function(e,t,r){"use strict";function n(){return(n=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var r=arguments[t];for(var n in r)Object.prototype.hasOwnProperty.call(r,n)&&(e[n]=r[n])}return e}).apply(this,arguments)}r.d(t,"a",function(){return n})},195:function(e,t,r){var n;/*! showdown v 1.8.6 - 22-12-2017 */
-(function(){function g(e){"use strict";var t={omitExtraWLInCodeBlocks:{defaultValue:!1,describe:"Omit the default extra whiteline added to code blocks",type:"boolean"},noHeaderId:{defaultValue:!1,describe:"Turn on/off generated header id",type:"boolean"},prefixHeaderId:{defaultValue:!1,describe:"Add a prefix to the generated header ids. Passing a string will prefix that string to the header id. Setting to true will add a generic 'section-' prefix",type:"string"},rawPrefixHeaderId:{defaultValue:!1,describe:'Setting this option to true will prevent showdown from modifying the prefix. This might result in malformed IDs (if, for instance, the " char is used in the prefix)',type:"boolean"},ghCompatibleHeaderId:{defaultValue:!1,describe:"Generate header ids compatible with github style (spaces are replaced with dashes, a bunch of non alphanumeric chars are removed)",type:"boolean"},rawHeaderId:{defaultValue:!1,describe:"Remove only spaces, ' and \" from generated header ids (including prefixes), replacing them with dashes (-). WARNING: This might result in malformed ids",type:"boolean"},headerLevelStart:{defaultValue:!1,describe:"The header blocks level start",type:"integer"},parseImgDimensions:{defaultValue:!1,describe:"Turn on/off image dimension parsing",type:"boolean"},simplifiedAutoLink:{defaultValue:!1,describe:"Turn on/off GFM autolink style",type:"boolean"},excludeTrailingPunctuationFromURLs:{defaultValue:!1,describe:"Excludes trailing punctuation from links generated with autoLinking",type:"boolean"},literalMidWordUnderscores:{defaultValue:!1,describe:"Parse midword underscores as literal underscores",type:"boolean"},literalMidWordAsterisks:{defaultValue:!1,describe:"Parse midword asterisks as literal asterisks",type:"boolean"},strikethrough:{defaultValue:!1,describe:"Turn on/off strikethrough support",type:"boolean"},tables:{defaultValue:!1,describe:"Turn on/off tables support",type:"boolean"},tablesHeaderId:{defaultValue:!1,describe:"Add an id to table headers",type:"boolean"},ghCodeBlocks:{defaultValue:!0,describe:"Turn on/off GFM fenced code blocks support",type:"boolean"},tasklists:{defaultValue:!1,describe:"Turn on/off GFM tasklist support",type:"boolean"},smoothLivePreview:{defaultValue:!1,describe:"Prevents weird effects in live previews due to incomplete input",type:"boolean"},smartIndentationFix:{defaultValue:!1,description:"Tries to smartly fix indentation in es6 strings",type:"boolean"},disableForced4SpacesIndentedSublists:{defaultValue:!1,description:"Disables the requirement of indenting nested sublists by 4 spaces",type:"boolean"},simpleLineBreaks:{defaultValue:!1,description:"Parses simple line breaks as <br> (GFM Style)",type:"boolean"},requireSpaceBeforeHeadingText:{defaultValue:!1,description:"Makes adding a space between `#` and the header text mandatory (GFM Style)",type:"boolean"},ghMentions:{defaultValue:!1,description:"Enables github @mentions",type:"boolean"},ghMentionsLink:{defaultValue:"https://github.com/{u}",description:"Changes the link generated by @mentions. Only applies if ghMentions option is enabled.",type:"string"},encodeEmails:{defaultValue:!0,description:"Encode e-mail addresses through the use of Character Entities, transforming ASCII e-mail addresses into its equivalent decimal entities",type:"boolean"},openLinksInNewWindow:{defaultValue:!1,description:"Open all links in new windows",type:"boolean"},backslashEscapesHTMLTags:{defaultValue:!1,description:"Support for HTML Tag escaping. ex: <div>foo</div>",type:"boolean"},emoji:{defaultValue:!1,description:"Enable emoji support. Ex: `this is a :smile: emoji`",type:"boolean"},underline:{defaultValue:!1,description:"Enable support for underline. Syntax is double or triple underscores: `__underline word__`. With this option enabled, underscores no longer parses into `<em>` and `<strong>`",type:"boolean"},completeHTMLDocument:{defaultValue:!1,description:"Outputs a complete html document, including `<html>`, `<head>` and `<body>` tags",type:"boolean"},metadata:{defaultValue:!1,description:"Enable support for document metadata (defined at the top of the document between `«««` and `»»»` or between `---` and `---`).",type:"boolean"},splitAdjacentBlockquotes:{defaultValue:!1,description:"Split adjacent blockquote blocks",type:"boolean"}};if(!1===e)return JSON.parse(JSON.stringify(t));var r={};for(var n in t)t.hasOwnProperty(n)&&(r[n]=t[n].defaultValue);return r}var a={},A={},i={},o=g(!0),C="vanilla",I={github:{omitExtraWLInCodeBlocks:!0,simplifiedAutoLink:!0,excludeTrailingPunctuationFromURLs:!0,literalMidWordUnderscores:!0,strikethrough:!0,tables:!0,tablesHeaderId:!0,ghCodeBlocks:!0,tasklists:!0,disableForced4SpacesIndentedSublists:!0,simpleLineBreaks:!0,requireSpaceBeforeHeadingText:!0,ghCompatibleHeaderId:!0,ghMentions:!0,backslashEscapesHTMLTags:!0,emoji:!0,splitAdjacentBlockquotes:!0},original:{noHeaderId:!0,ghCodeBlocks:!1},ghost:{omitExtraWLInCodeBlocks:!0,parseImgDimensions:!0,simplifiedAutoLink:!0,excludeTrailingPunctuationFromURLs:!0,literalMidWordUnderscores:!0,strikethrough:!0,tables:!0,tablesHeaderId:!0,ghCodeBlocks:!0,tasklists:!0,smoothLivePreview:!0,simpleLineBreaks:!0,requireSpaceBeforeHeadingText:!0,ghMentions:!1,encodeEmails:!0},vanilla:g(!0),allOn:function(){"use strict";var e=g(!0),t={};for(var r in e)e.hasOwnProperty(r)&&(t[r]=!0);return t}()};function s(e,t){"use strict";var r=t?"Error in "+t+" extension->":"Error in unnamed extension",n={valid:!0,error:""};a.helper.isArray(e)||(e=[e]);for(var g=0;g<e.length;++g){var A=r+" sub-extension "+g+": ",i=e[g];if("object"!=typeof i)return n.valid=!1,n.error=A+"must be an object, but "+typeof i+" given",n;if(!a.helper.isString(i.type))return n.valid=!1,n.error=A+'property "type" must be a string, but '+typeof i.type+" given",n;var o=i.type=i.type.toLowerCase();if("language"===o&&(o=i.type="lang"),"html"===o&&(o=i.type="output"),"lang"!==o&&"output"!==o&&"listener"!==o)return n.valid=!1,n.error=A+"type "+o+' is not recognized. Valid values: "lang/language", "output/html" or "listener"',n;if("listener"===o){if(a.helper.isUndefined(i.listeners))return n.valid=!1,n.error=A+'. Extensions of type "listener" must have a property called "listeners"',n}else if(a.helper.isUndefined(i.filter)&&a.helper.isUndefined(i.regex))return n.valid=!1,n.error=A+o+' extensions must define either a "regex" property or a "filter" method',n;if(i.listeners){if("object"!=typeof i.listeners)return n.valid=!1,n.error=A+'"listeners" property must be an object but '+typeof i.listeners+" given",n;for(var C in i.listeners)if(i.listeners.hasOwnProperty(C)&&"function"!=typeof i.listeners[C])return n.valid=!1,n.error=A+'"listeners" property must be an hash of [event name]: [callback]. listeners.'+C+" must be a function but "+typeof i.listeners[C]+" given",n}if(i.filter){if("function"!=typeof i.filter)return n.valid=!1,n.error=A+'"filter" must be a function, but '+typeof i.filter+" given",n}else if(i.regex){if(a.helper.isString(i.regex)&&(i.regex=new RegExp(i.regex,"g")),!(i.regex instanceof RegExp))return n.valid=!1,n.error=A+'"regex" property must either be a string or a RegExp object, but '+typeof i.regex+" given",n;if(a.helper.isUndefined(i.replace))return n.valid=!1,n.error=A+'"regex" extensions must implement a replace string or function',n}}return n}function c(e,t){"use strict";return"¨E"+t.charCodeAt(0)+"E"}a.helper={},a.extensions={},a.setOption=function(e,t){"use strict";return o[e]=t,this},a.getOption=function(e){"use strict";return o[e]},a.getOptions=function(){"use strict";return o},a.resetOptions=function(){"use strict";o=g(!0)},a.setFlavor=function(e){"use strict";if(!I.hasOwnProperty(e))throw Error(e+" flavor was not found");a.resetOptions();var t=I[e];for(var r in C=e,t)t.hasOwnProperty(r)&&(o[r]=t[r])},a.getFlavor=function(){"use strict";return C},a.getFlavorOptions=function(e){"use strict";if(I.hasOwnProperty(e))return I[e]},a.getDefaultOptions=function(e){"use strict";return g(e)},a.subParser=function(e,t){"use strict";if(a.helper.isString(e)){if(void 0===t){if(A.hasOwnProperty(e))return A[e];throw Error("SubParser named "+e+" not registered!")}A[e]=t}},a.extension=function(e,t){"use strict";if(!a.helper.isString(e))throw Error("Extension 'name' must be a string");if(e=a.helper.stdExtName(e),a.helper.isUndefined(t)){if(!i.hasOwnProperty(e))throw Error("Extension named "+e+" is not registered!");return i[e]}"function"==typeof t&&(t=t()),a.helper.isArray(t)||(t=[t]);var r=s(t,e);if(!r.valid)throw Error(r.error);i[e]=t},a.getAllExtensions=function(){"use strict";return i},a.removeExtension=function(e){"use strict";delete i[e]},a.resetExtensions=function(){"use strict";i={}},a.validateExtension=function(e){"use strict";var t=s(e,null);return!!t.valid||(console.warn(t.error),!1)},a.hasOwnProperty("helper")||(a.helper={}),a.helper.isString=function(e){"use strict";return"string"==typeof e||e instanceof String},a.helper.isFunction=function(e){"use strict";return e&&"[object Function]"==={}.toString.call(e)},a.helper.isArray=function(e){"use strict";return Array.isArray(e)},a.helper.isUndefined=function(e){"use strict";return void 0===e},a.helper.forEach=function(e,t){"use strict";if(a.helper.isUndefined(e))throw new Error("obj param is required");if(a.helper.isUndefined(t))throw new Error("callback param is required");if(!a.helper.isFunction(t))throw new Error("callback param must be a function/closure");if("function"==typeof e.forEach)e.forEach(t);else if(a.helper.isArray(e))for(var r=0;r<e.length;r++)t(e[r],r,e);else{if("object"!=typeof e)throw new Error("obj does not seem to be an array or an iterable object");for(var n in e)e.hasOwnProperty(n)&&t(e[n],n,e)}},a.helper.stdExtName=function(e){"use strict";return e.replace(/[_?*+\/\\.^-]/g,"").replace(/\s/g,"").toLowerCase()},a.helper.escapeCharactersCallback=c,a.helper.escapeCharacters=function(e,t,r){"use strict";var n="(["+t.replace(/([\[\]\\])/g,"\\$1")+"])";r&&(n="\\\\"+n);var g=new RegExp(n,"g");return e=e.replace(g,c)};var l=function(e,t,r,n){"use strict";var g,a,A,i,o,C=n||"",I=C.indexOf("g")>-1,s=new RegExp(t+"|"+r,"g"+C.replace(/g/g,"")),c=new RegExp(t,C.replace(/g/g,"")),l=[];do{for(g=0;A=s.exec(e);)if(c.test(A[0]))g++||(i=(a=s.lastIndex)-A[0].length);else if(g&&!--g){o=A.index+A[0].length;var u={left:{start:i,end:a},match:{start:a,end:A.index},right:{start:A.index,end:o},wholeMatch:{start:i,end:o}};if(l.push(u),!I)return l}}while(g&&(s.lastIndex=a));return l};a.helper.matchRecursiveRegExp=function(e,t,r,n){"use strict";for(var g=l(e,t,r,n),a=[],A=0;A<g.length;++A)a.push([e.slice(g[A].wholeMatch.start,g[A].wholeMatch.end),e.slice(g[A].match.start,g[A].match.end),e.slice(g[A].left.start,g[A].left.end),e.slice(g[A].right.start,g[A].right.end)]);return a},a.helper.replaceRecursiveRegExp=function(e,t,r,n,g){"use strict";if(!a.helper.isFunction(t)){var A=t;t=function(){return A}}var i=l(e,r,n,g),o=e,C=i.length;if(C>0){var I=[];0!==i[0].wholeMatch.start&&I.push(e.slice(0,i[0].wholeMatch.start));for(var s=0;s<C;++s)I.push(t(e.slice(i[s].wholeMatch.start,i[s].wholeMatch.end),e.slice(i[s].match.start,i[s].match.end),e.slice(i[s].left.start,i[s].left.end),e.slice(i[s].right.start,i[s].right.end))),s<C-1&&I.push(e.slice(i[s].wholeMatch.end,i[s+1].wholeMatch.start));i[C-1].wholeMatch.end<e.length&&I.push(e.slice(i[C-1].wholeMatch.end)),o=I.join("")}return o},a.helper.regexIndexOf=function(e,t,r){"use strict";if(!a.helper.isString(e))throw"InvalidArgumentError: first parameter of showdown.helper.regexIndexOf function must be a string";if(t instanceof RegExp==!1)throw"InvalidArgumentError: second parameter of showdown.helper.regexIndexOf function must be an instance of RegExp";var n=e.substring(r||0).search(t);return n>=0?n+(r||0):n},a.helper.splitAtIndex=function(e,t){"use strict";if(!a.helper.isString(e))throw"InvalidArgumentError: first parameter of showdown.helper.regexIndexOf function must be a string";return[e.substring(0,t),e.substring(t)]},a.helper.encodeEmailAddress=function(e){"use strict";var t=[function(e){return"&#"+e.charCodeAt(0)+";"},function(e){return"&#x"+e.charCodeAt(0).toString(16)+";"},function(e){return e}];return e=e.replace(/./g,function(e){if("@"===e)e=t[Math.floor(2*Math.random())](e);else{var r=Math.random();e=r>.9?t[2](e):r>.45?t[1](e):t[0](e)}return e})},"undefined"==typeof console&&(console={warn:function(e){"use strict";alert(e)},log:function(e){"use strict";alert(e)},error:function(e){"use strict";throw e}}),a.helper.regexes={asteriskDashAndColon:/([*_:~])/g},a.helper.emojis={"+1":"👍","-1":"👎",100:"💯",1234:"🔢","1st_place_medal":"🥇","2nd_place_medal":"🥈","3rd_place_medal":"🥉","8ball":"🎱",a:"🅰️",ab:"🆎",abc:"🔤",abcd:"🔡",accept:"🉑",aerial_tramway:"🚡",airplane:"✈️",alarm_clock:"⏰",alembic:"⚗️",alien:"👽",ambulance:"🚑",amphora:"🏺",anchor:"⚓️",angel:"👼",anger:"💢",angry:"😠",anguished:"😧",ant:"🐜",apple:"🍎",aquarius:"♒️",aries:"♈️",arrow_backward:"◀️",arrow_double_down:"⏬",arrow_double_up:"⏫",arrow_down:"⬇️",arrow_down_small:"🔽",arrow_forward:"▶️",arrow_heading_down:"⤵️",arrow_heading_up:"⤴️",arrow_left:"⬅️",arrow_lower_left:"↙️",arrow_lower_right:"↘️",arrow_right:"➡️",arrow_right_hook:"↪️",arrow_up:"⬆️",arrow_up_down:"↕️",arrow_up_small:"🔼",arrow_upper_left:"↖️",arrow_upper_right:"↗️",arrows_clockwise:"🔃",arrows_counterclockwise:"🔄",art:"🎨",articulated_lorry:"🚛",artificial_satellite:"🛰",astonished:"😲",athletic_shoe:"👟",atm:"🏧",atom_symbol:"⚛️",avocado:"🥑",b:"🅱️",baby:"👶",baby_bottle:"🍼",baby_chick:"🐤",baby_symbol:"🚼",back:"🔙",bacon:"🥓",badminton:"🏸",baggage_claim:"🛄",baguette_bread:"🥖",balance_scale:"⚖️",balloon:"🎈",ballot_box:"🗳",ballot_box_with_check:"☑️",bamboo:"🎍",banana:"🍌",bangbang:"‼️",bank:"🏦",bar_chart:"📊",barber:"💈",baseball:"⚾️",basketball:"🏀",basketball_man:"⛹️",basketball_woman:"⛹️&zwj;♀️",bat:"🦇",bath:"🛀",bathtub:"🛁",battery:"🔋",beach_umbrella:"🏖",bear:"🐻",bed:"🛏",bee:"🐝",beer:"🍺",beers:"🍻",beetle:"🐞",beginner:"🔰",bell:"🔔",bellhop_bell:"🛎",bento:"🍱",biking_man:"🚴",bike:"🚲",biking_woman:"🚴&zwj;♀️",bikini:"👙",biohazard:"☣️",bird:"🐦",birthday:"🎂",black_circle:"⚫️",black_flag:"🏴",black_heart:"🖤",black_joker:"🃏",black_large_square:"⬛️",black_medium_small_square:"◾️",black_medium_square:"◼️",black_nib:"✒️",black_small_square:"▪️",black_square_button:"🔲",blonde_man:"👱",blonde_woman:"👱&zwj;♀️",blossom:"🌼",blowfish:"🐡",blue_book:"📘",blue_car:"🚙",blue_heart:"💙",blush:"😊",boar:"🐗",boat:"⛵️",bomb:"💣",book:"📖",bookmark:"🔖",bookmark_tabs:"📑",books:"📚",boom:"💥",boot:"👢",bouquet:"💐",bowing_man:"🙇",bow_and_arrow:"🏹",bowing_woman:"🙇&zwj;♀️",bowling:"🎳",boxing_glove:"🥊",boy:"👦",bread:"🍞",bride_with_veil:"👰",bridge_at_night:"🌉",briefcase:"💼",broken_heart:"💔",bug:"🐛",building_construction:"🏗",bulb:"💡",bullettrain_front:"🚅",bullettrain_side:"🚄",burrito:"🌯",bus:"🚌",business_suit_levitating:"🕴",busstop:"🚏",bust_in_silhouette:"👤",busts_in_silhouette:"👥",butterfly:"🦋",cactus:"🌵",cake:"🍰",calendar:"📆",call_me_hand:"🤙",calling:"📲",camel:"🐫",camera:"📷",camera_flash:"📸",camping:"🏕",cancer:"♋️",candle:"🕯",candy:"🍬",canoe:"🛶",capital_abcd:"🔠",capricorn:"♑️",car:"🚗",card_file_box:"🗃",card_index:"📇",card_index_dividers:"🗂",carousel_horse:"🎠",carrot:"🥕",cat:"🐱",cat2:"🐈",cd:"💿",chains:"⛓",champagne:"🍾",chart:"💹",chart_with_downwards_trend:"📉",chart_with_upwards_trend:"📈",checkered_flag:"🏁",cheese:"🧀",cherries:"🍒",cherry_blossom:"🌸",chestnut:"🌰",chicken:"🐔",children_crossing:"🚸",chipmunk:"🐿",chocolate_bar:"🍫",christmas_tree:"🎄",church:"⛪️",cinema:"🎦",circus_tent:"🎪",city_sunrise:"🌇",city_sunset:"🌆",cityscape:"🏙",cl:"🆑",clamp:"🗜",clap:"👏",clapper:"🎬",classical_building:"🏛",clinking_glasses:"🥂",clipboard:"📋",clock1:"🕐",clock10:"🕙",clock1030:"🕥",clock11:"🕚",clock1130:"🕦",clock12:"🕛",clock1230:"🕧",clock130:"🕜",clock2:"🕑",clock230:"🕝",clock3:"🕒",clock330:"🕞",clock4:"🕓",clock430:"🕟",clock5:"🕔",clock530:"🕠",clock6:"🕕",clock630:"🕡",clock7:"🕖",clock730:"🕢",clock8:"🕗",clock830:"🕣",clock9:"🕘",clock930:"🕤",closed_book:"📕",closed_lock_with_key:"🔐",closed_umbrella:"🌂",cloud:"☁️",cloud_with_lightning:"🌩",cloud_with_lightning_and_rain:"⛈",cloud_with_rain:"🌧",cloud_with_snow:"🌨",clown_face:"🤡",clubs:"♣️",cocktail:"🍸",coffee:"☕️",coffin:"⚰️",cold_sweat:"😰",comet:"☄️",computer:"💻",computer_mouse:"🖱",confetti_ball:"🎊",confounded:"😖",confused:"😕",congratulations:"㊗️",construction:"🚧",construction_worker_man:"👷",construction_worker_woman:"👷&zwj;♀️",control_knobs:"🎛",convenience_store:"🏪",cookie:"🍪",cool:"🆒",policeman:"👮",copyright:"©️",corn:"🌽",couch_and_lamp:"🛋",couple:"👫",couple_with_heart_woman_man:"💑",couple_with_heart_man_man:"👨&zwj;❤️&zwj;👨",couple_with_heart_woman_woman:"👩&zwj;❤️&zwj;👩",couplekiss_man_man:"👨&zwj;❤️&zwj;💋&zwj;👨",couplekiss_man_woman:"💏",couplekiss_woman_woman:"👩&zwj;❤️&zwj;💋&zwj;👩",cow:"🐮",cow2:"🐄",cowboy_hat_face:"🤠",crab:"🦀",crayon:"🖍",credit_card:"💳",crescent_moon:"🌙",cricket:"🏏",crocodile:"🐊",croissant:"🥐",crossed_fingers:"🤞",crossed_flags:"🎌",crossed_swords:"⚔️",crown:"👑",cry:"😢",crying_cat_face:"😿",crystal_ball:"🔮",cucumber:"🥒",cupid:"💘",curly_loop:"➰",currency_exchange:"💱",curry:"🍛",custard:"🍮",customs:"🛃",cyclone:"🌀",dagger:"🗡",dancer:"💃",dancing_women:"👯",dancing_men:"👯&zwj;♂️",dango:"🍡",dark_sunglasses:"🕶",dart:"🎯",dash:"💨",date:"📅",deciduous_tree:"🌳",deer:"🦌",department_store:"🏬",derelict_house:"🏚",desert:"🏜",desert_island:"🏝",desktop_computer:"🖥",male_detective:"🕵️",diamond_shape_with_a_dot_inside:"💠",diamonds:"♦️",disappointed:"😞",disappointed_relieved:"😥",dizzy:"💫",dizzy_face:"😵",do_not_litter:"🚯",dog:"🐶",dog2:"🐕",dollar:"💵",dolls:"🎎",dolphin:"🐬",door:"🚪",doughnut:"🍩",dove:"🕊",dragon:"🐉",dragon_face:"🐲",dress:"👗",dromedary_camel:"🐪",drooling_face:"🤤",droplet:"💧",drum:"🥁",duck:"🦆",dvd:"📀","e-mail":"📧",eagle:"🦅",ear:"👂",ear_of_rice:"🌾",earth_africa:"🌍",earth_americas:"🌎",earth_asia:"🌏",egg:"🥚",eggplant:"🍆",eight_pointed_black_star:"✴️",eight_spoked_asterisk:"✳️",electric_plug:"🔌",elephant:"🐘",email:"✉️",end:"🔚",envelope_with_arrow:"📩",euro:"💶",european_castle:"🏰",european_post_office:"🏤",evergreen_tree:"🌲",exclamation:"❗️",expressionless:"😑",eye:"👁",eye_speech_bubble:"👁&zwj;🗨",eyeglasses:"👓",eyes:"👀",face_with_head_bandage:"🤕",face_with_thermometer:"🤒",fist_oncoming:"👊",factory:"🏭",fallen_leaf:"🍂",family_man_woman_boy:"👪",family_man_boy:"👨&zwj;👦",family_man_boy_boy:"👨&zwj;👦&zwj;👦",family_man_girl:"👨&zwj;👧",family_man_girl_boy:"👨&zwj;👧&zwj;👦",family_man_girl_girl:"👨&zwj;👧&zwj;👧",family_man_man_boy:"👨&zwj;👨&zwj;👦",family_man_man_boy_boy:"👨&zwj;👨&zwj;👦&zwj;👦",family_man_man_girl:"👨&zwj;👨&zwj;👧",family_man_man_girl_boy:"👨&zwj;👨&zwj;👧&zwj;👦",family_man_man_girl_girl:"👨&zwj;👨&zwj;👧&zwj;👧",family_man_woman_boy_boy:"👨&zwj;👩&zwj;👦&zwj;👦",family_man_woman_girl:"👨&zwj;👩&zwj;👧",family_man_woman_girl_boy:"👨&zwj;👩&zwj;👧&zwj;👦",family_man_woman_girl_girl:"👨&zwj;👩&zwj;👧&zwj;👧",family_woman_boy:"👩&zwj;👦",family_woman_boy_boy:"👩&zwj;👦&zwj;👦",family_woman_girl:"👩&zwj;👧",family_woman_girl_boy:"👩&zwj;👧&zwj;👦",family_woman_girl_girl:"👩&zwj;👧&zwj;👧",family_woman_woman_boy:"👩&zwj;👩&zwj;👦",family_woman_woman_boy_boy:"👩&zwj;👩&zwj;👦&zwj;👦",family_woman_woman_girl:"👩&zwj;👩&zwj;👧",family_woman_woman_girl_boy:"👩&zwj;👩&zwj;👧&zwj;👦",family_woman_woman_girl_girl:"👩&zwj;👩&zwj;👧&zwj;👧",fast_forward:"⏩",fax:"📠",fearful:"😨",feet:"🐾",female_detective:"🕵️&zwj;♀️",ferris_wheel:"🎡",ferry:"⛴",field_hockey:"🏑",file_cabinet:"🗄",file_folder:"📁",film_projector:"📽",film_strip:"🎞",fire:"🔥",fire_engine:"🚒",fireworks:"🎆",first_quarter_moon:"🌓",first_quarter_moon_with_face:"🌛",fish:"🐟",fish_cake:"🍥",fishing_pole_and_fish:"🎣",fist_raised:"✊",fist_left:"🤛",fist_right:"🤜",flags:"🎏",flashlight:"🔦",fleur_de_lis:"⚜️",flight_arrival:"🛬",flight_departure:"🛫",floppy_disk:"💾",flower_playing_cards:"🎴",flushed:"😳",fog:"🌫",foggy:"🌁",football:"🏈",footprints:"👣",fork_and_knife:"🍴",fountain:"⛲️",fountain_pen:"🖋",four_leaf_clover:"🍀",fox_face:"🦊",framed_picture:"🖼",free:"🆓",fried_egg:"🍳",fried_shrimp:"🍤",fries:"🍟",frog:"🐸",frowning:"😦",frowning_face:"☹️",frowning_man:"🙍&zwj;♂️",frowning_woman:"🙍",middle_finger:"🖕",fuelpump:"⛽️",full_moon:"🌕",full_moon_with_face:"🌝",funeral_urn:"⚱️",game_die:"🎲",gear:"⚙️",gem:"💎",gemini:"♊️",ghost:"👻",gift:"🎁",gift_heart:"💝",girl:"👧",globe_with_meridians:"🌐",goal_net:"🥅",goat:"🐐",golf:"⛳️",golfing_man:"🏌️",golfing_woman:"🏌️&zwj;♀️",gorilla:"🦍",grapes:"🍇",green_apple:"🍏",green_book:"📗",green_heart:"💚",green_salad:"🥗",grey_exclamation:"❕",grey_question:"❔",grimacing:"😬",grin:"😁",grinning:"😀",guardsman:"💂",guardswoman:"💂&zwj;♀️",guitar:"🎸",gun:"🔫",haircut_woman:"💇",haircut_man:"💇&zwj;♂️",hamburger:"🍔",hammer:"🔨",hammer_and_pick:"⚒",hammer_and_wrench:"🛠",hamster:"🐹",hand:"✋",handbag:"👜",handshake:"🤝",hankey:"💩",hatched_chick:"🐥",hatching_chick:"🐣",headphones:"🎧",hear_no_evil:"🙉",heart:"❤️",heart_decoration:"💟",heart_eyes:"😍",heart_eyes_cat:"😻",heartbeat:"💓",heartpulse:"💗",hearts:"♥️",heavy_check_mark:"✔️",heavy_division_sign:"➗",heavy_dollar_sign:"💲",heavy_heart_exclamation:"❣️",heavy_minus_sign:"➖",heavy_multiplication_x:"✖️",heavy_plus_sign:"➕",helicopter:"🚁",herb:"🌿",hibiscus:"🌺",high_brightness:"🔆",high_heel:"👠",hocho:"🔪",hole:"🕳",honey_pot:"🍯",horse:"🐴",horse_racing:"🏇",hospital:"🏥",hot_pepper:"🌶",hotdog:"🌭",hotel:"🏨",hotsprings:"♨️",hourglass:"⌛️",hourglass_flowing_sand:"⏳",house:"🏠",house_with_garden:"🏡",houses:"🏘",hugs:"🤗",hushed:"😯",ice_cream:"🍨",ice_hockey:"🏒",ice_skate:"⛸",icecream:"🍦",id:"🆔",ideograph_advantage:"🉐",imp:"👿",inbox_tray:"📥",incoming_envelope:"📨",tipping_hand_woman:"💁",information_source:"ℹ️",innocent:"😇",interrobang:"⁉️",iphone:"📱",izakaya_lantern:"🏮",jack_o_lantern:"🎃",japan:"🗾",japanese_castle:"🏯",japanese_goblin:"👺",japanese_ogre:"👹",jeans:"👖",joy:"😂",joy_cat:"😹",joystick:"🕹",kaaba:"🕋",key:"🔑",keyboard:"⌨️",keycap_ten:"🔟",kick_scooter:"🛴",kimono:"👘",kiss:"💋",kissing:"😗",kissing_cat:"😽",kissing_closed_eyes:"😚",kissing_heart:"😘",kissing_smiling_eyes:"😙",kiwi_fruit:"🥝",koala:"🐨",koko:"🈁",label:"🏷",large_blue_circle:"🔵",large_blue_diamond:"🔷",large_orange_diamond:"🔶",last_quarter_moon:"🌗",last_quarter_moon_with_face:"🌜",latin_cross:"✝️",laughing:"😆",leaves:"🍃",ledger:"📒",left_luggage:"🛅",left_right_arrow:"↔️",leftwards_arrow_with_hook:"↩️",lemon:"🍋",leo:"♌️",leopard:"🐆",level_slider:"🎚",libra:"♎️",light_rail:"🚈",link:"🔗",lion:"🦁",lips:"👄",lipstick:"💄",lizard:"🦎",lock:"🔒",lock_with_ink_pen:"🔏",lollipop:"🍭",loop:"➿",loud_sound:"🔊",loudspeaker:"📢",love_hotel:"🏩",love_letter:"💌",low_brightness:"🔅",lying_face:"🤥",m:"Ⓜ️",mag:"🔍",mag_right:"🔎",mahjong:"🀄️",mailbox:"📫",mailbox_closed:"📪",mailbox_with_mail:"📬",mailbox_with_no_mail:"📭",man:"👨",man_artist:"👨&zwj;🎨",man_astronaut:"👨&zwj;🚀",man_cartwheeling:"🤸&zwj;♂️",man_cook:"👨&zwj;🍳",man_dancing:"🕺",man_facepalming:"🤦&zwj;♂️",man_factory_worker:"👨&zwj;🏭",man_farmer:"👨&zwj;🌾",man_firefighter:"👨&zwj;🚒",man_health_worker:"👨&zwj;⚕️",man_in_tuxedo:"🤵",man_judge:"👨&zwj;⚖️",man_juggling:"🤹&zwj;♂️",man_mechanic:"👨&zwj;🔧",man_office_worker:"👨&zwj;💼",man_pilot:"👨&zwj;✈️",man_playing_handball:"🤾&zwj;♂️",man_playing_water_polo:"🤽&zwj;♂️",man_scientist:"👨&zwj;🔬",man_shrugging:"🤷&zwj;♂️",man_singer:"👨&zwj;🎤",man_student:"👨&zwj;🎓",man_teacher:"👨&zwj;🏫",man_technologist:"👨&zwj;💻",man_with_gua_pi_mao:"👲",man_with_turban:"👳",tangerine:"🍊",mans_shoe:"👞",mantelpiece_clock:"🕰",maple_leaf:"🍁",martial_arts_uniform:"🥋",mask:"😷",massage_woman:"💆",massage_man:"💆&zwj;♂️",meat_on_bone:"🍖",medal_military:"🎖",medal_sports:"🏅",mega:"📣",melon:"🍈",memo:"📝",men_wrestling:"🤼&zwj;♂️",menorah:"🕎",mens:"🚹",metal:"🤘",metro:"🚇",microphone:"🎤",microscope:"🔬",milk_glass:"🥛",milky_way:"🌌",minibus:"🚐",minidisc:"💽",mobile_phone_off:"📴",money_mouth_face:"🤑",money_with_wings:"💸",moneybag:"💰",monkey:"🐒",monkey_face:"🐵",monorail:"🚝",moon:"🌔",mortar_board:"🎓",mosque:"🕌",motor_boat:"🛥",motor_scooter:"🛵",motorcycle:"🏍",motorway:"🛣",mount_fuji:"🗻",mountain:"⛰",mountain_biking_man:"🚵",mountain_biking_woman:"🚵&zwj;♀️",mountain_cableway:"🚠",mountain_railway:"🚞",mountain_snow:"🏔",mouse:"🐭",mouse2:"🐁",movie_camera:"🎥",moyai:"🗿",mrs_claus:"🤶",muscle:"💪",mushroom:"🍄",musical_keyboard:"🎹",musical_note:"🎵",musical_score:"🎼",mute:"🔇",nail_care:"💅",name_badge:"📛",national_park:"🏞",nauseated_face:"🤢",necktie:"👔",negative_squared_cross_mark:"❎",nerd_face:"🤓",neutral_face:"😐",new:"🆕",new_moon:"🌑",new_moon_with_face:"🌚",newspaper:"📰",newspaper_roll:"🗞",next_track_button:"⏭",ng:"🆖",no_good_man:"🙅&zwj;♂️",no_good_woman:"🙅",night_with_stars:"🌃",no_bell:"🔕",no_bicycles:"🚳",no_entry:"⛔️",no_entry_sign:"🚫",no_mobile_phones:"📵",no_mouth:"😶",no_pedestrians:"🚷",no_smoking:"🚭","non-potable_water":"🚱",nose:"👃",notebook:"📓",notebook_with_decorative_cover:"📔",notes:"🎶",nut_and_bolt:"🔩",o:"⭕️",o2:"🅾️",ocean:"🌊",octopus:"🐙",oden:"🍢",office:"🏢",oil_drum:"🛢",ok:"🆗",ok_hand:"👌",ok_man:"🙆&zwj;♂️",ok_woman:"🙆",old_key:"🗝",older_man:"👴",older_woman:"👵",om:"🕉",on:"🔛",oncoming_automobile:"🚘",oncoming_bus:"🚍",oncoming_police_car:"🚔",oncoming_taxi:"🚖",open_file_folder:"📂",open_hands:"👐",open_mouth:"😮",open_umbrella:"☂️",ophiuchus:"⛎",orange_book:"📙",orthodox_cross:"☦️",outbox_tray:"📤",owl:"🦉",ox:"🐂",package:"📦",page_facing_up:"📄",page_with_curl:"📃",pager:"📟",paintbrush:"🖌",palm_tree:"🌴",pancakes:"🥞",panda_face:"🐼",paperclip:"📎",paperclips:"🖇",parasol_on_ground:"⛱",parking:"🅿️",part_alternation_mark:"〽️",partly_sunny:"⛅️",passenger_ship:"🛳",passport_control:"🛂",pause_button:"⏸",peace_symbol:"☮️",peach:"🍑",peanuts:"🥜",pear:"🍐",pen:"🖊",pencil2:"✏️",penguin:"🐧",pensive:"😔",performing_arts:"🎭",persevere:"😣",person_fencing:"🤺",pouting_woman:"🙎",phone:"☎️",pick:"⛏",pig:"🐷",pig2:"🐖",pig_nose:"🐽",pill:"💊",pineapple:"🍍",ping_pong:"🏓",pisces:"♓️",pizza:"🍕",place_of_worship:"🛐",plate_with_cutlery:"🍽",play_or_pause_button:"⏯",point_down:"👇",point_left:"👈",point_right:"👉",point_up:"☝️",point_up_2:"👆",police_car:"🚓",policewoman:"👮&zwj;♀️",poodle:"🐩",popcorn:"🍿",post_office:"🏣",postal_horn:"📯",postbox:"📮",potable_water:"🚰",potato:"🥔",pouch:"👝",poultry_leg:"🍗",pound:"💷",rage:"😡",pouting_cat:"😾",pouting_man:"🙎&zwj;♂️",pray:"🙏",prayer_beads:"📿",pregnant_woman:"🤰",previous_track_button:"⏮",prince:"🤴",princess:"👸",printer:"🖨",purple_heart:"💜",purse:"👛",pushpin:"📌",put_litter_in_its_place:"🚮",question:"❓",rabbit:"🐰",rabbit2:"🐇",racehorse:"🐎",racing_car:"🏎",radio:"📻",radio_button:"🔘",radioactive:"☢️",railway_car:"🚃",railway_track:"🛤",rainbow:"🌈",rainbow_flag:"🏳️&zwj;🌈",raised_back_of_hand:"🤚",raised_hand_with_fingers_splayed:"🖐",raised_hands:"🙌",raising_hand_woman:"🙋",raising_hand_man:"🙋&zwj;♂️",ram:"🐏",ramen:"🍜",rat:"🐀",record_button:"⏺",recycle:"♻️",red_circle:"🔴",registered:"®️",relaxed:"☺️",relieved:"😌",reminder_ribbon:"🎗",repeat:"🔁",repeat_one:"🔂",rescue_worker_helmet:"⛑",restroom:"🚻",revolving_hearts:"💞",rewind:"⏪",rhinoceros:"🦏",ribbon:"🎀",rice:"🍚",rice_ball:"🍙",rice_cracker:"🍘",rice_scene:"🎑",right_anger_bubble:"🗯",ring:"💍",robot:"🤖",rocket:"🚀",rofl:"🤣",roll_eyes:"🙄",roller_coaster:"🎢",rooster:"🐓",rose:"🌹",rosette:"🏵",rotating_light:"🚨",round_pushpin:"📍",rowing_man:"🚣",rowing_woman:"🚣&zwj;♀️",rugby_football:"🏉",running_man:"🏃",running_shirt_with_sash:"🎽",running_woman:"🏃&zwj;♀️",sa:"🈂️",sagittarius:"♐️",sake:"🍶",sandal:"👡",santa:"🎅",satellite:"📡",saxophone:"🎷",school:"🏫",school_satchel:"🎒",scissors:"✂️",scorpion:"🦂",scorpius:"♏️",scream:"😱",scream_cat:"🙀",scroll:"📜",seat:"💺",secret:"㊙️",see_no_evil:"🙈",seedling:"🌱",selfie:"🤳",shallow_pan_of_food:"🥘",shamrock:"☘️",shark:"🦈",shaved_ice:"🍧",sheep:"🐑",shell:"🐚",shield:"🛡",shinto_shrine:"⛩",ship:"🚢",shirt:"👕",shopping:"🛍",shopping_cart:"🛒",shower:"🚿",shrimp:"🦐",signal_strength:"📶",six_pointed_star:"🔯",ski:"🎿",skier:"⛷",skull:"💀",skull_and_crossbones:"☠️",sleeping:"😴",sleeping_bed:"🛌",sleepy:"😪",slightly_frowning_face:"🙁",slightly_smiling_face:"🙂",slot_machine:"🎰",small_airplane:"🛩",small_blue_diamond:"🔹",small_orange_diamond:"🔸",small_red_triangle:"🔺",small_red_triangle_down:"🔻",smile:"😄",smile_cat:"😸",smiley:"😃",smiley_cat:"😺",smiling_imp:"😈",smirk:"😏",smirk_cat:"😼",smoking:"🚬",snail:"🐌",snake:"🐍",sneezing_face:"🤧",snowboarder:"🏂",snowflake:"❄️",snowman:"⛄️",snowman_with_snow:"☃️",sob:"😭",soccer:"⚽️",soon:"🔜",sos:"🆘",sound:"🔉",space_invader:"👾",spades:"♠️",spaghetti:"🍝",sparkle:"❇️",sparkler:"🎇",sparkles:"✨",sparkling_heart:"💖",speak_no_evil:"🙊",speaker:"🔈",speaking_head:"🗣",speech_balloon:"💬",speedboat:"🚤",spider:"🕷",spider_web:"🕸",spiral_calendar:"🗓",spiral_notepad:"🗒",spoon:"🥄",squid:"🦑",stadium:"🏟",star:"⭐️",star2:"🌟",star_and_crescent:"☪️",star_of_david:"✡️",stars:"🌠",station:"🚉",statue_of_liberty:"🗽",steam_locomotive:"🚂",stew:"🍲",stop_button:"⏹",stop_sign:"🛑",stopwatch:"⏱",straight_ruler:"📏",strawberry:"🍓",stuck_out_tongue:"😛",stuck_out_tongue_closed_eyes:"😝",stuck_out_tongue_winking_eye:"😜",studio_microphone:"🎙",stuffed_flatbread:"🥙",sun_behind_large_cloud:"🌥",sun_behind_rain_cloud:"🌦",sun_behind_small_cloud:"🌤",sun_with_face:"🌞",sunflower:"🌻",sunglasses:"😎",sunny:"☀️",sunrise:"🌅",sunrise_over_mountains:"🌄",surfing_man:"🏄",surfing_woman:"🏄&zwj;♀️",sushi:"🍣",suspension_railway:"🚟",sweat:"😓",sweat_drops:"💦",sweat_smile:"😅",sweet_potato:"🍠",swimming_man:"🏊",swimming_woman:"🏊&zwj;♀️",symbols:"🔣",synagogue:"🕍",syringe:"💉",taco:"🌮",tada:"🎉",tanabata_tree:"🎋",taurus:"♉️",taxi:"🚕",tea:"🍵",telephone_receiver:"📞",telescope:"🔭",tennis:"🎾",tent:"⛺️",thermometer:"🌡",thinking:"🤔",thought_balloon:"💭",ticket:"🎫",tickets:"🎟",tiger:"🐯",tiger2:"🐅",timer_clock:"⏲",tipping_hand_man:"💁&zwj;♂️",tired_face:"😫",tm:"™️",toilet:"🚽",tokyo_tower:"🗼",tomato:"🍅",tongue:"👅",top:"🔝",tophat:"🎩",tornado:"🌪",trackball:"🖲",tractor:"🚜",traffic_light:"🚥",train:"🚋",train2:"🚆",tram:"🚊",triangular_flag_on_post:"🚩",triangular_ruler:"📐",trident:"🔱",triumph:"😤",trolleybus:"🚎",trophy:"🏆",tropical_drink:"🍹",tropical_fish:"🐠",truck:"🚚",trumpet:"🎺",tulip:"🌷",tumbler_glass:"🥃",turkey:"🦃",turtle:"🐢",tv:"📺",twisted_rightwards_arrows:"🔀",two_hearts:"💕",two_men_holding_hands:"👬",two_women_holding_hands:"👭",u5272:"🈹",u5408:"🈴",u55b6:"🈺",u6307:"🈯️",u6708:"🈷️",u6709:"🈶",u6e80:"🈵",u7121:"🈚️",u7533:"🈸",u7981:"🈲",u7a7a:"🈳",umbrella:"☔️",unamused:"😒",underage:"🔞",unicorn:"🦄",unlock:"🔓",up:"🆙",upside_down_face:"🙃",v:"✌️",vertical_traffic_light:"🚦",vhs:"📼",vibration_mode:"📳",video_camera:"📹",video_game:"🎮",violin:"🎻",virgo:"♍️",volcano:"🌋",volleyball:"🏐",vs:"🆚",vulcan_salute:"🖖",walking_man:"🚶",walking_woman:"🚶&zwj;♀️",waning_crescent_moon:"🌘",waning_gibbous_moon:"🌖",warning:"⚠️",wastebasket:"🗑",watch:"⌚️",water_buffalo:"🐃",watermelon:"🍉",wave:"👋",wavy_dash:"〰️",waxing_crescent_moon:"🌒",wc:"🚾",weary:"😩",wedding:"💒",weight_lifting_man:"🏋️",weight_lifting_woman:"🏋️&zwj;♀️",whale:"🐳",whale2:"🐋",wheel_of_dharma:"☸️",wheelchair:"♿️",white_check_mark:"✅",white_circle:"⚪️",white_flag:"🏳️",white_flower:"💮",white_large_square:"⬜️",white_medium_small_square:"◽️",white_medium_square:"◻️",white_small_square:"▫️",white_square_button:"🔳",wilted_flower:"🥀",wind_chime:"🎐",wind_face:"🌬",wine_glass:"🍷",wink:"😉",wolf:"🐺",woman:"👩",woman_artist:"👩&zwj;🎨",woman_astronaut:"👩&zwj;🚀",woman_cartwheeling:"🤸&zwj;♀️",woman_cook:"👩&zwj;🍳",woman_facepalming:"🤦&zwj;♀️",woman_factory_worker:"👩&zwj;🏭",woman_farmer:"👩&zwj;🌾",woman_firefighter:"👩&zwj;🚒",woman_health_worker:"👩&zwj;⚕️",woman_judge:"👩&zwj;⚖️",woman_juggling:"🤹&zwj;♀️",woman_mechanic:"👩&zwj;🔧",woman_office_worker:"👩&zwj;💼",woman_pilot:"👩&zwj;✈️",woman_playing_handball:"🤾&zwj;♀️",woman_playing_water_polo:"🤽&zwj;♀️",woman_scientist:"👩&zwj;🔬",woman_shrugging:"🤷&zwj;♀️",woman_singer:"👩&zwj;🎤",woman_student:"👩&zwj;🎓",woman_teacher:"👩&zwj;🏫",woman_technologist:"👩&zwj;💻",woman_with_turban:"👳&zwj;♀️",womans_clothes:"👚",womans_hat:"👒",women_wrestling:"🤼&zwj;♀️",womens:"🚺",world_map:"🗺",worried:"😟",wrench:"🔧",writing_hand:"✍️",x:"❌",yellow_heart:"💛",yen:"💴",yin_yang:"☯️",yum:"😋",zap:"⚡️",zipper_mouth_face:"🤐",zzz:"💤",octocat:'<img width="20" height="20" align="absmiddle" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAOwUlEQVR42uVbCVyO6RbPmn0sw9gZS0aZO4y5GTEUE2ObxjZjrbHEJVy3sWS5pkaWxjLEkCVDSbSgFLdESaWSLIVUSIi4kvb9f895vi/zbbR+yZ339/tbnu99n/ec/3Oe85xznufV0CjDBaAdwZqwnzCJ0FXjHV70/i8J5oQDhCFV8cJdq1atwqxZs+Ds7Iz4+HhqwgXCLELNKlK6G2Ej4e6lS5ewZcsWzJgxA+fOnWNZFqvzxT1v3boF/qcsBg0ahP3796OwsJAFWKYuIqjfPoS9cXFxWL58Obp06SInh5aWFr//jjoJWLlu3TolAorRuXNn7Ny5k4W4Spgj81xrgj5hLmED4RDhlNRygglBhADCSakpWxFMCHoETUJTwrYHDx7A1NT0je9nPHz4kN/fXl0EeI0aNeqtAjB69+4NPz8/FsSdlXvy5An8/f1hZ2cHCwsLGBsbY/To0cJy9PT0MGDAAAwePBhGRkbClNesWYODBw8iODgYOTk53M/d9evXo27duiW++8iRI3z/ZHURENOjR48ShSjGuHHjhHJ16tQp9TOKaNWqlZKpvw1MHluQOpSvk5eXh5YtW5ZbmarAvHnzmIBd6iCgXnZ2Npo1a1atCWAfwY5SHQTUKCoqQocOHao1AebmHBJgi7p8QBDP6epMwKFDvMDAWF0ELLS1ta3WBNy9e5cJMFIXAdvt7e2rNQHDhw9nAv5D+KKylV9y8+bNCi1pVYWZM2cyCfaVTcDdsqzH7xpBQRxcwqyylLdi5/K+KM/Q0dFhAqIri4Bn1T0AUgVpdmhYUeVHnD59+r1TnjF27Fgm4HhFCThoYmLyXhLQoEGD4mRKsyIE3OrZs+d7SQCDCyZcNSqv8k1evXoFTU3NUr+wzUcfYqRBf8yb/C2WzfoBFoTF08fBdMIITDD8CsP1+kL30x7Q6dYZH7drjfZ0f4fWLdG1Q1t81qMLBvTRwejB/TBl1BDMnzQGS2dMxKo5k7Fs9iSY/jAaBvR8Pc26pZaH02quLZSXgO6xsbGlelGnli1wZKcVMqN8gKcRwItrf+K/VB95doXaLwOJIVSzOU/+2Re5kV7IuuyJrIhTyLt6mmztLBBPNZLHoUAy9fE8UvJ8ikxfj8PwJPQErJeYlkquTZs2MQFLykuANgc/Jb2kn3Z3ZMaQUrmxwO1zyAo7gfRAJ6RfOIyMEFdkXj5F8BTK5lzxQv610yi8QcFatI8gQoCIK7x+hojwRnaE5H4JTiEj9Pjr/rJDqcZyn9b4ovu45LYbdWvXeqtsXMHiSlZ5CegRExPz1hd83PYj5POo0QinXyLFg48hnZTOiQ1Dzr1IZEaeQRoJn0HKZIR7lA2kfHrQUerXHTlx4ZL+rnjjFRGRGeYB5MUj2GnbW+XbuJFrp1heXgI6JCYmvvUFN1x3Aek3SWkapRAXMeJFGS8ge2Xfuog0toaykED3Mpk8+shOk+sv68Y50V9WuKewBKt5094o39atW/mRf5WXgIYZGRlo3Lixys4nj6A6Z1YMcqRCpwU4ouDlUyHk/QA/hNttR25Wlvh/ZthJUsil9ATQ/axkYbqEzDgfL0Ts/x35+aLyTES7IY36Q6w/+Q4/tP6wuUoZ9+7dy7ebVmQZjO/atavKzn32rAdeXkd6KCkXdAxZ13yFcLFnvPD73zrDVrsdTs6eggKSuSjjORHkUGoC0i86Iyc6QPQX7eqMnTodYNuzHU4vnosiaitMSUSavwMy6d3IvEUrzViVMrq5uXEX4ytCgL++vr5Sx7Vr1cIDX0dKkQJfj37Rs3jw1sBxkwlwGD4Ax3+ciN1faCHW76xQRFgAOcjSEMBkIe0x8nLzcez7kTg8Rh/uxuOxR/cTJISFSfq7eATpZCk8CAfXLVFJwIULXHnHoIoQYLtw4UKljps2aogXQcQuef/XAiMDKY+S4DhyEFwpDnCj9f+Afl8EbbWRTANaAdihlYoAMn8aZzyNuYODX/eD29TvRH/7v+qN8H27JdOAyWQfQQ74xPafVRLAPox9WUlK6hIGEgx4f00Kg2JcvHhRqeP6FIwknXemyen/2gLIIeC/CYk49M0AuE4xgtu0sThg8AUCN62TEuBdRgJo2Y+Kxh9D/k59SQiwH9QHobt3SAk4KSGA4oWjm1YqyVi8U6Soj4yOrHM/jTAyKVby/PnzIoNi8L+L4eXlpXoFcLcTgc1rAlISkJeXDxeK2A6P1hdTwI6mQPTJE+WbAlnJyE7PhNO3Q3BkrKGYWtxfHMkkmQLO0ilwA7+vXqAkn66urtBLUZ9iHfm30NBQaPAf165dA0d9vP2UlJSEp0+f4vHjx3j06JH4e+rUqUovcNmyGkiNEkLwklXsBG+ecMUOnfbYod1emG5uboFKJ8jPFVD0l0dBUHqoPDHpQeQEb0qc4FUHe3KAbYUT9JgzDbwOFL5MfN0fXkXhJ5PxSvLt2LFD1Ah5u4z1YJ14l4qnBe8v3rhxAzz4PAVG8nLHivIP0dHRiIiIQGRkpEgmrl69ClW1QBMjQ7LDW8hmU+RRI69ckJIkhL7jfRJBm62R+TJVYq6h0jhBRslsivqenT2MF/7OyI70VmkFhWnPJaS6OyPkt43IycqR9EfWlH7JDQUUTuNhCHR7Ke9YcRp/5coVoQPrcvnyZURFRYmBZlLS0kR8MVLD29sbnp6e8PHxQUBAgCgn8YO8E3z79m3BGKeVc+bMkXuBZt06SA12F/F5Go0gR4C8HBalPZMPXKL8lQKhPAqF+f97KXFyNx6HQsoPsshJ/kmAp2TKkJLISpXvjyxNhMYcDVLOEO+lPDi8B5mamipkZx1YF9YpJCRErAy+vr5CZ9ZdWABhDGEYYTBhAOFz3g4nfMJelNCbkNCpUye5F034mvxIPi1/FM+zQCw0k5B9O0iEr5kRXkqhMJOVf9NXIHjtT7hmaymSoBzKETimkAuFpaF1dkwI9RcmIYaXv3BJXoGCuyIgk5WpefPmKCgoYK46SmX/RKoL69Sfl0WuFEl1HlmWJXE5z6WmTZvKJxxmxkIQ3AuU5APk6NICj4hRT6eITTEEzqWk55HHPjz3cxJhNF5cxeNT9kj2cRDTQjEkzpDtjyyCic5l5fEA7uSHFEefR5pPsahrb2B9QkICFHeJ51HunkdLIg0VLY0BFKdLwllVHp4dHyvst3QuEiiju21vA/+VZkiluIKt4I3RIfWXQ4QgKUxkni47LJWUP3PmjHo2RxVI+CebmKJP6EiFDVurxUgmExe5PHlnPAkn8w4QqW62NCVmYopozid5H0CI9RKE21ggJeAYEeMnfitOnRn5XCfgeJ+VTosWQU8MOc6ZE0cqnUm4fv165SrPBVHCfMI4TowUfmOfsIcdJh92kBWmUcP6GDt8EDZbzIffH5tx3/ewSFjw5LKk0MEFEkZenDBjgew7Yiog5brkt+QrknvJmhIp4Apw/A1bVpjhG/0v5d7Vrl07bNu2TelUSqUoz8uI3Z49OEtBAy+TdP1CqKtwHzvQUxxgTJs2TeX5gdq1a0ObSmCjh+jB+NuvRamL1+3ls77HCip1rTSdJP5eNnMizKndjMLoH42G4bthX+FzHS3UVVEC69evH3799VeKMXJZrlWKclUGAZ5jxoxB02ZNsNlxH74aagBHZyex986HlVTczyGmI58h4CjL2toa48ePFxsUPEotWrQoc0GT0/C2bduiY8eO4ISMcxLeoOFYhS6qm2EpoZG65jmbv+dPSyRZlt5QfVjvtX19AOFNL+aDFNI4m0eFc9Ho5ORkaGtrl5kAVp6DMOk88efEjLe++ZhclZwHTJHEHbs4YOCmLj2645fdvwnTK42zoXtaEHwNDQ3LXdZm5yad3/2r+gQmDsRnIF5KAldX6zdsgG/GG8F44Vzcu3eP2y1K6GPr2rVrK1zbnz59Or/LoaoJCPZ4kCZsjw9GECL79OmDj9q2wb+320C3/5fgPQO6Vrzh+fpcDqxXr16lbHBwgkZXm6okYJr0ECMrX5vraiJ1lArEjrEnzWuOqemiYj9spGd2ee478XkiPsJakmJ83qA05/8qXNurJFLiunXrhpo1a6LxB02wyHIFZpovgOHwYfjZ0hK2lH5u2rwZ5suWYv5ycyUlmjRpgl69eimlrFy3kwuoyOvXr19frm3RokVMwPZ3TYC57E6xVq+e6KzVDSaL/oEp82Zh8IhhWLjGAp/p9oX5ujVKBNjY2MDV1VWuzd3dXaTesm2biUQuZ8u28elSPmKr8a4vdog8GnJpcT1N1KHUuBbt0jSgWuGbzJh3mVhh2TYHBwdxjFa2jVcZnvPVlQBOLXdZWlqW2ZFxNYYVlm07fPgwAgMD5dr4OD5HeHLFFxM+O42DGtXhIkFaMQlcUjIzM0P37t1Ro0YNpZPjPJcVK7SOjo5ybU5OTqIAo0gAh97VlgAZIj4l8Pn4WFaO64ocuXG6zJtDbMqySnC7IgF8uptLVrJtq1evFuWqak+A4j4i4TNpltiJ8LPiNFFFwNGjRyWFyfedAFUny/joekkEuLi4KK0CfykCeFnkiu1flgBeFtl3/D8SsMbKykpOifv37ysRcPz4cVHKUiSA8wwNdR9/VTMBSh9Y8S4Nf2qnSICiBbDzVCRg9uzZTMC+94kAv6FDh8opwRsVHPjItnl4eEDxHNLKlStFXV+2javQ/M1SpZe+1KA4L4G7WDG57fSm/OUbXiqG0ewAFYOeYcN4fwZhvLkp2y4tftrxcltdlf/w+fPn4qNGxTCYU2m6nrRu3VqunT/EoiuZvw6TTZHpyuNNmEaNGsndP3fu3OJAq1N1JOAHDmyKheVtNP4OkE2crULRAW7fvl20EyyLy24a8p+/7WISFixYIMLt4t82bNhQYjXqXREgPq3j74mlX3AmSL8E1eOPIBXnuVT5OsVZpuLnOMeOHeN7vifwiYhYzhC5IpwlOXj1QXWdBmy/XWU/X+UqMZfKBw4cKAobHPlJlZe9h6tOu+7cuSN2dg0MDMSSyZUpmXvaSD+crq/xvl0k9BTCRa7qEPq+5T4t6ffF52WVV+f1P6zyLG30bsU4AAAAAElFTkSuQmCC">',showdown:'<img width="20" height="20" align="absmiddle" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAKT2lDQ1BQaG90b3Nob3AgSUNDIHByb2ZpbGUAAHjanVNnVFPpFj333vRCS4iAlEtvUhUIIFJCi4AUkSYqIQkQSoghodkVUcERRUUEG8igiAOOjoCMFVEsDIoK2AfkIaKOg6OIisr74Xuja9a89+bN/rXXPues852zzwfACAyWSDNRNYAMqUIeEeCDx8TG4eQuQIEKJHAAEAizZCFz/SMBAPh+PDwrIsAHvgABeNMLCADATZvAMByH/w/qQplcAYCEAcB0kThLCIAUAEB6jkKmAEBGAYCdmCZTAKAEAGDLY2LjAFAtAGAnf+bTAICd+Jl7AQBblCEVAaCRACATZYhEAGg7AKzPVopFAFgwABRmS8Q5ANgtADBJV2ZIALC3AMDOEAuyAAgMADBRiIUpAAR7AGDIIyN4AISZABRG8lc88SuuEOcqAAB4mbI8uSQ5RYFbCC1xB1dXLh4ozkkXKxQ2YQJhmkAuwnmZGTKBNA/g88wAAKCRFRHgg/P9eM4Ors7ONo62Dl8t6r8G/yJiYuP+5c+rcEAAAOF0ftH+LC+zGoA7BoBt/qIl7gRoXgugdfeLZrIPQLUAoOnaV/Nw+H48PEWhkLnZ2eXk5NhKxEJbYcpXff5nwl/AV/1s+X48/Pf14L7iJIEyXYFHBPjgwsz0TKUcz5IJhGLc5o9H/LcL//wd0yLESWK5WCoU41EScY5EmozzMqUiiUKSKcUl0v9k4t8s+wM+3zUAsGo+AXuRLahdYwP2SycQWHTA4vcAAPK7b8HUKAgDgGiD4c93/+8//UegJQCAZkmScQAAXkQkLlTKsz/HCAAARKCBKrBBG/TBGCzABhzBBdzBC/xgNoRCJMTCQhBCCmSAHHJgKayCQiiGzbAdKmAv1EAdNMBRaIaTcA4uwlW4Dj1wD/phCJ7BKLyBCQRByAgTYSHaiAFiilgjjggXmYX4IcFIBBKLJCDJiBRRIkuRNUgxUopUIFVIHfI9cgI5h1xGupE7yAAygvyGvEcxlIGyUT3UDLVDuag3GoRGogvQZHQxmo8WoJvQcrQaPYw2oefQq2gP2o8+Q8cwwOgYBzPEbDAuxsNCsTgsCZNjy7EirAyrxhqwVqwDu4n1Y8+xdwQSgUXACTYEd0IgYR5BSFhMWE7YSKggHCQ0EdoJNwkDhFHCJyKTqEu0JroR+cQYYjIxh1hILCPWEo8TLxB7iEPENyQSiUMyJ7mQAkmxpFTSEtJG0m5SI+ksqZs0SBojk8naZGuyBzmULCAryIXkneTD5DPkG+Qh8lsKnWJAcaT4U+IoUspqShnlEOU05QZlmDJBVaOaUt2ooVQRNY9aQq2htlKvUYeoEzR1mjnNgxZJS6WtopXTGmgXaPdpr+h0uhHdlR5Ol9BX0svpR+iX6AP0dwwNhhWDx4hnKBmbGAcYZxl3GK+YTKYZ04sZx1QwNzHrmOeZD5lvVVgqtip8FZHKCpVKlSaVGyovVKmqpqreqgtV81XLVI+pXlN9rkZVM1PjqQnUlqtVqp1Q61MbU2epO6iHqmeob1Q/pH5Z/YkGWcNMw09DpFGgsV/jvMYgC2MZs3gsIWsNq4Z1gTXEJrHN2Xx2KruY/R27iz2qqaE5QzNKM1ezUvOUZj8H45hx+Jx0TgnnKKeX836K3hTvKeIpG6Y0TLkxZVxrqpaXllirSKtRq0frvTau7aedpr1Fu1n7gQ5Bx0onXCdHZ4/OBZ3nU9lT3acKpxZNPTr1ri6qa6UbobtEd79up+6Ynr5egJ5Mb6feeb3n+hx9L/1U/W36p/VHDFgGswwkBtsMzhg8xTVxbzwdL8fb8VFDXcNAQ6VhlWGX4YSRudE8o9VGjUYPjGnGXOMk423GbcajJgYmISZLTepN7ppSTbmmKaY7TDtMx83MzaLN1pk1mz0x1zLnm+eb15vft2BaeFostqi2uGVJsuRaplnutrxuhVo5WaVYVVpds0atna0l1rutu6cRp7lOk06rntZnw7Dxtsm2qbcZsOXYBtuutm22fWFnYhdnt8Wuw+6TvZN9un2N/T0HDYfZDqsdWh1+c7RyFDpWOt6azpzuP33F9JbpL2dYzxDP2DPjthPLKcRpnVOb00dnF2e5c4PziIuJS4LLLpc+Lpsbxt3IveRKdPVxXeF60vWdm7Obwu2o26/uNu5p7ofcn8w0nymeWTNz0MPIQ+BR5dE/C5+VMGvfrH5PQ0+BZ7XnIy9jL5FXrdewt6V3qvdh7xc+9j5yn+M+4zw33jLeWV/MN8C3yLfLT8Nvnl+F30N/I/9k/3r/0QCngCUBZwOJgUGBWwL7+Hp8Ib+OPzrbZfay2e1BjKC5QRVBj4KtguXBrSFoyOyQrSH355jOkc5pDoVQfujW0Adh5mGLw34MJ4WHhVeGP45wiFga0TGXNXfR3ENz30T6RJZE3ptnMU85ry1KNSo+qi5qPNo3ujS6P8YuZlnM1VidWElsSxw5LiquNm5svt/87fOH4p3iC+N7F5gvyF1weaHOwvSFpxapLhIsOpZATIhOOJTwQRAqqBaMJfITdyWOCnnCHcJnIi/RNtGI2ENcKh5O8kgqTXqS7JG8NXkkxTOlLOW5hCepkLxMDUzdmzqeFpp2IG0yPTq9MYOSkZBxQqohTZO2Z+pn5mZ2y6xlhbL+xW6Lty8elQfJa7OQrAVZLQq2QqboVFoo1yoHsmdlV2a/zYnKOZarnivN7cyzytuQN5zvn//tEsIS4ZK2pYZLVy0dWOa9rGo5sjxxedsK4xUFK4ZWBqw8uIq2Km3VT6vtV5eufr0mek1rgV7ByoLBtQFr6wtVCuWFfevc1+1dT1gvWd+1YfqGnRs+FYmKrhTbF5cVf9go3HjlG4dvyr+Z3JS0qavEuWTPZtJm6ebeLZ5bDpaql+aXDm4N2dq0Dd9WtO319kXbL5fNKNu7g7ZDuaO/PLi8ZafJzs07P1SkVPRU+lQ27tLdtWHX+G7R7ht7vPY07NXbW7z3/T7JvttVAVVN1WbVZftJ+7P3P66Jqun4lvttXa1ObXHtxwPSA/0HIw6217nU1R3SPVRSj9Yr60cOxx++/p3vdy0NNg1VjZzG4iNwRHnk6fcJ3/ceDTradox7rOEH0x92HWcdL2pCmvKaRptTmvtbYlu6T8w+0dbq3nr8R9sfD5w0PFl5SvNUyWna6YLTk2fyz4ydlZ19fi753GDborZ752PO32oPb++6EHTh0kX/i+c7vDvOXPK4dPKy2+UTV7hXmq86X23qdOo8/pPTT8e7nLuarrlca7nuer21e2b36RueN87d9L158Rb/1tWeOT3dvfN6b/fF9/XfFt1+cif9zsu72Xcn7q28T7xf9EDtQdlD3YfVP1v+3Njv3H9qwHeg89HcR/cGhYPP/pH1jw9DBY+Zj8uGDYbrnjg+OTniP3L96fynQ89kzyaeF/6i/suuFxYvfvjV69fO0ZjRoZfyl5O/bXyl/erA6xmv28bCxh6+yXgzMV70VvvtwXfcdx3vo98PT+R8IH8o/2j5sfVT0Kf7kxmTk/8EA5jz/GMzLdsAAECtaVRYdFhNTDpjb20uYWRvYmUueG1wAAAAAAA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/Pgo8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA1LjYtYzA2NyA3OS4xNTc3NDcsIDIwMTUvMDMvMzAtMjM6NDA6NDIgICAgICAgICI+CiAgIDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+CiAgICAgIDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiCiAgICAgICAgICAgIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIKICAgICAgICAgICAgeG1sbnM6cGhvdG9zaG9wPSJodHRwOi8vbnMuYWRvYmUuY29tL3Bob3Rvc2hvcC8xLjAvIgogICAgICAgICAgICB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iCiAgICAgICAgICAgIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIgogICAgICAgICAgICB4bWxuczpzdEV2dD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlRXZlbnQjIgogICAgICAgICAgICB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIKICAgICAgICAgICAgeG1sbnM6dGlmZj0iaHR0cDovL25zLmFkb2JlLmNvbS90aWZmLzEuMC8iCiAgICAgICAgICAgIHhtbG5zOmV4aWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20vZXhpZi8xLjAvIj4KICAgICAgICAgPHhtcDpDcmVhdG9yVG9vbD5BZG9iZSBQaG90b3Nob3AgQ0MgMjAxNSAoV2luZG93cyk8L3htcDpDcmVhdG9yVG9vbD4KICAgICAgICAgPHhtcDpDcmVhdGVEYXRlPjIwMTUtMDEtMTVUMjE6MDE6MTlaPC94bXA6Q3JlYXRlRGF0ZT4KICAgICAgICAgPHhtcDpNZXRhZGF0YURhdGU+MjAxNy0xMC0yNFQxMzozMTozMCswMTowMDwveG1wOk1ldGFkYXRhRGF0ZT4KICAgICAgICAgPHhtcDpNb2RpZnlEYXRlPjIwMTctMTAtMjRUMTM6MzE6MzArMDE6MDA8L3htcDpNb2RpZnlEYXRlPgogICAgICAgICA8cGhvdG9zaG9wOkNvbG9yTW9kZT4zPC9waG90b3Nob3A6Q29sb3JNb2RlPgogICAgICAgICA8cGhvdG9zaG9wOklDQ1Byb2ZpbGU+c1JHQiBJRUM2MTk2Ni0yLjE8L3Bob3Rvc2hvcDpJQ0NQcm9maWxlPgogICAgICAgICA8cGhvdG9zaG9wOlRleHRMYXllcnM+CiAgICAgICAgICAgIDxyZGY6QmFnPgogICAgICAgICAgICAgICA8cmRmOmxpIHJkZjpwYXJzZVR5cGU9IlJlc291cmNlIj4KICAgICAgICAgICAgICAgICAgPHBob3Rvc2hvcDpMYXllck5hbWU+UyAtPC9waG90b3Nob3A6TGF5ZXJOYW1lPgogICAgICAgICAgICAgICAgICA8cGhvdG9zaG9wOkxheWVyVGV4dD5TIC08L3Bob3Rvc2hvcDpMYXllclRleHQ+CiAgICAgICAgICAgICAgIDwvcmRmOmxpPgogICAgICAgICAgICA8L3JkZjpCYWc+CiAgICAgICAgIDwvcGhvdG9zaG9wOlRleHRMYXllcnM+CiAgICAgICAgIDxkYzpmb3JtYXQ+aW1hZ2UvcG5nPC9kYzpmb3JtYXQ+CiAgICAgICAgIDx4bXBNTTpJbnN0YW5jZUlEPnhtcC5paWQ6N2NkMzQxNzctOWYyZi0yNDRiLWEyYjQtMzU1MzJkY2Y1MWJiPC94bXBNTTpJbnN0YW5jZUlEPgogICAgICAgICA8eG1wTU06RG9jdW1lbnRJRD5hZG9iZTpkb2NpZDpwaG90b3Nob3A6M2E1YzgxYmYtYjhiNy0xMWU3LTk0NDktYTQ2MzdlZjJkNjMzPC94bXBNTTpEb2N1bWVudElEPgogICAgICAgICA8eG1wTU06T3JpZ2luYWxEb2N1bWVudElEPnhtcC5kaWQ6NjBDNUFFNjVGNjlDRTQxMTk0NUE4NTVFM0JDQTdFRUI8L3htcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD4KICAgICAgICAgPHhtcE1NOkhpc3Rvcnk+CiAgICAgICAgICAgIDxyZGY6U2VxPgogICAgICAgICAgICAgICA8cmRmOmxpIHJkZjpwYXJzZVR5cGU9IlJlc291cmNlIj4KICAgICAgICAgICAgICAgICAgPHN0RXZ0OmFjdGlvbj5jcmVhdGVkPC9zdEV2dDphY3Rpb24+CiAgICAgICAgICAgICAgICAgIDxzdEV2dDppbnN0YW5jZUlEPnhtcC5paWQ6NjBDNUFFNjVGNjlDRTQxMTk0NUE4NTVFM0JDQTdFRUI8L3N0RXZ0Omluc3RhbmNlSUQ+CiAgICAgICAgICAgICAgICAgIDxzdEV2dDp3aGVuPjIwMTUtMDEtMTVUMjE6MDE6MTlaPC9zdEV2dDp3aGVuPgogICAgICAgICAgICAgICAgICA8c3RFdnQ6c29mdHdhcmVBZ2VudD5BZG9iZSBQaG90b3Nob3AgQ1M2IChXaW5kb3dzKTwvc3RFdnQ6c29mdHdhcmVBZ2VudD4KICAgICAgICAgICAgICAgPC9yZGY6bGk+CiAgICAgICAgICAgICAgIDxyZGY6bGkgcmRmOnBhcnNlVHlwZT0iUmVzb3VyY2UiPgogICAgICAgICAgICAgICAgICA8c3RFdnQ6YWN0aW9uPnNhdmVkPC9zdEV2dDphY3Rpb24+CiAgICAgICAgICAgICAgICAgIDxzdEV2dDppbnN0YW5jZUlEPnhtcC5paWQ6ODZjNjBkMGQtOGY0Yy01ZTRlLWEwMjQtODI4ZWQyNTIwZDc3PC9zdEV2dDppbnN0YW5jZUlEPgogICAgICAgICAgICAgICAgICA8c3RFdnQ6d2hlbj4yMDE3LTEwLTI0VDEzOjMxOjMwKzAxOjAwPC9zdEV2dDp3aGVuPgogICAgICAgICAgICAgICAgICA8c3RFdnQ6c29mdHdhcmVBZ2VudD5BZG9iZSBQaG90b3Nob3AgQ0MgMjAxNSAoV2luZG93cyk8L3N0RXZ0OnNvZnR3YXJlQWdlbnQ+CiAgICAgICAgICAgICAgICAgIDxzdEV2dDpjaGFuZ2VkPi88L3N0RXZ0OmNoYW5nZWQ+CiAgICAgICAgICAgICAgIDwvcmRmOmxpPgogICAgICAgICAgICAgICA8cmRmOmxpIHJkZjpwYXJzZVR5cGU9IlJlc291cmNlIj4KICAgICAgICAgICAgICAgICAgPHN0RXZ0OmFjdGlvbj5jb252ZXJ0ZWQ8L3N0RXZ0OmFjdGlvbj4KICAgICAgICAgICAgICAgICAgPHN0RXZ0OnBhcmFtZXRlcnM+ZnJvbSBhcHBsaWNhdGlvbi92bmQuYWRvYmUucGhvdG9zaG9wIHRvIGltYWdlL3BuZzwvc3RFdnQ6cGFyYW1ldGVycz4KICAgICAgICAgICAgICAgPC9yZGY6bGk+CiAgICAgICAgICAgICAgIDxyZGY6bGkgcmRmOnBhcnNlVHlwZT0iUmVzb3VyY2UiPgogICAgICAgICAgICAgICAgICA8c3RFdnQ6YWN0aW9uPmRlcml2ZWQ8L3N0RXZ0OmFjdGlvbj4KICAgICAgICAgICAgICAgICAgPHN0RXZ0OnBhcmFtZXRlcnM+Y29udmVydGVkIGZyb20gYXBwbGljYXRpb24vdm5kLmFkb2JlLnBob3Rvc2hvcCB0byBpbWFnZS9wbmc8L3N0RXZ0OnBhcmFtZXRlcnM+CiAgICAgICAgICAgICAgIDwvcmRmOmxpPgogICAgICAgICAgICAgICA8cmRmOmxpIHJkZjpwYXJzZVR5cGU9IlJlc291cmNlIj4KICAgICAgICAgICAgICAgICAgPHN0RXZ0OmFjdGlvbj5zYXZlZDwvc3RFdnQ6YWN0aW9uPgogICAgICAgICAgICAgICAgICA8c3RFdnQ6aW5zdGFuY2VJRD54bXAuaWlkOjdjZDM0MTc3LTlmMmYtMjQ0Yi1hMmI0LTM1NTMyZGNmNTFiYjwvc3RFdnQ6aW5zdGFuY2VJRD4KICAgICAgICAgICAgICAgICAgPHN0RXZ0OndoZW4+MjAxNy0xMC0yNFQxMzozMTozMCswMTowMDwvc3RFdnQ6d2hlbj4KICAgICAgICAgICAgICAgICAgPHN0RXZ0OnNvZnR3YXJlQWdlbnQ+QWRvYmUgUGhvdG9zaG9wIENDIDIwMTUgKFdpbmRvd3MpPC9zdEV2dDpzb2Z0d2FyZUFnZW50PgogICAgICAgICAgICAgICAgICA8c3RFdnQ6Y2hhbmdlZD4vPC9zdEV2dDpjaGFuZ2VkPgogICAgICAgICAgICAgICA8L3JkZjpsaT4KICAgICAgICAgICAgPC9yZGY6U2VxPgogICAgICAgICA8L3htcE1NOkhpc3Rvcnk+CiAgICAgICAgIDx4bXBNTTpEZXJpdmVkRnJvbSByZGY6cGFyc2VUeXBlPSJSZXNvdXJjZSI+CiAgICAgICAgICAgIDxzdFJlZjppbnN0YW5jZUlEPnhtcC5paWQ6ODZjNjBkMGQtOGY0Yy01ZTRlLWEwMjQtODI4ZWQyNTIwZDc3PC9zdFJlZjppbnN0YW5jZUlEPgogICAgICAgICAgICA8c3RSZWY6ZG9jdW1lbnRJRD54bXAuZGlkOjYwQzVBRTY1RjY5Q0U0MTE5NDVBODU1RTNCQ0E3RUVCPC9zdFJlZjpkb2N1bWVudElEPgogICAgICAgICAgICA8c3RSZWY6b3JpZ2luYWxEb2N1bWVudElEPnhtcC5kaWQ6NjBDNUFFNjVGNjlDRTQxMTk0NUE4NTVFM0JDQTdFRUI8L3N0UmVmOm9yaWdpbmFsRG9jdW1lbnRJRD4KICAgICAgICAgPC94bXBNTTpEZXJpdmVkRnJvbT4KICAgICAgICAgPHRpZmY6T3JpZW50YXRpb24+MTwvdGlmZjpPcmllbnRhdGlvbj4KICAgICAgICAgPHRpZmY6WFJlc29sdXRpb24+NzIwMDAwLzEwMDAwPC90aWZmOlhSZXNvbHV0aW9uPgogICAgICAgICA8dGlmZjpZUmVzb2x1dGlvbj43MjAwMDAvMTAwMDA8L3RpZmY6WVJlc29sdXRpb24+CiAgICAgICAgIDx0aWZmOlJlc29sdXRpb25Vbml0PjI8L3RpZmY6UmVzb2x1dGlvblVuaXQ+CiAgICAgICAgIDxleGlmOkNvbG9yU3BhY2U+MTwvZXhpZjpDb2xvclNwYWNlPgogICAgICAgICA8ZXhpZjpQaXhlbFhEaW1lbnNpb24+NjQ8L2V4aWY6UGl4ZWxYRGltZW5zaW9uPgogICAgICAgICA8ZXhpZjpQaXhlbFlEaW1lbnNpb24+NjQ8L2V4aWY6UGl4ZWxZRGltZW5zaW9uPgogICAgICA8L3JkZjpEZXNjcmlwdGlvbj4KICAgPC9yZGY6UkRGPgo8L3g6eG1wbWV0YT4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAKPD94cGFja2V0IGVuZD0idyI/Pse7bzcAAAAgY0hSTQAAeiUAAICDAAD5/wAAgOkAAHUwAADqYAAAOpgAABdvkl/FRgAAA1JJREFUeNrsm1+OmlAUhz+aeS9dwZggJn1AnRUMO6jpBgZXULuC2hWUWUGZBTSxKyiuoA4mfUBMnB04K5g+9DihRBHlyh/lJLwIXLgf99xzzu9etZeXFy7Z3nDh1gBoAFy4XeVtQNO0zNcapmUDfUBPnFoBfhQGq6IBaHmjwD4Ahmk5wAD4kKG5J8CNwsAFaHe6DvA9cc0wCgOv8gDka3vA9RHNPgo0D7hNnJtGYWBXxgV2dH4MfMnRRA+Y1WIO2NJ5F/ikoKm3tYsChmkNFHW+fmHQMC1dfHaXPQP3wM1yMdc2B/AOGALTWobBmI1Shu0UGCwX83XyRBQGawHntTtdG5gUNfxVu4CTNqNv6/wWGL7kCc+1AmCYVisl3I2ydD4GYZUCs7IjoLXrxHIx9w9tLAqDCfBwDrXAY457x+cAoCfuwRGjYFUnAGk+PsjR7s8Dn1VeLWCYVlpDw+VivjVHSHt+u9PVJbzGzZXQWTkAkz0V31fATUaEsjVJlQBs4FeGcteLgzgbAALBA+4y3voAeJL8nA0AHfClnM1qm1HhnYUidCSE+KzvSSJUTwAxCOMcpfETMFYpfRUKIAbCFhC3OTJJJwqDWS0BxED0JZ4Pjix1P2+E0loCSMBwyK4S/xc1ojBwag8gMU84cvTKGgmlAYhngu1O9xAXuVE5J1QCQCz3bwHuHvdQui5QKQAxEO6eEKpsFCgTRSXkvdoxSlBMCxhJJbgrrbZRtHCiShN0pRB6PeQ3ckBw2K0oKXMBVYJIP+Nvh9qulFivGoBt1lLQxowT2ykBXCfnhZIglgYACWmqXQv+baioBYCeiCQHm+QEg1O7RhF7hO4OhSAhcJKSFU7qBGADwZeqMMuXn6TUBw8qlaMrirNb4LdhWlP+SWD+cjFfxTpuS2GUpik+o3jFSEkqbJiWn0P0OMSGqlWiOu0TvD+FRHZKAE+oW+cfRmEwqlsesJJEJs8y91QqP+9UL6lqEtz2gpuNEY5sm9sIHln2DRa2aFKGJtiXkZEMiWtgVvRKUSUFkSKt2S7fAGgAXLYpmQQXf36MUChTZdUa2u8/rkvPA6Tz30r4eH3ybcBS5gJ6SaNXb+aABkA1AMxKenclBZLW/He4cYEGwEXb3wEASelexk6LIIIAAAAASUVORK5CYII=">'},a.Converter=function(e){"use strict";var t={},r=[],n=[],g={},A=C,c={parsed:{},raw:"",format:""};function l(e,t){if(t=t||null,a.helper.isString(e)){if(t=e=a.helper.stdExtName(e),a.extensions[e])return console.warn("DEPRECATION WARNING: "+e+" is an old extension that uses a deprecated loading method.Please inform the developer that the extension should be updated!"),void function(e,t){"function"==typeof e&&(e=e(new a.Converter));a.helper.isArray(e)||(e=[e]);var g=s(e,t);if(!g.valid)throw Error(g.error);for(var A=0;A<e.length;++A)switch(e[A].type){case"lang":r.push(e[A]);break;case"output":n.push(e[A]);break;default:throw Error("Extension loader error: Type unrecognized!!!")}}(a.extensions[e],e);if(a.helper.isUndefined(i[e]))throw Error('Extension "'+e+'" could not be loaded. It was either not found or is not a valid extension.');e=i[e]}"function"==typeof e&&(e=e()),a.helper.isArray(e)||(e=[e]);var g=s(e,t);if(!g.valid)throw Error(g.error);for(var A=0;A<e.length;++A){switch(e[A].type){case"lang":r.push(e[A]);break;case"output":n.push(e[A])}if(e[A].hasOwnProperty("listeners"))for(var o in e[A].listeners)e[A].listeners.hasOwnProperty(o)&&u(o,e[A].listeners[o])}}function u(e,t){if(!a.helper.isString(e))throw Error("Invalid argument in converter.listen() method: name must be a string, but "+typeof e+" given");if("function"!=typeof t)throw Error("Invalid argument in converter.listen() method: callback must be a function, but "+typeof t+" given");g.hasOwnProperty(e)||(g[e]=[]),g[e].push(t)}!function(){for(var r in e=e||{},o)o.hasOwnProperty(r)&&(t[r]=o[r]);if("object"!=typeof e)throw Error("Converter expects the passed parameter to be an object, but "+typeof e+" was passed instead.");for(var n in e)e.hasOwnProperty(n)&&(t[n]=e[n]);t.extensions&&a.helper.forEach(t.extensions,l)}(),this._dispatch=function(e,t,r,n){if(g.hasOwnProperty(e))for(var a=0;a<g[e].length;++a){var A=g[e][a](e,t,this,r,n);A&&void 0!==A&&(t=A)}return t},this.listen=function(e,t){return u(e,t),this},this.makeHtml=function(e){if(!e)return e;var g={gHtmlBlocks:[],gHtmlMdBlocks:[],gHtmlSpans:[],gUrls:{},gTitles:{},gDimensions:{},gListLevel:0,hashLinkCounts:{},langExtensions:r,outputModifiers:n,converter:this,ghCodeBlocks:[],metadata:{parsed:{},raw:"",format:""}};return e=(e=(e=(e=(e=e.replace(/¨/g,"¨T")).replace(/\$/g,"¨D")).replace(/\r\n/g,"\n")).replace(/\r/g,"\n")).replace(/\u00A0/g," "),t.smartIndentationFix&&(e=function(e){var t=e.match(/^\s*/)[0].length,r=new RegExp("^\\s{0,"+t+"}","gm");return e.replace(r,"")}(e)),e="\n\n"+e+"\n\n",e=(e=a.subParser("detab")(e,t,g)).replace(/^[ \t]+$/gm,""),a.helper.forEach(r,function(r){e=a.subParser("runExtension")(r,e,t,g)}),e=a.subParser("metadata")(e,t,g),e=a.subParser("hashPreCodeTags")(e,t,g),e=a.subParser("githubCodeBlocks")(e,t,g),e=a.subParser("hashHTMLBlocks")(e,t,g),e=a.subParser("hashCodeTags")(e,t,g),e=a.subParser("stripLinkDefinitions")(e,t,g),e=a.subParser("blockGamut")(e,t,g),e=a.subParser("unhashHTMLSpans")(e,t,g),e=(e=(e=a.subParser("unescapeSpecialChars")(e,t,g)).replace(/¨D/g,"$$")).replace(/¨T/g,"¨"),e=a.subParser("completeHTMLDocument")(e,t,g),a.helper.forEach(n,function(r){e=a.subParser("runExtension")(r,e,t,g)}),c=g.metadata,e},this.setOption=function(e,r){t[e]=r},this.getOption=function(e){return t[e]},this.getOptions=function(){return t},this.addExtension=function(e,t){l(e,t=t||null)},this.useExtension=function(e){l(e)},this.setFlavor=function(e){if(!I.hasOwnProperty(e))throw Error(e+" flavor was not found");var r=I[e];for(var n in A=e,r)r.hasOwnProperty(n)&&(t[n]=r[n])},this.getFlavor=function(){return A},this.removeExtension=function(e){a.helper.isArray(e)||(e=[e]);for(var t=0;t<e.length;++t){for(var g=e[t],A=0;A<r.length;++A)r[A]===g&&r[A].splice(A,1);for(;0<n.length;++A)n[0]===g&&n[0].splice(A,1)}},this.getAllExtensions=function(){return{language:r,output:n}},this.getMetadata=function(e){return e?c.raw:c.parsed},this.getMetadataFormat=function(){return c.format},this._setMetadataPair=function(e,t){c.parsed[e]=t},this._setMetadataFormat=function(e){c.format=e},this._setMetadataRaw=function(e){c.raw=e}},a.subParser("anchors",function(e,t,r){"use strict";var n=function(e,n,g,A,i,o,C){if(a.helper.isUndefined(C)&&(C=""),g=g.toLowerCase(),e.search(/\(<?\s*>? ?(['"].*['"])?\)$/m)>-1)A="";else if(!A){if(g||(g=n.toLowerCase().replace(/ ?\n/g," ")),A="#"+g,a.helper.isUndefined(r.gUrls[g]))return e;A=r.gUrls[g],a.helper.isUndefined(r.gTitles[g])||(C=r.gTitles[g])}var I='<a href="'+(A=A.replace(a.helper.regexes.asteriskDashAndColon,a.helper.escapeCharactersCallback))+'"';return""!==C&&null!==C&&(I+=' title="'+(C=(C=C.replace(/"/g,"&quot;")).replace(a.helper.regexes.asteriskDashAndColon,a.helper.escapeCharactersCallback))+'"'),t.openLinksInNewWindow&&!/^#/.test(A)&&(I+=' target="¨E95Eblank"'),I+=">"+n+"</a>"};return e=(e=(e=(e=(e=r.converter._dispatch("anchors.before",e,t,r)).replace(/\[((?:\[[^\]]*]|[^\[\]])*)] ?(?:\n *)?\[(.*?)]()()()()/g,n)).replace(/\[((?:\[[^\]]*]|[^\[\]])*)]()[ \t]*\([ \t]?<([^>]*)>(?:[ \t]*((["'])([^"]*?)\5))?[ \t]?\)/g,n)).replace(/\[((?:\[[^\]]*]|[^\[\]])*)]()[ \t]*\([ \t]?<?([\S]+?(?:\([\S]*?\)[\S]*?)?)>?(?:[ \t]*((["'])([^"]*?)\5))?[ \t]?\)/g,n)).replace(/\[([^\[\]]+)]()()()()()/g,n),t.ghMentions&&(e=e.replace(/(^|\s)(\\)?(@([a-z\d\-]+))(?=[.!?;,[\]()]|\s|$)/gim,function(e,r,n,g,A){if("\\"===n)return r+g;if(!a.helper.isString(t.ghMentionsLink))throw new Error("ghMentionsLink option must be a string");var i=t.ghMentionsLink.replace(/\{u}/g,A),o="";return t.openLinksInNewWindow&&(o=' target="¨E95Eblank"'),r+'<a href="'+i+'"'+o+">"+g+"</a>"})),e=r.converter._dispatch("anchors.after",e,t,r)});var u=/([*~_]+|\b)(((https?|ftp|dict):\/\/|www\.)[^'">\s]+?\.[^'">\s]+?)()(\1)?(?=\s|$)(?!["<>])/gi,d=/([*~_]+|\b)(((https?|ftp|dict):\/\/|www\.)[^'">\s]+\.[^'">\s]+?)([.!?,()\[\]])?(\1)?(?=\s|$)(?!["<>])/gi,f=/()<(((https?|ftp|dict):\/\/|www\.)[^'">\s]+)()>()/gi,h=/(^|\s)(?:mailto:)?([A-Za-z0-9!#$%&'*+-/=?^_`{|}~.]+@[-a-z0-9]+(\.[-a-z0-9]+)*\.[a-z]+)(?=$|\s)/gim,p=/<()(?:mailto:)?([-.\w]+@[-a-z0-9]+(\.[-a-z0-9]+)*\.[a-z]+)>/gi,m=function(e){"use strict";return function(t,r,n,g,A,i,o){var C=n=n.replace(a.helper.regexes.asteriskDashAndColon,a.helper.escapeCharactersCallback),I="",s="",c=r||"",l=o||"";return/^www\./i.test(n)&&(n=n.replace(/^www\./i,"http://www.")),e.excludeTrailingPunctuationFromURLs&&i&&(I=i),e.openLinksInNewWindow&&(s=' target="¨E95Eblank"'),c+'<a href="'+n+'"'+s+">"+C+"</a>"+I+l}},b=function(e,t){"use strict";return function(r,n,g){var A="mailto:";return n=n||"",g=a.subParser("unescapeSpecialChars")(g,e,t),e.encodeEmails?(A=a.helper.encodeEmailAddress(A+g),g=a.helper.encodeEmailAddress(g)):A+=g,n+'<a href="'+A+'">'+g+"</a>"}};a.subParser("autoLinks",function(e,t,r){"use strict";return e=(e=(e=r.converter._dispatch("autoLinks.before",e,t,r)).replace(f,m(t))).replace(p,b(t,r)),e=r.converter._dispatch("autoLinks.after",e,t,r)}),a.subParser("simplifiedAutoLinks",function(e,t,r){"use strict";return t.simplifiedAutoLink?(e=r.converter._dispatch("simplifiedAutoLinks.before",e,t,r),e=(e=t.excludeTrailingPunctuationFromURLs?e.replace(d,m(t)):e.replace(u,m(t))).replace(h,b(t,r)),e=r.converter._dispatch("simplifiedAutoLinks.after",e,t,r)):e}),a.subParser("blockGamut",function(e,t,r){"use strict";return e=r.converter._dispatch("blockGamut.before",e,t,r),e=a.subParser("blockQuotes")(e,t,r),e=a.subParser("headers")(e,t,r),e=a.subParser("horizontalRule")(e,t,r),e=a.subParser("lists")(e,t,r),e=a.subParser("codeBlocks")(e,t,r),e=a.subParser("tables")(e,t,r),e=a.subParser("hashHTMLBlocks")(e,t,r),e=a.subParser("paragraphs")(e,t,r),e=r.converter._dispatch("blockGamut.after",e,t,r)}),a.subParser("blockQuotes",function(e,t,r){"use strict";e=r.converter._dispatch("blockQuotes.before",e,t,r),e+="\n\n";var n=/(^ {0,3}>[ \t]?.+\n(.+\n)*\n*)+/gm;return t.splitAdjacentBlockquotes&&(n=/^ {0,3}>[\s\S]*?(?:\n\n)/gm),e=e.replace(n,function(e){return e=(e=(e=e.replace(/^[ \t]*>[ \t]?/gm,"")).replace(/¨0/g,"")).replace(/^[ \t]+$/gm,""),e=a.subParser("githubCodeBlocks")(e,t,r),e=(e=(e=a.subParser("blockGamut")(e,t,r)).replace(/(^|\n)/g,"$1  ")).replace(/(\s*<pre>[^\r]+?<\/pre>)/gm,function(e,t){var r=t;return r=(r=r.replace(/^  /gm,"¨0")).replace(/¨0/g,"")}),a.subParser("hashBlock")("<blockquote>\n"+e+"\n</blockquote>",t,r)}),e=r.converter._dispatch("blockQuotes.after",e,t,r)}),a.subParser("codeBlocks",function(e,t,r){"use strict";e=r.converter._dispatch("codeBlocks.before",e,t,r);return e=(e=(e+="¨0").replace(/(?:\n\n|^)((?:(?:[ ]{4}|\t).*\n+)+)(\n*[ ]{0,3}[^ \t\n]|(?=¨0))/g,function(e,n,g){var A=n,i=g,o="\n";return A=a.subParser("outdent")(A,t,r),A=a.subParser("encodeCode")(A,t,r),A=(A=(A=a.subParser("detab")(A,t,r)).replace(/^\n+/g,"")).replace(/\n+$/g,""),t.omitExtraWLInCodeBlocks&&(o=""),A="<pre><code>"+A+o+"</code></pre>",a.subParser("hashBlock")(A,t,r)+i})).replace(/¨0/,""),e=r.converter._dispatch("codeBlocks.after",e,t,r)}),a.subParser("codeSpans",function(e,t,r){"use strict";return void 0===(e=r.converter._dispatch("codeSpans.before",e,t,r))&&(e=""),e=e.replace(/(^|[^\\])(`+)([^\r]*?[^`])\2(?!`)/gm,function(e,n,g,A){var i=A;return i=(i=i.replace(/^([ \t]*)/g,"")).replace(/[ \t]*$/g,""),i=n+"<code>"+(i=a.subParser("encodeCode")(i,t,r))+"</code>",i=a.subParser("hashHTMLSpans")(i,t,r)}),e=r.converter._dispatch("codeSpans.after",e,t,r)}),a.subParser("completeHTMLDocument",function(e,t,r){"use strict";if(!t.completeHTMLDocument)return e;e=r.converter._dispatch("completeHTMLDocument.before",e,t,r);var n="html",g="<!DOCTYPE HTML>\n",a="",A='<meta charset="utf-8">\n',i="",o="";for(var C in void 0!==r.metadata.parsed.doctype&&(g="<!DOCTYPE "+r.metadata.parsed.doctype+">\n","html"!==(n=r.metadata.parsed.doctype.toString().toLowerCase())&&"html5"!==n||(A='<meta charset="utf-8">')),r.metadata.parsed)if(r.metadata.parsed.hasOwnProperty(C))switch(C.toLowerCase()){case"doctype":break;case"title":a="<title>"+r.metadata.parsed.title+"</title>\n";break;case"charset":A="html"===n||"html5"===n?'<meta charset="'+r.metadata.parsed.charset+'">\n':'<meta name="charset" content="'+r.metadata.parsed.charset+'">\n';break;case"language":case"lang":i=' lang="'+r.metadata.parsed[C]+'"',o+='<meta name="'+C+'" content="'+r.metadata.parsed[C]+'">\n';break;default:o+='<meta name="'+C+'" content="'+r.metadata.parsed[C]+'">\n'}return e=g+"<html"+i+">\n<head>\n"+a+A+o+"</head>\n<body>\n"+e.trim()+"\n</body>\n</html>",e=r.converter._dispatch("completeHTMLDocument.after",e,t,r)}),a.subParser("detab",function(e,t,r){"use strict";return e=(e=(e=(e=(e=(e=r.converter._dispatch("detab.before",e,t,r)).replace(/\t(?=\t)/g,"    ")).replace(/\t/g,"¨A¨B")).replace(/¨B(.+?)¨A/g,function(e,t){for(var r=t,n=4-r.length%4,g=0;g<n;g++)r+=" ";return r})).replace(/¨A/g,"    ")).replace(/¨B/g,""),e=r.converter._dispatch("detab.after",e,t,r)}),a.subParser("ellipsis",function(e,t,r){"use strict";return e=(e=r.converter._dispatch("ellipsis.before",e,t,r)).replace(/\.\.\./g,"…"),e=r.converter._dispatch("ellipsis.after",e,t,r)}),a.subParser("emoji",function(e,t,r){"use strict";if(!t.emoji)return e;return e=(e=r.converter._dispatch("emoji.before",e,t,r)).replace(/:([\S]+?):/g,function(e,t){return a.helper.emojis.hasOwnProperty(t)?a.helper.emojis[t]:e}),e=r.converter._dispatch("emoji.after",e,t,r)}),a.subParser("encodeAmpsAndAngles",function(e,t,r){"use strict";return e=(e=(e=(e=(e=r.converter._dispatch("encodeAmpsAndAngles.before",e,t,r)).replace(/&(?!#?[xX]?(?:[0-9a-fA-F]+|\w+);)/g,"&amp;")).replace(/<(?![a-z\/?$!])/gi,"&lt;")).replace(/</g,"&lt;")).replace(/>/g,"&gt;"),e=r.converter._dispatch("encodeAmpsAndAngles.after",e,t,r)}),a.subParser("encodeBackslashEscapes",function(e,t,r){"use strict";return e=(e=(e=r.converter._dispatch("encodeBackslashEscapes.before",e,t,r)).replace(/\\(\\)/g,a.helper.escapeCharactersCallback)).replace(/\\([`*_{}\[\]()>#+.!~=|-])/g,a.helper.escapeCharactersCallback),e=r.converter._dispatch("encodeBackslashEscapes.after",e,t,r)}),a.subParser("encodeCode",function(e,t,r){"use strict";return e=(e=r.converter._dispatch("encodeCode.before",e,t,r)).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/([*_{}\[\]\\=~-])/g,a.helper.escapeCharactersCallback),e=r.converter._dispatch("encodeCode.after",e,t,r)}),a.subParser("escapeSpecialCharsWithinTagAttributes",function(e,t,r){"use strict";return e=(e=(e=r.converter._dispatch("escapeSpecialCharsWithinTagAttributes.before",e,t,r)).replace(/<\/?[a-z\d_:-]+(?:[\s]+[\s\S]+?)?>/gi,function(e){return e.replace(/(.)<\/?code>(?=.)/g,"$1`").replace(/([\\`*_~=|])/g,a.helper.escapeCharactersCallback)})).replace(/<!(--(?:(?:[^>-]|-[^>])(?:[^-]|-[^-])*)--)>/gi,function(e){return e.replace(/([\\`*_~=|])/g,a.helper.escapeCharactersCallback)}),e=r.converter._dispatch("escapeSpecialCharsWithinTagAttributes.after",e,t,r)}),a.subParser("githubCodeBlocks",function(e,t,r){"use strict";return t.ghCodeBlocks?(e=r.converter._dispatch("githubCodeBlocks.before",e,t,r),e=(e=(e+="¨0").replace(/(?:^|\n)(```+|~~~+)([^\s`~]*)\n([\s\S]*?)\n\1/g,function(e,n,g,A){var i=t.omitExtraWLInCodeBlocks?"":"\n";return A=a.subParser("encodeCode")(A,t,r),A=(A=(A=a.subParser("detab")(A,t,r)).replace(/^\n+/g,"")).replace(/\n+$/g,""),A="<pre><code"+(g?' class="'+g+" language-"+g+'"':"")+">"+A+i+"</code></pre>",A=a.subParser("hashBlock")(A,t,r),"\n\n¨G"+(r.ghCodeBlocks.push({text:e,codeblock:A})-1)+"G\n\n"})).replace(/¨0/,""),r.converter._dispatch("githubCodeBlocks.after",e,t,r)):e}),a.subParser("hashBlock",function(e,t,r){"use strict";return e=(e=r.converter._dispatch("hashBlock.before",e,t,r)).replace(/(^\n+|\n+$)/g,""),e="\n\n¨K"+(r.gHtmlBlocks.push(e)-1)+"K\n\n",e=r.converter._dispatch("hashBlock.after",e,t,r)}),a.subParser("hashCodeTags",function(e,t,r){"use strict";e=r.converter._dispatch("hashCodeTags.before",e,t,r);return e=a.helper.replaceRecursiveRegExp(e,function(e,n,g,A){var i=g+a.subParser("encodeCode")(n,t,r)+A;return"¨C"+(r.gHtmlSpans.push(i)-1)+"C"},"<code\\b[^>]*>","</code>","gim"),e=r.converter._dispatch("hashCodeTags.after",e,t,r)}),a.subParser("hashElement",function(e,t,r){"use strict";return function(e,t){var n=t;return n=(n=(n=n.replace(/\n\n/g,"\n")).replace(/^\n/,"")).replace(/\n+$/g,""),n="\n\n¨K"+(r.gHtmlBlocks.push(n)-1)+"K\n\n"}}),a.subParser("hashHTMLBlocks",function(e,t,r){"use strict";e=r.converter._dispatch("hashHTMLBlocks.before",e,t,r);var n=["pre","div","h1","h2","h3","h4","h5","h6","blockquote","table","dl","ol","ul","script","noscript","form","fieldset","iframe","math","style","section","header","footer","nav","article","aside","address","audio","canvas","figure","hgroup","output","video","p"],g=function(e,t,n,g){var a=e;return-1!==n.search(/\bmarkdown\b/)&&(a=n+r.converter.makeHtml(t)+g),"\n\n¨K"+(r.gHtmlBlocks.push(a)-1)+"K\n\n"};t.backslashEscapesHTMLTags&&(e=e.replace(/\\<(\/?[^>]+?)>/g,function(e,t){return"&lt;"+t+"&gt;"}));for(var A=0;A<n.length;++A)for(var i,o=new RegExp("^ {0,3}(<"+n[A]+"\\b[^>]*>)","im"),C="<"+n[A]+"\\b[^>]*>",I="</"+n[A]+">";-1!==(i=a.helper.regexIndexOf(e,o));){var s=a.helper.splitAtIndex(e,i),c=a.helper.replaceRecursiveRegExp(s[1],g,C,I,"im");if(c===s[1])break;e=s[0].concat(c)}return e=e.replace(/(\n {0,3}(<(hr)\b([^<>])*?\/?>)[ \t]*(?=\n{2,}))/g,a.subParser("hashElement")(e,t,r)),e=(e=a.helper.replaceRecursiveRegExp(e,function(e){return"\n\n¨K"+(r.gHtmlBlocks.push(e)-1)+"K\n\n"},"^ {0,3}\x3c!--","--\x3e","gm")).replace(/(?:\n\n)( {0,3}(?:<([?%])[^\r]*?\2>)[ \t]*(?=\n{2,}))/g,a.subParser("hashElement")(e,t,r)),e=r.converter._dispatch("hashHTMLBlocks.after",e,t,r)}),a.subParser("hashHTMLSpans",function(e,t,r){"use strict";function n(e){return"¨C"+(r.gHtmlSpans.push(e)-1)+"C"}return e=(e=(e=(e=(e=r.converter._dispatch("hashHTMLSpans.before",e,t,r)).replace(/<[^>]+?\/>/gi,function(e){return n(e)})).replace(/<([^>]+?)>[\s\S]*?<\/\1>/g,function(e){return n(e)})).replace(/<([^>]+?)\s[^>]+?>[\s\S]*?<\/\1>/g,function(e){return n(e)})).replace(/<[^>]+?>/gi,function(e){return n(e)}),e=r.converter._dispatch("hashHTMLSpans.after",e,t,r)}),a.subParser("unhashHTMLSpans",function(e,t,r){"use strict";e=r.converter._dispatch("unhashHTMLSpans.before",e,t,r);for(var n=0;n<r.gHtmlSpans.length;++n){for(var g=r.gHtmlSpans[n],a=0;/¨C(\d+)C/.test(g);){var A=RegExp.$1;if(g=g.replace("¨C"+A+"C",r.gHtmlSpans[A]),10===a){console.error("maximum nesting of 10 spans reached!!!");break}++a}e=e.replace("¨C"+n+"C",g)}return e=r.converter._dispatch("unhashHTMLSpans.after",e,t,r)}),a.subParser("hashPreCodeTags",function(e,t,r){"use strict";e=r.converter._dispatch("hashPreCodeTags.before",e,t,r);return e=a.helper.replaceRecursiveRegExp(e,function(e,n,g,A){var i=g+a.subParser("encodeCode")(n,t,r)+A;return"\n\n¨G"+(r.ghCodeBlocks.push({text:e,codeblock:i})-1)+"G\n\n"},"^ {0,3}<pre\\b[^>]*>\\s*<code\\b[^>]*>","^ {0,3}</code>\\s*</pre>","gim"),e=r.converter._dispatch("hashPreCodeTags.after",e,t,r)}),a.subParser("headers",function(e,t,r){"use strict";e=r.converter._dispatch("headers.before",e,t,r);var n=isNaN(parseInt(t.headerLevelStart))?1:parseInt(t.headerLevelStart),g=t.smoothLivePreview?/^(.+)[ \t]*\n={2,}[ \t]*\n+/gm:/^(.+)[ \t]*\n=+[ \t]*\n+/gm,A=t.smoothLivePreview?/^(.+)[ \t]*\n-{2,}[ \t]*\n+/gm:/^(.+)[ \t]*\n-+[ \t]*\n+/gm;e=(e=e.replace(g,function(e,g){var A=a.subParser("spanGamut")(g,t,r),i=t.noHeaderId?"":' id="'+o(g)+'"',C="<h"+n+i+">"+A+"</h"+n+">";return a.subParser("hashBlock")(C,t,r)})).replace(A,function(e,g){var A=a.subParser("spanGamut")(g,t,r),i=t.noHeaderId?"":' id="'+o(g)+'"',C=n+1,I="<h"+C+i+">"+A+"</h"+C+">";return a.subParser("hashBlock")(I,t,r)});var i=t.requireSpaceBeforeHeadingText?/^(#{1,6})[ \t]+(.+?)[ \t]*#*\n+/gm:/^(#{1,6})[ \t]*(.+?)[ \t]*#*\n+/gm;function o(e){var n,g;if(t.customizedHeaderId){var A=e.match(/\{([^{]+?)}\s*$/);A&&A[1]&&(e=A[1])}return n=e,g=a.helper.isString(t.prefixHeaderId)?t.prefixHeaderId:!0===t.prefixHeaderId?"section-":"",t.rawPrefixHeaderId||(n=g+n),n=t.ghCompatibleHeaderId?n.replace(/ /g,"-").replace(/&amp;/g,"").replace(/¨T/g,"").replace(/¨D/g,"").replace(/[&+$,\/:;=?@"#{}|^¨~\[\]`\\*)(%.!'<>]/g,"").toLowerCase():t.rawHeaderId?n.replace(/ /g,"-").replace(/&amp;/g,"&").replace(/¨T/g,"¨").replace(/¨D/g,"$").replace(/["']/g,"-").toLowerCase():n.replace(/[^\w]/g,"").toLowerCase(),t.rawPrefixHeaderId&&(n=g+n),r.hashLinkCounts[n]?n=n+"-"+r.hashLinkCounts[n]++:r.hashLinkCounts[n]=1,n}return e=e.replace(i,function(e,g,A){var i=A;t.customizedHeaderId&&(i=A.replace(/\s?\{([^{]+?)}\s*$/,""));var C=a.subParser("spanGamut")(i,t,r),I=t.noHeaderId?"":' id="'+o(A)+'"',s=n-1+g.length,c="<h"+s+I+">"+C+"</h"+s+">";return a.subParser("hashBlock")(c,t,r)}),e=r.converter._dispatch("headers.after",e,t,r)}),a.subParser("horizontalRule",function(e,t,r){"use strict";e=r.converter._dispatch("horizontalRule.before",e,t,r);var n=a.subParser("hashBlock")("<hr />",t,r);return e=(e=(e=e.replace(/^ {0,2}( ?-){3,}[ \t]*$/gm,n)).replace(/^ {0,2}( ?\*){3,}[ \t]*$/gm,n)).replace(/^ {0,2}( ?_){3,}[ \t]*$/gm,n),e=r.converter._dispatch("horizontalRule.after",e,t,r)}),a.subParser("images",function(e,t,r){"use strict";function n(e,t,n,g,A,i,o,C){var I=r.gUrls,s=r.gTitles,c=r.gDimensions;if(n=n.toLowerCase(),C||(C=""),e.search(/\(<?\s*>? ?(['"].*['"])?\)$/m)>-1)g="";else if(""===g||null===g){if(""!==n&&null!==n||(n=t.toLowerCase().replace(/ ?\n/g," ")),g="#"+n,a.helper.isUndefined(I[n]))return e;g=I[n],a.helper.isUndefined(s[n])||(C=s[n]),a.helper.isUndefined(c[n])||(A=c[n].width,i=c[n].height)}t=t.replace(/"/g,"&quot;").replace(a.helper.regexes.asteriskDashAndColon,a.helper.escapeCharactersCallback);var l='<img src="'+(g=g.replace(a.helper.regexes.asteriskDashAndColon,a.helper.escapeCharactersCallback))+'" alt="'+t+'"';return C&&(l+=' title="'+(C=C.replace(/"/g,"&quot;").replace(a.helper.regexes.asteriskDashAndColon,a.helper.escapeCharactersCallback))+'"'),A&&i&&(l+=' width="'+(A="*"===A?"auto":A)+'"',l+=' height="'+(i="*"===i?"auto":i)+'"'),l+=" />"}return e=(e=(e=(e=(e=(e=r.converter._dispatch("images.before",e,t,r)).replace(/!\[([^\]]*?)] ?(?:\n *)?\[([\s\S]*?)]()()()()()/g,n)).replace(/!\[([^\]]*?)][ \t]*()\([ \t]?<?(data:.+?\/.+?;base64,[A-Za-z0-9+/=\n]+?)>?(?: =([*\d]+[A-Za-z%]{0,4})x([*\d]+[A-Za-z%]{0,4}))?[ \t]*(?:(["'])([^"]*?)\6)?[ \t]?\)/g,function(e,t,r,g,a,A,i,o){return n(e,t,r,g=g.replace(/\s/g,""),a,A,0,o)})).replace(/!\[([^\]]*?)][ \t]*()\([ \t]?<([^>]*)>(?: =([*\d]+[A-Za-z%]{0,4})x([*\d]+[A-Za-z%]{0,4}))?[ \t]*(?:(?:(["'])([^"]*?)\6))?[ \t]?\)/g,n)).replace(/!\[([^\]]*?)][ \t]*()\([ \t]?<?([\S]+?(?:\([\S]*?\)[\S]*?)?)>?(?: =([*\d]+[A-Za-z%]{0,4})x([*\d]+[A-Za-z%]{0,4}))?[ \t]*(?:(["'])([^"]*?)\6)?[ \t]?\)/g,n)).replace(/!\[([^\[\]]+)]()()()()()/g,n),e=r.converter._dispatch("images.after",e,t,r)}),a.subParser("italicsAndBold",function(e,t,r){"use strict";function n(e,t,r){return t+e+r}return e=r.converter._dispatch("italicsAndBold.before",e,t,r),e=t.literalMidWordUnderscores?(e=(e=e.replace(/\b___(\S[\s\S]*)___\b/g,function(e,t){return n(t,"<strong><em>","</em></strong>")})).replace(/\b__(\S[\s\S]*)__\b/g,function(e,t){return n(t,"<strong>","</strong>")})).replace(/\b_(\S[\s\S]*?)_\b/g,function(e,t){return n(t,"<em>","</em>")}):(e=(e=e.replace(/___(\S[\s\S]*?)___/g,function(e,t){return/\S$/.test(t)?n(t,"<strong><em>","</em></strong>"):e})).replace(/__(\S[\s\S]*?)__/g,function(e,t){return/\S$/.test(t)?n(t,"<strong>","</strong>"):e})).replace(/_([^\s_][\s\S]*?)_/g,function(e,t){return/\S$/.test(t)?n(t,"<em>","</em>"):e}),e=t.literalMidWordAsterisks?(e=(e=e.replace(/([^*]|^)\B\*\*\*(\S[\s\S]+?)\*\*\*\B(?!\*)/g,function(e,t,r){return n(r,t+"<strong><em>","</em></strong>")})).replace(/([^*]|^)\B\*\*(\S[\s\S]+?)\*\*\B(?!\*)/g,function(e,t,r){return n(r,t+"<strong>","</strong>")})).replace(/([^*]|^)\B\*(\S[\s\S]+?)\*\B(?!\*)/g,function(e,t,r){return n(r,t+"<em>","</em>")}):(e=(e=e.replace(/\*\*\*(\S[\s\S]*?)\*\*\*/g,function(e,t){return/\S$/.test(t)?n(t,"<strong><em>","</em></strong>"):e})).replace(/\*\*(\S[\s\S]*?)\*\*/g,function(e,t){return/\S$/.test(t)?n(t,"<strong>","</strong>"):e})).replace(/\*([^\s*][\s\S]*?)\*/g,function(e,t){return/\S$/.test(t)?n(t,"<em>","</em>"):e}),e=r.converter._dispatch("italicsAndBold.after",e,t,r)}),a.subParser("lists",function(e,t,r){"use strict";function n(e,n){r.gListLevel++,e=e.replace(/\n{2,}$/,"\n");var g=/(\n)?(^ {0,3})([*+-]|\d+[.])[ \t]+((\[(x|X| )?])?[ \t]*[^\r]+?(\n{1,2}))(?=\n*(¨0| {0,3}([*+-]|\d+[.])[ \t]+))/gm,A=/\n[ \t]*\n(?!¨0)/.test(e+="¨0");return t.disableForced4SpacesIndentedSublists&&(g=/(\n)?(^ {0,3})([*+-]|\d+[.])[ \t]+((\[(x|X| )?])?[ \t]*[^\r]+?(\n{1,2}))(?=\n*(¨0|\2([*+-]|\d+[.])[ \t]+))/gm),e=(e=e.replace(g,function(e,n,g,i,o,C,I){I=I&&""!==I.trim();var s=a.subParser("outdent")(o,t,r),c="";return C&&t.tasklists&&(c=' class="task-list-item" style="list-style-type: none;"',s=s.replace(/^[ \t]*\[(x|X| )?]/m,function(){var e='<input type="checkbox" disabled style="margin: 0px 0.35em 0.25em -1.6em; vertical-align: middle;"';return I&&(e+=" checked"),e+=">"})),s=s.replace(/^([-*+]|\d\.)[ \t]+[\S\n ]*/g,function(e){return"¨A"+e}),n||s.search(/\n{2,}/)>-1?(s=a.subParser("githubCodeBlocks")(s,t,r),s=a.subParser("blockGamut")(s,t,r)):(s=(s=a.subParser("lists")(s,t,r)).replace(/\n$/,""),s=(s=a.subParser("hashHTMLBlocks")(s,t,r)).replace(/\n\n+/g,"\n\n"),s=A?a.subParser("paragraphs")(s,t,r):a.subParser("spanGamut")(s,t,r)),s="<li"+c+">"+(s=s.replace("¨A",""))+"</li>\n"})).replace(/¨0/g,""),r.gListLevel--,n&&(e=e.replace(/\s+$/,"")),e}function g(e,t){if("ol"===t){var r=e.match(/^ *(\d+)\./);if(r&&"1"!==r[1])return' start="'+r[1]+'"'}return""}function A(e,r,a){var A=t.disableForced4SpacesIndentedSublists?/^ ?\d+\.[ \t]/gm:/^ {0,3}\d+\.[ \t]/gm,i=t.disableForced4SpacesIndentedSublists?/^ ?[*+-][ \t]/gm:/^ {0,3}[*+-][ \t]/gm,o="ul"===r?A:i,C="";if(-1!==e.search(o))!function t(I){var s=I.search(o),c=g(e,r);-1!==s?(C+="\n\n<"+r+c+">\n"+n(I.slice(0,s),!!a)+"</"+r+">\n",o="ul"===(r="ul"===r?"ol":"ul")?A:i,t(I.slice(s))):C+="\n\n<"+r+c+">\n"+n(I,!!a)+"</"+r+">\n"}(e);else{var I=g(e,r);C="\n\n<"+r+I+">\n"+n(e,!!a)+"</"+r+">\n"}return C}return e=r.converter._dispatch("lists.before",e,t,r),e+="¨0",e=(e=r.gListLevel?e.replace(/^(( {0,3}([*+-]|\d+[.])[ \t]+)[^\r]+?(¨0|\n{2,}(?=\S)(?![ \t]*(?:[*+-]|\d+[.])[ \t]+)))/gm,function(e,t,r){return A(t,r.search(/[*+-]/g)>-1?"ul":"ol",!0)}):e.replace(/(\n\n|^\n?)(( {0,3}([*+-]|\d+[.])[ \t]+)[^\r]+?(¨0|\n{2,}(?=\S)(?![ \t]*(?:[*+-]|\d+[.])[ \t]+)))/gm,function(e,t,r,n){return A(r,n.search(/[*+-]/g)>-1?"ul":"ol",!1)})).replace(/¨0/,""),e=r.converter._dispatch("lists.after",e,t,r)}),a.subParser("metadata",function(e,t,r){"use strict";if(!t.metadata)return e;function n(e){r.metadata.raw=e,(e=(e=e.replace(/&/g,"&amp;").replace(/"/g,"&quot;")).replace(/\n {4}/g," ")).replace(/^([\S ]+): +([\s\S]+?)$/gm,function(e,t,n){return r.metadata.parsed[t]=n,""})}return e=(e=(e=(e=r.converter._dispatch("metadata.before",e,t,r)).replace(/^\s*«««+(\S*?)\n([\s\S]+?)\n»»»+\n/,function(e,t,r){return n(r),"¨M"})).replace(/^\s*---+(\S*?)\n([\s\S]+?)\n---+\n/,function(e,t,g){return t&&(r.metadata.format=t),n(g),"¨M"})).replace(/¨M/g,""),e=r.converter._dispatch("metadata.after",e,t,r)}),a.subParser("outdent",function(e,t,r){"use strict";return e=(e=(e=r.converter._dispatch("outdent.before",e,t,r)).replace(/^(\t|[ ]{1,4})/gm,"¨0")).replace(/¨0/g,""),e=r.converter._dispatch("outdent.after",e,t,r)}),a.subParser("paragraphs",function(e,t,r){"use strict";for(var n=(e=(e=(e=r.converter._dispatch("paragraphs.before",e,t,r)).replace(/^\n+/g,"")).replace(/\n+$/g,"")).split(/\n{2,}/g),g=[],A=n.length,i=0;i<A;i++){var o=n[i];o.search(/¨(K|G)(\d+)\1/g)>=0?g.push(o):o.search(/\S/)>=0&&(o=(o=a.subParser("spanGamut")(o,t,r)).replace(/^([ \t]*)/g,"<p>"),o+="</p>",g.push(o))}for(A=g.length,i=0;i<A;i++){for(var C="",I=g[i],s=!1;/¨(K|G)(\d+)\1/.test(I);){var c=RegExp.$1,l=RegExp.$2;C=(C="K"===c?r.gHtmlBlocks[l]:s?a.subParser("encodeCode")(r.ghCodeBlocks[l].text,t,r):r.ghCodeBlocks[l].codeblock).replace(/\$/g,"$$$$"),I=I.replace(/(\n\n)?¨(K|G)\d+\2(\n\n)?/,C),/^<pre\b[^>]*>\s*<code\b[^>]*>/.test(I)&&(s=!0)}g[i]=I}return e=(e=(e=g.join("\n")).replace(/^\n+/g,"")).replace(/\n+$/g,""),r.converter._dispatch("paragraphs.after",e,t,r)}),a.subParser("runExtension",function(e,t,r,n){"use strict";if(e.filter)t=e.filter(t,n.converter,r);else if(e.regex){var g=e.regex;g instanceof RegExp||(g=new RegExp(g,"g")),t=t.replace(g,e.replace)}return t}),a.subParser("spanGamut",function(e,t,r){"use strict";return e=r.converter._dispatch("spanGamut.before",e,t,r),e=a.subParser("codeSpans")(e,t,r),e=a.subParser("escapeSpecialCharsWithinTagAttributes")(e,t,r),e=a.subParser("encodeBackslashEscapes")(e,t,r),e=a.subParser("images")(e,t,r),e=a.subParser("anchors")(e,t,r),e=a.subParser("autoLinks")(e,t,r),e=a.subParser("simplifiedAutoLinks")(e,t,r),e=a.subParser("emoji")(e,t,r),e=a.subParser("underline")(e,t,r),e=a.subParser("italicsAndBold")(e,t,r),e=a.subParser("strikethrough")(e,t,r),e=a.subParser("ellipsis")(e,t,r),e=a.subParser("hashHTMLSpans")(e,t,r),e=a.subParser("encodeAmpsAndAngles")(e,t,r),t.simpleLineBreaks?/\n\n¨K/.test(e)||(e=e.replace(/\n+/g,"<br />\n")):e=e.replace(/  +\n/g,"<br />\n"),e=r.converter._dispatch("spanGamut.after",e,t,r)}),a.subParser("strikethrough",function(e,t,r){"use strict";return t.strikethrough&&(e=(e=r.converter._dispatch("strikethrough.before",e,t,r)).replace(/(?:~){2}([\s\S]+?)(?:~){2}/g,function(e,n){return function(e){return t.simplifiedAutoLink&&(e=a.subParser("simplifiedAutoLinks")(e,t,r)),"<del>"+e+"</del>"}(n)}),e=r.converter._dispatch("strikethrough.after",e,t,r)),e}),a.subParser("stripLinkDefinitions",function(e,t,r){"use strict";var n=function(e,n,g,A,i,o,C){return n=n.toLowerCase(),g.match(/^data:.+?\/.+?;base64,/)?r.gUrls[n]=g.replace(/\s/g,""):r.gUrls[n]=a.subParser("encodeAmpsAndAngles")(g,t,r),o?o+C:(C&&(r.gTitles[n]=C.replace(/"|'/g,"&quot;")),t.parseImgDimensions&&A&&i&&(r.gDimensions[n]={width:A,height:i}),"")};return e=(e=(e=(e+="¨0").replace(/^ {0,3}\[(.+)]:[ \t]*\n?[ \t]*<?(data:.+?\/.+?;base64,[A-Za-z0-9+/=\n]+?)>?(?: =([*\d]+[A-Za-z%]{0,4})x([*\d]+[A-Za-z%]{0,4}))?[ \t]*\n?[ \t]*(?:(\n*)["|'(](.+?)["|')][ \t]*)?(?:\n\n|(?=¨0)|(?=\n\[))/gm,n)).replace(/^ {0,3}\[(.+)]:[ \t]*\n?[ \t]*<?([^>\s]+)>?(?: =([*\d]+[A-Za-z%]{0,4})x([*\d]+[A-Za-z%]{0,4}))?[ \t]*\n?[ \t]*(?:(\n*)["|'(](.+?)["|')][ \t]*)?(?:\n+|(?=¨0))/gm,n)).replace(/¨0/,"")}),a.subParser("tables",function(e,t,r){"use strict";if(!t.tables)return e;function n(e){return/^:[ \t]*--*$/.test(e)?' style="text-align:left;"':/^--*[ \t]*:[ \t]*$/.test(e)?' style="text-align:right;"':/^:[ \t]*--*[ \t]*:$/.test(e)?' style="text-align:center;"':""}function g(e,n){var g="";return e=e.trim(),(t.tablesHeaderId||t.tableHeaderId)&&(g=' id="'+e.replace(/ /g,"_").toLowerCase()+'"'),"<th"+g+n+">"+(e=a.subParser("spanGamut")(e,t,r))+"</th>\n"}function A(e,n){return"<td"+n+">"+a.subParser("spanGamut")(e,t,r)+"</td>\n"}function i(e){var i,o=e.split("\n");for(i=0;i<o.length;++i)/^ {0,3}\|/.test(o[i])&&(o[i]=o[i].replace(/^ {0,3}\|/,"")),/\|[ \t]*$/.test(o[i])&&(o[i]=o[i].replace(/\|[ \t]*$/,"")),o[i]=a.subParser("codeSpans")(o[i],t,r);var C=o[0].split("|").map(function(e){return e.trim()}),I=o[1].split("|").map(function(e){return e.trim()}),s=[],c=[],l=[],u=[];for(o.shift(),o.shift(),i=0;i<o.length;++i)""!==o[i].trim()&&s.push(o[i].split("|").map(function(e){return e.trim()}));if(C.length<I.length)return e;for(i=0;i<I.length;++i)l.push(n(I[i]));for(i=0;i<C.length;++i)a.helper.isUndefined(l[i])&&(l[i]=""),c.push(g(C[i],l[i]));for(i=0;i<s.length;++i){for(var d=[],f=0;f<c.length;++f)a.helper.isUndefined(s[i][f]),d.push(A(s[i][f],l[f]));u.push(d)}return function(e,t){for(var r="<table>\n<thead>\n<tr>\n",n=e.length,g=0;g<n;++g)r+=e[g];for(r+="</tr>\n</thead>\n<tbody>\n",g=0;g<t.length;++g){r+="<tr>\n";for(var a=0;a<n;++a)r+=t[g][a];r+="</tr>\n"}return r+="</tbody>\n</table>\n"}(c,u)}return e=(e=(e=(e=r.converter._dispatch("tables.before",e,t,r)).replace(/\\(\|)/g,a.helper.escapeCharactersCallback)).replace(/^ {0,3}\|?.+\|.+\n {0,3}\|?[ \t]*:?[ \t]*(?:[-=]){2,}[ \t]*:?[ \t]*\|[ \t]*:?[ \t]*(?:[-=]){2,}[\s\S]+?(?:\n\n|¨0)/gm,i)).replace(/^ {0,3}\|.+\|[ \t]*\n {0,3}\|[ \t]*:?[ \t]*(?:[-=]){2,}[ \t]*:?[ \t]*\|[ \t]*\n( {0,3}\|.+\|[ \t]*\n)*(?:\n|¨0)/gm,i),e=r.converter._dispatch("tables.after",e,t,r)}),a.subParser("underline",function(e,t,r){"use strict";return t.underline?(e=r.converter._dispatch("underline.before",e,t,r),e=(e=t.literalMidWordUnderscores?e.replace(/\b_?__(\S[\s\S]*)___?\b/g,function(e,t){return"<u>"+t+"</u>"}):e.replace(/_?__(\S[\s\S]*?)___?/g,function(e,t){return/\S$/.test(t)?"<u>"+t+"</u>":e})).replace(/(_)/g,a.helper.escapeCharactersCallback),e=r.converter._dispatch("underline.after",e,t,r)):e}),a.subParser("unescapeSpecialChars",function(e,t,r){"use strict";return e=(e=r.converter._dispatch("unescapeSpecialChars.before",e,t,r)).replace(/¨E(\d+)E/g,function(e,t){var r=parseInt(t);return String.fromCharCode(r)}),e=r.converter._dispatch("unescapeSpecialChars.after",e,t,r)});void 0===(n=function(){"use strict";return a}.call(t,r,t,e))||(e.exports=n)}).call(this)},196:function(e,t){!function(){e.exports=this.wp.blockSerializationDefaultParser}()},2:function(e,t){!function(){e.exports=this.lodash}()},225:function(e,t,r){"use strict";r.r(t);var n={};r.d(n,"getBlockTypes",function(){return b}),r.d(n,"getBlockType",function(){return _}),r.d(n,"getBlockStyles",function(){return v}),r.d(n,"getCategories",function(){return w}),r.d(n,"getDefaultBlockName",function(){return k}),r.d(n,"getFreeformFallbackBlockName",function(){return y}),r.d(n,"getUnregisteredFallbackBlockName",function(){return j}),r.d(n,"getGroupingBlockName",function(){return O}),r.d(n,"getChildBlockNames",function(){return T}),r.d(n,"getBlockSupport",function(){return x}),r.d(n,"hasBlockSupport",function(){return E}),r.d(n,"isMatchingSearchTerm",function(){return N}),r.d(n,"hasChildBlocks",function(){return S}),r.d(n,"hasChildBlocksWithInserterSupport",function(){return B});var g={};r.d(g,"addBlockTypes",function(){return P}),r.d(g,"removeBlockTypes",function(){return L}),r.d(g,"addBlockStyles",function(){return z}),r.d(g,"removeBlockStyles",function(){return M}),r.d(g,"setDefaultBlockName",function(){return R}),r.d(g,"setFreeformFallbackBlockName",function(){return D}),r.d(g,"setUnregisteredFallbackBlockName",function(){return V}),r.d(g,"setGroupingBlockName",function(){return H}),r.d(g,"setCategories",function(){return F}),r.d(g,"updateCategory",function(){return Z});var a=r(4),A=r(15),i=r(17),o=r(8),C=r(2),I=r(1),s=[{slug:"common",title:Object(I.__)("Common Blocks")},{slug:"formatting",title:Object(I.__)("Formatting")},{slug:"layout",title:Object(I.__)("Layout Elements")},{slug:"widgets",title:Object(I.__)("Widgets")},{slug:"embed",title:Object(I.__)("Embeds")},{slug:"reusable",title:Object(I.__)("Reusable Blocks")}];function c(e){return function(){var t=arguments.length>0&&void 0!==arguments[0]?arguments[0]:null,r=arguments.length>1?arguments[1]:void 0;switch(r.type){case"REMOVE_BLOCK_TYPES":return-1!==r.names.indexOf(t)?null:t;case e:return r.name||null}return t}}var l=c("SET_DEFAULT_BLOCK_NAME"),u=c("SET_FREEFORM_FALLBACK_BLOCK_NAME"),d=c("SET_UNREGISTERED_FALLBACK_BLOCK_NAME"),f=c("SET_GROUPING_BLOCK_NAME");var h=Object(a.combineReducers)({blockTypes:function(){var e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{},t=arguments.length>1?arguments[1]:void 0;switch(t.type){case"ADD_BLOCK_TYPES":return Object(o.a)({},e,Object(C.keyBy)(Object(C.map)(t.blockTypes,function(e){return Object(C.omit)(e,"styles ")}),"name"));case"REMOVE_BLOCK_TYPES":return Object(C.omit)(e,t.names)}return e},blockStyles:function(){var e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{},t=arguments.length>1?arguments[1]:void 0;switch(t.type){case"ADD_BLOCK_TYPES":return Object(o.a)({},e,Object(C.mapValues)(Object(C.keyBy)(t.blockTypes,"name"),function(t){return Object(C.uniqBy)([].concat(Object(i.a)(Object(C.get)(t,["styles"],[])),Object(i.a)(Object(C.get)(e,[t.name],[]))),function(e){return e.name})}));case"ADD_BLOCK_STYLES":return Object(o.a)({},e,Object(A.a)({},t.blockName,Object(C.uniqBy)([].concat(Object(i.a)(Object(C.get)(e,[t.blockName],[])),Object(i.a)(t.styles)),function(e){return e.name})));case"REMOVE_BLOCK_STYLES":return Object(o.a)({},e,Object(A.a)({},t.blockName,Object(C.filter)(Object(C.get)(e,[t.blockName],[]),function(e){return-1===t.styleNames.indexOf(e.name)})))}return e},defaultBlockName:l,freeformFallbackBlockName:u,unregisteredFallbackBlockName:d,groupingBlockName:f,categories:function(){var e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:s,t=arguments.length>1?arguments[1]:void 0;switch(t.type){case"SET_CATEGORIES":return t.categories||[];case"UPDATE_CATEGORY":if(!t.category||Object(C.isEmpty)(t.category))return e;if(Object(C.find)(e,["slug",t.slug]))return Object(C.map)(e,function(e){return e.slug===t.slug?Object(o.a)({},e,t.category):e})}return e}}),p=r(34),m=function(e,t){return"string"==typeof t?_(e,t):t},b=Object(p.a)(function(e){return Object.values(e.blockTypes)},function(e){return[e.blockTypes]});function _(e,t){return e.blockTypes[t]}function v(e,t){return e.blockStyles[t]}function w(e){return e.categories}function k(e){return e.defaultBlockName}function y(e){return e.freeformFallbackBlockName}function j(e){return e.unregisteredFallbackBlockName}function O(e){return e.groupingBlockName}var T=Object(p.a)(function(e,t){return Object(C.map)(Object(C.filter)(e.blockTypes,function(e){return Object(C.includes)(e.parent,t)}),function(e){return e.name})},function(e){return[e.blockTypes]}),x=function(e,t,r,n){var g=m(e,t);return Object(C.get)(g,["supports",r],n)};function E(e,t,r,n){return!!x(e,t,r,n)}function N(e,t,r){var n=m(e,t),g=Object(C.flow)([C.deburr,function(e){return e.toLowerCase()},function(e){return e.trim()}]),a=g(r),A=Object(C.flow)([g,function(e){return Object(C.includes)(e,a)}]);return A(n.title)||Object(C.some)(n.keywords,A)||A(n.category)}var S=function(e,t){return T(e,t).length>0},B=function(e,t){return Object(C.some)(T(e,t),function(t){return E(e,t,"inserter",!0)})};function P(e){return{type:"ADD_BLOCK_TYPES",blockTypes:Object(C.castArray)(e)}}function L(e){return{type:"REMOVE_BLOCK_TYPES",names:Object(C.castArray)(e)}}function z(e,t){return{type:"ADD_BLOCK_STYLES",styles:Object(C.castArray)(t),blockName:e}}function M(e,t){return{type:"REMOVE_BLOCK_STYLES",styleNames:Object(C.castArray)(t),blockName:e}}function R(e){return{type:"SET_DEFAULT_BLOCK_NAME",name:e}}function D(e){return{type:"SET_FREEFORM_FALLBACK_BLOCK_NAME",name:e}}function V(e){return{type:"SET_UNREGISTERED_FALLBACK_BLOCK_NAME",name:e}}function H(e){return{type:"SET_GROUPING_BLOCK_NAME",name:e}}function F(e){return{type:"SET_CATEGORIES",categories:e}}function Z(e,t){return{type:"UPDATE_CATEGORY",slug:e,category:t}}Object(a.registerStore)("core/blocks",{reducer:h,selectors:n,actions:g});var G=r(64),U=r.n(G),Y=r(25),W=r(47),K=r.n(W),X=r(0),Q=["#191e23","#f8f9f9"];function J(e){var t=ue();if(e.name!==t)return!1;J.block&&J.block.name===t||(J.block=ye(t));var r=J.block,n=de(t);return Object(C.every)(n.attributes,function(t,n){return r.attributes[n]===e.attributes[n]})}function q(e){return!!e&&(Object(C.isString)(e)||Object(X.isValidElement)(e)||Object(C.isFunction)(e)||e instanceof X.Component)}function $(e){if(q(e))return{src:e};if(Object(C.has)(e,["background"])){var t=K()(e.background);return Object(o.a)({},e,{foreground:e.foreground?e.foreground:Object(W.mostReadable)(t,Q,{includeFallbackColors:!0,level:"AA",size:"large"}).toHexString(),shadowColor:t.setAlpha(.3).toRgbString()})}return e}function ee(e){return Object(C.isString)(e)?de(e):e}var te=["attributes","supports","save","migrate","isEligible"],re={icon:"block-default",attributes:{},keywords:[],save:function(){return null}},ne={};function ge(e){ne=Object(o.a)({},ne,e)}function ae(e,t){if(t=Object(o.a)({name:e},re,Object(C.get)(ne,e),t),"string"==typeof e)if(/^[a-z][a-z0-9-]*\/[a-z][a-z0-9-]*$/.test(e))if(Object(a.select)("core/blocks").getBlockType(e))console.error('Block "'+e+'" is already registered.');else{var r=Object(o.a)({},t);if((t=Object(Y.applyFilters)("blocks.registerBlockType",t,e)).deprecated&&(t.deprecated=t.deprecated.map(function(t){return Object(C.pick)(Object(Y.applyFilters)("blocks.registerBlockType",Object(o.a)({},Object(C.omit)(r,te),t),e),te)})),Object(C.isPlainObject)(t))if(Object(C.isFunction)(t.save))if("edit"in t&&!Object(C.isFunction)(t.edit))console.error('The "edit" property must be a valid function.');else if("category"in t)if("category"in t&&!Object(C.some)(Object(a.select)("core/blocks").getCategories(),{slug:t.category}))console.error('The block "'+e+'" must have a registered category.');else if("title"in t&&""!==t.title)if("string"==typeof t.title){if(t.icon=$(t.icon),q(t.icon.src))return Object(a.dispatch)("core/blocks").addBlockTypes(t),t;console.error("The icon passed is invalid. The icon should be a string, an element, a function, or an object following the specifications documented in https://developer.wordpress.org/block-editor/developers/block-api/block-registration/#icon-optional")}else console.error("Block titles must be strings.");else console.error('The block "'+e+'" must have a title.');else console.error('The block "'+e+'" must have a category.');else console.error('The "save" property must be a valid function.');else console.error("Block settings must be a valid object.")}else console.error("Block names must contain a namespace prefix, include only lowercase alphanumeric characters or dashes, and start with a letter. Example: my-plugin/my-custom-block");else console.error("Block names must be strings.")}function Ae(e){var t=Object(a.select)("core/blocks").getBlockType(e);if(t)return Object(a.dispatch)("core/blocks").removeBlockTypes(e),t;console.error('Block "'+e+'" is not registered.')}function ie(e){Object(a.dispatch)("core/blocks").setFreeformFallbackBlockName(e)}function oe(){return Object(a.select)("core/blocks").getFreeformFallbackBlockName()}function Ce(){return Object(a.select)("core/blocks").getGroupingBlockName()}function Ie(e){Object(a.dispatch)("core/blocks").setUnregisteredFallbackBlockName(e)}function se(){return Object(a.select)("core/blocks").getUnregisteredFallbackBlockName()}function ce(e){Object(a.dispatch)("core/blocks").setDefaultBlockName(e)}function le(e){Object(a.dispatch)("core/blocks").setGroupingBlockName(e)}function ue(){return Object(a.select)("core/blocks").getDefaultBlockName()}function de(e){return Object(a.select)("core/blocks").getBlockType(e)}function fe(){return Object(a.select)("core/blocks").getBlockTypes()}function he(e,t,r){return Object(a.select)("core/blocks").getBlockSupport(e,t,r)}function pe(e,t,r){return Object(a.select)("core/blocks").hasBlockSupport(e,t,r)}function me(e){return"core/block"===e.name}var be=function(e){return Object(a.select)("core/blocks").getChildBlockNames(e)},_e=function(e){return Object(a.select)("core/blocks").hasChildBlocks(e)},ve=function(e){return Object(a.select)("core/blocks").hasChildBlocksWithInserterSupport(e)},we=function(e,t){Object(a.dispatch)("core/blocks").addBlockStyles(e,t)},ke=function(e,t){Object(a.dispatch)("core/blocks").removeBlockStyles(e,t)};function ye(e){var t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{},r=arguments.length>2&&void 0!==arguments[2]?arguments[2]:[],n=de(e),g=Object(C.reduce)(n.attributes,function(e,r,n){var g=t[n];return void 0!==g?e[n]=g:r.hasOwnProperty("default")&&(e[n]=r.default),-1!==["node","children"].indexOf(r.source)&&("string"==typeof e[n]?e[n]=[e[n]]:Array.isArray(e[n])||(e[n]=[])),e},{});return{clientId:U()(),name:e,isValid:!0,attributes:g,innerBlocks:r}}function je(e){var t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{},r=arguments.length>2?arguments[2]:void 0,n=U()();return Object(o.a)({},e,{clientId:n,attributes:Object(o.a)({},e.attributes,t),innerBlocks:r||e.innerBlocks.map(function(e){return je(e)})})}var Oe=function(e,t,r){if(Object(C.isEmpty)(r))return!1;var n=r.length>1,g=Object(C.first)(r).name;if(!(Ee(e)||!n||e.isMultiBlock))return!1;if(!Ee(e)&&!Object(C.every)(r,{name:g}))return!1;if(!("block"===e.type))return!1;var a=Object(C.first)(r);if(!("from"!==t||-1!==e.blocks.indexOf(a.name)||Ee(e)))return!1;if(!n&&Ne(a.name)&&Ne(e.blockName))return!1;if(Object(C.isFunction)(e.isMatch)){var A=e.isMultiBlock?r.map(function(e){return e.attributes}):a.attributes;if(!e.isMatch(A))return!1}return!0},Te=function(e){if(Object(C.isEmpty)(e))return[];var t=fe();return Object(C.filter)(t,function(t){return!!Pe(Le("from",t.name),function(t){return Oe(t,"from",e)})})},xe=function(e){if(Object(C.isEmpty)(e))return[];var t=Le("to",de(Object(C.first)(e).name).name),r=Object(C.filter)(t,function(t){return t&&Oe(t,"to",e)});return Object(C.flatMap)(r,function(e){return e.blocks}).map(function(e){return de(e)})},Ee=function(e){return e&&"block"===e.type&&Array.isArray(e.blocks)&&e.blocks.includes("*")},Ne=function(e){return e===Ce()},Se=function(){var e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:[];if(!e.length)return!1;var t=e[0].name;return Object(C.every)(e,["name",t])};function Be(e){if(Object(C.isEmpty)(e))return[];var t=Te(e),r=xe(e);return Object(C.uniq)([].concat(Object(i.a)(t),Object(i.a)(r)))}function Pe(e,t){for(var r=Object(Y.createHooks)(),n=function(n){var g=e[n];t(g)&&r.addFilter("transform","transform/"+n.toString(),function(e){return e||g},g.priority)},g=0;g<e.length;g++)n(g);return r.applyFilters("transform",null)}function Le(e,t){if(void 0===t)return Object(C.flatMap)(fe(),function(t){var r=t.name;return Le(e,r)});var r=ee(t)||{},n=r.name,g=r.transforms;return g&&Array.isArray(g[e])?g[e].map(function(e){return Object(o.a)({},e,{blockName:n})}):[]}function ze(e,t){var r=Object(C.castArray)(e),n=r.length>1,g=r[0],a=g.name;if(!Ne(t)&&n&&!Se(r))return null;var A,i=Le("from",t),I=Pe(Le("to",a),function(e){return"block"===e.type&&(Ee(e)||-1!==e.blocks.indexOf(t))&&(!n||e.isMultiBlock)})||Pe(i,function(e){return"block"===e.type&&(Ee(e)||-1!==e.blocks.indexOf(a))&&(!n||e.isMultiBlock)});if(!I)return null;if(A=I.isMultiBlock?Object(C.has)(I,"__experimentalConvert")?I.__experimentalConvert(r):I.transform(r.map(function(e){return e.attributes}),r.map(function(e){return e.innerBlocks})):Object(C.has)(I,"__experimentalConvert")?I.__experimentalConvert(g):I.transform(g.attributes,g.innerBlocks),!Object(C.isObjectLike)(A))return null;if((A=Object(C.castArray)(A)).some(function(e){return!de(e.name)}))return null;var s=Object(C.findIndex)(A,function(e){return e.name===t});return s<0?null:A.map(function(t,r){var n=Object(o.a)({},t,{clientId:r===s?g.clientId:t.clientId});return Object(Y.applyFilters)("blocks.switchToBlockType.transformedBlock",n,e)})}var Me=r(23);var Re=function(){var e;return function(){return e||(e=document.implementation.createHTMLDocument("")),e}}();function De(e,t){if(t){if("string"==typeof e){var r=Re();r.body.innerHTML=e,e=r.body}if("function"==typeof t)return t(e);if(Object===t.constructor)return Object.keys(t).reduce(function(r,n){return r[n]=De(e,t[n]),r},{})}}function Ve(e,t){return 1===arguments.length&&(t=e,e=void 0),function(r){var n=r;if(e&&(n=r.querySelector(e)),n)return function(e,t){for(var r,n=t.split(".");r=n.shift();){if(!(r in e))return;e=e[r]}return e}(n,t)}}var He=r(62),Fe=r(196),Ze=r(38),Ge=r(32),Ue=r(37);var Ye=r(11),We=r(10),Ke=/^#[xX]([A-Fa-f0-9]+)$/,Xe=/^#([0-9]+)$/,Qe=/^([A-Za-z0-9]+)$/,Je=(function(){function e(e){this.named=e}e.prototype.parse=function(e){if(e){var t=e.match(Ke);return t?String.fromCharCode(parseInt(t[1],16)):(t=e.match(Xe))?String.fromCharCode(parseInt(t[1],10)):(t=e.match(Qe))?this.named[t[1]]:void 0}}}(),/[\t\n\f ]/),qe=/[A-Za-z]/,$e=/\r\n?/g;function et(e){return Je.test(e)}function tt(e){return qe.test(e)}var rt=function(){function e(e,t){this.delegate=e,this.entityParser=t,this.state="beforeData",this.line=-1,this.column=-1,this.input="",this.index=-1,this.tagNameBuffer="",this.states={beforeData:function(){var e=this.peek();if("<"===e)this.transitionTo("tagOpen"),this.markTagStart(),this.consume();else{if("\n"===e){var t=this.tagNameBuffer.toLowerCase();"pre"!==t&&"textarea"!==t||this.consume()}this.transitionTo("data"),this.delegate.beginData()}},data:function(){var e=this.peek();"<"===e?(this.delegate.finishData(),this.transitionTo("tagOpen"),this.markTagStart(),this.consume()):"&"===e?(this.consume(),this.delegate.appendToData(this.consumeCharRef()||"&")):(this.consume(),this.delegate.appendToData(e))},tagOpen:function(){var e=this.consume();"!"===e?this.transitionTo("markupDeclarationOpen"):"/"===e?this.transitionTo("endTagOpen"):("@"===e||":"===e||tt(e))&&(this.transitionTo("tagName"),this.tagNameBuffer="",this.delegate.beginStartTag(),this.appendToTagName(e))},markupDeclarationOpen:function(){"-"===this.consume()&&"-"===this.input.charAt(this.index)&&(this.consume(),this.transitionTo("commentStart"),this.delegate.beginComment())},commentStart:function(){var e=this.consume();"-"===e?this.transitionTo("commentStartDash"):">"===e?(this.delegate.finishComment(),this.transitionTo("beforeData")):(this.delegate.appendToCommentData(e),this.transitionTo("comment"))},commentStartDash:function(){var e=this.consume();"-"===e?this.transitionTo("commentEnd"):">"===e?(this.delegate.finishComment(),this.transitionTo("beforeData")):(this.delegate.appendToCommentData("-"),this.transitionTo("comment"))},comment:function(){var e=this.consume();"-"===e?this.transitionTo("commentEndDash"):this.delegate.appendToCommentData(e)},commentEndDash:function(){var e=this.consume();"-"===e?this.transitionTo("commentEnd"):(this.delegate.appendToCommentData("-"+e),this.transitionTo("comment"))},commentEnd:function(){var e=this.consume();">"===e?(this.delegate.finishComment(),this.transitionTo("beforeData")):(this.delegate.appendToCommentData("--"+e),this.transitionTo("comment"))},tagName:function(){var e=this.consume();et(e)?this.transitionTo("beforeAttributeName"):"/"===e?this.transitionTo("selfClosingStartTag"):">"===e?(this.delegate.finishTag(),this.transitionTo("beforeData")):this.appendToTagName(e)},beforeAttributeName:function(){var e=this.peek();et(e)?this.consume():"/"===e?(this.transitionTo("selfClosingStartTag"),this.consume()):">"===e?(this.consume(),this.delegate.finishTag(),this.transitionTo("beforeData")):"="===e?(this.delegate.reportSyntaxError("attribute name cannot start with equals sign"),this.transitionTo("attributeName"),this.delegate.beginAttribute(),this.consume(),this.delegate.appendToAttributeName(e)):(this.transitionTo("attributeName"),this.delegate.beginAttribute())},attributeName:function(){var e=this.peek();et(e)?(this.transitionTo("afterAttributeName"),this.consume()):"/"===e?(this.delegate.beginAttributeValue(!1),this.delegate.finishAttributeValue(),this.consume(),this.transitionTo("selfClosingStartTag")):"="===e?(this.transitionTo("beforeAttributeValue"),this.consume()):">"===e?(this.delegate.beginAttributeValue(!1),this.delegate.finishAttributeValue(),this.consume(),this.delegate.finishTag(),this.transitionTo("beforeData")):'"'===e||"'"===e||"<"===e?(this.delegate.reportSyntaxError(e+" is not a valid character within attribute names"),this.consume(),this.delegate.appendToAttributeName(e)):(this.consume(),this.delegate.appendToAttributeName(e))},afterAttributeName:function(){var e=this.peek();et(e)?this.consume():"/"===e?(this.delegate.beginAttributeValue(!1),this.delegate.finishAttributeValue(),this.consume(),this.transitionTo("selfClosingStartTag")):"="===e?(this.consume(),this.transitionTo("beforeAttributeValue")):">"===e?(this.delegate.beginAttributeValue(!1),this.delegate.finishAttributeValue(),this.consume(),this.delegate.finishTag(),this.transitionTo("beforeData")):(this.delegate.beginAttributeValue(!1),this.delegate.finishAttributeValue(),this.transitionTo("attributeName"),this.delegate.beginAttribute(),this.consume(),this.delegate.appendToAttributeName(e))},beforeAttributeValue:function(){var e=this.peek();et(e)?this.consume():'"'===e?(this.transitionTo("attributeValueDoubleQuoted"),this.delegate.beginAttributeValue(!0),this.consume()):"'"===e?(this.transitionTo("attributeValueSingleQuoted"),this.delegate.beginAttributeValue(!0),this.consume()):">"===e?(this.delegate.beginAttributeValue(!1),this.delegate.finishAttributeValue(),this.consume(),this.delegate.finishTag(),this.transitionTo("beforeData")):(this.transitionTo("attributeValueUnquoted"),this.delegate.beginAttributeValue(!1),this.consume(),this.delegate.appendToAttributeValue(e))},attributeValueDoubleQuoted:function(){var e=this.consume();'"'===e?(this.delegate.finishAttributeValue(),this.transitionTo("afterAttributeValueQuoted")):"&"===e?this.delegate.appendToAttributeValue(this.consumeCharRef()||"&"):this.delegate.appendToAttributeValue(e)},attributeValueSingleQuoted:function(){var e=this.consume();"'"===e?(this.delegate.finishAttributeValue(),this.transitionTo("afterAttributeValueQuoted")):"&"===e?this.delegate.appendToAttributeValue(this.consumeCharRef()||"&"):this.delegate.appendToAttributeValue(e)},attributeValueUnquoted:function(){var e=this.peek();et(e)?(this.delegate.finishAttributeValue(),this.consume(),this.transitionTo("beforeAttributeName")):"/"===e?(this.delegate.finishAttributeValue(),this.consume(),this.transitionTo("selfClosingStartTag")):"&"===e?(this.consume(),this.delegate.appendToAttributeValue(this.consumeCharRef()||"&")):">"===e?(this.delegate.finishAttributeValue(),this.consume(),this.delegate.finishTag(),this.transitionTo("beforeData")):(this.consume(),this.delegate.appendToAttributeValue(e))},afterAttributeValueQuoted:function(){var e=this.peek();et(e)?(this.consume(),this.transitionTo("beforeAttributeName")):"/"===e?(this.consume(),this.transitionTo("selfClosingStartTag")):">"===e?(this.consume(),this.delegate.finishTag(),this.transitionTo("beforeData")):this.transitionTo("beforeAttributeName")},selfClosingStartTag:function(){">"===this.peek()?(this.consume(),this.delegate.markTagAsSelfClosing(),this.delegate.finishTag(),this.transitionTo("beforeData")):this.transitionTo("beforeAttributeName")},endTagOpen:function(){var e=this.consume();("@"===e||":"===e||tt(e))&&(this.transitionTo("tagName"),this.tagNameBuffer="",this.delegate.beginEndTag(),this.appendToTagName(e))}},this.reset()}return e.prototype.reset=function(){this.transitionTo("beforeData"),this.input="",this.index=0,this.line=1,this.column=0,this.delegate.reset()},e.prototype.transitionTo=function(e){this.state=e},e.prototype.tokenize=function(e){this.reset(),this.tokenizePart(e),this.tokenizeEOF()},e.prototype.tokenizePart=function(e){for(this.input+=function(e){return e.replace($e,"\n")}(e);this.index<this.input.length;){var t=this.states[this.state];if(void 0===t)throw new Error("unhandled state "+this.state);t.call(this)}},e.prototype.tokenizeEOF=function(){this.flushData()},e.prototype.flushData=function(){"data"===this.state&&(this.delegate.finishData(),this.transitionTo("beforeData"))},e.prototype.peek=function(){return this.input.charAt(this.index)},e.prototype.consume=function(){var e=this.peek();return this.index++,"\n"===e?(this.line++,this.column=0):this.column++,e},e.prototype.consumeCharRef=function(){var e=this.input.indexOf(";",this.index);if(-1!==e){var t=this.input.slice(this.index,e),r=this.entityParser.parse(t);if(r){for(var n=t.length;n;)this.consume(),n--;return this.consume(),r}}},e.prototype.markTagStart=function(){this.delegate.tagOpen()},e.prototype.appendToTagName=function(e){this.tagNameBuffer+=e,this.delegate.appendToTagName(e)},e}(),nt=function(){function e(e,t){void 0===t&&(t={}),this.options=t,this.token=null,this.startLine=1,this.startColumn=0,this.tokens=[],this.tokenizer=new rt(this,e),this._currentAttribute=void 0}return e.prototype.tokenize=function(e){return this.tokens=[],this.tokenizer.tokenize(e),this.tokens},e.prototype.tokenizePart=function(e){return this.tokens=[],this.tokenizer.tokenizePart(e),this.tokens},e.prototype.tokenizeEOF=function(){return this.tokens=[],this.tokenizer.tokenizeEOF(),this.tokens[0]},e.prototype.reset=function(){this.token=null,this.startLine=1,this.startColumn=0},e.prototype.current=function(){var e=this.token;if(null===e)throw new Error("token was unexpectedly null");if(0===arguments.length)return e;for(var t=0;t<arguments.length;t++)if(e.type===arguments[t])return e;throw new Error("token type was unexpectedly "+e.type)},e.prototype.push=function(e){this.token=e,this.tokens.push(e)},e.prototype.currentAttribute=function(){return this._currentAttribute},e.prototype.addLocInfo=function(){this.options.loc&&(this.current().loc={start:{line:this.startLine,column:this.startColumn},end:{line:this.tokenizer.line,column:this.tokenizer.column}}),this.startLine=this.tokenizer.line,this.startColumn=this.tokenizer.column},e.prototype.beginData=function(){this.push({type:"Chars",chars:""})},e.prototype.appendToData=function(e){this.current("Chars").chars+=e},e.prototype.finishData=function(){this.addLocInfo()},e.prototype.beginComment=function(){this.push({type:"Comment",chars:""})},e.prototype.appendToCommentData=function(e){this.current("Comment").chars+=e},e.prototype.finishComment=function(){this.addLocInfo()},e.prototype.tagOpen=function(){},e.prototype.beginStartTag=function(){this.push({type:"StartTag",tagName:"",attributes:[],selfClosing:!1})},e.prototype.beginEndTag=function(){this.push({type:"EndTag",tagName:""})},e.prototype.finishTag=function(){this.addLocInfo()},e.prototype.markTagAsSelfClosing=function(){this.current("StartTag").selfClosing=!0},e.prototype.appendToTagName=function(e){this.current("StartTag","EndTag").tagName+=e},e.prototype.beginAttribute=function(){this._currentAttribute=["","",!1]},e.prototype.appendToAttributeName=function(e){this.currentAttribute()[0]+=e},e.prototype.beginAttributeValue=function(e){this.currentAttribute()[2]=e},e.prototype.appendToAttributeValue=function(e){this.currentAttribute()[1]+=e},e.prototype.finishAttributeValue=function(){this.current("StartTag").attributes.push(this._currentAttribute)},e.prototype.reportSyntaxError=function(e){this.current().syntaxError=e},e}();var gt=r(50),at=r(42),At=r.n(at),it=r(18),ot=r(7),Ct=Object(X.createContext)(function(){}),It=Ct.Consumer,st=Ct.Provider,ct=Object(ot.createHigherOrderComponent)(function(e){return function(t){return Object(X.createElement)(It,null,function(r){return Object(X.createElement)(e,Object(it.a)({},t,{BlockContent:r}))})}},"withBlockContentContext"),lt=function(e){var t=e.children,r=e.innerBlocks;return Object(X.createElement)(st,{value:function(){var e=_t(r,{isInnerBlocks:!0});return Object(X.createElement)(X.RawHTML,null,e)}},t)};function ut(e){var t="wp-block-"+e.replace(/\//,"-").replace(/^core-/,"");return Object(Y.applyFilters)("blocks.getBlockDefaultClassName",t,e)}function dt(e){var t="editor-block-list-item-"+e.replace(/\//,"-").replace(/^core-/,"");return Object(Y.applyFilters)("blocks.getBlockMenuDefaultClassName",t,e)}function ft(e,t){var r=arguments.length>2&&void 0!==arguments[2]?arguments[2]:[],n=ee(e),g=n.save;if(g.prototype instanceof X.Component){var a=new g({attributes:t});g=a.render.bind(a)}var A=g({attributes:t,innerBlocks:r});if(Object(C.isObject)(A)&&Object(Y.hasFilter)("blocks.getSaveContent.extraProps")){var i=Object(Y.applyFilters)("blocks.getSaveContent.extraProps",Object(o.a)({},A.props),n,t);At()(i,A.props)||(A=Object(X.cloneElement)(A,i))}return A=Object(Y.applyFilters)("blocks.getSaveElement",A,n,t),Object(X.createElement)(lt,{innerBlocks:r},A)}function ht(e,t,r){var n=ee(e);return Object(X.renderToString)(ft(n,t,r))}function pt(e){var t=e.originalContent;if(e.isValid||e.innerBlocks.length)try{t=ht(e.name,e.attributes,e.innerBlocks)}catch(e){}return t}function mt(e,t,r){var n=Object(C.isEmpty)(t)?"":function(e){return JSON.stringify(e).replace(/--/g,"\\u002d\\u002d").replace(/</g,"\\u003c").replace(/>/g,"\\u003e").replace(/&/g,"\\u0026").replace(/\\"/g,"\\u0022")}(t)+" ",g=Object(C.startsWith)(e,"core/")?e.slice(5):e;return r?"\x3c!-- wp:".concat(g," ").concat(n,"--\x3e\n")+r+"\n\x3c!-- /wp:".concat(g," --\x3e"):"\x3c!-- wp:".concat(g," ").concat(n,"/--\x3e")}function bt(e){var t=(arguments.length>1&&void 0!==arguments[1]?arguments[1]:{}).isInnerBlocks,r=void 0!==t&&t,n=e.name,g=pt(e);return n===se()||!r&&n===oe()?g:mt(n,function(e,t){return Object(C.reduce)(e.attributes,function(e,r,n){var g=t[n];return void 0===g?e:void 0!==r.source?e:"default"in r&&r.default===g?e:(e[n]=g,e)},{})}(de(n),e.attributes),g)}function _t(e,t){return Object(C.castArray)(e).map(function(e){return bt(e,t)}).join("\n\n")}var vt=/[\t\n\r\v\f ]+/g,wt=/^[\t\n\r\v\f ]*$/,kt=/^url\s*\(['"\s]*(.*?)['"\s]*\)$/,yt=["allowfullscreen","allowpaymentrequest","allowusermedia","async","autofocus","autoplay","checked","controls","default","defer","disabled","download","formnovalidate","hidden","ismap","itemscope","loop","multiple","muted","nomodule","novalidate","open","playsinline","readonly","required","reversed","selected","typemustmatch"],jt=[].concat(yt,["autocapitalize","autocomplete","charset","contenteditable","crossorigin","decoding","dir","draggable","enctype","formenctype","formmethod","http-equiv","inputmode","kind","method","preload","scope","shape","spellcheck","translate","type","wrap"]),Ot=[C.identity,function(e){return Bt(e).join(" ")}],Tt=/^[\da-z]+$/i,xt=/^#\d+$/,Et=/^#x[\da-f]+$/i;var Nt=function(){function e(){Object(Ye.a)(this,e)}return Object(We.a)(e,[{key:"parse",value:function(e){if(function(e){return Tt.test(e)||xt.test(e)||Et.test(e)}(e))return Object(gt.decodeEntities)("&"+e+";")}}]),e}(),St=function(){function e(e){return function(t){for(var r=arguments.length,n=new Array(r>1?r-1:0),g=1;g<r;g++)n[g-1]=arguments[g];return e.apply(void 0,["Block validation: "+t].concat(n))}}return{error:e(console.error),warning:e(console.warn)}}();function Bt(e){return e.trim().split(vt)}function Pt(e){return e.attributes.filter(function(e){var t=Object(Me.a)(e,2),r=t[0];return t[1]||0===r.indexOf("data-")||Object(C.includes)(jt,r)})}function Lt(e,t){for(var r=e.chars,n=t.chars,g=0;g<Ot.length;g++){var a=Ot[g];if((r=a(r))===(n=a(n)))return!0}return St.warning("Expected text `%s`, saw `%s`.",t.chars,e.chars),!1}function zt(e){var t=e.replace(/;?\s*$/,"").split(";").map(function(e){var t=function(e){return Object(Ze.a)(e)||Object(Ge.a)(e)||Object(Ue.a)()}(e.split(":")),r=t[0],n=t.slice(1).join(":");return[r.trim(),function(e){return e.replace(kt,"url($1)")}(n.trim())]});return Object(C.fromPairs)(t)}var Mt=Object(o.a)({class:function(e,t){return!C.xor.apply(void 0,Object(i.a)([e,t].map(Bt))).length},style:function(e,t){return C.isEqual.apply(void 0,Object(i.a)([e,t].map(zt)))}},Object(C.fromPairs)(yt.map(function(e){return[e,C.stubTrue]})));var Rt={StartTag:function(e,t){return e.tagName!==t.tagName?(St.warning("Expected tag name `%s`, instead saw `%s`.",t.tagName,e.tagName),!1):function(e,t){if(e.length!==t.length)return St.warning("Expected attributes %j, instead saw %j.",t,e),!1;var r=[e,t].map(C.fromPairs),n=Object(Me.a)(r,2),g=n[0],a=n[1];for(var A in g){if(!a.hasOwnProperty(A))return St.warning("Encountered unexpected attribute `%s`.",A),!1;var i=g[A],o=a[A],I=Mt[A];if(I){if(!I(i,o))return St.warning("Expected attribute `%s` of value `%s`, saw `%s`.",A,o,i),!1}else if(i!==o)return St.warning("Expected attribute `%s` of value `%s`, saw `%s`.",A,o,i),!1}return!0}.apply(void 0,Object(i.a)([e,t].map(Pt)))},Chars:Lt,Comment:Lt};function Dt(e){for(var t;t=e.shift();){if("Chars"!==t.type)return t;if(!wt.test(t.chars))return t}}function Vt(e){try{return new nt(new Nt).tokenize(e)}catch(t){St.warning("Malformed HTML detected: %s",e)}return null}function Ht(e,t){return!!e.selfClosing&&!(!t||t.tagName!==e.tagName||"EndTag"!==t.type)}function Ft(e,t,r){var n,g=ee(e);try{n=ht(g,t)}catch(e){return St.error("Block validation failed because an error occurred while generating block content:\n\n%s",e.toString()),!1}var a=function(e,t){var r,n,g=[e,t].map(Vt),a=Object(Me.a)(g,2),A=a[0],i=a[1];if(!A||!i)return!1;for(;r=Dt(A);){if(!(n=Dt(i)))return St.warning("Expected end of content, instead saw %j.",r),!1;if(r.type!==n.type)return St.warning("Expected token of type `%s` (%j), instead saw `%s` (%j).",n.type,n,r.type,r),!1;var o=Rt[r.type];if(o&&!o(r,n))return!1;Ht(r,i[0])?Dt(i):Ht(n,A[0])&&Dt(A)}return!(n=Dt(i))||(St.warning("Expected %j, instead saw end of content.",n),!1)}(r,n);return a||St.error("Block validation failed for `%s` (%o).\n\nContent generated by `save` function:\n\n%s\n\nContent retrieved from post body:\n\n%s",g.name,g,n,r),a}function Zt(e){for(var t=[],r=0;r<e.length;r++)try{t.push(Qt(e[r]))}catch(e){}return t}function Gt(e){var t=function(e){return e}(e);return Object(X.renderToString)(t)}function Ut(e){return function(t){var r=t;return e&&(r=t.querySelector(e)),r?Zt(r.childNodes):[]}}var Yt={concat:function(){for(var e=[],t=0;t<arguments.length;t++)for(var r=Object(C.castArray)(t<0||arguments.length<=t?void 0:arguments[t]),n=0;n<r.length;n++){var g=r[n];"string"==typeof g&&"string"==typeof e[e.length-1]?e[e.length-1]+=g:e.push(g)}return e},getChildrenArray:function(e){return e},fromDOM:Zt,toHTML:Gt,matcher:Ut},Wt=window.Node,Kt=Wt.TEXT_NODE,Xt=Wt.ELEMENT_NODE;function Qt(e){if(e.nodeType===Kt)return e.nodeValue;if(e.nodeType!==Xt)throw new TypeError("A block node can only be created from a node of type text or element.");return{type:e.nodeName.toLowerCase(),props:Object(o.a)({},function(e){for(var t={},r=0;r<e.length;r++){var n=e[r],g=n.name,a=n.value;t[g]=a}return t}(e.attributes),{children:Zt(e.childNodes)})}}function Jt(e){return function(t){var r=t;e&&(r=t.querySelector(e));try{return Qt(r)}catch(e){return null}}}var qt={isNodeOfType:function(e,t){return e&&e.type===t},fromDOM:Qt,toHTML:function(e){return Gt([e])},matcher:Jt};new Set(["attribute","html","text","tag"]);var $t=function(e){return Object(C.flow)([e,function(e){return void 0!==e}])};function er(e,t){return t.some(function(t){return function(e,t){switch(t){case"string":return"string"==typeof e;case"boolean":return"boolean"==typeof e;case"object":return!!e&&e.constructor===Object;case"null":return null===e;case"array":return Array.isArray(e);case"integer":case"number":return"number"==typeof e}return!0}(e,t)})}function tr(e){switch(e.source){case"attribute":var t=function(e,t){return 1===arguments.length&&(t=e,e=void 0),function(r){var n=Ve(e,"attributes")(r);if(n&&n.hasOwnProperty(t))return n[t].value}}(e.selector,e.attribute);return"boolean"===e.type&&(t=$t(t)),t;case"html":return function(e,t){return function(r){var n=r;if(e&&(n=r.querySelector(e)),!n)return"";if(t){for(var g="",a=n.children.length,A=0;A<a;A++){var i=n.children[A];i.nodeName.toLowerCase()===t&&(g+=i.outerHTML)}return g}return n.innerHTML}}(e.selector,e.multiline);case"text":return function(e){return Ve(e,"textContent")}(e.selector);case"children":return Ut(e.selector);case"node":return Jt(e.selector);case"query":var r=Object(C.mapValues)(e.query,tr);return function(e,t){return function(r){var n=r.querySelectorAll(e);return[].map.call(n,function(e){return De(e,t)})}}(e.selector,r);case"tag":return Object(C.flow)([Ve(e.selector,"nodeName"),function(e){return e?e.toLowerCase():void 0}]);default:console.error('Unknown source type "'.concat(e.source,'"'))}}function rr(e,t){return De(e,tr(t))}function nr(e,t,r,n){var g,a=t.type,A=t.enum;switch(t.source){case void 0:g=n?n[e]:void 0;break;case"attribute":case"property":case"html":case"text":case"children":case"node":case"query":case"tag":g=rr(r,t)}return function(e,t){return void 0===t||er(e,Object(C.castArray)(t))}(g,a)&&function(e,t){return!Array.isArray(t)||t.includes(e)}(g,A)||(g=void 0),void 0===g?t.default:g}function gr(e,t){var r=arguments.length>2&&void 0!==arguments[2]?arguments[2]:{},n=ee(e),g=Object(C.mapValues)(n.attributes,function(e,n){return nr(n,e,t,r)});return Object(Y.applyFilters)("blocks.getBlockAttributes",g,n,t,r)}function ar(e){var t=e.blockName,r=e.attrs,n=e.innerBlocks,g=void 0===n?[]:n,a=e.innerHTML,A=e.innerContent,i=oe(),I=se()||i;r=r||{},a=a.trim();var s=t||i;"core/cover-image"===s&&(s="core/cover"),"core/text"!==s&&"core/cover-text"!==s||(s="core/paragraph"),s===i&&(a=Object(He.autop)(a).trim());var c=de(s);if(!c){var l={attrs:r,blockName:t,innerBlocks:g,innerContent:A},u=Ar(l,{isCommentDelimited:!1}),d=Ar(l,{isCommentDelimited:!0});s&&(a=d),r={originalName:t,originalContent:d,originalUndelimitedContent:u},c=de(s=I)}g=g.map(ar);var f=s===i||s===I;if(c&&(a||!f)){var h=ye(s,gr(c,a,r),g);return f||(h.isValid=Ft(c,h.attributes,a)),h.originalContent=h.originalContent||a,h=function(e,t){var r=de(e.name),n=r.deprecated;if(!n||!n.length)return e;for(var g=e,a=g.originalContent,A=g.innerBlocks,i=0;i<n.length;i++){var I=n[i].isEligible,s=void 0===I?C.stubFalse:I;if(!e.isValid||s(t,A)){var c=Object.assign(Object(C.omit)(r,te),n[i]),l=gr(c,a,t);if(Ft(c,l,a)){e=Object(o.a)({},e,{isValid:!0});var u=A,d=c.migrate;if(d){var f=Object(C.castArray)(d(l,A)),h=Object(Me.a)(f,2),p=h[0];l=void 0===p?t:p;var m=h[1];u=void 0===m?A:m}e.attributes=l,e.innerBlocks=u}}}return e}(h,r)}}function Ar(e){var t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{},r=t.isCommentDelimited,n=void 0===r||r,g=e.blockName,a=e.attrs,A=void 0===a?{}:a,i=e.innerBlocks,o=void 0===i?[]:i,C=e.innerContent,I=0,s=(void 0===C?[]:C).map(function(e){return null!==e?e:Ar(o[I++],t)}).join("\n").replace(/\n+/g,"\n").trim();return n?mt(g,A,s):s}var ir=function(e){return function(t){return e(t).reduce(function(e,t){var r=ar(t);return r&&e.push(r),e},[])}}(Fe.parse),or=ir,Cr=r(27),Ir={strong:{},em:{},s:{},del:{},ins:{},a:{attributes:["href","target","rel"]},code:{},abbr:{attributes:["title"]},sub:{},sup:{},br:{},"#text":{}};function sr(){return Ir}function cr(e){var t=e.nodeName.toLowerCase();return sr().hasOwnProperty(t)||"span"===t}["strong","em","s","del","ins","a","code","abbr","sub","sup"].forEach(function(e){Ir[e].children=Object(C.omit)(Ir,e)});var lr=window.Node,ur=lr.ELEMENT_NODE,dr=lr.TEXT_NODE;function fr(e){var t=e.map(function(e){var t=e.isMatch,r=e.blockName,n=e.schema,g=pe(r,"anchor");return g||t?Object(C.mapValues)(n,function(e){var r=e.attributes||[];return g&&(r=[].concat(Object(i.a)(r),["id"])),Object(o.a)({},e,{attributes:r,isMatch:t||void 0})}):n});return C.mergeWith.apply(void 0,[{}].concat(Object(i.a)(t),[function(e,t,r){switch(r){case"children":return"*"===e||"*"===t?"*":Object(o.a)({},e,t);case"attributes":case"require":return[].concat(Object(i.a)(e||[]),Object(i.a)(t||[]));case"isMatch":if(!e||!t)return;return function(){return e.apply(void 0,arguments)||t.apply(void 0,arguments)}}}]))}function hr(e){return!e.hasChildNodes()||Array.from(e.childNodes).every(function(e){return e.nodeType===dr?!e.nodeValue.trim():e.nodeType!==ur||("BR"===e.nodeName||!e.hasAttributes()&&hr(e))})}function pr(e){var t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:[],r=arguments.length>2?arguments[2]:void 0,n=document.implementation.createHTMLDocument("");return n.body.innerHTML=e,function e(t,r,n,g){Array.from(t).forEach(function(t){e(t.childNodes,r,n,g),r.forEach(function(e){n.contains(t)&&e(t,n,g)})})}(n.body.childNodes,t,n,r),n.body.innerHTML}function mr(e,t,r){var n=document.implementation.createHTMLDocument("");return n.body.innerHTML=e,function e(t,r,n,g){Array.from(t).forEach(function(t){var a=t.nodeName.toLowerCase();if(!n.hasOwnProperty(a)||n[a].isMatch&&!n[a].isMatch(t))e(t.childNodes,r,n,g),g&&!cr(t)&&t.nextElementSibling&&Object(Cr.insertAfter)(r.createElement("br"),t),Object(Cr.unwrap)(t);else if(t.nodeType===ur){var A=n[a],i=A.attributes,o=void 0===i?[]:i,I=A.classes,s=void 0===I?[]:I,c=A.children,l=A.require,u=void 0===l?[]:l,d=A.allowEmpty;if(c&&!d&&hr(t))return void Object(Cr.remove)(t);if(t.hasAttributes()&&(Array.from(t.attributes).forEach(function(e){var r=e.name;"class"===r||Object(C.includes)(o,r)||t.removeAttribute(r)}),t.classList&&t.classList.length)){var f=s.map(function(e){return"string"==typeof e?function(t){return t===e}:e instanceof RegExp?function(t){return e.test(t)}:C.noop});Array.from(t.classList).forEach(function(e){f.some(function(t){return t(e)})||t.classList.remove(e)}),t.classList.length||t.removeAttribute("class")}if(t.hasChildNodes()){if("*"===c)return;if(c)u.length&&!t.querySelector(u.join(","))?(e(t.childNodes,r,n,g),Object(Cr.unwrap)(t)):"BODY"===t.parentNode.nodeName&&cr(t)?(e(t.childNodes,r,n,g),Array.from(t.childNodes).some(function(e){return!cr(e)})&&Object(Cr.unwrap)(t)):e(t.childNodes,r,c,g);else for(;t.firstChild;)Object(Cr.remove)(t.firstChild)}}})}(n.body.childNodes,n,t,r),n.body.innerHTML}var br=window.Node,_r=br.ELEMENT_NODE,vr=br.TEXT_NODE,wr=function(e){var t=document.implementation.createHTMLDocument(""),r=document.implementation.createHTMLDocument(""),n=t.body,g=r.body;for(n.innerHTML=e;n.firstChild;){var a=n.firstChild;a.nodeType===vr?a.nodeValue.trim()?(g.lastChild&&"P"===g.lastChild.nodeName||g.appendChild(r.createElement("P")),g.lastChild.appendChild(a)):n.removeChild(a):a.nodeType===_r?"BR"===a.nodeName?(a.nextSibling&&"BR"===a.nextSibling.nodeName&&(g.appendChild(r.createElement("P")),n.removeChild(a.nextSibling)),g.lastChild&&"P"===g.lastChild.nodeName&&g.lastChild.hasChildNodes()?g.lastChild.appendChild(a):n.removeChild(a)):"P"===a.nodeName?hr(a)?n.removeChild(a):g.appendChild(a):cr(a)?(g.lastChild&&"P"===g.lastChild.nodeName||g.appendChild(r.createElement("P")),g.lastChild.appendChild(a)):g.appendChild(a):n.removeChild(a)}return g.innerHTML},kr=window.Node.COMMENT_NODE,yr=function(e,t){if(e.nodeType===kr)if("nextpage"!==e.nodeValue){if(0===e.nodeValue.indexOf("more")){for(var r=e.nodeValue.slice(4).trim(),n=e,g=!1;n=n.nextSibling;)if(n.nodeType===kr&&"noteaser"===n.nodeValue){g=!0,Object(Cr.remove)(n);break}Object(Cr.replace)(e,function(e,t,r){var n=r.createElement("wp-block");n.dataset.block="core/more",e&&(n.dataset.customText=e);t&&(n.dataset.noTeaser="");return n}(r,g,t))}}else Object(Cr.replace)(e,function(e){var t=e.createElement("wp-block");return t.dataset.block="core/nextpage",t}(t))};function jr(e){return"OL"===e.nodeName||"UL"===e.nodeName}var Or=function(e){if(jr(e)){var t=e,r=e.previousElementSibling;if(r&&r.nodeName===e.nodeName&&1===t.children.length){for(;t.firstChild;)r.appendChild(t.firstChild);t.parentNode.removeChild(t)}var n=e.parentNode;if(n&&"LI"===n.nodeName&&1===n.children.length&&!/\S/.test(function(e){return Object(i.a)(e.childNodes).map(function(e){var t=e.nodeValue;return void 0===t?"":t}).join("")}(n))){var g=n,a=g.previousElementSibling,A=g.parentNode;a?(a.appendChild(t),A.removeChild(g)):(A.parentNode.insertBefore(t,A),A.parentNode.removeChild(A))}if(n&&jr(n)){var o=e.previousElementSibling;o?o.appendChild(e):Object(Cr.unwrap)(e)}}},Tr=function(e){"BLOCKQUOTE"===e.nodeName&&(e.innerHTML=wr(e.innerHTML))};var xr=function(e,t,r){if(function(e,t){var r=e.nodeName.toLowerCase();return"figcaption"!==r&&!cr(e)&&Object(C.has)(t,["figure","children",r])}(e,r)){var n=e,g=e.parentNode;(function(e,t){var r=e.nodeName.toLowerCase();return Object(C.has)(t,["figure","children","a","children",r])})(e,r)&&"A"===g.nodeName&&1===g.childNodes.length&&(n=e.parentNode);for(var a=n;a&&"P"!==a.nodeName;)a=a.parentElement;var A=t.createElement("figure");a?a.parentNode.insertBefore(A,a):n.parentNode.insertBefore(A,n),A.appendChild(n)}},Er=r(135);var Nr=function e(t){var r=arguments.length>1&&void 0!==arguments[1]?arguments[1]:0,n=Pe(Le("from"),function(e){return"shortcode"===e.type&&Object(C.some)(Object(C.castArray)(e.tag),function(e){return Object(Er.regexp)(e).test(t)})});if(!n)return[t];var g,a=Object(C.castArray)(n.tag),A=Object(C.first)(a);if(g=Object(Er.next)(A,t,r)){var I=t.substr(0,g.index);if(r=g.index+g.content.length,!Object(C.includes)(g.shortcode.content||"","<")&&!/(\n|<p>)\s*$/.test(I))return e(t,r);var s=Object(C.mapValues)(Object(C.pickBy)(n.attributes,function(e){return e.shortcode}),function(e){return e.shortcode(g.shortcode.attrs,g)});return[I,ye(n.blockName,gr(Object(o.a)({},de(n.blockName),{attributes:n.attributes}),g.shortcode.content,s))].concat(Object(i.a)(e(t.substr(r))))}return[t]},Sr=window.Node.COMMENT_NODE,Br=function(e){e.nodeType===Sr&&Object(Cr.remove)(e)};function Pr(e,t){return e.every(function(e){return function(e,t){if(cr(e))return!0;if(!t)return!1;var r=e.nodeName.toLowerCase();return[["ul","li","ol"],["h1","h2","h3","h4","h5","h6"]].some(function(e){return 0===Object(C.difference)([r,t],e).length})}(e,t)&&Pr(Array.from(e.children),t)})}function Lr(e){return"BR"===e.nodeName&&e.previousSibling&&"BR"===e.previousSibling.nodeName}var zr=function(e,t){var r=document.implementation.createHTMLDocument("");r.body.innerHTML=e;var n=Array.from(r.body.children);return!n.some(Lr)&&Pr(n,t)},Mr=function(e,t){if("SPAN"===e.nodeName&&e.style){var r=e.style,n=r.fontWeight,g=r.fontStyle,a=r.textDecorationLine,A=r.verticalAlign;"bold"!==n&&"700"!==n||Object(Cr.wrap)(t.createElement("strong"),e),"italic"===g&&Object(Cr.wrap)(t.createElement("em"),e),"line-through"===a&&Object(Cr.wrap)(t.createElement("s"),e),"super"===A?Object(Cr.wrap)(t.createElement("sup"),e):"sub"===A&&Object(Cr.wrap)(t.createElement("sub"),e)}else"B"===e.nodeName?e=Object(Cr.replaceTag)(e,"strong"):"I"===e.nodeName?e=Object(Cr.replaceTag)(e,"em"):"A"===e.nodeName&&(e.target&&"_blank"===e.target.toLowerCase()?e.rel="noreferrer noopener":(e.removeAttribute("target"),e.removeAttribute("rel")))},Rr=function(e){"SCRIPT"!==e.nodeName&&"NOSCRIPT"!==e.nodeName&&"TEMPLATE"!==e.nodeName&&"STYLE"!==e.nodeName||e.parentNode.removeChild(e)},Dr=window.parseInt;function Vr(e){return"OL"===e.nodeName||"UL"===e.nodeName}var Hr=function(e,t){if("P"===e.nodeName){var r=e.getAttribute("style");if(r&&-1!==r.indexOf("mso-list")){var n=/mso-list\s*:[^;]+level([0-9]+)/i.exec(r);if(n){var g=Dr(n[1],10)-1||0,a=e.previousElementSibling;if(!a||!Vr(a)){var A=e.textContent.trim().slice(0,1),i=/[1iIaA]/.test(A),o=t.createElement(i?"ol":"ul");i&&o.setAttribute("type",A),e.parentNode.insertBefore(o,e)}var C=e.previousElementSibling,I=C.nodeName,s=t.createElement("li"),c=C;for(e.removeChild(e.firstElementChild);e.firstChild;)s.appendChild(e.firstChild);for(;g--;)Vr(c=c.lastElementChild||c)&&(c=c.lastElementChild||c);Vr(c)||(c=c.appendChild(t.createElement(I))),c.appendChild(s),e.parentNode.removeChild(e)}}}},Fr=r(36),Zr=window,Gr=Zr.atob,Ur=Zr.File,Yr=function(e){if("IMG"===e.nodeName){if(0===e.src.indexOf("file:")&&(e.src=""),0===e.src.indexOf("data:")){var t,r=e.src.split(","),n=Object(Me.a)(r,2),g=n[0],a=n[1],A=g.slice(5).split(";"),i=Object(Me.a)(A,1)[0];if(!a||!i)return void(e.src="");try{t=Gr(a)}catch(t){return void(e.src="")}for(var o=new Uint8Array(t.length),C=0;C<o.length;C++)o[C]=t.charCodeAt(C);var I=i.replace("/","."),s=new Ur([o],I,{type:i});e.src=Object(Fr.createBlobURL)(s)}1!==e.height&&1!==e.width||e.parentNode.removeChild(e)}},Wr=r(195),Kr=new(r.n(Wr).a.Converter)({noHeaderId:!0,tables:!0,literalMidWordUnderscores:!0,omitExtraWLInCodeBlocks:!0,simpleLineBreaks:!0,strikethrough:!0});var Xr=function(e){return Kr.makeHtml(function(e){return e.replace(/((?:^|\n)```)([^\n`]+)(```(?:$|\n))/,function(e,t,r,n){return"".concat(t,"\n").concat(r,"\n").concat(n)})}(e))},Qr=function(e){"IFRAME"===e.nodeName&&Object(Cr.remove)(e)},Jr=function(e){e.id&&0===e.id.indexOf("docs-internal-guid-")&&Object(Cr.unwrap)(e)},qr=window.console;function $r(e){return e=mr(e=pr(e,[Jr,Mr,Br]),sr(),{inline:!0}),qr.log("Processed inline HTML:\n\n",e),e}function en(e){var t=e.HTML,r=void 0===t?"":t,n=e.plainText,g=void 0===n?"":n,a=e.mode,A=void 0===a?"AUTO":a,i=e.tagName,I=e.canUserUseUnfilteredHTML,s=void 0!==I&&I;if(r=r.replace(/<meta[^>]+>/,""),"INLINE"!==A){var c=r||g;if(-1!==c.indexOf("\x3c!-- wp:"))return ir(c)}if(String.prototype.normalize&&(r=r.normalize()),!g||r&&!function(e){return!/<(?!br[ />])/i.test(e)}(r)||(r=Xr(g),"AUTO"===A&&-1===g.indexOf("\n")&&0!==g.indexOf("<p>")&&0===r.indexOf("<p>")&&(A="INLINE")),"INLINE"===A)return $r(r);var l=Nr(r),u=l.length>1;if("AUTO"===A&&!u&&zr(r,i))return $r(r);var d=Object(C.filter)(Le("from"),{type:"raw"}).map(function(e){return e.isMatch?e:Object(o.a)({},e,{isMatch:function(t){return e.selector&&t.matches(e.selector)}})}),f=sr(),h=fr(d),p=Object(C.compact)(Object(C.flatMap)(l,function(e){if("string"!=typeof e)return e;var t=[Jr,Hr,Rr,Or,Yr,Mr,yr,Br,xr,Tr];s||t.unshift(Qr);var r=Object(o.a)({},h,f);return e=mr(e=pr(e,t,h),r),e=wr(e),qr.log("Processed HTML piece:\n\n",e),function(e){var t=e.html,r=e.rawTransforms,n=document.implementation.createHTMLDocument("");return n.body.innerHTML=t,Array.from(n.body.children).map(function(e){var t=Pe(r,function(t){return(0,t.isMatch)(e)});if(!t)return ye("core/html",gr("core/html",e.outerHTML));var n=t.transform,g=t.blockName;return n?n(e):ye(g,gr(g,e.outerHTML))})}({html:e,rawTransforms:d})}));if("AUTO"===A&&1===p.length){var m=g.trim();if(""!==m&&-1===m.indexOf("\n"))return mr(pt(p[0]),f)}return p}function tn(e){var t=e.HTML,r=void 0===t?"":t;if(-1!==r.indexOf("\x3c!-- wp:"))return ir(r);var n=Nr(r),g=Object(C.filter)(Le("from"),{type:"raw"}).map(function(e){return e.isMatch?e:Object(o.a)({},e,{isMatch:function(t){return e.selector&&t.matches(e.selector)}})}),a=fr(g);return Object(C.compact)(Object(C.flatMap)(n,function(e){return"string"!=typeof e?e:(e=pr(e,[Or,yr,xr,Tr],a),function(e){var t=e.html,r=e.rawTransforms,n=document.implementation.createHTMLDocument("");return n.body.innerHTML=t,Array.from(n.body.children).map(function(e){var t=Pe(r,function(t){return(0,t.isMatch)(e)});if(!t)return ye("core/html",gr("core/html",e.outerHTML));var n=t.transform,g=t.blockName;return n?n(e):ye(g,gr(g,e.outerHTML))})}({html:e=wr(e),rawTransforms:g}))}))}function rn(){return Object(a.select)("core/blocks").getCategories()}function nn(e){Object(a.dispatch)("core/blocks").setCategories(e)}function gn(e,t){Object(a.dispatch)("core/blocks").updateCategory(e,t)}function an(){var e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:[],t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:[];return e.length===t.length&&Object(C.every)(t,function(t,r){var n=Object(Me.a)(t,3),g=n[0],a=n[2],A=e[r];return g===A.name&&an(A.innerBlocks,a)})}function An(){var e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:[],t=arguments.length>1?arguments[1]:void 0;return t?Object(C.map)(t,function(t,r){var n=Object(Me.a)(t,3),g=n[0],a=n[1],A=n[2],i=e[r];if(i&&i.name===g){var I=An(i.innerBlocks,A);return Object(o.a)({},i,{innerBlocks:I})}var s=de(g),c=function(e,t){return Object(C.mapValues)(t,function(t,r){return l(e[r],t)})},l=function(e,t){return function(e){return"html"===Object(C.get)(e,["source"])}(e)&&Object(C.isArray)(t)?Object(X.renderToString)(t):function(e){return"query"===Object(C.get)(e,["source"])}(e)&&t?t.map(function(t){return c(e.query,t)}):t};return ye(g,c(Object(C.get)(s,["attributes"],{}),a),An([],A))}):e}r.d(t,"createBlock",function(){return ye}),r.d(t,"cloneBlock",function(){return je}),r.d(t,"getPossibleBlockTransformations",function(){return Be}),r.d(t,"switchToBlockType",function(){return ze}),r.d(t,"getBlockTransforms",function(){return Le}),r.d(t,"findTransform",function(){return Pe}),r.d(t,"parse",function(){return or}),r.d(t,"getBlockAttributes",function(){return gr}),r.d(t,"parseWithAttributeSchema",function(){return rr}),r.d(t,"pasteHandler",function(){return en}),r.d(t,"rawHandler",function(){return tn}),r.d(t,"getPhrasingContentSchema",function(){return sr}),r.d(t,"serialize",function(){return _t}),r.d(t,"getBlockContent",function(){return pt}),r.d(t,"getBlockDefaultClassName",function(){return ut}),r.d(t,"getBlockMenuDefaultClassName",function(){return dt}),r.d(t,"getSaveElement",function(){return ft}),r.d(t,"getSaveContent",function(){return ht}),r.d(t,"isValidBlockContent",function(){return Ft}),r.d(t,"getCategories",function(){return rn}),r.d(t,"setCategories",function(){return nn}),r.d(t,"updateCategory",function(){return gn}),r.d(t,"registerBlockType",function(){return ae}),r.d(t,"unregisterBlockType",function(){return Ae}),r.d(t,"setFreeformContentHandlerName",function(){return ie}),r.d(t,"getFreeformContentHandlerName",function(){return oe}),r.d(t,"setUnregisteredTypeHandlerName",function(){return Ie}),r.d(t,"getUnregisteredTypeHandlerName",function(){return se}),r.d(t,"setDefaultBlockName",function(){return ce}),r.d(t,"getDefaultBlockName",function(){return ue}),r.d(t,"setGroupingBlockName",function(){return le}),r.d(t,"getGroupingBlockName",function(){return Ce}),r.d(t,"getBlockType",function(){return de}),r.d(t,"getBlockTypes",function(){return fe}),r.d(t,"getBlockSupport",function(){return he}),r.d(t,"hasBlockSupport",function(){return pe}),r.d(t,"isReusableBlock",function(){return me}),r.d(t,"getChildBlockNames",function(){return be}),r.d(t,"hasChildBlocks",function(){return _e}),r.d(t,"hasChildBlocksWithInserterSupport",function(){return ve}),r.d(t,"unstable__bootstrapServerSideBlockDefinitions",function(){return ge}),r.d(t,"registerBlockStyle",function(){return we}),r.d(t,"unregisterBlockStyle",function(){return ke}),r.d(t,"isUnmodifiedDefaultBlock",function(){return J}),r.d(t,"normalizeIconObject",function(){return $}),r.d(t,"isValidIcon",function(){return q}),r.d(t,"doBlocksMatchTemplate",function(){return an}),r.d(t,"synchronizeBlocksWithTemplate",function(){return An}),r.d(t,"children",function(){return Yt}),r.d(t,"node",function(){return qt}),r.d(t,"withBlockContentContext",function(){return ct})},23:function(e,t,r){"use strict";var n=r(38);var g=r(37);function a(e,t){return Object(n.a)(e)||function(e,t){var r=[],n=!0,g=!1,a=void 0;try{for(var A,i=e[Symbol.iterator]();!(n=(A=i.next()).done)&&(r.push(A.value),!t||r.length!==t);n=!0);}catch(e){g=!0,a=e}finally{try{n||null==i.return||i.return()}finally{if(g)throw a}}return r}(e,t)||Object(g.a)()}r.d(t,"a",function(){return a})},25:function(e,t){!function(){e.exports=this.wp.hooks}()},27:function(e,t){!function(){e.exports=this.wp.dom}()},32:function(e,t,r){"use strict";function n(e){if(Symbol.iterator in Object(e)||"[object Arguments]"===Object.prototype.toString.call(e))return Array.from(e)}r.d(t,"a",function(){return n})},34:function(e,t,r){"use strict";var n,g;function a(e){return[e]}function A(e){return!!e&&"object"==typeof e}function i(){var e={clear:function(){e.head=null}};return e}function o(e,t,r){var n;if(e.length!==t.length)return!1;for(n=r;n<e.length;n++)if(e[n]!==t[n])return!1;return!0}n={},g="undefined"!=typeof WeakMap,t.a=function(e,t){var r,C;function I(){r=g?new WeakMap:i()}function s(){var r,n,g,a,A,i=arguments.length;for(a=new Array(i),g=0;g<i;g++)a[g]=arguments[g];for(A=t.apply(null,a),(r=C(A)).isUniqueByDependants||(r.lastDependants&&!o(A,r.lastDependants,0)&&r.clear(),r.lastDependants=A),n=r.head;n;){if(o(n.args,a,1))return n!==r.head&&(n.prev.next=n.next,n.next&&(n.next.prev=n.prev),n.next=r.head,n.prev=null,r.head.prev=n,r.head=n),n.val;n=n.next}return n={val:e.apply(null,a)},a[0]=null,n.args=a,r.head&&(r.head.prev=n,n.next=r.head),r.head=n,n.val}return t||(t=a),C=g?function(e){var t,g,a,o,C=r,I=!0;for(t=0;t<e.length;t++){if(!A(g=e[t])){I=!1;break}C.has(g)?C=C.get(g):(a=new WeakMap,C.set(g,a),C=a)}return C.has(n)||((o=i()).isUniqueByDependants=I,C.set(n,o)),C.get(n)}:function(){return r},s.getDependants=t,s.clear=I,I(),s}},36:function(e,t){!function(){e.exports=this.wp.blob}()},37:function(e,t,r){"use strict";function n(){throw new TypeError("Invalid attempt to destructure non-iterable instance")}r.d(t,"a",function(){return n})},38:function(e,t,r){"use strict";function n(e){if(Array.isArray(e))return e}r.d(t,"a",function(){return n})},4:function(e,t){!function(){e.exports=this.wp.data}()},42:function(e,t){!function(){e.exports=this.wp.isShallowEqual}()},47:function(e,t,r){var n;!function(g){var a=/^\s+/,A=/\s+$/,i=0,o=g.round,C=g.min,I=g.max,s=g.random;function c(e,t){if(e=e||"",t=t||{},e instanceof c)return e;if(!(this instanceof c))return new c(e,t);var r=function(e){var t={r:0,g:0,b:0},r=1,n=null,i=null,o=null,s=!1,c=!1;"string"==typeof e&&(e=function(e){e=e.replace(a,"").replace(A,"").toLowerCase();var t,r=!1;if(E[e])e=E[e],r=!0;else if("transparent"==e)return{r:0,g:0,b:0,a:0,format:"name"};if(t=V.rgb.exec(e))return{r:t[1],g:t[2],b:t[3]};if(t=V.rgba.exec(e))return{r:t[1],g:t[2],b:t[3],a:t[4]};if(t=V.hsl.exec(e))return{h:t[1],s:t[2],l:t[3]};if(t=V.hsla.exec(e))return{h:t[1],s:t[2],l:t[3],a:t[4]};if(t=V.hsv.exec(e))return{h:t[1],s:t[2],v:t[3]};if(t=V.hsva.exec(e))return{h:t[1],s:t[2],v:t[3],a:t[4]};if(t=V.hex8.exec(e))return{r:L(t[1]),g:L(t[2]),b:L(t[3]),a:D(t[4]),format:r?"name":"hex8"};if(t=V.hex6.exec(e))return{r:L(t[1]),g:L(t[2]),b:L(t[3]),format:r?"name":"hex"};if(t=V.hex4.exec(e))return{r:L(t[1]+""+t[1]),g:L(t[2]+""+t[2]),b:L(t[3]+""+t[3]),a:D(t[4]+""+t[4]),format:r?"name":"hex8"};if(t=V.hex3.exec(e))return{r:L(t[1]+""+t[1]),g:L(t[2]+""+t[2]),b:L(t[3]+""+t[3]),format:r?"name":"hex"};return!1}(e));"object"==typeof e&&(H(e.r)&&H(e.g)&&H(e.b)?(t=function(e,t,r){return{r:255*B(e,255),g:255*B(t,255),b:255*B(r,255)}}(e.r,e.g,e.b),s=!0,c="%"===String(e.r).substr(-1)?"prgb":"rgb"):H(e.h)&&H(e.s)&&H(e.v)?(n=M(e.s),i=M(e.v),t=function(e,t,r){e=6*B(e,360),t=B(t,100),r=B(r,100);var n=g.floor(e),a=e-n,A=r*(1-t),i=r*(1-a*t),o=r*(1-(1-a)*t),C=n%6;return{r:255*[r,i,A,A,o,r][C],g:255*[o,r,r,i,A,A][C],b:255*[A,A,o,r,r,i][C]}}(e.h,n,i),s=!0,c="hsv"):H(e.h)&&H(e.s)&&H(e.l)&&(n=M(e.s),o=M(e.l),t=function(e,t,r){var n,g,a;function A(e,t,r){return r<0&&(r+=1),r>1&&(r-=1),r<1/6?e+6*(t-e)*r:r<.5?t:r<2/3?e+(t-e)*(2/3-r)*6:e}if(e=B(e,360),t=B(t,100),r=B(r,100),0===t)n=g=a=r;else{var i=r<.5?r*(1+t):r+t-r*t,o=2*r-i;n=A(o,i,e+1/3),g=A(o,i,e),a=A(o,i,e-1/3)}return{r:255*n,g:255*g,b:255*a}}(e.h,n,o),s=!0,c="hsl"),e.hasOwnProperty("a")&&(r=e.a));return r=S(r),{ok:s,format:e.format||c,r:C(255,I(t.r,0)),g:C(255,I(t.g,0)),b:C(255,I(t.b,0)),a:r}}(e);this._originalInput=e,this._r=r.r,this._g=r.g,this._b=r.b,this._a=r.a,this._roundA=o(100*this._a)/100,this._format=t.format||r.format,this._gradientType=t.gradientType,this._r<1&&(this._r=o(this._r)),this._g<1&&(this._g=o(this._g)),this._b<1&&(this._b=o(this._b)),this._ok=r.ok,this._tc_id=i++}function l(e,t,r){e=B(e,255),t=B(t,255),r=B(r,255);var n,g,a=I(e,t,r),A=C(e,t,r),i=(a+A)/2;if(a==A)n=g=0;else{var o=a-A;switch(g=i>.5?o/(2-a-A):o/(a+A),a){case e:n=(t-r)/o+(t<r?6:0);break;case t:n=(r-e)/o+2;break;case r:n=(e-t)/o+4}n/=6}return{h:n,s:g,l:i}}function u(e,t,r){e=B(e,255),t=B(t,255),r=B(r,255);var n,g,a=I(e,t,r),A=C(e,t,r),i=a,o=a-A;if(g=0===a?0:o/a,a==A)n=0;else{switch(a){case e:n=(t-r)/o+(t<r?6:0);break;case t:n=(r-e)/o+2;break;case r:n=(e-t)/o+4}n/=6}return{h:n,s:g,v:i}}function d(e,t,r,n){var g=[z(o(e).toString(16)),z(o(t).toString(16)),z(o(r).toString(16))];return n&&g[0].charAt(0)==g[0].charAt(1)&&g[1].charAt(0)==g[1].charAt(1)&&g[2].charAt(0)==g[2].charAt(1)?g[0].charAt(0)+g[1].charAt(0)+g[2].charAt(0):g.join("")}function f(e,t,r,n){return[z(R(n)),z(o(e).toString(16)),z(o(t).toString(16)),z(o(r).toString(16))].join("")}function h(e,t){t=0===t?0:t||10;var r=c(e).toHsl();return r.s-=t/100,r.s=P(r.s),c(r)}function p(e,t){t=0===t?0:t||10;var r=c(e).toHsl();return r.s+=t/100,r.s=P(r.s),c(r)}function m(e){return c(e).desaturate(100)}function b(e,t){t=0===t?0:t||10;var r=c(e).toHsl();return r.l+=t/100,r.l=P(r.l),c(r)}function _(e,t){t=0===t?0:t||10;var r=c(e).toRgb();return r.r=I(0,C(255,r.r-o(-t/100*255))),r.g=I(0,C(255,r.g-o(-t/100*255))),r.b=I(0,C(255,r.b-o(-t/100*255))),c(r)}function v(e,t){t=0===t?0:t||10;var r=c(e).toHsl();return r.l-=t/100,r.l=P(r.l),c(r)}function w(e,t){var r=c(e).toHsl(),n=(r.h+t)%360;return r.h=n<0?360+n:n,c(r)}function k(e){var t=c(e).toHsl();return t.h=(t.h+180)%360,c(t)}function y(e){var t=c(e).toHsl(),r=t.h;return[c(e),c({h:(r+120)%360,s:t.s,l:t.l}),c({h:(r+240)%360,s:t.s,l:t.l})]}function j(e){var t=c(e).toHsl(),r=t.h;return[c(e),c({h:(r+90)%360,s:t.s,l:t.l}),c({h:(r+180)%360,s:t.s,l:t.l}),c({h:(r+270)%360,s:t.s,l:t.l})]}function O(e){var t=c(e).toHsl(),r=t.h;return[c(e),c({h:(r+72)%360,s:t.s,l:t.l}),c({h:(r+216)%360,s:t.s,l:t.l})]}function T(e,t,r){t=t||6,r=r||30;var n=c(e).toHsl(),g=360/r,a=[c(e)];for(n.h=(n.h-(g*t>>1)+720)%360;--t;)n.h=(n.h+g)%360,a.push(c(n));return a}function x(e,t){t=t||6;for(var r=c(e).toHsv(),n=r.h,g=r.s,a=r.v,A=[],i=1/t;t--;)A.push(c({h:n,s:g,v:a})),a=(a+i)%1;return A}c.prototype={isDark:function(){return this.getBrightness()<128},isLight:function(){return!this.isDark()},isValid:function(){return this._ok},getOriginalInput:function(){return this._originalInput},getFormat:function(){return this._format},getAlpha:function(){return this._a},getBrightness:function(){var e=this.toRgb();return(299*e.r+587*e.g+114*e.b)/1e3},getLuminance:function(){var e,t,r,n=this.toRgb();return e=n.r/255,t=n.g/255,r=n.b/255,.2126*(e<=.03928?e/12.92:g.pow((e+.055)/1.055,2.4))+.7152*(t<=.03928?t/12.92:g.pow((t+.055)/1.055,2.4))+.0722*(r<=.03928?r/12.92:g.pow((r+.055)/1.055,2.4))},setAlpha:function(e){return this._a=S(e),this._roundA=o(100*this._a)/100,this},toHsv:function(){var e=u(this._r,this._g,this._b);return{h:360*e.h,s:e.s,v:e.v,a:this._a}},toHsvString:function(){var e=u(this._r,this._g,this._b),t=o(360*e.h),r=o(100*e.s),n=o(100*e.v);return 1==this._a?"hsv("+t+", "+r+"%, "+n+"%)":"hsva("+t+", "+r+"%, "+n+"%, "+this._roundA+")"},toHsl:function(){var e=l(this._r,this._g,this._b);return{h:360*e.h,s:e.s,l:e.l,a:this._a}},toHslString:function(){var e=l(this._r,this._g,this._b),t=o(360*e.h),r=o(100*e.s),n=o(100*e.l);return 1==this._a?"hsl("+t+", "+r+"%, "+n+"%)":"hsla("+t+", "+r+"%, "+n+"%, "+this._roundA+")"},toHex:function(e){return d(this._r,this._g,this._b,e)},toHexString:function(e){return"#"+this.toHex(e)},toHex8:function(e){return function(e,t,r,n,g){var a=[z(o(e).toString(16)),z(o(t).toString(16)),z(o(r).toString(16)),z(R(n))];if(g&&a[0].charAt(0)==a[0].charAt(1)&&a[1].charAt(0)==a[1].charAt(1)&&a[2].charAt(0)==a[2].charAt(1)&&a[3].charAt(0)==a[3].charAt(1))return a[0].charAt(0)+a[1].charAt(0)+a[2].charAt(0)+a[3].charAt(0);return a.join("")}(this._r,this._g,this._b,this._a,e)},toHex8String:function(e){return"#"+this.toHex8(e)},toRgb:function(){return{r:o(this._r),g:o(this._g),b:o(this._b),a:this._a}},toRgbString:function(){return 1==this._a?"rgb("+o(this._r)+", "+o(this._g)+", "+o(this._b)+")":"rgba("+o(this._r)+", "+o(this._g)+", "+o(this._b)+", "+this._roundA+")"},toPercentageRgb:function(){return{r:o(100*B(this._r,255))+"%",g:o(100*B(this._g,255))+"%",b:o(100*B(this._b,255))+"%",a:this._a}},toPercentageRgbString:function(){return 1==this._a?"rgb("+o(100*B(this._r,255))+"%, "+o(100*B(this._g,255))+"%, "+o(100*B(this._b,255))+"%)":"rgba("+o(100*B(this._r,255))+"%, "+o(100*B(this._g,255))+"%, "+o(100*B(this._b,255))+"%, "+this._roundA+")"},toName:function(){return 0===this._a?"transparent":!(this._a<1)&&(N[d(this._r,this._g,this._b,!0)]||!1)},toFilter:function(e){var t="#"+f(this._r,this._g,this._b,this._a),r=t,n=this._gradientType?"GradientType = 1, ":"";if(e){var g=c(e);r="#"+f(g._r,g._g,g._b,g._a)}return"progid:DXImageTransform.Microsoft.gradient("+n+"startColorstr="+t+",endColorstr="+r+")"},toString:function(e){var t=!!e;e=e||this._format;var r=!1,n=this._a<1&&this._a>=0;return t||!n||"hex"!==e&&"hex6"!==e&&"hex3"!==e&&"hex4"!==e&&"hex8"!==e&&"name"!==e?("rgb"===e&&(r=this.toRgbString()),"prgb"===e&&(r=this.toPercentageRgbString()),"hex"!==e&&"hex6"!==e||(r=this.toHexString()),"hex3"===e&&(r=this.toHexString(!0)),"hex4"===e&&(r=this.toHex8String(!0)),"hex8"===e&&(r=this.toHex8String()),"name"===e&&(r=this.toName()),"hsl"===e&&(r=this.toHslString()),"hsv"===e&&(r=this.toHsvString()),r||this.toHexString()):"name"===e&&0===this._a?this.toName():this.toRgbString()},clone:function(){return c(this.toString())},_applyModification:function(e,t){var r=e.apply(null,[this].concat([].slice.call(t)));return this._r=r._r,this._g=r._g,this._b=r._b,this.setAlpha(r._a),this},lighten:function(){return this._applyModification(b,arguments)},brighten:function(){return this._applyModification(_,arguments)},darken:function(){return this._applyModification(v,arguments)},desaturate:function(){return this._applyModification(h,arguments)},saturate:function(){return this._applyModification(p,arguments)},greyscale:function(){return this._applyModification(m,arguments)},spin:function(){return this._applyModification(w,arguments)},_applyCombination:function(e,t){return e.apply(null,[this].concat([].slice.call(t)))},analogous:function(){return this._applyCombination(T,arguments)},complement:function(){return this._applyCombination(k,arguments)},monochromatic:function(){return this._applyCombination(x,arguments)},splitcomplement:function(){return this._applyCombination(O,arguments)},triad:function(){return this._applyCombination(y,arguments)},tetrad:function(){return this._applyCombination(j,arguments)}},c.fromRatio=function(e,t){if("object"==typeof e){var r={};for(var n in e)e.hasOwnProperty(n)&&(r[n]="a"===n?e[n]:M(e[n]));e=r}return c(e,t)},c.equals=function(e,t){return!(!e||!t)&&c(e).toRgbString()==c(t).toRgbString()},c.random=function(){return c.fromRatio({r:s(),g:s(),b:s()})},c.mix=function(e,t,r){r=0===r?0:r||50;var n=c(e).toRgb(),g=c(t).toRgb(),a=r/100;return c({r:(g.r-n.r)*a+n.r,g:(g.g-n.g)*a+n.g,b:(g.b-n.b)*a+n.b,a:(g.a-n.a)*a+n.a})},c.readability=function(e,t){var r=c(e),n=c(t);return(g.max(r.getLuminance(),n.getLuminance())+.05)/(g.min(r.getLuminance(),n.getLuminance())+.05)},c.isReadable=function(e,t,r){var n,g,a=c.readability(e,t);switch(g=!1,(n=function(e){var t,r;t=((e=e||{level:"AA",size:"small"}).level||"AA").toUpperCase(),r=(e.size||"small").toLowerCase(),"AA"!==t&&"AAA"!==t&&(t="AA");"small"!==r&&"large"!==r&&(r="small");return{level:t,size:r}}(r)).level+n.size){case"AAsmall":case"AAAlarge":g=a>=4.5;break;case"AAlarge":g=a>=3;break;case"AAAsmall":g=a>=7}return g},c.mostReadable=function(e,t,r){var n,g,a,A,i=null,o=0;g=(r=r||{}).includeFallbackColors,a=r.level,A=r.size;for(var C=0;C<t.length;C++)(n=c.readability(e,t[C]))>o&&(o=n,i=c(t[C]));return c.isReadable(e,i,{level:a,size:A})||!g?i:(r.includeFallbackColors=!1,c.mostReadable(e,["#fff","#000"],r))};var E=c.names={aliceblue:"f0f8ff",antiquewhite:"faebd7",aqua:"0ff",aquamarine:"7fffd4",azure:"f0ffff",beige:"f5f5dc",bisque:"ffe4c4",black:"000",blanchedalmond:"ffebcd",blue:"00f",blueviolet:"8a2be2",brown:"a52a2a",burlywood:"deb887",burntsienna:"ea7e5d",cadetblue:"5f9ea0",chartreuse:"7fff00",chocolate:"d2691e",coral:"ff7f50",cornflowerblue:"6495ed",cornsilk:"fff8dc",crimson:"dc143c",cyan:"0ff",darkblue:"00008b",darkcyan:"008b8b",darkgoldenrod:"b8860b",darkgray:"a9a9a9",darkgreen:"006400",darkgrey:"a9a9a9",darkkhaki:"bdb76b",darkmagenta:"8b008b",darkolivegreen:"556b2f",darkorange:"ff8c00",darkorchid:"9932cc",darkred:"8b0000",darksalmon:"e9967a",darkseagreen:"8fbc8f",darkslateblue:"483d8b",darkslategray:"2f4f4f",darkslategrey:"2f4f4f",darkturquoise:"00ced1",darkviolet:"9400d3",deeppink:"ff1493",deepskyblue:"00bfff",dimgray:"696969",dimgrey:"696969",dodgerblue:"1e90ff",firebrick:"b22222",floralwhite:"fffaf0",forestgreen:"228b22",fuchsia:"f0f",gainsboro:"dcdcdc",ghostwhite:"f8f8ff",gold:"ffd700",goldenrod:"daa520",gray:"808080",green:"008000",greenyellow:"adff2f",grey:"808080",honeydew:"f0fff0",hotpink:"ff69b4",indianred:"cd5c5c",indigo:"4b0082",ivory:"fffff0",khaki:"f0e68c",lavender:"e6e6fa",lavenderblush:"fff0f5",lawngreen:"7cfc00",lemonchiffon:"fffacd",lightblue:"add8e6",lightcoral:"f08080",lightcyan:"e0ffff",lightgoldenrodyellow:"fafad2",lightgray:"d3d3d3",lightgreen:"90ee90",lightgrey:"d3d3d3",lightpink:"ffb6c1",lightsalmon:"ffa07a",lightseagreen:"20b2aa",lightskyblue:"87cefa",lightslategray:"789",lightslategrey:"789",lightsteelblue:"b0c4de",lightyellow:"ffffe0",lime:"0f0",limegreen:"32cd32",linen:"faf0e6",magenta:"f0f",maroon:"800000",mediumaquamarine:"66cdaa",mediumblue:"0000cd",mediumorchid:"ba55d3",mediumpurple:"9370db",mediumseagreen:"3cb371",mediumslateblue:"7b68ee",mediumspringgreen:"00fa9a",mediumturquoise:"48d1cc",mediumvioletred:"c71585",midnightblue:"191970",mintcream:"f5fffa",mistyrose:"ffe4e1",moccasin:"ffe4b5",navajowhite:"ffdead",navy:"000080",oldlace:"fdf5e6",olive:"808000",olivedrab:"6b8e23",orange:"ffa500",orangered:"ff4500",orchid:"da70d6",palegoldenrod:"eee8aa",palegreen:"98fb98",paleturquoise:"afeeee",palevioletred:"db7093",papayawhip:"ffefd5",peachpuff:"ffdab9",peru:"cd853f",pink:"ffc0cb",plum:"dda0dd",powderblue:"b0e0e6",purple:"800080",rebeccapurple:"663399",red:"f00",rosybrown:"bc8f8f",royalblue:"4169e1",saddlebrown:"8b4513",salmon:"fa8072",sandybrown:"f4a460",seagreen:"2e8b57",seashell:"fff5ee",sienna:"a0522d",silver:"c0c0c0",skyblue:"87ceeb",slateblue:"6a5acd",slategray:"708090",slategrey:"708090",snow:"fffafa",springgreen:"00ff7f",steelblue:"4682b4",tan:"d2b48c",teal:"008080",thistle:"d8bfd8",tomato:"ff6347",turquoise:"40e0d0",violet:"ee82ee",wheat:"f5deb3",white:"fff",whitesmoke:"f5f5f5",yellow:"ff0",yellowgreen:"9acd32"},N=c.hexNames=function(e){var t={};for(var r in e)e.hasOwnProperty(r)&&(t[e[r]]=r);return t}(E);function S(e){return e=parseFloat(e),(isNaN(e)||e<0||e>1)&&(e=1),e}function B(e,t){(function(e){return"string"==typeof e&&-1!=e.indexOf(".")&&1===parseFloat(e)})(e)&&(e="100%");var r=function(e){return"string"==typeof e&&-1!=e.indexOf("%")}(e);return e=C(t,I(0,parseFloat(e))),r&&(e=parseInt(e*t,10)/100),g.abs(e-t)<1e-6?1:e%t/parseFloat(t)}function P(e){return C(1,I(0,e))}function L(e){return parseInt(e,16)}function z(e){return 1==e.length?"0"+e:""+e}function M(e){return e<=1&&(e=100*e+"%"),e}function R(e){return g.round(255*parseFloat(e)).toString(16)}function D(e){return L(e)/255}var V=function(){var e="(?:[-\\+]?\\d*\\.\\d+%?)|(?:[-\\+]?\\d+%?)",t="[\\s|\\(]+("+e+")[,|\\s]+("+e+")[,|\\s]+("+e+")\\s*\\)?",r="[\\s|\\(]+("+e+")[,|\\s]+("+e+")[,|\\s]+("+e+")[,|\\s]+("+e+")\\s*\\)?";return{CSS_UNIT:new RegExp(e),rgb:new RegExp("rgb"+t),rgba:new RegExp("rgba"+r),hsl:new RegExp("hsl"+t),hsla:new RegExp("hsla"+r),hsv:new RegExp("hsv"+t),hsva:new RegExp("hsva"+r),hex3:/^#?([0-9a-fA-F]{1})([0-9a-fA-F]{1})([0-9a-fA-F]{1})$/,hex6:/^#?([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$/,hex4:/^#?([0-9a-fA-F]{1})([0-9a-fA-F]{1})([0-9a-fA-F]{1})([0-9a-fA-F]{1})$/,hex8:/^#?([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$/}}();function H(e){return!!V.CSS_UNIT.exec(e)}void 0!==e&&e.exports?e.exports=c:void 0===(n=function(){return c}.call(t,r,t,e))||(e.exports=n)}(Math)},50:function(e,t){!function(){e.exports=this.wp.htmlEntities}()},62:function(e,t){!function(){e.exports=this.wp.autop}()},64:function(e,t,r){var n=r(93),g=r(92);e.exports=function(e,t,r){var a=t&&r||0;"string"==typeof e&&(t="binary"===e?new Array(16):null,e=null);var A=(e=e||{}).random||(e.rng||n)();if(A[6]=15&A[6]|64,A[8]=63&A[8]|128,t)for(var i=0;i<16;++i)t[a+i]=A[i];return t||g(A)}},7:function(e,t){!function(){e.exports=this.wp.compose}()},8:function(e,t,r){"use strict";r.d(t,"a",function(){return g});var n=r(15);function g(e){for(var t=1;t<arguments.length;t++){var r=null!=arguments[t]?arguments[t]:{},g=Object.keys(r);"function"==typeof Object.getOwnPropertySymbols&&(g=g.concat(Object.getOwnPropertySymbols(r).filter(function(e){return Object.getOwnPropertyDescriptor(r,e).enumerable}))),g.forEach(function(t){Object(n.a)(e,t,r[t])})}return e}},92:function(e,t){for(var r=[],n=0;n<256;++n)r[n]=(n+256).toString(16).substr(1);e.exports=function(e,t){var n=t||0,g=r;return[g[e[n++]],g[e[n++]],g[e[n++]],g[e[n++]],"-",g[e[n++]],g[e[n++]],"-",g[e[n++]],g[e[n++]],"-",g[e[n++]],g[e[n++]],"-",g[e[n++]],g[e[n++]],g[e[n++]],g[e[n++]],g[e[n++]],g[e[n++]]].join("")}},93:function(e,t){var r="undefined"!=typeof crypto&&crypto.getRandomValues&&crypto.getRandomValues.bind(crypto)||"undefined"!=typeof msCrypto&&"function"==typeof window.msCrypto.getRandomValues&&msCrypto.getRandomValues.bind(msCrypto);if(r){var n=new Uint8Array(16);e.exports=function(){return r(n),n}}else{var g=new Array(16);e.exports=function(){for(var e,t=0;t<16;t++)0==(3&t)&&(e=4294967296*Math.random()),g[t]=e>>>((3&t)<<3)&255;return g}}}});
+this["wp"] = this["wp"] || {}; this["wp"]["blocks"] =
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = "./packages/blocks/build-module/index.js");
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ "./node_modules/@babel/runtime/helpers/esm/arrayWithHoles.js":
+/*!*******************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/arrayWithHoles.js ***!
+  \*******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _arrayWithHoles; });
+function _arrayWithHoles(arr) {
+  if (Array.isArray(arr)) return arr;
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/esm/arrayWithoutHoles.js":
+/*!**********************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/arrayWithoutHoles.js ***!
+  \**********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _arrayWithoutHoles; });
+function _arrayWithoutHoles(arr) {
+  if (Array.isArray(arr)) {
+    for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {
+      arr2[i] = arr[i];
+    }
+
+    return arr2;
+  }
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/esm/classCallCheck.js":
+/*!*******************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/classCallCheck.js ***!
+  \*******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _classCallCheck; });
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/esm/createClass.js":
+/*!****************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/createClass.js ***!
+  \****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _createClass; });
+function _defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
+
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
+  return Constructor;
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/esm/defineProperty.js":
+/*!*******************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/defineProperty.js ***!
+  \*******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _defineProperty; });
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/esm/extends.js":
+/*!************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/extends.js ***!
+  \************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _extends; });
+function _extends() {
+  _extends = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  return _extends.apply(this, arguments);
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/esm/iterableToArray.js":
+/*!********************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/iterableToArray.js ***!
+  \********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _iterableToArray; });
+function _iterableToArray(iter) {
+  if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/esm/iterableToArrayLimit.js":
+/*!*************************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/iterableToArrayLimit.js ***!
+  \*************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _iterableToArrayLimit; });
+function _iterableToArrayLimit(arr, i) {
+  var _arr = [];
+  var _n = true;
+  var _d = false;
+  var _e = undefined;
+
+  try {
+    for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+      _arr.push(_s.value);
+
+      if (i && _arr.length === i) break;
+    }
+  } catch (err) {
+    _d = true;
+    _e = err;
+  } finally {
+    try {
+      if (!_n && _i["return"] != null) _i["return"]();
+    } finally {
+      if (_d) throw _e;
+    }
+  }
+
+  return _arr;
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/esm/nonIterableRest.js":
+/*!********************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/nonIterableRest.js ***!
+  \********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _nonIterableRest; });
+function _nonIterableRest() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance");
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/esm/nonIterableSpread.js":
+/*!**********************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/nonIterableSpread.js ***!
+  \**********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _nonIterableSpread; });
+function _nonIterableSpread() {
+  throw new TypeError("Invalid attempt to spread non-iterable instance");
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/esm/objectSpread.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/objectSpread.js ***!
+  \*****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _objectSpread; });
+/* harmony import */ var _defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./defineProperty */ "./node_modules/@babel/runtime/helpers/esm/defineProperty.js");
+
+function _objectSpread(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i] != null ? arguments[i] : {};
+    var ownKeys = Object.keys(source);
+
+    if (typeof Object.getOwnPropertySymbols === 'function') {
+      ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {
+        return Object.getOwnPropertyDescriptor(source, sym).enumerable;
+      }));
+    }
+
+    ownKeys.forEach(function (key) {
+      Object(_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(target, key, source[key]);
+    });
+  }
+
+  return target;
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/slicedToArray.js ***!
+  \******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _slicedToArray; });
+/* harmony import */ var _arrayWithHoles__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./arrayWithHoles */ "./node_modules/@babel/runtime/helpers/esm/arrayWithHoles.js");
+/* harmony import */ var _iterableToArrayLimit__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./iterableToArrayLimit */ "./node_modules/@babel/runtime/helpers/esm/iterableToArrayLimit.js");
+/* harmony import */ var _nonIterableRest__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./nonIterableRest */ "./node_modules/@babel/runtime/helpers/esm/nonIterableRest.js");
+
+
+
+function _slicedToArray(arr, i) {
+  return Object(_arrayWithHoles__WEBPACK_IMPORTED_MODULE_0__["default"])(arr) || Object(_iterableToArrayLimit__WEBPACK_IMPORTED_MODULE_1__["default"])(arr, i) || Object(_nonIterableRest__WEBPACK_IMPORTED_MODULE_2__["default"])();
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/esm/toArray.js":
+/*!************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/toArray.js ***!
+  \************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _toArray; });
+/* harmony import */ var _arrayWithHoles__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./arrayWithHoles */ "./node_modules/@babel/runtime/helpers/esm/arrayWithHoles.js");
+/* harmony import */ var _iterableToArray__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./iterableToArray */ "./node_modules/@babel/runtime/helpers/esm/iterableToArray.js");
+/* harmony import */ var _nonIterableRest__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./nonIterableRest */ "./node_modules/@babel/runtime/helpers/esm/nonIterableRest.js");
+
+
+
+function _toArray(arr) {
+  return Object(_arrayWithHoles__WEBPACK_IMPORTED_MODULE_0__["default"])(arr) || Object(_iterableToArray__WEBPACK_IMPORTED_MODULE_1__["default"])(arr) || Object(_nonIterableRest__WEBPACK_IMPORTED_MODULE_2__["default"])();
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/esm/toConsumableArray.js":
+/*!**********************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/toConsumableArray.js ***!
+  \**********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _toConsumableArray; });
+/* harmony import */ var _arrayWithoutHoles__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./arrayWithoutHoles */ "./node_modules/@babel/runtime/helpers/esm/arrayWithoutHoles.js");
+/* harmony import */ var _iterableToArray__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./iterableToArray */ "./node_modules/@babel/runtime/helpers/esm/iterableToArray.js");
+/* harmony import */ var _nonIterableSpread__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./nonIterableSpread */ "./node_modules/@babel/runtime/helpers/esm/nonIterableSpread.js");
+
+
+
+function _toConsumableArray(arr) {
+  return Object(_arrayWithoutHoles__WEBPACK_IMPORTED_MODULE_0__["default"])(arr) || Object(_iterableToArray__WEBPACK_IMPORTED_MODULE_1__["default"])(arr) || Object(_nonIterableSpread__WEBPACK_IMPORTED_MODULE_2__["default"])();
+}
+
+/***/ }),
+
+/***/ "./node_modules/hpq/es/get-path.js":
+/*!*****************************************!*\
+  !*** ./node_modules/hpq/es/get-path.js ***!
+  \*****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return getPath; });
+/**
+ * Given object and string of dot-delimited path segments, returns value at
+ * path or undefined if path cannot be resolved.
+ *
+ * @param  {Object} object Lookup object
+ * @param  {string} path   Path to resolve
+ * @return {?*}            Resolved value
+ */
+function getPath(object, path) {
+  var segments = path.split('.');
+  var segment;
+
+  while (segment = segments.shift()) {
+    if (!(segment in object)) {
+      return;
+    }
+
+    object = object[segment];
+  }
+
+  return object;
+}
+
+/***/ }),
+
+/***/ "./node_modules/hpq/es/index.js":
+/*!**************************************!*\
+  !*** ./node_modules/hpq/es/index.js ***!
+  \**************************************/
+/*! exports provided: parse, prop, attr, html, text, query */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "parse", function() { return parse; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "prop", function() { return prop; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "attr", function() { return attr; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "html", function() { return html; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "text", function() { return text; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "query", function() { return query; });
+/* harmony import */ var _get_path__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./get-path */ "./node_modules/hpq/es/get-path.js");
+/**
+ * Internal dependencies
+ */
+
+/**
+ * Function returning a DOM document created by `createHTMLDocument`. The same
+ * document is returned between invocations.
+ *
+ * @return {Document} DOM document.
+ */
+
+var getDocument = function () {
+  var doc;
+  return function () {
+    if (!doc) {
+      doc = document.implementation.createHTMLDocument('');
+    }
+
+    return doc;
+  };
+}();
+/**
+ * Given a markup string or DOM element, creates an object aligning with the
+ * shape of the matchers object, or the value returned by the matcher.
+ *
+ * @param  {(string|Element)}  source   Source content
+ * @param  {(Object|Function)} matchers Matcher function or object of matchers
+ * @return {(Object|*)}                 Matched value(s), shaped by object
+ */
+
+
+function parse(source, matchers) {
+  if (!matchers) {
+    return;
+  } // Coerce to element
+
+
+  if ('string' === typeof source) {
+    var doc = getDocument();
+    doc.body.innerHTML = source;
+    source = doc.body;
+  } // Return singular value
+
+
+  if ('function' === typeof matchers) {
+    return matchers(source);
+  } // Bail if we can't handle matchers
+
+
+  if (Object !== matchers.constructor) {
+    return;
+  } // Shape result by matcher object
+
+
+  return Object.keys(matchers).reduce(function (memo, key) {
+    memo[key] = parse(source, matchers[key]);
+    return memo;
+  }, {});
+}
+/**
+ * Generates a function which matches node of type selector, returning an
+ * attribute by property if the attribute exists. If no selector is passed,
+ * returns property of the query element.
+ *
+ * @param  {?string} selector Optional selector
+ * @param  {string}  name     Property name
+ * @return {*}                Property value
+ */
+
+function prop(selector, name) {
+  if (1 === arguments.length) {
+    name = selector;
+    selector = undefined;
+  }
+
+  return function (node) {
+    var match = node;
+
+    if (selector) {
+      match = node.querySelector(selector);
+    }
+
+    if (match) {
+      return Object(_get_path__WEBPACK_IMPORTED_MODULE_0__["default"])(match, name);
+    }
+  };
+}
+/**
+ * Generates a function which matches node of type selector, returning an
+ * attribute by name if the attribute exists. If no selector is passed,
+ * returns attribute of the query element.
+ *
+ * @param  {?string} selector Optional selector
+ * @param  {string}  name     Attribute name
+ * @return {?string}          Attribute value
+ */
+
+function attr(selector, name) {
+  if (1 === arguments.length) {
+    name = selector;
+    selector = undefined;
+  }
+
+  return function (node) {
+    var attributes = prop(selector, 'attributes')(node);
+
+    if (attributes && attributes.hasOwnProperty(name)) {
+      return attributes[name].value;
+    }
+  };
+}
+/**
+ * Convenience for `prop( selector, 'innerHTML' )`.
+ *
+ * @see prop()
+ *
+ * @param  {?string} selector Optional selector
+ * @return {string}           Inner HTML
+ */
+
+function html(selector) {
+  return prop(selector, 'innerHTML');
+}
+/**
+ * Convenience for `prop( selector, 'textContent' )`.
+ *
+ * @see prop()
+ *
+ * @param  {?string} selector Optional selector
+ * @return {string}           Text content
+ */
+
+function text(selector) {
+  return prop(selector, 'textContent');
+}
+/**
+ * Creates a new matching context by first finding elements matching selector
+ * using querySelectorAll before then running another `parse` on `matchers`
+ * scoped to the matched elements.
+ *
+ * @see parse()
+ *
+ * @param  {string}            selector Selector to match
+ * @param  {(Object|Function)} matchers Matcher function or object of matchers
+ * @return {Array.<*,Object>}           Array of matched value(s)
+ */
+
+function query(selector, matchers) {
+  return function (node) {
+    var matches = node.querySelectorAll(selector);
+    return [].map.call(matches, function (match) {
+      return parse(match, matchers);
+    });
+  };
+}
+
+/***/ }),
+
+/***/ "./node_modules/rememo/es/rememo.js":
+/*!******************************************!*\
+  !*** ./node_modules/rememo/es/rememo.js ***!
+  \******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+
+
+var LEAF_KEY, hasWeakMap;
+
+/**
+ * Arbitrary value used as key for referencing cache object in WeakMap tree.
+ *
+ * @type {Object}
+ */
+LEAF_KEY = {};
+
+/**
+ * Whether environment supports WeakMap.
+ *
+ * @type {boolean}
+ */
+hasWeakMap = typeof WeakMap !== 'undefined';
+
+/**
+ * Returns the first argument as the sole entry in an array.
+ *
+ * @param {*} value Value to return.
+ *
+ * @return {Array} Value returned as entry in array.
+ */
+function arrayOf( value ) {
+	return [ value ];
+}
+
+/**
+ * Returns true if the value passed is object-like, or false otherwise. A value
+ * is object-like if it can support property assignment, e.g. object or array.
+ *
+ * @param {*} value Value to test.
+ *
+ * @return {boolean} Whether value is object-like.
+ */
+function isObjectLike( value ) {
+	return !! value && 'object' === typeof value;
+}
+
+/**
+ * Creates and returns a new cache object.
+ *
+ * @return {Object} Cache object.
+ */
+function createCache() {
+	var cache = {
+		clear: function() {
+			cache.head = null;
+		},
+	};
+
+	return cache;
+}
+
+/**
+ * Returns true if entries within the two arrays are strictly equal by
+ * reference from a starting index.
+ *
+ * @param {Array}  a         First array.
+ * @param {Array}  b         Second array.
+ * @param {number} fromIndex Index from which to start comparison.
+ *
+ * @return {boolean} Whether arrays are shallowly equal.
+ */
+function isShallowEqual( a, b, fromIndex ) {
+	var i;
+
+	if ( a.length !== b.length ) {
+		return false;
+	}
+
+	for ( i = fromIndex; i < a.length; i++ ) {
+		if ( a[ i ] !== b[ i ] ) {
+			return false;
+		}
+	}
+
+	return true;
+}
+
+/**
+ * Returns a memoized selector function. The getDependants function argument is
+ * called before the memoized selector and is expected to return an immutable
+ * reference or array of references on which the selector depends for computing
+ * its own return value. The memoize cache is preserved only as long as those
+ * dependant references remain the same. If getDependants returns a different
+ * reference(s), the cache is cleared and the selector value regenerated.
+ *
+ * @param {Function} selector      Selector function.
+ * @param {Function} getDependants Dependant getter returning an immutable
+ *                                 reference or array of reference used in
+ *                                 cache bust consideration.
+ *
+ * @return {Function} Memoized selector.
+ */
+/* harmony default export */ __webpack_exports__["default"] = (function( selector, getDependants ) {
+	var rootCache, getCache;
+
+	// Use object source as dependant if getter not provided
+	if ( ! getDependants ) {
+		getDependants = arrayOf;
+	}
+
+	/**
+	 * Returns the root cache. If WeakMap is supported, this is assigned to the
+	 * root WeakMap cache set, otherwise it is a shared instance of the default
+	 * cache object.
+	 *
+	 * @return {(WeakMap|Object)} Root cache object.
+	 */
+	function getRootCache() {
+		return rootCache;
+	}
+
+	/**
+	 * Returns the cache for a given dependants array. When possible, a WeakMap
+	 * will be used to create a unique cache for each set of dependants. This
+	 * is feasible due to the nature of WeakMap in allowing garbage collection
+	 * to occur on entries where the key object is no longer referenced. Since
+	 * WeakMap requires the key to be an object, this is only possible when the
+	 * dependant is object-like. The root cache is created as a hierarchy where
+	 * each top-level key is the first entry in a dependants set, the value a
+	 * WeakMap where each key is the next dependant, and so on. This continues
+	 * so long as the dependants are object-like. If no dependants are object-
+	 * like, then the cache is shared across all invocations.
+	 *
+	 * @see isObjectLike
+	 *
+	 * @param {Array} dependants Selector dependants.
+	 *
+	 * @return {Object} Cache object.
+	 */
+	function getWeakMapCache( dependants ) {
+		var caches = rootCache,
+			isUniqueByDependants = true,
+			i, dependant, map, cache;
+
+		for ( i = 0; i < dependants.length; i++ ) {
+			dependant = dependants[ i ];
+
+			// Can only compose WeakMap from object-like key.
+			if ( ! isObjectLike( dependant ) ) {
+				isUniqueByDependants = false;
+				break;
+			}
+
+			// Does current segment of cache already have a WeakMap?
+			if ( caches.has( dependant ) ) {
+				// Traverse into nested WeakMap.
+				caches = caches.get( dependant );
+			} else {
+				// Create, set, and traverse into a new one.
+				map = new WeakMap();
+				caches.set( dependant, map );
+				caches = map;
+			}
+		}
+
+		// We use an arbitrary (but consistent) object as key for the last item
+		// in the WeakMap to serve as our running cache.
+		if ( ! caches.has( LEAF_KEY ) ) {
+			cache = createCache();
+			cache.isUniqueByDependants = isUniqueByDependants;
+			caches.set( LEAF_KEY, cache );
+		}
+
+		return caches.get( LEAF_KEY );
+	}
+
+	// Assign cache handler by availability of WeakMap
+	getCache = hasWeakMap ? getWeakMapCache : getRootCache;
+
+	/**
+	 * Resets root memoization cache.
+	 */
+	function clear() {
+		rootCache = hasWeakMap ? new WeakMap() : createCache();
+	}
+
+	// eslint-disable-next-line jsdoc/check-param-names
+	/**
+	 * The augmented selector call, considering first whether dependants have
+	 * changed before passing it to underlying memoize function.
+	 *
+	 * @param {Object} source    Source object for derivation.
+	 * @param {...*}   extraArgs Additional arguments to pass to selector.
+	 *
+	 * @return {*} Selector result.
+	 */
+	function callSelector( /* source, ...extraArgs */ ) {
+		var len = arguments.length,
+			cache, node, i, args, dependants;
+
+		// Create copy of arguments (avoid leaking deoptimization).
+		args = new Array( len );
+		for ( i = 0; i < len; i++ ) {
+			args[ i ] = arguments[ i ];
+		}
+
+		dependants = getDependants.apply( null, args );
+		cache = getCache( dependants );
+
+		// If not guaranteed uniqueness by dependants (primitive type or lack
+		// of WeakMap support), shallow compare against last dependants and, if
+		// references have changed, destroy cache to recalculate result.
+		if ( ! cache.isUniqueByDependants ) {
+			if ( cache.lastDependants && ! isShallowEqual( dependants, cache.lastDependants, 0 ) ) {
+				cache.clear();
+			}
+
+			cache.lastDependants = dependants;
+		}
+
+		node = cache.head;
+		while ( node ) {
+			// Check whether node arguments match arguments
+			if ( ! isShallowEqual( node.args, args, 1 ) ) {
+				node = node.next;
+				continue;
+			}
+
+			// At this point we can assume we've found a match
+
+			// Surface matched node to head if not already
+			if ( node !== cache.head ) {
+				// Adjust siblings to point to each other.
+				node.prev.next = node.next;
+				if ( node.next ) {
+					node.next.prev = node.prev;
+				}
+
+				node.next = cache.head;
+				node.prev = null;
+				cache.head.prev = node;
+				cache.head = node;
+			}
+
+			// Return immediately
+			return node.val;
+		}
+
+		// No cached value found. Continue to insertion phase:
+
+		node = {
+			// Generate the result from original function
+			val: selector.apply( null, args ),
+		};
+
+		// Avoid including the source object in the cache.
+		args[ 0 ] = null;
+		node.args = args;
+
+		// Don't need to check whether node is already head, since it would
+		// have been returned above already if it was
+
+		// Shift existing head down list
+		if ( cache.head ) {
+			cache.head.prev = node;
+			node.next = cache.head;
+		}
+
+		cache.head = node;
+
+		return node.val;
+	}
+
+	callSelector.getDependants = getDependants;
+	callSelector.clear = clear;
+	clear();
+
+	return callSelector;
+});
+
+
+/***/ }),
+
+/***/ "./node_modules/showdown/dist/showdown.js":
+/*!************************************************!*\
+  !*** ./node_modules/showdown/dist/showdown.js ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_RESULT__;;/*! showdown v 1.8.6 - 22-12-2017 */
+(function(){
+/**
+ * Created by Tivie on 13-07-2015.
+ */
+
+function getDefaultOpts (simple) {
+  'use strict';
+
+  var defaultOptions = {
+    omitExtraWLInCodeBlocks: {
+      defaultValue: false,
+      describe: 'Omit the default extra whiteline added to code blocks',
+      type: 'boolean'
+    },
+    noHeaderId: {
+      defaultValue: false,
+      describe: 'Turn on/off generated header id',
+      type: 'boolean'
+    },
+    prefixHeaderId: {
+      defaultValue: false,
+      describe: 'Add a prefix to the generated header ids. Passing a string will prefix that string to the header id. Setting to true will add a generic \'section-\' prefix',
+      type: 'string'
+    },
+    rawPrefixHeaderId: {
+      defaultValue: false,
+      describe: 'Setting this option to true will prevent showdown from modifying the prefix. This might result in malformed IDs (if, for instance, the " char is used in the prefix)',
+      type: 'boolean'
+    },
+    ghCompatibleHeaderId: {
+      defaultValue: false,
+      describe: 'Generate header ids compatible with github style (spaces are replaced with dashes, a bunch of non alphanumeric chars are removed)',
+      type: 'boolean'
+    },
+    rawHeaderId: {
+      defaultValue: false,
+      describe: 'Remove only spaces, \' and " from generated header ids (including prefixes), replacing them with dashes (-). WARNING: This might result in malformed ids',
+      type: 'boolean'
+    },
+    headerLevelStart: {
+      defaultValue: false,
+      describe: 'The header blocks level start',
+      type: 'integer'
+    },
+    parseImgDimensions: {
+      defaultValue: false,
+      describe: 'Turn on/off image dimension parsing',
+      type: 'boolean'
+    },
+    simplifiedAutoLink: {
+      defaultValue: false,
+      describe: 'Turn on/off GFM autolink style',
+      type: 'boolean'
+    },
+    excludeTrailingPunctuationFromURLs: {
+      defaultValue: false,
+      describe: 'Excludes trailing punctuation from links generated with autoLinking',
+      type: 'boolean'
+    },
+    literalMidWordUnderscores: {
+      defaultValue: false,
+      describe: 'Parse midword underscores as literal underscores',
+      type: 'boolean'
+    },
+    literalMidWordAsterisks: {
+      defaultValue: false,
+      describe: 'Parse midword asterisks as literal asterisks',
+      type: 'boolean'
+    },
+    strikethrough: {
+      defaultValue: false,
+      describe: 'Turn on/off strikethrough support',
+      type: 'boolean'
+    },
+    tables: {
+      defaultValue: false,
+      describe: 'Turn on/off tables support',
+      type: 'boolean'
+    },
+    tablesHeaderId: {
+      defaultValue: false,
+      describe: 'Add an id to table headers',
+      type: 'boolean'
+    },
+    ghCodeBlocks: {
+      defaultValue: true,
+      describe: 'Turn on/off GFM fenced code blocks support',
+      type: 'boolean'
+    },
+    tasklists: {
+      defaultValue: false,
+      describe: 'Turn on/off GFM tasklist support',
+      type: 'boolean'
+    },
+    smoothLivePreview: {
+      defaultValue: false,
+      describe: 'Prevents weird effects in live previews due to incomplete input',
+      type: 'boolean'
+    },
+    smartIndentationFix: {
+      defaultValue: false,
+      description: 'Tries to smartly fix indentation in es6 strings',
+      type: 'boolean'
+    },
+    disableForced4SpacesIndentedSublists: {
+      defaultValue: false,
+      description: 'Disables the requirement of indenting nested sublists by 4 spaces',
+      type: 'boolean'
+    },
+    simpleLineBreaks: {
+      defaultValue: false,
+      description: 'Parses simple line breaks as <br> (GFM Style)',
+      type: 'boolean'
+    },
+    requireSpaceBeforeHeadingText: {
+      defaultValue: false,
+      description: 'Makes adding a space between `#` and the header text mandatory (GFM Style)',
+      type: 'boolean'
+    },
+    ghMentions: {
+      defaultValue: false,
+      description: 'Enables github @mentions',
+      type: 'boolean'
+    },
+    ghMentionsLink: {
+      defaultValue: 'https://github.com/{u}',
+      description: 'Changes the link generated by @mentions. Only applies if ghMentions option is enabled.',
+      type: 'string'
+    },
+    encodeEmails: {
+      defaultValue: true,
+      description: 'Encode e-mail addresses through the use of Character Entities, transforming ASCII e-mail addresses into its equivalent decimal entities',
+      type: 'boolean'
+    },
+    openLinksInNewWindow: {
+      defaultValue: false,
+      description: 'Open all links in new windows',
+      type: 'boolean'
+    },
+    backslashEscapesHTMLTags: {
+      defaultValue: false,
+      description: 'Support for HTML Tag escaping. ex: \<div>foo\</div>',
+      type: 'boolean'
+    },
+    emoji: {
+      defaultValue: false,
+      description: 'Enable emoji support. Ex: `this is a :smile: emoji`',
+      type: 'boolean'
+    },
+    underline: {
+      defaultValue: false,
+      description: 'Enable support for underline. Syntax is double or triple underscores: `__underline word__`. With this option enabled, underscores no longer parses into `<em>` and `<strong>`',
+      type: 'boolean'
+    },
+    completeHTMLDocument: {
+      defaultValue: false,
+      description: 'Outputs a complete html document, including `<html>`, `<head>` and `<body>` tags',
+      type: 'boolean'
+    },
+    metadata: {
+      defaultValue: false,
+      description: 'Enable support for document metadata (defined at the top of the document between `«««` and `»»»` or between `---` and `---`).',
+      type: 'boolean'
+    },
+    splitAdjacentBlockquotes: {
+      defaultValue: false,
+      description: 'Split adjacent blockquote blocks',
+      type: 'boolean'
+    }
+  };
+  if (simple === false) {
+    return JSON.parse(JSON.stringify(defaultOptions));
+  }
+  var ret = {};
+  for (var opt in defaultOptions) {
+    if (defaultOptions.hasOwnProperty(opt)) {
+      ret[opt] = defaultOptions[opt].defaultValue;
+    }
+  }
+  return ret;
+}
+
+function allOptionsOn () {
+  'use strict';
+  var options = getDefaultOpts(true),
+      ret = {};
+  for (var opt in options) {
+    if (options.hasOwnProperty(opt)) {
+      ret[opt] = true;
+    }
+  }
+  return ret;
+}
+
+/**
+ * Created by Tivie on 06-01-2015.
+ */
+
+// Private properties
+var showdown = {},
+    parsers = {},
+    extensions = {},
+    globalOptions = getDefaultOpts(true),
+    setFlavor = 'vanilla',
+    flavor = {
+      github: {
+        omitExtraWLInCodeBlocks:              true,
+        simplifiedAutoLink:                   true,
+        excludeTrailingPunctuationFromURLs:   true,
+        literalMidWordUnderscores:            true,
+        strikethrough:                        true,
+        tables:                               true,
+        tablesHeaderId:                       true,
+        ghCodeBlocks:                         true,
+        tasklists:                            true,
+        disableForced4SpacesIndentedSublists: true,
+        simpleLineBreaks:                     true,
+        requireSpaceBeforeHeadingText:        true,
+        ghCompatibleHeaderId:                 true,
+        ghMentions:                           true,
+        backslashEscapesHTMLTags:             true,
+        emoji:                                true,
+        splitAdjacentBlockquotes:             true
+      },
+      original: {
+        noHeaderId:                           true,
+        ghCodeBlocks:                         false
+      },
+      ghost: {
+        omitExtraWLInCodeBlocks:              true,
+        parseImgDimensions:                   true,
+        simplifiedAutoLink:                   true,
+        excludeTrailingPunctuationFromURLs:   true,
+        literalMidWordUnderscores:            true,
+        strikethrough:                        true,
+        tables:                               true,
+        tablesHeaderId:                       true,
+        ghCodeBlocks:                         true,
+        tasklists:                            true,
+        smoothLivePreview:                    true,
+        simpleLineBreaks:                     true,
+        requireSpaceBeforeHeadingText:        true,
+        ghMentions:                           false,
+        encodeEmails:                         true
+      },
+      vanilla: getDefaultOpts(true),
+      allOn: allOptionsOn()
+    };
+
+/**
+ * helper namespace
+ * @type {{}}
+ */
+showdown.helper = {};
+
+/**
+ * TODO LEGACY SUPPORT CODE
+ * @type {{}}
+ */
+showdown.extensions = {};
+
+/**
+ * Set a global option
+ * @static
+ * @param {string} key
+ * @param {*} value
+ * @returns {showdown}
+ */
+showdown.setOption = function (key, value) {
+  'use strict';
+  globalOptions[key] = value;
+  return this;
+};
+
+/**
+ * Get a global option
+ * @static
+ * @param {string} key
+ * @returns {*}
+ */
+showdown.getOption = function (key) {
+  'use strict';
+  return globalOptions[key];
+};
+
+/**
+ * Get the global options
+ * @static
+ * @returns {{}}
+ */
+showdown.getOptions = function () {
+  'use strict';
+  return globalOptions;
+};
+
+/**
+ * Reset global options to the default values
+ * @static
+ */
+showdown.resetOptions = function () {
+  'use strict';
+  globalOptions = getDefaultOpts(true);
+};
+
+/**
+ * Set the flavor showdown should use as default
+ * @param {string} name
+ */
+showdown.setFlavor = function (name) {
+  'use strict';
+  if (!flavor.hasOwnProperty(name)) {
+    throw Error(name + ' flavor was not found');
+  }
+  showdown.resetOptions();
+  var preset = flavor[name];
+  setFlavor = name;
+  for (var option in preset) {
+    if (preset.hasOwnProperty(option)) {
+      globalOptions[option] = preset[option];
+    }
+  }
+};
+
+/**
+ * Get the currently set flavor
+ * @returns {string}
+ */
+showdown.getFlavor = function () {
+  'use strict';
+  return setFlavor;
+};
+
+/**
+ * Get the options of a specified flavor. Returns undefined if the flavor was not found
+ * @param {string} name Name of the flavor
+ * @returns {{}|undefined}
+ */
+showdown.getFlavorOptions = function (name) {
+  'use strict';
+  if (flavor.hasOwnProperty(name)) {
+    return flavor[name];
+  }
+};
+
+/**
+ * Get the default options
+ * @static
+ * @param {boolean} [simple=true]
+ * @returns {{}}
+ */
+showdown.getDefaultOptions = function (simple) {
+  'use strict';
+  return getDefaultOpts(simple);
+};
+
+/**
+ * Get or set a subParser
+ *
+ * subParser(name)       - Get a registered subParser
+ * subParser(name, func) - Register a subParser
+ * @static
+ * @param {string} name
+ * @param {function} [func]
+ * @returns {*}
+ */
+showdown.subParser = function (name, func) {
+  'use strict';
+  if (showdown.helper.isString(name)) {
+    if (typeof func !== 'undefined') {
+      parsers[name] = func;
+    } else {
+      if (parsers.hasOwnProperty(name)) {
+        return parsers[name];
+      } else {
+        throw Error('SubParser named ' + name + ' not registered!');
+      }
+    }
+  }
+};
+
+/**
+ * Gets or registers an extension
+ * @static
+ * @param {string} name
+ * @param {object|function=} ext
+ * @returns {*}
+ */
+showdown.extension = function (name, ext) {
+  'use strict';
+
+  if (!showdown.helper.isString(name)) {
+    throw Error('Extension \'name\' must be a string');
+  }
+
+  name = showdown.helper.stdExtName(name);
+
+  // Getter
+  if (showdown.helper.isUndefined(ext)) {
+    if (!extensions.hasOwnProperty(name)) {
+      throw Error('Extension named ' + name + ' is not registered!');
+    }
+    return extensions[name];
+
+    // Setter
+  } else {
+    // Expand extension if it's wrapped in a function
+    if (typeof ext === 'function') {
+      ext = ext();
+    }
+
+    // Ensure extension is an array
+    if (!showdown.helper.isArray(ext)) {
+      ext = [ext];
+    }
+
+    var validExtension = validate(ext, name);
+
+    if (validExtension.valid) {
+      extensions[name] = ext;
+    } else {
+      throw Error(validExtension.error);
+    }
+  }
+};
+
+/**
+ * Gets all extensions registered
+ * @returns {{}}
+ */
+showdown.getAllExtensions = function () {
+  'use strict';
+  return extensions;
+};
+
+/**
+ * Remove an extension
+ * @param {string} name
+ */
+showdown.removeExtension = function (name) {
+  'use strict';
+  delete extensions[name];
+};
+
+/**
+ * Removes all extensions
+ */
+showdown.resetExtensions = function () {
+  'use strict';
+  extensions = {};
+};
+
+/**
+ * Validate extension
+ * @param {array} extension
+ * @param {string} name
+ * @returns {{valid: boolean, error: string}}
+ */
+function validate (extension, name) {
+  'use strict';
+
+  var errMsg = (name) ? 'Error in ' + name + ' extension->' : 'Error in unnamed extension',
+      ret = {
+        valid: true,
+        error: ''
+      };
+
+  if (!showdown.helper.isArray(extension)) {
+    extension = [extension];
+  }
+
+  for (var i = 0; i < extension.length; ++i) {
+    var baseMsg = errMsg + ' sub-extension ' + i + ': ',
+        ext = extension[i];
+    if (typeof ext !== 'object') {
+      ret.valid = false;
+      ret.error = baseMsg + 'must be an object, but ' + typeof ext + ' given';
+      return ret;
+    }
+
+    if (!showdown.helper.isString(ext.type)) {
+      ret.valid = false;
+      ret.error = baseMsg + 'property "type" must be a string, but ' + typeof ext.type + ' given';
+      return ret;
+    }
+
+    var type = ext.type = ext.type.toLowerCase();
+
+    // normalize extension type
+    if (type === 'language') {
+      type = ext.type = 'lang';
+    }
+
+    if (type === 'html') {
+      type = ext.type = 'output';
+    }
+
+    if (type !== 'lang' && type !== 'output' && type !== 'listener') {
+      ret.valid = false;
+      ret.error = baseMsg + 'type ' + type + ' is not recognized. Valid values: "lang/language", "output/html" or "listener"';
+      return ret;
+    }
+
+    if (type === 'listener') {
+      if (showdown.helper.isUndefined(ext.listeners)) {
+        ret.valid = false;
+        ret.error = baseMsg + '. Extensions of type "listener" must have a property called "listeners"';
+        return ret;
+      }
+    } else {
+      if (showdown.helper.isUndefined(ext.filter) && showdown.helper.isUndefined(ext.regex)) {
+        ret.valid = false;
+        ret.error = baseMsg + type + ' extensions must define either a "regex" property or a "filter" method';
+        return ret;
+      }
+    }
+
+    if (ext.listeners) {
+      if (typeof ext.listeners !== 'object') {
+        ret.valid = false;
+        ret.error = baseMsg + '"listeners" property must be an object but ' + typeof ext.listeners + ' given';
+        return ret;
+      }
+      for (var ln in ext.listeners) {
+        if (ext.listeners.hasOwnProperty(ln)) {
+          if (typeof ext.listeners[ln] !== 'function') {
+            ret.valid = false;
+            ret.error = baseMsg + '"listeners" property must be an hash of [event name]: [callback]. listeners.' + ln +
+              ' must be a function but ' + typeof ext.listeners[ln] + ' given';
+            return ret;
+          }
+        }
+      }
+    }
+
+    if (ext.filter) {
+      if (typeof ext.filter !== 'function') {
+        ret.valid = false;
+        ret.error = baseMsg + '"filter" must be a function, but ' + typeof ext.filter + ' given';
+        return ret;
+      }
+    } else if (ext.regex) {
+      if (showdown.helper.isString(ext.regex)) {
+        ext.regex = new RegExp(ext.regex, 'g');
+      }
+      if (!(ext.regex instanceof RegExp)) {
+        ret.valid = false;
+        ret.error = baseMsg + '"regex" property must either be a string or a RegExp object, but ' + typeof ext.regex + ' given';
+        return ret;
+      }
+      if (showdown.helper.isUndefined(ext.replace)) {
+        ret.valid = false;
+        ret.error = baseMsg + '"regex" extensions must implement a replace string or function';
+        return ret;
+      }
+    }
+  }
+  return ret;
+}
+
+/**
+ * Validate extension
+ * @param {object} ext
+ * @returns {boolean}
+ */
+showdown.validateExtension = function (ext) {
+  'use strict';
+
+  var validateExtension = validate(ext, null);
+  if (!validateExtension.valid) {
+    console.warn(validateExtension.error);
+    return false;
+  }
+  return true;
+};
+
+/**
+ * showdownjs helper functions
+ */
+
+if (!showdown.hasOwnProperty('helper')) {
+  showdown.helper = {};
+}
+
+/**
+ * Check if var is string
+ * @static
+ * @param {string} a
+ * @returns {boolean}
+ */
+showdown.helper.isString = function (a) {
+  'use strict';
+  return (typeof a === 'string' || a instanceof String);
+};
+
+/**
+ * Check if var is a function
+ * @static
+ * @param {*} a
+ * @returns {boolean}
+ */
+showdown.helper.isFunction = function (a) {
+  'use strict';
+  var getType = {};
+  return a && getType.toString.call(a) === '[object Function]';
+};
+
+/**
+ * isArray helper function
+ * @static
+ * @param {*} a
+ * @returns {boolean}
+ */
+showdown.helper.isArray = function (a) {
+  'use strict';
+  return Array.isArray(a);
+};
+
+/**
+ * Check if value is undefined
+ * @static
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is `undefined`, else `false`.
+ */
+showdown.helper.isUndefined = function (value) {
+  'use strict';
+  return typeof value === 'undefined';
+};
+
+/**
+ * ForEach helper function
+ * Iterates over Arrays and Objects (own properties only)
+ * @static
+ * @param {*} obj
+ * @param {function} callback Accepts 3 params: 1. value, 2. key, 3. the original array/object
+ */
+showdown.helper.forEach = function (obj, callback) {
+  'use strict';
+  // check if obj is defined
+  if (showdown.helper.isUndefined(obj)) {
+    throw new Error('obj param is required');
+  }
+
+  if (showdown.helper.isUndefined(callback)) {
+    throw new Error('callback param is required');
+  }
+
+  if (!showdown.helper.isFunction(callback)) {
+    throw new Error('callback param must be a function/closure');
+  }
+
+  if (typeof obj.forEach === 'function') {
+    obj.forEach(callback);
+  } else if (showdown.helper.isArray(obj)) {
+    for (var i = 0; i < obj.length; i++) {
+      callback(obj[i], i, obj);
+    }
+  } else if (typeof (obj) === 'object') {
+    for (var prop in obj) {
+      if (obj.hasOwnProperty(prop)) {
+        callback(obj[prop], prop, obj);
+      }
+    }
+  } else {
+    throw new Error('obj does not seem to be an array or an iterable object');
+  }
+};
+
+/**
+ * Standardidize extension name
+ * @static
+ * @param {string} s extension name
+ * @returns {string}
+ */
+showdown.helper.stdExtName = function (s) {
+  'use strict';
+  return s.replace(/[_?*+\/\\.^-]/g, '').replace(/\s/g, '').toLowerCase();
+};
+
+function escapeCharactersCallback (wholeMatch, m1) {
+  'use strict';
+  var charCodeToEscape = m1.charCodeAt(0);
+  return '¨E' + charCodeToEscape + 'E';
+}
+
+/**
+ * Callback used to escape characters when passing through String.replace
+ * @static
+ * @param {string} wholeMatch
+ * @param {string} m1
+ * @returns {string}
+ */
+showdown.helper.escapeCharactersCallback = escapeCharactersCallback;
+
+/**
+ * Escape characters in a string
+ * @static
+ * @param {string} text
+ * @param {string} charsToEscape
+ * @param {boolean} afterBackslash
+ * @returns {XML|string|void|*}
+ */
+showdown.helper.escapeCharacters = function (text, charsToEscape, afterBackslash) {
+  'use strict';
+  // First we have to escape the escape characters so that
+  // we can build a character class out of them
+  var regexString = '([' + charsToEscape.replace(/([\[\]\\])/g, '\\$1') + '])';
+
+  if (afterBackslash) {
+    regexString = '\\\\' + regexString;
+  }
+
+  var regex = new RegExp(regexString, 'g');
+  text = text.replace(regex, escapeCharactersCallback);
+
+  return text;
+};
+
+var rgxFindMatchPos = function (str, left, right, flags) {
+  'use strict';
+  var f = flags || '',
+      g = f.indexOf('g') > -1,
+      x = new RegExp(left + '|' + right, 'g' + f.replace(/g/g, '')),
+      l = new RegExp(left, f.replace(/g/g, '')),
+      pos = [],
+      t, s, m, start, end;
+
+  do {
+    t = 0;
+    while ((m = x.exec(str))) {
+      if (l.test(m[0])) {
+        if (!(t++)) {
+          s = x.lastIndex;
+          start = s - m[0].length;
+        }
+      } else if (t) {
+        if (!--t) {
+          end = m.index + m[0].length;
+          var obj = {
+            left: {start: start, end: s},
+            match: {start: s, end: m.index},
+            right: {start: m.index, end: end},
+            wholeMatch: {start: start, end: end}
+          };
+          pos.push(obj);
+          if (!g) {
+            return pos;
+          }
+        }
+      }
+    }
+  } while (t && (x.lastIndex = s));
+
+  return pos;
+};
+
+/**
+ * matchRecursiveRegExp
+ *
+ * (c) 2007 Steven Levithan <stevenlevithan.com>
+ * MIT License
+ *
+ * Accepts a string to search, a left and right format delimiter
+ * as regex patterns, and optional regex flags. Returns an array
+ * of matches, allowing nested instances of left/right delimiters.
+ * Use the "g" flag to return all matches, otherwise only the
+ * first is returned. Be careful to ensure that the left and
+ * right format delimiters produce mutually exclusive matches.
+ * Backreferences are not supported within the right delimiter
+ * due to how it is internally combined with the left delimiter.
+ * When matching strings whose format delimiters are unbalanced
+ * to the left or right, the output is intentionally as a
+ * conventional regex library with recursion support would
+ * produce, e.g. "<<x>" and "<x>>" both produce ["x"] when using
+ * "<" and ">" as the delimiters (both strings contain a single,
+ * balanced instance of "<x>").
+ *
+ * examples:
+ * matchRecursiveRegExp("test", "\\(", "\\)")
+ * returns: []
+ * matchRecursiveRegExp("<t<<e>><s>>t<>", "<", ">", "g")
+ * returns: ["t<<e>><s>", ""]
+ * matchRecursiveRegExp("<div id=\"x\">test</div>", "<div\\b[^>]*>", "</div>", "gi")
+ * returns: ["test"]
+ */
+showdown.helper.matchRecursiveRegExp = function (str, left, right, flags) {
+  'use strict';
+
+  var matchPos = rgxFindMatchPos (str, left, right, flags),
+      results = [];
+
+  for (var i = 0; i < matchPos.length; ++i) {
+    results.push([
+      str.slice(matchPos[i].wholeMatch.start, matchPos[i].wholeMatch.end),
+      str.slice(matchPos[i].match.start, matchPos[i].match.end),
+      str.slice(matchPos[i].left.start, matchPos[i].left.end),
+      str.slice(matchPos[i].right.start, matchPos[i].right.end)
+    ]);
+  }
+  return results;
+};
+
+/**
+ *
+ * @param {string} str
+ * @param {string|function} replacement
+ * @param {string} left
+ * @param {string} right
+ * @param {string} flags
+ * @returns {string}
+ */
+showdown.helper.replaceRecursiveRegExp = function (str, replacement, left, right, flags) {
+  'use strict';
+
+  if (!showdown.helper.isFunction(replacement)) {
+    var repStr = replacement;
+    replacement = function () {
+      return repStr;
+    };
+  }
+
+  var matchPos = rgxFindMatchPos(str, left, right, flags),
+      finalStr = str,
+      lng = matchPos.length;
+
+  if (lng > 0) {
+    var bits = [];
+    if (matchPos[0].wholeMatch.start !== 0) {
+      bits.push(str.slice(0, matchPos[0].wholeMatch.start));
+    }
+    for (var i = 0; i < lng; ++i) {
+      bits.push(
+        replacement(
+          str.slice(matchPos[i].wholeMatch.start, matchPos[i].wholeMatch.end),
+          str.slice(matchPos[i].match.start, matchPos[i].match.end),
+          str.slice(matchPos[i].left.start, matchPos[i].left.end),
+          str.slice(matchPos[i].right.start, matchPos[i].right.end)
+        )
+      );
+      if (i < lng - 1) {
+        bits.push(str.slice(matchPos[i].wholeMatch.end, matchPos[i + 1].wholeMatch.start));
+      }
+    }
+    if (matchPos[lng - 1].wholeMatch.end < str.length) {
+      bits.push(str.slice(matchPos[lng - 1].wholeMatch.end));
+    }
+    finalStr = bits.join('');
+  }
+  return finalStr;
+};
+
+/**
+ * Returns the index within the passed String object of the first occurrence of the specified regex,
+ * starting the search at fromIndex. Returns -1 if the value is not found.
+ *
+ * @param {string} str string to search
+ * @param {RegExp} regex Regular expression to search
+ * @param {int} [fromIndex = 0] Index to start the search
+ * @returns {Number}
+ * @throws InvalidArgumentError
+ */
+showdown.helper.regexIndexOf = function (str, regex, fromIndex) {
+  'use strict';
+  if (!showdown.helper.isString(str)) {
+    throw 'InvalidArgumentError: first parameter of showdown.helper.regexIndexOf function must be a string';
+  }
+  if (regex instanceof RegExp === false) {
+    throw 'InvalidArgumentError: second parameter of showdown.helper.regexIndexOf function must be an instance of RegExp';
+  }
+  var indexOf = str.substring(fromIndex || 0).search(regex);
+  return (indexOf >= 0) ? (indexOf + (fromIndex || 0)) : indexOf;
+};
+
+/**
+ * Splits the passed string object at the defined index, and returns an array composed of the two substrings
+ * @param {string} str string to split
+ * @param {int} index index to split string at
+ * @returns {[string,string]}
+ * @throws InvalidArgumentError
+ */
+showdown.helper.splitAtIndex = function (str, index) {
+  'use strict';
+  if (!showdown.helper.isString(str)) {
+    throw 'InvalidArgumentError: first parameter of showdown.helper.regexIndexOf function must be a string';
+  }
+  return [str.substring(0, index), str.substring(index)];
+};
+
+/**
+ * Obfuscate an e-mail address through the use of Character Entities,
+ * transforming ASCII characters into their equivalent decimal or hex entities.
+ *
+ * Since it has a random component, subsequent calls to this function produce different results
+ *
+ * @param {string} mail
+ * @returns {string}
+ */
+showdown.helper.encodeEmailAddress = function (mail) {
+  'use strict';
+  var encode = [
+    function (ch) {
+      return '&#' + ch.charCodeAt(0) + ';';
+    },
+    function (ch) {
+      return '&#x' + ch.charCodeAt(0).toString(16) + ';';
+    },
+    function (ch) {
+      return ch;
+    }
+  ];
+
+  mail = mail.replace(/./g, function (ch) {
+    if (ch === '@') {
+      // this *must* be encoded. I insist.
+      ch = encode[Math.floor(Math.random() * 2)](ch);
+    } else {
+      var r = Math.random();
+      // roughly 10% raw, 45% hex, 45% dec
+      ch = (
+        r > 0.9 ? encode[2](ch) : r > 0.45 ? encode[1](ch) : encode[0](ch)
+      );
+    }
+    return ch;
+  });
+
+  return mail;
+};
+
+/**
+ * POLYFILLS
+ */
+// use this instead of builtin is undefined for IE8 compatibility
+if (typeof(console) === 'undefined') {
+  console = {
+    warn: function (msg) {
+      'use strict';
+      alert(msg);
+    },
+    log: function (msg) {
+      'use strict';
+      alert(msg);
+    },
+    error: function (msg) {
+      'use strict';
+      throw msg;
+    }
+  };
+}
+
+/**
+ * Common regexes.
+ * We declare some common regexes to improve performance
+ */
+showdown.helper.regexes = {
+  asteriskDashAndColon: /([*_:~])/g
+};
+
+/**
+ * EMOJIS LIST
+ */
+showdown.helper.emojis = {
+  '+1':'\ud83d\udc4d',
+  '-1':'\ud83d\udc4e',
+  '100':'\ud83d\udcaf',
+  '1234':'\ud83d\udd22',
+  '1st_place_medal':'\ud83e\udd47',
+  '2nd_place_medal':'\ud83e\udd48',
+  '3rd_place_medal':'\ud83e\udd49',
+  '8ball':'\ud83c\udfb1',
+  'a':'\ud83c\udd70\ufe0f',
+  'ab':'\ud83c\udd8e',
+  'abc':'\ud83d\udd24',
+  'abcd':'\ud83d\udd21',
+  'accept':'\ud83c\ude51',
+  'aerial_tramway':'\ud83d\udea1',
+  'airplane':'\u2708\ufe0f',
+  'alarm_clock':'\u23f0',
+  'alembic':'\u2697\ufe0f',
+  'alien':'\ud83d\udc7d',
+  'ambulance':'\ud83d\ude91',
+  'amphora':'\ud83c\udffa',
+  'anchor':'\u2693\ufe0f',
+  'angel':'\ud83d\udc7c',
+  'anger':'\ud83d\udca2',
+  'angry':'\ud83d\ude20',
+  'anguished':'\ud83d\ude27',
+  'ant':'\ud83d\udc1c',
+  'apple':'\ud83c\udf4e',
+  'aquarius':'\u2652\ufe0f',
+  'aries':'\u2648\ufe0f',
+  'arrow_backward':'\u25c0\ufe0f',
+  'arrow_double_down':'\u23ec',
+  'arrow_double_up':'\u23eb',
+  'arrow_down':'\u2b07\ufe0f',
+  'arrow_down_small':'\ud83d\udd3d',
+  'arrow_forward':'\u25b6\ufe0f',
+  'arrow_heading_down':'\u2935\ufe0f',
+  'arrow_heading_up':'\u2934\ufe0f',
+  'arrow_left':'\u2b05\ufe0f',
+  'arrow_lower_left':'\u2199\ufe0f',
+  'arrow_lower_right':'\u2198\ufe0f',
+  'arrow_right':'\u27a1\ufe0f',
+  'arrow_right_hook':'\u21aa\ufe0f',
+  'arrow_up':'\u2b06\ufe0f',
+  'arrow_up_down':'\u2195\ufe0f',
+  'arrow_up_small':'\ud83d\udd3c',
+  'arrow_upper_left':'\u2196\ufe0f',
+  'arrow_upper_right':'\u2197\ufe0f',
+  'arrows_clockwise':'\ud83d\udd03',
+  'arrows_counterclockwise':'\ud83d\udd04',
+  'art':'\ud83c\udfa8',
+  'articulated_lorry':'\ud83d\ude9b',
+  'artificial_satellite':'\ud83d\udef0',
+  'astonished':'\ud83d\ude32',
+  'athletic_shoe':'\ud83d\udc5f',
+  'atm':'\ud83c\udfe7',
+  'atom_symbol':'\u269b\ufe0f',
+  'avocado':'\ud83e\udd51',
+  'b':'\ud83c\udd71\ufe0f',
+  'baby':'\ud83d\udc76',
+  'baby_bottle':'\ud83c\udf7c',
+  'baby_chick':'\ud83d\udc24',
+  'baby_symbol':'\ud83d\udebc',
+  'back':'\ud83d\udd19',
+  'bacon':'\ud83e\udd53',
+  'badminton':'\ud83c\udff8',
+  'baggage_claim':'\ud83d\udec4',
+  'baguette_bread':'\ud83e\udd56',
+  'balance_scale':'\u2696\ufe0f',
+  'balloon':'\ud83c\udf88',
+  'ballot_box':'\ud83d\uddf3',
+  'ballot_box_with_check':'\u2611\ufe0f',
+  'bamboo':'\ud83c\udf8d',
+  'banana':'\ud83c\udf4c',
+  'bangbang':'\u203c\ufe0f',
+  'bank':'\ud83c\udfe6',
+  'bar_chart':'\ud83d\udcca',
+  'barber':'\ud83d\udc88',
+  'baseball':'\u26be\ufe0f',
+  'basketball':'\ud83c\udfc0',
+  'basketball_man':'\u26f9\ufe0f',
+  'basketball_woman':'\u26f9\ufe0f&zwj;\u2640\ufe0f',
+  'bat':'\ud83e\udd87',
+  'bath':'\ud83d\udec0',
+  'bathtub':'\ud83d\udec1',
+  'battery':'\ud83d\udd0b',
+  'beach_umbrella':'\ud83c\udfd6',
+  'bear':'\ud83d\udc3b',
+  'bed':'\ud83d\udecf',
+  'bee':'\ud83d\udc1d',
+  'beer':'\ud83c\udf7a',
+  'beers':'\ud83c\udf7b',
+  'beetle':'\ud83d\udc1e',
+  'beginner':'\ud83d\udd30',
+  'bell':'\ud83d\udd14',
+  'bellhop_bell':'\ud83d\udece',
+  'bento':'\ud83c\udf71',
+  'biking_man':'\ud83d\udeb4',
+  'bike':'\ud83d\udeb2',
+  'biking_woman':'\ud83d\udeb4&zwj;\u2640\ufe0f',
+  'bikini':'\ud83d\udc59',
+  'biohazard':'\u2623\ufe0f',
+  'bird':'\ud83d\udc26',
+  'birthday':'\ud83c\udf82',
+  'black_circle':'\u26ab\ufe0f',
+  'black_flag':'\ud83c\udff4',
+  'black_heart':'\ud83d\udda4',
+  'black_joker':'\ud83c\udccf',
+  'black_large_square':'\u2b1b\ufe0f',
+  'black_medium_small_square':'\u25fe\ufe0f',
+  'black_medium_square':'\u25fc\ufe0f',
+  'black_nib':'\u2712\ufe0f',
+  'black_small_square':'\u25aa\ufe0f',
+  'black_square_button':'\ud83d\udd32',
+  'blonde_man':'\ud83d\udc71',
+  'blonde_woman':'\ud83d\udc71&zwj;\u2640\ufe0f',
+  'blossom':'\ud83c\udf3c',
+  'blowfish':'\ud83d\udc21',
+  'blue_book':'\ud83d\udcd8',
+  'blue_car':'\ud83d\ude99',
+  'blue_heart':'\ud83d\udc99',
+  'blush':'\ud83d\ude0a',
+  'boar':'\ud83d\udc17',
+  'boat':'\u26f5\ufe0f',
+  'bomb':'\ud83d\udca3',
+  'book':'\ud83d\udcd6',
+  'bookmark':'\ud83d\udd16',
+  'bookmark_tabs':'\ud83d\udcd1',
+  'books':'\ud83d\udcda',
+  'boom':'\ud83d\udca5',
+  'boot':'\ud83d\udc62',
+  'bouquet':'\ud83d\udc90',
+  'bowing_man':'\ud83d\ude47',
+  'bow_and_arrow':'\ud83c\udff9',
+  'bowing_woman':'\ud83d\ude47&zwj;\u2640\ufe0f',
+  'bowling':'\ud83c\udfb3',
+  'boxing_glove':'\ud83e\udd4a',
+  'boy':'\ud83d\udc66',
+  'bread':'\ud83c\udf5e',
+  'bride_with_veil':'\ud83d\udc70',
+  'bridge_at_night':'\ud83c\udf09',
+  'briefcase':'\ud83d\udcbc',
+  'broken_heart':'\ud83d\udc94',
+  'bug':'\ud83d\udc1b',
+  'building_construction':'\ud83c\udfd7',
+  'bulb':'\ud83d\udca1',
+  'bullettrain_front':'\ud83d\ude85',
+  'bullettrain_side':'\ud83d\ude84',
+  'burrito':'\ud83c\udf2f',
+  'bus':'\ud83d\ude8c',
+  'business_suit_levitating':'\ud83d\udd74',
+  'busstop':'\ud83d\ude8f',
+  'bust_in_silhouette':'\ud83d\udc64',
+  'busts_in_silhouette':'\ud83d\udc65',
+  'butterfly':'\ud83e\udd8b',
+  'cactus':'\ud83c\udf35',
+  'cake':'\ud83c\udf70',
+  'calendar':'\ud83d\udcc6',
+  'call_me_hand':'\ud83e\udd19',
+  'calling':'\ud83d\udcf2',
+  'camel':'\ud83d\udc2b',
+  'camera':'\ud83d\udcf7',
+  'camera_flash':'\ud83d\udcf8',
+  'camping':'\ud83c\udfd5',
+  'cancer':'\u264b\ufe0f',
+  'candle':'\ud83d\udd6f',
+  'candy':'\ud83c\udf6c',
+  'canoe':'\ud83d\udef6',
+  'capital_abcd':'\ud83d\udd20',
+  'capricorn':'\u2651\ufe0f',
+  'car':'\ud83d\ude97',
+  'card_file_box':'\ud83d\uddc3',
+  'card_index':'\ud83d\udcc7',
+  'card_index_dividers':'\ud83d\uddc2',
+  'carousel_horse':'\ud83c\udfa0',
+  'carrot':'\ud83e\udd55',
+  'cat':'\ud83d\udc31',
+  'cat2':'\ud83d\udc08',
+  'cd':'\ud83d\udcbf',
+  'chains':'\u26d3',
+  'champagne':'\ud83c\udf7e',
+  'chart':'\ud83d\udcb9',
+  'chart_with_downwards_trend':'\ud83d\udcc9',
+  'chart_with_upwards_trend':'\ud83d\udcc8',
+  'checkered_flag':'\ud83c\udfc1',
+  'cheese':'\ud83e\uddc0',
+  'cherries':'\ud83c\udf52',
+  'cherry_blossom':'\ud83c\udf38',
+  'chestnut':'\ud83c\udf30',
+  'chicken':'\ud83d\udc14',
+  'children_crossing':'\ud83d\udeb8',
+  'chipmunk':'\ud83d\udc3f',
+  'chocolate_bar':'\ud83c\udf6b',
+  'christmas_tree':'\ud83c\udf84',
+  'church':'\u26ea\ufe0f',
+  'cinema':'\ud83c\udfa6',
+  'circus_tent':'\ud83c\udfaa',
+  'city_sunrise':'\ud83c\udf07',
+  'city_sunset':'\ud83c\udf06',
+  'cityscape':'\ud83c\udfd9',
+  'cl':'\ud83c\udd91',
+  'clamp':'\ud83d\udddc',
+  'clap':'\ud83d\udc4f',
+  'clapper':'\ud83c\udfac',
+  'classical_building':'\ud83c\udfdb',
+  'clinking_glasses':'\ud83e\udd42',
+  'clipboard':'\ud83d\udccb',
+  'clock1':'\ud83d\udd50',
+  'clock10':'\ud83d\udd59',
+  'clock1030':'\ud83d\udd65',
+  'clock11':'\ud83d\udd5a',
+  'clock1130':'\ud83d\udd66',
+  'clock12':'\ud83d\udd5b',
+  'clock1230':'\ud83d\udd67',
+  'clock130':'\ud83d\udd5c',
+  'clock2':'\ud83d\udd51',
+  'clock230':'\ud83d\udd5d',
+  'clock3':'\ud83d\udd52',
+  'clock330':'\ud83d\udd5e',
+  'clock4':'\ud83d\udd53',
+  'clock430':'\ud83d\udd5f',
+  'clock5':'\ud83d\udd54',
+  'clock530':'\ud83d\udd60',
+  'clock6':'\ud83d\udd55',
+  'clock630':'\ud83d\udd61',
+  'clock7':'\ud83d\udd56',
+  'clock730':'\ud83d\udd62',
+  'clock8':'\ud83d\udd57',
+  'clock830':'\ud83d\udd63',
+  'clock9':'\ud83d\udd58',
+  'clock930':'\ud83d\udd64',
+  'closed_book':'\ud83d\udcd5',
+  'closed_lock_with_key':'\ud83d\udd10',
+  'closed_umbrella':'\ud83c\udf02',
+  'cloud':'\u2601\ufe0f',
+  'cloud_with_lightning':'\ud83c\udf29',
+  'cloud_with_lightning_and_rain':'\u26c8',
+  'cloud_with_rain':'\ud83c\udf27',
+  'cloud_with_snow':'\ud83c\udf28',
+  'clown_face':'\ud83e\udd21',
+  'clubs':'\u2663\ufe0f',
+  'cocktail':'\ud83c\udf78',
+  'coffee':'\u2615\ufe0f',
+  'coffin':'\u26b0\ufe0f',
+  'cold_sweat':'\ud83d\ude30',
+  'comet':'\u2604\ufe0f',
+  'computer':'\ud83d\udcbb',
+  'computer_mouse':'\ud83d\uddb1',
+  'confetti_ball':'\ud83c\udf8a',
+  'confounded':'\ud83d\ude16',
+  'confused':'\ud83d\ude15',
+  'congratulations':'\u3297\ufe0f',
+  'construction':'\ud83d\udea7',
+  'construction_worker_man':'\ud83d\udc77',
+  'construction_worker_woman':'\ud83d\udc77&zwj;\u2640\ufe0f',
+  'control_knobs':'\ud83c\udf9b',
+  'convenience_store':'\ud83c\udfea',
+  'cookie':'\ud83c\udf6a',
+  'cool':'\ud83c\udd92',
+  'policeman':'\ud83d\udc6e',
+  'copyright':'\u00a9\ufe0f',
+  'corn':'\ud83c\udf3d',
+  'couch_and_lamp':'\ud83d\udecb',
+  'couple':'\ud83d\udc6b',
+  'couple_with_heart_woman_man':'\ud83d\udc91',
+  'couple_with_heart_man_man':'\ud83d\udc68&zwj;\u2764\ufe0f&zwj;\ud83d\udc68',
+  'couple_with_heart_woman_woman':'\ud83d\udc69&zwj;\u2764\ufe0f&zwj;\ud83d\udc69',
+  'couplekiss_man_man':'\ud83d\udc68&zwj;\u2764\ufe0f&zwj;\ud83d\udc8b&zwj;\ud83d\udc68',
+  'couplekiss_man_woman':'\ud83d\udc8f',
+  'couplekiss_woman_woman':'\ud83d\udc69&zwj;\u2764\ufe0f&zwj;\ud83d\udc8b&zwj;\ud83d\udc69',
+  'cow':'\ud83d\udc2e',
+  'cow2':'\ud83d\udc04',
+  'cowboy_hat_face':'\ud83e\udd20',
+  'crab':'\ud83e\udd80',
+  'crayon':'\ud83d\udd8d',
+  'credit_card':'\ud83d\udcb3',
+  'crescent_moon':'\ud83c\udf19',
+  'cricket':'\ud83c\udfcf',
+  'crocodile':'\ud83d\udc0a',
+  'croissant':'\ud83e\udd50',
+  'crossed_fingers':'\ud83e\udd1e',
+  'crossed_flags':'\ud83c\udf8c',
+  'crossed_swords':'\u2694\ufe0f',
+  'crown':'\ud83d\udc51',
+  'cry':'\ud83d\ude22',
+  'crying_cat_face':'\ud83d\ude3f',
+  'crystal_ball':'\ud83d\udd2e',
+  'cucumber':'\ud83e\udd52',
+  'cupid':'\ud83d\udc98',
+  'curly_loop':'\u27b0',
+  'currency_exchange':'\ud83d\udcb1',
+  'curry':'\ud83c\udf5b',
+  'custard':'\ud83c\udf6e',
+  'customs':'\ud83d\udec3',
+  'cyclone':'\ud83c\udf00',
+  'dagger':'\ud83d\udde1',
+  'dancer':'\ud83d\udc83',
+  'dancing_women':'\ud83d\udc6f',
+  'dancing_men':'\ud83d\udc6f&zwj;\u2642\ufe0f',
+  'dango':'\ud83c\udf61',
+  'dark_sunglasses':'\ud83d\udd76',
+  'dart':'\ud83c\udfaf',
+  'dash':'\ud83d\udca8',
+  'date':'\ud83d\udcc5',
+  'deciduous_tree':'\ud83c\udf33',
+  'deer':'\ud83e\udd8c',
+  'department_store':'\ud83c\udfec',
+  'derelict_house':'\ud83c\udfda',
+  'desert':'\ud83c\udfdc',
+  'desert_island':'\ud83c\udfdd',
+  'desktop_computer':'\ud83d\udda5',
+  'male_detective':'\ud83d\udd75\ufe0f',
+  'diamond_shape_with_a_dot_inside':'\ud83d\udca0',
+  'diamonds':'\u2666\ufe0f',
+  'disappointed':'\ud83d\ude1e',
+  'disappointed_relieved':'\ud83d\ude25',
+  'dizzy':'\ud83d\udcab',
+  'dizzy_face':'\ud83d\ude35',
+  'do_not_litter':'\ud83d\udeaf',
+  'dog':'\ud83d\udc36',
+  'dog2':'\ud83d\udc15',
+  'dollar':'\ud83d\udcb5',
+  'dolls':'\ud83c\udf8e',
+  'dolphin':'\ud83d\udc2c',
+  'door':'\ud83d\udeaa',
+  'doughnut':'\ud83c\udf69',
+  'dove':'\ud83d\udd4a',
+  'dragon':'\ud83d\udc09',
+  'dragon_face':'\ud83d\udc32',
+  'dress':'\ud83d\udc57',
+  'dromedary_camel':'\ud83d\udc2a',
+  'drooling_face':'\ud83e\udd24',
+  'droplet':'\ud83d\udca7',
+  'drum':'\ud83e\udd41',
+  'duck':'\ud83e\udd86',
+  'dvd':'\ud83d\udcc0',
+  'e-mail':'\ud83d\udce7',
+  'eagle':'\ud83e\udd85',
+  'ear':'\ud83d\udc42',
+  'ear_of_rice':'\ud83c\udf3e',
+  'earth_africa':'\ud83c\udf0d',
+  'earth_americas':'\ud83c\udf0e',
+  'earth_asia':'\ud83c\udf0f',
+  'egg':'\ud83e\udd5a',
+  'eggplant':'\ud83c\udf46',
+  'eight_pointed_black_star':'\u2734\ufe0f',
+  'eight_spoked_asterisk':'\u2733\ufe0f',
+  'electric_plug':'\ud83d\udd0c',
+  'elephant':'\ud83d\udc18',
+  'email':'\u2709\ufe0f',
+  'end':'\ud83d\udd1a',
+  'envelope_with_arrow':'\ud83d\udce9',
+  'euro':'\ud83d\udcb6',
+  'european_castle':'\ud83c\udff0',
+  'european_post_office':'\ud83c\udfe4',
+  'evergreen_tree':'\ud83c\udf32',
+  'exclamation':'\u2757\ufe0f',
+  'expressionless':'\ud83d\ude11',
+  'eye':'\ud83d\udc41',
+  'eye_speech_bubble':'\ud83d\udc41&zwj;\ud83d\udde8',
+  'eyeglasses':'\ud83d\udc53',
+  'eyes':'\ud83d\udc40',
+  'face_with_head_bandage':'\ud83e\udd15',
+  'face_with_thermometer':'\ud83e\udd12',
+  'fist_oncoming':'\ud83d\udc4a',
+  'factory':'\ud83c\udfed',
+  'fallen_leaf':'\ud83c\udf42',
+  'family_man_woman_boy':'\ud83d\udc6a',
+  'family_man_boy':'\ud83d\udc68&zwj;\ud83d\udc66',
+  'family_man_boy_boy':'\ud83d\udc68&zwj;\ud83d\udc66&zwj;\ud83d\udc66',
+  'family_man_girl':'\ud83d\udc68&zwj;\ud83d\udc67',
+  'family_man_girl_boy':'\ud83d\udc68&zwj;\ud83d\udc67&zwj;\ud83d\udc66',
+  'family_man_girl_girl':'\ud83d\udc68&zwj;\ud83d\udc67&zwj;\ud83d\udc67',
+  'family_man_man_boy':'\ud83d\udc68&zwj;\ud83d\udc68&zwj;\ud83d\udc66',
+  'family_man_man_boy_boy':'\ud83d\udc68&zwj;\ud83d\udc68&zwj;\ud83d\udc66&zwj;\ud83d\udc66',
+  'family_man_man_girl':'\ud83d\udc68&zwj;\ud83d\udc68&zwj;\ud83d\udc67',
+  'family_man_man_girl_boy':'\ud83d\udc68&zwj;\ud83d\udc68&zwj;\ud83d\udc67&zwj;\ud83d\udc66',
+  'family_man_man_girl_girl':'\ud83d\udc68&zwj;\ud83d\udc68&zwj;\ud83d\udc67&zwj;\ud83d\udc67',
+  'family_man_woman_boy_boy':'\ud83d\udc68&zwj;\ud83d\udc69&zwj;\ud83d\udc66&zwj;\ud83d\udc66',
+  'family_man_woman_girl':'\ud83d\udc68&zwj;\ud83d\udc69&zwj;\ud83d\udc67',
+  'family_man_woman_girl_boy':'\ud83d\udc68&zwj;\ud83d\udc69&zwj;\ud83d\udc67&zwj;\ud83d\udc66',
+  'family_man_woman_girl_girl':'\ud83d\udc68&zwj;\ud83d\udc69&zwj;\ud83d\udc67&zwj;\ud83d\udc67',
+  'family_woman_boy':'\ud83d\udc69&zwj;\ud83d\udc66',
+  'family_woman_boy_boy':'\ud83d\udc69&zwj;\ud83d\udc66&zwj;\ud83d\udc66',
+  'family_woman_girl':'\ud83d\udc69&zwj;\ud83d\udc67',
+  'family_woman_girl_boy':'\ud83d\udc69&zwj;\ud83d\udc67&zwj;\ud83d\udc66',
+  'family_woman_girl_girl':'\ud83d\udc69&zwj;\ud83d\udc67&zwj;\ud83d\udc67',
+  'family_woman_woman_boy':'\ud83d\udc69&zwj;\ud83d\udc69&zwj;\ud83d\udc66',
+  'family_woman_woman_boy_boy':'\ud83d\udc69&zwj;\ud83d\udc69&zwj;\ud83d\udc66&zwj;\ud83d\udc66',
+  'family_woman_woman_girl':'\ud83d\udc69&zwj;\ud83d\udc69&zwj;\ud83d\udc67',
+  'family_woman_woman_girl_boy':'\ud83d\udc69&zwj;\ud83d\udc69&zwj;\ud83d\udc67&zwj;\ud83d\udc66',
+  'family_woman_woman_girl_girl':'\ud83d\udc69&zwj;\ud83d\udc69&zwj;\ud83d\udc67&zwj;\ud83d\udc67',
+  'fast_forward':'\u23e9',
+  'fax':'\ud83d\udce0',
+  'fearful':'\ud83d\ude28',
+  'feet':'\ud83d\udc3e',
+  'female_detective':'\ud83d\udd75\ufe0f&zwj;\u2640\ufe0f',
+  'ferris_wheel':'\ud83c\udfa1',
+  'ferry':'\u26f4',
+  'field_hockey':'\ud83c\udfd1',
+  'file_cabinet':'\ud83d\uddc4',
+  'file_folder':'\ud83d\udcc1',
+  'film_projector':'\ud83d\udcfd',
+  'film_strip':'\ud83c\udf9e',
+  'fire':'\ud83d\udd25',
+  'fire_engine':'\ud83d\ude92',
+  'fireworks':'\ud83c\udf86',
+  'first_quarter_moon':'\ud83c\udf13',
+  'first_quarter_moon_with_face':'\ud83c\udf1b',
+  'fish':'\ud83d\udc1f',
+  'fish_cake':'\ud83c\udf65',
+  'fishing_pole_and_fish':'\ud83c\udfa3',
+  'fist_raised':'\u270a',
+  'fist_left':'\ud83e\udd1b',
+  'fist_right':'\ud83e\udd1c',
+  'flags':'\ud83c\udf8f',
+  'flashlight':'\ud83d\udd26',
+  'fleur_de_lis':'\u269c\ufe0f',
+  'flight_arrival':'\ud83d\udeec',
+  'flight_departure':'\ud83d\udeeb',
+  'floppy_disk':'\ud83d\udcbe',
+  'flower_playing_cards':'\ud83c\udfb4',
+  'flushed':'\ud83d\ude33',
+  'fog':'\ud83c\udf2b',
+  'foggy':'\ud83c\udf01',
+  'football':'\ud83c\udfc8',
+  'footprints':'\ud83d\udc63',
+  'fork_and_knife':'\ud83c\udf74',
+  'fountain':'\u26f2\ufe0f',
+  'fountain_pen':'\ud83d\udd8b',
+  'four_leaf_clover':'\ud83c\udf40',
+  'fox_face':'\ud83e\udd8a',
+  'framed_picture':'\ud83d\uddbc',
+  'free':'\ud83c\udd93',
+  'fried_egg':'\ud83c\udf73',
+  'fried_shrimp':'\ud83c\udf64',
+  'fries':'\ud83c\udf5f',
+  'frog':'\ud83d\udc38',
+  'frowning':'\ud83d\ude26',
+  'frowning_face':'\u2639\ufe0f',
+  'frowning_man':'\ud83d\ude4d&zwj;\u2642\ufe0f',
+  'frowning_woman':'\ud83d\ude4d',
+  'middle_finger':'\ud83d\udd95',
+  'fuelpump':'\u26fd\ufe0f',
+  'full_moon':'\ud83c\udf15',
+  'full_moon_with_face':'\ud83c\udf1d',
+  'funeral_urn':'\u26b1\ufe0f',
+  'game_die':'\ud83c\udfb2',
+  'gear':'\u2699\ufe0f',
+  'gem':'\ud83d\udc8e',
+  'gemini':'\u264a\ufe0f',
+  'ghost':'\ud83d\udc7b',
+  'gift':'\ud83c\udf81',
+  'gift_heart':'\ud83d\udc9d',
+  'girl':'\ud83d\udc67',
+  'globe_with_meridians':'\ud83c\udf10',
+  'goal_net':'\ud83e\udd45',
+  'goat':'\ud83d\udc10',
+  'golf':'\u26f3\ufe0f',
+  'golfing_man':'\ud83c\udfcc\ufe0f',
+  'golfing_woman':'\ud83c\udfcc\ufe0f&zwj;\u2640\ufe0f',
+  'gorilla':'\ud83e\udd8d',
+  'grapes':'\ud83c\udf47',
+  'green_apple':'\ud83c\udf4f',
+  'green_book':'\ud83d\udcd7',
+  'green_heart':'\ud83d\udc9a',
+  'green_salad':'\ud83e\udd57',
+  'grey_exclamation':'\u2755',
+  'grey_question':'\u2754',
+  'grimacing':'\ud83d\ude2c',
+  'grin':'\ud83d\ude01',
+  'grinning':'\ud83d\ude00',
+  'guardsman':'\ud83d\udc82',
+  'guardswoman':'\ud83d\udc82&zwj;\u2640\ufe0f',
+  'guitar':'\ud83c\udfb8',
+  'gun':'\ud83d\udd2b',
+  'haircut_woman':'\ud83d\udc87',
+  'haircut_man':'\ud83d\udc87&zwj;\u2642\ufe0f',
+  'hamburger':'\ud83c\udf54',
+  'hammer':'\ud83d\udd28',
+  'hammer_and_pick':'\u2692',
+  'hammer_and_wrench':'\ud83d\udee0',
+  'hamster':'\ud83d\udc39',
+  'hand':'\u270b',
+  'handbag':'\ud83d\udc5c',
+  'handshake':'\ud83e\udd1d',
+  'hankey':'\ud83d\udca9',
+  'hatched_chick':'\ud83d\udc25',
+  'hatching_chick':'\ud83d\udc23',
+  'headphones':'\ud83c\udfa7',
+  'hear_no_evil':'\ud83d\ude49',
+  'heart':'\u2764\ufe0f',
+  'heart_decoration':'\ud83d\udc9f',
+  'heart_eyes':'\ud83d\ude0d',
+  'heart_eyes_cat':'\ud83d\ude3b',
+  'heartbeat':'\ud83d\udc93',
+  'heartpulse':'\ud83d\udc97',
+  'hearts':'\u2665\ufe0f',
+  'heavy_check_mark':'\u2714\ufe0f',
+  'heavy_division_sign':'\u2797',
+  'heavy_dollar_sign':'\ud83d\udcb2',
+  'heavy_heart_exclamation':'\u2763\ufe0f',
+  'heavy_minus_sign':'\u2796',
+  'heavy_multiplication_x':'\u2716\ufe0f',
+  'heavy_plus_sign':'\u2795',
+  'helicopter':'\ud83d\ude81',
+  'herb':'\ud83c\udf3f',
+  'hibiscus':'\ud83c\udf3a',
+  'high_brightness':'\ud83d\udd06',
+  'high_heel':'\ud83d\udc60',
+  'hocho':'\ud83d\udd2a',
+  'hole':'\ud83d\udd73',
+  'honey_pot':'\ud83c\udf6f',
+  'horse':'\ud83d\udc34',
+  'horse_racing':'\ud83c\udfc7',
+  'hospital':'\ud83c\udfe5',
+  'hot_pepper':'\ud83c\udf36',
+  'hotdog':'\ud83c\udf2d',
+  'hotel':'\ud83c\udfe8',
+  'hotsprings':'\u2668\ufe0f',
+  'hourglass':'\u231b\ufe0f',
+  'hourglass_flowing_sand':'\u23f3',
+  'house':'\ud83c\udfe0',
+  'house_with_garden':'\ud83c\udfe1',
+  'houses':'\ud83c\udfd8',
+  'hugs':'\ud83e\udd17',
+  'hushed':'\ud83d\ude2f',
+  'ice_cream':'\ud83c\udf68',
+  'ice_hockey':'\ud83c\udfd2',
+  'ice_skate':'\u26f8',
+  'icecream':'\ud83c\udf66',
+  'id':'\ud83c\udd94',
+  'ideograph_advantage':'\ud83c\ude50',
+  'imp':'\ud83d\udc7f',
+  'inbox_tray':'\ud83d\udce5',
+  'incoming_envelope':'\ud83d\udce8',
+  'tipping_hand_woman':'\ud83d\udc81',
+  'information_source':'\u2139\ufe0f',
+  'innocent':'\ud83d\ude07',
+  'interrobang':'\u2049\ufe0f',
+  'iphone':'\ud83d\udcf1',
+  'izakaya_lantern':'\ud83c\udfee',
+  'jack_o_lantern':'\ud83c\udf83',
+  'japan':'\ud83d\uddfe',
+  'japanese_castle':'\ud83c\udfef',
+  'japanese_goblin':'\ud83d\udc7a',
+  'japanese_ogre':'\ud83d\udc79',
+  'jeans':'\ud83d\udc56',
+  'joy':'\ud83d\ude02',
+  'joy_cat':'\ud83d\ude39',
+  'joystick':'\ud83d\udd79',
+  'kaaba':'\ud83d\udd4b',
+  'key':'\ud83d\udd11',
+  'keyboard':'\u2328\ufe0f',
+  'keycap_ten':'\ud83d\udd1f',
+  'kick_scooter':'\ud83d\udef4',
+  'kimono':'\ud83d\udc58',
+  'kiss':'\ud83d\udc8b',
+  'kissing':'\ud83d\ude17',
+  'kissing_cat':'\ud83d\ude3d',
+  'kissing_closed_eyes':'\ud83d\ude1a',
+  'kissing_heart':'\ud83d\ude18',
+  'kissing_smiling_eyes':'\ud83d\ude19',
+  'kiwi_fruit':'\ud83e\udd5d',
+  'koala':'\ud83d\udc28',
+  'koko':'\ud83c\ude01',
+  'label':'\ud83c\udff7',
+  'large_blue_circle':'\ud83d\udd35',
+  'large_blue_diamond':'\ud83d\udd37',
+  'large_orange_diamond':'\ud83d\udd36',
+  'last_quarter_moon':'\ud83c\udf17',
+  'last_quarter_moon_with_face':'\ud83c\udf1c',
+  'latin_cross':'\u271d\ufe0f',
+  'laughing':'\ud83d\ude06',
+  'leaves':'\ud83c\udf43',
+  'ledger':'\ud83d\udcd2',
+  'left_luggage':'\ud83d\udec5',
+  'left_right_arrow':'\u2194\ufe0f',
+  'leftwards_arrow_with_hook':'\u21a9\ufe0f',
+  'lemon':'\ud83c\udf4b',
+  'leo':'\u264c\ufe0f',
+  'leopard':'\ud83d\udc06',
+  'level_slider':'\ud83c\udf9a',
+  'libra':'\u264e\ufe0f',
+  'light_rail':'\ud83d\ude88',
+  'link':'\ud83d\udd17',
+  'lion':'\ud83e\udd81',
+  'lips':'\ud83d\udc44',
+  'lipstick':'\ud83d\udc84',
+  'lizard':'\ud83e\udd8e',
+  'lock':'\ud83d\udd12',
+  'lock_with_ink_pen':'\ud83d\udd0f',
+  'lollipop':'\ud83c\udf6d',
+  'loop':'\u27bf',
+  'loud_sound':'\ud83d\udd0a',
+  'loudspeaker':'\ud83d\udce2',
+  'love_hotel':'\ud83c\udfe9',
+  'love_letter':'\ud83d\udc8c',
+  'low_brightness':'\ud83d\udd05',
+  'lying_face':'\ud83e\udd25',
+  'm':'\u24c2\ufe0f',
+  'mag':'\ud83d\udd0d',
+  'mag_right':'\ud83d\udd0e',
+  'mahjong':'\ud83c\udc04\ufe0f',
+  'mailbox':'\ud83d\udceb',
+  'mailbox_closed':'\ud83d\udcea',
+  'mailbox_with_mail':'\ud83d\udcec',
+  'mailbox_with_no_mail':'\ud83d\udced',
+  'man':'\ud83d\udc68',
+  'man_artist':'\ud83d\udc68&zwj;\ud83c\udfa8',
+  'man_astronaut':'\ud83d\udc68&zwj;\ud83d\ude80',
+  'man_cartwheeling':'\ud83e\udd38&zwj;\u2642\ufe0f',
+  'man_cook':'\ud83d\udc68&zwj;\ud83c\udf73',
+  'man_dancing':'\ud83d\udd7a',
+  'man_facepalming':'\ud83e\udd26&zwj;\u2642\ufe0f',
+  'man_factory_worker':'\ud83d\udc68&zwj;\ud83c\udfed',
+  'man_farmer':'\ud83d\udc68&zwj;\ud83c\udf3e',
+  'man_firefighter':'\ud83d\udc68&zwj;\ud83d\ude92',
+  'man_health_worker':'\ud83d\udc68&zwj;\u2695\ufe0f',
+  'man_in_tuxedo':'\ud83e\udd35',
+  'man_judge':'\ud83d\udc68&zwj;\u2696\ufe0f',
+  'man_juggling':'\ud83e\udd39&zwj;\u2642\ufe0f',
+  'man_mechanic':'\ud83d\udc68&zwj;\ud83d\udd27',
+  'man_office_worker':'\ud83d\udc68&zwj;\ud83d\udcbc',
+  'man_pilot':'\ud83d\udc68&zwj;\u2708\ufe0f',
+  'man_playing_handball':'\ud83e\udd3e&zwj;\u2642\ufe0f',
+  'man_playing_water_polo':'\ud83e\udd3d&zwj;\u2642\ufe0f',
+  'man_scientist':'\ud83d\udc68&zwj;\ud83d\udd2c',
+  'man_shrugging':'\ud83e\udd37&zwj;\u2642\ufe0f',
+  'man_singer':'\ud83d\udc68&zwj;\ud83c\udfa4',
+  'man_student':'\ud83d\udc68&zwj;\ud83c\udf93',
+  'man_teacher':'\ud83d\udc68&zwj;\ud83c\udfeb',
+  'man_technologist':'\ud83d\udc68&zwj;\ud83d\udcbb',
+  'man_with_gua_pi_mao':'\ud83d\udc72',
+  'man_with_turban':'\ud83d\udc73',
+  'tangerine':'\ud83c\udf4a',
+  'mans_shoe':'\ud83d\udc5e',
+  'mantelpiece_clock':'\ud83d\udd70',
+  'maple_leaf':'\ud83c\udf41',
+  'martial_arts_uniform':'\ud83e\udd4b',
+  'mask':'\ud83d\ude37',
+  'massage_woman':'\ud83d\udc86',
+  'massage_man':'\ud83d\udc86&zwj;\u2642\ufe0f',
+  'meat_on_bone':'\ud83c\udf56',
+  'medal_military':'\ud83c\udf96',
+  'medal_sports':'\ud83c\udfc5',
+  'mega':'\ud83d\udce3',
+  'melon':'\ud83c\udf48',
+  'memo':'\ud83d\udcdd',
+  'men_wrestling':'\ud83e\udd3c&zwj;\u2642\ufe0f',
+  'menorah':'\ud83d\udd4e',
+  'mens':'\ud83d\udeb9',
+  'metal':'\ud83e\udd18',
+  'metro':'\ud83d\ude87',
+  'microphone':'\ud83c\udfa4',
+  'microscope':'\ud83d\udd2c',
+  'milk_glass':'\ud83e\udd5b',
+  'milky_way':'\ud83c\udf0c',
+  'minibus':'\ud83d\ude90',
+  'minidisc':'\ud83d\udcbd',
+  'mobile_phone_off':'\ud83d\udcf4',
+  'money_mouth_face':'\ud83e\udd11',
+  'money_with_wings':'\ud83d\udcb8',
+  'moneybag':'\ud83d\udcb0',
+  'monkey':'\ud83d\udc12',
+  'monkey_face':'\ud83d\udc35',
+  'monorail':'\ud83d\ude9d',
+  'moon':'\ud83c\udf14',
+  'mortar_board':'\ud83c\udf93',
+  'mosque':'\ud83d\udd4c',
+  'motor_boat':'\ud83d\udee5',
+  'motor_scooter':'\ud83d\udef5',
+  'motorcycle':'\ud83c\udfcd',
+  'motorway':'\ud83d\udee3',
+  'mount_fuji':'\ud83d\uddfb',
+  'mountain':'\u26f0',
+  'mountain_biking_man':'\ud83d\udeb5',
+  'mountain_biking_woman':'\ud83d\udeb5&zwj;\u2640\ufe0f',
+  'mountain_cableway':'\ud83d\udea0',
+  'mountain_railway':'\ud83d\ude9e',
+  'mountain_snow':'\ud83c\udfd4',
+  'mouse':'\ud83d\udc2d',
+  'mouse2':'\ud83d\udc01',
+  'movie_camera':'\ud83c\udfa5',
+  'moyai':'\ud83d\uddff',
+  'mrs_claus':'\ud83e\udd36',
+  'muscle':'\ud83d\udcaa',
+  'mushroom':'\ud83c\udf44',
+  'musical_keyboard':'\ud83c\udfb9',
+  'musical_note':'\ud83c\udfb5',
+  'musical_score':'\ud83c\udfbc',
+  'mute':'\ud83d\udd07',
+  'nail_care':'\ud83d\udc85',
+  'name_badge':'\ud83d\udcdb',
+  'national_park':'\ud83c\udfde',
+  'nauseated_face':'\ud83e\udd22',
+  'necktie':'\ud83d\udc54',
+  'negative_squared_cross_mark':'\u274e',
+  'nerd_face':'\ud83e\udd13',
+  'neutral_face':'\ud83d\ude10',
+  'new':'\ud83c\udd95',
+  'new_moon':'\ud83c\udf11',
+  'new_moon_with_face':'\ud83c\udf1a',
+  'newspaper':'\ud83d\udcf0',
+  'newspaper_roll':'\ud83d\uddde',
+  'next_track_button':'\u23ed',
+  'ng':'\ud83c\udd96',
+  'no_good_man':'\ud83d\ude45&zwj;\u2642\ufe0f',
+  'no_good_woman':'\ud83d\ude45',
+  'night_with_stars':'\ud83c\udf03',
+  'no_bell':'\ud83d\udd15',
+  'no_bicycles':'\ud83d\udeb3',
+  'no_entry':'\u26d4\ufe0f',
+  'no_entry_sign':'\ud83d\udeab',
+  'no_mobile_phones':'\ud83d\udcf5',
+  'no_mouth':'\ud83d\ude36',
+  'no_pedestrians':'\ud83d\udeb7',
+  'no_smoking':'\ud83d\udead',
+  'non-potable_water':'\ud83d\udeb1',
+  'nose':'\ud83d\udc43',
+  'notebook':'\ud83d\udcd3',
+  'notebook_with_decorative_cover':'\ud83d\udcd4',
+  'notes':'\ud83c\udfb6',
+  'nut_and_bolt':'\ud83d\udd29',
+  'o':'\u2b55\ufe0f',
+  'o2':'\ud83c\udd7e\ufe0f',
+  'ocean':'\ud83c\udf0a',
+  'octopus':'\ud83d\udc19',
+  'oden':'\ud83c\udf62',
+  'office':'\ud83c\udfe2',
+  'oil_drum':'\ud83d\udee2',
+  'ok':'\ud83c\udd97',
+  'ok_hand':'\ud83d\udc4c',
+  'ok_man':'\ud83d\ude46&zwj;\u2642\ufe0f',
+  'ok_woman':'\ud83d\ude46',
+  'old_key':'\ud83d\udddd',
+  'older_man':'\ud83d\udc74',
+  'older_woman':'\ud83d\udc75',
+  'om':'\ud83d\udd49',
+  'on':'\ud83d\udd1b',
+  'oncoming_automobile':'\ud83d\ude98',
+  'oncoming_bus':'\ud83d\ude8d',
+  'oncoming_police_car':'\ud83d\ude94',
+  'oncoming_taxi':'\ud83d\ude96',
+  'open_file_folder':'\ud83d\udcc2',
+  'open_hands':'\ud83d\udc50',
+  'open_mouth':'\ud83d\ude2e',
+  'open_umbrella':'\u2602\ufe0f',
+  'ophiuchus':'\u26ce',
+  'orange_book':'\ud83d\udcd9',
+  'orthodox_cross':'\u2626\ufe0f',
+  'outbox_tray':'\ud83d\udce4',
+  'owl':'\ud83e\udd89',
+  'ox':'\ud83d\udc02',
+  'package':'\ud83d\udce6',
+  'page_facing_up':'\ud83d\udcc4',
+  'page_with_curl':'\ud83d\udcc3',
+  'pager':'\ud83d\udcdf',
+  'paintbrush':'\ud83d\udd8c',
+  'palm_tree':'\ud83c\udf34',
+  'pancakes':'\ud83e\udd5e',
+  'panda_face':'\ud83d\udc3c',
+  'paperclip':'\ud83d\udcce',
+  'paperclips':'\ud83d\udd87',
+  'parasol_on_ground':'\u26f1',
+  'parking':'\ud83c\udd7f\ufe0f',
+  'part_alternation_mark':'\u303d\ufe0f',
+  'partly_sunny':'\u26c5\ufe0f',
+  'passenger_ship':'\ud83d\udef3',
+  'passport_control':'\ud83d\udec2',
+  'pause_button':'\u23f8',
+  'peace_symbol':'\u262e\ufe0f',
+  'peach':'\ud83c\udf51',
+  'peanuts':'\ud83e\udd5c',
+  'pear':'\ud83c\udf50',
+  'pen':'\ud83d\udd8a',
+  'pencil2':'\u270f\ufe0f',
+  'penguin':'\ud83d\udc27',
+  'pensive':'\ud83d\ude14',
+  'performing_arts':'\ud83c\udfad',
+  'persevere':'\ud83d\ude23',
+  'person_fencing':'\ud83e\udd3a',
+  'pouting_woman':'\ud83d\ude4e',
+  'phone':'\u260e\ufe0f',
+  'pick':'\u26cf',
+  'pig':'\ud83d\udc37',
+  'pig2':'\ud83d\udc16',
+  'pig_nose':'\ud83d\udc3d',
+  'pill':'\ud83d\udc8a',
+  'pineapple':'\ud83c\udf4d',
+  'ping_pong':'\ud83c\udfd3',
+  'pisces':'\u2653\ufe0f',
+  'pizza':'\ud83c\udf55',
+  'place_of_worship':'\ud83d\uded0',
+  'plate_with_cutlery':'\ud83c\udf7d',
+  'play_or_pause_button':'\u23ef',
+  'point_down':'\ud83d\udc47',
+  'point_left':'\ud83d\udc48',
+  'point_right':'\ud83d\udc49',
+  'point_up':'\u261d\ufe0f',
+  'point_up_2':'\ud83d\udc46',
+  'police_car':'\ud83d\ude93',
+  'policewoman':'\ud83d\udc6e&zwj;\u2640\ufe0f',
+  'poodle':'\ud83d\udc29',
+  'popcorn':'\ud83c\udf7f',
+  'post_office':'\ud83c\udfe3',
+  'postal_horn':'\ud83d\udcef',
+  'postbox':'\ud83d\udcee',
+  'potable_water':'\ud83d\udeb0',
+  'potato':'\ud83e\udd54',
+  'pouch':'\ud83d\udc5d',
+  'poultry_leg':'\ud83c\udf57',
+  'pound':'\ud83d\udcb7',
+  'rage':'\ud83d\ude21',
+  'pouting_cat':'\ud83d\ude3e',
+  'pouting_man':'\ud83d\ude4e&zwj;\u2642\ufe0f',
+  'pray':'\ud83d\ude4f',
+  'prayer_beads':'\ud83d\udcff',
+  'pregnant_woman':'\ud83e\udd30',
+  'previous_track_button':'\u23ee',
+  'prince':'\ud83e\udd34',
+  'princess':'\ud83d\udc78',
+  'printer':'\ud83d\udda8',
+  'purple_heart':'\ud83d\udc9c',
+  'purse':'\ud83d\udc5b',
+  'pushpin':'\ud83d\udccc',
+  'put_litter_in_its_place':'\ud83d\udeae',
+  'question':'\u2753',
+  'rabbit':'\ud83d\udc30',
+  'rabbit2':'\ud83d\udc07',
+  'racehorse':'\ud83d\udc0e',
+  'racing_car':'\ud83c\udfce',
+  'radio':'\ud83d\udcfb',
+  'radio_button':'\ud83d\udd18',
+  'radioactive':'\u2622\ufe0f',
+  'railway_car':'\ud83d\ude83',
+  'railway_track':'\ud83d\udee4',
+  'rainbow':'\ud83c\udf08',
+  'rainbow_flag':'\ud83c\udff3\ufe0f&zwj;\ud83c\udf08',
+  'raised_back_of_hand':'\ud83e\udd1a',
+  'raised_hand_with_fingers_splayed':'\ud83d\udd90',
+  'raised_hands':'\ud83d\ude4c',
+  'raising_hand_woman':'\ud83d\ude4b',
+  'raising_hand_man':'\ud83d\ude4b&zwj;\u2642\ufe0f',
+  'ram':'\ud83d\udc0f',
+  'ramen':'\ud83c\udf5c',
+  'rat':'\ud83d\udc00',
+  'record_button':'\u23fa',
+  'recycle':'\u267b\ufe0f',
+  'red_circle':'\ud83d\udd34',
+  'registered':'\u00ae\ufe0f',
+  'relaxed':'\u263a\ufe0f',
+  'relieved':'\ud83d\ude0c',
+  'reminder_ribbon':'\ud83c\udf97',
+  'repeat':'\ud83d\udd01',
+  'repeat_one':'\ud83d\udd02',
+  'rescue_worker_helmet':'\u26d1',
+  'restroom':'\ud83d\udebb',
+  'revolving_hearts':'\ud83d\udc9e',
+  'rewind':'\u23ea',
+  'rhinoceros':'\ud83e\udd8f',
+  'ribbon':'\ud83c\udf80',
+  'rice':'\ud83c\udf5a',
+  'rice_ball':'\ud83c\udf59',
+  'rice_cracker':'\ud83c\udf58',
+  'rice_scene':'\ud83c\udf91',
+  'right_anger_bubble':'\ud83d\uddef',
+  'ring':'\ud83d\udc8d',
+  'robot':'\ud83e\udd16',
+  'rocket':'\ud83d\ude80',
+  'rofl':'\ud83e\udd23',
+  'roll_eyes':'\ud83d\ude44',
+  'roller_coaster':'\ud83c\udfa2',
+  'rooster':'\ud83d\udc13',
+  'rose':'\ud83c\udf39',
+  'rosette':'\ud83c\udff5',
+  'rotating_light':'\ud83d\udea8',
+  'round_pushpin':'\ud83d\udccd',
+  'rowing_man':'\ud83d\udea3',
+  'rowing_woman':'\ud83d\udea3&zwj;\u2640\ufe0f',
+  'rugby_football':'\ud83c\udfc9',
+  'running_man':'\ud83c\udfc3',
+  'running_shirt_with_sash':'\ud83c\udfbd',
+  'running_woman':'\ud83c\udfc3&zwj;\u2640\ufe0f',
+  'sa':'\ud83c\ude02\ufe0f',
+  'sagittarius':'\u2650\ufe0f',
+  'sake':'\ud83c\udf76',
+  'sandal':'\ud83d\udc61',
+  'santa':'\ud83c\udf85',
+  'satellite':'\ud83d\udce1',
+  'saxophone':'\ud83c\udfb7',
+  'school':'\ud83c\udfeb',
+  'school_satchel':'\ud83c\udf92',
+  'scissors':'\u2702\ufe0f',
+  'scorpion':'\ud83e\udd82',
+  'scorpius':'\u264f\ufe0f',
+  'scream':'\ud83d\ude31',
+  'scream_cat':'\ud83d\ude40',
+  'scroll':'\ud83d\udcdc',
+  'seat':'\ud83d\udcba',
+  'secret':'\u3299\ufe0f',
+  'see_no_evil':'\ud83d\ude48',
+  'seedling':'\ud83c\udf31',
+  'selfie':'\ud83e\udd33',
+  'shallow_pan_of_food':'\ud83e\udd58',
+  'shamrock':'\u2618\ufe0f',
+  'shark':'\ud83e\udd88',
+  'shaved_ice':'\ud83c\udf67',
+  'sheep':'\ud83d\udc11',
+  'shell':'\ud83d\udc1a',
+  'shield':'\ud83d\udee1',
+  'shinto_shrine':'\u26e9',
+  'ship':'\ud83d\udea2',
+  'shirt':'\ud83d\udc55',
+  'shopping':'\ud83d\udecd',
+  'shopping_cart':'\ud83d\uded2',
+  'shower':'\ud83d\udebf',
+  'shrimp':'\ud83e\udd90',
+  'signal_strength':'\ud83d\udcf6',
+  'six_pointed_star':'\ud83d\udd2f',
+  'ski':'\ud83c\udfbf',
+  'skier':'\u26f7',
+  'skull':'\ud83d\udc80',
+  'skull_and_crossbones':'\u2620\ufe0f',
+  'sleeping':'\ud83d\ude34',
+  'sleeping_bed':'\ud83d\udecc',
+  'sleepy':'\ud83d\ude2a',
+  'slightly_frowning_face':'\ud83d\ude41',
+  'slightly_smiling_face':'\ud83d\ude42',
+  'slot_machine':'\ud83c\udfb0',
+  'small_airplane':'\ud83d\udee9',
+  'small_blue_diamond':'\ud83d\udd39',
+  'small_orange_diamond':'\ud83d\udd38',
+  'small_red_triangle':'\ud83d\udd3a',
+  'small_red_triangle_down':'\ud83d\udd3b',
+  'smile':'\ud83d\ude04',
+  'smile_cat':'\ud83d\ude38',
+  'smiley':'\ud83d\ude03',
+  'smiley_cat':'\ud83d\ude3a',
+  'smiling_imp':'\ud83d\ude08',
+  'smirk':'\ud83d\ude0f',
+  'smirk_cat':'\ud83d\ude3c',
+  'smoking':'\ud83d\udeac',
+  'snail':'\ud83d\udc0c',
+  'snake':'\ud83d\udc0d',
+  'sneezing_face':'\ud83e\udd27',
+  'snowboarder':'\ud83c\udfc2',
+  'snowflake':'\u2744\ufe0f',
+  'snowman':'\u26c4\ufe0f',
+  'snowman_with_snow':'\u2603\ufe0f',
+  'sob':'\ud83d\ude2d',
+  'soccer':'\u26bd\ufe0f',
+  'soon':'\ud83d\udd1c',
+  'sos':'\ud83c\udd98',
+  'sound':'\ud83d\udd09',
+  'space_invader':'\ud83d\udc7e',
+  'spades':'\u2660\ufe0f',
+  'spaghetti':'\ud83c\udf5d',
+  'sparkle':'\u2747\ufe0f',
+  'sparkler':'\ud83c\udf87',
+  'sparkles':'\u2728',
+  'sparkling_heart':'\ud83d\udc96',
+  'speak_no_evil':'\ud83d\ude4a',
+  'speaker':'\ud83d\udd08',
+  'speaking_head':'\ud83d\udde3',
+  'speech_balloon':'\ud83d\udcac',
+  'speedboat':'\ud83d\udea4',
+  'spider':'\ud83d\udd77',
+  'spider_web':'\ud83d\udd78',
+  'spiral_calendar':'\ud83d\uddd3',
+  'spiral_notepad':'\ud83d\uddd2',
+  'spoon':'\ud83e\udd44',
+  'squid':'\ud83e\udd91',
+  'stadium':'\ud83c\udfdf',
+  'star':'\u2b50\ufe0f',
+  'star2':'\ud83c\udf1f',
+  'star_and_crescent':'\u262a\ufe0f',
+  'star_of_david':'\u2721\ufe0f',
+  'stars':'\ud83c\udf20',
+  'station':'\ud83d\ude89',
+  'statue_of_liberty':'\ud83d\uddfd',
+  'steam_locomotive':'\ud83d\ude82',
+  'stew':'\ud83c\udf72',
+  'stop_button':'\u23f9',
+  'stop_sign':'\ud83d\uded1',
+  'stopwatch':'\u23f1',
+  'straight_ruler':'\ud83d\udccf',
+  'strawberry':'\ud83c\udf53',
+  'stuck_out_tongue':'\ud83d\ude1b',
+  'stuck_out_tongue_closed_eyes':'\ud83d\ude1d',
+  'stuck_out_tongue_winking_eye':'\ud83d\ude1c',
+  'studio_microphone':'\ud83c\udf99',
+  'stuffed_flatbread':'\ud83e\udd59',
+  'sun_behind_large_cloud':'\ud83c\udf25',
+  'sun_behind_rain_cloud':'\ud83c\udf26',
+  'sun_behind_small_cloud':'\ud83c\udf24',
+  'sun_with_face':'\ud83c\udf1e',
+  'sunflower':'\ud83c\udf3b',
+  'sunglasses':'\ud83d\ude0e',
+  'sunny':'\u2600\ufe0f',
+  'sunrise':'\ud83c\udf05',
+  'sunrise_over_mountains':'\ud83c\udf04',
+  'surfing_man':'\ud83c\udfc4',
+  'surfing_woman':'\ud83c\udfc4&zwj;\u2640\ufe0f',
+  'sushi':'\ud83c\udf63',
+  'suspension_railway':'\ud83d\ude9f',
+  'sweat':'\ud83d\ude13',
+  'sweat_drops':'\ud83d\udca6',
+  'sweat_smile':'\ud83d\ude05',
+  'sweet_potato':'\ud83c\udf60',
+  'swimming_man':'\ud83c\udfca',
+  'swimming_woman':'\ud83c\udfca&zwj;\u2640\ufe0f',
+  'symbols':'\ud83d\udd23',
+  'synagogue':'\ud83d\udd4d',
+  'syringe':'\ud83d\udc89',
+  'taco':'\ud83c\udf2e',
+  'tada':'\ud83c\udf89',
+  'tanabata_tree':'\ud83c\udf8b',
+  'taurus':'\u2649\ufe0f',
+  'taxi':'\ud83d\ude95',
+  'tea':'\ud83c\udf75',
+  'telephone_receiver':'\ud83d\udcde',
+  'telescope':'\ud83d\udd2d',
+  'tennis':'\ud83c\udfbe',
+  'tent':'\u26fa\ufe0f',
+  'thermometer':'\ud83c\udf21',
+  'thinking':'\ud83e\udd14',
+  'thought_balloon':'\ud83d\udcad',
+  'ticket':'\ud83c\udfab',
+  'tickets':'\ud83c\udf9f',
+  'tiger':'\ud83d\udc2f',
+  'tiger2':'\ud83d\udc05',
+  'timer_clock':'\u23f2',
+  'tipping_hand_man':'\ud83d\udc81&zwj;\u2642\ufe0f',
+  'tired_face':'\ud83d\ude2b',
+  'tm':'\u2122\ufe0f',
+  'toilet':'\ud83d\udebd',
+  'tokyo_tower':'\ud83d\uddfc',
+  'tomato':'\ud83c\udf45',
+  'tongue':'\ud83d\udc45',
+  'top':'\ud83d\udd1d',
+  'tophat':'\ud83c\udfa9',
+  'tornado':'\ud83c\udf2a',
+  'trackball':'\ud83d\uddb2',
+  'tractor':'\ud83d\ude9c',
+  'traffic_light':'\ud83d\udea5',
+  'train':'\ud83d\ude8b',
+  'train2':'\ud83d\ude86',
+  'tram':'\ud83d\ude8a',
+  'triangular_flag_on_post':'\ud83d\udea9',
+  'triangular_ruler':'\ud83d\udcd0',
+  'trident':'\ud83d\udd31',
+  'triumph':'\ud83d\ude24',
+  'trolleybus':'\ud83d\ude8e',
+  'trophy':'\ud83c\udfc6',
+  'tropical_drink':'\ud83c\udf79',
+  'tropical_fish':'\ud83d\udc20',
+  'truck':'\ud83d\ude9a',
+  'trumpet':'\ud83c\udfba',
+  'tulip':'\ud83c\udf37',
+  'tumbler_glass':'\ud83e\udd43',
+  'turkey':'\ud83e\udd83',
+  'turtle':'\ud83d\udc22',
+  'tv':'\ud83d\udcfa',
+  'twisted_rightwards_arrows':'\ud83d\udd00',
+  'two_hearts':'\ud83d\udc95',
+  'two_men_holding_hands':'\ud83d\udc6c',
+  'two_women_holding_hands':'\ud83d\udc6d',
+  'u5272':'\ud83c\ude39',
+  'u5408':'\ud83c\ude34',
+  'u55b6':'\ud83c\ude3a',
+  'u6307':'\ud83c\ude2f\ufe0f',
+  'u6708':'\ud83c\ude37\ufe0f',
+  'u6709':'\ud83c\ude36',
+  'u6e80':'\ud83c\ude35',
+  'u7121':'\ud83c\ude1a\ufe0f',
+  'u7533':'\ud83c\ude38',
+  'u7981':'\ud83c\ude32',
+  'u7a7a':'\ud83c\ude33',
+  'umbrella':'\u2614\ufe0f',
+  'unamused':'\ud83d\ude12',
+  'underage':'\ud83d\udd1e',
+  'unicorn':'\ud83e\udd84',
+  'unlock':'\ud83d\udd13',
+  'up':'\ud83c\udd99',
+  'upside_down_face':'\ud83d\ude43',
+  'v':'\u270c\ufe0f',
+  'vertical_traffic_light':'\ud83d\udea6',
+  'vhs':'\ud83d\udcfc',
+  'vibration_mode':'\ud83d\udcf3',
+  'video_camera':'\ud83d\udcf9',
+  'video_game':'\ud83c\udfae',
+  'violin':'\ud83c\udfbb',
+  'virgo':'\u264d\ufe0f',
+  'volcano':'\ud83c\udf0b',
+  'volleyball':'\ud83c\udfd0',
+  'vs':'\ud83c\udd9a',
+  'vulcan_salute':'\ud83d\udd96',
+  'walking_man':'\ud83d\udeb6',
+  'walking_woman':'\ud83d\udeb6&zwj;\u2640\ufe0f',
+  'waning_crescent_moon':'\ud83c\udf18',
+  'waning_gibbous_moon':'\ud83c\udf16',
+  'warning':'\u26a0\ufe0f',
+  'wastebasket':'\ud83d\uddd1',
+  'watch':'\u231a\ufe0f',
+  'water_buffalo':'\ud83d\udc03',
+  'watermelon':'\ud83c\udf49',
+  'wave':'\ud83d\udc4b',
+  'wavy_dash':'\u3030\ufe0f',
+  'waxing_crescent_moon':'\ud83c\udf12',
+  'wc':'\ud83d\udebe',
+  'weary':'\ud83d\ude29',
+  'wedding':'\ud83d\udc92',
+  'weight_lifting_man':'\ud83c\udfcb\ufe0f',
+  'weight_lifting_woman':'\ud83c\udfcb\ufe0f&zwj;\u2640\ufe0f',
+  'whale':'\ud83d\udc33',
+  'whale2':'\ud83d\udc0b',
+  'wheel_of_dharma':'\u2638\ufe0f',
+  'wheelchair':'\u267f\ufe0f',
+  'white_check_mark':'\u2705',
+  'white_circle':'\u26aa\ufe0f',
+  'white_flag':'\ud83c\udff3\ufe0f',
+  'white_flower':'\ud83d\udcae',
+  'white_large_square':'\u2b1c\ufe0f',
+  'white_medium_small_square':'\u25fd\ufe0f',
+  'white_medium_square':'\u25fb\ufe0f',
+  'white_small_square':'\u25ab\ufe0f',
+  'white_square_button':'\ud83d\udd33',
+  'wilted_flower':'\ud83e\udd40',
+  'wind_chime':'\ud83c\udf90',
+  'wind_face':'\ud83c\udf2c',
+  'wine_glass':'\ud83c\udf77',
+  'wink':'\ud83d\ude09',
+  'wolf':'\ud83d\udc3a',
+  'woman':'\ud83d\udc69',
+  'woman_artist':'\ud83d\udc69&zwj;\ud83c\udfa8',
+  'woman_astronaut':'\ud83d\udc69&zwj;\ud83d\ude80',
+  'woman_cartwheeling':'\ud83e\udd38&zwj;\u2640\ufe0f',
+  'woman_cook':'\ud83d\udc69&zwj;\ud83c\udf73',
+  'woman_facepalming':'\ud83e\udd26&zwj;\u2640\ufe0f',
+  'woman_factory_worker':'\ud83d\udc69&zwj;\ud83c\udfed',
+  'woman_farmer':'\ud83d\udc69&zwj;\ud83c\udf3e',
+  'woman_firefighter':'\ud83d\udc69&zwj;\ud83d\ude92',
+  'woman_health_worker':'\ud83d\udc69&zwj;\u2695\ufe0f',
+  'woman_judge':'\ud83d\udc69&zwj;\u2696\ufe0f',
+  'woman_juggling':'\ud83e\udd39&zwj;\u2640\ufe0f',
+  'woman_mechanic':'\ud83d\udc69&zwj;\ud83d\udd27',
+  'woman_office_worker':'\ud83d\udc69&zwj;\ud83d\udcbc',
+  'woman_pilot':'\ud83d\udc69&zwj;\u2708\ufe0f',
+  'woman_playing_handball':'\ud83e\udd3e&zwj;\u2640\ufe0f',
+  'woman_playing_water_polo':'\ud83e\udd3d&zwj;\u2640\ufe0f',
+  'woman_scientist':'\ud83d\udc69&zwj;\ud83d\udd2c',
+  'woman_shrugging':'\ud83e\udd37&zwj;\u2640\ufe0f',
+  'woman_singer':'\ud83d\udc69&zwj;\ud83c\udfa4',
+  'woman_student':'\ud83d\udc69&zwj;\ud83c\udf93',
+  'woman_teacher':'\ud83d\udc69&zwj;\ud83c\udfeb',
+  'woman_technologist':'\ud83d\udc69&zwj;\ud83d\udcbb',
+  'woman_with_turban':'\ud83d\udc73&zwj;\u2640\ufe0f',
+  'womans_clothes':'\ud83d\udc5a',
+  'womans_hat':'\ud83d\udc52',
+  'women_wrestling':'\ud83e\udd3c&zwj;\u2640\ufe0f',
+  'womens':'\ud83d\udeba',
+  'world_map':'\ud83d\uddfa',
+  'worried':'\ud83d\ude1f',
+  'wrench':'\ud83d\udd27',
+  'writing_hand':'\u270d\ufe0f',
+  'x':'\u274c',
+  'yellow_heart':'\ud83d\udc9b',
+  'yen':'\ud83d\udcb4',
+  'yin_yang':'\u262f\ufe0f',
+  'yum':'\ud83d\ude0b',
+  'zap':'\u26a1\ufe0f',
+  'zipper_mouth_face':'\ud83e\udd10',
+  'zzz':'\ud83d\udca4',
+
+  /* special emojis :P */
+  'octocat':  '<img width="20" height="20" align="absmiddle" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAOwUlEQVR42uVbCVyO6RbPmn0sw9gZS0aZO4y5GTEUE2ObxjZjrbHEJVy3sWS5pkaWxjLEkCVDSbSgFLdESaWSLIVUSIi4kvb9f895vi/zbbR+yZ339/tbnu99n/ec/3Oe85xznufV0CjDBaAdwZqwnzCJ0FXjHV70/i8J5oQDhCFV8cJdq1atwqxZs+Ds7Iz4+HhqwgXCLELNKlK6G2Ej4e6lS5ewZcsWzJgxA+fOnWNZFqvzxT1v3boF/qcsBg0ahP3796OwsJAFWKYuIqjfPoS9cXFxWL58Obp06SInh5aWFr//jjoJWLlu3TolAorRuXNn7Ny5k4W4Spgj81xrgj5hLmED4RDhlNRygglBhADCSakpWxFMCHoETUJTwrYHDx7A1NT0je9nPHz4kN/fXl0EeI0aNeqtAjB69+4NPz8/FsSdlXvy5An8/f1hZ2cHCwsLGBsbY/To0cJy9PT0MGDAAAwePBhGRkbClNesWYODBw8iODgYOTk53M/d9evXo27duiW++8iRI3z/ZHURENOjR48ShSjGuHHjhHJ16tQp9TOKaNWqlZKpvw1MHluQOpSvk5eXh5YtW5ZbmarAvHnzmIBd6iCgXnZ2Npo1a1atCWAfwY5SHQTUKCoqQocOHao1AebmHBJgi7p8QBDP6epMwKFDvMDAWF0ELLS1ta3WBNy9e5cJMFIXAdvt7e2rNQHDhw9nAv5D+KKylV9y8+bNCi1pVYWZM2cyCfaVTcDdsqzH7xpBQRxcwqyylLdi5/K+KM/Q0dFhAqIri4Bn1T0AUgVpdmhYUeVHnD59+r1TnjF27Fgm4HhFCThoYmLyXhLQoEGD4mRKsyIE3OrZs+d7SQCDCyZcNSqv8k1evXoFTU3NUr+wzUcfYqRBf8yb/C2WzfoBFoTF08fBdMIITDD8CsP1+kL30x7Q6dYZH7drjfZ0f4fWLdG1Q1t81qMLBvTRwejB/TBl1BDMnzQGS2dMxKo5k7Fs9iSY/jAaBvR8Pc26pZaH02quLZSXgO6xsbGlelGnli1wZKcVMqN8gKcRwItrf+K/VB95doXaLwOJIVSzOU/+2Re5kV7IuuyJrIhTyLt6mmztLBBPNZLHoUAy9fE8UvJ8ikxfj8PwJPQErJeYlkquTZs2MQFLykuANgc/Jb2kn3Z3ZMaQUrmxwO1zyAo7gfRAJ6RfOIyMEFdkXj5F8BTK5lzxQv610yi8QcFatI8gQoCIK7x+hojwRnaE5H4JTiEj9Pjr/rJDqcZyn9b4ovu45LYbdWvXeqtsXMHiSlZ5CegRExPz1hd83PYj5POo0QinXyLFg48hnZTOiQ1Dzr1IZEaeQRoJn0HKZIR7lA2kfHrQUerXHTlx4ZL+rnjjFRGRGeYB5MUj2GnbW+XbuJFrp1heXgI6JCYmvvUFN1x3Aek3SWkapRAXMeJFGS8ge2Xfuog0toaykED3Mpk8+shOk+sv68Y50V9WuKewBKt5094o39atW/mRf5WXgIYZGRlo3Lixys4nj6A6Z1YMcqRCpwU4ouDlUyHk/QA/hNttR25Wlvh/ZthJUsil9ATQ/axkYbqEzDgfL0Ts/x35+aLyTES7IY36Q6w/+Q4/tP6wuUoZ9+7dy7ebVmQZjO/atavKzn32rAdeXkd6KCkXdAxZ13yFcLFnvPD73zrDVrsdTs6eggKSuSjjORHkUGoC0i86Iyc6QPQX7eqMnTodYNuzHU4vnosiaitMSUSavwMy6d3IvEUrzViVMrq5uXEX4ytCgL++vr5Sx7Vr1cIDX0dKkQJfj37Rs3jw1sBxkwlwGD4Ax3+ciN1faCHW76xQRFgAOcjSEMBkIe0x8nLzcez7kTg8Rh/uxuOxR/cTJISFSfq7eATpZCk8CAfXLVFJwIULXHnHoIoQYLtw4UKljps2aogXQcQuef/XAiMDKY+S4DhyEFwpDnCj9f+Afl8EbbWRTANaAdihlYoAMn8aZzyNuYODX/eD29TvRH/7v+qN8H27JdOAyWQfQQ74xPafVRLAPox9WUlK6hIGEgx4f00Kg2JcvHhRqeP6FIwknXemyen/2gLIIeC/CYk49M0AuE4xgtu0sThg8AUCN62TEuBdRgJo2Y+Kxh9D/k59SQiwH9QHobt3SAk4KSGA4oWjm1YqyVi8U6Soj4yOrHM/jTAyKVby/PnzIoNi8L+L4eXlpXoFcLcTgc1rAlISkJeXDxeK2A6P1hdTwI6mQPTJE+WbAlnJyE7PhNO3Q3BkrKGYWtxfHMkkmQLO0ilwA7+vXqAkn66urtBLUZ9iHfm30NBQaPAf165dA0d9vP2UlJSEp0+f4vHjx3j06JH4e+rUqUovcNmyGkiNEkLwklXsBG+ecMUOnfbYod1emG5uboFKJ8jPFVD0l0dBUHqoPDHpQeQEb0qc4FUHe3KAbYUT9JgzDbwOFL5MfN0fXkXhJ5PxSvLt2LFD1Ah5u4z1YJ14l4qnBe8v3rhxAzz4PAVG8nLHivIP0dHRiIiIQGRkpEgmrl69ClW1QBMjQ7LDW8hmU+RRI69ckJIkhL7jfRJBm62R+TJVYq6h0jhBRslsivqenT2MF/7OyI70VmkFhWnPJaS6OyPkt43IycqR9EfWlH7JDQUUTuNhCHR7Ke9YcRp/5coVoQPrcvnyZURFRYmBZlLS0kR8MVLD29sbnp6e8PHxQUBAgCgn8YO8E3z79m3BGKeVc+bMkXuBZt06SA12F/F5Go0gR4C8HBalPZMPXKL8lQKhPAqF+f97KXFyNx6HQsoPsshJ/kmAp2TKkJLISpXvjyxNhMYcDVLOEO+lPDi8B5mamipkZx1YF9YpJCRErAy+vr5CZ9ZdWABhDGEYYTBhAOFz3g4nfMJelNCbkNCpUye5F034mvxIPi1/FM+zQCw0k5B9O0iEr5kRXkqhMJOVf9NXIHjtT7hmaymSoBzKETimkAuFpaF1dkwI9RcmIYaXv3BJXoGCuyIgk5WpefPmKCgoYK46SmX/RKoL69Sfl0WuFEl1HlmWJXE5z6WmTZvKJxxmxkIQ3AuU5APk6NICj4hRT6eITTEEzqWk55HHPjz3cxJhNF5cxeNT9kj2cRDTQjEkzpDtjyyCic5l5fEA7uSHFEefR5pPsahrb2B9QkICFHeJ51HunkdLIg0VLY0BFKdLwllVHp4dHyvst3QuEiiju21vA/+VZkiluIKt4I3RIfWXQ4QgKUxkni47LJWUP3PmjHo2RxVI+CebmKJP6EiFDVurxUgmExe5PHlnPAkn8w4QqW62NCVmYopozid5H0CI9RKE21ggJeAYEeMnfitOnRn5XCfgeJ+VTosWQU8MOc6ZE0cqnUm4fv165SrPBVHCfMI4TowUfmOfsIcdJh92kBWmUcP6GDt8EDZbzIffH5tx3/ewSFjw5LKk0MEFEkZenDBjgew7Yiog5brkt+QrknvJmhIp4Apw/A1bVpjhG/0v5d7Vrl07bNu2TelUSqUoz8uI3Z49OEtBAy+TdP1CqKtwHzvQUxxgTJs2TeX5gdq1a0ObSmCjh+jB+NuvRamL1+3ls77HCip1rTSdJP5eNnMizKndjMLoH42G4bthX+FzHS3UVVEC69evH3799VeKMXJZrlWKclUGAZ5jxoxB02ZNsNlxH74aagBHZyex986HlVTczyGmI58h4CjL2toa48ePFxsUPEotWrQoc0GT0/C2bduiY8eO4ISMcxLeoOFYhS6qm2EpoZG65jmbv+dPSyRZlt5QfVjvtX19AOFNL+aDFNI4m0eFc9Ho5ORkaGtrl5kAVp6DMOk88efEjLe++ZhclZwHTJHEHbs4YOCmLj2645fdvwnTK42zoXtaEHwNDQ3LXdZm5yad3/2r+gQmDsRnIF5KAldX6zdsgG/GG8F44Vzcu3eP2y1K6GPr2rVrK1zbnz59Or/LoaoJCPZ4kCZsjw9GECL79OmDj9q2wb+320C3/5fgPQO6Vrzh+fpcDqxXr16lbHBwgkZXm6okYJr0ECMrX5vraiJ1lArEjrEnzWuOqemiYj9spGd2ee478XkiPsJakmJ83qA05/8qXNurJFLiunXrhpo1a6LxB02wyHIFZpovgOHwYfjZ0hK2lH5u2rwZ5suWYv5ycyUlmjRpgl69eimlrFy3kwuoyOvXr19frm3RokVMwPZ3TYC57E6xVq+e6KzVDSaL/oEp82Zh8IhhWLjGAp/p9oX5ujVKBNjY2MDV1VWuzd3dXaTesm2biUQuZ8u28elSPmKr8a4vdog8GnJpcT1N1KHUuBbt0jSgWuGbzJh3mVhh2TYHBwdxjFa2jVcZnvPVlQBOLXdZWlqW2ZFxNYYVlm07fPgwAgMD5dr4OD5HeHLFFxM+O42DGtXhIkFaMQlcUjIzM0P37t1Ro0YNpZPjPJcVK7SOjo5ybU5OTqIAo0gAh97VlgAZIj4l8Pn4WFaO64ocuXG6zJtDbMqySnC7IgF8uptLVrJtq1evFuWqak+A4j4i4TNpltiJ8LPiNFFFwNGjRyWFyfedAFUny/joekkEuLi4KK0CfykCeFnkiu1flgBeFtl3/D8SsMbKykpOifv37ysRcPz4cVHKUiSA8wwNdR9/VTMBSh9Y8S4Nf2qnSICiBbDzVCRg9uzZTMC+94kAv6FDh8opwRsVHPjItnl4eEDxHNLKlStFXV+2javQ/M1SpZe+1KA4L4G7WDG57fSm/OUbXiqG0ewAFYOeYcN4fwZhvLkp2y4tftrxcltdlf/w+fPn4qNGxTCYU2m6nrRu3VqunT/EoiuZvw6TTZHpyuNNmEaNGsndP3fu3OJAq1N1JOAHDmyKheVtNP4OkE2crULRAW7fvl20EyyLy24a8p+/7WISFixYIMLt4t82bNhQYjXqXREgPq3j74mlX3AmSL8E1eOPIBXnuVT5OsVZpuLnOMeOHeN7vifwiYhYzhC5IpwlOXj1QXWdBmy/XWU/X+UqMZfKBw4cKAobHPlJlZe9h6tOu+7cuSN2dg0MDMSSyZUpmXvaSD+crq/xvl0k9BTCRa7qEPq+5T4t6ffF52WVV+f1P6zyLG30bsU4AAAAAElFTkSuQmCC">',
+  'showdown': '<img width="20" height="20" align="absmiddle" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAKT2lDQ1BQaG90b3Nob3AgSUNDIHByb2ZpbGUAAHjanVNnVFPpFj333vRCS4iAlEtvUhUIIFJCi4AUkSYqIQkQSoghodkVUcERRUUEG8igiAOOjoCMFVEsDIoK2AfkIaKOg6OIisr74Xuja9a89+bN/rXXPues852zzwfACAyWSDNRNYAMqUIeEeCDx8TG4eQuQIEKJHAAEAizZCFz/SMBAPh+PDwrIsAHvgABeNMLCADATZvAMByH/w/qQplcAYCEAcB0kThLCIAUAEB6jkKmAEBGAYCdmCZTAKAEAGDLY2LjAFAtAGAnf+bTAICd+Jl7AQBblCEVAaCRACATZYhEAGg7AKzPVopFAFgwABRmS8Q5ANgtADBJV2ZIALC3AMDOEAuyAAgMADBRiIUpAAR7AGDIIyN4AISZABRG8lc88SuuEOcqAAB4mbI8uSQ5RYFbCC1xB1dXLh4ozkkXKxQ2YQJhmkAuwnmZGTKBNA/g88wAAKCRFRHgg/P9eM4Ors7ONo62Dl8t6r8G/yJiYuP+5c+rcEAAAOF0ftH+LC+zGoA7BoBt/qIl7gRoXgugdfeLZrIPQLUAoOnaV/Nw+H48PEWhkLnZ2eXk5NhKxEJbYcpXff5nwl/AV/1s+X48/Pf14L7iJIEyXYFHBPjgwsz0TKUcz5IJhGLc5o9H/LcL//wd0yLESWK5WCoU41EScY5EmozzMqUiiUKSKcUl0v9k4t8s+wM+3zUAsGo+AXuRLahdYwP2SycQWHTA4vcAAPK7b8HUKAgDgGiD4c93/+8//UegJQCAZkmScQAAXkQkLlTKsz/HCAAARKCBKrBBG/TBGCzABhzBBdzBC/xgNoRCJMTCQhBCCmSAHHJgKayCQiiGzbAdKmAv1EAdNMBRaIaTcA4uwlW4Dj1wD/phCJ7BKLyBCQRByAgTYSHaiAFiilgjjggXmYX4IcFIBBKLJCDJiBRRIkuRNUgxUopUIFVIHfI9cgI5h1xGupE7yAAygvyGvEcxlIGyUT3UDLVDuag3GoRGogvQZHQxmo8WoJvQcrQaPYw2oefQq2gP2o8+Q8cwwOgYBzPEbDAuxsNCsTgsCZNjy7EirAyrxhqwVqwDu4n1Y8+xdwQSgUXACTYEd0IgYR5BSFhMWE7YSKggHCQ0EdoJNwkDhFHCJyKTqEu0JroR+cQYYjIxh1hILCPWEo8TLxB7iEPENyQSiUMyJ7mQAkmxpFTSEtJG0m5SI+ksqZs0SBojk8naZGuyBzmULCAryIXkneTD5DPkG+Qh8lsKnWJAcaT4U+IoUspqShnlEOU05QZlmDJBVaOaUt2ooVQRNY9aQq2htlKvUYeoEzR1mjnNgxZJS6WtopXTGmgXaPdpr+h0uhHdlR5Ol9BX0svpR+iX6AP0dwwNhhWDx4hnKBmbGAcYZxl3GK+YTKYZ04sZx1QwNzHrmOeZD5lvVVgqtip8FZHKCpVKlSaVGyovVKmqpqreqgtV81XLVI+pXlN9rkZVM1PjqQnUlqtVqp1Q61MbU2epO6iHqmeob1Q/pH5Z/YkGWcNMw09DpFGgsV/jvMYgC2MZs3gsIWsNq4Z1gTXEJrHN2Xx2KruY/R27iz2qqaE5QzNKM1ezUvOUZj8H45hx+Jx0TgnnKKeX836K3hTvKeIpG6Y0TLkxZVxrqpaXllirSKtRq0frvTau7aedpr1Fu1n7gQ5Bx0onXCdHZ4/OBZ3nU9lT3acKpxZNPTr1ri6qa6UbobtEd79up+6Ynr5egJ5Mb6feeb3n+hx9L/1U/W36p/VHDFgGswwkBtsMzhg8xTVxbzwdL8fb8VFDXcNAQ6VhlWGX4YSRudE8o9VGjUYPjGnGXOMk423GbcajJgYmISZLTepN7ppSTbmmKaY7TDtMx83MzaLN1pk1mz0x1zLnm+eb15vft2BaeFostqi2uGVJsuRaplnutrxuhVo5WaVYVVpds0atna0l1rutu6cRp7lOk06rntZnw7Dxtsm2qbcZsOXYBtuutm22fWFnYhdnt8Wuw+6TvZN9un2N/T0HDYfZDqsdWh1+c7RyFDpWOt6azpzuP33F9JbpL2dYzxDP2DPjthPLKcRpnVOb00dnF2e5c4PziIuJS4LLLpc+Lpsbxt3IveRKdPVxXeF60vWdm7Obwu2o26/uNu5p7ofcn8w0nymeWTNz0MPIQ+BR5dE/C5+VMGvfrH5PQ0+BZ7XnIy9jL5FXrdewt6V3qvdh7xc+9j5yn+M+4zw33jLeWV/MN8C3yLfLT8Nvnl+F30N/I/9k/3r/0QCngCUBZwOJgUGBWwL7+Hp8Ib+OPzrbZfay2e1BjKC5QRVBj4KtguXBrSFoyOyQrSH355jOkc5pDoVQfujW0Adh5mGLw34MJ4WHhVeGP45wiFga0TGXNXfR3ENz30T6RJZE3ptnMU85ry1KNSo+qi5qPNo3ujS6P8YuZlnM1VidWElsSxw5LiquNm5svt/87fOH4p3iC+N7F5gvyF1weaHOwvSFpxapLhIsOpZATIhOOJTwQRAqqBaMJfITdyWOCnnCHcJnIi/RNtGI2ENcKh5O8kgqTXqS7JG8NXkkxTOlLOW5hCepkLxMDUzdmzqeFpp2IG0yPTq9MYOSkZBxQqohTZO2Z+pn5mZ2y6xlhbL+xW6Lty8elQfJa7OQrAVZLQq2QqboVFoo1yoHsmdlV2a/zYnKOZarnivN7cyzytuQN5zvn//tEsIS4ZK2pYZLVy0dWOa9rGo5sjxxedsK4xUFK4ZWBqw8uIq2Km3VT6vtV5eufr0mek1rgV7ByoLBtQFr6wtVCuWFfevc1+1dT1gvWd+1YfqGnRs+FYmKrhTbF5cVf9go3HjlG4dvyr+Z3JS0qavEuWTPZtJm6ebeLZ5bDpaql+aXDm4N2dq0Dd9WtO319kXbL5fNKNu7g7ZDuaO/PLi8ZafJzs07P1SkVPRU+lQ27tLdtWHX+G7R7ht7vPY07NXbW7z3/T7JvttVAVVN1WbVZftJ+7P3P66Jqun4lvttXa1ObXHtxwPSA/0HIw6217nU1R3SPVRSj9Yr60cOxx++/p3vdy0NNg1VjZzG4iNwRHnk6fcJ3/ceDTradox7rOEH0x92HWcdL2pCmvKaRptTmvtbYlu6T8w+0dbq3nr8R9sfD5w0PFl5SvNUyWna6YLTk2fyz4ydlZ19fi753GDborZ752PO32oPb++6EHTh0kX/i+c7vDvOXPK4dPKy2+UTV7hXmq86X23qdOo8/pPTT8e7nLuarrlca7nuer21e2b36RueN87d9L158Rb/1tWeOT3dvfN6b/fF9/XfFt1+cif9zsu72Xcn7q28T7xf9EDtQdlD3YfVP1v+3Njv3H9qwHeg89HcR/cGhYPP/pH1jw9DBY+Zj8uGDYbrnjg+OTniP3L96fynQ89kzyaeF/6i/suuFxYvfvjV69fO0ZjRoZfyl5O/bXyl/erA6xmv28bCxh6+yXgzMV70VvvtwXfcdx3vo98PT+R8IH8o/2j5sfVT0Kf7kxmTk/8EA5jz/GMzLdsAAECtaVRYdFhNTDpjb20uYWRvYmUueG1wAAAAAAA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/Pgo8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA1LjYtYzA2NyA3OS4xNTc3NDcsIDIwMTUvMDMvMzAtMjM6NDA6NDIgICAgICAgICI+CiAgIDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+CiAgICAgIDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiCiAgICAgICAgICAgIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIKICAgICAgICAgICAgeG1sbnM6cGhvdG9zaG9wPSJodHRwOi8vbnMuYWRvYmUuY29tL3Bob3Rvc2hvcC8xLjAvIgogICAgICAgICAgICB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iCiAgICAgICAgICAgIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIgogICAgICAgICAgICB4bWxuczpzdEV2dD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlRXZlbnQjIgogICAgICAgICAgICB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIKICAgICAgICAgICAgeG1sbnM6dGlmZj0iaHR0cDovL25zLmFkb2JlLmNvbS90aWZmLzEuMC8iCiAgICAgICAgICAgIHhtbG5zOmV4aWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20vZXhpZi8xLjAvIj4KICAgICAgICAgPHhtcDpDcmVhdG9yVG9vbD5BZG9iZSBQaG90b3Nob3AgQ0MgMjAxNSAoV2luZG93cyk8L3htcDpDcmVhdG9yVG9vbD4KICAgICAgICAgPHhtcDpDcmVhdGVEYXRlPjIwMTUtMDEtMTVUMjE6MDE6MTlaPC94bXA6Q3JlYXRlRGF0ZT4KICAgICAgICAgPHhtcDpNZXRhZGF0YURhdGU+MjAxNy0xMC0yNFQxMzozMTozMCswMTowMDwveG1wOk1ldGFkYXRhRGF0ZT4KICAgICAgICAgPHhtcDpNb2RpZnlEYXRlPjIwMTctMTAtMjRUMTM6MzE6MzArMDE6MDA8L3htcDpNb2RpZnlEYXRlPgogICAgICAgICA8cGhvdG9zaG9wOkNvbG9yTW9kZT4zPC9waG90b3Nob3A6Q29sb3JNb2RlPgogICAgICAgICA8cGhvdG9zaG9wOklDQ1Byb2ZpbGU+c1JHQiBJRUM2MTk2Ni0yLjE8L3Bob3Rvc2hvcDpJQ0NQcm9maWxlPgogICAgICAgICA8cGhvdG9zaG9wOlRleHRMYXllcnM+CiAgICAgICAgICAgIDxyZGY6QmFnPgogICAgICAgICAgICAgICA8cmRmOmxpIHJkZjpwYXJzZVR5cGU9IlJlc291cmNlIj4KICAgICAgICAgICAgICAgICAgPHBob3Rvc2hvcDpMYXllck5hbWU+UyAtPC9waG90b3Nob3A6TGF5ZXJOYW1lPgogICAgICAgICAgICAgICAgICA8cGhvdG9zaG9wOkxheWVyVGV4dD5TIC08L3Bob3Rvc2hvcDpMYXllclRleHQ+CiAgICAgICAgICAgICAgIDwvcmRmOmxpPgogICAgICAgICAgICA8L3JkZjpCYWc+CiAgICAgICAgIDwvcGhvdG9zaG9wOlRleHRMYXllcnM+CiAgICAgICAgIDxkYzpmb3JtYXQ+aW1hZ2UvcG5nPC9kYzpmb3JtYXQ+CiAgICAgICAgIDx4bXBNTTpJbnN0YW5jZUlEPnhtcC5paWQ6N2NkMzQxNzctOWYyZi0yNDRiLWEyYjQtMzU1MzJkY2Y1MWJiPC94bXBNTTpJbnN0YW5jZUlEPgogICAgICAgICA8eG1wTU06RG9jdW1lbnRJRD5hZG9iZTpkb2NpZDpwaG90b3Nob3A6M2E1YzgxYmYtYjhiNy0xMWU3LTk0NDktYTQ2MzdlZjJkNjMzPC94bXBNTTpEb2N1bWVudElEPgogICAgICAgICA8eG1wTU06T3JpZ2luYWxEb2N1bWVudElEPnhtcC5kaWQ6NjBDNUFFNjVGNjlDRTQxMTk0NUE4NTVFM0JDQTdFRUI8L3htcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD4KICAgICAgICAgPHhtcE1NOkhpc3Rvcnk+CiAgICAgICAgICAgIDxyZGY6U2VxPgogICAgICAgICAgICAgICA8cmRmOmxpIHJkZjpwYXJzZVR5cGU9IlJlc291cmNlIj4KICAgICAgICAgICAgICAgICAgPHN0RXZ0OmFjdGlvbj5jcmVhdGVkPC9zdEV2dDphY3Rpb24+CiAgICAgICAgICAgICAgICAgIDxzdEV2dDppbnN0YW5jZUlEPnhtcC5paWQ6NjBDNUFFNjVGNjlDRTQxMTk0NUE4NTVFM0JDQTdFRUI8L3N0RXZ0Omluc3RhbmNlSUQ+CiAgICAgICAgICAgICAgICAgIDxzdEV2dDp3aGVuPjIwMTUtMDEtMTVUMjE6MDE6MTlaPC9zdEV2dDp3aGVuPgogICAgICAgICAgICAgICAgICA8c3RFdnQ6c29mdHdhcmVBZ2VudD5BZG9iZSBQaG90b3Nob3AgQ1M2IChXaW5kb3dzKTwvc3RFdnQ6c29mdHdhcmVBZ2VudD4KICAgICAgICAgICAgICAgPC9yZGY6bGk+CiAgICAgICAgICAgICAgIDxyZGY6bGkgcmRmOnBhcnNlVHlwZT0iUmVzb3VyY2UiPgogICAgICAgICAgICAgICAgICA8c3RFdnQ6YWN0aW9uPnNhdmVkPC9zdEV2dDphY3Rpb24+CiAgICAgICAgICAgICAgICAgIDxzdEV2dDppbnN0YW5jZUlEPnhtcC5paWQ6ODZjNjBkMGQtOGY0Yy01ZTRlLWEwMjQtODI4ZWQyNTIwZDc3PC9zdEV2dDppbnN0YW5jZUlEPgogICAgICAgICAgICAgICAgICA8c3RFdnQ6d2hlbj4yMDE3LTEwLTI0VDEzOjMxOjMwKzAxOjAwPC9zdEV2dDp3aGVuPgogICAgICAgICAgICAgICAgICA8c3RFdnQ6c29mdHdhcmVBZ2VudD5BZG9iZSBQaG90b3Nob3AgQ0MgMjAxNSAoV2luZG93cyk8L3N0RXZ0OnNvZnR3YXJlQWdlbnQ+CiAgICAgICAgICAgICAgICAgIDxzdEV2dDpjaGFuZ2VkPi88L3N0RXZ0OmNoYW5nZWQ+CiAgICAgICAgICAgICAgIDwvcmRmOmxpPgogICAgICAgICAgICAgICA8cmRmOmxpIHJkZjpwYXJzZVR5cGU9IlJlc291cmNlIj4KICAgICAgICAgICAgICAgICAgPHN0RXZ0OmFjdGlvbj5jb252ZXJ0ZWQ8L3N0RXZ0OmFjdGlvbj4KICAgICAgICAgICAgICAgICAgPHN0RXZ0OnBhcmFtZXRlcnM+ZnJvbSBhcHBsaWNhdGlvbi92bmQuYWRvYmUucGhvdG9zaG9wIHRvIGltYWdlL3BuZzwvc3RFdnQ6cGFyYW1ldGVycz4KICAgICAgICAgICAgICAgPC9yZGY6bGk+CiAgICAgICAgICAgICAgIDxyZGY6bGkgcmRmOnBhcnNlVHlwZT0iUmVzb3VyY2UiPgogICAgICAgICAgICAgICAgICA8c3RFdnQ6YWN0aW9uPmRlcml2ZWQ8L3N0RXZ0OmFjdGlvbj4KICAgICAgICAgICAgICAgICAgPHN0RXZ0OnBhcmFtZXRlcnM+Y29udmVydGVkIGZyb20gYXBwbGljYXRpb24vdm5kLmFkb2JlLnBob3Rvc2hvcCB0byBpbWFnZS9wbmc8L3N0RXZ0OnBhcmFtZXRlcnM+CiAgICAgICAgICAgICAgIDwvcmRmOmxpPgogICAgICAgICAgICAgICA8cmRmOmxpIHJkZjpwYXJzZVR5cGU9IlJlc291cmNlIj4KICAgICAgICAgICAgICAgICAgPHN0RXZ0OmFjdGlvbj5zYXZlZDwvc3RFdnQ6YWN0aW9uPgogICAgICAgICAgICAgICAgICA8c3RFdnQ6aW5zdGFuY2VJRD54bXAuaWlkOjdjZDM0MTc3LTlmMmYtMjQ0Yi1hMmI0LTM1NTMyZGNmNTFiYjwvc3RFdnQ6aW5zdGFuY2VJRD4KICAgICAgICAgICAgICAgICAgPHN0RXZ0OndoZW4+MjAxNy0xMC0yNFQxMzozMTozMCswMTowMDwvc3RFdnQ6d2hlbj4KICAgICAgICAgICAgICAgICAgPHN0RXZ0OnNvZnR3YXJlQWdlbnQ+QWRvYmUgUGhvdG9zaG9wIENDIDIwMTUgKFdpbmRvd3MpPC9zdEV2dDpzb2Z0d2FyZUFnZW50PgogICAgICAgICAgICAgICAgICA8c3RFdnQ6Y2hhbmdlZD4vPC9zdEV2dDpjaGFuZ2VkPgogICAgICAgICAgICAgICA8L3JkZjpsaT4KICAgICAgICAgICAgPC9yZGY6U2VxPgogICAgICAgICA8L3htcE1NOkhpc3Rvcnk+CiAgICAgICAgIDx4bXBNTTpEZXJpdmVkRnJvbSByZGY6cGFyc2VUeXBlPSJSZXNvdXJjZSI+CiAgICAgICAgICAgIDxzdFJlZjppbnN0YW5jZUlEPnhtcC5paWQ6ODZjNjBkMGQtOGY0Yy01ZTRlLWEwMjQtODI4ZWQyNTIwZDc3PC9zdFJlZjppbnN0YW5jZUlEPgogICAgICAgICAgICA8c3RSZWY6ZG9jdW1lbnRJRD54bXAuZGlkOjYwQzVBRTY1RjY5Q0U0MTE5NDVBODU1RTNCQ0E3RUVCPC9zdFJlZjpkb2N1bWVudElEPgogICAgICAgICAgICA8c3RSZWY6b3JpZ2luYWxEb2N1bWVudElEPnhtcC5kaWQ6NjBDNUFFNjVGNjlDRTQxMTk0NUE4NTVFM0JDQTdFRUI8L3N0UmVmOm9yaWdpbmFsRG9jdW1lbnRJRD4KICAgICAgICAgPC94bXBNTTpEZXJpdmVkRnJvbT4KICAgICAgICAgPHRpZmY6T3JpZW50YXRpb24+MTwvdGlmZjpPcmllbnRhdGlvbj4KICAgICAgICAgPHRpZmY6WFJlc29sdXRpb24+NzIwMDAwLzEwMDAwPC90aWZmOlhSZXNvbHV0aW9uPgogICAgICAgICA8dGlmZjpZUmVzb2x1dGlvbj43MjAwMDAvMTAwMDA8L3RpZmY6WVJlc29sdXRpb24+CiAgICAgICAgIDx0aWZmOlJlc29sdXRpb25Vbml0PjI8L3RpZmY6UmVzb2x1dGlvblVuaXQ+CiAgICAgICAgIDxleGlmOkNvbG9yU3BhY2U+MTwvZXhpZjpDb2xvclNwYWNlPgogICAgICAgICA8ZXhpZjpQaXhlbFhEaW1lbnNpb24+NjQ8L2V4aWY6UGl4ZWxYRGltZW5zaW9uPgogICAgICAgICA8ZXhpZjpQaXhlbFlEaW1lbnNpb24+NjQ8L2V4aWY6UGl4ZWxZRGltZW5zaW9uPgogICAgICA8L3JkZjpEZXNjcmlwdGlvbj4KICAgPC9yZGY6UkRGPgo8L3g6eG1wbWV0YT4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAKPD94cGFja2V0IGVuZD0idyI/Pse7bzcAAAAgY0hSTQAAeiUAAICDAAD5/wAAgOkAAHUwAADqYAAAOpgAABdvkl/FRgAAA1JJREFUeNrsm1+OmlAUhz+aeS9dwZggJn1AnRUMO6jpBgZXULuC2hWUWUGZBTSxKyiuoA4mfUBMnB04K5g+9DihRBHlyh/lJLwIXLgf99xzzu9etZeXFy7Z3nDh1gBoAFy4XeVtQNO0zNcapmUDfUBPnFoBfhQGq6IBaHmjwD4Ahmk5wAD4kKG5J8CNwsAFaHe6DvA9cc0wCgOv8gDka3vA9RHNPgo0D7hNnJtGYWBXxgV2dH4MfMnRRA+Y1WIO2NJ5F/ikoKm3tYsChmkNFHW+fmHQMC1dfHaXPQP3wM1yMdc2B/AOGALTWobBmI1Shu0UGCwX83XyRBQGawHntTtdG5gUNfxVu4CTNqNv6/wWGL7kCc+1AmCYVisl3I2ydD4GYZUCs7IjoLXrxHIx9w9tLAqDCfBwDrXAY457x+cAoCfuwRGjYFUnAGk+PsjR7s8Dn1VeLWCYVlpDw+VivjVHSHt+u9PVJbzGzZXQWTkAkz0V31fATUaEsjVJlQBs4FeGcteLgzgbAALBA+4y3voAeJL8nA0AHfClnM1qm1HhnYUidCSE+KzvSSJUTwAxCOMcpfETMFYpfRUKIAbCFhC3OTJJJwqDWS0BxED0JZ4Pjix1P2+E0loCSMBwyK4S/xc1ojBwag8gMU84cvTKGgmlAYhngu1O9xAXuVE5J1QCQCz3bwHuHvdQui5QKQAxEO6eEKpsFCgTRSXkvdoxSlBMCxhJJbgrrbZRtHCiShN0pRB6PeQ3ckBw2K0oKXMBVYJIP+Nvh9qulFivGoBt1lLQxowT2ykBXCfnhZIglgYACWmqXQv+baioBYCeiCQHm+QEg1O7RhF7hO4OhSAhcJKSFU7qBGADwZeqMMuXn6TUBw8qlaMrirNb4LdhWlP+SWD+cjFfxTpuS2GUpik+o3jFSEkqbJiWn0P0OMSGqlWiOu0TvD+FRHZKAE+oW+cfRmEwqlsesJJEJs8y91QqP+9UL6lqEtz2gpuNEY5sm9sIHln2DRa2aFKGJtiXkZEMiWtgVvRKUSUFkSKt2S7fAGgAXLYpmQQXf36MUChTZdUa2u8/rkvPA6Tz30r4eH3ybcBS5gJ6SaNXb+aABkA1AMxKenclBZLW/He4cYEGwEXb3wEASelexk6LIIIAAAAASUVORK5CYII=">'
+};
+
+/**
+ * Created by Estevao on 31-05-2015.
+ */
+
+/**
+ * Showdown Converter class
+ * @class
+ * @param {object} [converterOptions]
+ * @returns {Converter}
+ */
+showdown.Converter = function (converterOptions) {
+  'use strict';
+
+  var
+      /**
+       * Options used by this converter
+       * @private
+       * @type {{}}
+       */
+      options = {},
+
+      /**
+       * Language extensions used by this converter
+       * @private
+       * @type {Array}
+       */
+      langExtensions = [],
+
+      /**
+       * Output modifiers extensions used by this converter
+       * @private
+       * @type {Array}
+       */
+      outputModifiers = [],
+
+      /**
+       * Event listeners
+       * @private
+       * @type {{}}
+       */
+      listeners = {},
+
+      /**
+       * The flavor set in this converter
+       */
+      setConvFlavor = setFlavor,
+
+    /**
+     * Metadata of the document
+     * @type {{parsed: {}, raw: string, format: string}}
+     */
+      metadata = {
+        parsed: {},
+        raw: '',
+        format: ''
+      };
+
+  _constructor();
+
+  /**
+   * Converter constructor
+   * @private
+   */
+  function _constructor () {
+    converterOptions = converterOptions || {};
+
+    for (var gOpt in globalOptions) {
+      if (globalOptions.hasOwnProperty(gOpt)) {
+        options[gOpt] = globalOptions[gOpt];
+      }
+    }
+
+    // Merge options
+    if (typeof converterOptions === 'object') {
+      for (var opt in converterOptions) {
+        if (converterOptions.hasOwnProperty(opt)) {
+          options[opt] = converterOptions[opt];
+        }
+      }
+    } else {
+      throw Error('Converter expects the passed parameter to be an object, but ' + typeof converterOptions +
+      ' was passed instead.');
+    }
+
+    if (options.extensions) {
+      showdown.helper.forEach(options.extensions, _parseExtension);
+    }
+  }
+
+  /**
+   * Parse extension
+   * @param {*} ext
+   * @param {string} [name='']
+   * @private
+   */
+  function _parseExtension (ext, name) {
+
+    name = name || null;
+    // If it's a string, the extension was previously loaded
+    if (showdown.helper.isString(ext)) {
+      ext = showdown.helper.stdExtName(ext);
+      name = ext;
+
+      // LEGACY_SUPPORT CODE
+      if (showdown.extensions[ext]) {
+        console.warn('DEPRECATION WARNING: ' + ext + ' is an old extension that uses a deprecated loading method.' +
+          'Please inform the developer that the extension should be updated!');
+        legacyExtensionLoading(showdown.extensions[ext], ext);
+        return;
+      // END LEGACY SUPPORT CODE
+
+      } else if (!showdown.helper.isUndefined(extensions[ext])) {
+        ext = extensions[ext];
+
+      } else {
+        throw Error('Extension "' + ext + '" could not be loaded. It was either not found or is not a valid extension.');
+      }
+    }
+
+    if (typeof ext === 'function') {
+      ext = ext();
+    }
+
+    if (!showdown.helper.isArray(ext)) {
+      ext = [ext];
+    }
+
+    var validExt = validate(ext, name);
+    if (!validExt.valid) {
+      throw Error(validExt.error);
+    }
+
+    for (var i = 0; i < ext.length; ++i) {
+      switch (ext[i].type) {
+
+        case 'lang':
+          langExtensions.push(ext[i]);
+          break;
+
+        case 'output':
+          outputModifiers.push(ext[i]);
+          break;
+      }
+      if (ext[i].hasOwnProperty('listeners')) {
+        for (var ln in ext[i].listeners) {
+          if (ext[i].listeners.hasOwnProperty(ln)) {
+            listen(ln, ext[i].listeners[ln]);
+          }
+        }
+      }
+    }
+
+  }
+
+  /**
+   * LEGACY_SUPPORT
+   * @param {*} ext
+   * @param {string} name
+   */
+  function legacyExtensionLoading (ext, name) {
+    if (typeof ext === 'function') {
+      ext = ext(new showdown.Converter());
+    }
+    if (!showdown.helper.isArray(ext)) {
+      ext = [ext];
+    }
+    var valid = validate(ext, name);
+
+    if (!valid.valid) {
+      throw Error(valid.error);
+    }
+
+    for (var i = 0; i < ext.length; ++i) {
+      switch (ext[i].type) {
+        case 'lang':
+          langExtensions.push(ext[i]);
+          break;
+        case 'output':
+          outputModifiers.push(ext[i]);
+          break;
+        default:// should never reach here
+          throw Error('Extension loader error: Type unrecognized!!!');
+      }
+    }
+  }
+
+  /**
+   * Listen to an event
+   * @param {string} name
+   * @param {function} callback
+   */
+  function listen (name, callback) {
+    if (!showdown.helper.isString(name)) {
+      throw Error('Invalid argument in converter.listen() method: name must be a string, but ' + typeof name + ' given');
+    }
+
+    if (typeof callback !== 'function') {
+      throw Error('Invalid argument in converter.listen() method: callback must be a function, but ' + typeof callback + ' given');
+    }
+
+    if (!listeners.hasOwnProperty(name)) {
+      listeners[name] = [];
+    }
+    listeners[name].push(callback);
+  }
+
+  function rTrimInputText (text) {
+    var rsp = text.match(/^\s*/)[0].length,
+        rgx = new RegExp('^\\s{0,' + rsp + '}', 'gm');
+    return text.replace(rgx, '');
+  }
+
+  /**
+   * Dispatch an event
+   * @private
+   * @param {string} evtName Event name
+   * @param {string} text Text
+   * @param {{}} options Converter Options
+   * @param {{}} globals
+   * @returns {string}
+   */
+  this._dispatch = function dispatch (evtName, text, options, globals) {
+    if (listeners.hasOwnProperty(evtName)) {
+      for (var ei = 0; ei < listeners[evtName].length; ++ei) {
+        var nText = listeners[evtName][ei](evtName, text, this, options, globals);
+        if (nText && typeof nText !== 'undefined') {
+          text = nText;
+        }
+      }
+    }
+    return text;
+  };
+
+  /**
+   * Listen to an event
+   * @param {string} name
+   * @param {function} callback
+   * @returns {showdown.Converter}
+   */
+  this.listen = function (name, callback) {
+    listen(name, callback);
+    return this;
+  };
+
+  /**
+   * Converts a markdown string into HTML
+   * @param {string} text
+   * @returns {*}
+   */
+  this.makeHtml = function (text) {
+    //check if text is not falsy
+    if (!text) {
+      return text;
+    }
+
+    var globals = {
+      gHtmlBlocks:     [],
+      gHtmlMdBlocks:   [],
+      gHtmlSpans:      [],
+      gUrls:           {},
+      gTitles:         {},
+      gDimensions:     {},
+      gListLevel:      0,
+      hashLinkCounts:  {},
+      langExtensions:  langExtensions,
+      outputModifiers: outputModifiers,
+      converter:       this,
+      ghCodeBlocks:    [],
+      metadata: {
+        parsed: {},
+        raw: '',
+        format: ''
+      }
+    };
+
+    // This lets us use ¨ trema as an escape char to avoid md5 hashes
+    // The choice of character is arbitrary; anything that isn't
+    // magic in Markdown will work.
+    text = text.replace(/¨/g, '¨T');
+
+    // Replace $ with ¨D
+    // RegExp interprets $ as a special character
+    // when it's in a replacement string
+    text = text.replace(/\$/g, '¨D');
+
+    // Standardize line endings
+    text = text.replace(/\r\n/g, '\n'); // DOS to Unix
+    text = text.replace(/\r/g, '\n'); // Mac to Unix
+
+    // Stardardize line spaces (nbsp causes trouble in older browsers and some regex flavors)
+    text = text.replace(/\u00A0/g, ' ');
+
+    if (options.smartIndentationFix) {
+      text = rTrimInputText(text);
+    }
+
+    // Make sure text begins and ends with a couple of newlines:
+    text = '\n\n' + text + '\n\n';
+
+    // detab
+    text = showdown.subParser('detab')(text, options, globals);
+
+    /**
+     * Strip any lines consisting only of spaces and tabs.
+     * This makes subsequent regexs easier to write, because we can
+     * match consecutive blank lines with /\n+/ instead of something
+     * contorted like /[ \t]*\n+/
+     */
+    text = text.replace(/^[ \t]+$/mg, '');
+
+    //run languageExtensions
+    showdown.helper.forEach(langExtensions, function (ext) {
+      text = showdown.subParser('runExtension')(ext, text, options, globals);
+    });
+
+    // run the sub parsers
+    text = showdown.subParser('metadata')(text, options, globals);
+    text = showdown.subParser('hashPreCodeTags')(text, options, globals);
+    text = showdown.subParser('githubCodeBlocks')(text, options, globals);
+    text = showdown.subParser('hashHTMLBlocks')(text, options, globals);
+    text = showdown.subParser('hashCodeTags')(text, options, globals);
+    text = showdown.subParser('stripLinkDefinitions')(text, options, globals);
+    text = showdown.subParser('blockGamut')(text, options, globals);
+    text = showdown.subParser('unhashHTMLSpans')(text, options, globals);
+    text = showdown.subParser('unescapeSpecialChars')(text, options, globals);
+
+    // attacklab: Restore dollar signs
+    text = text.replace(/¨D/g, '$$');
+
+    // attacklab: Restore tremas
+    text = text.replace(/¨T/g, '¨');
+
+    // render a complete html document instead of a partial if the option is enabled
+    text = showdown.subParser('completeHTMLDocument')(text, options, globals);
+
+    // Run output modifiers
+    showdown.helper.forEach(outputModifiers, function (ext) {
+      text = showdown.subParser('runExtension')(ext, text, options, globals);
+    });
+
+    // update metadata
+    metadata = globals.metadata;
+    return text;
+  };
+
+  /**
+   * Set an option of this Converter instance
+   * @param {string} key
+   * @param {*} value
+   */
+  this.setOption = function (key, value) {
+    options[key] = value;
+  };
+
+  /**
+   * Get the option of this Converter instance
+   * @param {string} key
+   * @returns {*}
+   */
+  this.getOption = function (key) {
+    return options[key];
+  };
+
+  /**
+   * Get the options of this Converter instance
+   * @returns {{}}
+   */
+  this.getOptions = function () {
+    return options;
+  };
+
+  /**
+   * Add extension to THIS converter
+   * @param {{}} extension
+   * @param {string} [name=null]
+   */
+  this.addExtension = function (extension, name) {
+    name = name || null;
+    _parseExtension(extension, name);
+  };
+
+  /**
+   * Use a global registered extension with THIS converter
+   * @param {string} extensionName Name of the previously registered extension
+   */
+  this.useExtension = function (extensionName) {
+    _parseExtension(extensionName);
+  };
+
+  /**
+   * Set the flavor THIS converter should use
+   * @param {string} name
+   */
+  this.setFlavor = function (name) {
+    if (!flavor.hasOwnProperty(name)) {
+      throw Error(name + ' flavor was not found');
+    }
+    var preset = flavor[name];
+    setConvFlavor = name;
+    for (var option in preset) {
+      if (preset.hasOwnProperty(option)) {
+        options[option] = preset[option];
+      }
+    }
+  };
+
+  /**
+   * Get the currently set flavor of this converter
+   * @returns {string}
+   */
+  this.getFlavor = function () {
+    return setConvFlavor;
+  };
+
+  /**
+   * Remove an extension from THIS converter.
+   * Note: This is a costly operation. It's better to initialize a new converter
+   * and specify the extensions you wish to use
+   * @param {Array} extension
+   */
+  this.removeExtension = function (extension) {
+    if (!showdown.helper.isArray(extension)) {
+      extension = [extension];
+    }
+    for (var a = 0; a < extension.length; ++a) {
+      var ext = extension[a];
+      for (var i = 0; i < langExtensions.length; ++i) {
+        if (langExtensions[i] === ext) {
+          langExtensions[i].splice(i, 1);
+        }
+      }
+      for (var ii = 0; ii < outputModifiers.length; ++i) {
+        if (outputModifiers[ii] === ext) {
+          outputModifiers[ii].splice(i, 1);
+        }
+      }
+    }
+  };
+
+  /**
+   * Get all extension of THIS converter
+   * @returns {{language: Array, output: Array}}
+   */
+  this.getAllExtensions = function () {
+    return {
+      language: langExtensions,
+      output: outputModifiers
+    };
+  };
+
+  /**
+   * Get the metadata of the previously parsed document
+   * @param raw
+   * @returns {string|{}}
+   */
+  this.getMetadata = function (raw) {
+    if (raw) {
+      return metadata.raw;
+    } else {
+      return metadata.parsed;
+    }
+  };
+
+  /**
+   * Get the metadata format of the previously parsed document
+   * @returns {string}
+   */
+  this.getMetadataFormat = function () {
+    return metadata.format;
+  };
+
+  /**
+   * Private: set a single key, value metadata pair
+   * @param {string} key
+   * @param {string} value
+   */
+  this._setMetadataPair = function (key, value) {
+    metadata.parsed[key] = value;
+  };
+
+  /**
+   * Private: set metadata format
+   * @param {string} format
+   */
+  this._setMetadataFormat = function (format) {
+    metadata.format = format;
+  };
+
+  /**
+   * Private: set metadata raw text
+   * @param {string} raw
+   */
+  this._setMetadataRaw = function (raw) {
+    metadata.raw = raw;
+  };
+};
+
+/**
+ * Turn Markdown link shortcuts into XHTML <a> tags.
+ */
+showdown.subParser('anchors', function (text, options, globals) {
+  'use strict';
+
+  text = globals.converter._dispatch('anchors.before', text, options, globals);
+
+  var writeAnchorTag = function (wholeMatch, linkText, linkId, url, m5, m6, title) {
+    if (showdown.helper.isUndefined(title)) {
+      title = '';
+    }
+    linkId = linkId.toLowerCase();
+
+    // Special case for explicit empty url
+    if (wholeMatch.search(/\(<?\s*>? ?(['"].*['"])?\)$/m) > -1) {
+      url = '';
+    } else if (!url) {
+      if (!linkId) {
+        // lower-case and turn embedded newlines into spaces
+        linkId = linkText.toLowerCase().replace(/ ?\n/g, ' ');
+      }
+      url = '#' + linkId;
+
+      if (!showdown.helper.isUndefined(globals.gUrls[linkId])) {
+        url = globals.gUrls[linkId];
+        if (!showdown.helper.isUndefined(globals.gTitles[linkId])) {
+          title = globals.gTitles[linkId];
+        }
+      } else {
+        return wholeMatch;
+      }
+    }
+
+    //url = showdown.helper.escapeCharacters(url, '*_', false); // replaced line to improve performance
+    url = url.replace(showdown.helper.regexes.asteriskDashAndColon, showdown.helper.escapeCharactersCallback);
+
+    var result = '<a href="' + url + '"';
+
+    if (title !== '' && title !== null) {
+      title = title.replace(/"/g, '&quot;');
+      //title = showdown.helper.escapeCharacters(title, '*_', false); // replaced line to improve performance
+      title = title.replace(showdown.helper.regexes.asteriskDashAndColon, showdown.helper.escapeCharactersCallback);
+      result += ' title="' + title + '"';
+    }
+
+    // optionLinksInNewWindow only applies
+    // to external links. Hash links (#) open in same page
+    if (options.openLinksInNewWindow && !/^#/.test(url)) {
+      // escaped _
+      result += ' target="¨E95Eblank"';
+    }
+
+    result += '>' + linkText + '</a>';
+
+    return result;
+  };
+
+  // First, handle reference-style links: [link text] [id]
+  text = text.replace(/\[((?:\[[^\]]*]|[^\[\]])*)] ?(?:\n *)?\[(.*?)]()()()()/g, writeAnchorTag);
+
+  // Next, inline-style links: [link text](url "optional title")
+  // cases with crazy urls like ./image/cat1).png
+  text = text.replace(/\[((?:\[[^\]]*]|[^\[\]])*)]()[ \t]*\([ \t]?<([^>]*)>(?:[ \t]*((["'])([^"]*?)\5))?[ \t]?\)/g,
+    writeAnchorTag);
+
+  // normal cases
+  text = text.replace(/\[((?:\[[^\]]*]|[^\[\]])*)]()[ \t]*\([ \t]?<?([\S]+?(?:\([\S]*?\)[\S]*?)?)>?(?:[ \t]*((["'])([^"]*?)\5))?[ \t]?\)/g,
+                      writeAnchorTag);
+
+  // handle reference-style shortcuts: [link text]
+  // These must come last in case you've also got [link test][1]
+  // or [link test](/foo)
+  text = text.replace(/\[([^\[\]]+)]()()()()()/g, writeAnchorTag);
+
+  // Lastly handle GithubMentions if option is enabled
+  if (options.ghMentions) {
+    text = text.replace(/(^|\s)(\\)?(@([a-z\d\-]+))(?=[.!?;,[\]()]|\s|$)/gmi, function (wm, st, escape, mentions, username) {
+      if (escape === '\\') {
+        return st + mentions;
+      }
+
+      //check if options.ghMentionsLink is a string
+      if (!showdown.helper.isString(options.ghMentionsLink)) {
+        throw new Error('ghMentionsLink option must be a string');
+      }
+      var lnk = options.ghMentionsLink.replace(/\{u}/g, username),
+          target = '';
+      if (options.openLinksInNewWindow) {
+        target = ' target="¨E95Eblank"';
+      }
+      return st + '<a href="' + lnk + '"' + target + '>' + mentions + '</a>';
+    });
+  }
+
+  text = globals.converter._dispatch('anchors.after', text, options, globals);
+  return text;
+});
+
+// url allowed chars [a-z\d_.~:/?#[]@!$&'()*+,;=-]
+
+var simpleURLRegex  = /([*~_]+|\b)(((https?|ftp|dict):\/\/|www\.)[^'">\s]+?\.[^'">\s]+?)()(\1)?(?=\s|$)(?!["<>])/gi,
+    simpleURLRegex2 = /([*~_]+|\b)(((https?|ftp|dict):\/\/|www\.)[^'">\s]+\.[^'">\s]+?)([.!?,()\[\]])?(\1)?(?=\s|$)(?!["<>])/gi,
+    delimUrlRegex   = /()<(((https?|ftp|dict):\/\/|www\.)[^'">\s]+)()>()/gi,
+    simpleMailRegex = /(^|\s)(?:mailto:)?([A-Za-z0-9!#$%&'*+-/=?^_`{|}~.]+@[-a-z0-9]+(\.[-a-z0-9]+)*\.[a-z]+)(?=$|\s)/gmi,
+    delimMailRegex  = /<()(?:mailto:)?([-.\w]+@[-a-z0-9]+(\.[-a-z0-9]+)*\.[a-z]+)>/gi,
+
+    replaceLink = function (options) {
+      'use strict';
+      return function (wm, leadingMagicChars, link, m2, m3, trailingPunctuation, trailingMagicChars) {
+        link = link.replace(showdown.helper.regexes.asteriskDashAndColon, showdown.helper.escapeCharactersCallback);
+        var lnkTxt = link,
+            append = '',
+            target = '',
+            lmc    = leadingMagicChars || '',
+            tmc    = trailingMagicChars || '';
+        if (/^www\./i.test(link)) {
+          link = link.replace(/^www\./i, 'http://www.');
+        }
+        if (options.excludeTrailingPunctuationFromURLs && trailingPunctuation) {
+          append = trailingPunctuation;
+        }
+        if (options.openLinksInNewWindow) {
+          target = ' target="¨E95Eblank"';
+        }
+        return lmc + '<a href="' + link + '"' + target + '>' + lnkTxt + '</a>' + append + tmc;
+      };
+    },
+
+    replaceMail = function (options, globals) {
+      'use strict';
+      return function (wholeMatch, b, mail) {
+        var href = 'mailto:';
+        b = b || '';
+        mail = showdown.subParser('unescapeSpecialChars')(mail, options, globals);
+        if (options.encodeEmails) {
+          href = showdown.helper.encodeEmailAddress(href + mail);
+          mail = showdown.helper.encodeEmailAddress(mail);
+        } else {
+          href = href + mail;
+        }
+        return b + '<a href="' + href + '">' + mail + '</a>';
+      };
+    };
+
+showdown.subParser('autoLinks', function (text, options, globals) {
+  'use strict';
+
+  text = globals.converter._dispatch('autoLinks.before', text, options, globals);
+
+  text = text.replace(delimUrlRegex, replaceLink(options));
+  text = text.replace(delimMailRegex, replaceMail(options, globals));
+
+  text = globals.converter._dispatch('autoLinks.after', text, options, globals);
+
+  return text;
+});
+
+showdown.subParser('simplifiedAutoLinks', function (text, options, globals) {
+  'use strict';
+
+  if (!options.simplifiedAutoLink) {
+    return text;
+  }
+
+  text = globals.converter._dispatch('simplifiedAutoLinks.before', text, options, globals);
+
+  if (options.excludeTrailingPunctuationFromURLs) {
+    text = text.replace(simpleURLRegex2, replaceLink(options));
+  } else {
+    text = text.replace(simpleURLRegex, replaceLink(options));
+  }
+  text = text.replace(simpleMailRegex, replaceMail(options, globals));
+
+  text = globals.converter._dispatch('simplifiedAutoLinks.after', text, options, globals);
+
+  return text;
+});
+
+/**
+ * These are all the transformations that form block-level
+ * tags like paragraphs, headers, and list items.
+ */
+showdown.subParser('blockGamut', function (text, options, globals) {
+  'use strict';
+
+  text = globals.converter._dispatch('blockGamut.before', text, options, globals);
+
+  // we parse blockquotes first so that we can have headings and hrs
+  // inside blockquotes
+  text = showdown.subParser('blockQuotes')(text, options, globals);
+  text = showdown.subParser('headers')(text, options, globals);
+
+  // Do Horizontal Rules:
+  text = showdown.subParser('horizontalRule')(text, options, globals);
+
+  text = showdown.subParser('lists')(text, options, globals);
+  text = showdown.subParser('codeBlocks')(text, options, globals);
+  text = showdown.subParser('tables')(text, options, globals);
+
+  // We already ran _HashHTMLBlocks() before, in Markdown(), but that
+  // was to escape raw HTML in the original Markdown source. This time,
+  // we're escaping the markup we've just created, so that we don't wrap
+  // <p> tags around block-level tags.
+  text = showdown.subParser('hashHTMLBlocks')(text, options, globals);
+  text = showdown.subParser('paragraphs')(text, options, globals);
+
+  text = globals.converter._dispatch('blockGamut.after', text, options, globals);
+
+  return text;
+});
+
+showdown.subParser('blockQuotes', function (text, options, globals) {
+  'use strict';
+
+  text = globals.converter._dispatch('blockQuotes.before', text, options, globals);
+
+  // add a couple extra lines after the text and endtext mark
+  text = text + '\n\n';
+
+  var rgx = /(^ {0,3}>[ \t]?.+\n(.+\n)*\n*)+/gm;
+
+  if (options.splitAdjacentBlockquotes) {
+    rgx = /^ {0,3}>[\s\S]*?(?:\n\n)/gm;
+  }
+
+  text = text.replace(rgx, function (bq) {
+    // attacklab: hack around Konqueror 3.5.4 bug:
+    // "----------bug".replace(/^-/g,"") == "bug"
+    bq = bq.replace(/^[ \t]*>[ \t]?/gm, ''); // trim one level of quoting
+
+    // attacklab: clean up hack
+    bq = bq.replace(/¨0/g, '');
+
+    bq = bq.replace(/^[ \t]+$/gm, ''); // trim whitespace-only lines
+    bq = showdown.subParser('githubCodeBlocks')(bq, options, globals);
+    bq = showdown.subParser('blockGamut')(bq, options, globals); // recurse
+
+    bq = bq.replace(/(^|\n)/g, '$1  ');
+    // These leading spaces screw with <pre> content, so we need to fix that:
+    bq = bq.replace(/(\s*<pre>[^\r]+?<\/pre>)/gm, function (wholeMatch, m1) {
+      var pre = m1;
+      // attacklab: hack around Konqueror 3.5.4 bug:
+      pre = pre.replace(/^  /mg, '¨0');
+      pre = pre.replace(/¨0/g, '');
+      return pre;
+    });
+
+    return showdown.subParser('hashBlock')('<blockquote>\n' + bq + '\n</blockquote>', options, globals);
+  });
+
+  text = globals.converter._dispatch('blockQuotes.after', text, options, globals);
+  return text;
+});
+
+/**
+ * Process Markdown `<pre><code>` blocks.
+ */
+showdown.subParser('codeBlocks', function (text, options, globals) {
+  'use strict';
+
+  text = globals.converter._dispatch('codeBlocks.before', text, options, globals);
+
+  // sentinel workarounds for lack of \A and \Z, safari\khtml bug
+  text += '¨0';
+
+  var pattern = /(?:\n\n|^)((?:(?:[ ]{4}|\t).*\n+)+)(\n*[ ]{0,3}[^ \t\n]|(?=¨0))/g;
+  text = text.replace(pattern, function (wholeMatch, m1, m2) {
+    var codeblock = m1,
+        nextChar = m2,
+        end = '\n';
+
+    codeblock = showdown.subParser('outdent')(codeblock, options, globals);
+    codeblock = showdown.subParser('encodeCode')(codeblock, options, globals);
+    codeblock = showdown.subParser('detab')(codeblock, options, globals);
+    codeblock = codeblock.replace(/^\n+/g, ''); // trim leading newlines
+    codeblock = codeblock.replace(/\n+$/g, ''); // trim trailing newlines
+
+    if (options.omitExtraWLInCodeBlocks) {
+      end = '';
+    }
+
+    codeblock = '<pre><code>' + codeblock + end + '</code></pre>';
+
+    return showdown.subParser('hashBlock')(codeblock, options, globals) + nextChar;
+  });
+
+  // strip sentinel
+  text = text.replace(/¨0/, '');
+
+  text = globals.converter._dispatch('codeBlocks.after', text, options, globals);
+  return text;
+});
+
+/**
+ *
+ *   *  Backtick quotes are used for <code></code> spans.
+ *
+ *   *  You can use multiple backticks as the delimiters if you want to
+ *     include literal backticks in the code span. So, this input:
+ *
+ *         Just type ``foo `bar` baz`` at the prompt.
+ *
+ *       Will translate to:
+ *
+ *         <p>Just type <code>foo `bar` baz</code> at the prompt.</p>
+ *
+ *    There's no arbitrary limit to the number of backticks you
+ *    can use as delimters. If you need three consecutive backticks
+ *    in your code, use four for delimiters, etc.
+ *
+ *  *  You can use spaces to get literal backticks at the edges:
+ *
+ *         ... type `` `bar` `` ...
+ *
+ *       Turns to:
+ *
+ *         ... type <code>`bar`</code> ...
+ */
+showdown.subParser('codeSpans', function (text, options, globals) {
+  'use strict';
+
+  text = globals.converter._dispatch('codeSpans.before', text, options, globals);
+
+  if (typeof(text) === 'undefined') {
+    text = '';
+  }
+  text = text.replace(/(^|[^\\])(`+)([^\r]*?[^`])\2(?!`)/gm,
+    function (wholeMatch, m1, m2, m3) {
+      var c = m3;
+      c = c.replace(/^([ \t]*)/g, '');	// leading whitespace
+      c = c.replace(/[ \t]*$/g, '');	// trailing whitespace
+      c = showdown.subParser('encodeCode')(c, options, globals);
+      c = m1 + '<code>' + c + '</code>';
+      c = showdown.subParser('hashHTMLSpans')(c, options, globals);
+      return c;
+    }
+  );
+
+  text = globals.converter._dispatch('codeSpans.after', text, options, globals);
+  return text;
+});
+
+/**
+ * Turn Markdown link shortcuts into XHTML <a> tags.
+ */
+showdown.subParser('completeHTMLDocument', function (text, options, globals) {
+  'use strict';
+
+  if (!options.completeHTMLDocument) {
+    return text;
+  }
+
+  text = globals.converter._dispatch('completeHTMLDocument.before', text, options, globals);
+
+  var doctype = 'html',
+      doctypeParsed = '<!DOCTYPE HTML>\n',
+      title = '',
+      charset = '<meta charset="utf-8">\n',
+      lang = '',
+      metadata = '';
+
+  if (typeof globals.metadata.parsed.doctype !== 'undefined') {
+    doctypeParsed = '<!DOCTYPE ' +  globals.metadata.parsed.doctype + '>\n';
+    doctype = globals.metadata.parsed.doctype.toString().toLowerCase();
+    if (doctype === 'html' || doctype === 'html5') {
+      charset = '<meta charset="utf-8">';
+    }
+  }
+
+  for (var meta in globals.metadata.parsed) {
+    if (globals.metadata.parsed.hasOwnProperty(meta)) {
+      switch (meta.toLowerCase()) {
+        case 'doctype':
+          break;
+
+        case 'title':
+          title = '<title>' +  globals.metadata.parsed.title + '</title>\n';
+          break;
+
+        case 'charset':
+          if (doctype === 'html' || doctype === 'html5') {
+            charset = '<meta charset="' + globals.metadata.parsed.charset + '">\n';
+          } else {
+            charset = '<meta name="charset" content="' + globals.metadata.parsed.charset + '">\n';
+          }
+          break;
+
+        case 'language':
+        case 'lang':
+          lang = ' lang="' + globals.metadata.parsed[meta] + '"';
+          metadata += '<meta name="' + meta + '" content="' + globals.metadata.parsed[meta] + '">\n';
+          break;
+
+        default:
+          metadata += '<meta name="' + meta + '" content="' + globals.metadata.parsed[meta] + '">\n';
+      }
+    }
+  }
+
+  text = doctypeParsed + '<html' + lang + '>\n<head>\n' + title + charset + metadata + '</head>\n<body>\n' + text.trim() + '\n</body>\n</html>';
+
+  text = globals.converter._dispatch('completeHTMLDocument.after', text, options, globals);
+  return text;
+});
+
+/**
+ * Convert all tabs to spaces
+ */
+showdown.subParser('detab', function (text, options, globals) {
+  'use strict';
+  text = globals.converter._dispatch('detab.before', text, options, globals);
+
+  // expand first n-1 tabs
+  text = text.replace(/\t(?=\t)/g, '    '); // g_tab_width
+
+  // replace the nth with two sentinels
+  text = text.replace(/\t/g, '¨A¨B');
+
+  // use the sentinel to anchor our regex so it doesn't explode
+  text = text.replace(/¨B(.+?)¨A/g, function (wholeMatch, m1) {
+    var leadingText = m1,
+        numSpaces = 4 - leadingText.length % 4;  // g_tab_width
+
+    // there *must* be a better way to do this:
+    for (var i = 0; i < numSpaces; i++) {
+      leadingText += ' ';
+    }
+
+    return leadingText;
+  });
+
+  // clean up sentinels
+  text = text.replace(/¨A/g, '    ');  // g_tab_width
+  text = text.replace(/¨B/g, '');
+
+  text = globals.converter._dispatch('detab.after', text, options, globals);
+  return text;
+});
+
+showdown.subParser('ellipsis', function (text, options, globals) {
+  'use strict';
+
+  text = globals.converter._dispatch('ellipsis.before', text, options, globals);
+
+  text = text.replace(/\.\.\./g, '…');
+
+  text = globals.converter._dispatch('ellipsis.after', text, options, globals);
+
+  return text;
+});
+
+/**
+ * These are all the transformations that occur *within* block-level
+ * tags like paragraphs, headers, and list items.
+ */
+showdown.subParser('emoji', function (text, options, globals) {
+  'use strict';
+
+  if (!options.emoji) {
+    return text;
+  }
+
+  text = globals.converter._dispatch('emoji.before', text, options, globals);
+
+  var emojiRgx = /:([\S]+?):/g;
+
+  text = text.replace(emojiRgx, function (wm, emojiCode) {
+    if (showdown.helper.emojis.hasOwnProperty(emojiCode)) {
+      return showdown.helper.emojis[emojiCode];
+    }
+    return wm;
+  });
+
+  text = globals.converter._dispatch('emoji.after', text, options, globals);
+
+  return text;
+});
+
+/**
+ * Smart processing for ampersands and angle brackets that need to be encoded.
+ */
+showdown.subParser('encodeAmpsAndAngles', function (text, options, globals) {
+  'use strict';
+  text = globals.converter._dispatch('encodeAmpsAndAngles.before', text, options, globals);
+
+  // Ampersand-encoding based entirely on Nat Irons's Amputator MT plugin:
+  // http://bumppo.net/projects/amputator/
+  text = text.replace(/&(?!#?[xX]?(?:[0-9a-fA-F]+|\w+);)/g, '&amp;');
+
+  // Encode naked <'s
+  text = text.replace(/<(?![a-z\/?$!])/gi, '&lt;');
+
+  // Encode <
+  text = text.replace(/</g, '&lt;');
+
+  // Encode >
+  text = text.replace(/>/g, '&gt;');
+
+  text = globals.converter._dispatch('encodeAmpsAndAngles.after', text, options, globals);
+  return text;
+});
+
+/**
+ * Returns the string, with after processing the following backslash escape sequences.
+ *
+ * attacklab: The polite way to do this is with the new escapeCharacters() function:
+ *
+ *    text = escapeCharacters(text,"\\",true);
+ *    text = escapeCharacters(text,"`*_{}[]()>#+-.!",true);
+ *
+ * ...but we're sidestepping its use of the (slow) RegExp constructor
+ * as an optimization for Firefox.  This function gets called a LOT.
+ */
+showdown.subParser('encodeBackslashEscapes', function (text, options, globals) {
+  'use strict';
+  text = globals.converter._dispatch('encodeBackslashEscapes.before', text, options, globals);
+
+  text = text.replace(/\\(\\)/g, showdown.helper.escapeCharactersCallback);
+  text = text.replace(/\\([`*_{}\[\]()>#+.!~=|-])/g, showdown.helper.escapeCharactersCallback);
+
+  text = globals.converter._dispatch('encodeBackslashEscapes.after', text, options, globals);
+  return text;
+});
+
+/**
+ * Encode/escape certain characters inside Markdown code runs.
+ * The point is that in code, these characters are literals,
+ * and lose their special Markdown meanings.
+ */
+showdown.subParser('encodeCode', function (text, options, globals) {
+  'use strict';
+
+  text = globals.converter._dispatch('encodeCode.before', text, options, globals);
+
+  // Encode all ampersands; HTML entities are not
+  // entities within a Markdown code span.
+  text = text
+    .replace(/&/g, '&amp;')
+  // Do the angle bracket song and dance:
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+  // Now, escape characters that are magic in Markdown:
+    .replace(/([*_{}\[\]\\=~-])/g, showdown.helper.escapeCharactersCallback);
+
+  text = globals.converter._dispatch('encodeCode.after', text, options, globals);
+  return text;
+});
+
+/**
+ * Within tags -- meaning between < and > -- encode [\ ` * _ ~ =] so they
+ * don't conflict with their use in Markdown for code, italics and strong.
+ */
+showdown.subParser('escapeSpecialCharsWithinTagAttributes', function (text, options, globals) {
+  'use strict';
+  text = globals.converter._dispatch('escapeSpecialCharsWithinTagAttributes.before', text, options, globals);
+
+  // Build a regex to find HTML tags.
+  var tags     = /<\/?[a-z\d_:-]+(?:[\s]+[\s\S]+?)?>/gi,
+      comments = /<!(--(?:(?:[^>-]|-[^>])(?:[^-]|-[^-])*)--)>/gi;
+
+  text = text.replace(tags, function (wholeMatch) {
+    return wholeMatch
+      .replace(/(.)<\/?code>(?=.)/g, '$1`')
+      .replace(/([\\`*_~=|])/g, showdown.helper.escapeCharactersCallback);
+  });
+
+  text = text.replace(comments, function (wholeMatch) {
+    return wholeMatch
+      .replace(/([\\`*_~=|])/g, showdown.helper.escapeCharactersCallback);
+  });
+
+  text = globals.converter._dispatch('escapeSpecialCharsWithinTagAttributes.after', text, options, globals);
+  return text;
+});
+
+/**
+ * Handle github codeblocks prior to running HashHTML so that
+ * HTML contained within the codeblock gets escaped properly
+ * Example:
+ * ```ruby
+ *     def hello_world(x)
+ *       puts "Hello, #{x}"
+ *     end
+ * ```
+ */
+showdown.subParser('githubCodeBlocks', function (text, options, globals) {
+  'use strict';
+
+  // early exit if option is not enabled
+  if (!options.ghCodeBlocks) {
+    return text;
+  }
+
+  text = globals.converter._dispatch('githubCodeBlocks.before', text, options, globals);
+
+  text += '¨0';
+
+  text = text.replace(/(?:^|\n)(```+|~~~+)([^\s`~]*)\n([\s\S]*?)\n\1/g, function (wholeMatch, delim, language, codeblock) {
+    var end = (options.omitExtraWLInCodeBlocks) ? '' : '\n';
+
+    // First parse the github code block
+    codeblock = showdown.subParser('encodeCode')(codeblock, options, globals);
+    codeblock = showdown.subParser('detab')(codeblock, options, globals);
+    codeblock = codeblock.replace(/^\n+/g, ''); // trim leading newlines
+    codeblock = codeblock.replace(/\n+$/g, ''); // trim trailing whitespace
+
+    codeblock = '<pre><code' + (language ? ' class="' + language + ' language-' + language + '"' : '') + '>' + codeblock + end + '</code></pre>';
+
+    codeblock = showdown.subParser('hashBlock')(codeblock, options, globals);
+
+    // Since GHCodeblocks can be false positives, we need to
+    // store the primitive text and the parsed text in a global var,
+    // and then return a token
+    return '\n\n¨G' + (globals.ghCodeBlocks.push({text: wholeMatch, codeblock: codeblock}) - 1) + 'G\n\n';
+  });
+
+  // attacklab: strip sentinel
+  text = text.replace(/¨0/, '');
+
+  return globals.converter._dispatch('githubCodeBlocks.after', text, options, globals);
+});
+
+showdown.subParser('hashBlock', function (text, options, globals) {
+  'use strict';
+  text = globals.converter._dispatch('hashBlock.before', text, options, globals);
+  text = text.replace(/(^\n+|\n+$)/g, '');
+  text = '\n\n¨K' + (globals.gHtmlBlocks.push(text) - 1) + 'K\n\n';
+  text = globals.converter._dispatch('hashBlock.after', text, options, globals);
+  return text;
+});
+
+/**
+ * Hash and escape <code> elements that should not be parsed as markdown
+ */
+showdown.subParser('hashCodeTags', function (text, options, globals) {
+  'use strict';
+  text = globals.converter._dispatch('hashCodeTags.before', text, options, globals);
+
+  var repFunc = function (wholeMatch, match, left, right) {
+    var codeblock = left + showdown.subParser('encodeCode')(match, options, globals) + right;
+    return '¨C' + (globals.gHtmlSpans.push(codeblock) - 1) + 'C';
+  };
+
+  // Hash naked <code>
+  text = showdown.helper.replaceRecursiveRegExp(text, repFunc, '<code\\b[^>]*>', '</code>', 'gim');
+
+  text = globals.converter._dispatch('hashCodeTags.after', text, options, globals);
+  return text;
+});
+
+showdown.subParser('hashElement', function (text, options, globals) {
+  'use strict';
+
+  return function (wholeMatch, m1) {
+    var blockText = m1;
+
+    // Undo double lines
+    blockText = blockText.replace(/\n\n/g, '\n');
+    blockText = blockText.replace(/^\n/, '');
+
+    // strip trailing blank lines
+    blockText = blockText.replace(/\n+$/g, '');
+
+    // Replace the element text with a marker ("¨KxK" where x is its key)
+    blockText = '\n\n¨K' + (globals.gHtmlBlocks.push(blockText) - 1) + 'K\n\n';
+
+    return blockText;
+  };
+});
+
+showdown.subParser('hashHTMLBlocks', function (text, options, globals) {
+  'use strict';
+  text = globals.converter._dispatch('hashHTMLBlocks.before', text, options, globals);
+
+  var blockTags = [
+        'pre',
+        'div',
+        'h1',
+        'h2',
+        'h3',
+        'h4',
+        'h5',
+        'h6',
+        'blockquote',
+        'table',
+        'dl',
+        'ol',
+        'ul',
+        'script',
+        'noscript',
+        'form',
+        'fieldset',
+        'iframe',
+        'math',
+        'style',
+        'section',
+        'header',
+        'footer',
+        'nav',
+        'article',
+        'aside',
+        'address',
+        'audio',
+        'canvas',
+        'figure',
+        'hgroup',
+        'output',
+        'video',
+        'p'
+      ],
+      repFunc = function (wholeMatch, match, left, right) {
+        var txt = wholeMatch;
+        // check if this html element is marked as markdown
+        // if so, it's contents should be parsed as markdown
+        if (left.search(/\bmarkdown\b/) !== -1) {
+          txt = left + globals.converter.makeHtml(match) + right;
+        }
+        return '\n\n¨K' + (globals.gHtmlBlocks.push(txt) - 1) + 'K\n\n';
+      };
+
+  if (options.backslashEscapesHTMLTags) {
+    // encode backslash escaped HTML tags
+    text = text.replace(/\\<(\/?[^>]+?)>/g, function (wm, inside) {
+      return '&lt;' + inside + '&gt;';
+    });
+  }
+
+  // hash HTML Blocks
+  for (var i = 0; i < blockTags.length; ++i) {
+
+    var opTagPos,
+        rgx1     = new RegExp('^ {0,3}(<' + blockTags[i] + '\\b[^>]*>)', 'im'),
+        patLeft  = '<' + blockTags[i] + '\\b[^>]*>',
+        patRight = '</' + blockTags[i] + '>';
+    // 1. Look for the first position of the first opening HTML tag in the text
+    while ((opTagPos = showdown.helper.regexIndexOf(text, rgx1)) !== -1) {
+
+      // if the HTML tag is \ escaped, we need to escape it and break
+
+
+      //2. Split the text in that position
+      var subTexts = showdown.helper.splitAtIndex(text, opTagPos),
+      //3. Match recursively
+          newSubText1 = showdown.helper.replaceRecursiveRegExp(subTexts[1], repFunc, patLeft, patRight, 'im');
+
+      // prevent an infinite loop
+      if (newSubText1 === subTexts[1]) {
+        break;
+      }
+      text = subTexts[0].concat(newSubText1);
+    }
+  }
+  // HR SPECIAL CASE
+  text = text.replace(/(\n {0,3}(<(hr)\b([^<>])*?\/?>)[ \t]*(?=\n{2,}))/g,
+    showdown.subParser('hashElement')(text, options, globals));
+
+  // Special case for standalone HTML comments
+  text = showdown.helper.replaceRecursiveRegExp(text, function (txt) {
+    return '\n\n¨K' + (globals.gHtmlBlocks.push(txt) - 1) + 'K\n\n';
+  }, '^ {0,3}<!--', '-->', 'gm');
+
+  // PHP and ASP-style processor instructions (<?...?> and <%...%>)
+  text = text.replace(/(?:\n\n)( {0,3}(?:<([?%])[^\r]*?\2>)[ \t]*(?=\n{2,}))/g,
+    showdown.subParser('hashElement')(text, options, globals));
+
+  text = globals.converter._dispatch('hashHTMLBlocks.after', text, options, globals);
+  return text;
+});
+
+/**
+ * Hash span elements that should not be parsed as markdown
+ */
+showdown.subParser('hashHTMLSpans', function (text, options, globals) {
+  'use strict';
+  text = globals.converter._dispatch('hashHTMLSpans.before', text, options, globals);
+
+  function hashHTMLSpan (html) {
+    return '¨C' + (globals.gHtmlSpans.push(html) - 1) + 'C';
+  }
+
+  // Hash Self Closing tags
+  text = text.replace(/<[^>]+?\/>/gi, function (wm) {
+    return hashHTMLSpan(wm);
+  });
+
+  // Hash tags without properties
+  text = text.replace(/<([^>]+?)>[\s\S]*?<\/\1>/g, function (wm) {
+    return hashHTMLSpan(wm);
+  });
+
+  // Hash tags with properties
+  text = text.replace(/<([^>]+?)\s[^>]+?>[\s\S]*?<\/\1>/g, function (wm) {
+    return hashHTMLSpan(wm);
+  });
+
+  // Hash self closing tags without />
+  text = text.replace(/<[^>]+?>/gi, function (wm) {
+    return hashHTMLSpan(wm);
+  });
+
+  /*showdown.helper.matchRecursiveRegExp(text, '<code\\b[^>]*>', '</code>', 'gi');*/
+
+  text = globals.converter._dispatch('hashHTMLSpans.after', text, options, globals);
+  return text;
+});
+
+/**
+ * Unhash HTML spans
+ */
+showdown.subParser('unhashHTMLSpans', function (text, options, globals) {
+  'use strict';
+  text = globals.converter._dispatch('unhashHTMLSpans.before', text, options, globals);
+
+  for (var i = 0; i < globals.gHtmlSpans.length; ++i) {
+    var repText = globals.gHtmlSpans[i],
+        // limiter to prevent infinite loop (assume 10 as limit for recurse)
+        limit = 0;
+
+    while (/¨C(\d+)C/.test(repText)) {
+      var num = RegExp.$1;
+      repText = repText.replace('¨C' + num + 'C', globals.gHtmlSpans[num]);
+      if (limit === 10) {
+        console.error('maximum nesting of 10 spans reached!!!');
+        break;
+      }
+      ++limit;
+    }
+    text = text.replace('¨C' + i + 'C', repText);
+  }
+
+  text = globals.converter._dispatch('unhashHTMLSpans.after', text, options, globals);
+  return text;
+});
+
+/**
+ * Hash and escape <pre><code> elements that should not be parsed as markdown
+ */
+showdown.subParser('hashPreCodeTags', function (text, options, globals) {
+  'use strict';
+  text = globals.converter._dispatch('hashPreCodeTags.before', text, options, globals);
+
+  var repFunc = function (wholeMatch, match, left, right) {
+    // encode html entities
+    var codeblock = left + showdown.subParser('encodeCode')(match, options, globals) + right;
+    return '\n\n¨G' + (globals.ghCodeBlocks.push({text: wholeMatch, codeblock: codeblock}) - 1) + 'G\n\n';
+  };
+
+  // Hash <pre><code>
+  text = showdown.helper.replaceRecursiveRegExp(text, repFunc, '^ {0,3}<pre\\b[^>]*>\\s*<code\\b[^>]*>', '^ {0,3}</code>\\s*</pre>', 'gim');
+
+  text = globals.converter._dispatch('hashPreCodeTags.after', text, options, globals);
+  return text;
+});
+
+showdown.subParser('headers', function (text, options, globals) {
+  'use strict';
+
+  text = globals.converter._dispatch('headers.before', text, options, globals);
+
+  var headerLevelStart = (isNaN(parseInt(options.headerLevelStart))) ? 1 : parseInt(options.headerLevelStart),
+
+  // Set text-style headers:
+  //	Header 1
+  //	========
+  //
+  //	Header 2
+  //	--------
+  //
+      setextRegexH1 = (options.smoothLivePreview) ? /^(.+)[ \t]*\n={2,}[ \t]*\n+/gm : /^(.+)[ \t]*\n=+[ \t]*\n+/gm,
+      setextRegexH2 = (options.smoothLivePreview) ? /^(.+)[ \t]*\n-{2,}[ \t]*\n+/gm : /^(.+)[ \t]*\n-+[ \t]*\n+/gm;
+
+  text = text.replace(setextRegexH1, function (wholeMatch, m1) {
+
+    var spanGamut = showdown.subParser('spanGamut')(m1, options, globals),
+        hID = (options.noHeaderId) ? '' : ' id="' + headerId(m1) + '"',
+        hLevel = headerLevelStart,
+        hashBlock = '<h' + hLevel + hID + '>' + spanGamut + '</h' + hLevel + '>';
+    return showdown.subParser('hashBlock')(hashBlock, options, globals);
+  });
+
+  text = text.replace(setextRegexH2, function (matchFound, m1) {
+    var spanGamut = showdown.subParser('spanGamut')(m1, options, globals),
+        hID = (options.noHeaderId) ? '' : ' id="' + headerId(m1) + '"',
+        hLevel = headerLevelStart + 1,
+        hashBlock = '<h' + hLevel + hID + '>' + spanGamut + '</h' + hLevel + '>';
+    return showdown.subParser('hashBlock')(hashBlock, options, globals);
+  });
+
+  // atx-style headers:
+  //  # Header 1
+  //  ## Header 2
+  //  ## Header 2 with closing hashes ##
+  //  ...
+  //  ###### Header 6
+  //
+  var atxStyle = (options.requireSpaceBeforeHeadingText) ? /^(#{1,6})[ \t]+(.+?)[ \t]*#*\n+/gm : /^(#{1,6})[ \t]*(.+?)[ \t]*#*\n+/gm;
+
+  text = text.replace(atxStyle, function (wholeMatch, m1, m2) {
+    var hText = m2;
+    if (options.customizedHeaderId) {
+      hText = m2.replace(/\s?\{([^{]+?)}\s*$/, '');
+    }
+
+    var span = showdown.subParser('spanGamut')(hText, options, globals),
+        hID = (options.noHeaderId) ? '' : ' id="' + headerId(m2) + '"',
+        hLevel = headerLevelStart - 1 + m1.length,
+        header = '<h' + hLevel + hID + '>' + span + '</h' + hLevel + '>';
+
+    return showdown.subParser('hashBlock')(header, options, globals);
+  });
+
+  function headerId (m) {
+    var title,
+        prefix;
+
+    // It is separate from other options to allow combining prefix and customized
+    if (options.customizedHeaderId) {
+      var match = m.match(/\{([^{]+?)}\s*$/);
+      if (match && match[1]) {
+        m = match[1];
+      }
+    }
+
+    title = m;
+
+    // Prefix id to prevent causing inadvertent pre-existing style matches.
+    if (showdown.helper.isString(options.prefixHeaderId)) {
+      prefix = options.prefixHeaderId;
+    } else if (options.prefixHeaderId === true) {
+      prefix = 'section-';
+    } else {
+      prefix = '';
+    }
+
+    if (!options.rawPrefixHeaderId) {
+      title = prefix + title;
+    }
+
+    if (options.ghCompatibleHeaderId) {
+      title = title
+        .replace(/ /g, '-')
+        // replace previously escaped chars (&, ¨ and $)
+        .replace(/&amp;/g, '')
+        .replace(/¨T/g, '')
+        .replace(/¨D/g, '')
+        // replace rest of the chars (&~$ are repeated as they might have been escaped)
+        // borrowed from github's redcarpet (some they should produce similar results)
+        .replace(/[&+$,\/:;=?@"#{}|^¨~\[\]`\\*)(%.!'<>]/g, '')
+        .toLowerCase();
+    } else if (options.rawHeaderId) {
+      title = title
+        .replace(/ /g, '-')
+        // replace previously escaped chars (&, ¨ and $)
+        .replace(/&amp;/g, '&')
+        .replace(/¨T/g, '¨')
+        .replace(/¨D/g, '$')
+        // replace " and '
+        .replace(/["']/g, '-')
+        .toLowerCase();
+    } else {
+      title = title
+        .replace(/[^\w]/g, '')
+        .toLowerCase();
+    }
+
+    if (options.rawPrefixHeaderId) {
+      title = prefix + title;
+    }
+
+    if (globals.hashLinkCounts[title]) {
+      title = title + '-' + (globals.hashLinkCounts[title]++);
+    } else {
+      globals.hashLinkCounts[title] = 1;
+    }
+    return title;
+  }
+
+  text = globals.converter._dispatch('headers.after', text, options, globals);
+  return text;
+});
+
+/**
+ * Turn Markdown link shortcuts into XHTML <a> tags.
+ */
+showdown.subParser('horizontalRule', function (text, options, globals) {
+  'use strict';
+  text = globals.converter._dispatch('horizontalRule.before', text, options, globals);
+
+  var key = showdown.subParser('hashBlock')('<hr />', options, globals);
+  text = text.replace(/^ {0,2}( ?-){3,}[ \t]*$/gm, key);
+  text = text.replace(/^ {0,2}( ?\*){3,}[ \t]*$/gm, key);
+  text = text.replace(/^ {0,2}( ?_){3,}[ \t]*$/gm, key);
+
+  text = globals.converter._dispatch('horizontalRule.after', text, options, globals);
+  return text;
+});
+
+/**
+ * Turn Markdown image shortcuts into <img> tags.
+ */
+showdown.subParser('images', function (text, options, globals) {
+  'use strict';
+
+  text = globals.converter._dispatch('images.before', text, options, globals);
+
+  var inlineRegExp      = /!\[([^\]]*?)][ \t]*()\([ \t]?<?([\S]+?(?:\([\S]*?\)[\S]*?)?)>?(?: =([*\d]+[A-Za-z%]{0,4})x([*\d]+[A-Za-z%]{0,4}))?[ \t]*(?:(["'])([^"]*?)\6)?[ \t]?\)/g,
+      crazyRegExp       = /!\[([^\]]*?)][ \t]*()\([ \t]?<([^>]*)>(?: =([*\d]+[A-Za-z%]{0,4})x([*\d]+[A-Za-z%]{0,4}))?[ \t]*(?:(?:(["'])([^"]*?)\6))?[ \t]?\)/g,
+      base64RegExp      = /!\[([^\]]*?)][ \t]*()\([ \t]?<?(data:.+?\/.+?;base64,[A-Za-z0-9+/=\n]+?)>?(?: =([*\d]+[A-Za-z%]{0,4})x([*\d]+[A-Za-z%]{0,4}))?[ \t]*(?:(["'])([^"]*?)\6)?[ \t]?\)/g,
+      referenceRegExp   = /!\[([^\]]*?)] ?(?:\n *)?\[([\s\S]*?)]()()()()()/g,
+      refShortcutRegExp = /!\[([^\[\]]+)]()()()()()/g;
+
+  function writeImageTagBase64 (wholeMatch, altText, linkId, url, width, height, m5, title) {
+    url = url.replace(/\s/g, '');
+    return writeImageTag (wholeMatch, altText, linkId, url, width, height, m5, title);
+  }
+
+  function writeImageTag (wholeMatch, altText, linkId, url, width, height, m5, title) {
+
+    var gUrls   = globals.gUrls,
+        gTitles = globals.gTitles,
+        gDims   = globals.gDimensions;
+
+    linkId = linkId.toLowerCase();
+
+    if (!title) {
+      title = '';
+    }
+    // Special case for explicit empty url
+    if (wholeMatch.search(/\(<?\s*>? ?(['"].*['"])?\)$/m) > -1) {
+      url = '';
+
+    } else if (url === '' || url === null) {
+      if (linkId === '' || linkId === null) {
+        // lower-case and turn embedded newlines into spaces
+        linkId = altText.toLowerCase().replace(/ ?\n/g, ' ');
+      }
+      url = '#' + linkId;
+
+      if (!showdown.helper.isUndefined(gUrls[linkId])) {
+        url = gUrls[linkId];
+        if (!showdown.helper.isUndefined(gTitles[linkId])) {
+          title = gTitles[linkId];
+        }
+        if (!showdown.helper.isUndefined(gDims[linkId])) {
+          width = gDims[linkId].width;
+          height = gDims[linkId].height;
+        }
+      } else {
+        return wholeMatch;
+      }
+    }
+
+    altText = altText
+      .replace(/"/g, '&quot;')
+    //altText = showdown.helper.escapeCharacters(altText, '*_', false);
+      .replace(showdown.helper.regexes.asteriskDashAndColon, showdown.helper.escapeCharactersCallback);
+    //url = showdown.helper.escapeCharacters(url, '*_', false);
+    url = url.replace(showdown.helper.regexes.asteriskDashAndColon, showdown.helper.escapeCharactersCallback);
+    var result = '<img src="' + url + '" alt="' + altText + '"';
+
+    if (title) {
+      title = title
+        .replace(/"/g, '&quot;')
+      //title = showdown.helper.escapeCharacters(title, '*_', false);
+        .replace(showdown.helper.regexes.asteriskDashAndColon, showdown.helper.escapeCharactersCallback);
+      result += ' title="' + title + '"';
+    }
+
+    if (width && height) {
+      width  = (width === '*') ? 'auto' : width;
+      height = (height === '*') ? 'auto' : height;
+
+      result += ' width="' + width + '"';
+      result += ' height="' + height + '"';
+    }
+
+    result += ' />';
+
+    return result;
+  }
+
+  // First, handle reference-style labeled images: ![alt text][id]
+  text = text.replace(referenceRegExp, writeImageTag);
+
+  // Next, handle inline images:  ![alt text](url =<width>x<height> "optional title")
+
+  // base64 encoded images
+  text = text.replace(base64RegExp, writeImageTagBase64);
+
+  // cases with crazy urls like ./image/cat1).png
+  text = text.replace(crazyRegExp, writeImageTag);
+
+  // normal cases
+  text = text.replace(inlineRegExp, writeImageTag);
+
+  // handle reference-style shortcuts: ![img text]
+  text = text.replace(refShortcutRegExp, writeImageTag);
+
+  text = globals.converter._dispatch('images.after', text, options, globals);
+  return text;
+});
+
+showdown.subParser('italicsAndBold', function (text, options, globals) {
+  'use strict';
+
+  text = globals.converter._dispatch('italicsAndBold.before', text, options, globals);
+
+  // it's faster to have 3 separate regexes for each case than have just one
+  // because of backtracing, in some cases, it could lead to an exponential effect
+  // called "catastrophic backtrace". Ominous!
+
+  function parseInside (txt, left, right) {
+    /*
+    if (options.simplifiedAutoLink) {
+      txt = showdown.subParser('simplifiedAutoLinks')(txt, options, globals);
+    }
+    */
+    return left + txt + right;
+  }
+
+  // Parse underscores
+  if (options.literalMidWordUnderscores) {
+    text = text.replace(/\b___(\S[\s\S]*)___\b/g, function (wm, txt) {
+      return parseInside (txt, '<strong><em>', '</em></strong>');
+    });
+    text = text.replace(/\b__(\S[\s\S]*)__\b/g, function (wm, txt) {
+      return parseInside (txt, '<strong>', '</strong>');
+    });
+    text = text.replace(/\b_(\S[\s\S]*?)_\b/g, function (wm, txt) {
+      return parseInside (txt, '<em>', '</em>');
+    });
+  } else {
+    text = text.replace(/___(\S[\s\S]*?)___/g, function (wm, m) {
+      return (/\S$/.test(m)) ? parseInside (m, '<strong><em>', '</em></strong>') : wm;
+    });
+    text = text.replace(/__(\S[\s\S]*?)__/g, function (wm, m) {
+      return (/\S$/.test(m)) ? parseInside (m, '<strong>', '</strong>') : wm;
+    });
+    text = text.replace(/_([^\s_][\s\S]*?)_/g, function (wm, m) {
+      // !/^_[^_]/.test(m) - test if it doesn't start with __ (since it seems redundant, we removed it)
+      return (/\S$/.test(m)) ? parseInside (m, '<em>', '</em>') : wm;
+    });
+  }
+
+  // Now parse asterisks
+  if (options.literalMidWordAsterisks) {
+    text = text.replace(/([^*]|^)\B\*\*\*(\S[\s\S]+?)\*\*\*\B(?!\*)/g, function (wm, lead, txt) {
+      return parseInside (txt, lead + '<strong><em>', '</em></strong>');
+    });
+    text = text.replace(/([^*]|^)\B\*\*(\S[\s\S]+?)\*\*\B(?!\*)/g, function (wm, lead, txt) {
+      return parseInside (txt, lead + '<strong>', '</strong>');
+    });
+    text = text.replace(/([^*]|^)\B\*(\S[\s\S]+?)\*\B(?!\*)/g, function (wm, lead, txt) {
+      return parseInside (txt, lead + '<em>', '</em>');
+    });
+  } else {
+    text = text.replace(/\*\*\*(\S[\s\S]*?)\*\*\*/g, function (wm, m) {
+      return (/\S$/.test(m)) ? parseInside (m, '<strong><em>', '</em></strong>') : wm;
+    });
+    text = text.replace(/\*\*(\S[\s\S]*?)\*\*/g, function (wm, m) {
+      return (/\S$/.test(m)) ? parseInside (m, '<strong>', '</strong>') : wm;
+    });
+    text = text.replace(/\*([^\s*][\s\S]*?)\*/g, function (wm, m) {
+      // !/^\*[^*]/.test(m) - test if it doesn't start with ** (since it seems redundant, we removed it)
+      return (/\S$/.test(m)) ? parseInside (m, '<em>', '</em>') : wm;
+    });
+  }
+
+
+  text = globals.converter._dispatch('italicsAndBold.after', text, options, globals);
+  return text;
+});
+
+/**
+ * Form HTML ordered (numbered) and unordered (bulleted) lists.
+ */
+showdown.subParser('lists', function (text, options, globals) {
+  'use strict';
+
+  /**
+   * Process the contents of a single ordered or unordered list, splitting it
+   * into individual list items.
+   * @param {string} listStr
+   * @param {boolean} trimTrailing
+   * @returns {string}
+   */
+  function processListItems (listStr, trimTrailing) {
+    // The $g_list_level global keeps track of when we're inside a list.
+    // Each time we enter a list, we increment it; when we leave a list,
+    // we decrement. If it's zero, we're not in a list anymore.
+    //
+    // We do this because when we're not inside a list, we want to treat
+    // something like this:
+    //
+    //    I recommend upgrading to version
+    //    8. Oops, now this line is treated
+    //    as a sub-list.
+    //
+    // As a single paragraph, despite the fact that the second line starts
+    // with a digit-period-space sequence.
+    //
+    // Whereas when we're inside a list (or sub-list), that line will be
+    // treated as the start of a sub-list. What a kludge, huh? This is
+    // an aspect of Markdown's syntax that's hard to parse perfectly
+    // without resorting to mind-reading. Perhaps the solution is to
+    // change the syntax rules such that sub-lists must start with a
+    // starting cardinal number; e.g. "1." or "a.".
+    globals.gListLevel++;
+
+    // trim trailing blank lines:
+    listStr = listStr.replace(/\n{2,}$/, '\n');
+
+    // attacklab: add sentinel to emulate \z
+    listStr += '¨0';
+
+    var rgx = /(\n)?(^ {0,3})([*+-]|\d+[.])[ \t]+((\[(x|X| )?])?[ \t]*[^\r]+?(\n{1,2}))(?=\n*(¨0| {0,3}([*+-]|\d+[.])[ \t]+))/gm,
+        isParagraphed = (/\n[ \t]*\n(?!¨0)/.test(listStr));
+
+    // Since version 1.5, nesting sublists requires 4 spaces (or 1 tab) indentation,
+    // which is a syntax breaking change
+    // activating this option reverts to old behavior
+    if (options.disableForced4SpacesIndentedSublists) {
+      rgx = /(\n)?(^ {0,3})([*+-]|\d+[.])[ \t]+((\[(x|X| )?])?[ \t]*[^\r]+?(\n{1,2}))(?=\n*(¨0|\2([*+-]|\d+[.])[ \t]+))/gm;
+    }
+
+    listStr = listStr.replace(rgx, function (wholeMatch, m1, m2, m3, m4, taskbtn, checked) {
+      checked = (checked && checked.trim() !== '');
+
+      var item = showdown.subParser('outdent')(m4, options, globals),
+          bulletStyle = '';
+
+      // Support for github tasklists
+      if (taskbtn && options.tasklists) {
+        bulletStyle = ' class="task-list-item" style="list-style-type: none;"';
+        item = item.replace(/^[ \t]*\[(x|X| )?]/m, function () {
+          var otp = '<input type="checkbox" disabled style="margin: 0px 0.35em 0.25em -1.6em; vertical-align: middle;"';
+          if (checked) {
+            otp += ' checked';
+          }
+          otp += '>';
+          return otp;
+        });
+      }
+
+      // ISSUE #312
+      // This input: - - - a
+      // causes trouble to the parser, since it interprets it as:
+      // <ul><li><li><li>a</li></li></li></ul>
+      // instead of:
+      // <ul><li>- - a</li></ul>
+      // So, to prevent it, we will put a marker (¨A)in the beginning of the line
+      // Kind of hackish/monkey patching, but seems more effective than overcomplicating the list parser
+      item = item.replace(/^([-*+]|\d\.)[ \t]+[\S\n ]*/g, function (wm2) {
+        return '¨A' + wm2;
+      });
+
+      // m1 - Leading line or
+      // Has a double return (multi paragraph) or
+      // Has sublist
+      if (m1 || (item.search(/\n{2,}/) > -1)) {
+        item = showdown.subParser('githubCodeBlocks')(item, options, globals);
+        item = showdown.subParser('blockGamut')(item, options, globals);
+      } else {
+        // Recursion for sub-lists:
+        item = showdown.subParser('lists')(item, options, globals);
+        item = item.replace(/\n$/, ''); // chomp(item)
+        item = showdown.subParser('hashHTMLBlocks')(item, options, globals);
+
+        // Colapse double linebreaks
+        item = item.replace(/\n\n+/g, '\n\n');
+        if (isParagraphed) {
+          item = showdown.subParser('paragraphs')(item, options, globals);
+        } else {
+          item = showdown.subParser('spanGamut')(item, options, globals);
+        }
+      }
+
+      // now we need to remove the marker (¨A)
+      item = item.replace('¨A', '');
+      // we can finally wrap the line in list item tags
+      item =  '<li' + bulletStyle + '>' + item + '</li>\n';
+
+      return item;
+    });
+
+    // attacklab: strip sentinel
+    listStr = listStr.replace(/¨0/g, '');
+
+    globals.gListLevel--;
+
+    if (trimTrailing) {
+      listStr = listStr.replace(/\s+$/, '');
+    }
+
+    return listStr;
+  }
+
+  function styleStartNumber (list, listType) {
+    // check if ol and starts by a number different than 1
+    if (listType === 'ol') {
+      var res = list.match(/^ *(\d+)\./);
+      if (res && res[1] !== '1') {
+        return ' start="' + res[1] + '"';
+      }
+    }
+    return '';
+  }
+
+  /**
+   * Check and parse consecutive lists (better fix for issue #142)
+   * @param {string} list
+   * @param {string} listType
+   * @param {boolean} trimTrailing
+   * @returns {string}
+   */
+  function parseConsecutiveLists (list, listType, trimTrailing) {
+    // check if we caught 2 or more consecutive lists by mistake
+    // we use the counterRgx, meaning if listType is UL we look for OL and vice versa
+    var olRgx = (options.disableForced4SpacesIndentedSublists) ? /^ ?\d+\.[ \t]/gm : /^ {0,3}\d+\.[ \t]/gm,
+        ulRgx = (options.disableForced4SpacesIndentedSublists) ? /^ ?[*+-][ \t]/gm : /^ {0,3}[*+-][ \t]/gm,
+        counterRxg = (listType === 'ul') ? olRgx : ulRgx,
+        result = '';
+
+    if (list.search(counterRxg) !== -1) {
+      (function parseCL (txt) {
+        var pos = txt.search(counterRxg),
+            style = styleStartNumber(list, listType);
+        if (pos !== -1) {
+          // slice
+          result += '\n\n<' + listType + style + '>\n' + processListItems(txt.slice(0, pos), !!trimTrailing) + '</' + listType + '>\n';
+
+          // invert counterType and listType
+          listType = (listType === 'ul') ? 'ol' : 'ul';
+          counterRxg = (listType === 'ul') ? olRgx : ulRgx;
+
+          //recurse
+          parseCL(txt.slice(pos));
+        } else {
+          result += '\n\n<' + listType + style + '>\n' + processListItems(txt, !!trimTrailing) + '</' + listType + '>\n';
+        }
+      })(list);
+    } else {
+      var style = styleStartNumber(list, listType);
+      result = '\n\n<' + listType + style + '>\n' + processListItems(list, !!trimTrailing) + '</' + listType + '>\n';
+    }
+
+    return result;
+  }
+
+  /** Start of list parsing **/
+  text = globals.converter._dispatch('lists.before', text, options, globals);
+  // add sentinel to hack around khtml/safari bug:
+  // http://bugs.webkit.org/show_bug.cgi?id=11231
+  text += '¨0';
+
+  if (globals.gListLevel) {
+    text = text.replace(/^(( {0,3}([*+-]|\d+[.])[ \t]+)[^\r]+?(¨0|\n{2,}(?=\S)(?![ \t]*(?:[*+-]|\d+[.])[ \t]+)))/gm,
+      function (wholeMatch, list, m2) {
+        var listType = (m2.search(/[*+-]/g) > -1) ? 'ul' : 'ol';
+        return parseConsecutiveLists(list, listType, true);
+      }
+    );
+  } else {
+    text = text.replace(/(\n\n|^\n?)(( {0,3}([*+-]|\d+[.])[ \t]+)[^\r]+?(¨0|\n{2,}(?=\S)(?![ \t]*(?:[*+-]|\d+[.])[ \t]+)))/gm,
+      function (wholeMatch, m1, list, m3) {
+        var listType = (m3.search(/[*+-]/g) > -1) ? 'ul' : 'ol';
+        return parseConsecutiveLists(list, listType, false);
+      }
+    );
+  }
+
+  // strip sentinel
+  text = text.replace(/¨0/, '');
+  text = globals.converter._dispatch('lists.after', text, options, globals);
+  return text;
+});
+
+/**
+ * Parse metadata at the top of the document
+ */
+showdown.subParser('metadata', function (text, options, globals) {
+  'use strict';
+
+  if (!options.metadata) {
+    return text;
+  }
+
+  text = globals.converter._dispatch('metadata.before', text, options, globals);
+
+  function parseMetadataContents (content) {
+    // raw is raw so it's not changed in any way
+    globals.metadata.raw = content;
+
+    // escape chars forbidden in html attributes
+    // double quotes
+    content = content
+      // ampersand first
+      .replace(/&/g, '&amp;')
+      // double quotes
+      .replace(/"/g, '&quot;');
+
+    content = content.replace(/\n {4}/g, ' ');
+    content.replace(/^([\S ]+): +([\s\S]+?)$/gm, function (wm, key, value) {
+      globals.metadata.parsed[key] = value;
+      return '';
+    });
+  }
+
+  text = text.replace(/^\s*«««+(\S*?)\n([\s\S]+?)\n»»»+\n/, function (wholematch, format, content) {
+    parseMetadataContents(content);
+    return '¨M';
+  });
+
+  text = text.replace(/^\s*---+(\S*?)\n([\s\S]+?)\n---+\n/, function (wholematch, format, content) {
+    if (format) {
+      globals.metadata.format = format;
+    }
+    parseMetadataContents(content);
+    return '¨M';
+  });
+
+  text = text.replace(/¨M/g, '');
+
+  text = globals.converter._dispatch('metadata.after', text, options, globals);
+  return text;
+});
+
+/**
+ * Remove one level of line-leading tabs or spaces
+ */
+showdown.subParser('outdent', function (text, options, globals) {
+  'use strict';
+  text = globals.converter._dispatch('outdent.before', text, options, globals);
+
+  // attacklab: hack around Konqueror 3.5.4 bug:
+  // "----------bug".replace(/^-/g,"") == "bug"
+  text = text.replace(/^(\t|[ ]{1,4})/gm, '¨0'); // attacklab: g_tab_width
+
+  // attacklab: clean up hack
+  text = text.replace(/¨0/g, '');
+
+  text = globals.converter._dispatch('outdent.after', text, options, globals);
+  return text;
+});
+
+/**
+ *
+ */
+showdown.subParser('paragraphs', function (text, options, globals) {
+  'use strict';
+
+  text = globals.converter._dispatch('paragraphs.before', text, options, globals);
+  // Strip leading and trailing lines:
+  text = text.replace(/^\n+/g, '');
+  text = text.replace(/\n+$/g, '');
+
+  var grafs = text.split(/\n{2,}/g),
+      grafsOut = [],
+      end = grafs.length; // Wrap <p> tags
+
+  for (var i = 0; i < end; i++) {
+    var str = grafs[i];
+    // if this is an HTML marker, copy it
+    if (str.search(/¨(K|G)(\d+)\1/g) >= 0) {
+      grafsOut.push(str);
+
+    // test for presence of characters to prevent empty lines being parsed
+    // as paragraphs (resulting in undesired extra empty paragraphs)
+    } else if (str.search(/\S/) >= 0) {
+      str = showdown.subParser('spanGamut')(str, options, globals);
+      str = str.replace(/^([ \t]*)/g, '<p>');
+      str += '</p>';
+      grafsOut.push(str);
+    }
+  }
+
+  /** Unhashify HTML blocks */
+  end = grafsOut.length;
+  for (i = 0; i < end; i++) {
+    var blockText = '',
+        grafsOutIt = grafsOut[i],
+        codeFlag = false;
+    // if this is a marker for an html block...
+    // use RegExp.test instead of string.search because of QML bug
+    while (/¨(K|G)(\d+)\1/.test(grafsOutIt)) {
+      var delim = RegExp.$1,
+          num   = RegExp.$2;
+
+      if (delim === 'K') {
+        blockText = globals.gHtmlBlocks[num];
+      } else {
+        // we need to check if ghBlock is a false positive
+        if (codeFlag) {
+          // use encoded version of all text
+          blockText = showdown.subParser('encodeCode')(globals.ghCodeBlocks[num].text, options, globals);
+        } else {
+          blockText = globals.ghCodeBlocks[num].codeblock;
+        }
+      }
+      blockText = blockText.replace(/\$/g, '$$$$'); // Escape any dollar signs
+
+      grafsOutIt = grafsOutIt.replace(/(\n\n)?¨(K|G)\d+\2(\n\n)?/, blockText);
+      // Check if grafsOutIt is a pre->code
+      if (/^<pre\b[^>]*>\s*<code\b[^>]*>/.test(grafsOutIt)) {
+        codeFlag = true;
+      }
+    }
+    grafsOut[i] = grafsOutIt;
+  }
+  text = grafsOut.join('\n');
+  // Strip leading and trailing lines:
+  text = text.replace(/^\n+/g, '');
+  text = text.replace(/\n+$/g, '');
+  return globals.converter._dispatch('paragraphs.after', text, options, globals);
+});
+
+/**
+ * Run extension
+ */
+showdown.subParser('runExtension', function (ext, text, options, globals) {
+  'use strict';
+
+  if (ext.filter) {
+    text = ext.filter(text, globals.converter, options);
+
+  } else if (ext.regex) {
+    // TODO remove this when old extension loading mechanism is deprecated
+    var re = ext.regex;
+    if (!(re instanceof RegExp)) {
+      re = new RegExp(re, 'g');
+    }
+    text = text.replace(re, ext.replace);
+  }
+
+  return text;
+});
+
+/**
+ * These are all the transformations that occur *within* block-level
+ * tags like paragraphs, headers, and list items.
+ */
+showdown.subParser('spanGamut', function (text, options, globals) {
+  'use strict';
+
+  text = globals.converter._dispatch('spanGamut.before', text, options, globals);
+  text = showdown.subParser('codeSpans')(text, options, globals);
+  text = showdown.subParser('escapeSpecialCharsWithinTagAttributes')(text, options, globals);
+  text = showdown.subParser('encodeBackslashEscapes')(text, options, globals);
+
+  // Process anchor and image tags. Images must come first,
+  // because ![foo][f] looks like an anchor.
+  text = showdown.subParser('images')(text, options, globals);
+  text = showdown.subParser('anchors')(text, options, globals);
+
+  // Make links out of things like `<http://example.com/>`
+  // Must come after anchors, because you can use < and >
+  // delimiters in inline links like [this](<url>).
+  text = showdown.subParser('autoLinks')(text, options, globals);
+  text = showdown.subParser('simplifiedAutoLinks')(text, options, globals);
+  text = showdown.subParser('emoji')(text, options, globals);
+  text = showdown.subParser('underline')(text, options, globals);
+  text = showdown.subParser('italicsAndBold')(text, options, globals);
+  text = showdown.subParser('strikethrough')(text, options, globals);
+  text = showdown.subParser('ellipsis')(text, options, globals);
+
+  // we need to hash HTML tags inside spans
+  text = showdown.subParser('hashHTMLSpans')(text, options, globals);
+
+  // now we encode amps and angles
+  text = showdown.subParser('encodeAmpsAndAngles')(text, options, globals);
+
+  // Do hard breaks
+  if (options.simpleLineBreaks) {
+    // GFM style hard breaks
+    // only add line breaks if the text does not contain a block (special case for lists)
+    if (!/\n\n¨K/.test(text)) {
+      text = text.replace(/\n+/g, '<br />\n');
+    }
+  } else {
+    // Vanilla hard breaks
+    text = text.replace(/  +\n/g, '<br />\n');
+  }
+
+  text = globals.converter._dispatch('spanGamut.after', text, options, globals);
+  return text;
+});
+
+showdown.subParser('strikethrough', function (text, options, globals) {
+  'use strict';
+
+  function parseInside (txt) {
+    if (options.simplifiedAutoLink) {
+      txt = showdown.subParser('simplifiedAutoLinks')(txt, options, globals);
+    }
+    return '<del>' + txt + '</del>';
+  }
+
+  if (options.strikethrough) {
+    text = globals.converter._dispatch('strikethrough.before', text, options, globals);
+    text = text.replace(/(?:~){2}([\s\S]+?)(?:~){2}/g, function (wm, txt) { return parseInside(txt); });
+    text = globals.converter._dispatch('strikethrough.after', text, options, globals);
+  }
+
+  return text;
+});
+
+/**
+ * Strips link definitions from text, stores the URLs and titles in
+ * hash references.
+ * Link defs are in the form: ^[id]: url "optional title"
+ */
+showdown.subParser('stripLinkDefinitions', function (text, options, globals) {
+  'use strict';
+
+  var regex       = /^ {0,3}\[(.+)]:[ \t]*\n?[ \t]*<?([^>\s]+)>?(?: =([*\d]+[A-Za-z%]{0,4})x([*\d]+[A-Za-z%]{0,4}))?[ \t]*\n?[ \t]*(?:(\n*)["|'(](.+?)["|')][ \t]*)?(?:\n+|(?=¨0))/gm,
+      base64Regex = /^ {0,3}\[(.+)]:[ \t]*\n?[ \t]*<?(data:.+?\/.+?;base64,[A-Za-z0-9+/=\n]+?)>?(?: =([*\d]+[A-Za-z%]{0,4})x([*\d]+[A-Za-z%]{0,4}))?[ \t]*\n?[ \t]*(?:(\n*)["|'(](.+?)["|')][ \t]*)?(?:\n\n|(?=¨0)|(?=\n\[))/gm;
+
+  // attacklab: sentinel workarounds for lack of \A and \Z, safari\khtml bug
+  text += '¨0';
+
+  var replaceFunc = function (wholeMatch, linkId, url, width, height, blankLines, title) {
+    linkId = linkId.toLowerCase();
+    if (url.match(/^data:.+?\/.+?;base64,/)) {
+      // remove newlines
+      globals.gUrls[linkId] = url.replace(/\s/g, '');
+    } else {
+      globals.gUrls[linkId] = showdown.subParser('encodeAmpsAndAngles')(url, options, globals);  // Link IDs are case-insensitive
+    }
+
+    if (blankLines) {
+      // Oops, found blank lines, so it's not a title.
+      // Put back the parenthetical statement we stole.
+      return blankLines + title;
+
+    } else {
+      if (title) {
+        globals.gTitles[linkId] = title.replace(/"|'/g, '&quot;');
+      }
+      if (options.parseImgDimensions && width && height) {
+        globals.gDimensions[linkId] = {
+          width:  width,
+          height: height
+        };
+      }
+    }
+    // Completely remove the definition from the text
+    return '';
+  };
+
+  // first we try to find base64 link references
+  text = text.replace(base64Regex, replaceFunc);
+
+  text = text.replace(regex, replaceFunc);
+
+  // attacklab: strip sentinel
+  text = text.replace(/¨0/, '');
+
+  return text;
+});
+
+showdown.subParser('tables', function (text, options, globals) {
+  'use strict';
+
+  if (!options.tables) {
+    return text;
+  }
+
+  var tableRgx       = /^ {0,3}\|?.+\|.+\n {0,3}\|?[ \t]*:?[ \t]*(?:[-=]){2,}[ \t]*:?[ \t]*\|[ \t]*:?[ \t]*(?:[-=]){2,}[\s\S]+?(?:\n\n|¨0)/gm,
+    //singeColTblRgx = /^ {0,3}\|.+\|\n {0,3}\|[ \t]*:?[ \t]*(?:[-=]){2,}[ \t]*:?[ \t]*\|[ \t]*\n(?: {0,3}\|.+\|\n)+(?:\n\n|¨0)/gm;
+      singeColTblRgx = /^ {0,3}\|.+\|[ \t]*\n {0,3}\|[ \t]*:?[ \t]*(?:[-=]){2,}[ \t]*:?[ \t]*\|[ \t]*\n( {0,3}\|.+\|[ \t]*\n)*(?:\n|¨0)/gm;
+
+  function parseStyles (sLine) {
+    if (/^:[ \t]*--*$/.test(sLine)) {
+      return ' style="text-align:left;"';
+    } else if (/^--*[ \t]*:[ \t]*$/.test(sLine)) {
+      return ' style="text-align:right;"';
+    } else if (/^:[ \t]*--*[ \t]*:$/.test(sLine)) {
+      return ' style="text-align:center;"';
+    } else {
+      return '';
+    }
+  }
+
+  function parseHeaders (header, style) {
+    var id = '';
+    header = header.trim();
+    // support both tablesHeaderId and tableHeaderId due to error in documentation so we don't break backwards compatibility
+    if (options.tablesHeaderId || options.tableHeaderId) {
+      id = ' id="' + header.replace(/ /g, '_').toLowerCase() + '"';
+    }
+    header = showdown.subParser('spanGamut')(header, options, globals);
+
+    return '<th' + id + style + '>' + header + '</th>\n';
+  }
+
+  function parseCells (cell, style) {
+    var subText = showdown.subParser('spanGamut')(cell, options, globals);
+    return '<td' + style + '>' + subText + '</td>\n';
+  }
+
+  function buildTable (headers, cells) {
+    var tb = '<table>\n<thead>\n<tr>\n',
+        tblLgn = headers.length;
+
+    for (var i = 0; i < tblLgn; ++i) {
+      tb += headers[i];
+    }
+    tb += '</tr>\n</thead>\n<tbody>\n';
+
+    for (i = 0; i < cells.length; ++i) {
+      tb += '<tr>\n';
+      for (var ii = 0; ii < tblLgn; ++ii) {
+        tb += cells[i][ii];
+      }
+      tb += '</tr>\n';
+    }
+    tb += '</tbody>\n</table>\n';
+    return tb;
+  }
+
+  function parseTable (rawTable) {
+    var i, tableLines = rawTable.split('\n');
+
+    for (i = 0; i < tableLines.length; ++i) {
+      // strip wrong first and last column if wrapped tables are used
+      if (/^ {0,3}\|/.test(tableLines[i])) {
+        tableLines[i] = tableLines[i].replace(/^ {0,3}\|/, '');
+      }
+      if (/\|[ \t]*$/.test(tableLines[i])) {
+        tableLines[i] = tableLines[i].replace(/\|[ \t]*$/, '');
+      }
+      // parse code spans first, but we only support one line code spans
+      tableLines[i] = showdown.subParser('codeSpans')(tableLines[i], options, globals);
+    }
+
+    var rawHeaders = tableLines[0].split('|').map(function (s) { return s.trim();}),
+        rawStyles = tableLines[1].split('|').map(function (s) { return s.trim();}),
+        rawCells = [],
+        headers = [],
+        styles = [],
+        cells = [];
+
+    tableLines.shift();
+    tableLines.shift();
+
+    for (i = 0; i < tableLines.length; ++i) {
+      if (tableLines[i].trim() === '') {
+        continue;
+      }
+      rawCells.push(
+        tableLines[i]
+          .split('|')
+          .map(function (s) {
+            return s.trim();
+          })
+      );
+    }
+
+    if (rawHeaders.length < rawStyles.length) {
+      return rawTable;
+    }
+
+    for (i = 0; i < rawStyles.length; ++i) {
+      styles.push(parseStyles(rawStyles[i]));
+    }
+
+    for (i = 0; i < rawHeaders.length; ++i) {
+      if (showdown.helper.isUndefined(styles[i])) {
+        styles[i] = '';
+      }
+      headers.push(parseHeaders(rawHeaders[i], styles[i]));
+    }
+
+    for (i = 0; i < rawCells.length; ++i) {
+      var row = [];
+      for (var ii = 0; ii < headers.length; ++ii) {
+        if (showdown.helper.isUndefined(rawCells[i][ii])) {
+
+        }
+        row.push(parseCells(rawCells[i][ii], styles[ii]));
+      }
+      cells.push(row);
+    }
+
+    return buildTable(headers, cells);
+  }
+
+  text = globals.converter._dispatch('tables.before', text, options, globals);
+
+  // find escaped pipe characters
+  text = text.replace(/\\(\|)/g, showdown.helper.escapeCharactersCallback);
+
+  // parse multi column tables
+  text = text.replace(tableRgx, parseTable);
+
+  // parse one column tables
+  text = text.replace(singeColTblRgx, parseTable);
+
+  text = globals.converter._dispatch('tables.after', text, options, globals);
+
+  return text;
+});
+
+showdown.subParser('underline', function (text, options, globals) {
+  'use strict';
+
+  if (!options.underline) {
+    return text;
+  }
+
+  text = globals.converter._dispatch('underline.before', text, options, globals);
+
+  if (options.literalMidWordUnderscores) {
+    text = text.replace(/\b_?__(\S[\s\S]*)___?\b/g, function (wm, txt) {
+      return '<u>' + txt + '</u>';
+    });
+  } else {
+    text = text.replace(/_?__(\S[\s\S]*?)___?/g, function (wm, m) {
+      return (/\S$/.test(m)) ? '<u>' + m + '</u>' : wm;
+    });
+  }
+
+  // escape remaining underscores to prevent them being parsed by italic and bold
+  text = text.replace(/(_)/g, showdown.helper.escapeCharactersCallback);
+
+  text = globals.converter._dispatch('underline.after', text, options, globals);
+
+  return text;
+});
+
+/**
+ * Swap back in all the special characters we've hidden.
+ */
+showdown.subParser('unescapeSpecialChars', function (text, options, globals) {
+  'use strict';
+  text = globals.converter._dispatch('unescapeSpecialChars.before', text, options, globals);
+
+  text = text.replace(/¨E(\d+)E/g, function (wholeMatch, m1) {
+    var charCodeToReplace = parseInt(m1);
+    return String.fromCharCode(charCodeToReplace);
+  });
+
+  text = globals.converter._dispatch('unescapeSpecialChars.after', text, options, globals);
+  return text;
+});
+
+var root = this;
+
+// AMD Loader
+if (true) {
+  !(__WEBPACK_AMD_DEFINE_RESULT__ = (function () {
+    'use strict';
+    return showdown;
+  }).call(exports, __webpack_require__, exports, module),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+// CommonJS/nodeJS Loader
+} else {}
+}).call(this);
+
+
+
+/***/ }),
+
+/***/ "./node_modules/simple-html-tokenizer/dist/es6/index.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/simple-html-tokenizer/dist/es6/index.js ***!
+  \**************************************************************/
+/*! exports provided: HTML5NamedCharRefs, EntityParser, EventedTokenizer, Tokenizer, tokenize */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HTML5NamedCharRefs", function() { return namedCharRefs; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EntityParser", function() { return EntityParser; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EventedTokenizer", function() { return EventedTokenizer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Tokenizer", function() { return Tokenizer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "tokenize", function() { return tokenize; });
+/**
+ * generated from https://raw.githubusercontent.com/w3c/html/26b5126f96f736f796b9e29718138919dd513744/entities.json
+ * do not edit
+ */
+var namedCharRefs = {
+    Aacute: "Á", aacute: "á", Abreve: "Ă", abreve: "ă", ac: "∾", acd: "∿", acE: "∾̳", Acirc: "Â", acirc: "â", acute: "´", Acy: "А", acy: "а", AElig: "Æ", aelig: "æ", af: "\u2061", Afr: "𝔄", afr: "𝔞", Agrave: "À", agrave: "à", alefsym: "ℵ", aleph: "ℵ", Alpha: "Α", alpha: "α", Amacr: "Ā", amacr: "ā", amalg: "⨿", amp: "&", AMP: "&", andand: "⩕", And: "⩓", and: "∧", andd: "⩜", andslope: "⩘", andv: "⩚", ang: "∠", ange: "⦤", angle: "∠", angmsdaa: "⦨", angmsdab: "⦩", angmsdac: "⦪", angmsdad: "⦫", angmsdae: "⦬", angmsdaf: "⦭", angmsdag: "⦮", angmsdah: "⦯", angmsd: "∡", angrt: "∟", angrtvb: "⊾", angrtvbd: "⦝", angsph: "∢", angst: "Å", angzarr: "⍼", Aogon: "Ą", aogon: "ą", Aopf: "𝔸", aopf: "𝕒", apacir: "⩯", ap: "≈", apE: "⩰", ape: "≊", apid: "≋", apos: "'", ApplyFunction: "\u2061", approx: "≈", approxeq: "≊", Aring: "Å", aring: "å", Ascr: "𝒜", ascr: "𝒶", Assign: "≔", ast: "*", asymp: "≈", asympeq: "≍", Atilde: "Ã", atilde: "ã", Auml: "Ä", auml: "ä", awconint: "∳", awint: "⨑", backcong: "≌", backepsilon: "϶", backprime: "‵", backsim: "∽", backsimeq: "⋍", Backslash: "∖", Barv: "⫧", barvee: "⊽", barwed: "⌅", Barwed: "⌆", barwedge: "⌅", bbrk: "⎵", bbrktbrk: "⎶", bcong: "≌", Bcy: "Б", bcy: "б", bdquo: "„", becaus: "∵", because: "∵", Because: "∵", bemptyv: "⦰", bepsi: "϶", bernou: "ℬ", Bernoullis: "ℬ", Beta: "Β", beta: "β", beth: "ℶ", between: "≬", Bfr: "𝔅", bfr: "𝔟", bigcap: "⋂", bigcirc: "◯", bigcup: "⋃", bigodot: "⨀", bigoplus: "⨁", bigotimes: "⨂", bigsqcup: "⨆", bigstar: "★", bigtriangledown: "▽", bigtriangleup: "△", biguplus: "⨄", bigvee: "⋁", bigwedge: "⋀", bkarow: "⤍", blacklozenge: "⧫", blacksquare: "▪", blacktriangle: "▴", blacktriangledown: "▾", blacktriangleleft: "◂", blacktriangleright: "▸", blank: "␣", blk12: "▒", blk14: "░", blk34: "▓", block: "█", bne: "=⃥", bnequiv: "≡⃥", bNot: "⫭", bnot: "⌐", Bopf: "𝔹", bopf: "𝕓", bot: "⊥", bottom: "⊥", bowtie: "⋈", boxbox: "⧉", boxdl: "┐", boxdL: "╕", boxDl: "╖", boxDL: "╗", boxdr: "┌", boxdR: "╒", boxDr: "╓", boxDR: "╔", boxh: "─", boxH: "═", boxhd: "┬", boxHd: "╤", boxhD: "╥", boxHD: "╦", boxhu: "┴", boxHu: "╧", boxhU: "╨", boxHU: "╩", boxminus: "⊟", boxplus: "⊞", boxtimes: "⊠", boxul: "┘", boxuL: "╛", boxUl: "╜", boxUL: "╝", boxur: "└", boxuR: "╘", boxUr: "╙", boxUR: "╚", boxv: "│", boxV: "║", boxvh: "┼", boxvH: "╪", boxVh: "╫", boxVH: "╬", boxvl: "┤", boxvL: "╡", boxVl: "╢", boxVL: "╣", boxvr: "├", boxvR: "╞", boxVr: "╟", boxVR: "╠", bprime: "‵", breve: "˘", Breve: "˘", brvbar: "¦", bscr: "𝒷", Bscr: "ℬ", bsemi: "⁏", bsim: "∽", bsime: "⋍", bsolb: "⧅", bsol: "\\", bsolhsub: "⟈", bull: "•", bullet: "•", bump: "≎", bumpE: "⪮", bumpe: "≏", Bumpeq: "≎", bumpeq: "≏", Cacute: "Ć", cacute: "ć", capand: "⩄", capbrcup: "⩉", capcap: "⩋", cap: "∩", Cap: "⋒", capcup: "⩇", capdot: "⩀", CapitalDifferentialD: "ⅅ", caps: "∩︀", caret: "⁁", caron: "ˇ", Cayleys: "ℭ", ccaps: "⩍", Ccaron: "Č", ccaron: "č", Ccedil: "Ç", ccedil: "ç", Ccirc: "Ĉ", ccirc: "ĉ", Cconint: "∰", ccups: "⩌", ccupssm: "⩐", Cdot: "Ċ", cdot: "ċ", cedil: "¸", Cedilla: "¸", cemptyv: "⦲", cent: "¢", centerdot: "·", CenterDot: "·", cfr: "𝔠", Cfr: "ℭ", CHcy: "Ч", chcy: "ч", check: "✓", checkmark: "✓", Chi: "Χ", chi: "χ", circ: "ˆ", circeq: "≗", circlearrowleft: "↺", circlearrowright: "↻", circledast: "⊛", circledcirc: "⊚", circleddash: "⊝", CircleDot: "⊙", circledR: "®", circledS: "Ⓢ", CircleMinus: "⊖", CirclePlus: "⊕", CircleTimes: "⊗", cir: "○", cirE: "⧃", cire: "≗", cirfnint: "⨐", cirmid: "⫯", cirscir: "⧂", ClockwiseContourIntegral: "∲", CloseCurlyDoubleQuote: "”", CloseCurlyQuote: "’", clubs: "♣", clubsuit: "♣", colon: ":", Colon: "∷", Colone: "⩴", colone: "≔", coloneq: "≔", comma: ",", commat: "@", comp: "∁", compfn: "∘", complement: "∁", complexes: "ℂ", cong: "≅", congdot: "⩭", Congruent: "≡", conint: "∮", Conint: "∯", ContourIntegral: "∮", copf: "𝕔", Copf: "ℂ", coprod: "∐", Coproduct: "∐", copy: "©", COPY: "©", copysr: "℗", CounterClockwiseContourIntegral: "∳", crarr: "↵", cross: "✗", Cross: "⨯", Cscr: "𝒞", cscr: "𝒸", csub: "⫏", csube: "⫑", csup: "⫐", csupe: "⫒", ctdot: "⋯", cudarrl: "⤸", cudarrr: "⤵", cuepr: "⋞", cuesc: "⋟", cularr: "↶", cularrp: "⤽", cupbrcap: "⩈", cupcap: "⩆", CupCap: "≍", cup: "∪", Cup: "⋓", cupcup: "⩊", cupdot: "⊍", cupor: "⩅", cups: "∪︀", curarr: "↷", curarrm: "⤼", curlyeqprec: "⋞", curlyeqsucc: "⋟", curlyvee: "⋎", curlywedge: "⋏", curren: "¤", curvearrowleft: "↶", curvearrowright: "↷", cuvee: "⋎", cuwed: "⋏", cwconint: "∲", cwint: "∱", cylcty: "⌭", dagger: "†", Dagger: "‡", daleth: "ℸ", darr: "↓", Darr: "↡", dArr: "⇓", dash: "‐", Dashv: "⫤", dashv: "⊣", dbkarow: "⤏", dblac: "˝", Dcaron: "Ď", dcaron: "ď", Dcy: "Д", dcy: "д", ddagger: "‡", ddarr: "⇊", DD: "ⅅ", dd: "ⅆ", DDotrahd: "⤑", ddotseq: "⩷", deg: "°", Del: "∇", Delta: "Δ", delta: "δ", demptyv: "⦱", dfisht: "⥿", Dfr: "𝔇", dfr: "𝔡", dHar: "⥥", dharl: "⇃", dharr: "⇂", DiacriticalAcute: "´", DiacriticalDot: "˙", DiacriticalDoubleAcute: "˝", DiacriticalGrave: "`", DiacriticalTilde: "˜", diam: "⋄", diamond: "⋄", Diamond: "⋄", diamondsuit: "♦", diams: "♦", die: "¨", DifferentialD: "ⅆ", digamma: "ϝ", disin: "⋲", div: "÷", divide: "÷", divideontimes: "⋇", divonx: "⋇", DJcy: "Ђ", djcy: "ђ", dlcorn: "⌞", dlcrop: "⌍", dollar: "$", Dopf: "𝔻", dopf: "𝕕", Dot: "¨", dot: "˙", DotDot: "⃜", doteq: "≐", doteqdot: "≑", DotEqual: "≐", dotminus: "∸", dotplus: "∔", dotsquare: "⊡", doublebarwedge: "⌆", DoubleContourIntegral: "∯", DoubleDot: "¨", DoubleDownArrow: "⇓", DoubleLeftArrow: "⇐", DoubleLeftRightArrow: "⇔", DoubleLeftTee: "⫤", DoubleLongLeftArrow: "⟸", DoubleLongLeftRightArrow: "⟺", DoubleLongRightArrow: "⟹", DoubleRightArrow: "⇒", DoubleRightTee: "⊨", DoubleUpArrow: "⇑", DoubleUpDownArrow: "⇕", DoubleVerticalBar: "∥", DownArrowBar: "⤓", downarrow: "↓", DownArrow: "↓", Downarrow: "⇓", DownArrowUpArrow: "⇵", DownBreve: "̑", downdownarrows: "⇊", downharpoonleft: "⇃", downharpoonright: "⇂", DownLeftRightVector: "⥐", DownLeftTeeVector: "⥞", DownLeftVectorBar: "⥖", DownLeftVector: "↽", DownRightTeeVector: "⥟", DownRightVectorBar: "⥗", DownRightVector: "⇁", DownTeeArrow: "↧", DownTee: "⊤", drbkarow: "⤐", drcorn: "⌟", drcrop: "⌌", Dscr: "𝒟", dscr: "𝒹", DScy: "Ѕ", dscy: "ѕ", dsol: "⧶", Dstrok: "Đ", dstrok: "đ", dtdot: "⋱", dtri: "▿", dtrif: "▾", duarr: "⇵", duhar: "⥯", dwangle: "⦦", DZcy: "Џ", dzcy: "џ", dzigrarr: "⟿", Eacute: "É", eacute: "é", easter: "⩮", Ecaron: "Ě", ecaron: "ě", Ecirc: "Ê", ecirc: "ê", ecir: "≖", ecolon: "≕", Ecy: "Э", ecy: "э", eDDot: "⩷", Edot: "Ė", edot: "ė", eDot: "≑", ee: "ⅇ", efDot: "≒", Efr: "𝔈", efr: "𝔢", eg: "⪚", Egrave: "È", egrave: "è", egs: "⪖", egsdot: "⪘", el: "⪙", Element: "∈", elinters: "⏧", ell: "ℓ", els: "⪕", elsdot: "⪗", Emacr: "Ē", emacr: "ē", empty: "∅", emptyset: "∅", EmptySmallSquare: "◻", emptyv: "∅", EmptyVerySmallSquare: "▫", emsp13: " ", emsp14: " ", emsp: " ", ENG: "Ŋ", eng: "ŋ", ensp: " ", Eogon: "Ę", eogon: "ę", Eopf: "𝔼", eopf: "𝕖", epar: "⋕", eparsl: "⧣", eplus: "⩱", epsi: "ε", Epsilon: "Ε", epsilon: "ε", epsiv: "ϵ", eqcirc: "≖", eqcolon: "≕", eqsim: "≂", eqslantgtr: "⪖", eqslantless: "⪕", Equal: "⩵", equals: "=", EqualTilde: "≂", equest: "≟", Equilibrium: "⇌", equiv: "≡", equivDD: "⩸", eqvparsl: "⧥", erarr: "⥱", erDot: "≓", escr: "ℯ", Escr: "ℰ", esdot: "≐", Esim: "⩳", esim: "≂", Eta: "Η", eta: "η", ETH: "Ð", eth: "ð", Euml: "Ë", euml: "ë", euro: "€", excl: "!", exist: "∃", Exists: "∃", expectation: "ℰ", exponentiale: "ⅇ", ExponentialE: "ⅇ", fallingdotseq: "≒", Fcy: "Ф", fcy: "ф", female: "♀", ffilig: "ﬃ", fflig: "ﬀ", ffllig: "ﬄ", Ffr: "𝔉", ffr: "𝔣", filig: "ﬁ", FilledSmallSquare: "◼", FilledVerySmallSquare: "▪", fjlig: "fj", flat: "♭", fllig: "ﬂ", fltns: "▱", fnof: "ƒ", Fopf: "𝔽", fopf: "𝕗", forall: "∀", ForAll: "∀", fork: "⋔", forkv: "⫙", Fouriertrf: "ℱ", fpartint: "⨍", frac12: "½", frac13: "⅓", frac14: "¼", frac15: "⅕", frac16: "⅙", frac18: "⅛", frac23: "⅔", frac25: "⅖", frac34: "¾", frac35: "⅗", frac38: "⅜", frac45: "⅘", frac56: "⅚", frac58: "⅝", frac78: "⅞", frasl: "⁄", frown: "⌢", fscr: "𝒻", Fscr: "ℱ", gacute: "ǵ", Gamma: "Γ", gamma: "γ", Gammad: "Ϝ", gammad: "ϝ", gap: "⪆", Gbreve: "Ğ", gbreve: "ğ", Gcedil: "Ģ", Gcirc: "Ĝ", gcirc: "ĝ", Gcy: "Г", gcy: "г", Gdot: "Ġ", gdot: "ġ", ge: "≥", gE: "≧", gEl: "⪌", gel: "⋛", geq: "≥", geqq: "≧", geqslant: "⩾", gescc: "⪩", ges: "⩾", gesdot: "⪀", gesdoto: "⪂", gesdotol: "⪄", gesl: "⋛︀", gesles: "⪔", Gfr: "𝔊", gfr: "𝔤", gg: "≫", Gg: "⋙", ggg: "⋙", gimel: "ℷ", GJcy: "Ѓ", gjcy: "ѓ", gla: "⪥", gl: "≷", glE: "⪒", glj: "⪤", gnap: "⪊", gnapprox: "⪊", gne: "⪈", gnE: "≩", gneq: "⪈", gneqq: "≩", gnsim: "⋧", Gopf: "𝔾", gopf: "𝕘", grave: "`", GreaterEqual: "≥", GreaterEqualLess: "⋛", GreaterFullEqual: "≧", GreaterGreater: "⪢", GreaterLess: "≷", GreaterSlantEqual: "⩾", GreaterTilde: "≳", Gscr: "𝒢", gscr: "ℊ", gsim: "≳", gsime: "⪎", gsiml: "⪐", gtcc: "⪧", gtcir: "⩺", gt: ">", GT: ">", Gt: "≫", gtdot: "⋗", gtlPar: "⦕", gtquest: "⩼", gtrapprox: "⪆", gtrarr: "⥸", gtrdot: "⋗", gtreqless: "⋛", gtreqqless: "⪌", gtrless: "≷", gtrsim: "≳", gvertneqq: "≩︀", gvnE: "≩︀", Hacek: "ˇ", hairsp: " ", half: "½", hamilt: "ℋ", HARDcy: "Ъ", hardcy: "ъ", harrcir: "⥈", harr: "↔", hArr: "⇔", harrw: "↭", Hat: "^", hbar: "ℏ", Hcirc: "Ĥ", hcirc: "ĥ", hearts: "♥", heartsuit: "♥", hellip: "…", hercon: "⊹", hfr: "𝔥", Hfr: "ℌ", HilbertSpace: "ℋ", hksearow: "⤥", hkswarow: "⤦", hoarr: "⇿", homtht: "∻", hookleftarrow: "↩", hookrightarrow: "↪", hopf: "𝕙", Hopf: "ℍ", horbar: "―", HorizontalLine: "─", hscr: "𝒽", Hscr: "ℋ", hslash: "ℏ", Hstrok: "Ħ", hstrok: "ħ", HumpDownHump: "≎", HumpEqual: "≏", hybull: "⁃", hyphen: "‐", Iacute: "Í", iacute: "í", ic: "\u2063", Icirc: "Î", icirc: "î", Icy: "И", icy: "и", Idot: "İ", IEcy: "Е", iecy: "е", iexcl: "¡", iff: "⇔", ifr: "𝔦", Ifr: "ℑ", Igrave: "Ì", igrave: "ì", ii: "ⅈ", iiiint: "⨌", iiint: "∭", iinfin: "⧜", iiota: "℩", IJlig: "Ĳ", ijlig: "ĳ", Imacr: "Ī", imacr: "ī", image: "ℑ", ImaginaryI: "ⅈ", imagline: "ℐ", imagpart: "ℑ", imath: "ı", Im: "ℑ", imof: "⊷", imped: "Ƶ", Implies: "⇒", incare: "℅", in: "∈", infin: "∞", infintie: "⧝", inodot: "ı", intcal: "⊺", int: "∫", Int: "∬", integers: "ℤ", Integral: "∫", intercal: "⊺", Intersection: "⋂", intlarhk: "⨗", intprod: "⨼", InvisibleComma: "\u2063", InvisibleTimes: "\u2062", IOcy: "Ё", iocy: "ё", Iogon: "Į", iogon: "į", Iopf: "𝕀", iopf: "𝕚", Iota: "Ι", iota: "ι", iprod: "⨼", iquest: "¿", iscr: "𝒾", Iscr: "ℐ", isin: "∈", isindot: "⋵", isinE: "⋹", isins: "⋴", isinsv: "⋳", isinv: "∈", it: "\u2062", Itilde: "Ĩ", itilde: "ĩ", Iukcy: "І", iukcy: "і", Iuml: "Ï", iuml: "ï", Jcirc: "Ĵ", jcirc: "ĵ", Jcy: "Й", jcy: "й", Jfr: "𝔍", jfr: "𝔧", jmath: "ȷ", Jopf: "𝕁", jopf: "𝕛", Jscr: "𝒥", jscr: "𝒿", Jsercy: "Ј", jsercy: "ј", Jukcy: "Є", jukcy: "є", Kappa: "Κ", kappa: "κ", kappav: "ϰ", Kcedil: "Ķ", kcedil: "ķ", Kcy: "К", kcy: "к", Kfr: "𝔎", kfr: "𝔨", kgreen: "ĸ", KHcy: "Х", khcy: "х", KJcy: "Ќ", kjcy: "ќ", Kopf: "𝕂", kopf: "𝕜", Kscr: "𝒦", kscr: "𝓀", lAarr: "⇚", Lacute: "Ĺ", lacute: "ĺ", laemptyv: "⦴", lagran: "ℒ", Lambda: "Λ", lambda: "λ", lang: "⟨", Lang: "⟪", langd: "⦑", langle: "⟨", lap: "⪅", Laplacetrf: "ℒ", laquo: "«", larrb: "⇤", larrbfs: "⤟", larr: "←", Larr: "↞", lArr: "⇐", larrfs: "⤝", larrhk: "↩", larrlp: "↫", larrpl: "⤹", larrsim: "⥳", larrtl: "↢", latail: "⤙", lAtail: "⤛", lat: "⪫", late: "⪭", lates: "⪭︀", lbarr: "⤌", lBarr: "⤎", lbbrk: "❲", lbrace: "{", lbrack: "[", lbrke: "⦋", lbrksld: "⦏", lbrkslu: "⦍", Lcaron: "Ľ", lcaron: "ľ", Lcedil: "Ļ", lcedil: "ļ", lceil: "⌈", lcub: "{", Lcy: "Л", lcy: "л", ldca: "⤶", ldquo: "“", ldquor: "„", ldrdhar: "⥧", ldrushar: "⥋", ldsh: "↲", le: "≤", lE: "≦", LeftAngleBracket: "⟨", LeftArrowBar: "⇤", leftarrow: "←", LeftArrow: "←", Leftarrow: "⇐", LeftArrowRightArrow: "⇆", leftarrowtail: "↢", LeftCeiling: "⌈", LeftDoubleBracket: "⟦", LeftDownTeeVector: "⥡", LeftDownVectorBar: "⥙", LeftDownVector: "⇃", LeftFloor: "⌊", leftharpoondown: "↽", leftharpoonup: "↼", leftleftarrows: "⇇", leftrightarrow: "↔", LeftRightArrow: "↔", Leftrightarrow: "⇔", leftrightarrows: "⇆", leftrightharpoons: "⇋", leftrightsquigarrow: "↭", LeftRightVector: "⥎", LeftTeeArrow: "↤", LeftTee: "⊣", LeftTeeVector: "⥚", leftthreetimes: "⋋", LeftTriangleBar: "⧏", LeftTriangle: "⊲", LeftTriangleEqual: "⊴", LeftUpDownVector: "⥑", LeftUpTeeVector: "⥠", LeftUpVectorBar: "⥘", LeftUpVector: "↿", LeftVectorBar: "⥒", LeftVector: "↼", lEg: "⪋", leg: "⋚", leq: "≤", leqq: "≦", leqslant: "⩽", lescc: "⪨", les: "⩽", lesdot: "⩿", lesdoto: "⪁", lesdotor: "⪃", lesg: "⋚︀", lesges: "⪓", lessapprox: "⪅", lessdot: "⋖", lesseqgtr: "⋚", lesseqqgtr: "⪋", LessEqualGreater: "⋚", LessFullEqual: "≦", LessGreater: "≶", lessgtr: "≶", LessLess: "⪡", lesssim: "≲", LessSlantEqual: "⩽", LessTilde: "≲", lfisht: "⥼", lfloor: "⌊", Lfr: "𝔏", lfr: "𝔩", lg: "≶", lgE: "⪑", lHar: "⥢", lhard: "↽", lharu: "↼", lharul: "⥪", lhblk: "▄", LJcy: "Љ", ljcy: "љ", llarr: "⇇", ll: "≪", Ll: "⋘", llcorner: "⌞", Lleftarrow: "⇚", llhard: "⥫", lltri: "◺", Lmidot: "Ŀ", lmidot: "ŀ", lmoustache: "⎰", lmoust: "⎰", lnap: "⪉", lnapprox: "⪉", lne: "⪇", lnE: "≨", lneq: "⪇", lneqq: "≨", lnsim: "⋦", loang: "⟬", loarr: "⇽", lobrk: "⟦", longleftarrow: "⟵", LongLeftArrow: "⟵", Longleftarrow: "⟸", longleftrightarrow: "⟷", LongLeftRightArrow: "⟷", Longleftrightarrow: "⟺", longmapsto: "⟼", longrightarrow: "⟶", LongRightArrow: "⟶", Longrightarrow: "⟹", looparrowleft: "↫", looparrowright: "↬", lopar: "⦅", Lopf: "𝕃", lopf: "𝕝", loplus: "⨭", lotimes: "⨴", lowast: "∗", lowbar: "_", LowerLeftArrow: "↙", LowerRightArrow: "↘", loz: "◊", lozenge: "◊", lozf: "⧫", lpar: "(", lparlt: "⦓", lrarr: "⇆", lrcorner: "⌟", lrhar: "⇋", lrhard: "⥭", lrm: "\u200e", lrtri: "⊿", lsaquo: "‹", lscr: "𝓁", Lscr: "ℒ", lsh: "↰", Lsh: "↰", lsim: "≲", lsime: "⪍", lsimg: "⪏", lsqb: "[", lsquo: "‘", lsquor: "‚", Lstrok: "Ł", lstrok: "ł", ltcc: "⪦", ltcir: "⩹", lt: "<", LT: "<", Lt: "≪", ltdot: "⋖", lthree: "⋋", ltimes: "⋉", ltlarr: "⥶", ltquest: "⩻", ltri: "◃", ltrie: "⊴", ltrif: "◂", ltrPar: "⦖", lurdshar: "⥊", luruhar: "⥦", lvertneqq: "≨︀", lvnE: "≨︀", macr: "¯", male: "♂", malt: "✠", maltese: "✠", Map: "⤅", map: "↦", mapsto: "↦", mapstodown: "↧", mapstoleft: "↤", mapstoup: "↥", marker: "▮", mcomma: "⨩", Mcy: "М", mcy: "м", mdash: "—", mDDot: "∺", measuredangle: "∡", MediumSpace: " ", Mellintrf: "ℳ", Mfr: "𝔐", mfr: "𝔪", mho: "℧", micro: "µ", midast: "*", midcir: "⫰", mid: "∣", middot: "·", minusb: "⊟", minus: "−", minusd: "∸", minusdu: "⨪", MinusPlus: "∓", mlcp: "⫛", mldr: "…", mnplus: "∓", models: "⊧", Mopf: "𝕄", mopf: "𝕞", mp: "∓", mscr: "𝓂", Mscr: "ℳ", mstpos: "∾", Mu: "Μ", mu: "μ", multimap: "⊸", mumap: "⊸", nabla: "∇", Nacute: "Ń", nacute: "ń", nang: "∠⃒", nap: "≉", napE: "⩰̸", napid: "≋̸", napos: "ŉ", napprox: "≉", natural: "♮", naturals: "ℕ", natur: "♮", nbsp: " ", nbump: "≎̸", nbumpe: "≏̸", ncap: "⩃", Ncaron: "Ň", ncaron: "ň", Ncedil: "Ņ", ncedil: "ņ", ncong: "≇", ncongdot: "⩭̸", ncup: "⩂", Ncy: "Н", ncy: "н", ndash: "–", nearhk: "⤤", nearr: "↗", neArr: "⇗", nearrow: "↗", ne: "≠", nedot: "≐̸", NegativeMediumSpace: "​", NegativeThickSpace: "​", NegativeThinSpace: "​", NegativeVeryThinSpace: "​", nequiv: "≢", nesear: "⤨", nesim: "≂̸", NestedGreaterGreater: "≫", NestedLessLess: "≪", NewLine: "\u000a", nexist: "∄", nexists: "∄", Nfr: "𝔑", nfr: "𝔫", ngE: "≧̸", nge: "≱", ngeq: "≱", ngeqq: "≧̸", ngeqslant: "⩾̸", nges: "⩾̸", nGg: "⋙̸", ngsim: "≵", nGt: "≫⃒", ngt: "≯", ngtr: "≯", nGtv: "≫̸", nharr: "↮", nhArr: "⇎", nhpar: "⫲", ni: "∋", nis: "⋼", nisd: "⋺", niv: "∋", NJcy: "Њ", njcy: "њ", nlarr: "↚", nlArr: "⇍", nldr: "‥", nlE: "≦̸", nle: "≰", nleftarrow: "↚", nLeftarrow: "⇍", nleftrightarrow: "↮", nLeftrightarrow: "⇎", nleq: "≰", nleqq: "≦̸", nleqslant: "⩽̸", nles: "⩽̸", nless: "≮", nLl: "⋘̸", nlsim: "≴", nLt: "≪⃒", nlt: "≮", nltri: "⋪", nltrie: "⋬", nLtv: "≪̸", nmid: "∤", NoBreak: "\u2060", NonBreakingSpace: " ", nopf: "𝕟", Nopf: "ℕ", Not: "⫬", not: "¬", NotCongruent: "≢", NotCupCap: "≭", NotDoubleVerticalBar: "∦", NotElement: "∉", NotEqual: "≠", NotEqualTilde: "≂̸", NotExists: "∄", NotGreater: "≯", NotGreaterEqual: "≱", NotGreaterFullEqual: "≧̸", NotGreaterGreater: "≫̸", NotGreaterLess: "≹", NotGreaterSlantEqual: "⩾̸", NotGreaterTilde: "≵", NotHumpDownHump: "≎̸", NotHumpEqual: "≏̸", notin: "∉", notindot: "⋵̸", notinE: "⋹̸", notinva: "∉", notinvb: "⋷", notinvc: "⋶", NotLeftTriangleBar: "⧏̸", NotLeftTriangle: "⋪", NotLeftTriangleEqual: "⋬", NotLess: "≮", NotLessEqual: "≰", NotLessGreater: "≸", NotLessLess: "≪̸", NotLessSlantEqual: "⩽̸", NotLessTilde: "≴", NotNestedGreaterGreater: "⪢̸", NotNestedLessLess: "⪡̸", notni: "∌", notniva: "∌", notnivb: "⋾", notnivc: "⋽", NotPrecedes: "⊀", NotPrecedesEqual: "⪯̸", NotPrecedesSlantEqual: "⋠", NotReverseElement: "∌", NotRightTriangleBar: "⧐̸", NotRightTriangle: "⋫", NotRightTriangleEqual: "⋭", NotSquareSubset: "⊏̸", NotSquareSubsetEqual: "⋢", NotSquareSuperset: "⊐̸", NotSquareSupersetEqual: "⋣", NotSubset: "⊂⃒", NotSubsetEqual: "⊈", NotSucceeds: "⊁", NotSucceedsEqual: "⪰̸", NotSucceedsSlantEqual: "⋡", NotSucceedsTilde: "≿̸", NotSuperset: "⊃⃒", NotSupersetEqual: "⊉", NotTilde: "≁", NotTildeEqual: "≄", NotTildeFullEqual: "≇", NotTildeTilde: "≉", NotVerticalBar: "∤", nparallel: "∦", npar: "∦", nparsl: "⫽⃥", npart: "∂̸", npolint: "⨔", npr: "⊀", nprcue: "⋠", nprec: "⊀", npreceq: "⪯̸", npre: "⪯̸", nrarrc: "⤳̸", nrarr: "↛", nrArr: "⇏", nrarrw: "↝̸", nrightarrow: "↛", nRightarrow: "⇏", nrtri: "⋫", nrtrie: "⋭", nsc: "⊁", nsccue: "⋡", nsce: "⪰̸", Nscr: "𝒩", nscr: "𝓃", nshortmid: "∤", nshortparallel: "∦", nsim: "≁", nsime: "≄", nsimeq: "≄", nsmid: "∤", nspar: "∦", nsqsube: "⋢", nsqsupe: "⋣", nsub: "⊄", nsubE: "⫅̸", nsube: "⊈", nsubset: "⊂⃒", nsubseteq: "⊈", nsubseteqq: "⫅̸", nsucc: "⊁", nsucceq: "⪰̸", nsup: "⊅", nsupE: "⫆̸", nsupe: "⊉", nsupset: "⊃⃒", nsupseteq: "⊉", nsupseteqq: "⫆̸", ntgl: "≹", Ntilde: "Ñ", ntilde: "ñ", ntlg: "≸", ntriangleleft: "⋪", ntrianglelefteq: "⋬", ntriangleright: "⋫", ntrianglerighteq: "⋭", Nu: "Ν", nu: "ν", num: "#", numero: "№", numsp: " ", nvap: "≍⃒", nvdash: "⊬", nvDash: "⊭", nVdash: "⊮", nVDash: "⊯", nvge: "≥⃒", nvgt: ">⃒", nvHarr: "⤄", nvinfin: "⧞", nvlArr: "⤂", nvle: "≤⃒", nvlt: "<⃒", nvltrie: "⊴⃒", nvrArr: "⤃", nvrtrie: "⊵⃒", nvsim: "∼⃒", nwarhk: "⤣", nwarr: "↖", nwArr: "⇖", nwarrow: "↖", nwnear: "⤧", Oacute: "Ó", oacute: "ó", oast: "⊛", Ocirc: "Ô", ocirc: "ô", ocir: "⊚", Ocy: "О", ocy: "о", odash: "⊝", Odblac: "Ő", odblac: "ő", odiv: "⨸", odot: "⊙", odsold: "⦼", OElig: "Œ", oelig: "œ", ofcir: "⦿", Ofr: "𝔒", ofr: "𝔬", ogon: "˛", Ograve: "Ò", ograve: "ò", ogt: "⧁", ohbar: "⦵", ohm: "Ω", oint: "∮", olarr: "↺", olcir: "⦾", olcross: "⦻", oline: "‾", olt: "⧀", Omacr: "Ō", omacr: "ō", Omega: "Ω", omega: "ω", Omicron: "Ο", omicron: "ο", omid: "⦶", ominus: "⊖", Oopf: "𝕆", oopf: "𝕠", opar: "⦷", OpenCurlyDoubleQuote: "“", OpenCurlyQuote: "‘", operp: "⦹", oplus: "⊕", orarr: "↻", Or: "⩔", or: "∨", ord: "⩝", order: "ℴ", orderof: "ℴ", ordf: "ª", ordm: "º", origof: "⊶", oror: "⩖", orslope: "⩗", orv: "⩛", oS: "Ⓢ", Oscr: "𝒪", oscr: "ℴ", Oslash: "Ø", oslash: "ø", osol: "⊘", Otilde: "Õ", otilde: "õ", otimesas: "⨶", Otimes: "⨷", otimes: "⊗", Ouml: "Ö", ouml: "ö", ovbar: "⌽", OverBar: "‾", OverBrace: "⏞", OverBracket: "⎴", OverParenthesis: "⏜", para: "¶", parallel: "∥", par: "∥", parsim: "⫳", parsl: "⫽", part: "∂", PartialD: "∂", Pcy: "П", pcy: "п", percnt: "%", period: ".", permil: "‰", perp: "⊥", pertenk: "‱", Pfr: "𝔓", pfr: "𝔭", Phi: "Φ", phi: "φ", phiv: "ϕ", phmmat: "ℳ", phone: "☎", Pi: "Π", pi: "π", pitchfork: "⋔", piv: "ϖ", planck: "ℏ", planckh: "ℎ", plankv: "ℏ", plusacir: "⨣", plusb: "⊞", pluscir: "⨢", plus: "+", plusdo: "∔", plusdu: "⨥", pluse: "⩲", PlusMinus: "±", plusmn: "±", plussim: "⨦", plustwo: "⨧", pm: "±", Poincareplane: "ℌ", pointint: "⨕", popf: "𝕡", Popf: "ℙ", pound: "£", prap: "⪷", Pr: "⪻", pr: "≺", prcue: "≼", precapprox: "⪷", prec: "≺", preccurlyeq: "≼", Precedes: "≺", PrecedesEqual: "⪯", PrecedesSlantEqual: "≼", PrecedesTilde: "≾", preceq: "⪯", precnapprox: "⪹", precneqq: "⪵", precnsim: "⋨", pre: "⪯", prE: "⪳", precsim: "≾", prime: "′", Prime: "″", primes: "ℙ", prnap: "⪹", prnE: "⪵", prnsim: "⋨", prod: "∏", Product: "∏", profalar: "⌮", profline: "⌒", profsurf: "⌓", prop: "∝", Proportional: "∝", Proportion: "∷", propto: "∝", prsim: "≾", prurel: "⊰", Pscr: "𝒫", pscr: "𝓅", Psi: "Ψ", psi: "ψ", puncsp: " ", Qfr: "𝔔", qfr: "𝔮", qint: "⨌", qopf: "𝕢", Qopf: "ℚ", qprime: "⁗", Qscr: "𝒬", qscr: "𝓆", quaternions: "ℍ", quatint: "⨖", quest: "?", questeq: "≟", quot: "\"", QUOT: "\"", rAarr: "⇛", race: "∽̱", Racute: "Ŕ", racute: "ŕ", radic: "√", raemptyv: "⦳", rang: "⟩", Rang: "⟫", rangd: "⦒", range: "⦥", rangle: "⟩", raquo: "»", rarrap: "⥵", rarrb: "⇥", rarrbfs: "⤠", rarrc: "⤳", rarr: "→", Rarr: "↠", rArr: "⇒", rarrfs: "⤞", rarrhk: "↪", rarrlp: "↬", rarrpl: "⥅", rarrsim: "⥴", Rarrtl: "⤖", rarrtl: "↣", rarrw: "↝", ratail: "⤚", rAtail: "⤜", ratio: "∶", rationals: "ℚ", rbarr: "⤍", rBarr: "⤏", RBarr: "⤐", rbbrk: "❳", rbrace: "}", rbrack: "]", rbrke: "⦌", rbrksld: "⦎", rbrkslu: "⦐", Rcaron: "Ř", rcaron: "ř", Rcedil: "Ŗ", rcedil: "ŗ", rceil: "⌉", rcub: "}", Rcy: "Р", rcy: "р", rdca: "⤷", rdldhar: "⥩", rdquo: "”", rdquor: "”", rdsh: "↳", real: "ℜ", realine: "ℛ", realpart: "ℜ", reals: "ℝ", Re: "ℜ", rect: "▭", reg: "®", REG: "®", ReverseElement: "∋", ReverseEquilibrium: "⇋", ReverseUpEquilibrium: "⥯", rfisht: "⥽", rfloor: "⌋", rfr: "𝔯", Rfr: "ℜ", rHar: "⥤", rhard: "⇁", rharu: "⇀", rharul: "⥬", Rho: "Ρ", rho: "ρ", rhov: "ϱ", RightAngleBracket: "⟩", RightArrowBar: "⇥", rightarrow: "→", RightArrow: "→", Rightarrow: "⇒", RightArrowLeftArrow: "⇄", rightarrowtail: "↣", RightCeiling: "⌉", RightDoubleBracket: "⟧", RightDownTeeVector: "⥝", RightDownVectorBar: "⥕", RightDownVector: "⇂", RightFloor: "⌋", rightharpoondown: "⇁", rightharpoonup: "⇀", rightleftarrows: "⇄", rightleftharpoons: "⇌", rightrightarrows: "⇉", rightsquigarrow: "↝", RightTeeArrow: "↦", RightTee: "⊢", RightTeeVector: "⥛", rightthreetimes: "⋌", RightTriangleBar: "⧐", RightTriangle: "⊳", RightTriangleEqual: "⊵", RightUpDownVector: "⥏", RightUpTeeVector: "⥜", RightUpVectorBar: "⥔", RightUpVector: "↾", RightVectorBar: "⥓", RightVector: "⇀", ring: "˚", risingdotseq: "≓", rlarr: "⇄", rlhar: "⇌", rlm: "\u200f", rmoustache: "⎱", rmoust: "⎱", rnmid: "⫮", roang: "⟭", roarr: "⇾", robrk: "⟧", ropar: "⦆", ropf: "𝕣", Ropf: "ℝ", roplus: "⨮", rotimes: "⨵", RoundImplies: "⥰", rpar: ")", rpargt: "⦔", rppolint: "⨒", rrarr: "⇉", Rrightarrow: "⇛", rsaquo: "›", rscr: "𝓇", Rscr: "ℛ", rsh: "↱", Rsh: "↱", rsqb: "]", rsquo: "’", rsquor: "’", rthree: "⋌", rtimes: "⋊", rtri: "▹", rtrie: "⊵", rtrif: "▸", rtriltri: "⧎", RuleDelayed: "⧴", ruluhar: "⥨", rx: "℞", Sacute: "Ś", sacute: "ś", sbquo: "‚", scap: "⪸", Scaron: "Š", scaron: "š", Sc: "⪼", sc: "≻", sccue: "≽", sce: "⪰", scE: "⪴", Scedil: "Ş", scedil: "ş", Scirc: "Ŝ", scirc: "ŝ", scnap: "⪺", scnE: "⪶", scnsim: "⋩", scpolint: "⨓", scsim: "≿", Scy: "С", scy: "с", sdotb: "⊡", sdot: "⋅", sdote: "⩦", searhk: "⤥", searr: "↘", seArr: "⇘", searrow: "↘", sect: "§", semi: ";", seswar: "⤩", setminus: "∖", setmn: "∖", sext: "✶", Sfr: "𝔖", sfr: "𝔰", sfrown: "⌢", sharp: "♯", SHCHcy: "Щ", shchcy: "щ", SHcy: "Ш", shcy: "ш", ShortDownArrow: "↓", ShortLeftArrow: "←", shortmid: "∣", shortparallel: "∥", ShortRightArrow: "→", ShortUpArrow: "↑", shy: "\u00ad", Sigma: "Σ", sigma: "σ", sigmaf: "ς", sigmav: "ς", sim: "∼", simdot: "⩪", sime: "≃", simeq: "≃", simg: "⪞", simgE: "⪠", siml: "⪝", simlE: "⪟", simne: "≆", simplus: "⨤", simrarr: "⥲", slarr: "←", SmallCircle: "∘", smallsetminus: "∖", smashp: "⨳", smeparsl: "⧤", smid: "∣", smile: "⌣", smt: "⪪", smte: "⪬", smtes: "⪬︀", SOFTcy: "Ь", softcy: "ь", solbar: "⌿", solb: "⧄", sol: "/", Sopf: "𝕊", sopf: "𝕤", spades: "♠", spadesuit: "♠", spar: "∥", sqcap: "⊓", sqcaps: "⊓︀", sqcup: "⊔", sqcups: "⊔︀", Sqrt: "√", sqsub: "⊏", sqsube: "⊑", sqsubset: "⊏", sqsubseteq: "⊑", sqsup: "⊐", sqsupe: "⊒", sqsupset: "⊐", sqsupseteq: "⊒", square: "□", Square: "□", SquareIntersection: "⊓", SquareSubset: "⊏", SquareSubsetEqual: "⊑", SquareSuperset: "⊐", SquareSupersetEqual: "⊒", SquareUnion: "⊔", squarf: "▪", squ: "□", squf: "▪", srarr: "→", Sscr: "𝒮", sscr: "𝓈", ssetmn: "∖", ssmile: "⌣", sstarf: "⋆", Star: "⋆", star: "☆", starf: "★", straightepsilon: "ϵ", straightphi: "ϕ", strns: "¯", sub: "⊂", Sub: "⋐", subdot: "⪽", subE: "⫅", sube: "⊆", subedot: "⫃", submult: "⫁", subnE: "⫋", subne: "⊊", subplus: "⪿", subrarr: "⥹", subset: "⊂", Subset: "⋐", subseteq: "⊆", subseteqq: "⫅", SubsetEqual: "⊆", subsetneq: "⊊", subsetneqq: "⫋", subsim: "⫇", subsub: "⫕", subsup: "⫓", succapprox: "⪸", succ: "≻", succcurlyeq: "≽", Succeeds: "≻", SucceedsEqual: "⪰", SucceedsSlantEqual: "≽", SucceedsTilde: "≿", succeq: "⪰", succnapprox: "⪺", succneqq: "⪶", succnsim: "⋩", succsim: "≿", SuchThat: "∋", sum: "∑", Sum: "∑", sung: "♪", sup1: "¹", sup2: "²", sup3: "³", sup: "⊃", Sup: "⋑", supdot: "⪾", supdsub: "⫘", supE: "⫆", supe: "⊇", supedot: "⫄", Superset: "⊃", SupersetEqual: "⊇", suphsol: "⟉", suphsub: "⫗", suplarr: "⥻", supmult: "⫂", supnE: "⫌", supne: "⊋", supplus: "⫀", supset: "⊃", Supset: "⋑", supseteq: "⊇", supseteqq: "⫆", supsetneq: "⊋", supsetneqq: "⫌", supsim: "⫈", supsub: "⫔", supsup: "⫖", swarhk: "⤦", swarr: "↙", swArr: "⇙", swarrow: "↙", swnwar: "⤪", szlig: "ß", Tab: "\u0009", target: "⌖", Tau: "Τ", tau: "τ", tbrk: "⎴", Tcaron: "Ť", tcaron: "ť", Tcedil: "Ţ", tcedil: "ţ", Tcy: "Т", tcy: "т", tdot: "⃛", telrec: "⌕", Tfr: "𝔗", tfr: "𝔱", there4: "∴", therefore: "∴", Therefore: "∴", Theta: "Θ", theta: "θ", thetasym: "ϑ", thetav: "ϑ", thickapprox: "≈", thicksim: "∼", ThickSpace: "  ", ThinSpace: " ", thinsp: " ", thkap: "≈", thksim: "∼", THORN: "Þ", thorn: "þ", tilde: "˜", Tilde: "∼", TildeEqual: "≃", TildeFullEqual: "≅", TildeTilde: "≈", timesbar: "⨱", timesb: "⊠", times: "×", timesd: "⨰", tint: "∭", toea: "⤨", topbot: "⌶", topcir: "⫱", top: "⊤", Topf: "𝕋", topf: "𝕥", topfork: "⫚", tosa: "⤩", tprime: "‴", trade: "™", TRADE: "™", triangle: "▵", triangledown: "▿", triangleleft: "◃", trianglelefteq: "⊴", triangleq: "≜", triangleright: "▹", trianglerighteq: "⊵", tridot: "◬", trie: "≜", triminus: "⨺", TripleDot: "⃛", triplus: "⨹", trisb: "⧍", tritime: "⨻", trpezium: "⏢", Tscr: "𝒯", tscr: "𝓉", TScy: "Ц", tscy: "ц", TSHcy: "Ћ", tshcy: "ћ", Tstrok: "Ŧ", tstrok: "ŧ", twixt: "≬", twoheadleftarrow: "↞", twoheadrightarrow: "↠", Uacute: "Ú", uacute: "ú", uarr: "↑", Uarr: "↟", uArr: "⇑", Uarrocir: "⥉", Ubrcy: "Ў", ubrcy: "ў", Ubreve: "Ŭ", ubreve: "ŭ", Ucirc: "Û", ucirc: "û", Ucy: "У", ucy: "у", udarr: "⇅", Udblac: "Ű", udblac: "ű", udhar: "⥮", ufisht: "⥾", Ufr: "𝔘", ufr: "𝔲", Ugrave: "Ù", ugrave: "ù", uHar: "⥣", uharl: "↿", uharr: "↾", uhblk: "▀", ulcorn: "⌜", ulcorner: "⌜", ulcrop: "⌏", ultri: "◸", Umacr: "Ū", umacr: "ū", uml: "¨", UnderBar: "_", UnderBrace: "⏟", UnderBracket: "⎵", UnderParenthesis: "⏝", Union: "⋃", UnionPlus: "⊎", Uogon: "Ų", uogon: "ų", Uopf: "𝕌", uopf: "𝕦", UpArrowBar: "⤒", uparrow: "↑", UpArrow: "↑", Uparrow: "⇑", UpArrowDownArrow: "⇅", updownarrow: "↕", UpDownArrow: "↕", Updownarrow: "⇕", UpEquilibrium: "⥮", upharpoonleft: "↿", upharpoonright: "↾", uplus: "⊎", UpperLeftArrow: "↖", UpperRightArrow: "↗", upsi: "υ", Upsi: "ϒ", upsih: "ϒ", Upsilon: "Υ", upsilon: "υ", UpTeeArrow: "↥", UpTee: "⊥", upuparrows: "⇈", urcorn: "⌝", urcorner: "⌝", urcrop: "⌎", Uring: "Ů", uring: "ů", urtri: "◹", Uscr: "𝒰", uscr: "𝓊", utdot: "⋰", Utilde: "Ũ", utilde: "ũ", utri: "▵", utrif: "▴", uuarr: "⇈", Uuml: "Ü", uuml: "ü", uwangle: "⦧", vangrt: "⦜", varepsilon: "ϵ", varkappa: "ϰ", varnothing: "∅", varphi: "ϕ", varpi: "ϖ", varpropto: "∝", varr: "↕", vArr: "⇕", varrho: "ϱ", varsigma: "ς", varsubsetneq: "⊊︀", varsubsetneqq: "⫋︀", varsupsetneq: "⊋︀", varsupsetneqq: "⫌︀", vartheta: "ϑ", vartriangleleft: "⊲", vartriangleright: "⊳", vBar: "⫨", Vbar: "⫫", vBarv: "⫩", Vcy: "В", vcy: "в", vdash: "⊢", vDash: "⊨", Vdash: "⊩", VDash: "⊫", Vdashl: "⫦", veebar: "⊻", vee: "∨", Vee: "⋁", veeeq: "≚", vellip: "⋮", verbar: "|", Verbar: "‖", vert: "|", Vert: "‖", VerticalBar: "∣", VerticalLine: "|", VerticalSeparator: "❘", VerticalTilde: "≀", VeryThinSpace: " ", Vfr: "𝔙", vfr: "𝔳", vltri: "⊲", vnsub: "⊂⃒", vnsup: "⊃⃒", Vopf: "𝕍", vopf: "𝕧", vprop: "∝", vrtri: "⊳", Vscr: "𝒱", vscr: "𝓋", vsubnE: "⫋︀", vsubne: "⊊︀", vsupnE: "⫌︀", vsupne: "⊋︀", Vvdash: "⊪", vzigzag: "⦚", Wcirc: "Ŵ", wcirc: "ŵ", wedbar: "⩟", wedge: "∧", Wedge: "⋀", wedgeq: "≙", weierp: "℘", Wfr: "𝔚", wfr: "𝔴", Wopf: "𝕎", wopf: "𝕨", wp: "℘", wr: "≀", wreath: "≀", Wscr: "𝒲", wscr: "𝓌", xcap: "⋂", xcirc: "◯", xcup: "⋃", xdtri: "▽", Xfr: "𝔛", xfr: "𝔵", xharr: "⟷", xhArr: "⟺", Xi: "Ξ", xi: "ξ", xlarr: "⟵", xlArr: "⟸", xmap: "⟼", xnis: "⋻", xodot: "⨀", Xopf: "𝕏", xopf: "𝕩", xoplus: "⨁", xotime: "⨂", xrarr: "⟶", xrArr: "⟹", Xscr: "𝒳", xscr: "𝓍", xsqcup: "⨆", xuplus: "⨄", xutri: "△", xvee: "⋁", xwedge: "⋀", Yacute: "Ý", yacute: "ý", YAcy: "Я", yacy: "я", Ycirc: "Ŷ", ycirc: "ŷ", Ycy: "Ы", ycy: "ы", yen: "¥", Yfr: "𝔜", yfr: "𝔶", YIcy: "Ї", yicy: "ї", Yopf: "𝕐", yopf: "𝕪", Yscr: "𝒴", yscr: "𝓎", YUcy: "Ю", yucy: "ю", yuml: "ÿ", Yuml: "Ÿ", Zacute: "Ź", zacute: "ź", Zcaron: "Ž", zcaron: "ž", Zcy: "З", zcy: "з", Zdot: "Ż", zdot: "ż", zeetrf: "ℨ", ZeroWidthSpace: "​", Zeta: "Ζ", zeta: "ζ", zfr: "𝔷", Zfr: "ℨ", ZHcy: "Ж", zhcy: "ж", zigrarr: "⇝", zopf: "𝕫", Zopf: "ℤ", Zscr: "𝒵", zscr: "𝓏", zwj: "\u200d", zwnj: "\u200c"
+};
+
+var HEXCHARCODE = /^#[xX]([A-Fa-f0-9]+)$/;
+var CHARCODE = /^#([0-9]+)$/;
+var NAMED = /^([A-Za-z0-9]+)$/;
+var EntityParser = /** @class */ (function () {
+    function EntityParser(named) {
+        this.named = named;
+    }
+    EntityParser.prototype.parse = function (entity) {
+        if (!entity) {
+            return;
+        }
+        var matches = entity.match(HEXCHARCODE);
+        if (matches) {
+            return String.fromCharCode(parseInt(matches[1], 16));
+        }
+        matches = entity.match(CHARCODE);
+        if (matches) {
+            return String.fromCharCode(parseInt(matches[1], 10));
+        }
+        matches = entity.match(NAMED);
+        if (matches) {
+            return this.named[matches[1]];
+        }
+    };
+    return EntityParser;
+}());
+
+var WSP = /[\t\n\f ]/;
+var ALPHA = /[A-Za-z]/;
+var CRLF = /\r\n?/g;
+function isSpace(char) {
+    return WSP.test(char);
+}
+function isAlpha(char) {
+    return ALPHA.test(char);
+}
+function preprocessInput(input) {
+    return input.replace(CRLF, '\n');
+}
+
+var EventedTokenizer = /** @class */ (function () {
+    function EventedTokenizer(delegate, entityParser) {
+        this.delegate = delegate;
+        this.entityParser = entityParser;
+        this.state = "beforeData" /* beforeData */;
+        this.line = -1;
+        this.column = -1;
+        this.input = '';
+        this.index = -1;
+        this.tagNameBuffer = '';
+        this.states = {
+            beforeData: function () {
+                var char = this.peek();
+                if (char === '<') {
+                    this.transitionTo("tagOpen" /* tagOpen */);
+                    this.markTagStart();
+                    this.consume();
+                }
+                else {
+                    if (char === '\n') {
+                        var tag = this.tagNameBuffer.toLowerCase();
+                        if (tag === 'pre' || tag === 'textarea') {
+                            this.consume();
+                        }
+                    }
+                    this.transitionTo("data" /* data */);
+                    this.delegate.beginData();
+                }
+            },
+            data: function () {
+                var char = this.peek();
+                if (char === '<') {
+                    this.delegate.finishData();
+                    this.transitionTo("tagOpen" /* tagOpen */);
+                    this.markTagStart();
+                    this.consume();
+                }
+                else if (char === '&') {
+                    this.consume();
+                    this.delegate.appendToData(this.consumeCharRef() || '&');
+                }
+                else {
+                    this.consume();
+                    this.delegate.appendToData(char);
+                }
+            },
+            tagOpen: function () {
+                var char = this.consume();
+                if (char === '!') {
+                    this.transitionTo("markupDeclarationOpen" /* markupDeclarationOpen */);
+                }
+                else if (char === '/') {
+                    this.transitionTo("endTagOpen" /* endTagOpen */);
+                }
+                else if (char === '@' || char === ':' || isAlpha(char)) {
+                    this.transitionTo("tagName" /* tagName */);
+                    this.tagNameBuffer = '';
+                    this.delegate.beginStartTag();
+                    this.appendToTagName(char);
+                }
+            },
+            markupDeclarationOpen: function () {
+                var char = this.consume();
+                if (char === '-' && this.input.charAt(this.index) === '-') {
+                    this.consume();
+                    this.transitionTo("commentStart" /* commentStart */);
+                    this.delegate.beginComment();
+                }
+            },
+            commentStart: function () {
+                var char = this.consume();
+                if (char === '-') {
+                    this.transitionTo("commentStartDash" /* commentStartDash */);
+                }
+                else if (char === '>') {
+                    this.delegate.finishComment();
+                    this.transitionTo("beforeData" /* beforeData */);
+                }
+                else {
+                    this.delegate.appendToCommentData(char);
+                    this.transitionTo("comment" /* comment */);
+                }
+            },
+            commentStartDash: function () {
+                var char = this.consume();
+                if (char === '-') {
+                    this.transitionTo("commentEnd" /* commentEnd */);
+                }
+                else if (char === '>') {
+                    this.delegate.finishComment();
+                    this.transitionTo("beforeData" /* beforeData */);
+                }
+                else {
+                    this.delegate.appendToCommentData('-');
+                    this.transitionTo("comment" /* comment */);
+                }
+            },
+            comment: function () {
+                var char = this.consume();
+                if (char === '-') {
+                    this.transitionTo("commentEndDash" /* commentEndDash */);
+                }
+                else {
+                    this.delegate.appendToCommentData(char);
+                }
+            },
+            commentEndDash: function () {
+                var char = this.consume();
+                if (char === '-') {
+                    this.transitionTo("commentEnd" /* commentEnd */);
+                }
+                else {
+                    this.delegate.appendToCommentData('-' + char);
+                    this.transitionTo("comment" /* comment */);
+                }
+            },
+            commentEnd: function () {
+                var char = this.consume();
+                if (char === '>') {
+                    this.delegate.finishComment();
+                    this.transitionTo("beforeData" /* beforeData */);
+                }
+                else {
+                    this.delegate.appendToCommentData('--' + char);
+                    this.transitionTo("comment" /* comment */);
+                }
+            },
+            tagName: function () {
+                var char = this.consume();
+                if (isSpace(char)) {
+                    this.transitionTo("beforeAttributeName" /* beforeAttributeName */);
+                }
+                else if (char === '/') {
+                    this.transitionTo("selfClosingStartTag" /* selfClosingStartTag */);
+                }
+                else if (char === '>') {
+                    this.delegate.finishTag();
+                    this.transitionTo("beforeData" /* beforeData */);
+                }
+                else {
+                    this.appendToTagName(char);
+                }
+            },
+            beforeAttributeName: function () {
+                var char = this.peek();
+                if (isSpace(char)) {
+                    this.consume();
+                    return;
+                }
+                else if (char === '/') {
+                    this.transitionTo("selfClosingStartTag" /* selfClosingStartTag */);
+                    this.consume();
+                }
+                else if (char === '>') {
+                    this.consume();
+                    this.delegate.finishTag();
+                    this.transitionTo("beforeData" /* beforeData */);
+                }
+                else if (char === '=') {
+                    this.delegate.reportSyntaxError('attribute name cannot start with equals sign');
+                    this.transitionTo("attributeName" /* attributeName */);
+                    this.delegate.beginAttribute();
+                    this.consume();
+                    this.delegate.appendToAttributeName(char);
+                }
+                else {
+                    this.transitionTo("attributeName" /* attributeName */);
+                    this.delegate.beginAttribute();
+                }
+            },
+            attributeName: function () {
+                var char = this.peek();
+                if (isSpace(char)) {
+                    this.transitionTo("afterAttributeName" /* afterAttributeName */);
+                    this.consume();
+                }
+                else if (char === '/') {
+                    this.delegate.beginAttributeValue(false);
+                    this.delegate.finishAttributeValue();
+                    this.consume();
+                    this.transitionTo("selfClosingStartTag" /* selfClosingStartTag */);
+                }
+                else if (char === '=') {
+                    this.transitionTo("beforeAttributeValue" /* beforeAttributeValue */);
+                    this.consume();
+                }
+                else if (char === '>') {
+                    this.delegate.beginAttributeValue(false);
+                    this.delegate.finishAttributeValue();
+                    this.consume();
+                    this.delegate.finishTag();
+                    this.transitionTo("beforeData" /* beforeData */);
+                }
+                else if (char === '"' || char === "'" || char === '<') {
+                    this.delegate.reportSyntaxError(char + ' is not a valid character within attribute names');
+                    this.consume();
+                    this.delegate.appendToAttributeName(char);
+                }
+                else {
+                    this.consume();
+                    this.delegate.appendToAttributeName(char);
+                }
+            },
+            afterAttributeName: function () {
+                var char = this.peek();
+                if (isSpace(char)) {
+                    this.consume();
+                    return;
+                }
+                else if (char === '/') {
+                    this.delegate.beginAttributeValue(false);
+                    this.delegate.finishAttributeValue();
+                    this.consume();
+                    this.transitionTo("selfClosingStartTag" /* selfClosingStartTag */);
+                }
+                else if (char === '=') {
+                    this.consume();
+                    this.transitionTo("beforeAttributeValue" /* beforeAttributeValue */);
+                }
+                else if (char === '>') {
+                    this.delegate.beginAttributeValue(false);
+                    this.delegate.finishAttributeValue();
+                    this.consume();
+                    this.delegate.finishTag();
+                    this.transitionTo("beforeData" /* beforeData */);
+                }
+                else {
+                    this.delegate.beginAttributeValue(false);
+                    this.delegate.finishAttributeValue();
+                    this.transitionTo("attributeName" /* attributeName */);
+                    this.delegate.beginAttribute();
+                    this.consume();
+                    this.delegate.appendToAttributeName(char);
+                }
+            },
+            beforeAttributeValue: function () {
+                var char = this.peek();
+                if (isSpace(char)) {
+                    this.consume();
+                }
+                else if (char === '"') {
+                    this.transitionTo("attributeValueDoubleQuoted" /* attributeValueDoubleQuoted */);
+                    this.delegate.beginAttributeValue(true);
+                    this.consume();
+                }
+                else if (char === "'") {
+                    this.transitionTo("attributeValueSingleQuoted" /* attributeValueSingleQuoted */);
+                    this.delegate.beginAttributeValue(true);
+                    this.consume();
+                }
+                else if (char === '>') {
+                    this.delegate.beginAttributeValue(false);
+                    this.delegate.finishAttributeValue();
+                    this.consume();
+                    this.delegate.finishTag();
+                    this.transitionTo("beforeData" /* beforeData */);
+                }
+                else {
+                    this.transitionTo("attributeValueUnquoted" /* attributeValueUnquoted */);
+                    this.delegate.beginAttributeValue(false);
+                    this.consume();
+                    this.delegate.appendToAttributeValue(char);
+                }
+            },
+            attributeValueDoubleQuoted: function () {
+                var char = this.consume();
+                if (char === '"') {
+                    this.delegate.finishAttributeValue();
+                    this.transitionTo("afterAttributeValueQuoted" /* afterAttributeValueQuoted */);
+                }
+                else if (char === '&') {
+                    this.delegate.appendToAttributeValue(this.consumeCharRef() || '&');
+                }
+                else {
+                    this.delegate.appendToAttributeValue(char);
+                }
+            },
+            attributeValueSingleQuoted: function () {
+                var char = this.consume();
+                if (char === "'") {
+                    this.delegate.finishAttributeValue();
+                    this.transitionTo("afterAttributeValueQuoted" /* afterAttributeValueQuoted */);
+                }
+                else if (char === '&') {
+                    this.delegate.appendToAttributeValue(this.consumeCharRef() || '&');
+                }
+                else {
+                    this.delegate.appendToAttributeValue(char);
+                }
+            },
+            attributeValueUnquoted: function () {
+                var char = this.peek();
+                if (isSpace(char)) {
+                    this.delegate.finishAttributeValue();
+                    this.consume();
+                    this.transitionTo("beforeAttributeName" /* beforeAttributeName */);
+                }
+                else if (char === '/') {
+                    this.delegate.finishAttributeValue();
+                    this.consume();
+                    this.transitionTo("selfClosingStartTag" /* selfClosingStartTag */);
+                }
+                else if (char === '&') {
+                    this.consume();
+                    this.delegate.appendToAttributeValue(this.consumeCharRef() || '&');
+                }
+                else if (char === '>') {
+                    this.delegate.finishAttributeValue();
+                    this.consume();
+                    this.delegate.finishTag();
+                    this.transitionTo("beforeData" /* beforeData */);
+                }
+                else {
+                    this.consume();
+                    this.delegate.appendToAttributeValue(char);
+                }
+            },
+            afterAttributeValueQuoted: function () {
+                var char = this.peek();
+                if (isSpace(char)) {
+                    this.consume();
+                    this.transitionTo("beforeAttributeName" /* beforeAttributeName */);
+                }
+                else if (char === '/') {
+                    this.consume();
+                    this.transitionTo("selfClosingStartTag" /* selfClosingStartTag */);
+                }
+                else if (char === '>') {
+                    this.consume();
+                    this.delegate.finishTag();
+                    this.transitionTo("beforeData" /* beforeData */);
+                }
+                else {
+                    this.transitionTo("beforeAttributeName" /* beforeAttributeName */);
+                }
+            },
+            selfClosingStartTag: function () {
+                var char = this.peek();
+                if (char === '>') {
+                    this.consume();
+                    this.delegate.markTagAsSelfClosing();
+                    this.delegate.finishTag();
+                    this.transitionTo("beforeData" /* beforeData */);
+                }
+                else {
+                    this.transitionTo("beforeAttributeName" /* beforeAttributeName */);
+                }
+            },
+            endTagOpen: function () {
+                var char = this.consume();
+                if (char === '@' || char === ':' || isAlpha(char)) {
+                    this.transitionTo("tagName" /* tagName */);
+                    this.tagNameBuffer = '';
+                    this.delegate.beginEndTag();
+                    this.appendToTagName(char);
+                }
+            }
+        };
+        this.reset();
+    }
+    EventedTokenizer.prototype.reset = function () {
+        this.transitionTo("beforeData" /* beforeData */);
+        this.input = '';
+        this.index = 0;
+        this.line = 1;
+        this.column = 0;
+        this.delegate.reset();
+    };
+    EventedTokenizer.prototype.transitionTo = function (state) {
+        this.state = state;
+    };
+    EventedTokenizer.prototype.tokenize = function (input) {
+        this.reset();
+        this.tokenizePart(input);
+        this.tokenizeEOF();
+    };
+    EventedTokenizer.prototype.tokenizePart = function (input) {
+        this.input += preprocessInput(input);
+        while (this.index < this.input.length) {
+            var handler = this.states[this.state];
+            if (handler !== undefined) {
+                handler.call(this);
+            }
+            else {
+                throw new Error("unhandled state " + this.state);
+            }
+        }
+    };
+    EventedTokenizer.prototype.tokenizeEOF = function () {
+        this.flushData();
+    };
+    EventedTokenizer.prototype.flushData = function () {
+        if (this.state === 'data') {
+            this.delegate.finishData();
+            this.transitionTo("beforeData" /* beforeData */);
+        }
+    };
+    EventedTokenizer.prototype.peek = function () {
+        return this.input.charAt(this.index);
+    };
+    EventedTokenizer.prototype.consume = function () {
+        var char = this.peek();
+        this.index++;
+        if (char === '\n') {
+            this.line++;
+            this.column = 0;
+        }
+        else {
+            this.column++;
+        }
+        return char;
+    };
+    EventedTokenizer.prototype.consumeCharRef = function () {
+        var endIndex = this.input.indexOf(';', this.index);
+        if (endIndex === -1) {
+            return;
+        }
+        var entity = this.input.slice(this.index, endIndex);
+        var chars = this.entityParser.parse(entity);
+        if (chars) {
+            var count = entity.length;
+            // consume the entity chars
+            while (count) {
+                this.consume();
+                count--;
+            }
+            // consume the `;`
+            this.consume();
+            return chars;
+        }
+    };
+    EventedTokenizer.prototype.markTagStart = function () {
+        this.delegate.tagOpen();
+    };
+    EventedTokenizer.prototype.appendToTagName = function (char) {
+        this.tagNameBuffer += char;
+        this.delegate.appendToTagName(char);
+    };
+    return EventedTokenizer;
+}());
+
+var Tokenizer = /** @class */ (function () {
+    function Tokenizer(entityParser, options) {
+        if (options === void 0) { options = {}; }
+        this.options = options;
+        this.token = null;
+        this.startLine = 1;
+        this.startColumn = 0;
+        this.tokens = [];
+        this.tokenizer = new EventedTokenizer(this, entityParser);
+        this._currentAttribute = undefined;
+    }
+    Tokenizer.prototype.tokenize = function (input) {
+        this.tokens = [];
+        this.tokenizer.tokenize(input);
+        return this.tokens;
+    };
+    Tokenizer.prototype.tokenizePart = function (input) {
+        this.tokens = [];
+        this.tokenizer.tokenizePart(input);
+        return this.tokens;
+    };
+    Tokenizer.prototype.tokenizeEOF = function () {
+        this.tokens = [];
+        this.tokenizer.tokenizeEOF();
+        return this.tokens[0];
+    };
+    Tokenizer.prototype.reset = function () {
+        this.token = null;
+        this.startLine = 1;
+        this.startColumn = 0;
+    };
+    Tokenizer.prototype.current = function () {
+        var token = this.token;
+        if (token === null) {
+            throw new Error('token was unexpectedly null');
+        }
+        if (arguments.length === 0) {
+            return token;
+        }
+        for (var i = 0; i < arguments.length; i++) {
+            if (token.type === arguments[i]) {
+                return token;
+            }
+        }
+        throw new Error("token type was unexpectedly " + token.type);
+    };
+    Tokenizer.prototype.push = function (token) {
+        this.token = token;
+        this.tokens.push(token);
+    };
+    Tokenizer.prototype.currentAttribute = function () {
+        return this._currentAttribute;
+    };
+    Tokenizer.prototype.addLocInfo = function () {
+        if (this.options.loc) {
+            this.current().loc = {
+                start: {
+                    line: this.startLine,
+                    column: this.startColumn
+                },
+                end: {
+                    line: this.tokenizer.line,
+                    column: this.tokenizer.column
+                }
+            };
+        }
+        this.startLine = this.tokenizer.line;
+        this.startColumn = this.tokenizer.column;
+    };
+    // Data
+    Tokenizer.prototype.beginData = function () {
+        this.push({
+            type: "Chars" /* Chars */,
+            chars: ''
+        });
+    };
+    Tokenizer.prototype.appendToData = function (char) {
+        this.current("Chars" /* Chars */).chars += char;
+    };
+    Tokenizer.prototype.finishData = function () {
+        this.addLocInfo();
+    };
+    // Comment
+    Tokenizer.prototype.beginComment = function () {
+        this.push({
+            type: "Comment" /* Comment */,
+            chars: ''
+        });
+    };
+    Tokenizer.prototype.appendToCommentData = function (char) {
+        this.current("Comment" /* Comment */).chars += char;
+    };
+    Tokenizer.prototype.finishComment = function () {
+        this.addLocInfo();
+    };
+    // Tags - basic
+    Tokenizer.prototype.tagOpen = function () { };
+    Tokenizer.prototype.beginStartTag = function () {
+        this.push({
+            type: "StartTag" /* StartTag */,
+            tagName: '',
+            attributes: [],
+            selfClosing: false
+        });
+    };
+    Tokenizer.prototype.beginEndTag = function () {
+        this.push({
+            type: "EndTag" /* EndTag */,
+            tagName: ''
+        });
+    };
+    Tokenizer.prototype.finishTag = function () {
+        this.addLocInfo();
+    };
+    Tokenizer.prototype.markTagAsSelfClosing = function () {
+        this.current("StartTag" /* StartTag */).selfClosing = true;
+    };
+    // Tags - name
+    Tokenizer.prototype.appendToTagName = function (char) {
+        this.current("StartTag" /* StartTag */, "EndTag" /* EndTag */).tagName += char;
+    };
+    // Tags - attributes
+    Tokenizer.prototype.beginAttribute = function () {
+        this._currentAttribute = ['', '', false];
+    };
+    Tokenizer.prototype.appendToAttributeName = function (char) {
+        this.currentAttribute()[0] += char;
+    };
+    Tokenizer.prototype.beginAttributeValue = function (isQuoted) {
+        this.currentAttribute()[2] = isQuoted;
+    };
+    Tokenizer.prototype.appendToAttributeValue = function (char) {
+        this.currentAttribute()[1] += char;
+    };
+    Tokenizer.prototype.finishAttributeValue = function () {
+        this.current("StartTag" /* StartTag */).attributes.push(this._currentAttribute);
+    };
+    Tokenizer.prototype.reportSyntaxError = function (message) {
+        this.current().syntaxError = message;
+    };
+    return Tokenizer;
+}());
+
+function tokenize(input, options) {
+    var tokenizer = new Tokenizer(new EntityParser(namedCharRefs), options);
+    return tokenizer.tokenize(input);
+}
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/tinycolor2/tinycolor.js":
+/*!**********************************************!*\
+  !*** ./node_modules/tinycolor2/tinycolor.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_RESULT__;// TinyColor v1.4.1
+// https://github.com/bgrins/TinyColor
+// Brian Grinstead, MIT License
+
+(function(Math) {
+
+var trimLeft = /^\s+/,
+    trimRight = /\s+$/,
+    tinyCounter = 0,
+    mathRound = Math.round,
+    mathMin = Math.min,
+    mathMax = Math.max,
+    mathRandom = Math.random;
+
+function tinycolor (color, opts) {
+
+    color = (color) ? color : '';
+    opts = opts || { };
+
+    // If input is already a tinycolor, return itself
+    if (color instanceof tinycolor) {
+       return color;
+    }
+    // If we are called as a function, call using new instead
+    if (!(this instanceof tinycolor)) {
+        return new tinycolor(color, opts);
+    }
+
+    var rgb = inputToRGB(color);
+    this._originalInput = color,
+    this._r = rgb.r,
+    this._g = rgb.g,
+    this._b = rgb.b,
+    this._a = rgb.a,
+    this._roundA = mathRound(100*this._a) / 100,
+    this._format = opts.format || rgb.format;
+    this._gradientType = opts.gradientType;
+
+    // Don't let the range of [0,255] come back in [0,1].
+    // Potentially lose a little bit of precision here, but will fix issues where
+    // .5 gets interpreted as half of the total, instead of half of 1
+    // If it was supposed to be 128, this was already taken care of by `inputToRgb`
+    if (this._r < 1) { this._r = mathRound(this._r); }
+    if (this._g < 1) { this._g = mathRound(this._g); }
+    if (this._b < 1) { this._b = mathRound(this._b); }
+
+    this._ok = rgb.ok;
+    this._tc_id = tinyCounter++;
+}
+
+tinycolor.prototype = {
+    isDark: function() {
+        return this.getBrightness() < 128;
+    },
+    isLight: function() {
+        return !this.isDark();
+    },
+    isValid: function() {
+        return this._ok;
+    },
+    getOriginalInput: function() {
+      return this._originalInput;
+    },
+    getFormat: function() {
+        return this._format;
+    },
+    getAlpha: function() {
+        return this._a;
+    },
+    getBrightness: function() {
+        //http://www.w3.org/TR/AERT#color-contrast
+        var rgb = this.toRgb();
+        return (rgb.r * 299 + rgb.g * 587 + rgb.b * 114) / 1000;
+    },
+    getLuminance: function() {
+        //http://www.w3.org/TR/2008/REC-WCAG20-20081211/#relativeluminancedef
+        var rgb = this.toRgb();
+        var RsRGB, GsRGB, BsRGB, R, G, B;
+        RsRGB = rgb.r/255;
+        GsRGB = rgb.g/255;
+        BsRGB = rgb.b/255;
+
+        if (RsRGB <= 0.03928) {R = RsRGB / 12.92;} else {R = Math.pow(((RsRGB + 0.055) / 1.055), 2.4);}
+        if (GsRGB <= 0.03928) {G = GsRGB / 12.92;} else {G = Math.pow(((GsRGB + 0.055) / 1.055), 2.4);}
+        if (BsRGB <= 0.03928) {B = BsRGB / 12.92;} else {B = Math.pow(((BsRGB + 0.055) / 1.055), 2.4);}
+        return (0.2126 * R) + (0.7152 * G) + (0.0722 * B);
+    },
+    setAlpha: function(value) {
+        this._a = boundAlpha(value);
+        this._roundA = mathRound(100*this._a) / 100;
+        return this;
+    },
+    toHsv: function() {
+        var hsv = rgbToHsv(this._r, this._g, this._b);
+        return { h: hsv.h * 360, s: hsv.s, v: hsv.v, a: this._a };
+    },
+    toHsvString: function() {
+        var hsv = rgbToHsv(this._r, this._g, this._b);
+        var h = mathRound(hsv.h * 360), s = mathRound(hsv.s * 100), v = mathRound(hsv.v * 100);
+        return (this._a == 1) ?
+          "hsv("  + h + ", " + s + "%, " + v + "%)" :
+          "hsva(" + h + ", " + s + "%, " + v + "%, "+ this._roundA + ")";
+    },
+    toHsl: function() {
+        var hsl = rgbToHsl(this._r, this._g, this._b);
+        return { h: hsl.h * 360, s: hsl.s, l: hsl.l, a: this._a };
+    },
+    toHslString: function() {
+        var hsl = rgbToHsl(this._r, this._g, this._b);
+        var h = mathRound(hsl.h * 360), s = mathRound(hsl.s * 100), l = mathRound(hsl.l * 100);
+        return (this._a == 1) ?
+          "hsl("  + h + ", " + s + "%, " + l + "%)" :
+          "hsla(" + h + ", " + s + "%, " + l + "%, "+ this._roundA + ")";
+    },
+    toHex: function(allow3Char) {
+        return rgbToHex(this._r, this._g, this._b, allow3Char);
+    },
+    toHexString: function(allow3Char) {
+        return '#' + this.toHex(allow3Char);
+    },
+    toHex8: function(allow4Char) {
+        return rgbaToHex(this._r, this._g, this._b, this._a, allow4Char);
+    },
+    toHex8String: function(allow4Char) {
+        return '#' + this.toHex8(allow4Char);
+    },
+    toRgb: function() {
+        return { r: mathRound(this._r), g: mathRound(this._g), b: mathRound(this._b), a: this._a };
+    },
+    toRgbString: function() {
+        return (this._a == 1) ?
+          "rgb("  + mathRound(this._r) + ", " + mathRound(this._g) + ", " + mathRound(this._b) + ")" :
+          "rgba(" + mathRound(this._r) + ", " + mathRound(this._g) + ", " + mathRound(this._b) + ", " + this._roundA + ")";
+    },
+    toPercentageRgb: function() {
+        return { r: mathRound(bound01(this._r, 255) * 100) + "%", g: mathRound(bound01(this._g, 255) * 100) + "%", b: mathRound(bound01(this._b, 255) * 100) + "%", a: this._a };
+    },
+    toPercentageRgbString: function() {
+        return (this._a == 1) ?
+          "rgb("  + mathRound(bound01(this._r, 255) * 100) + "%, " + mathRound(bound01(this._g, 255) * 100) + "%, " + mathRound(bound01(this._b, 255) * 100) + "%)" :
+          "rgba(" + mathRound(bound01(this._r, 255) * 100) + "%, " + mathRound(bound01(this._g, 255) * 100) + "%, " + mathRound(bound01(this._b, 255) * 100) + "%, " + this._roundA + ")";
+    },
+    toName: function() {
+        if (this._a === 0) {
+            return "transparent";
+        }
+
+        if (this._a < 1) {
+            return false;
+        }
+
+        return hexNames[rgbToHex(this._r, this._g, this._b, true)] || false;
+    },
+    toFilter: function(secondColor) {
+        var hex8String = '#' + rgbaToArgbHex(this._r, this._g, this._b, this._a);
+        var secondHex8String = hex8String;
+        var gradientType = this._gradientType ? "GradientType = 1, " : "";
+
+        if (secondColor) {
+            var s = tinycolor(secondColor);
+            secondHex8String = '#' + rgbaToArgbHex(s._r, s._g, s._b, s._a);
+        }
+
+        return "progid:DXImageTransform.Microsoft.gradient("+gradientType+"startColorstr="+hex8String+",endColorstr="+secondHex8String+")";
+    },
+    toString: function(format) {
+        var formatSet = !!format;
+        format = format || this._format;
+
+        var formattedString = false;
+        var hasAlpha = this._a < 1 && this._a >= 0;
+        var needsAlphaFormat = !formatSet && hasAlpha && (format === "hex" || format === "hex6" || format === "hex3" || format === "hex4" || format === "hex8" || format === "name");
+
+        if (needsAlphaFormat) {
+            // Special case for "transparent", all other non-alpha formats
+            // will return rgba when there is transparency.
+            if (format === "name" && this._a === 0) {
+                return this.toName();
+            }
+            return this.toRgbString();
+        }
+        if (format === "rgb") {
+            formattedString = this.toRgbString();
+        }
+        if (format === "prgb") {
+            formattedString = this.toPercentageRgbString();
+        }
+        if (format === "hex" || format === "hex6") {
+            formattedString = this.toHexString();
+        }
+        if (format === "hex3") {
+            formattedString = this.toHexString(true);
+        }
+        if (format === "hex4") {
+            formattedString = this.toHex8String(true);
+        }
+        if (format === "hex8") {
+            formattedString = this.toHex8String();
+        }
+        if (format === "name") {
+            formattedString = this.toName();
+        }
+        if (format === "hsl") {
+            formattedString = this.toHslString();
+        }
+        if (format === "hsv") {
+            formattedString = this.toHsvString();
+        }
+
+        return formattedString || this.toHexString();
+    },
+    clone: function() {
+        return tinycolor(this.toString());
+    },
+
+    _applyModification: function(fn, args) {
+        var color = fn.apply(null, [this].concat([].slice.call(args)));
+        this._r = color._r;
+        this._g = color._g;
+        this._b = color._b;
+        this.setAlpha(color._a);
+        return this;
+    },
+    lighten: function() {
+        return this._applyModification(lighten, arguments);
+    },
+    brighten: function() {
+        return this._applyModification(brighten, arguments);
+    },
+    darken: function() {
+        return this._applyModification(darken, arguments);
+    },
+    desaturate: function() {
+        return this._applyModification(desaturate, arguments);
+    },
+    saturate: function() {
+        return this._applyModification(saturate, arguments);
+    },
+    greyscale: function() {
+        return this._applyModification(greyscale, arguments);
+    },
+    spin: function() {
+        return this._applyModification(spin, arguments);
+    },
+
+    _applyCombination: function(fn, args) {
+        return fn.apply(null, [this].concat([].slice.call(args)));
+    },
+    analogous: function() {
+        return this._applyCombination(analogous, arguments);
+    },
+    complement: function() {
+        return this._applyCombination(complement, arguments);
+    },
+    monochromatic: function() {
+        return this._applyCombination(monochromatic, arguments);
+    },
+    splitcomplement: function() {
+        return this._applyCombination(splitcomplement, arguments);
+    },
+    triad: function() {
+        return this._applyCombination(triad, arguments);
+    },
+    tetrad: function() {
+        return this._applyCombination(tetrad, arguments);
+    }
+};
+
+// If input is an object, force 1 into "1.0" to handle ratios properly
+// String input requires "1.0" as input, so 1 will be treated as 1
+tinycolor.fromRatio = function(color, opts) {
+    if (typeof color == "object") {
+        var newColor = {};
+        for (var i in color) {
+            if (color.hasOwnProperty(i)) {
+                if (i === "a") {
+                    newColor[i] = color[i];
+                }
+                else {
+                    newColor[i] = convertToPercentage(color[i]);
+                }
+            }
+        }
+        color = newColor;
+    }
+
+    return tinycolor(color, opts);
+};
+
+// Given a string or object, convert that input to RGB
+// Possible string inputs:
+//
+//     "red"
+//     "#f00" or "f00"
+//     "#ff0000" or "ff0000"
+//     "#ff000000" or "ff000000"
+//     "rgb 255 0 0" or "rgb (255, 0, 0)"
+//     "rgb 1.0 0 0" or "rgb (1, 0, 0)"
+//     "rgba (255, 0, 0, 1)" or "rgba 255, 0, 0, 1"
+//     "rgba (1.0, 0, 0, 1)" or "rgba 1.0, 0, 0, 1"
+//     "hsl(0, 100%, 50%)" or "hsl 0 100% 50%"
+//     "hsla(0, 100%, 50%, 1)" or "hsla 0 100% 50%, 1"
+//     "hsv(0, 100%, 100%)" or "hsv 0 100% 100%"
+//
+function inputToRGB(color) {
+
+    var rgb = { r: 0, g: 0, b: 0 };
+    var a = 1;
+    var s = null;
+    var v = null;
+    var l = null;
+    var ok = false;
+    var format = false;
+
+    if (typeof color == "string") {
+        color = stringInputToObject(color);
+    }
+
+    if (typeof color == "object") {
+        if (isValidCSSUnit(color.r) && isValidCSSUnit(color.g) && isValidCSSUnit(color.b)) {
+            rgb = rgbToRgb(color.r, color.g, color.b);
+            ok = true;
+            format = String(color.r).substr(-1) === "%" ? "prgb" : "rgb";
+        }
+        else if (isValidCSSUnit(color.h) && isValidCSSUnit(color.s) && isValidCSSUnit(color.v)) {
+            s = convertToPercentage(color.s);
+            v = convertToPercentage(color.v);
+            rgb = hsvToRgb(color.h, s, v);
+            ok = true;
+            format = "hsv";
+        }
+        else if (isValidCSSUnit(color.h) && isValidCSSUnit(color.s) && isValidCSSUnit(color.l)) {
+            s = convertToPercentage(color.s);
+            l = convertToPercentage(color.l);
+            rgb = hslToRgb(color.h, s, l);
+            ok = true;
+            format = "hsl";
+        }
+
+        if (color.hasOwnProperty("a")) {
+            a = color.a;
+        }
+    }
+
+    a = boundAlpha(a);
+
+    return {
+        ok: ok,
+        format: color.format || format,
+        r: mathMin(255, mathMax(rgb.r, 0)),
+        g: mathMin(255, mathMax(rgb.g, 0)),
+        b: mathMin(255, mathMax(rgb.b, 0)),
+        a: a
+    };
+}
+
+
+// Conversion Functions
+// --------------------
+
+// `rgbToHsl`, `rgbToHsv`, `hslToRgb`, `hsvToRgb` modified from:
+// <http://mjijackson.com/2008/02/rgb-to-hsl-and-rgb-to-hsv-color-model-conversion-algorithms-in-javascript>
+
+// `rgbToRgb`
+// Handle bounds / percentage checking to conform to CSS color spec
+// <http://www.w3.org/TR/css3-color/>
+// *Assumes:* r, g, b in [0, 255] or [0, 1]
+// *Returns:* { r, g, b } in [0, 255]
+function rgbToRgb(r, g, b){
+    return {
+        r: bound01(r, 255) * 255,
+        g: bound01(g, 255) * 255,
+        b: bound01(b, 255) * 255
+    };
+}
+
+// `rgbToHsl`
+// Converts an RGB color value to HSL.
+// *Assumes:* r, g, and b are contained in [0, 255] or [0, 1]
+// *Returns:* { h, s, l } in [0,1]
+function rgbToHsl(r, g, b) {
+
+    r = bound01(r, 255);
+    g = bound01(g, 255);
+    b = bound01(b, 255);
+
+    var max = mathMax(r, g, b), min = mathMin(r, g, b);
+    var h, s, l = (max + min) / 2;
+
+    if(max == min) {
+        h = s = 0; // achromatic
+    }
+    else {
+        var d = max - min;
+        s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+        switch(max) {
+            case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+            case g: h = (b - r) / d + 2; break;
+            case b: h = (r - g) / d + 4; break;
+        }
+
+        h /= 6;
+    }
+
+    return { h: h, s: s, l: l };
+}
+
+// `hslToRgb`
+// Converts an HSL color value to RGB.
+// *Assumes:* h is contained in [0, 1] or [0, 360] and s and l are contained [0, 1] or [0, 100]
+// *Returns:* { r, g, b } in the set [0, 255]
+function hslToRgb(h, s, l) {
+    var r, g, b;
+
+    h = bound01(h, 360);
+    s = bound01(s, 100);
+    l = bound01(l, 100);
+
+    function hue2rgb(p, q, t) {
+        if(t < 0) t += 1;
+        if(t > 1) t -= 1;
+        if(t < 1/6) return p + (q - p) * 6 * t;
+        if(t < 1/2) return q;
+        if(t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+        return p;
+    }
+
+    if(s === 0) {
+        r = g = b = l; // achromatic
+    }
+    else {
+        var q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+        var p = 2 * l - q;
+        r = hue2rgb(p, q, h + 1/3);
+        g = hue2rgb(p, q, h);
+        b = hue2rgb(p, q, h - 1/3);
+    }
+
+    return { r: r * 255, g: g * 255, b: b * 255 };
+}
+
+// `rgbToHsv`
+// Converts an RGB color value to HSV
+// *Assumes:* r, g, and b are contained in the set [0, 255] or [0, 1]
+// *Returns:* { h, s, v } in [0,1]
+function rgbToHsv(r, g, b) {
+
+    r = bound01(r, 255);
+    g = bound01(g, 255);
+    b = bound01(b, 255);
+
+    var max = mathMax(r, g, b), min = mathMin(r, g, b);
+    var h, s, v = max;
+
+    var d = max - min;
+    s = max === 0 ? 0 : d / max;
+
+    if(max == min) {
+        h = 0; // achromatic
+    }
+    else {
+        switch(max) {
+            case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+            case g: h = (b - r) / d + 2; break;
+            case b: h = (r - g) / d + 4; break;
+        }
+        h /= 6;
+    }
+    return { h: h, s: s, v: v };
+}
+
+// `hsvToRgb`
+// Converts an HSV color value to RGB.
+// *Assumes:* h is contained in [0, 1] or [0, 360] and s and v are contained in [0, 1] or [0, 100]
+// *Returns:* { r, g, b } in the set [0, 255]
+ function hsvToRgb(h, s, v) {
+
+    h = bound01(h, 360) * 6;
+    s = bound01(s, 100);
+    v = bound01(v, 100);
+
+    var i = Math.floor(h),
+        f = h - i,
+        p = v * (1 - s),
+        q = v * (1 - f * s),
+        t = v * (1 - (1 - f) * s),
+        mod = i % 6,
+        r = [v, q, p, p, t, v][mod],
+        g = [t, v, v, q, p, p][mod],
+        b = [p, p, t, v, v, q][mod];
+
+    return { r: r * 255, g: g * 255, b: b * 255 };
+}
+
+// `rgbToHex`
+// Converts an RGB color to hex
+// Assumes r, g, and b are contained in the set [0, 255]
+// Returns a 3 or 6 character hex
+function rgbToHex(r, g, b, allow3Char) {
+
+    var hex = [
+        pad2(mathRound(r).toString(16)),
+        pad2(mathRound(g).toString(16)),
+        pad2(mathRound(b).toString(16))
+    ];
+
+    // Return a 3 character hex if possible
+    if (allow3Char && hex[0].charAt(0) == hex[0].charAt(1) && hex[1].charAt(0) == hex[1].charAt(1) && hex[2].charAt(0) == hex[2].charAt(1)) {
+        return hex[0].charAt(0) + hex[1].charAt(0) + hex[2].charAt(0);
+    }
+
+    return hex.join("");
+}
+
+// `rgbaToHex`
+// Converts an RGBA color plus alpha transparency to hex
+// Assumes r, g, b are contained in the set [0, 255] and
+// a in [0, 1]. Returns a 4 or 8 character rgba hex
+function rgbaToHex(r, g, b, a, allow4Char) {
+
+    var hex = [
+        pad2(mathRound(r).toString(16)),
+        pad2(mathRound(g).toString(16)),
+        pad2(mathRound(b).toString(16)),
+        pad2(convertDecimalToHex(a))
+    ];
+
+    // Return a 4 character hex if possible
+    if (allow4Char && hex[0].charAt(0) == hex[0].charAt(1) && hex[1].charAt(0) == hex[1].charAt(1) && hex[2].charAt(0) == hex[2].charAt(1) && hex[3].charAt(0) == hex[3].charAt(1)) {
+        return hex[0].charAt(0) + hex[1].charAt(0) + hex[2].charAt(0) + hex[3].charAt(0);
+    }
+
+    return hex.join("");
+}
+
+// `rgbaToArgbHex`
+// Converts an RGBA color to an ARGB Hex8 string
+// Rarely used, but required for "toFilter()"
+function rgbaToArgbHex(r, g, b, a) {
+
+    var hex = [
+        pad2(convertDecimalToHex(a)),
+        pad2(mathRound(r).toString(16)),
+        pad2(mathRound(g).toString(16)),
+        pad2(mathRound(b).toString(16))
+    ];
+
+    return hex.join("");
+}
+
+// `equals`
+// Can be called with any tinycolor input
+tinycolor.equals = function (color1, color2) {
+    if (!color1 || !color2) { return false; }
+    return tinycolor(color1).toRgbString() == tinycolor(color2).toRgbString();
+};
+
+tinycolor.random = function() {
+    return tinycolor.fromRatio({
+        r: mathRandom(),
+        g: mathRandom(),
+        b: mathRandom()
+    });
+};
+
+
+// Modification Functions
+// ----------------------
+// Thanks to less.js for some of the basics here
+// <https://github.com/cloudhead/less.js/blob/master/lib/less/functions.js>
+
+function desaturate(color, amount) {
+    amount = (amount === 0) ? 0 : (amount || 10);
+    var hsl = tinycolor(color).toHsl();
+    hsl.s -= amount / 100;
+    hsl.s = clamp01(hsl.s);
+    return tinycolor(hsl);
+}
+
+function saturate(color, amount) {
+    amount = (amount === 0) ? 0 : (amount || 10);
+    var hsl = tinycolor(color).toHsl();
+    hsl.s += amount / 100;
+    hsl.s = clamp01(hsl.s);
+    return tinycolor(hsl);
+}
+
+function greyscale(color) {
+    return tinycolor(color).desaturate(100);
+}
+
+function lighten (color, amount) {
+    amount = (amount === 0) ? 0 : (amount || 10);
+    var hsl = tinycolor(color).toHsl();
+    hsl.l += amount / 100;
+    hsl.l = clamp01(hsl.l);
+    return tinycolor(hsl);
+}
+
+function brighten(color, amount) {
+    amount = (amount === 0) ? 0 : (amount || 10);
+    var rgb = tinycolor(color).toRgb();
+    rgb.r = mathMax(0, mathMin(255, rgb.r - mathRound(255 * - (amount / 100))));
+    rgb.g = mathMax(0, mathMin(255, rgb.g - mathRound(255 * - (amount / 100))));
+    rgb.b = mathMax(0, mathMin(255, rgb.b - mathRound(255 * - (amount / 100))));
+    return tinycolor(rgb);
+}
+
+function darken (color, amount) {
+    amount = (amount === 0) ? 0 : (amount || 10);
+    var hsl = tinycolor(color).toHsl();
+    hsl.l -= amount / 100;
+    hsl.l = clamp01(hsl.l);
+    return tinycolor(hsl);
+}
+
+// Spin takes a positive or negative amount within [-360, 360] indicating the change of hue.
+// Values outside of this range will be wrapped into this range.
+function spin(color, amount) {
+    var hsl = tinycolor(color).toHsl();
+    var hue = (hsl.h + amount) % 360;
+    hsl.h = hue < 0 ? 360 + hue : hue;
+    return tinycolor(hsl);
+}
+
+// Combination Functions
+// ---------------------
+// Thanks to jQuery xColor for some of the ideas behind these
+// <https://github.com/infusion/jQuery-xcolor/blob/master/jquery.xcolor.js>
+
+function complement(color) {
+    var hsl = tinycolor(color).toHsl();
+    hsl.h = (hsl.h + 180) % 360;
+    return tinycolor(hsl);
+}
+
+function triad(color) {
+    var hsl = tinycolor(color).toHsl();
+    var h = hsl.h;
+    return [
+        tinycolor(color),
+        tinycolor({ h: (h + 120) % 360, s: hsl.s, l: hsl.l }),
+        tinycolor({ h: (h + 240) % 360, s: hsl.s, l: hsl.l })
+    ];
+}
+
+function tetrad(color) {
+    var hsl = tinycolor(color).toHsl();
+    var h = hsl.h;
+    return [
+        tinycolor(color),
+        tinycolor({ h: (h + 90) % 360, s: hsl.s, l: hsl.l }),
+        tinycolor({ h: (h + 180) % 360, s: hsl.s, l: hsl.l }),
+        tinycolor({ h: (h + 270) % 360, s: hsl.s, l: hsl.l })
+    ];
+}
+
+function splitcomplement(color) {
+    var hsl = tinycolor(color).toHsl();
+    var h = hsl.h;
+    return [
+        tinycolor(color),
+        tinycolor({ h: (h + 72) % 360, s: hsl.s, l: hsl.l}),
+        tinycolor({ h: (h + 216) % 360, s: hsl.s, l: hsl.l})
+    ];
+}
+
+function analogous(color, results, slices) {
+    results = results || 6;
+    slices = slices || 30;
+
+    var hsl = tinycolor(color).toHsl();
+    var part = 360 / slices;
+    var ret = [tinycolor(color)];
+
+    for (hsl.h = ((hsl.h - (part * results >> 1)) + 720) % 360; --results; ) {
+        hsl.h = (hsl.h + part) % 360;
+        ret.push(tinycolor(hsl));
+    }
+    return ret;
+}
+
+function monochromatic(color, results) {
+    results = results || 6;
+    var hsv = tinycolor(color).toHsv();
+    var h = hsv.h, s = hsv.s, v = hsv.v;
+    var ret = [];
+    var modification = 1 / results;
+
+    while (results--) {
+        ret.push(tinycolor({ h: h, s: s, v: v}));
+        v = (v + modification) % 1;
+    }
+
+    return ret;
+}
+
+// Utility Functions
+// ---------------------
+
+tinycolor.mix = function(color1, color2, amount) {
+    amount = (amount === 0) ? 0 : (amount || 50);
+
+    var rgb1 = tinycolor(color1).toRgb();
+    var rgb2 = tinycolor(color2).toRgb();
+
+    var p = amount / 100;
+
+    var rgba = {
+        r: ((rgb2.r - rgb1.r) * p) + rgb1.r,
+        g: ((rgb2.g - rgb1.g) * p) + rgb1.g,
+        b: ((rgb2.b - rgb1.b) * p) + rgb1.b,
+        a: ((rgb2.a - rgb1.a) * p) + rgb1.a
+    };
+
+    return tinycolor(rgba);
+};
+
+
+// Readability Functions
+// ---------------------
+// <http://www.w3.org/TR/2008/REC-WCAG20-20081211/#contrast-ratiodef (WCAG Version 2)
+
+// `contrast`
+// Analyze the 2 colors and returns the color contrast defined by (WCAG Version 2)
+tinycolor.readability = function(color1, color2) {
+    var c1 = tinycolor(color1);
+    var c2 = tinycolor(color2);
+    return (Math.max(c1.getLuminance(),c2.getLuminance())+0.05) / (Math.min(c1.getLuminance(),c2.getLuminance())+0.05);
+};
+
+// `isReadable`
+// Ensure that foreground and background color combinations meet WCAG2 guidelines.
+// The third argument is an optional Object.
+//      the 'level' property states 'AA' or 'AAA' - if missing or invalid, it defaults to 'AA';
+//      the 'size' property states 'large' or 'small' - if missing or invalid, it defaults to 'small'.
+// If the entire object is absent, isReadable defaults to {level:"AA",size:"small"}.
+
+// *Example*
+//    tinycolor.isReadable("#000", "#111") => false
+//    tinycolor.isReadable("#000", "#111",{level:"AA",size:"large"}) => false
+tinycolor.isReadable = function(color1, color2, wcag2) {
+    var readability = tinycolor.readability(color1, color2);
+    var wcag2Parms, out;
+
+    out = false;
+
+    wcag2Parms = validateWCAG2Parms(wcag2);
+    switch (wcag2Parms.level + wcag2Parms.size) {
+        case "AAsmall":
+        case "AAAlarge":
+            out = readability >= 4.5;
+            break;
+        case "AAlarge":
+            out = readability >= 3;
+            break;
+        case "AAAsmall":
+            out = readability >= 7;
+            break;
+    }
+    return out;
+
+};
+
+// `mostReadable`
+// Given a base color and a list of possible foreground or background
+// colors for that base, returns the most readable color.
+// Optionally returns Black or White if the most readable color is unreadable.
+// *Example*
+//    tinycolor.mostReadable(tinycolor.mostReadable("#123", ["#124", "#125"],{includeFallbackColors:false}).toHexString(); // "#112255"
+//    tinycolor.mostReadable(tinycolor.mostReadable("#123", ["#124", "#125"],{includeFallbackColors:true}).toHexString();  // "#ffffff"
+//    tinycolor.mostReadable("#a8015a", ["#faf3f3"],{includeFallbackColors:true,level:"AAA",size:"large"}).toHexString(); // "#faf3f3"
+//    tinycolor.mostReadable("#a8015a", ["#faf3f3"],{includeFallbackColors:true,level:"AAA",size:"small"}).toHexString(); // "#ffffff"
+tinycolor.mostReadable = function(baseColor, colorList, args) {
+    var bestColor = null;
+    var bestScore = 0;
+    var readability;
+    var includeFallbackColors, level, size ;
+    args = args || {};
+    includeFallbackColors = args.includeFallbackColors ;
+    level = args.level;
+    size = args.size;
+
+    for (var i= 0; i < colorList.length ; i++) {
+        readability = tinycolor.readability(baseColor, colorList[i]);
+        if (readability > bestScore) {
+            bestScore = readability;
+            bestColor = tinycolor(colorList[i]);
+        }
+    }
+
+    if (tinycolor.isReadable(baseColor, bestColor, {"level":level,"size":size}) || !includeFallbackColors) {
+        return bestColor;
+    }
+    else {
+        args.includeFallbackColors=false;
+        return tinycolor.mostReadable(baseColor,["#fff", "#000"],args);
+    }
+};
+
+
+// Big List of Colors
+// ------------------
+// <http://www.w3.org/TR/css3-color/#svg-color>
+var names = tinycolor.names = {
+    aliceblue: "f0f8ff",
+    antiquewhite: "faebd7",
+    aqua: "0ff",
+    aquamarine: "7fffd4",
+    azure: "f0ffff",
+    beige: "f5f5dc",
+    bisque: "ffe4c4",
+    black: "000",
+    blanchedalmond: "ffebcd",
+    blue: "00f",
+    blueviolet: "8a2be2",
+    brown: "a52a2a",
+    burlywood: "deb887",
+    burntsienna: "ea7e5d",
+    cadetblue: "5f9ea0",
+    chartreuse: "7fff00",
+    chocolate: "d2691e",
+    coral: "ff7f50",
+    cornflowerblue: "6495ed",
+    cornsilk: "fff8dc",
+    crimson: "dc143c",
+    cyan: "0ff",
+    darkblue: "00008b",
+    darkcyan: "008b8b",
+    darkgoldenrod: "b8860b",
+    darkgray: "a9a9a9",
+    darkgreen: "006400",
+    darkgrey: "a9a9a9",
+    darkkhaki: "bdb76b",
+    darkmagenta: "8b008b",
+    darkolivegreen: "556b2f",
+    darkorange: "ff8c00",
+    darkorchid: "9932cc",
+    darkred: "8b0000",
+    darksalmon: "e9967a",
+    darkseagreen: "8fbc8f",
+    darkslateblue: "483d8b",
+    darkslategray: "2f4f4f",
+    darkslategrey: "2f4f4f",
+    darkturquoise: "00ced1",
+    darkviolet: "9400d3",
+    deeppink: "ff1493",
+    deepskyblue: "00bfff",
+    dimgray: "696969",
+    dimgrey: "696969",
+    dodgerblue: "1e90ff",
+    firebrick: "b22222",
+    floralwhite: "fffaf0",
+    forestgreen: "228b22",
+    fuchsia: "f0f",
+    gainsboro: "dcdcdc",
+    ghostwhite: "f8f8ff",
+    gold: "ffd700",
+    goldenrod: "daa520",
+    gray: "808080",
+    green: "008000",
+    greenyellow: "adff2f",
+    grey: "808080",
+    honeydew: "f0fff0",
+    hotpink: "ff69b4",
+    indianred: "cd5c5c",
+    indigo: "4b0082",
+    ivory: "fffff0",
+    khaki: "f0e68c",
+    lavender: "e6e6fa",
+    lavenderblush: "fff0f5",
+    lawngreen: "7cfc00",
+    lemonchiffon: "fffacd",
+    lightblue: "add8e6",
+    lightcoral: "f08080",
+    lightcyan: "e0ffff",
+    lightgoldenrodyellow: "fafad2",
+    lightgray: "d3d3d3",
+    lightgreen: "90ee90",
+    lightgrey: "d3d3d3",
+    lightpink: "ffb6c1",
+    lightsalmon: "ffa07a",
+    lightseagreen: "20b2aa",
+    lightskyblue: "87cefa",
+    lightslategray: "789",
+    lightslategrey: "789",
+    lightsteelblue: "b0c4de",
+    lightyellow: "ffffe0",
+    lime: "0f0",
+    limegreen: "32cd32",
+    linen: "faf0e6",
+    magenta: "f0f",
+    maroon: "800000",
+    mediumaquamarine: "66cdaa",
+    mediumblue: "0000cd",
+    mediumorchid: "ba55d3",
+    mediumpurple: "9370db",
+    mediumseagreen: "3cb371",
+    mediumslateblue: "7b68ee",
+    mediumspringgreen: "00fa9a",
+    mediumturquoise: "48d1cc",
+    mediumvioletred: "c71585",
+    midnightblue: "191970",
+    mintcream: "f5fffa",
+    mistyrose: "ffe4e1",
+    moccasin: "ffe4b5",
+    navajowhite: "ffdead",
+    navy: "000080",
+    oldlace: "fdf5e6",
+    olive: "808000",
+    olivedrab: "6b8e23",
+    orange: "ffa500",
+    orangered: "ff4500",
+    orchid: "da70d6",
+    palegoldenrod: "eee8aa",
+    palegreen: "98fb98",
+    paleturquoise: "afeeee",
+    palevioletred: "db7093",
+    papayawhip: "ffefd5",
+    peachpuff: "ffdab9",
+    peru: "cd853f",
+    pink: "ffc0cb",
+    plum: "dda0dd",
+    powderblue: "b0e0e6",
+    purple: "800080",
+    rebeccapurple: "663399",
+    red: "f00",
+    rosybrown: "bc8f8f",
+    royalblue: "4169e1",
+    saddlebrown: "8b4513",
+    salmon: "fa8072",
+    sandybrown: "f4a460",
+    seagreen: "2e8b57",
+    seashell: "fff5ee",
+    sienna: "a0522d",
+    silver: "c0c0c0",
+    skyblue: "87ceeb",
+    slateblue: "6a5acd",
+    slategray: "708090",
+    slategrey: "708090",
+    snow: "fffafa",
+    springgreen: "00ff7f",
+    steelblue: "4682b4",
+    tan: "d2b48c",
+    teal: "008080",
+    thistle: "d8bfd8",
+    tomato: "ff6347",
+    turquoise: "40e0d0",
+    violet: "ee82ee",
+    wheat: "f5deb3",
+    white: "fff",
+    whitesmoke: "f5f5f5",
+    yellow: "ff0",
+    yellowgreen: "9acd32"
+};
+
+// Make it easy to access colors via `hexNames[hex]`
+var hexNames = tinycolor.hexNames = flip(names);
+
+
+// Utilities
+// ---------
+
+// `{ 'name1': 'val1' }` becomes `{ 'val1': 'name1' }`
+function flip(o) {
+    var flipped = { };
+    for (var i in o) {
+        if (o.hasOwnProperty(i)) {
+            flipped[o[i]] = i;
+        }
+    }
+    return flipped;
+}
+
+// Return a valid alpha value [0,1] with all invalid values being set to 1
+function boundAlpha(a) {
+    a = parseFloat(a);
+
+    if (isNaN(a) || a < 0 || a > 1) {
+        a = 1;
+    }
+
+    return a;
+}
+
+// Take input from [0, n] and return it as [0, 1]
+function bound01(n, max) {
+    if (isOnePointZero(n)) { n = "100%"; }
+
+    var processPercent = isPercentage(n);
+    n = mathMin(max, mathMax(0, parseFloat(n)));
+
+    // Automatically convert percentage into number
+    if (processPercent) {
+        n = parseInt(n * max, 10) / 100;
+    }
+
+    // Handle floating point rounding errors
+    if ((Math.abs(n - max) < 0.000001)) {
+        return 1;
+    }
+
+    // Convert into [0, 1] range if it isn't already
+    return (n % max) / parseFloat(max);
+}
+
+// Force a number between 0 and 1
+function clamp01(val) {
+    return mathMin(1, mathMax(0, val));
+}
+
+// Parse a base-16 hex value into a base-10 integer
+function parseIntFromHex(val) {
+    return parseInt(val, 16);
+}
+
+// Need to handle 1.0 as 100%, since once it is a number, there is no difference between it and 1
+// <http://stackoverflow.com/questions/7422072/javascript-how-to-detect-number-as-a-decimal-including-1-0>
+function isOnePointZero(n) {
+    return typeof n == "string" && n.indexOf('.') != -1 && parseFloat(n) === 1;
+}
+
+// Check to see if string passed in is a percentage
+function isPercentage(n) {
+    return typeof n === "string" && n.indexOf('%') != -1;
+}
+
+// Force a hex value to have 2 characters
+function pad2(c) {
+    return c.length == 1 ? '0' + c : '' + c;
+}
+
+// Replace a decimal with it's percentage value
+function convertToPercentage(n) {
+    if (n <= 1) {
+        n = (n * 100) + "%";
+    }
+
+    return n;
+}
+
+// Converts a decimal to a hex value
+function convertDecimalToHex(d) {
+    return Math.round(parseFloat(d) * 255).toString(16);
+}
+// Converts a hex value to a decimal
+function convertHexToDecimal(h) {
+    return (parseIntFromHex(h) / 255);
+}
+
+var matchers = (function() {
+
+    // <http://www.w3.org/TR/css3-values/#integers>
+    var CSS_INTEGER = "[-\\+]?\\d+%?";
+
+    // <http://www.w3.org/TR/css3-values/#number-value>
+    var CSS_NUMBER = "[-\\+]?\\d*\\.\\d+%?";
+
+    // Allow positive/negative integer/number.  Don't capture the either/or, just the entire outcome.
+    var CSS_UNIT = "(?:" + CSS_NUMBER + ")|(?:" + CSS_INTEGER + ")";
+
+    // Actual matching.
+    // Parentheses and commas are optional, but not required.
+    // Whitespace can take the place of commas or opening paren
+    var PERMISSIVE_MATCH3 = "[\\s|\\(]+(" + CSS_UNIT + ")[,|\\s]+(" + CSS_UNIT + ")[,|\\s]+(" + CSS_UNIT + ")\\s*\\)?";
+    var PERMISSIVE_MATCH4 = "[\\s|\\(]+(" + CSS_UNIT + ")[,|\\s]+(" + CSS_UNIT + ")[,|\\s]+(" + CSS_UNIT + ")[,|\\s]+(" + CSS_UNIT + ")\\s*\\)?";
+
+    return {
+        CSS_UNIT: new RegExp(CSS_UNIT),
+        rgb: new RegExp("rgb" + PERMISSIVE_MATCH3),
+        rgba: new RegExp("rgba" + PERMISSIVE_MATCH4),
+        hsl: new RegExp("hsl" + PERMISSIVE_MATCH3),
+        hsla: new RegExp("hsla" + PERMISSIVE_MATCH4),
+        hsv: new RegExp("hsv" + PERMISSIVE_MATCH3),
+        hsva: new RegExp("hsva" + PERMISSIVE_MATCH4),
+        hex3: /^#?([0-9a-fA-F]{1})([0-9a-fA-F]{1})([0-9a-fA-F]{1})$/,
+        hex6: /^#?([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$/,
+        hex4: /^#?([0-9a-fA-F]{1})([0-9a-fA-F]{1})([0-9a-fA-F]{1})([0-9a-fA-F]{1})$/,
+        hex8: /^#?([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$/
+    };
+})();
+
+// `isValidCSSUnit`
+// Take in a single string / number and check to see if it looks like a CSS unit
+// (see `matchers` above for definition).
+function isValidCSSUnit(color) {
+    return !!matchers.CSS_UNIT.exec(color);
+}
+
+// `stringInputToObject`
+// Permissive string parsing.  Take in a number of formats, and output an object
+// based on detected format.  Returns `{ r, g, b }` or `{ h, s, l }` or `{ h, s, v}`
+function stringInputToObject(color) {
+
+    color = color.replace(trimLeft,'').replace(trimRight, '').toLowerCase();
+    var named = false;
+    if (names[color]) {
+        color = names[color];
+        named = true;
+    }
+    else if (color == 'transparent') {
+        return { r: 0, g: 0, b: 0, a: 0, format: "name" };
+    }
+
+    // Try to match string input using regular expressions.
+    // Keep most of the number bounding out of this function - don't worry about [0,1] or [0,100] or [0,360]
+    // Just return an object and let the conversion functions handle that.
+    // This way the result will be the same whether the tinycolor is initialized with string or object.
+    var match;
+    if ((match = matchers.rgb.exec(color))) {
+        return { r: match[1], g: match[2], b: match[3] };
+    }
+    if ((match = matchers.rgba.exec(color))) {
+        return { r: match[1], g: match[2], b: match[3], a: match[4] };
+    }
+    if ((match = matchers.hsl.exec(color))) {
+        return { h: match[1], s: match[2], l: match[3] };
+    }
+    if ((match = matchers.hsla.exec(color))) {
+        return { h: match[1], s: match[2], l: match[3], a: match[4] };
+    }
+    if ((match = matchers.hsv.exec(color))) {
+        return { h: match[1], s: match[2], v: match[3] };
+    }
+    if ((match = matchers.hsva.exec(color))) {
+        return { h: match[1], s: match[2], v: match[3], a: match[4] };
+    }
+    if ((match = matchers.hex8.exec(color))) {
+        return {
+            r: parseIntFromHex(match[1]),
+            g: parseIntFromHex(match[2]),
+            b: parseIntFromHex(match[3]),
+            a: convertHexToDecimal(match[4]),
+            format: named ? "name" : "hex8"
+        };
+    }
+    if ((match = matchers.hex6.exec(color))) {
+        return {
+            r: parseIntFromHex(match[1]),
+            g: parseIntFromHex(match[2]),
+            b: parseIntFromHex(match[3]),
+            format: named ? "name" : "hex"
+        };
+    }
+    if ((match = matchers.hex4.exec(color))) {
+        return {
+            r: parseIntFromHex(match[1] + '' + match[1]),
+            g: parseIntFromHex(match[2] + '' + match[2]),
+            b: parseIntFromHex(match[3] + '' + match[3]),
+            a: convertHexToDecimal(match[4] + '' + match[4]),
+            format: named ? "name" : "hex8"
+        };
+    }
+    if ((match = matchers.hex3.exec(color))) {
+        return {
+            r: parseIntFromHex(match[1] + '' + match[1]),
+            g: parseIntFromHex(match[2] + '' + match[2]),
+            b: parseIntFromHex(match[3] + '' + match[3]),
+            format: named ? "name" : "hex"
+        };
+    }
+
+    return false;
+}
+
+function validateWCAG2Parms(parms) {
+    // return valid WCAG2 parms for isReadable.
+    // If input parms are invalid, return {"level":"AA", "size":"small"}
+    var level, size;
+    parms = parms || {"level":"AA", "size":"small"};
+    level = (parms.level || "AA").toUpperCase();
+    size = (parms.size || "small").toLowerCase();
+    if (level !== "AA" && level !== "AAA") {
+        level = "AA";
+    }
+    if (size !== "small" && size !== "large") {
+        size = "small";
+    }
+    return {"level":level, "size":size};
+}
+
+// Node: Export function
+if (typeof module !== "undefined" && module.exports) {
+    module.exports = tinycolor;
+}
+// AMD/requirejs: Define the module
+else if (true) {
+    !(__WEBPACK_AMD_DEFINE_RESULT__ = (function () {return tinycolor;}).call(exports, __webpack_require__, exports, module),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+}
+// Browser: Expose to window
+else {}
+
+})(Math);
+
+
+/***/ }),
+
+/***/ "./node_modules/uuid/lib/bytesToUuid.js":
+/*!**********************************************!*\
+  !*** ./node_modules/uuid/lib/bytesToUuid.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * Convert array of 16 byte values to UUID string format of the form:
+ * XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
+ */
+var byteToHex = [];
+for (var i = 0; i < 256; ++i) {
+  byteToHex[i] = (i + 0x100).toString(16).substr(1);
+}
+
+function bytesToUuid(buf, offset) {
+  var i = offset || 0;
+  var bth = byteToHex;
+  // join used to fix memory issue caused by concatenation: https://bugs.chromium.org/p/v8/issues/detail?id=3175#c4
+  return ([bth[buf[i++]], bth[buf[i++]], 
+	bth[buf[i++]], bth[buf[i++]], '-',
+	bth[buf[i++]], bth[buf[i++]], '-',
+	bth[buf[i++]], bth[buf[i++]], '-',
+	bth[buf[i++]], bth[buf[i++]], '-',
+	bth[buf[i++]], bth[buf[i++]],
+	bth[buf[i++]], bth[buf[i++]],
+	bth[buf[i++]], bth[buf[i++]]]).join('');
+}
+
+module.exports = bytesToUuid;
+
+
+/***/ }),
+
+/***/ "./node_modules/uuid/lib/rng-browser.js":
+/*!**********************************************!*\
+  !*** ./node_modules/uuid/lib/rng-browser.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// Unique ID creation requires a high quality random # generator.  In the
+// browser this is a little complicated due to unknown quality of Math.random()
+// and inconsistent support for the `crypto` API.  We do the best we can via
+// feature-detection
+
+// getRandomValues needs to be invoked in a context where "this" is a Crypto
+// implementation. Also, find the complete implementation of crypto on IE11.
+var getRandomValues = (typeof(crypto) != 'undefined' && crypto.getRandomValues && crypto.getRandomValues.bind(crypto)) ||
+                      (typeof(msCrypto) != 'undefined' && typeof window.msCrypto.getRandomValues == 'function' && msCrypto.getRandomValues.bind(msCrypto));
+
+if (getRandomValues) {
+  // WHATWG crypto RNG - http://wiki.whatwg.org/wiki/Crypto
+  var rnds8 = new Uint8Array(16); // eslint-disable-line no-undef
+
+  module.exports = function whatwgRNG() {
+    getRandomValues(rnds8);
+    return rnds8;
+  };
+} else {
+  // Math.random()-based (RNG)
+  //
+  // If all else fails, use Math.random().  It's fast, but is of unspecified
+  // quality.
+  var rnds = new Array(16);
+
+  module.exports = function mathRNG() {
+    for (var i = 0, r; i < 16; i++) {
+      if ((i & 0x03) === 0) r = Math.random() * 0x100000000;
+      rnds[i] = r >>> ((i & 0x03) << 3) & 0xff;
+    }
+
+    return rnds;
+  };
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/uuid/v4.js":
+/*!*********************************!*\
+  !*** ./node_modules/uuid/v4.js ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var rng = __webpack_require__(/*! ./lib/rng */ "./node_modules/uuid/lib/rng-browser.js");
+var bytesToUuid = __webpack_require__(/*! ./lib/bytesToUuid */ "./node_modules/uuid/lib/bytesToUuid.js");
+
+function v4(options, buf, offset) {
+  var i = buf && offset || 0;
+
+  if (typeof(options) == 'string') {
+    buf = options === 'binary' ? new Array(16) : null;
+    options = null;
+  }
+  options = options || {};
+
+  var rnds = options.random || (options.rng || rng)();
+
+  // Per 4.4, set bits for version and `clock_seq_hi_and_reserved`
+  rnds[6] = (rnds[6] & 0x0f) | 0x40;
+  rnds[8] = (rnds[8] & 0x3f) | 0x80;
+
+  // Copy bytes to buffer, if provided
+  if (buf) {
+    for (var ii = 0; ii < 16; ++ii) {
+      buf[i + ii] = rnds[ii];
+    }
+  }
+
+  return buf || bytesToUuid(rnds);
+}
+
+module.exports = v4;
+
+
+/***/ }),
+
+/***/ "./packages/blocks/build-module/api/categories.js":
+/*!********************************************************!*\
+  !*** ./packages/blocks/build-module/api/categories.js ***!
+  \********************************************************/
+/*! exports provided: getCategories, setCategories, updateCategory */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCategories", function() { return getCategories; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setCategories", function() { return setCategories; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateCategory", function() { return updateCategory; });
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_0__);
+/**
+ * WordPress dependencies
+ */
+
+/**
+ * Returns all the block categories.
+ *
+ * @return {Object[]} Block categories.
+ */
+
+function getCategories() {
+  return Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_0__["select"])('core/blocks').getCategories();
+}
+/**
+ * Sets the block categories.
+ *
+ * @param {Object[]} categories Block categories.
+ */
+
+function setCategories(categories) {
+  Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_0__["dispatch"])('core/blocks').setCategories(categories);
+}
+/**
+ * Updates a category.
+ *
+ * @param {string} slug          Block category slug.
+ * @param {Object} category Object containing the category properties that should be updated.
+ */
+
+function updateCategory(slug, category) {
+  Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_0__["dispatch"])('core/blocks').updateCategory(slug, category);
+}
+
+
+/***/ }),
+
+/***/ "./packages/blocks/build-module/api/children.js":
+/*!******************************************************!*\
+  !*** ./packages/blocks/build-module/api/children.js ***!
+  \******************************************************/
+/*! exports provided: getSerializeCapableElement, concat, fromDOM, toHTML, matcher, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getSerializeCapableElement", function() { return getSerializeCapableElement; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "concat", function() { return concat; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fromDOM", function() { return fromDOM; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "toHTML", function() { return toHTML; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "matcher", function() { return matcher; });
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ "lodash");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _node__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node */ "./packages/blocks/build-module/api/node.js");
+/**
+ * External dependencies
+ */
+
+/**
+ * WordPress dependencies
+ */
+
+
+/**
+ * Internal dependencies
+ */
+
+
+/**
+ * A representation of a block's rich text value.
+ *
+ * @typedef {WPBlockNode[]} WPBlockChildren
+ */
+
+/**
+ * Given block children, returns a serialize-capable WordPress element.
+ *
+ * @param {WPBlockChildren} children Block children object to convert.
+ *
+ * @return {WPElement} A serialize-capable element.
+ */
+
+function getSerializeCapableElement(children) {
+  // The fact that block children are compatible with the element serializer is
+  // merely an implementation detail that currently serves to be true, but
+  // should not be mistaken as being a guarantee on the external API. The
+  // public API only offers guarantees to work with strings (toHTML) and DOM
+  // elements (fromDOM), and should provide utilities to manipulate the value
+  // rather than expect consumers to inspect or construct its shape (concat).
+  return children;
+}
+/**
+ * Given block children, returns an array of block nodes.
+ *
+ * @param {WPBlockChildren} children Block children object to convert.
+ *
+ * @return {Array<WPBlockNode>} An array of individual block nodes.
+ */
+
+function getChildrenArray(children) {
+  // The fact that block children are compatible with the element serializer
+  // is merely an implementation detail that currently serves to be true, but
+  // should not be mistaken as being a guarantee on the external API.
+  return children;
+}
+/**
+ * Given two or more block nodes, returns a new block node representing a
+ * concatenation of its values.
+ *
+ * @param {...WPBlockChildren} blockNodes Block nodes to concatenate.
+ *
+ * @return {WPBlockChildren} Concatenated block node.
+ */
+
+
+function concat() {
+  var result = [];
+
+  for (var i = 0; i < arguments.length; i++) {
+    var blockNode = Object(lodash__WEBPACK_IMPORTED_MODULE_0__["castArray"])(i < 0 || arguments.length <= i ? undefined : arguments[i]);
+
+    for (var j = 0; j < blockNode.length; j++) {
+      var child = blockNode[j];
+      var canConcatToPreviousString = typeof child === 'string' && typeof result[result.length - 1] === 'string';
+
+      if (canConcatToPreviousString) {
+        result[result.length - 1] += child;
+      } else {
+        result.push(child);
+      }
+    }
+  }
+
+  return result;
+}
+/**
+ * Given an iterable set of DOM nodes, returns equivalent block children.
+ * Ignores any non-element/text nodes included in set.
+ *
+ * @param {Iterable.<Node>} domNodes Iterable set of DOM nodes to convert.
+ *
+ * @return {WPBlockChildren} Block children equivalent to DOM nodes.
+ */
+
+function fromDOM(domNodes) {
+  var result = [];
+
+  for (var i = 0; i < domNodes.length; i++) {
+    try {
+      result.push(_node__WEBPACK_IMPORTED_MODULE_2__["fromDOM"](domNodes[i]));
+    } catch (error) {// Simply ignore if DOM node could not be converted.
+    }
+  }
+
+  return result;
+}
+/**
+ * Given a block node, returns its HTML string representation.
+ *
+ * @param {WPBlockChildren} children Block node(s) to convert to string.
+ *
+ * @return {string} String HTML representation of block node.
+ */
+
+function toHTML(children) {
+  var element = getSerializeCapableElement(children);
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["renderToString"])(element);
+}
+/**
+ * Given a selector, returns an hpq matcher generating a WPBlockChildren value
+ * matching the selector result.
+ *
+ * @param {string} selector DOM selector.
+ *
+ * @return {Function} hpq matcher.
+ */
+
+function matcher(selector) {
+  return function (domNode) {
+    var match = domNode;
+
+    if (selector) {
+      match = domNode.querySelector(selector);
+    }
+
+    if (match) {
+      return fromDOM(match.childNodes);
+    }
+
+    return [];
+  };
+}
+/**
+ * Object of utility functions used in managing block attribute values of
+ * source `children`.
+ *
+ * @see https://github.com/WordPress/gutenberg/pull/10439
+ *
+ * @deprecated since 4.0. The `children` source should not be used, and can be
+ *             replaced by the `html` source.
+ *
+ * @private
+ */
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  concat: concat,
+  getChildrenArray: getChildrenArray,
+  fromDOM: fromDOM,
+  toHTML: toHTML,
+  matcher: matcher
+});
+
+
+/***/ }),
+
+/***/ "./packages/blocks/build-module/api/constants.js":
+/*!*******************************************************!*\
+  !*** ./packages/blocks/build-module/api/constants.js ***!
+  \*******************************************************/
+/*! exports provided: DEPRECATED_ENTRY_KEYS */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DEPRECATED_ENTRY_KEYS", function() { return DEPRECATED_ENTRY_KEYS; });
+/**
+ * Array of valid keys in a block type settings deprecation object.
+ *
+ * @type {string[]}
+ */
+var DEPRECATED_ENTRY_KEYS = ['attributes', 'supports', 'save', 'migrate', 'isEligible'];
+
+
+/***/ }),
+
+/***/ "./packages/blocks/build-module/api/factory.js":
+/*!*****************************************************!*\
+  !*** ./packages/blocks/build-module/api/factory.js ***!
+  \*****************************************************/
+/*! exports provided: createBlock, cloneBlock, isWildcardBlockTransform, isContainerGroupBlock, isBlockSelectionOfSameType, getPossibleBlockTransformations, findTransform, getBlockTransforms, switchToBlockType */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createBlock", function() { return createBlock; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "cloneBlock", function() { return cloneBlock; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isWildcardBlockTransform", function() { return isWildcardBlockTransform; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isContainerGroupBlock", function() { return isContainerGroupBlock; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isBlockSelectionOfSameType", function() { return isBlockSelectionOfSameType; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getPossibleBlockTransformations", function() { return getPossibleBlockTransformations; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "findTransform", function() { return findTransform; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getBlockTransforms", function() { return getBlockTransforms; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "switchToBlockType", function() { return switchToBlockType; });
+/* harmony import */ var _babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/toConsumableArray */ "./node_modules/@babel/runtime/helpers/esm/toConsumableArray.js");
+/* harmony import */ var _babel_runtime_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectSpread */ "./node_modules/@babel/runtime/helpers/esm/objectSpread.js");
+/* harmony import */ var uuid_v4__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! uuid/v4 */ "./node_modules/uuid/v4.js");
+/* harmony import */ var uuid_v4__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(uuid_v4__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! lodash */ "lodash");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/hooks */ "@wordpress/hooks");
+/* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _registration__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./registration */ "./packages/blocks/build-module/api/registration.js");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./utils */ "./packages/blocks/build-module/api/utils.js");
+
+
+
+/**
+ * External dependencies
+ */
+
+
+/**
+ * WordPress dependencies
+ */
+
+
+/**
+ * Internal dependencies
+ */
+
+
+
+/**
+ * Returns a block object given its type and attributes.
+ *
+ * @param {string} name        Block name.
+ * @param {Object} attributes  Block attributes.
+ * @param {?Array} innerBlocks Nested blocks.
+ *
+ * @return {Object} Block object.
+ */
+
+function createBlock(name) {
+  var attributes = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  var innerBlocks = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
+  // Get the type definition associated with a registered block.
+  var blockType = Object(_registration__WEBPACK_IMPORTED_MODULE_5__["getBlockType"])(name); // Ensure attributes contains only values defined by block type, and merge
+  // default values for missing attributes.
+
+  var sanitizedAttributes = Object(lodash__WEBPACK_IMPORTED_MODULE_3__["reduce"])(blockType.attributes, function (result, schema, key) {
+    var value = attributes[key];
+
+    if (undefined !== value) {
+      result[key] = value;
+    } else if (schema.hasOwnProperty('default')) {
+      result[key] = schema.default;
+    }
+
+    if (['node', 'children'].indexOf(schema.source) !== -1) {
+      // Ensure value passed is always an array, which we're expecting in
+      // the RichText component to handle the deprecated value.
+      if (typeof result[key] === 'string') {
+        result[key] = [result[key]];
+      } else if (!Array.isArray(result[key])) {
+        result[key] = [];
+      }
+    }
+
+    return result;
+  }, {});
+  var clientId = uuid_v4__WEBPACK_IMPORTED_MODULE_2___default()(); // Blocks are stored with a unique ID, the assigned type name, the block
+  // attributes, and their inner blocks.
+
+  return {
+    clientId: clientId,
+    name: name,
+    isValid: true,
+    attributes: sanitizedAttributes,
+    innerBlocks: innerBlocks
+  };
+}
+/**
+ * Given a block object, returns a copy of the block object, optionally merging
+ * new attributes and/or replacing its inner blocks.
+ *
+ * @param {Object} block              Block instance.
+ * @param {Object} mergeAttributes    Block attributes.
+ * @param {?Array} newInnerBlocks     Nested blocks.
+ *
+ * @return {Object} A cloned block.
+ */
+
+function cloneBlock(block) {
+  var mergeAttributes = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  var newInnerBlocks = arguments.length > 2 ? arguments[2] : undefined;
+  var clientId = uuid_v4__WEBPACK_IMPORTED_MODULE_2___default()();
+  return Object(_babel_runtime_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, block, {
+    clientId: clientId,
+    attributes: Object(_babel_runtime_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, block.attributes, mergeAttributes),
+    innerBlocks: newInnerBlocks || block.innerBlocks.map(function (innerBlock) {
+      return cloneBlock(innerBlock);
+    })
+  });
+}
+/**
+ * Returns a boolean indicating whether a transform is possible based on
+ * various bits of context.
+ *
+ * @param {Object} transform The transform object to validate.
+ * @param {string} direction Is this a 'from' or 'to' transform.
+ * @param {Array} blocks The blocks to transform from.
+ *
+ * @return {boolean} Is the transform possible?
+ */
+
+var isPossibleTransformForSource = function isPossibleTransformForSource(transform, direction, blocks) {
+  if (Object(lodash__WEBPACK_IMPORTED_MODULE_3__["isEmpty"])(blocks)) {
+    return false;
+  } // If multiple blocks are selected, only multi block transforms
+  // or wildcard transforms are allowed.
+
+
+  var isMultiBlock = blocks.length > 1;
+  var firstBlockName = Object(lodash__WEBPACK_IMPORTED_MODULE_3__["first"])(blocks).name;
+  var isValidForMultiBlocks = isWildcardBlockTransform(transform) || !isMultiBlock || transform.isMultiBlock;
+
+  if (!isValidForMultiBlocks) {
+    return false;
+  } // Check non-wildcard transforms to ensure that transform is valid
+  // for a block selection of multiple blocks of different types
+
+
+  if (!isWildcardBlockTransform(transform) && !Object(lodash__WEBPACK_IMPORTED_MODULE_3__["every"])(blocks, {
+    name: firstBlockName
+  })) {
+    return false;
+  } // Only consider 'block' type transforms as valid.
+
+
+  var isBlockType = transform.type === 'block';
+
+  if (!isBlockType) {
+    return false;
+  } // Check if the transform's block name matches the source block (or is a wildcard)
+  // only if this is a transform 'from'.
+
+
+  var sourceBlock = Object(lodash__WEBPACK_IMPORTED_MODULE_3__["first"])(blocks);
+  var hasMatchingName = direction !== 'from' || transform.blocks.indexOf(sourceBlock.name) !== -1 || isWildcardBlockTransform(transform);
+
+  if (!hasMatchingName) {
+    return false;
+  } // Don't allow single Grouping blocks to be transformed into
+  // a Grouping block.
+
+
+  if (!isMultiBlock && isContainerGroupBlock(sourceBlock.name) && isContainerGroupBlock(transform.blockName)) {
+    return false;
+  } // If the transform has a `isMatch` function specified, check that it returns true.
+
+
+  if (Object(lodash__WEBPACK_IMPORTED_MODULE_3__["isFunction"])(transform.isMatch)) {
+    var attributes = transform.isMultiBlock ? blocks.map(function (block) {
+      return block.attributes;
+    }) : sourceBlock.attributes;
+
+    if (!transform.isMatch(attributes)) {
+      return false;
+    }
+  }
+
+  return true;
+};
+/**
+ * Returns block types that the 'blocks' can be transformed into, based on
+ * 'from' transforms on other blocks.
+ *
+ * @param {Array}  blocks  The blocks to transform from.
+ *
+ * @return {Array} Block types that the blocks can be transformed into.
+ */
+
+
+var getBlockTypesForPossibleFromTransforms = function getBlockTypesForPossibleFromTransforms(blocks) {
+  if (Object(lodash__WEBPACK_IMPORTED_MODULE_3__["isEmpty"])(blocks)) {
+    return [];
+  }
+
+  var allBlockTypes = Object(_registration__WEBPACK_IMPORTED_MODULE_5__["getBlockTypes"])(); // filter all blocks to find those with a 'from' transform.
+
+  var blockTypesWithPossibleFromTransforms = Object(lodash__WEBPACK_IMPORTED_MODULE_3__["filter"])(allBlockTypes, function (blockType) {
+    var fromTransforms = getBlockTransforms('from', blockType.name);
+    return !!findTransform(fromTransforms, function (transform) {
+      return isPossibleTransformForSource(transform, 'from', blocks);
+    });
+  });
+  return blockTypesWithPossibleFromTransforms;
+};
+/**
+ * Returns block types that the 'blocks' can be transformed into, based on
+ * the source block's own 'to' transforms.
+ *
+ * @param {Array} blocks The blocks to transform from.
+ *
+ * @return {Array} Block types that the source can be transformed into.
+ */
+
+
+var getBlockTypesForPossibleToTransforms = function getBlockTypesForPossibleToTransforms(blocks) {
+  if (Object(lodash__WEBPACK_IMPORTED_MODULE_3__["isEmpty"])(blocks)) {
+    return [];
+  }
+
+  var sourceBlock = Object(lodash__WEBPACK_IMPORTED_MODULE_3__["first"])(blocks);
+  var blockType = Object(_registration__WEBPACK_IMPORTED_MODULE_5__["getBlockType"])(sourceBlock.name);
+  var transformsTo = getBlockTransforms('to', blockType.name); // filter all 'to' transforms to find those that are possible.
+
+  var possibleTransforms = Object(lodash__WEBPACK_IMPORTED_MODULE_3__["filter"])(transformsTo, function (transform) {
+    return transform && isPossibleTransformForSource(transform, 'to', blocks);
+  }); // Build a list of block names using the possible 'to' transforms.
+
+  var blockNames = Object(lodash__WEBPACK_IMPORTED_MODULE_3__["flatMap"])(possibleTransforms, function (transformation) {
+    return transformation.blocks;
+  }); // Map block names to block types.
+
+  return blockNames.map(function (name) {
+    return Object(_registration__WEBPACK_IMPORTED_MODULE_5__["getBlockType"])(name);
+  });
+};
+/**
+ * Determines whether transform is a "block" type
+ * and if so whether it is a "wildcard" transform
+ * ie: targets "any" block type
+ *
+ * @param {Object} t the Block transform object
+ *
+ * @return {boolean} whether transform is a wildcard transform
+ */
+
+
+var isWildcardBlockTransform = function isWildcardBlockTransform(t) {
+  return t && t.type === 'block' && Array.isArray(t.blocks) && t.blocks.includes('*');
+};
+/**
+ * Determines whether the given Block is the core Block which
+ * acts as a container Block for other Blocks as part of the
+ * Grouping mechanics
+ *
+ * @param  {string} name the name of the Block to test against
+ *
+ * @return {boolean} whether or not the Block is the container Block type
+ */
+
+var isContainerGroupBlock = function isContainerGroupBlock(name) {
+  return name === Object(_registration__WEBPACK_IMPORTED_MODULE_5__["getGroupingBlockName"])();
+};
+/**
+ * Determines whether the provided Blocks are of the same type
+ * (eg: all `core/paragraph`).
+ *
+ * @param  {Array}  blocksArray the Block definitions
+ *
+ * @return {boolean} whether or not the given Blocks pass the criteria
+ */
+
+var isBlockSelectionOfSameType = function isBlockSelectionOfSameType() {
+  var blocksArray = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+
+  if (!blocksArray.length) {
+    return false;
+  }
+
+  var sourceName = blocksArray[0].name;
+  return Object(lodash__WEBPACK_IMPORTED_MODULE_3__["every"])(blocksArray, ['name', sourceName]);
+};
+/**
+ * Returns an array of block types that the set of blocks received as argument
+ * can be transformed into.
+ *
+ * @param {Array} blocks Blocks array.
+ *
+ * @return {Array} Block types that the blocks argument can be transformed to.
+ */
+
+function getPossibleBlockTransformations(blocks) {
+  if (Object(lodash__WEBPACK_IMPORTED_MODULE_3__["isEmpty"])(blocks)) {
+    return [];
+  }
+
+  var blockTypesForFromTransforms = getBlockTypesForPossibleFromTransforms(blocks);
+  var blockTypesForToTransforms = getBlockTypesForPossibleToTransforms(blocks);
+  return Object(lodash__WEBPACK_IMPORTED_MODULE_3__["uniq"])([].concat(Object(_babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(blockTypesForFromTransforms), Object(_babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(blockTypesForToTransforms)));
+}
+/**
+ * Given an array of transforms, returns the highest-priority transform where
+ * the predicate function returns a truthy value. A higher-priority transform
+ * is one with a lower priority value (i.e. first in priority order). Returns
+ * null if the transforms set is empty or the predicate function returns a
+ * falsey value for all entries.
+ *
+ * @param {Object[]} transforms Transforms to search.
+ * @param {Function} predicate  Function returning true on matching transform.
+ *
+ * @return {?Object} Highest-priority transform candidate.
+ */
+
+function findTransform(transforms, predicate) {
+  // The hooks library already has built-in mechanisms for managing priority
+  // queue, so leverage via locally-defined instance.
+  var hooks = Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_4__["createHooks"])();
+
+  var _loop = function _loop(i) {
+    var candidate = transforms[i];
+
+    if (predicate(candidate)) {
+      hooks.addFilter('transform', 'transform/' + i.toString(), function (result) {
+        return result ? result : candidate;
+      }, candidate.priority);
+    }
+  };
+
+  for (var i = 0; i < transforms.length; i++) {
+    _loop(i);
+  } // Filter name is arbitrarily chosen but consistent with above aggregation.
+
+
+  return hooks.applyFilters('transform', null);
+}
+/**
+ * Returns normal block transforms for a given transform direction, optionally
+ * for a specific block by name, or an empty array if there are no transforms.
+ * If no block name is provided, returns transforms for all blocks. A normal
+ * transform object includes `blockName` as a property.
+ *
+ * @param {string}  direction Transform direction ("to", "from").
+ * @param {string|Object} blockTypeOrName  Block type or name.
+ *
+ * @return {Array} Block transforms for direction.
+ */
+
+function getBlockTransforms(direction, blockTypeOrName) {
+  // When retrieving transforms for all block types, recurse into self.
+  if (blockTypeOrName === undefined) {
+    return Object(lodash__WEBPACK_IMPORTED_MODULE_3__["flatMap"])(Object(_registration__WEBPACK_IMPORTED_MODULE_5__["getBlockTypes"])(), function (_ref) {
+      var name = _ref.name;
+      return getBlockTransforms(direction, name);
+    });
+  } // Validate that block type exists and has array of direction.
+
+
+  var blockType = Object(_utils__WEBPACK_IMPORTED_MODULE_6__["normalizeBlockType"])(blockTypeOrName);
+
+  var _ref2 = blockType || {},
+      blockName = _ref2.name,
+      transforms = _ref2.transforms;
+
+  if (!transforms || !Array.isArray(transforms[direction])) {
+    return [];
+  } // Map transforms to normal form.
+
+
+  return transforms[direction].map(function (transform) {
+    return Object(_babel_runtime_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, transform, {
+      blockName: blockName
+    });
+  });
+}
+/**
+ * Switch one or more blocks into one or more blocks of the new block type.
+ *
+ * @param {Array|Object} blocks Blocks array or block object.
+ * @param {string}       name   Block name.
+ *
+ * @return {?Array} Array of blocks or null.
+ */
+
+function switchToBlockType(blocks, name) {
+  var blocksArray = Object(lodash__WEBPACK_IMPORTED_MODULE_3__["castArray"])(blocks);
+  var isMultiBlock = blocksArray.length > 1;
+  var firstBlock = blocksArray[0];
+  var sourceName = firstBlock.name; // Unless it's a Grouping Block then for multi block selections
+  // check that all Blocks are of the same type otherwise
+  // we can't run a conversion
+
+  if (!isContainerGroupBlock(name) && isMultiBlock && !isBlockSelectionOfSameType(blocksArray)) {
+    return null;
+  } // Find the right transformation by giving priority to the "to"
+  // transformation.
+
+
+  var transformationsFrom = getBlockTransforms('from', name);
+  var transformationsTo = getBlockTransforms('to', sourceName);
+  var transformation = findTransform(transformationsTo, function (t) {
+    return t.type === 'block' && (isWildcardBlockTransform(t) || t.blocks.indexOf(name) !== -1) && (!isMultiBlock || t.isMultiBlock);
+  }) || findTransform(transformationsFrom, function (t) {
+    return t.type === 'block' && (isWildcardBlockTransform(t) || t.blocks.indexOf(sourceName) !== -1) && (!isMultiBlock || t.isMultiBlock);
+  }); // Stop if there is no valid transformation.
+
+  if (!transformation) {
+    return null;
+  }
+
+  var transformationResults;
+
+  if (transformation.isMultiBlock) {
+    if (Object(lodash__WEBPACK_IMPORTED_MODULE_3__["has"])(transformation, '__experimentalConvert')) {
+      transformationResults = transformation.__experimentalConvert(blocksArray);
+    } else {
+      transformationResults = transformation.transform(blocksArray.map(function (currentBlock) {
+        return currentBlock.attributes;
+      }), blocksArray.map(function (currentBlock) {
+        return currentBlock.innerBlocks;
+      }));
+    }
+  } else if (Object(lodash__WEBPACK_IMPORTED_MODULE_3__["has"])(transformation, '__experimentalConvert')) {
+    transformationResults = transformation.__experimentalConvert(firstBlock);
+  } else {
+    transformationResults = transformation.transform(firstBlock.attributes, firstBlock.innerBlocks);
+  } // Ensure that the transformation function returned an object or an array
+  // of objects.
+
+
+  if (!Object(lodash__WEBPACK_IMPORTED_MODULE_3__["isObjectLike"])(transformationResults)) {
+    return null;
+  } // If the transformation function returned a single object, we want to work
+  // with an array instead.
+
+
+  transformationResults = Object(lodash__WEBPACK_IMPORTED_MODULE_3__["castArray"])(transformationResults); // Ensure that every block object returned by the transformation has a
+  // valid block type.
+
+  if (transformationResults.some(function (result) {
+    return !Object(_registration__WEBPACK_IMPORTED_MODULE_5__["getBlockType"])(result.name);
+  })) {
+    return null;
+  }
+
+  var firstSwitchedBlock = Object(lodash__WEBPACK_IMPORTED_MODULE_3__["findIndex"])(transformationResults, function (result) {
+    return result.name === name;
+  }); // Ensure that at least one block object returned by the transformation has
+  // the expected "destination" block type.
+
+  if (firstSwitchedBlock < 0) {
+    return null;
+  }
+
+  return transformationResults.map(function (result, index) {
+    var transformedBlock = Object(_babel_runtime_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, result, {
+      // The first transformed block whose type matches the "destination"
+      // type gets to keep the existing client ID of the first block.
+      clientId: index === firstSwitchedBlock ? firstBlock.clientId : result.clientId
+    });
+    /**
+     * Filters an individual transform result from block transformation.
+     * All of the original blocks are passed, since transformations are
+     * many-to-many, not one-to-one.
+     *
+     * @param {Object}   transformedBlock The transformed block.
+     * @param {Object[]} blocks           Original blocks transformed.
+     */
+
+
+    return Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_4__["applyFilters"])('blocks.switchToBlockType.transformedBlock', transformedBlock, blocks);
+  });
+}
+
+
+/***/ }),
+
+/***/ "./packages/blocks/build-module/api/index.js":
+/*!***************************************************!*\
+  !*** ./packages/blocks/build-module/api/index.js ***!
+  \***************************************************/
+/*! exports provided: createBlock, cloneBlock, getPossibleBlockTransformations, switchToBlockType, getBlockTransforms, findTransform, parse, getBlockAttributes, parseWithAttributeSchema, pasteHandler, rawHandler, getPhrasingContentSchema, serialize, getBlockContent, getBlockDefaultClassName, getBlockMenuDefaultClassName, getSaveElement, getSaveContent, isValidBlockContent, getCategories, setCategories, updateCategory, registerBlockType, unregisterBlockType, setFreeformContentHandlerName, getFreeformContentHandlerName, setUnregisteredTypeHandlerName, getUnregisteredTypeHandlerName, setDefaultBlockName, getDefaultBlockName, setGroupingBlockName, getGroupingBlockName, getBlockType, getBlockTypes, getBlockSupport, hasBlockSupport, isReusableBlock, getChildBlockNames, hasChildBlocks, hasChildBlocksWithInserterSupport, unstable__bootstrapServerSideBlockDefinitions, registerBlockStyle, unregisterBlockStyle, isUnmodifiedDefaultBlock, normalizeIconObject, isValidIcon, doBlocksMatchTemplate, synchronizeBlocksWithTemplate, children, node */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _factory__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./factory */ "./packages/blocks/build-module/api/factory.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "createBlock", function() { return _factory__WEBPACK_IMPORTED_MODULE_0__["createBlock"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "cloneBlock", function() { return _factory__WEBPACK_IMPORTED_MODULE_0__["cloneBlock"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getPossibleBlockTransformations", function() { return _factory__WEBPACK_IMPORTED_MODULE_0__["getPossibleBlockTransformations"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "switchToBlockType", function() { return _factory__WEBPACK_IMPORTED_MODULE_0__["switchToBlockType"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getBlockTransforms", function() { return _factory__WEBPACK_IMPORTED_MODULE_0__["getBlockTransforms"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "findTransform", function() { return _factory__WEBPACK_IMPORTED_MODULE_0__["findTransform"]; });
+
+/* harmony import */ var _parser__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./parser */ "./packages/blocks/build-module/api/parser.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "parse", function() { return _parser__WEBPACK_IMPORTED_MODULE_1__["default"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getBlockAttributes", function() { return _parser__WEBPACK_IMPORTED_MODULE_1__["getBlockAttributes"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "parseWithAttributeSchema", function() { return _parser__WEBPACK_IMPORTED_MODULE_1__["parseWithAttributeSchema"]; });
+
+/* harmony import */ var _raw_handling__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./raw-handling */ "./packages/blocks/build-module/api/raw-handling/index.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "pasteHandler", function() { return _raw_handling__WEBPACK_IMPORTED_MODULE_2__["pasteHandler"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "rawHandler", function() { return _raw_handling__WEBPACK_IMPORTED_MODULE_2__["rawHandler"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getPhrasingContentSchema", function() { return _raw_handling__WEBPACK_IMPORTED_MODULE_2__["getPhrasingContentSchema"]; });
+
+/* harmony import */ var _serializer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./serializer */ "./packages/blocks/build-module/api/serializer.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "serialize", function() { return _serializer__WEBPACK_IMPORTED_MODULE_3__["default"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getBlockContent", function() { return _serializer__WEBPACK_IMPORTED_MODULE_3__["getBlockContent"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getBlockDefaultClassName", function() { return _serializer__WEBPACK_IMPORTED_MODULE_3__["getBlockDefaultClassName"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getBlockMenuDefaultClassName", function() { return _serializer__WEBPACK_IMPORTED_MODULE_3__["getBlockMenuDefaultClassName"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getSaveElement", function() { return _serializer__WEBPACK_IMPORTED_MODULE_3__["getSaveElement"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getSaveContent", function() { return _serializer__WEBPACK_IMPORTED_MODULE_3__["getSaveContent"]; });
+
+/* harmony import */ var _validation__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./validation */ "./packages/blocks/build-module/api/validation/index.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "isValidBlockContent", function() { return _validation__WEBPACK_IMPORTED_MODULE_4__["isValidBlockContent"]; });
+
+/* harmony import */ var _categories__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./categories */ "./packages/blocks/build-module/api/categories.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getCategories", function() { return _categories__WEBPACK_IMPORTED_MODULE_5__["getCategories"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "setCategories", function() { return _categories__WEBPACK_IMPORTED_MODULE_5__["setCategories"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "updateCategory", function() { return _categories__WEBPACK_IMPORTED_MODULE_5__["updateCategory"]; });
+
+/* harmony import */ var _registration__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./registration */ "./packages/blocks/build-module/api/registration.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "registerBlockType", function() { return _registration__WEBPACK_IMPORTED_MODULE_6__["registerBlockType"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "unregisterBlockType", function() { return _registration__WEBPACK_IMPORTED_MODULE_6__["unregisterBlockType"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "setFreeformContentHandlerName", function() { return _registration__WEBPACK_IMPORTED_MODULE_6__["setFreeformContentHandlerName"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getFreeformContentHandlerName", function() { return _registration__WEBPACK_IMPORTED_MODULE_6__["getFreeformContentHandlerName"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "setUnregisteredTypeHandlerName", function() { return _registration__WEBPACK_IMPORTED_MODULE_6__["setUnregisteredTypeHandlerName"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getUnregisteredTypeHandlerName", function() { return _registration__WEBPACK_IMPORTED_MODULE_6__["getUnregisteredTypeHandlerName"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "setDefaultBlockName", function() { return _registration__WEBPACK_IMPORTED_MODULE_6__["setDefaultBlockName"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getDefaultBlockName", function() { return _registration__WEBPACK_IMPORTED_MODULE_6__["getDefaultBlockName"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "setGroupingBlockName", function() { return _registration__WEBPACK_IMPORTED_MODULE_6__["setGroupingBlockName"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getGroupingBlockName", function() { return _registration__WEBPACK_IMPORTED_MODULE_6__["getGroupingBlockName"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getBlockType", function() { return _registration__WEBPACK_IMPORTED_MODULE_6__["getBlockType"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getBlockTypes", function() { return _registration__WEBPACK_IMPORTED_MODULE_6__["getBlockTypes"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getBlockSupport", function() { return _registration__WEBPACK_IMPORTED_MODULE_6__["getBlockSupport"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "hasBlockSupport", function() { return _registration__WEBPACK_IMPORTED_MODULE_6__["hasBlockSupport"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "isReusableBlock", function() { return _registration__WEBPACK_IMPORTED_MODULE_6__["isReusableBlock"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getChildBlockNames", function() { return _registration__WEBPACK_IMPORTED_MODULE_6__["getChildBlockNames"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "hasChildBlocks", function() { return _registration__WEBPACK_IMPORTED_MODULE_6__["hasChildBlocks"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "hasChildBlocksWithInserterSupport", function() { return _registration__WEBPACK_IMPORTED_MODULE_6__["hasChildBlocksWithInserterSupport"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "unstable__bootstrapServerSideBlockDefinitions", function() { return _registration__WEBPACK_IMPORTED_MODULE_6__["unstable__bootstrapServerSideBlockDefinitions"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "registerBlockStyle", function() { return _registration__WEBPACK_IMPORTED_MODULE_6__["registerBlockStyle"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "unregisterBlockStyle", function() { return _registration__WEBPACK_IMPORTED_MODULE_6__["unregisterBlockStyle"]; });
+
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./utils */ "./packages/blocks/build-module/api/utils.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "isUnmodifiedDefaultBlock", function() { return _utils__WEBPACK_IMPORTED_MODULE_7__["isUnmodifiedDefaultBlock"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "normalizeIconObject", function() { return _utils__WEBPACK_IMPORTED_MODULE_7__["normalizeIconObject"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "isValidIcon", function() { return _utils__WEBPACK_IMPORTED_MODULE_7__["isValidIcon"]; });
+
+/* harmony import */ var _templates__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./templates */ "./packages/blocks/build-module/api/templates.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doBlocksMatchTemplate", function() { return _templates__WEBPACK_IMPORTED_MODULE_8__["doBlocksMatchTemplate"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "synchronizeBlocksWithTemplate", function() { return _templates__WEBPACK_IMPORTED_MODULE_8__["synchronizeBlocksWithTemplate"]; });
+
+/* harmony import */ var _children__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./children */ "./packages/blocks/build-module/api/children.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "children", function() { return _children__WEBPACK_IMPORTED_MODULE_9__["default"]; });
+
+/* harmony import */ var _node__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./node */ "./packages/blocks/build-module/api/node.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "node", function() { return _node__WEBPACK_IMPORTED_MODULE_10__["default"]; });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/***/ }),
+
+/***/ "./packages/blocks/build-module/api/matchers.js":
+/*!******************************************************!*\
+  !*** ./packages/blocks/build-module/api/matchers.js ***!
+  \******************************************************/
+/*! exports provided: attr, prop, text, query, node, children, html */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "html", function() { return html; });
+/* harmony import */ var hpq__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! hpq */ "./node_modules/hpq/es/index.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "attr", function() { return hpq__WEBPACK_IMPORTED_MODULE_0__["attr"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "prop", function() { return hpq__WEBPACK_IMPORTED_MODULE_0__["prop"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "text", function() { return hpq__WEBPACK_IMPORTED_MODULE_0__["text"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "query", function() { return hpq__WEBPACK_IMPORTED_MODULE_0__["query"]; });
+
+/* harmony import */ var _node__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./node */ "./packages/blocks/build-module/api/node.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "node", function() { return _node__WEBPACK_IMPORTED_MODULE_1__["matcher"]; });
+
+/* harmony import */ var _children__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./children */ "./packages/blocks/build-module/api/children.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "children", function() { return _children__WEBPACK_IMPORTED_MODULE_2__["matcher"]; });
+
+/**
+ * External dependencies
+ */
+
+/**
+ * Internal dependencies
+ */
+
+
+
+function html(selector, multilineTag) {
+  return function (domNode) {
+    var match = domNode;
+
+    if (selector) {
+      match = domNode.querySelector(selector);
+    }
+
+    if (!match) {
+      return '';
+    }
+
+    if (multilineTag) {
+      var value = '';
+      var length = match.children.length;
+
+      for (var index = 0; index < length; index++) {
+        var child = match.children[index];
+
+        if (child.nodeName.toLowerCase() !== multilineTag) {
+          continue;
+        }
+
+        value += child.outerHTML;
+      }
+
+      return value;
+    }
+
+    return match.innerHTML;
+  };
+}
+
+
+/***/ }),
+
+/***/ "./packages/blocks/build-module/api/node.js":
+/*!**************************************************!*\
+  !*** ./packages/blocks/build-module/api/node.js ***!
+  \**************************************************/
+/*! exports provided: getNamedNodeMapAsObject, fromDOM, toHTML, matcher, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getNamedNodeMapAsObject", function() { return getNamedNodeMapAsObject; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fromDOM", function() { return fromDOM; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "toHTML", function() { return toHTML; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "matcher", function() { return matcher; });
+/* harmony import */ var _babel_runtime_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectSpread */ "./node_modules/@babel/runtime/helpers/esm/objectSpread.js");
+/* harmony import */ var _children__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./children */ "./packages/blocks/build-module/api/children.js");
+
+
+/**
+ * Internal dependencies
+ */
+
+/**
+ * Browser dependencies
+ */
+
+var _window$Node = window.Node,
+    TEXT_NODE = _window$Node.TEXT_NODE,
+    ELEMENT_NODE = _window$Node.ELEMENT_NODE;
+/**
+ * A representation of a single node within a block's rich text value. If
+ * representing a text node, the value is simply a string of the node value.
+ * As representing an element node, it is an object of:
+ *
+ * 1. `type` (string): Tag name.
+ * 2. `props` (object): Attributes and children array of WPBlockNode.
+ *
+ * @typedef {string|Object} WPBlockNode
+ */
+
+/**
+ * Given a single node and a node type (e.g. `'br'`), returns true if the node
+ * corresponds to that type, false otherwise.
+ *
+ * @param {WPBlockNode} node Block node to test
+ * @param {string} type      Node to type to test against.
+ *
+ * @return {boolean} Whether node is of intended type.
+ */
+
+function isNodeOfType(node, type) {
+  return node && node.type === type;
+}
+/**
+ * Given an object implementing the NamedNodeMap interface, returns a plain
+ * object equivalent value of name, value key-value pairs.
+ *
+ * @see https://dom.spec.whatwg.org/#interface-namednodemap
+ *
+ * @param {NamedNodeMap} nodeMap NamedNodeMap to convert to object.
+ *
+ * @return {Object} Object equivalent value of NamedNodeMap.
+ */
+
+
+function getNamedNodeMapAsObject(nodeMap) {
+  var result = {};
+
+  for (var i = 0; i < nodeMap.length; i++) {
+    var _nodeMap$i = nodeMap[i],
+        name = _nodeMap$i.name,
+        value = _nodeMap$i.value;
+    result[name] = value;
+  }
+
+  return result;
+}
+/**
+ * Given a DOM Element or Text node, returns an equivalent block node. Throws
+ * if passed any node type other than element or text.
+ *
+ * @throws {TypeError} If non-element/text node is passed.
+ *
+ * @param {Node} domNode DOM node to convert.
+ *
+ * @return {WPBlockNode} Block node equivalent to DOM node.
+ */
+
+function fromDOM(domNode) {
+  if (domNode.nodeType === TEXT_NODE) {
+    return domNode.nodeValue;
+  }
+
+  if (domNode.nodeType !== ELEMENT_NODE) {
+    throw new TypeError('A block node can only be created from a node of type text or ' + 'element.');
+  }
+
+  return {
+    type: domNode.nodeName.toLowerCase(),
+    props: Object(_babel_runtime_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, getNamedNodeMapAsObject(domNode.attributes), {
+      children: _children__WEBPACK_IMPORTED_MODULE_1__["fromDOM"](domNode.childNodes)
+    })
+  };
+}
+/**
+ * Given a block node, returns its HTML string representation.
+ *
+ * @param {WPBlockNode} node Block node to convert to string.
+ *
+ * @return {string} String HTML representation of block node.
+ */
+
+function toHTML(node) {
+  return _children__WEBPACK_IMPORTED_MODULE_1__["toHTML"]([node]);
+}
+/**
+ * Given a selector, returns an hpq matcher generating a WPBlockNode value
+ * matching the selector result.
+ *
+ * @param {string} selector DOM selector.
+ *
+ * @return {Function} hpq matcher.
+ */
+
+function matcher(selector) {
+  return function (domNode) {
+    var match = domNode;
+
+    if (selector) {
+      match = domNode.querySelector(selector);
+    }
+
+    try {
+      return fromDOM(match);
+    } catch (error) {
+      return null;
+    }
+  };
+}
+/**
+ * Object of utility functions used in managing block attribute values of
+ * source `node`.
+ *
+ * @see https://github.com/WordPress/gutenberg/pull/10439
+ *
+ * @deprecated since 4.0. The `node` source should not be used, and can be
+ *             replaced by the `html` source.
+ *
+ * @private
+ */
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  isNodeOfType: isNodeOfType,
+  fromDOM: fromDOM,
+  toHTML: toHTML,
+  matcher: matcher
+});
+
+
+/***/ }),
+
+/***/ "./packages/blocks/build-module/api/parser.js":
+/*!****************************************************!*\
+  !*** ./packages/blocks/build-module/api/parser.js ***!
+  \****************************************************/
+/*! exports provided: toBooleanAttributeMatcher, isOfType, isOfTypes, isValidByType, isValidByEnum, isAmbiguousStringSource, matcherFromSource, parseWithAttributeSchema, getBlockAttribute, getBlockAttributes, getMigratedBlock, createBlockWithFallback, serializeBlockNode, parseWithGrammar, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "toBooleanAttributeMatcher", function() { return toBooleanAttributeMatcher; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isOfType", function() { return isOfType; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isOfTypes", function() { return isOfTypes; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isValidByType", function() { return isValidByType; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isValidByEnum", function() { return isValidByEnum; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isAmbiguousStringSource", function() { return isAmbiguousStringSource; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "matcherFromSource", function() { return matcherFromSource; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "parseWithAttributeSchema", function() { return parseWithAttributeSchema; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getBlockAttribute", function() { return getBlockAttribute; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getBlockAttributes", function() { return getBlockAttributes; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getMigratedBlock", function() { return getMigratedBlock; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createBlockWithFallback", function() { return createBlockWithFallback; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "serializeBlockNode", function() { return serializeBlockNode; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "parseWithGrammar", function() { return parseWithGrammar; });
+/* harmony import */ var _babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/slicedToArray */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
+/* harmony import */ var _babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/toConsumableArray */ "./node_modules/@babel/runtime/helpers/esm/toConsumableArray.js");
+/* harmony import */ var _babel_runtime_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectSpread */ "./node_modules/@babel/runtime/helpers/esm/objectSpread.js");
+/* harmony import */ var hpq__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! hpq */ "./node_modules/hpq/es/index.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! lodash */ "lodash");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _wordpress_autop__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/autop */ "@wordpress/autop");
+/* harmony import */ var _wordpress_autop__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_autop__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/hooks */ "@wordpress/hooks");
+/* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _wordpress_block_serialization_default_parser__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/block-serialization-default-parser */ "@wordpress/block-serialization-default-parser");
+/* harmony import */ var _wordpress_block_serialization_default_parser__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_serialization_default_parser__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _registration__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./registration */ "./packages/blocks/build-module/api/registration.js");
+/* harmony import */ var _factory__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./factory */ "./packages/blocks/build-module/api/factory.js");
+/* harmony import */ var _validation__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./validation */ "./packages/blocks/build-module/api/validation/index.js");
+/* harmony import */ var _serializer__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./serializer */ "./packages/blocks/build-module/api/serializer.js");
+/* harmony import */ var _matchers__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./matchers */ "./packages/blocks/build-module/api/matchers.js");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./utils */ "./packages/blocks/build-module/api/utils.js");
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./constants */ "./packages/blocks/build-module/api/constants.js");
+
+
+
+
+/**
+ * External dependencies
+ */
+
+
+/**
+ * WordPress dependencies
+ */
+
+
+
+
+/**
+ * Internal dependencies
+ */
+
+
+
+
+
+
+
+
+/**
+ * Sources which are guaranteed to return a string value.
+ *
+ * @type {Set}
+ */
+
+var STRING_SOURCES = new Set(['attribute', 'html', 'text', 'tag']);
+/**
+ * Higher-order hpq matcher which enhances an attribute matcher to return true
+ * or false depending on whether the original matcher returns undefined. This
+ * is useful for boolean attributes (e.g. disabled) whose attribute values may
+ * be technically falsey (empty string), though their mere presence should be
+ * enough to infer as true.
+ *
+ * @param {Function} matcher Original hpq matcher.
+ *
+ * @return {Function} Enhanced hpq matcher.
+ */
+
+var toBooleanAttributeMatcher = function toBooleanAttributeMatcher(matcher) {
+  return Object(lodash__WEBPACK_IMPORTED_MODULE_4__["flow"])([matcher, // Expected values from `attr( 'disabled' )`:
+  //
+  // <input>
+  // - Value:       `undefined`
+  // - Transformed: `false`
+  //
+  // <input disabled>
+  // - Value:       `''`
+  // - Transformed: `true`
+  //
+  // <input disabled="disabled">
+  // - Value:       `'disabled'`
+  // - Transformed: `true`
+  function (value) {
+    return value !== undefined;
+  }]);
+};
+/**
+ * Returns true if value is of the given JSON schema type, or false otherwise.
+ *
+ * @see http://json-schema.org/latest/json-schema-validation.html#rfc.section.6.25
+ *
+ * @param {*}      value Value to test.
+ * @param {string} type  Type to test.
+ *
+ * @return {boolean} Whether value is of type.
+ */
+
+function isOfType(value, type) {
+  switch (type) {
+    case 'string':
+      return typeof value === 'string';
+
+    case 'boolean':
+      return typeof value === 'boolean';
+
+    case 'object':
+      return !!value && value.constructor === Object;
+
+    case 'null':
+      return value === null;
+
+    case 'array':
+      return Array.isArray(value);
+
+    case 'integer':
+    case 'number':
+      return typeof value === 'number';
+  }
+
+  return true;
+}
+/**
+ * Returns true if value is of an array of given JSON schema types, or false
+ * otherwise.
+ *
+ * @see http://json-schema.org/latest/json-schema-validation.html#rfc.section.6.25
+ *
+ * @param {*}        value Value to test.
+ * @param {string[]} types Types to test.
+ *
+ * @return {boolean} Whether value is of types.
+ */
+
+function isOfTypes(value, types) {
+  return types.some(function (type) {
+    return isOfType(value, type);
+  });
+}
+/**
+ * Returns true if value is valid per the given block attribute schema type
+ * definition, or false otherwise.
+ *
+ * @see https://json-schema.org/latest/json-schema-validation.html#rfc.section.6.1.1
+ *
+ * @param {*}                       value Value to test.
+ * @param {?(Array<string>|string)} type  Block attribute schema type.
+ *
+ * @return {boolean} Whether value is valid.
+ */
+
+function isValidByType(value, type) {
+  return type === undefined || isOfTypes(value, Object(lodash__WEBPACK_IMPORTED_MODULE_4__["castArray"])(type));
+}
+/**
+ * Returns true if value is valid per the given block attribute schema enum
+ * definition, or false otherwise.
+ *
+ * @see https://json-schema.org/latest/json-schema-validation.html#rfc.section.6.1.2
+ *
+ * @param {*}      value   Value to test.
+ * @param {?Array} enumSet Block attribute schema enum.
+ *
+ * @return {boolean} Whether value is valid.
+ */
+
+function isValidByEnum(value, enumSet) {
+  return !Array.isArray(enumSet) || enumSet.includes(value);
+}
+/**
+ * Returns true if the given attribute schema describes a value which may be
+ * an ambiguous string.
+ *
+ * Some sources are ambiguously serialized as strings, for which value casting
+ * is enabled. This is only possible when a singular type is assigned to the
+ * attribute schema, since the string ambiguity makes it impossible to know the
+ * correct type of multiple to which to cast.
+ *
+ * @param {Object} attributeSchema Attribute's schema.
+ *
+ * @return {boolean} Whether attribute schema defines an ambiguous string
+ *                   source.
+ */
+
+function isAmbiguousStringSource(attributeSchema) {
+  var source = attributeSchema.source,
+      type = attributeSchema.type;
+  var isStringSource = STRING_SOURCES.has(source);
+  var isSingleType = typeof type === 'string';
+  return isStringSource && isSingleType;
+}
+/**
+ * Returns an hpq matcher given a source object.
+ *
+ * @param {Object} sourceConfig Attribute Source object.
+ *
+ * @return {Function} A hpq Matcher.
+ */
+
+function matcherFromSource(sourceConfig) {
+  switch (sourceConfig.source) {
+    case 'attribute':
+      var matcher = Object(_matchers__WEBPACK_IMPORTED_MODULE_12__["attr"])(sourceConfig.selector, sourceConfig.attribute);
+
+      if (sourceConfig.type === 'boolean') {
+        matcher = toBooleanAttributeMatcher(matcher);
+      }
+
+      return matcher;
+
+    case 'html':
+      return Object(_matchers__WEBPACK_IMPORTED_MODULE_12__["html"])(sourceConfig.selector, sourceConfig.multiline);
+
+    case 'text':
+      return Object(_matchers__WEBPACK_IMPORTED_MODULE_12__["text"])(sourceConfig.selector);
+
+    case 'children':
+      return Object(_matchers__WEBPACK_IMPORTED_MODULE_12__["children"])(sourceConfig.selector);
+
+    case 'node':
+      return Object(_matchers__WEBPACK_IMPORTED_MODULE_12__["node"])(sourceConfig.selector);
+
+    case 'query':
+      var subMatchers = Object(lodash__WEBPACK_IMPORTED_MODULE_4__["mapValues"])(sourceConfig.query, matcherFromSource);
+      return Object(_matchers__WEBPACK_IMPORTED_MODULE_12__["query"])(sourceConfig.selector, subMatchers);
+
+    case 'tag':
+      return Object(lodash__WEBPACK_IMPORTED_MODULE_4__["flow"])([Object(_matchers__WEBPACK_IMPORTED_MODULE_12__["prop"])(sourceConfig.selector, 'nodeName'), function (nodeName) {
+        return nodeName ? nodeName.toLowerCase() : undefined;
+      }]);
+
+    default:
+      // eslint-disable-next-line no-console
+      console.error("Unknown source type \"".concat(sourceConfig.source, "\""));
+  }
+}
+/**
+ * Given a block's raw content and an attribute's schema returns the attribute's
+ * value depending on its source.
+ *
+ * @param {string} innerHTML         Block's raw content.
+ * @param {Object} attributeSchema   Attribute's schema.
+ *
+ * @return {*} Attribute value.
+ */
+
+function parseWithAttributeSchema(innerHTML, attributeSchema) {
+  return Object(hpq__WEBPACK_IMPORTED_MODULE_3__["parse"])(innerHTML, matcherFromSource(attributeSchema));
+}
+/**
+ * Given an attribute key, an attribute's schema, a block's raw content and the
+ * commentAttributes returns the attribute value depending on its source
+ * definition of the given attribute key.
+ *
+ * @param {string} attributeKey      Attribute key.
+ * @param {Object} attributeSchema   Attribute's schema.
+ * @param {string} innerHTML         Block's raw content.
+ * @param {Object} commentAttributes Block's comment attributes.
+ *
+ * @return {*} Attribute value.
+ */
+
+function getBlockAttribute(attributeKey, attributeSchema, innerHTML, commentAttributes) {
+  var type = attributeSchema.type,
+      enumSet = attributeSchema.enum;
+  var value;
+
+  switch (attributeSchema.source) {
+    // undefined source means that it's an attribute serialized to the block's "comment"
+    case undefined:
+      value = commentAttributes ? commentAttributes[attributeKey] : undefined;
+      break;
+
+    case 'attribute':
+    case 'property':
+    case 'html':
+    case 'text':
+    case 'children':
+    case 'node':
+    case 'query':
+    case 'tag':
+      value = parseWithAttributeSchema(innerHTML, attributeSchema);
+      break;
+  }
+
+  if (!isValidByType(value, type) || !isValidByEnum(value, enumSet)) {
+    // Reject the value if it is not valid. Reverting to the undefined
+    // value ensures the default is respected, if applicable.
+    value = undefined;
+  }
+
+  if (value === undefined) {
+    return attributeSchema.default;
+  }
+
+  return value;
+}
+/**
+ * Returns the block attributes of a registered block node given its type.
+ *
+ * @param {string|Object} blockTypeOrName Block type or name.
+ * @param {string}        innerHTML       Raw block content.
+ * @param {?Object}       attributes      Known block attributes (from delimiters).
+ *
+ * @return {Object} All block attributes.
+ */
+
+function getBlockAttributes(blockTypeOrName, innerHTML) {
+  var attributes = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+  var blockType = Object(_utils__WEBPACK_IMPORTED_MODULE_13__["normalizeBlockType"])(blockTypeOrName);
+  var blockAttributes = Object(lodash__WEBPACK_IMPORTED_MODULE_4__["mapValues"])(blockType.attributes, function (attributeSchema, attributeKey) {
+    return getBlockAttribute(attributeKey, attributeSchema, innerHTML, attributes);
+  });
+  return Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_6__["applyFilters"])('blocks.getBlockAttributes', blockAttributes, blockType, innerHTML, attributes);
+}
+/**
+ * Given a block object, returns a new copy of the block with any applicable
+ * deprecated migrations applied, or the original block if it was both valid
+ * and no eligible migrations exist.
+ *
+ * @param {WPBlock} block            Original block object.
+ * @param {Object}  parsedAttributes Attributes as parsed from the initial
+ *                                   block markup.
+ *
+ * @return {WPBlock} Migrated block object.
+ */
+
+function getMigratedBlock(block, parsedAttributes) {
+  var blockType = Object(_registration__WEBPACK_IMPORTED_MODULE_8__["getBlockType"])(block.name);
+  var deprecatedDefinitions = blockType.deprecated;
+
+  if (!deprecatedDefinitions || !deprecatedDefinitions.length) {
+    return block;
+  }
+
+  var _block = block,
+      originalContent = _block.originalContent,
+      innerBlocks = _block.innerBlocks;
+
+  for (var i = 0; i < deprecatedDefinitions.length; i++) {
+    // A block can opt into a migration even if the block is valid by
+    // defining isEligible on its deprecation. If the block is both valid
+    // and does not opt to migrate, skip.
+    var _deprecatedDefinition = deprecatedDefinitions[i].isEligible,
+        isEligible = _deprecatedDefinition === void 0 ? lodash__WEBPACK_IMPORTED_MODULE_4__["stubFalse"] : _deprecatedDefinition;
+
+    if (block.isValid && !isEligible(parsedAttributes, innerBlocks)) {
+      continue;
+    } // Block type properties which could impact either serialization or
+    // parsing are not considered in the deprecated block type by default,
+    // and must be explicitly provided.
+
+
+    var deprecatedBlockType = Object.assign(Object(lodash__WEBPACK_IMPORTED_MODULE_4__["omit"])(blockType, _constants__WEBPACK_IMPORTED_MODULE_14__["DEPRECATED_ENTRY_KEYS"]), deprecatedDefinitions[i]);
+    var migratedAttributes = getBlockAttributes(deprecatedBlockType, originalContent, parsedAttributes); // Ignore the deprecation if it produces a block which is not valid.
+
+    var _getBlockContentValid = Object(_validation__WEBPACK_IMPORTED_MODULE_10__["getBlockContentValidationResult"])(deprecatedBlockType, migratedAttributes, originalContent),
+        isValid = _getBlockContentValid.isValid,
+        validationIssues = _getBlockContentValid.validationIssues;
+
+    if (!isValid) {
+      block = Object(_babel_runtime_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_2__["default"])({}, block, {
+        validationIssues: [].concat(Object(_babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_1__["default"])(Object(lodash__WEBPACK_IMPORTED_MODULE_4__["get"])(block, 'validationIssues', [])), Object(_babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_1__["default"])(validationIssues))
+      });
+      continue;
+    }
+
+    var migratedInnerBlocks = innerBlocks; // A block may provide custom behavior to assign new attributes and/or
+    // inner blocks.
+
+    var migrate = deprecatedBlockType.migrate;
+
+    if (migrate) {
+      var _castArray = Object(lodash__WEBPACK_IMPORTED_MODULE_4__["castArray"])(migrate(migratedAttributes, innerBlocks));
+
+      var _castArray2 = Object(_babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_castArray, 2);
+
+      var _castArray2$ = _castArray2[0];
+      migratedAttributes = _castArray2$ === void 0 ? parsedAttributes : _castArray2$;
+      var _castArray2$2 = _castArray2[1];
+      migratedInnerBlocks = _castArray2$2 === void 0 ? innerBlocks : _castArray2$2;
+    }
+
+    block = Object(_babel_runtime_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_2__["default"])({}, block, {
+      attributes: migratedAttributes,
+      innerBlocks: migratedInnerBlocks,
+      isValid: true
+    });
+  }
+
+  return block;
+}
+/**
+ * Creates a block with fallback to the unknown type handler.
+ *
+ * @param {Object} blockNode Parsed block node.
+ *
+ * @return {?Object} An initialized block object (if possible).
+ */
+
+function createBlockWithFallback(blockNode) {
+  var originalName = blockNode.blockName;
+  var attributes = blockNode.attrs,
+      _blockNode$innerBlock = blockNode.innerBlocks,
+      innerBlocks = _blockNode$innerBlock === void 0 ? [] : _blockNode$innerBlock,
+      innerHTML = blockNode.innerHTML;
+  var innerContent = blockNode.innerContent;
+  var freeformContentFallbackBlock = Object(_registration__WEBPACK_IMPORTED_MODULE_8__["getFreeformContentHandlerName"])();
+  var unregisteredFallbackBlock = Object(_registration__WEBPACK_IMPORTED_MODULE_8__["getUnregisteredTypeHandlerName"])() || freeformContentFallbackBlock;
+  attributes = attributes || {}; // Trim content to avoid creation of intermediary freeform segments.
+
+  innerHTML = innerHTML.trim(); // Use type from block content if available. Otherwise, default to the
+  // freeform content fallback.
+
+  var name = originalName || freeformContentFallbackBlock; // Convert 'core/cover-image' block in existing content to 'core/cover'.
+
+  if ('core/cover-image' === name) {
+    name = 'core/cover';
+  } // Convert 'core/text' blocks in existing content to 'core/paragraph'.
+
+
+  if ('core/text' === name || 'core/cover-text' === name) {
+    name = 'core/paragraph';
+  } // Fallback content may be upgraded from classic editor expecting implicit
+  // automatic paragraphs, so preserve them. Assumes wpautop is idempotent,
+  // meaning there are no negative consequences to repeated autop calls.
+
+
+  if (name === freeformContentFallbackBlock) {
+    innerHTML = Object(_wordpress_autop__WEBPACK_IMPORTED_MODULE_5__["autop"])(innerHTML).trim();
+  } // Try finding the type for known block name, else fall back again.
+
+
+  var blockType = Object(_registration__WEBPACK_IMPORTED_MODULE_8__["getBlockType"])(name);
+
+  if (!blockType) {
+    // Since the constituents of the block node are extracted at the start
+    // of the present function, construct a new object rather than reuse
+    // `blockNode`.
+    var reconstitutedBlockNode = {
+      attrs: attributes,
+      blockName: originalName,
+      innerBlocks: innerBlocks,
+      innerContent: innerContent
+    }; // Preserve undelimited content for use by the unregistered type
+    // handler. A block node's `innerHTML` isn't enough, as that field only
+    // carries the block's own HTML and not its nested blocks'.
+
+    var originalUndelimitedContent = serializeBlockNode(reconstitutedBlockNode, {
+      isCommentDelimited: false
+    }); // Preserve full block content for use by the unregistered type
+    // handler, block boundaries included.
+
+    var originalContent = serializeBlockNode(reconstitutedBlockNode, {
+      isCommentDelimited: true
+    }); // If detected as a block which is not registered, preserve comment
+    // delimiters in content of unregistered type handler.
+
+    if (name) {
+      innerHTML = originalContent;
+    }
+
+    name = unregisteredFallbackBlock;
+    attributes = {
+      originalName: originalName,
+      originalContent: originalContent,
+      originalUndelimitedContent: originalUndelimitedContent
+    };
+    blockType = Object(_registration__WEBPACK_IMPORTED_MODULE_8__["getBlockType"])(name);
+  } // Coerce inner blocks from parsed form to canonical form.
+
+
+  innerBlocks = innerBlocks.map(createBlockWithFallback); // Remove `undefined` innerBlocks.
+  //
+  // This is a temporary fix to prevent unrecoverable TypeErrors when handling unexpectedly
+  // empty freeform block nodes. See https://github.com/WordPress/gutenberg/pull/17164.
+
+  innerBlocks = innerBlocks.filter(function (innerBlock) {
+    return innerBlock;
+  });
+  var isFallbackBlock = name === freeformContentFallbackBlock || name === unregisteredFallbackBlock; // Include in set only if type was determined.
+
+  if (!blockType || !innerHTML && isFallbackBlock) {
+    return;
+  }
+
+  var block = Object(_factory__WEBPACK_IMPORTED_MODULE_9__["createBlock"])(name, getBlockAttributes(blockType, innerHTML, attributes), innerBlocks); // Block validation assumes an idempotent operation from source block to serialized block
+  // provided there are no changes in attributes. The validation procedure thus compares the
+  // provided source value with the serialized output before there are any modifications to
+  // the block. When both match, the block is marked as valid.
+
+  if (!isFallbackBlock) {
+    var _getBlockContentValid2 = Object(_validation__WEBPACK_IMPORTED_MODULE_10__["getBlockContentValidationResult"])(blockType, block.attributes, innerHTML),
+        isValid = _getBlockContentValid2.isValid,
+        validationIssues = _getBlockContentValid2.validationIssues;
+
+    block.isValid = isValid;
+    block.validationIssues = validationIssues;
+  } // Preserve original content for future use in case the block is parsed
+  // as invalid, or future serialization attempt results in an error.
+
+
+  block.originalContent = block.originalContent || innerHTML;
+  block = getMigratedBlock(block, attributes);
+
+  if (block.validationIssues && block.validationIssues.length > 0) {
+    if (block.isValid) {
+      // eslint-disable-next-line no-console
+      console.info('Block successfully updated for `%s` (%o).\n\nNew content generated by `save` function:\n\n%s\n\nContent retrieved from post body:\n\n%s', blockType.name, blockType, Object(_serializer__WEBPACK_IMPORTED_MODULE_11__["getSaveContent"])(blockType, block.attributes), block.originalContent);
+    } else {
+      block.validationIssues.forEach(function (_ref) {
+        var log = _ref.log,
+            args = _ref.args;
+        return log.apply(void 0, Object(_babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_1__["default"])(args));
+      });
+    }
+  }
+
+  return block;
+}
+/**
+ * Serializes a block node into the native HTML-comment-powered block format.
+ * CAVEAT: This function is intended for reserializing blocks as parsed by
+ * valid parsers and skips any validation steps. This is NOT a generic
+ * serialization function for in-memory blocks. For most purposes, see the
+ * following functions available in the `@wordpress/blocks` package:
+ *
+ * @see serializeBlock
+ * @see serialize
+ *
+ * For more on the format of block nodes as returned by valid parsers:
+ *
+ * @see `@wordpress/block-serialization-default-parser` package
+ * @see `@wordpress/block-serialization-spec-parser` package
+ *
+ * @param {Object}   blockNode                  A block node as returned by a valid parser.
+ * @param {?Object}  options                    Serialization options.
+ * @param {?boolean} options.isCommentDelimited Whether to output HTML comments around blocks.
+ *
+ * @return {string} An HTML string representing a block.
+ */
+
+function serializeBlockNode(blockNode) {
+  var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  var _options$isCommentDel = options.isCommentDelimited,
+      isCommentDelimited = _options$isCommentDel === void 0 ? true : _options$isCommentDel;
+  var blockName = blockNode.blockName,
+      _blockNode$attrs = blockNode.attrs,
+      attrs = _blockNode$attrs === void 0 ? {} : _blockNode$attrs,
+      _blockNode$innerBlock2 = blockNode.innerBlocks,
+      innerBlocks = _blockNode$innerBlock2 === void 0 ? [] : _blockNode$innerBlock2,
+      _blockNode$innerConte = blockNode.innerContent,
+      innerContent = _blockNode$innerConte === void 0 ? [] : _blockNode$innerConte;
+  var childIndex = 0;
+  var content = innerContent.map(function (item) {
+    return (// `null` denotes a nested block, otherwise we have an HTML fragment
+      item !== null ? item : serializeBlockNode(innerBlocks[childIndex++], options)
+    );
+  }).join('\n').replace(/\n+/g, '\n').trim();
+  return isCommentDelimited ? Object(_serializer__WEBPACK_IMPORTED_MODULE_11__["getCommentDelimitedContent"])(blockName, attrs, content) : content;
+}
+/**
+ * Creates a parse implementation for the post content which returns a list of blocks.
+ *
+ * @param {Function} parseImplementation Parse implementation.
+ *
+ * @return {Function} An implementation which parses the post content.
+ */
+
+var createParse = function createParse(parseImplementation) {
+  return function (content) {
+    return parseImplementation(content).reduce(function (memo, blockNode) {
+      var block = createBlockWithFallback(blockNode);
+
+      if (block) {
+        memo.push(block);
+      }
+
+      return memo;
+    }, []);
+  };
+};
+/**
+ * Parses the post content with a PegJS grammar and returns a list of blocks.
+ *
+ * @param {string} content The post content.
+ *
+ * @return {Array} Block list.
+ */
+
+
+var parseWithGrammar = createParse(_wordpress_block_serialization_default_parser__WEBPACK_IMPORTED_MODULE_7__["parse"]);
+/* harmony default export */ __webpack_exports__["default"] = (parseWithGrammar);
+
+
+/***/ }),
+
+/***/ "./packages/blocks/build-module/api/raw-handling/blockquote-normaliser.js":
+/*!********************************************************************************!*\
+  !*** ./packages/blocks/build-module/api/raw-handling/blockquote-normaliser.js ***!
+  \********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _normalise_blocks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./normalise-blocks */ "./packages/blocks/build-module/api/raw-handling/normalise-blocks.js");
+/**
+ * Internal dependencies
+ */
+
+/* harmony default export */ __webpack_exports__["default"] = (function (node) {
+  if (node.nodeName !== 'BLOCKQUOTE') {
+    return;
+  }
+
+  node.innerHTML = Object(_normalise_blocks__WEBPACK_IMPORTED_MODULE_0__["default"])(node.innerHTML);
+});
+
+
+/***/ }),
+
+/***/ "./packages/blocks/build-module/api/raw-handling/comment-remover.js":
+/*!**************************************************************************!*\
+  !*** ./packages/blocks/build-module/api/raw-handling/comment-remover.js ***!
+  \**************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_dom__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/dom */ "@wordpress/dom");
+/* harmony import */ var _wordpress_dom__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_dom__WEBPACK_IMPORTED_MODULE_0__);
+/**
+ * WordPress dependencies
+ */
+
+/**
+ * Browser dependencies
+ */
+
+var COMMENT_NODE = window.Node.COMMENT_NODE;
+/**
+ * Looks for comments, and removes them.
+ *
+ * @param {Node} node The node to be processed.
+ * @return {void}
+ */
+
+/* harmony default export */ __webpack_exports__["default"] = (function (node) {
+  if (node.nodeType === COMMENT_NODE) {
+    Object(_wordpress_dom__WEBPACK_IMPORTED_MODULE_0__["remove"])(node);
+  }
+});
+
+
+/***/ }),
+
+/***/ "./packages/blocks/build-module/api/raw-handling/figure-content-reducer.js":
+/*!*********************************************************************************!*\
+  !*** ./packages/blocks/build-module/api/raw-handling/figure-content-reducer.js ***!
+  \*********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ "lodash");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _phrasing_content__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./phrasing-content */ "./packages/blocks/build-module/api/raw-handling/phrasing-content.js");
+/**
+ * External dependencies
+ */
+
+/**
+ * Internal dependencies
+ */
+
+
+/**
+ * Whether or not the given node is figure content.
+ *
+ * @param {Node}   node   The node to check.
+ * @param {Object} schema The schema to use.
+ *
+ * @return {boolean} True if figure content, false if not.
+ */
+
+function isFigureContent(node, schema) {
+  var tag = node.nodeName.toLowerCase(); // We are looking for tags that can be a child of the figure tag, excluding
+  // `figcaption` and any phrasing content.
+
+  if (tag === 'figcaption' || Object(_phrasing_content__WEBPACK_IMPORTED_MODULE_1__["isPhrasingContent"])(node)) {
+    return false;
+  }
+
+  return Object(lodash__WEBPACK_IMPORTED_MODULE_0__["has"])(schema, ['figure', 'children', tag]);
+}
+/**
+ * Whether or not the given node can have an anchor.
+ *
+ * @param {Node}   node   The node to check.
+ * @param {Object} schema The schema to use.
+ *
+ * @return {boolean} True if it can, false if not.
+ */
+
+
+function canHaveAnchor(node, schema) {
+  var tag = node.nodeName.toLowerCase();
+  return Object(lodash__WEBPACK_IMPORTED_MODULE_0__["has"])(schema, ['figure', 'children', 'a', 'children', tag]);
+}
+/**
+ * This filter takes figure content out of paragraphs, wraps it in a figure
+ * element, and moves any anchors with it if needed.
+ *
+ * @param {Node}     node   The node to filter.
+ * @param {Document} doc    The document of the node.
+ * @param {Object}   schema The schema to use.
+ *
+ * @return {void}
+ */
+
+
+/* harmony default export */ __webpack_exports__["default"] = (function (node, doc, schema) {
+  if (!isFigureContent(node, schema)) {
+    return;
+  }
+
+  var nodeToInsert = node;
+  var parentNode = node.parentNode; // If the figure content can have an anchor and its parent is an anchor with
+  // only the figure content, take the anchor out instead of just the content.
+
+  if (canHaveAnchor(node, schema) && parentNode.nodeName === 'A' && parentNode.childNodes.length === 1) {
+    nodeToInsert = node.parentNode;
+  }
+
+  var wrapper = nodeToInsert;
+
+  while (wrapper && wrapper.nodeName !== 'P') {
+    wrapper = wrapper.parentElement;
+  }
+
+  var figure = doc.createElement('figure');
+
+  if (wrapper) {
+    wrapper.parentNode.insertBefore(figure, wrapper);
+  } else {
+    nodeToInsert.parentNode.insertBefore(figure, nodeToInsert);
+  }
+
+  figure.appendChild(nodeToInsert);
+});
+
+
+/***/ }),
+
+/***/ "./packages/blocks/build-module/api/raw-handling/google-docs-uid-remover.js":
+/*!**********************************************************************************!*\
+  !*** ./packages/blocks/build-module/api/raw-handling/google-docs-uid-remover.js ***!
+  \**********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_dom__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/dom */ "@wordpress/dom");
+/* harmony import */ var _wordpress_dom__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_dom__WEBPACK_IMPORTED_MODULE_0__);
+/**
+ * WordPress dependencies
+ */
+
+/* harmony default export */ __webpack_exports__["default"] = (function (node) {
+  if (!node.id || node.id.indexOf('docs-internal-guid-') !== 0) {
+    return;
+  }
+
+  Object(_wordpress_dom__WEBPACK_IMPORTED_MODULE_0__["unwrap"])(node);
+});
+
+
+/***/ }),
+
+/***/ "./packages/blocks/build-module/api/raw-handling/head-remover.js":
+/*!***********************************************************************!*\
+  !*** ./packages/blocks/build-module/api/raw-handling/head-remover.js ***!
+  \***********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (function (node) {
+  if (node.nodeName !== 'SCRIPT' && node.nodeName !== 'NOSCRIPT' && node.nodeName !== 'TEMPLATE' && node.nodeName !== 'STYLE') {
+    return;
+  }
+
+  node.parentNode.removeChild(node);
+});
+
+
+/***/ }),
+
+/***/ "./packages/blocks/build-module/api/raw-handling/iframe-remover.js":
+/*!*************************************************************************!*\
+  !*** ./packages/blocks/build-module/api/raw-handling/iframe-remover.js ***!
+  \*************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_dom__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/dom */ "@wordpress/dom");
+/* harmony import */ var _wordpress_dom__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_dom__WEBPACK_IMPORTED_MODULE_0__);
+/**
+ * WordPress dependencies
+ */
+
+/**
+ * Removes iframes.
+ *
+ * @param {Node} node The node to check.
+ *
+ * @return {void}
+ */
+
+/* harmony default export */ __webpack_exports__["default"] = (function (node) {
+  if (node.nodeName === 'IFRAME') {
+    Object(_wordpress_dom__WEBPACK_IMPORTED_MODULE_0__["remove"])(node);
+  }
+});
+
+
+/***/ }),
+
+/***/ "./packages/blocks/build-module/api/raw-handling/image-corrector.js":
+/*!**************************************************************************!*\
+  !*** ./packages/blocks/build-module/api/raw-handling/image-corrector.js ***!
+  \**************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/slicedToArray */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
+/* harmony import */ var _wordpress_blob__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/blob */ "@wordpress/blob");
+/* harmony import */ var _wordpress_blob__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blob__WEBPACK_IMPORTED_MODULE_1__);
+
+
+/**
+ * WordPress dependencies
+ */
+
+/**
+ * Browser dependencies
+ */
+
+var _window = window,
+    atob = _window.atob,
+    File = _window.File;
+/* harmony default export */ __webpack_exports__["default"] = (function (node) {
+  if (node.nodeName !== 'IMG') {
+    return;
+  }
+
+  if (node.src.indexOf('file:') === 0) {
+    node.src = '';
+  } // This piece cannot be tested outside a browser env.
+
+
+  if (node.src.indexOf('data:') === 0) {
+    var _node$src$split = node.src.split(','),
+        _node$src$split2 = Object(_babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_node$src$split, 2),
+        properties = _node$src$split2[0],
+        data = _node$src$split2[1];
+
+    var _properties$slice$spl = properties.slice(5).split(';'),
+        _properties$slice$spl2 = Object(_babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_properties$slice$spl, 1),
+        type = _properties$slice$spl2[0];
+
+    if (!data || !type) {
+      node.src = '';
+      return;
+    }
+
+    var decoded; // Can throw DOMException!
+
+    try {
+      decoded = atob(data);
+    } catch (e) {
+      node.src = '';
+      return;
+    }
+
+    var uint8Array = new Uint8Array(decoded.length);
+
+    for (var i = 0; i < uint8Array.length; i++) {
+      uint8Array[i] = decoded.charCodeAt(i);
+    }
+
+    var name = type.replace('/', '.');
+    var file = new File([uint8Array], name, {
+      type: type
+    });
+    node.src = Object(_wordpress_blob__WEBPACK_IMPORTED_MODULE_1__["createBlobURL"])(file);
+  } // Remove trackers and hardly visible images.
+
+
+  if (node.height === 1 || node.width === 1) {
+    node.parentNode.removeChild(node);
+  }
+});
+
+
+/***/ }),
+
+/***/ "./packages/blocks/build-module/api/raw-handling/index.js":
+/*!****************************************************************!*\
+  !*** ./packages/blocks/build-module/api/raw-handling/index.js ***!
+  \****************************************************************/
+/*! exports provided: getPhrasingContentSchema, pasteHandler, rawHandler */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "rawHandler", function() { return rawHandler; });
+/* harmony import */ var _babel_runtime_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectSpread */ "./node_modules/@babel/runtime/helpers/esm/objectSpread.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "lodash");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _factory__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../factory */ "./packages/blocks/build-module/api/factory.js");
+/* harmony import */ var _parser__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../parser */ "./packages/blocks/build-module/api/parser.js");
+/* harmony import */ var _normalise_blocks__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./normalise-blocks */ "./packages/blocks/build-module/api/raw-handling/normalise-blocks.js");
+/* harmony import */ var _special_comment_converter__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./special-comment-converter */ "./packages/blocks/build-module/api/raw-handling/special-comment-converter.js");
+/* harmony import */ var _list_reducer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./list-reducer */ "./packages/blocks/build-module/api/raw-handling/list-reducer.js");
+/* harmony import */ var _blockquote_normaliser__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./blockquote-normaliser */ "./packages/blocks/build-module/api/raw-handling/blockquote-normaliser.js");
+/* harmony import */ var _figure_content_reducer__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./figure-content-reducer */ "./packages/blocks/build-module/api/raw-handling/figure-content-reducer.js");
+/* harmony import */ var _shortcode_converter__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./shortcode-converter */ "./packages/blocks/build-module/api/raw-handling/shortcode-converter.js");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./utils */ "./packages/blocks/build-module/api/raw-handling/utils.js");
+/* harmony import */ var _phrasing_content__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./phrasing-content */ "./packages/blocks/build-module/api/raw-handling/phrasing-content.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getPhrasingContentSchema", function() { return _phrasing_content__WEBPACK_IMPORTED_MODULE_11__["getPhrasingContentSchema"]; });
+
+/* harmony import */ var _paste_handler__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./paste-handler */ "./packages/blocks/build-module/api/raw-handling/paste-handler.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "pasteHandler", function() { return _paste_handler__WEBPACK_IMPORTED_MODULE_12__["pasteHandler"]; });
+
+
+
+/**
+ * External dependencies
+ */
+
+/**
+ * Internal dependencies
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+function getRawTransformations() {
+  return Object(lodash__WEBPACK_IMPORTED_MODULE_1__["filter"])(Object(_factory__WEBPACK_IMPORTED_MODULE_2__["getBlockTransforms"])('from'), {
+    type: 'raw'
+  }).map(function (transform) {
+    return transform.isMatch ? transform : Object(_babel_runtime_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, transform, {
+      isMatch: function isMatch(node) {
+        return transform.selector && node.matches(transform.selector);
+      }
+    });
+  });
+}
+/**
+ * Converts HTML directly to blocks. Looks for a matching transform for each
+ * top-level tag. The HTML should be filtered to not have any text between
+ * top-level tags and formatted in a way that blocks can handle the HTML.
+ *
+ * @param  {Object} $1               Named parameters.
+ * @param  {string} $1.html          HTML to convert.
+ * @param  {Array}  $1.rawTransforms Transforms that can be used.
+ *
+ * @return {Array} An array of blocks.
+ */
+
+
+function htmlToBlocks(_ref) {
+  var html = _ref.html,
+      rawTransforms = _ref.rawTransforms;
+  var doc = document.implementation.createHTMLDocument('');
+  doc.body.innerHTML = html;
+  return Array.from(doc.body.children).map(function (node) {
+    var rawTransform = Object(_factory__WEBPACK_IMPORTED_MODULE_2__["findTransform"])(rawTransforms, function (_ref2) {
+      var isMatch = _ref2.isMatch;
+      return isMatch(node);
+    });
+
+    if (!rawTransform) {
+      return Object(_factory__WEBPACK_IMPORTED_MODULE_2__["createBlock"])( // Should not be hardcoded.
+      'core/html', Object(_parser__WEBPACK_IMPORTED_MODULE_3__["getBlockAttributes"])('core/html', node.outerHTML));
+    }
+
+    var transform = rawTransform.transform,
+        blockName = rawTransform.blockName;
+
+    if (transform) {
+      return transform(node);
+    }
+
+    return Object(_factory__WEBPACK_IMPORTED_MODULE_2__["createBlock"])(blockName, Object(_parser__WEBPACK_IMPORTED_MODULE_3__["getBlockAttributes"])(blockName, node.outerHTML));
+  });
+}
+/**
+ * Converts an HTML string to known blocks.
+ *
+ * @param {Object} $1
+ * @param {string} $1.HTML The HTML to convert.
+ *
+ * @return {Array} A list of blocks.
+ */
+
+
+function rawHandler(_ref3) {
+  var _ref3$HTML = _ref3.HTML,
+      HTML = _ref3$HTML === void 0 ? '' : _ref3$HTML;
+
+  // If we detect block delimiters, parse entirely as blocks.
+  if (HTML.indexOf('<!-- wp:') !== -1) {
+    return Object(_parser__WEBPACK_IMPORTED_MODULE_3__["parseWithGrammar"])(HTML);
+  } // An array of HTML strings and block objects. The blocks replace matched
+  // shortcodes.
+
+
+  var pieces = Object(_shortcode_converter__WEBPACK_IMPORTED_MODULE_9__["default"])(HTML);
+  var rawTransforms = getRawTransformations();
+  var blockContentSchema = Object(_utils__WEBPACK_IMPORTED_MODULE_10__["getBlockContentSchema"])(rawTransforms);
+  return Object(lodash__WEBPACK_IMPORTED_MODULE_1__["compact"])(Object(lodash__WEBPACK_IMPORTED_MODULE_1__["flatMap"])(pieces, function (piece) {
+    // Already a block from shortcode.
+    if (typeof piece !== 'string') {
+      return piece;
+    } // These filters are essential for some blocks to be able to transform
+    // from raw HTML. These filters move around some content or add
+    // additional tags, they do not remove any content.
+
+
+    var filters = [// Needed to adjust invalid lists.
+    _list_reducer__WEBPACK_IMPORTED_MODULE_6__["default"], // Needed to create more and nextpage blocks.
+    _special_comment_converter__WEBPACK_IMPORTED_MODULE_5__["default"], // Needed to create media blocks.
+    _figure_content_reducer__WEBPACK_IMPORTED_MODULE_8__["default"], // Needed to create the quote block, which cannot handle text
+    // without wrapper paragraphs.
+    _blockquote_normaliser__WEBPACK_IMPORTED_MODULE_7__["default"]];
+    piece = Object(_utils__WEBPACK_IMPORTED_MODULE_10__["deepFilterHTML"])(piece, filters, blockContentSchema);
+    piece = Object(_normalise_blocks__WEBPACK_IMPORTED_MODULE_4__["default"])(piece);
+    return htmlToBlocks({
+      html: piece,
+      rawTransforms: rawTransforms
+    });
+  }));
+}
+
+
+/***/ }),
+
+/***/ "./packages/blocks/build-module/api/raw-handling/is-inline-content.js":
+/*!****************************************************************************!*\
+  !*** ./packages/blocks/build-module/api/raw-handling/is-inline-content.js ***!
+  \****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ "lodash");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _phrasing_content__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./phrasing-content */ "./packages/blocks/build-module/api/raw-handling/phrasing-content.js");
+/**
+ * External dependencies
+ */
+
+/**
+ * Internal dependencies
+ */
+
+
+/**
+ * Checks if the given node should be considered inline content, optionally
+ * depending on a context tag.
+ *
+ * @param {Node}   node       Node name.
+ * @param {string} contextTag Tag name.
+ *
+ * @return {boolean} True if the node is inline content, false if nohe.
+ */
+
+function isInline(node, contextTag) {
+  if (Object(_phrasing_content__WEBPACK_IMPORTED_MODULE_1__["isPhrasingContent"])(node)) {
+    return true;
+  }
+
+  if (!contextTag) {
+    return false;
+  }
+
+  var tag = node.nodeName.toLowerCase();
+  var inlineWhitelistTagGroups = [['ul', 'li', 'ol'], ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']];
+  return inlineWhitelistTagGroups.some(function (tagGroup) {
+    return Object(lodash__WEBPACK_IMPORTED_MODULE_0__["difference"])([tag, contextTag], tagGroup).length === 0;
+  });
+}
+
+function deepCheck(nodes, contextTag) {
+  return nodes.every(function (node) {
+    return isInline(node, contextTag) && deepCheck(Array.from(node.children), contextTag);
+  });
+}
+
+function isDoubleBR(node) {
+  return node.nodeName === 'BR' && node.previousSibling && node.previousSibling.nodeName === 'BR';
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (function (HTML, contextTag) {
+  var doc = document.implementation.createHTMLDocument('');
+  doc.body.innerHTML = HTML;
+  var nodes = Array.from(doc.body.children);
+  return !nodes.some(isDoubleBR) && deepCheck(nodes, contextTag);
+});
+
+
+/***/ }),
+
+/***/ "./packages/blocks/build-module/api/raw-handling/list-reducer.js":
+/*!***********************************************************************!*\
+  !*** ./packages/blocks/build-module/api/raw-handling/list-reducer.js ***!
+  \***********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/toConsumableArray */ "./node_modules/@babel/runtime/helpers/esm/toConsumableArray.js");
+/* harmony import */ var _wordpress_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/dom */ "@wordpress/dom");
+/* harmony import */ var _wordpress_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_dom__WEBPACK_IMPORTED_MODULE_1__);
+
+
+/**
+ * WordPress dependencies
+ */
+
+
+function isList(node) {
+  return node.nodeName === 'OL' || node.nodeName === 'UL';
+}
+
+function shallowTextContent(element) {
+  return Object(_babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(element.childNodes).map(function (_ref) {
+    var _ref$nodeValue = _ref.nodeValue,
+        nodeValue = _ref$nodeValue === void 0 ? '' : _ref$nodeValue;
+    return nodeValue;
+  }).join('');
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (function (node) {
+  if (!isList(node)) {
+    return;
+  }
+
+  var list = node;
+  var prevElement = node.previousElementSibling; // Merge with previous list if:
+  // * There is a previous list of the same type.
+  // * There is only one list item.
+
+  if (prevElement && prevElement.nodeName === node.nodeName && list.children.length === 1) {
+    // Move all child nodes, including any text nodes, if any.
+    while (list.firstChild) {
+      prevElement.appendChild(list.firstChild);
+    }
+
+    list.parentNode.removeChild(list);
+  }
+
+  var parentElement = node.parentNode; // Nested list with empty parent item.
+
+  if (parentElement && parentElement.nodeName === 'LI' && parentElement.children.length === 1 && !/\S/.test(shallowTextContent(parentElement))) {
+    var parentListItem = parentElement;
+    var prevListItem = parentListItem.previousElementSibling;
+    var parentList = parentListItem.parentNode;
+
+    if (prevListItem) {
+      prevListItem.appendChild(list);
+      parentList.removeChild(parentListItem);
+    } else {
+      parentList.parentNode.insertBefore(list, parentList);
+      parentList.parentNode.removeChild(parentList);
+    }
+  } // Invalid: OL/UL > OL/UL.
+
+
+  if (parentElement && isList(parentElement)) {
+    var _prevListItem = node.previousElementSibling;
+
+    if (_prevListItem) {
+      _prevListItem.appendChild(node);
+    } else {
+      Object(_wordpress_dom__WEBPACK_IMPORTED_MODULE_1__["unwrap"])(node);
+    }
+  }
+});
+
+
+/***/ }),
+
+/***/ "./packages/blocks/build-module/api/raw-handling/markdown-converter.js":
+/*!*****************************************************************************!*\
+  !*** ./packages/blocks/build-module/api/raw-handling/markdown-converter.js ***!
+  \*****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var showdown__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! showdown */ "./node_modules/showdown/dist/showdown.js");
+/* harmony import */ var showdown__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(showdown__WEBPACK_IMPORTED_MODULE_0__);
+/**
+ * External dependencies
+ */
+ // Reuse the same showdown converter.
+
+var converter = new showdown__WEBPACK_IMPORTED_MODULE_0___default.a.Converter({
+  noHeaderId: true,
+  tables: true,
+  literalMidWordUnderscores: true,
+  omitExtraWLInCodeBlocks: true,
+  simpleLineBreaks: true,
+  strikethrough: true
+});
+/**
+ * Corrects the Slack Markdown variant of the code block.
+ * If uncorrected, it will be converted to inline code.
+ *
+ * @see https://get.slack.help/hc/en-us/articles/202288908-how-can-i-add-formatting-to-my-messages-#code-blocks
+ *
+ * @param {string} text The potential Markdown text to correct.
+ *
+ * @return {string} The corrected Markdown.
+ */
+
+function slackMarkdownVariantCorrector(text) {
+  return text.replace(/((?:^|\n)```)([^\n`]+)(```(?:$|\n))/, function (match, p1, p2, p3) {
+    return "".concat(p1, "\n").concat(p2, "\n").concat(p3);
+  });
+}
+/**
+ * Converts a piece of text into HTML based on any Markdown present.
+ * Also decodes any encoded HTML.
+ *
+ * @param {string} text The plain text to convert.
+ *
+ * @return {string} HTML.
+ */
+
+
+/* harmony default export */ __webpack_exports__["default"] = (function (text) {
+  return converter.makeHtml(slackMarkdownVariantCorrector(text));
+});
+
+
+/***/ }),
+
+/***/ "./packages/blocks/build-module/api/raw-handling/ms-list-converter.js":
+/*!****************************************************************************!*\
+  !*** ./packages/blocks/build-module/api/raw-handling/ms-list-converter.js ***!
+  \****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/**
+ * Browser dependencies
+ */
+var _window = window,
+    parseInt = _window.parseInt;
+
+function isList(node) {
+  return node.nodeName === 'OL' || node.nodeName === 'UL';
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (function (node, doc) {
+  if (node.nodeName !== 'P') {
+    return;
+  }
+
+  var style = node.getAttribute('style');
+
+  if (!style) {
+    return;
+  } // Quick check.
+
+
+  if (style.indexOf('mso-list') === -1) {
+    return;
+  }
+
+  var matches = /mso-list\s*:[^;]+level([0-9]+)/i.exec(style);
+
+  if (!matches) {
+    return;
+  }
+
+  var level = parseInt(matches[1], 10) - 1 || 0;
+  var prevNode = node.previousElementSibling; // Add new list if no previous.
+
+  if (!prevNode || !isList(prevNode)) {
+    // See https://html.spec.whatwg.org/multipage/grouping-content.html#attr-ol-type.
+    var type = node.textContent.trim().slice(0, 1);
+    var isNumeric = /[1iIaA]/.test(type);
+    var newListNode = doc.createElement(isNumeric ? 'ol' : 'ul');
+
+    if (isNumeric) {
+      newListNode.setAttribute('type', type);
+    }
+
+    node.parentNode.insertBefore(newListNode, node);
+  }
+
+  var listNode = node.previousElementSibling;
+  var listType = listNode.nodeName;
+  var listItem = doc.createElement('li');
+  var receivingNode = listNode; // Remove the first span with list info.
+
+  node.removeChild(node.firstElementChild); // Add content.
+
+  while (node.firstChild) {
+    listItem.appendChild(node.firstChild);
+  } // Change pointer depending on indentation level.
+
+
+  while (level--) {
+    receivingNode = receivingNode.lastElementChild || receivingNode; // If it's a list, move pointer to the last item.
+
+    if (isList(receivingNode)) {
+      receivingNode = receivingNode.lastElementChild || receivingNode;
+    }
+  } // Make sure we append to a list.
+
+
+  if (!isList(receivingNode)) {
+    receivingNode = receivingNode.appendChild(doc.createElement(listType));
+  } // Append the list item to the list.
+
+
+  receivingNode.appendChild(listItem); // Remove the wrapper paragraph.
+
+  node.parentNode.removeChild(node);
+});
+
+
+/***/ }),
+
+/***/ "./packages/blocks/build-module/api/raw-handling/normalise-blocks.js":
+/*!***************************************************************************!*\
+  !*** ./packages/blocks/build-module/api/raw-handling/normalise-blocks.js ***!
+  \***************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils */ "./packages/blocks/build-module/api/raw-handling/utils.js");
+/* harmony import */ var _phrasing_content__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./phrasing-content */ "./packages/blocks/build-module/api/raw-handling/phrasing-content.js");
+/**
+ * Internal dependencies
+ */
+
+
+/**
+ * Browser dependencies
+ */
+
+var _window$Node = window.Node,
+    ELEMENT_NODE = _window$Node.ELEMENT_NODE,
+    TEXT_NODE = _window$Node.TEXT_NODE;
+/* harmony default export */ __webpack_exports__["default"] = (function (HTML) {
+  var decuDoc = document.implementation.createHTMLDocument('');
+  var accuDoc = document.implementation.createHTMLDocument('');
+  var decu = decuDoc.body;
+  var accu = accuDoc.body;
+  decu.innerHTML = HTML;
+
+  while (decu.firstChild) {
+    var node = decu.firstChild; // Text nodes: wrap in a paragraph, or append to previous.
+
+    if (node.nodeType === TEXT_NODE) {
+      if (!node.nodeValue.trim()) {
+        decu.removeChild(node);
+      } else {
+        if (!accu.lastChild || accu.lastChild.nodeName !== 'P') {
+          accu.appendChild(accuDoc.createElement('P'));
+        }
+
+        accu.lastChild.appendChild(node);
+      } // Element nodes.
+
+    } else if (node.nodeType === ELEMENT_NODE) {
+      // BR nodes: create a new paragraph on double, or append to previous.
+      if (node.nodeName === 'BR') {
+        if (node.nextSibling && node.nextSibling.nodeName === 'BR') {
+          accu.appendChild(accuDoc.createElement('P'));
+          decu.removeChild(node.nextSibling);
+        } // Don't append to an empty paragraph.
+
+
+        if (accu.lastChild && accu.lastChild.nodeName === 'P' && accu.lastChild.hasChildNodes()) {
+          accu.lastChild.appendChild(node);
+        } else {
+          decu.removeChild(node);
+        }
+      } else if (node.nodeName === 'P') {
+        // Only append non-empty paragraph nodes.
+        if (Object(_utils__WEBPACK_IMPORTED_MODULE_0__["isEmpty"])(node)) {
+          decu.removeChild(node);
+        } else {
+          accu.appendChild(node);
+        }
+      } else if (Object(_phrasing_content__WEBPACK_IMPORTED_MODULE_1__["isPhrasingContent"])(node)) {
+        if (!accu.lastChild || accu.lastChild.nodeName !== 'P') {
+          accu.appendChild(accuDoc.createElement('P'));
+        }
+
+        accu.lastChild.appendChild(node);
+      } else {
+        accu.appendChild(node);
+      }
+    } else {
+      decu.removeChild(node);
+    }
+  }
+
+  return accu.innerHTML;
+});
+
+
+/***/ }),
+
+/***/ "./packages/blocks/build-module/api/raw-handling/paste-handler.js":
+/*!************************************************************************!*\
+  !*** ./packages/blocks/build-module/api/raw-handling/paste-handler.js ***!
+  \************************************************************************/
+/*! exports provided: pasteHandler */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pasteHandler", function() { return pasteHandler; });
+/* harmony import */ var _babel_runtime_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectSpread */ "./node_modules/@babel/runtime/helpers/esm/objectSpread.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "lodash");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _factory__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../factory */ "./packages/blocks/build-module/api/factory.js");
+/* harmony import */ var _serializer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../serializer */ "./packages/blocks/build-module/api/serializer.js");
+/* harmony import */ var _parser__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../parser */ "./packages/blocks/build-module/api/parser.js");
+/* harmony import */ var _normalise_blocks__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./normalise-blocks */ "./packages/blocks/build-module/api/raw-handling/normalise-blocks.js");
+/* harmony import */ var _special_comment_converter__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./special-comment-converter */ "./packages/blocks/build-module/api/raw-handling/special-comment-converter.js");
+/* harmony import */ var _comment_remover__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./comment-remover */ "./packages/blocks/build-module/api/raw-handling/comment-remover.js");
+/* harmony import */ var _is_inline_content__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./is-inline-content */ "./packages/blocks/build-module/api/raw-handling/is-inline-content.js");
+/* harmony import */ var _phrasing_content_reducer__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./phrasing-content-reducer */ "./packages/blocks/build-module/api/raw-handling/phrasing-content-reducer.js");
+/* harmony import */ var _head_remover__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./head-remover */ "./packages/blocks/build-module/api/raw-handling/head-remover.js");
+/* harmony import */ var _ms_list_converter__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./ms-list-converter */ "./packages/blocks/build-module/api/raw-handling/ms-list-converter.js");
+/* harmony import */ var _list_reducer__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./list-reducer */ "./packages/blocks/build-module/api/raw-handling/list-reducer.js");
+/* harmony import */ var _image_corrector__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./image-corrector */ "./packages/blocks/build-module/api/raw-handling/image-corrector.js");
+/* harmony import */ var _blockquote_normaliser__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./blockquote-normaliser */ "./packages/blocks/build-module/api/raw-handling/blockquote-normaliser.js");
+/* harmony import */ var _figure_content_reducer__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./figure-content-reducer */ "./packages/blocks/build-module/api/raw-handling/figure-content-reducer.js");
+/* harmony import */ var _shortcode_converter__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./shortcode-converter */ "./packages/blocks/build-module/api/raw-handling/shortcode-converter.js");
+/* harmony import */ var _markdown_converter__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./markdown-converter */ "./packages/blocks/build-module/api/raw-handling/markdown-converter.js");
+/* harmony import */ var _iframe_remover__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./iframe-remover */ "./packages/blocks/build-module/api/raw-handling/iframe-remover.js");
+/* harmony import */ var _google_docs_uid_remover__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./google-docs-uid-remover */ "./packages/blocks/build-module/api/raw-handling/google-docs-uid-remover.js");
+/* harmony import */ var _phrasing_content__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./phrasing-content */ "./packages/blocks/build-module/api/raw-handling/phrasing-content.js");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./utils */ "./packages/blocks/build-module/api/raw-handling/utils.js");
+
+
+/**
+ * External dependencies
+ */
+
+/**
+ * Internal dependencies
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * Browser dependencies
+ */
+
+var _window = window,
+    console = _window.console;
+/**
+ * Filters HTML to only contain phrasing content.
+ *
+ * @param {string} HTML The HTML to filter.
+ *
+ * @return {string} HTML only containing phrasing content.
+ */
+
+function filterInlineHTML(HTML) {
+  HTML = Object(_utils__WEBPACK_IMPORTED_MODULE_21__["deepFilterHTML"])(HTML, [_google_docs_uid_remover__WEBPACK_IMPORTED_MODULE_19__["default"], _phrasing_content_reducer__WEBPACK_IMPORTED_MODULE_9__["default"], _comment_remover__WEBPACK_IMPORTED_MODULE_7__["default"]]);
+  HTML = Object(_utils__WEBPACK_IMPORTED_MODULE_21__["removeInvalidHTML"])(HTML, Object(_phrasing_content__WEBPACK_IMPORTED_MODULE_20__["getPhrasingContentSchema"])(), {
+    inline: true
+  }); // Allows us to ask for this information when we get a report.
+
+  console.log('Processed inline HTML:\n\n', HTML);
+  return HTML;
+}
+
+function getRawTransformations() {
+  return Object(lodash__WEBPACK_IMPORTED_MODULE_1__["filter"])(Object(_factory__WEBPACK_IMPORTED_MODULE_2__["getBlockTransforms"])('from'), {
+    type: 'raw'
+  }).map(function (transform) {
+    return transform.isMatch ? transform : Object(_babel_runtime_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, transform, {
+      isMatch: function isMatch(node) {
+        return transform.selector && node.matches(transform.selector);
+      }
+    });
+  });
+}
+/**
+ * Converts HTML directly to blocks. Looks for a matching transform for each
+ * top-level tag. The HTML should be filtered to not have any text between
+ * top-level tags and formatted in a way that blocks can handle the HTML.
+ *
+ * @param  {Object} $1               Named parameters.
+ * @param  {string} $1.html          HTML to convert.
+ * @param  {Array}  $1.rawTransforms Transforms that can be used.
+ *
+ * @return {Array} An array of blocks.
+ */
+
+
+function htmlToBlocks(_ref) {
+  var html = _ref.html,
+      rawTransforms = _ref.rawTransforms;
+  var doc = document.implementation.createHTMLDocument('');
+  doc.body.innerHTML = html;
+  return Array.from(doc.body.children).map(function (node) {
+    var rawTransform = Object(_factory__WEBPACK_IMPORTED_MODULE_2__["findTransform"])(rawTransforms, function (_ref2) {
+      var isMatch = _ref2.isMatch;
+      return isMatch(node);
+    });
+
+    if (!rawTransform) {
+      return Object(_factory__WEBPACK_IMPORTED_MODULE_2__["createBlock"])( // Should not be hardcoded.
+      'core/html', Object(_parser__WEBPACK_IMPORTED_MODULE_4__["getBlockAttributes"])('core/html', node.outerHTML));
+    }
+
+    var transform = rawTransform.transform,
+        blockName = rawTransform.blockName;
+
+    if (transform) {
+      return transform(node);
+    }
+
+    return Object(_factory__WEBPACK_IMPORTED_MODULE_2__["createBlock"])(blockName, Object(_parser__WEBPACK_IMPORTED_MODULE_4__["getBlockAttributes"])(blockName, node.outerHTML));
+  });
+}
+/**
+ * Converts an HTML string to known blocks. Strips everything else.
+ *
+ * @param {Object}  options
+ * @param {string}  [options.HTML]                     The HTML to convert.
+ * @param {string}  [options.plainText]                Plain text version.
+ * @param {string}  [options.mode]                     Handle content as blocks or inline content.
+ *                                                     * 'AUTO': Decide based on the content passed.
+ *                                                     * 'INLINE': Always handle as inline content, and return string.
+ *                                                     * 'BLOCKS': Always handle as blocks, and return array of blocks.
+ * @param {Array}   [options.tagName]                  The tag into which content will be inserted.
+ * @param {boolean} [options.canUserUseUnfilteredHTML] Whether or not the user can use unfiltered HTML.
+ *
+ * @return {Array|string} A list of blocks or a string, depending on `handlerMode`.
+ */
+
+
+function pasteHandler(_ref3) {
+  var _ref3$HTML = _ref3.HTML,
+      HTML = _ref3$HTML === void 0 ? '' : _ref3$HTML,
+      _ref3$plainText = _ref3.plainText,
+      plainText = _ref3$plainText === void 0 ? '' : _ref3$plainText,
+      _ref3$mode = _ref3.mode,
+      mode = _ref3$mode === void 0 ? 'AUTO' : _ref3$mode,
+      tagName = _ref3.tagName,
+      _ref3$canUserUseUnfil = _ref3.canUserUseUnfilteredHTML,
+      canUserUseUnfilteredHTML = _ref3$canUserUseUnfil === void 0 ? false : _ref3$canUserUseUnfil;
+  // First of all, strip any meta tags.
+  HTML = HTML.replace(/<meta[^>]+>/, ''); // If we detect block delimiters in HTML, parse entirely as blocks.
+
+  if (mode !== 'INLINE') {
+    // Check plain text if there is no HTML.
+    var content = HTML ? HTML : plainText;
+
+    if (content.indexOf('<!-- wp:') !== -1) {
+      return Object(_parser__WEBPACK_IMPORTED_MODULE_4__["parseWithGrammar"])(content);
+    }
+  } // Normalize unicode to use composed characters.
+  // This is unsupported in IE 11 but it's a nice-to-have feature, not mandatory.
+  // Not normalizing the content will only affect older browsers and won't
+  // entirely break the app.
+  // See: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/normalize
+  // See: https://core.trac.wordpress.org/ticket/30130
+  // See: https://github.com/WordPress/gutenberg/pull/6983#pullrequestreview-125151075
+
+
+  if (String.prototype.normalize) {
+    HTML = HTML.normalize();
+  } // Parse Markdown (and encoded HTML) if:
+  // * There is a plain text version.
+  // * There is no HTML version, or it has no formatting.
+
+
+  if (plainText && (!HTML || Object(_utils__WEBPACK_IMPORTED_MODULE_21__["isPlain"])(HTML))) {
+    HTML = Object(_markdown_converter__WEBPACK_IMPORTED_MODULE_17__["default"])(plainText); // Switch to inline mode if:
+    // * The current mode is AUTO.
+    // * The original plain text had no line breaks.
+    // * The original plain text was not an HTML paragraph.
+    // * The converted text is just a paragraph.
+
+    if (mode === 'AUTO' && plainText.indexOf('\n') === -1 && plainText.indexOf('<p>') !== 0 && HTML.indexOf('<p>') === 0) {
+      mode = 'INLINE';
+    }
+  }
+
+  if (mode === 'INLINE') {
+    return filterInlineHTML(HTML);
+  } // An array of HTML strings and block objects. The blocks replace matched
+  // shortcodes.
+
+
+  var pieces = Object(_shortcode_converter__WEBPACK_IMPORTED_MODULE_16__["default"])(HTML); // The call to shortcodeConverter will always return more than one element
+  // if shortcodes are matched. The reason is when shortcodes are matched
+  // empty HTML strings are included.
+
+  var hasShortcodes = pieces.length > 1;
+
+  if (mode === 'AUTO' && !hasShortcodes && Object(_is_inline_content__WEBPACK_IMPORTED_MODULE_8__["default"])(HTML, tagName)) {
+    return filterInlineHTML(HTML);
+  }
+
+  var rawTransforms = getRawTransformations();
+  var phrasingContentSchema = Object(_phrasing_content__WEBPACK_IMPORTED_MODULE_20__["getPhrasingContentSchema"])();
+  var blockContentSchema = Object(_utils__WEBPACK_IMPORTED_MODULE_21__["getBlockContentSchema"])(rawTransforms);
+  var blocks = Object(lodash__WEBPACK_IMPORTED_MODULE_1__["compact"])(Object(lodash__WEBPACK_IMPORTED_MODULE_1__["flatMap"])(pieces, function (piece) {
+    // Already a block from shortcode.
+    if (typeof piece !== 'string') {
+      return piece;
+    }
+
+    var filters = [_google_docs_uid_remover__WEBPACK_IMPORTED_MODULE_19__["default"], _ms_list_converter__WEBPACK_IMPORTED_MODULE_11__["default"], _head_remover__WEBPACK_IMPORTED_MODULE_10__["default"], _list_reducer__WEBPACK_IMPORTED_MODULE_12__["default"], _image_corrector__WEBPACK_IMPORTED_MODULE_13__["default"], _phrasing_content_reducer__WEBPACK_IMPORTED_MODULE_9__["default"], _special_comment_converter__WEBPACK_IMPORTED_MODULE_6__["default"], _comment_remover__WEBPACK_IMPORTED_MODULE_7__["default"], _figure_content_reducer__WEBPACK_IMPORTED_MODULE_15__["default"], _blockquote_normaliser__WEBPACK_IMPORTED_MODULE_14__["default"]];
+
+    if (!canUserUseUnfilteredHTML) {
+      // Should run before `figureContentReducer`.
+      filters.unshift(_iframe_remover__WEBPACK_IMPORTED_MODULE_18__["default"]);
+    }
+
+    var schema = Object(_babel_runtime_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, blockContentSchema, phrasingContentSchema);
+
+    piece = Object(_utils__WEBPACK_IMPORTED_MODULE_21__["deepFilterHTML"])(piece, filters, blockContentSchema);
+    piece = Object(_utils__WEBPACK_IMPORTED_MODULE_21__["removeInvalidHTML"])(piece, schema);
+    piece = Object(_normalise_blocks__WEBPACK_IMPORTED_MODULE_5__["default"])(piece); // Allows us to ask for this information when we get a report.
+
+    console.log('Processed HTML piece:\n\n', piece);
+    return htmlToBlocks({
+      html: piece,
+      rawTransforms: rawTransforms
+    });
+  })); // If we're allowed to return inline content and there is only one block
+  // and the original plain text content does not have any line breaks, then
+  // treat it as inline paste.
+
+  if (mode === 'AUTO' && blocks.length === 1) {
+    var trimmedPlainText = plainText.trim();
+
+    if (trimmedPlainText !== '' && trimmedPlainText.indexOf('\n') === -1) {
+      return Object(_utils__WEBPACK_IMPORTED_MODULE_21__["removeInvalidHTML"])(Object(_serializer__WEBPACK_IMPORTED_MODULE_3__["getBlockContent"])(blocks[0]), phrasingContentSchema);
+    }
+  }
+
+  return blocks;
+}
+
+
+/***/ }),
+
+/***/ "./packages/blocks/build-module/api/raw-handling/phrasing-content-reducer.js":
+/*!***********************************************************************************!*\
+  !*** ./packages/blocks/build-module/api/raw-handling/phrasing-content-reducer.js ***!
+  \***********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_dom__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/dom */ "@wordpress/dom");
+/* harmony import */ var _wordpress_dom__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_dom__WEBPACK_IMPORTED_MODULE_0__);
+/**
+ * WordPress dependencies
+ */
+
+/* harmony default export */ __webpack_exports__["default"] = (function (node, doc) {
+  // In jsdom-jscore, 'node.style' can be null.
+  // TODO: Explore fixing this by patching jsdom-jscore.
+  if (node.nodeName === 'SPAN' && node.style) {
+    var _node$style = node.style,
+        fontWeight = _node$style.fontWeight,
+        fontStyle = _node$style.fontStyle,
+        textDecorationLine = _node$style.textDecorationLine,
+        verticalAlign = _node$style.verticalAlign;
+
+    if (fontWeight === 'bold' || fontWeight === '700') {
+      Object(_wordpress_dom__WEBPACK_IMPORTED_MODULE_0__["wrap"])(doc.createElement('strong'), node);
+    }
+
+    if (fontStyle === 'italic') {
+      Object(_wordpress_dom__WEBPACK_IMPORTED_MODULE_0__["wrap"])(doc.createElement('em'), node);
+    }
+
+    if (textDecorationLine === 'line-through') {
+      Object(_wordpress_dom__WEBPACK_IMPORTED_MODULE_0__["wrap"])(doc.createElement('s'), node);
+    }
+
+    if (verticalAlign === 'super') {
+      Object(_wordpress_dom__WEBPACK_IMPORTED_MODULE_0__["wrap"])(doc.createElement('sup'), node);
+    } else if (verticalAlign === 'sub') {
+      Object(_wordpress_dom__WEBPACK_IMPORTED_MODULE_0__["wrap"])(doc.createElement('sub'), node);
+    }
+  } else if (node.nodeName === 'B') {
+    node = Object(_wordpress_dom__WEBPACK_IMPORTED_MODULE_0__["replaceTag"])(node, 'strong');
+  } else if (node.nodeName === 'I') {
+    node = Object(_wordpress_dom__WEBPACK_IMPORTED_MODULE_0__["replaceTag"])(node, 'em');
+  } else if (node.nodeName === 'A') {
+    // In jsdom-jscore, 'node.target' can be null.
+    // TODO: Explore fixing this by patching jsdom-jscore.
+    if (node.target && node.target.toLowerCase() === '_blank') {
+      node.rel = 'noreferrer noopener';
+    } else {
+      node.removeAttribute('target');
+      node.removeAttribute('rel');
+    }
+  }
+});
+
+
+/***/ }),
+
+/***/ "./packages/blocks/build-module/api/raw-handling/phrasing-content.js":
+/*!***************************************************************************!*\
+  !*** ./packages/blocks/build-module/api/raw-handling/phrasing-content.js ***!
+  \***************************************************************************/
+/*! exports provided: getPhrasingContentSchema, isPhrasingContent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getPhrasingContentSchema", function() { return getPhrasingContentSchema; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isPhrasingContent", function() { return isPhrasingContent; });
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ "lodash");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);
+/**
+ * External dependencies
+ */
+
+var phrasingContentSchema = {
+  strong: {},
+  em: {},
+  s: {},
+  del: {},
+  ins: {},
+  a: {
+    attributes: ['href', 'target', 'rel']
+  },
+  code: {},
+  abbr: {
+    attributes: ['title']
+  },
+  sub: {},
+  sup: {},
+  br: {},
+  '#text': {}
+}; // Recursion is needed.
+// Possible: strong > em > strong.
+// Impossible: strong > strong.
+
+['strong', 'em', 's', 'del', 'ins', 'a', 'code', 'abbr', 'sub', 'sup'].forEach(function (tag) {
+  phrasingContentSchema[tag].children = Object(lodash__WEBPACK_IMPORTED_MODULE_0__["omit"])(phrasingContentSchema, tag);
+});
+/**
+ * Get schema of possible paths for phrasing content.
+ *
+ * @see https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Content_categories#Phrasing_content
+ *
+ * @return {Object} Schema.
+ */
+
+function getPhrasingContentSchema() {
+  return phrasingContentSchema;
+}
+/**
+ * Find out whether or not the given node is phrasing content.
+ *
+ * @see https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Content_categories#Phrasing_content
+ *
+ * @param {Element} node The node to test.
+ *
+ * @return {boolean} True if phrasing content, false if not.
+ */
+
+function isPhrasingContent(node) {
+  var tag = node.nodeName.toLowerCase();
+  return getPhrasingContentSchema().hasOwnProperty(tag) || tag === 'span';
+}
+
+
+/***/ }),
+
+/***/ "./packages/blocks/build-module/api/raw-handling/shortcode-converter.js":
+/*!******************************************************************************!*\
+  !*** ./packages/blocks/build-module/api/raw-handling/shortcode-converter.js ***!
+  \******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/toConsumableArray */ "./node_modules/@babel/runtime/helpers/esm/toConsumableArray.js");
+/* harmony import */ var _babel_runtime_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectSpread */ "./node_modules/@babel/runtime/helpers/esm/objectSpread.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lodash */ "lodash");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_shortcode__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/shortcode */ "@wordpress/shortcode");
+/* harmony import */ var _wordpress_shortcode__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_shortcode__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _factory__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../factory */ "./packages/blocks/build-module/api/factory.js");
+/* harmony import */ var _registration__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../registration */ "./packages/blocks/build-module/api/registration.js");
+/* harmony import */ var _parser__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../parser */ "./packages/blocks/build-module/api/parser.js");
+
+
+
+/**
+ * External dependencies
+ */
+
+/**
+ * WordPress dependencies
+ */
+
+
+/**
+ * Internal dependencies
+ */
+
+
+
+
+
+function segmentHTMLToShortcodeBlock(HTML) {
+  var lastIndex = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+  // Get all matches.
+  var transformsFrom = Object(_factory__WEBPACK_IMPORTED_MODULE_4__["getBlockTransforms"])('from');
+  var transformation = Object(_factory__WEBPACK_IMPORTED_MODULE_4__["findTransform"])(transformsFrom, function (transform) {
+    return transform.type === 'shortcode' && Object(lodash__WEBPACK_IMPORTED_MODULE_2__["some"])(Object(lodash__WEBPACK_IMPORTED_MODULE_2__["castArray"])(transform.tag), function (tag) {
+      return Object(_wordpress_shortcode__WEBPACK_IMPORTED_MODULE_3__["regexp"])(tag).test(HTML);
+    });
+  });
+
+  if (!transformation) {
+    return [HTML];
+  }
+
+  var transformTags = Object(lodash__WEBPACK_IMPORTED_MODULE_2__["castArray"])(transformation.tag);
+  var transformTag = Object(lodash__WEBPACK_IMPORTED_MODULE_2__["first"])(transformTags);
+  var match;
+
+  if (match = Object(_wordpress_shortcode__WEBPACK_IMPORTED_MODULE_3__["next"])(transformTag, HTML, lastIndex)) {
+    var beforeHTML = HTML.substr(0, match.index);
+    lastIndex = match.index + match.content.length; // If the shortcode content does not contain HTML and the shortcode is
+    // not on a new line (or in paragraph from Markdown converter),
+    // consider the shortcode as inline text, and thus skip conversion for
+    // this segment.
+
+    if (!Object(lodash__WEBPACK_IMPORTED_MODULE_2__["includes"])(match.shortcode.content || '', '<') && !/(\n|<p>)\s*$/.test(beforeHTML)) {
+      return segmentHTMLToShortcodeBlock(HTML, lastIndex);
+    }
+
+    var attributes = Object(lodash__WEBPACK_IMPORTED_MODULE_2__["mapValues"])(Object(lodash__WEBPACK_IMPORTED_MODULE_2__["pickBy"])(transformation.attributes, function (schema) {
+      return schema.shortcode;
+    }), // Passing all of `match` as second argument is intentionally broad
+    // but shouldn't be too relied upon.
+    //
+    // See: https://github.com/WordPress/gutenberg/pull/3610#discussion_r152546926
+    function (schema) {
+      return schema.shortcode(match.shortcode.attrs, match);
+    });
+    var block = Object(_factory__WEBPACK_IMPORTED_MODULE_4__["createBlock"])(transformation.blockName, Object(_parser__WEBPACK_IMPORTED_MODULE_6__["getBlockAttributes"])(Object(_babel_runtime_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, Object(_registration__WEBPACK_IMPORTED_MODULE_5__["getBlockType"])(transformation.blockName), {
+      attributes: transformation.attributes
+    }), match.shortcode.content, attributes));
+    return [beforeHTML, block].concat(Object(_babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(segmentHTMLToShortcodeBlock(HTML.substr(lastIndex))));
+  }
+
+  return [HTML];
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (segmentHTMLToShortcodeBlock);
+
+
+/***/ }),
+
+/***/ "./packages/blocks/build-module/api/raw-handling/special-comment-converter.js":
+/*!************************************************************************************!*\
+  !*** ./packages/blocks/build-module/api/raw-handling/special-comment-converter.js ***!
+  \************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_dom__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/dom */ "@wordpress/dom");
+/* harmony import */ var _wordpress_dom__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_dom__WEBPACK_IMPORTED_MODULE_0__);
+/**
+ * WordPress dependencies
+ */
+
+/**
+ * Browser dependencies
+ */
+
+var COMMENT_NODE = window.Node.COMMENT_NODE;
+/**
+ * Looks for `<!--nextpage-->` and `<!--more-->` comments, as well as the
+ * `<!--more Some text-->` variant and its `<!--noteaser-->` companion,
+ * and replaces them with a custom element representing a future block.
+ *
+ * The custom element is a way to bypass the rest of the `raw-handling`
+ * transforms, which would eliminate other kinds of node with which to carry
+ * `<!--more-->`'s data: nodes with `data` attributes, empty paragraphs, etc.
+ *
+ * The custom element is then expected to be recognized by any registered
+ * block's `raw` transform.
+ *
+ * @param {Node}     node The node to be processed.
+ * @param {Document} doc  The document of the node.
+ * @return {void}
+ */
+
+/* harmony default export */ __webpack_exports__["default"] = (function (node, doc) {
+  if (node.nodeType !== COMMENT_NODE) {
+    return;
+  }
+
+  if (node.nodeValue === 'nextpage') {
+    Object(_wordpress_dom__WEBPACK_IMPORTED_MODULE_0__["replace"])(node, createNextpage(doc));
+    return;
+  }
+
+  if (node.nodeValue.indexOf('more') === 0) {
+    // Grab any custom text in the comment.
+    var customText = node.nodeValue.slice(4).trim();
+    /*
+     * When a `<!--more-->` comment is found, we need to look for any
+     * `<!--noteaser-->` sibling, but it may not be a direct sibling
+     * (whitespace typically lies in between)
+     */
+
+    var sibling = node;
+    var noTeaser = false;
+
+    while (sibling = sibling.nextSibling) {
+      if (sibling.nodeType === COMMENT_NODE && sibling.nodeValue === 'noteaser') {
+        noTeaser = true;
+        Object(_wordpress_dom__WEBPACK_IMPORTED_MODULE_0__["remove"])(sibling);
+        break;
+      }
+    }
+
+    Object(_wordpress_dom__WEBPACK_IMPORTED_MODULE_0__["replace"])(node, createMore(customText, noTeaser, doc));
+  }
+});
+
+function createMore(customText, noTeaser, doc) {
+  var node = doc.createElement('wp-block');
+  node.dataset.block = 'core/more';
+
+  if (customText) {
+    node.dataset.customText = customText;
+  }
+
+  if (noTeaser) {
+    // "Boolean" data attribute
+    node.dataset.noTeaser = '';
+  }
+
+  return node;
+}
+
+function createNextpage(doc) {
+  var node = doc.createElement('wp-block');
+  node.dataset.block = 'core/nextpage';
+  return node;
+}
+
+
+/***/ }),
+
+/***/ "./packages/blocks/build-module/api/raw-handling/utils.js":
+/*!****************************************************************!*\
+  !*** ./packages/blocks/build-module/api/raw-handling/utils.js ***!
+  \****************************************************************/
+/*! exports provided: getBlockContentSchema, isEmpty, isPlain, deepFilterNodeList, deepFilterHTML, removeInvalidHTML */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getBlockContentSchema", function() { return getBlockContentSchema; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isEmpty", function() { return isEmpty; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isPlain", function() { return isPlain; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deepFilterNodeList", function() { return deepFilterNodeList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deepFilterHTML", function() { return deepFilterHTML; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeInvalidHTML", function() { return removeInvalidHTML; });
+/* harmony import */ var _babel_runtime_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectSpread */ "./node_modules/@babel/runtime/helpers/esm/objectSpread.js");
+/* harmony import */ var _babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/toConsumableArray */ "./node_modules/@babel/runtime/helpers/esm/toConsumableArray.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lodash */ "lodash");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/dom */ "@wordpress/dom");
+/* harmony import */ var _wordpress_dom__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_dom__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! .. */ "./packages/blocks/build-module/api/index.js");
+/* harmony import */ var _phrasing_content__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./phrasing-content */ "./packages/blocks/build-module/api/raw-handling/phrasing-content.js");
+
+
+
+/**
+ * External dependencies
+ */
+
+/**
+ * WordPress dependencies
+ */
+
+
+/**
+ * Internal dependencies
+ */
+
+
+
+/**
+ * Browser dependencies
+ */
+
+var _window$Node = window.Node,
+    ELEMENT_NODE = _window$Node.ELEMENT_NODE,
+    TEXT_NODE = _window$Node.TEXT_NODE;
+/**
+ * Given raw transforms from blocks, merges all schemas into one.
+ *
+ * @param {Array} transforms Block transforms, of the `raw` type.
+ *
+ * @return {Object} A complete block content schema.
+ */
+
+function getBlockContentSchema(transforms) {
+  var schemas = transforms.map(function (_ref) {
+    var isMatch = _ref.isMatch,
+        blockName = _ref.blockName,
+        schema = _ref.schema;
+    var hasAnchorSupport = Object(___WEBPACK_IMPORTED_MODULE_4__["hasBlockSupport"])(blockName, 'anchor'); // If the block does not has anchor support and the transform does not
+    // provides an isMatch we can return the schema right away.
+
+    if (!hasAnchorSupport && !isMatch) {
+      return schema;
+    }
+
+    return Object(lodash__WEBPACK_IMPORTED_MODULE_2__["mapValues"])(schema, function (value) {
+      var attributes = value.attributes || []; // If the block supports the "anchor" functionality, it needs to keep its ID attribute.
+
+      if (hasAnchorSupport) {
+        attributes = [].concat(Object(_babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_1__["default"])(attributes), ['id']);
+      }
+
+      return Object(_babel_runtime_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, value, {
+        attributes: attributes,
+        isMatch: isMatch ? isMatch : undefined
+      });
+    });
+  });
+  return lodash__WEBPACK_IMPORTED_MODULE_2__["mergeWith"].apply(void 0, [{}].concat(Object(_babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_1__["default"])(schemas), [function (objValue, srcValue, key) {
+    switch (key) {
+      case 'children':
+        {
+          if (objValue === '*' || srcValue === '*') {
+            return '*';
+          }
+
+          return Object(_babel_runtime_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, objValue, srcValue);
+        }
+
+      case 'attributes':
+      case 'require':
+        {
+          return [].concat(Object(_babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_1__["default"])(objValue || []), Object(_babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_1__["default"])(srcValue || []));
+        }
+
+      case 'isMatch':
+        {
+          // If one of the values being merge is undefined (matches everything),
+          // the result of the merge will be undefined.
+          if (!objValue || !srcValue) {
+            return undefined;
+          } // When merging two isMatch functions, the result is a new function
+          // that returns if one of the source functions returns true.
+
+
+          return function () {
+            return objValue.apply(void 0, arguments) || srcValue.apply(void 0, arguments);
+          };
+        }
+    }
+  }]));
+}
+/**
+ * Recursively checks if an element is empty. An element is not empty if it
+ * contains text or contains elements with attributes such as images.
+ *
+ * @param {Element} element The element to check.
+ *
+ * @return {boolean} Wether or not the element is empty.
+ */
+
+function isEmpty(element) {
+  if (!element.hasChildNodes()) {
+    return true;
+  }
+
+  return Array.from(element.childNodes).every(function (node) {
+    if (node.nodeType === TEXT_NODE) {
+      return !node.nodeValue.trim();
+    }
+
+    if (node.nodeType === ELEMENT_NODE) {
+      if (node.nodeName === 'BR') {
+        return true;
+      } else if (node.hasAttributes()) {
+        return false;
+      }
+
+      return isEmpty(node);
+    }
+
+    return true;
+  });
+}
+/**
+ * Checks wether HTML can be considered plain text. That is, it does not contain
+ * any elements that are not line breaks.
+ *
+ * @param {string} HTML The HTML to check.
+ *
+ * @return {boolean} Wether the HTML can be considered plain text.
+ */
+
+function isPlain(HTML) {
+  return !/<(?!br[ />])/i.test(HTML);
+}
+/**
+ * Given node filters, deeply filters and mutates a NodeList.
+ *
+ * @param {NodeList} nodeList The nodeList to filter.
+ * @param {Array}    filters  An array of functions that can mutate with the provided node.
+ * @param {Document} doc      The document of the nodeList.
+ * @param {Object}   schema   The schema to use.
+ */
+
+function deepFilterNodeList(nodeList, filters, doc, schema) {
+  Array.from(nodeList).forEach(function (node) {
+    deepFilterNodeList(node.childNodes, filters, doc, schema);
+    filters.forEach(function (item) {
+      // Make sure the node is still attached to the document.
+      if (!doc.contains(node)) {
+        return;
+      }
+
+      item(node, doc, schema);
+    });
+  });
+}
+/**
+ * Given node filters, deeply filters HTML tags.
+ * Filters from the deepest nodes to the top.
+ *
+ * @param {string} HTML    The HTML to filter.
+ * @param {Array}  filters An array of functions that can mutate with the provided node.
+ * @param {Object} schema  The schema to use.
+ *
+ * @return {string} The filtered HTML.
+ */
+
+function deepFilterHTML(HTML) {
+  var filters = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
+  var schema = arguments.length > 2 ? arguments[2] : undefined;
+  var doc = document.implementation.createHTMLDocument('');
+  doc.body.innerHTML = HTML;
+  deepFilterNodeList(doc.body.childNodes, filters, doc, schema);
+  return doc.body.innerHTML;
+}
+/**
+ * Given a schema, unwraps or removes nodes, attributes and classes on a node
+ * list.
+ *
+ * @param {NodeList} nodeList The nodeList to filter.
+ * @param {Document} doc      The document of the nodeList.
+ * @param {Object}   schema   An array of functions that can mutate with the provided node.
+ * @param {Object}   inline   Whether to clean for inline mode.
+ */
+
+function cleanNodeList(nodeList, doc, schema, inline) {
+  Array.from(nodeList).forEach(function (node) {
+    var tag = node.nodeName.toLowerCase(); // It's a valid child, if the tag exists in the schema without an isMatch
+    // function, or with an isMatch function that matches the node.
+
+    if (schema.hasOwnProperty(tag) && (!schema[tag].isMatch || schema[tag].isMatch(node))) {
+      if (node.nodeType === ELEMENT_NODE) {
+        var _schema$tag = schema[tag],
+            _schema$tag$attribute = _schema$tag.attributes,
+            attributes = _schema$tag$attribute === void 0 ? [] : _schema$tag$attribute,
+            _schema$tag$classes = _schema$tag.classes,
+            classes = _schema$tag$classes === void 0 ? [] : _schema$tag$classes,
+            children = _schema$tag.children,
+            _schema$tag$require = _schema$tag.require,
+            require = _schema$tag$require === void 0 ? [] : _schema$tag$require,
+            allowEmpty = _schema$tag.allowEmpty; // If the node is empty and it's supposed to have children,
+        // remove the node.
+
+
+        if (children && !allowEmpty && isEmpty(node)) {
+          Object(_wordpress_dom__WEBPACK_IMPORTED_MODULE_3__["remove"])(node);
+          return;
+        }
+
+        if (node.hasAttributes()) {
+          // Strip invalid attributes.
+          Array.from(node.attributes).forEach(function (_ref2) {
+            var name = _ref2.name;
+
+            if (name !== 'class' && !Object(lodash__WEBPACK_IMPORTED_MODULE_2__["includes"])(attributes, name)) {
+              node.removeAttribute(name);
+            }
+          }); // Strip invalid classes.
+          // In jsdom-jscore, 'node.classList' can be undefined.
+          // TODO: Explore patching this in jsdom-jscore.
+
+          if (node.classList && node.classList.length) {
+            var mattchers = classes.map(function (item) {
+              if (typeof item === 'string') {
+                return function (className) {
+                  return className === item;
+                };
+              } else if (item instanceof RegExp) {
+                return function (className) {
+                  return item.test(className);
+                };
+              }
+
+              return lodash__WEBPACK_IMPORTED_MODULE_2__["noop"];
+            });
+            Array.from(node.classList).forEach(function (name) {
+              if (!mattchers.some(function (isMatch) {
+                return isMatch(name);
+              })) {
+                node.classList.remove(name);
+              }
+            });
+
+            if (!node.classList.length) {
+              node.removeAttribute('class');
+            }
+          }
+        }
+
+        if (node.hasChildNodes()) {
+          // Do not filter any content.
+          if (children === '*') {
+            return;
+          } // Continue if the node is supposed to have children.
+
+
+          if (children) {
+            // If a parent requires certain children, but it does
+            // not have them, drop the parent and continue.
+            if (require.length && !node.querySelector(require.join(','))) {
+              cleanNodeList(node.childNodes, doc, schema, inline);
+              Object(_wordpress_dom__WEBPACK_IMPORTED_MODULE_3__["unwrap"])(node); // If the node is at the top, phrasing content, and
+              // contains children that are block content, unwrap
+              // the node because it is invalid.
+            } else if (node.parentNode.nodeName === 'BODY' && Object(_phrasing_content__WEBPACK_IMPORTED_MODULE_5__["isPhrasingContent"])(node)) {
+              cleanNodeList(node.childNodes, doc, schema, inline);
+
+              if (Array.from(node.childNodes).some(function (child) {
+                return !Object(_phrasing_content__WEBPACK_IMPORTED_MODULE_5__["isPhrasingContent"])(child);
+              })) {
+                Object(_wordpress_dom__WEBPACK_IMPORTED_MODULE_3__["unwrap"])(node);
+              }
+            } else {
+              cleanNodeList(node.childNodes, doc, children, inline);
+            } // Remove children if the node is not supposed to have any.
+
+          } else {
+            while (node.firstChild) {
+              Object(_wordpress_dom__WEBPACK_IMPORTED_MODULE_3__["remove"])(node.firstChild);
+            }
+          }
+        }
+      } // Invalid child. Continue with schema at the same place and unwrap.
+
+    } else {
+      cleanNodeList(node.childNodes, doc, schema, inline); // For inline mode, insert a line break when unwrapping nodes that
+      // are not phrasing content.
+
+      if (inline && !Object(_phrasing_content__WEBPACK_IMPORTED_MODULE_5__["isPhrasingContent"])(node) && node.nextElementSibling) {
+        Object(_wordpress_dom__WEBPACK_IMPORTED_MODULE_3__["insertAfter"])(doc.createElement('br'), node);
+      }
+
+      Object(_wordpress_dom__WEBPACK_IMPORTED_MODULE_3__["unwrap"])(node);
+    }
+  });
+}
+/**
+ * Given a schema, unwraps or removes nodes, attributes and classes on HTML.
+ *
+ * @param {string} HTML   The HTML to clean up.
+ * @param {Object} schema Schema for the HTML.
+ * @param {Object} inline Whether to clean for inline mode.
+ *
+ * @return {string} The cleaned up HTML.
+ */
+
+
+function removeInvalidHTML(HTML, schema, inline) {
+  var doc = document.implementation.createHTMLDocument('');
+  doc.body.innerHTML = HTML;
+  cleanNodeList(doc.body.childNodes, doc, schema, inline);
+  return doc.body.innerHTML;
+}
+
+
+/***/ }),
+
+/***/ "./packages/blocks/build-module/api/registration.js":
+/*!**********************************************************!*\
+  !*** ./packages/blocks/build-module/api/registration.js ***!
+  \**********************************************************/
+/*! exports provided: DEFAULT_BLOCK_TYPE_SETTINGS, serverSideBlockDefinitions, unstable__bootstrapServerSideBlockDefinitions, registerBlockType, unregisterBlockType, setFreeformContentHandlerName, getFreeformContentHandlerName, getGroupingBlockName, setUnregisteredTypeHandlerName, getUnregisteredTypeHandlerName, setDefaultBlockName, setGroupingBlockName, getDefaultBlockName, getBlockType, getBlockTypes, getBlockSupport, hasBlockSupport, isReusableBlock, getChildBlockNames, hasChildBlocks, hasChildBlocksWithInserterSupport, registerBlockStyle, unregisterBlockStyle */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DEFAULT_BLOCK_TYPE_SETTINGS", function() { return DEFAULT_BLOCK_TYPE_SETTINGS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "serverSideBlockDefinitions", function() { return serverSideBlockDefinitions; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "unstable__bootstrapServerSideBlockDefinitions", function() { return unstable__bootstrapServerSideBlockDefinitions; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "registerBlockType", function() { return registerBlockType; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "unregisterBlockType", function() { return unregisterBlockType; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setFreeformContentHandlerName", function() { return setFreeformContentHandlerName; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getFreeformContentHandlerName", function() { return getFreeformContentHandlerName; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getGroupingBlockName", function() { return getGroupingBlockName; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setUnregisteredTypeHandlerName", function() { return setUnregisteredTypeHandlerName; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getUnregisteredTypeHandlerName", function() { return getUnregisteredTypeHandlerName; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setDefaultBlockName", function() { return setDefaultBlockName; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setGroupingBlockName", function() { return setGroupingBlockName; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getDefaultBlockName", function() { return getDefaultBlockName; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getBlockType", function() { return getBlockType; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getBlockTypes", function() { return getBlockTypes; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getBlockSupport", function() { return getBlockSupport; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hasBlockSupport", function() { return hasBlockSupport; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isReusableBlock", function() { return isReusableBlock; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getChildBlockNames", function() { return getChildBlockNames; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hasChildBlocks", function() { return hasChildBlocks; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hasChildBlocksWithInserterSupport", function() { return hasChildBlocksWithInserterSupport; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "registerBlockStyle", function() { return registerBlockStyle; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "unregisterBlockStyle", function() { return unregisterBlockStyle; });
+/* harmony import */ var _babel_runtime_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectSpread */ "./node_modules/@babel/runtime/helpers/esm/objectSpread.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "lodash");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/hooks */ "@wordpress/hooks");
+/* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./utils */ "./packages/blocks/build-module/api/utils.js");
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./constants */ "./packages/blocks/build-module/api/constants.js");
+
+
+/* eslint no-console: [ 'error', { allow: [ 'error' ] } ] */
+
+/**
+ * External dependencies
+ */
+
+/**
+ * WordPress dependencies
+ */
+
+
+
+/**
+ * Internal dependencies
+ */
+
+
+
+/**
+ * Render behavior of a block type icon; one of a Dashicon slug, an element,
+ * or a component.
+ *
+ * @typedef {(string|WPElement|WPComponent)} WPBlockTypeIconRender
+ *
+ * @see https://developer.wordpress.org/resource/dashicons/
+ */
+
+/**
+ * An object describing a normalized block type icon.
+ *
+ * @typedef {Object} WPBlockTypeIconDescriptor
+ *
+ * @property {WPBlockTypeIconRender} src         Render behavior of the icon,
+ *                                               one of a Dashicon slug, an
+ *                                               element, or a component.
+ * @property {string}                background  Optimal background hex string
+ *                                               color when displaying icon.
+ * @property {string}                foreground  Optimal foreground hex string
+ *                                               color when displaying icon.
+ * @property {string}                shadowColor Optimal shadow hex string
+ *                                               color when displaying icon.
+ */
+
+/**
+ * Value to use to render the icon for a block type in an editor interface,
+ * either a Dashicon slug, an element, a component, or an object describing
+ * the icon.
+ *
+ * @typedef {(WPBlockTypeIconDescriptor|WPBlockTypeIconRender)} WPBlockTypeIcon
+ */
+
+/**
+ * Defined behavior of a block type.
+ *
+ * @typedef {Object} WPBlockType
+ *
+ * @property {string}           name        Block type's namespaced name.
+ * @property {string}           title       Human-readable block type label.
+ * @property {string}           category    Block type category classification,
+ *                                          used in search interfaces to arrange
+ *                                          block types by category.
+ * @property {WPBlockTypeIcon} [icon]       Block type icon.
+ * @property {string[]}        [keywords]   Additional keywords to produce block
+ *                                          type as result in search interfaces.
+ * @property {Object}          [attributes] Block type attributes.
+ * @property {WPComponent}     [save]       Optional component describing
+ *                                          serialized markup structure of a
+ *                                          block type.
+ * @property {WPComponent}      edit        Component rendering an element to
+ *                                          manipulate the attributes of a block
+ *                                          in the context of an editor.
+ */
+
+/**
+ * Default values to assign for omitted optional block type settings.
+ *
+ * @type {Object}
+ */
+
+var DEFAULT_BLOCK_TYPE_SETTINGS = {
+  icon: 'block-default',
+  attributes: {},
+  keywords: [],
+  save: function save() {
+    return null;
+  }
+};
+var serverSideBlockDefinitions = {};
+/**
+ * Sets the server side block definition of blocks.
+ *
+ * @param {Object} definitions Server-side block definitions
+ */
+
+function unstable__bootstrapServerSideBlockDefinitions(definitions) {
+  // eslint-disable-line camelcase
+  serverSideBlockDefinitions = Object(_babel_runtime_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, serverSideBlockDefinitions, definitions);
+}
+/**
+ * Registers a new block provided a unique name and an object defining its
+ * behavior. Once registered, the block is made available as an option to any
+ * editor interface where blocks are implemented.
+ *
+ * @param {string} name     Block name.
+ * @param {Object} settings Block settings.
+ *
+ * @return {?WPBlock} The block, if it has been successfully registered;
+ *                     otherwise `undefined`.
+ */
+
+function registerBlockType(name, settings) {
+  settings = Object(_babel_runtime_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({
+    name: name
+  }, DEFAULT_BLOCK_TYPE_SETTINGS, Object(lodash__WEBPACK_IMPORTED_MODULE_1__["get"])(serverSideBlockDefinitions, name), settings);
+
+  if (typeof name !== 'string') {
+    console.error('Block names must be strings.');
+    return;
+  }
+
+  if (!/^[a-z][a-z0-9-]*\/[a-z][a-z0-9-]*$/.test(name)) {
+    console.error('Block names must contain a namespace prefix, include only lowercase alphanumeric characters or dashes, and start with a letter. Example: my-plugin/my-custom-block');
+    return;
+  }
+
+  if (Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_3__["select"])('core/blocks').getBlockType(name)) {
+    console.error('Block "' + name + '" is already registered.');
+    return;
+  }
+
+  var preFilterSettings = Object(_babel_runtime_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, settings);
+
+  settings = Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_2__["applyFilters"])('blocks.registerBlockType', settings, name);
+
+  if (settings.deprecated) {
+    settings.deprecated = settings.deprecated.map(function (deprecation) {
+      return Object(lodash__WEBPACK_IMPORTED_MODULE_1__["pick"])( // Only keep valid deprecation keys.
+      Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_2__["applyFilters"])('blocks.registerBlockType', // Merge deprecation keys with pre-filter settings
+      // so that filters that depend on specific keys being
+      // present don't fail.
+      Object(_babel_runtime_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, Object(lodash__WEBPACK_IMPORTED_MODULE_1__["omit"])(preFilterSettings, _constants__WEBPACK_IMPORTED_MODULE_5__["DEPRECATED_ENTRY_KEYS"]), deprecation), name), _constants__WEBPACK_IMPORTED_MODULE_5__["DEPRECATED_ENTRY_KEYS"]);
+    });
+  }
+
+  if (!Object(lodash__WEBPACK_IMPORTED_MODULE_1__["isPlainObject"])(settings)) {
+    console.error('Block settings must be a valid object.');
+    return;
+  }
+
+  if (!Object(lodash__WEBPACK_IMPORTED_MODULE_1__["isFunction"])(settings.save)) {
+    console.error('The "save" property must be a valid function.');
+    return;
+  }
+
+  if ('edit' in settings && !Object(lodash__WEBPACK_IMPORTED_MODULE_1__["isFunction"])(settings.edit)) {
+    console.error('The "edit" property must be a valid function.');
+    return;
+  }
+
+  if (!('category' in settings)) {
+    console.error('The block "' + name + '" must have a category.');
+    return;
+  }
+
+  if ('category' in settings && !Object(lodash__WEBPACK_IMPORTED_MODULE_1__["some"])(Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_3__["select"])('core/blocks').getCategories(), {
+    slug: settings.category
+  })) {
+    console.error('The block "' + name + '" must have a registered category.');
+    return;
+  }
+
+  if (!('title' in settings) || settings.title === '') {
+    console.error('The block "' + name + '" must have a title.');
+    return;
+  }
+
+  if (typeof settings.title !== 'string') {
+    console.error('Block titles must be strings.');
+    return;
+  }
+
+  settings.icon = Object(_utils__WEBPACK_IMPORTED_MODULE_4__["normalizeIconObject"])(settings.icon);
+
+  if (!Object(_utils__WEBPACK_IMPORTED_MODULE_4__["isValidIcon"])(settings.icon.src)) {
+    console.error('The icon passed is invalid. ' + 'The icon should be a string, an element, a function, or an object following the specifications documented in https://developer.wordpress.org/block-editor/developers/block-api/block-registration/#icon-optional');
+    return;
+  }
+
+  Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_3__["dispatch"])('core/blocks').addBlockTypes(settings);
+  return settings;
+}
+/**
+ * Unregisters a block.
+ *
+ * @param {string} name Block name.
+ *
+ * @return {?WPBlock} The previous block value, if it has been successfully
+ *                     unregistered; otherwise `undefined`.
+ */
+
+function unregisterBlockType(name) {
+  var oldBlock = Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_3__["select"])('core/blocks').getBlockType(name);
+
+  if (!oldBlock) {
+    console.error('Block "' + name + '" is not registered.');
+    return;
+  }
+
+  Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_3__["dispatch"])('core/blocks').removeBlockTypes(name);
+  return oldBlock;
+}
+/**
+ * Assigns name of block for handling non-block content.
+ *
+ * @param {string} blockName Block name.
+ */
+
+function setFreeformContentHandlerName(blockName) {
+  Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_3__["dispatch"])('core/blocks').setFreeformFallbackBlockName(blockName);
+}
+/**
+ * Retrieves name of block handling non-block content, or undefined if no
+ * handler has been defined.
+ *
+ * @return {?string} Block name.
+ */
+
+function getFreeformContentHandlerName() {
+  return Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_3__["select"])('core/blocks').getFreeformFallbackBlockName();
+}
+/**
+ * Retrieves name of block used for handling grouping interactions.
+ *
+ * @return {?string} Block name.
+ */
+
+function getGroupingBlockName() {
+  return Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_3__["select"])('core/blocks').getGroupingBlockName();
+}
+/**
+ * Assigns name of block handling unregistered block types.
+ *
+ * @param {string} blockName Block name.
+ */
+
+function setUnregisteredTypeHandlerName(blockName) {
+  Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_3__["dispatch"])('core/blocks').setUnregisteredFallbackBlockName(blockName);
+}
+/**
+ * Retrieves name of block handling unregistered block types, or undefined if no
+ * handler has been defined.
+ *
+ * @return {?string} Block name.
+ */
+
+function getUnregisteredTypeHandlerName() {
+  return Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_3__["select"])('core/blocks').getUnregisteredFallbackBlockName();
+}
+/**
+ * Assigns the default block name.
+ *
+ * @param {string} name Block name.
+ */
+
+function setDefaultBlockName(name) {
+  Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_3__["dispatch"])('core/blocks').setDefaultBlockName(name);
+}
+/**
+ * Assigns name of block for handling block grouping interactions.
+ *
+ * @param {string} name Block name.
+ */
+
+function setGroupingBlockName(name) {
+  Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_3__["dispatch"])('core/blocks').setGroupingBlockName(name);
+}
+/**
+ * Retrieves the default block name.
+ *
+ * @return {?string} Block name.
+ */
+
+function getDefaultBlockName() {
+  return Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_3__["select"])('core/blocks').getDefaultBlockName();
+}
+/**
+ * Returns a registered block type.
+ *
+ * @param {string} name Block name.
+ *
+ * @return {?Object} Block type.
+ */
+
+function getBlockType(name) {
+  return Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_3__["select"])('core/blocks').getBlockType(name);
+}
+/**
+ * Returns all registered blocks.
+ *
+ * @return {Array} Block settings.
+ */
+
+function getBlockTypes() {
+  return Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_3__["select"])('core/blocks').getBlockTypes();
+}
+/**
+ * Returns the block support value for a feature, if defined.
+ *
+ * @param  {(string|Object)} nameOrType      Block name or type object
+ * @param  {string}          feature         Feature to retrieve
+ * @param  {*}               defaultSupports Default value to return if not
+ *                                           explicitly defined
+ *
+ * @return {?*} Block support value
+ */
+
+function getBlockSupport(nameOrType, feature, defaultSupports) {
+  return Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_3__["select"])('core/blocks').getBlockSupport(nameOrType, feature, defaultSupports);
+}
+/**
+ * Returns true if the block defines support for a feature, or false otherwise.
+ *
+ * @param {(string|Object)} nameOrType      Block name or type object.
+ * @param {string}          feature         Feature to test.
+ * @param {boolean}         defaultSupports Whether feature is supported by
+ *                                          default if not explicitly defined.
+ *
+ * @return {boolean} Whether block supports feature.
+ */
+
+function hasBlockSupport(nameOrType, feature, defaultSupports) {
+  return Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_3__["select"])('core/blocks').hasBlockSupport(nameOrType, feature, defaultSupports);
+}
+/**
+ * Determines whether or not the given block is a reusable block. This is a
+ * special block type that is used to point to a global block stored via the
+ * API.
+ *
+ * @param {Object} blockOrType Block or Block Type to test.
+ *
+ * @return {boolean} Whether the given block is a reusable block.
+ */
+
+function isReusableBlock(blockOrType) {
+  return blockOrType.name === 'core/block';
+}
+/**
+ * Returns an array with the child blocks of a given block.
+ *
+ * @param {string} blockName Name of block (example: “latest-posts”).
+ *
+ * @return {Array} Array of child block names.
+ */
+
+var getChildBlockNames = function getChildBlockNames(blockName) {
+  return Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_3__["select"])('core/blocks').getChildBlockNames(blockName);
+};
+/**
+ * Returns a boolean indicating if a block has child blocks or not.
+ *
+ * @param {string} blockName Name of block (example: “latest-posts”).
+ *
+ * @return {boolean} True if a block contains child blocks and false otherwise.
+ */
+
+var hasChildBlocks = function hasChildBlocks(blockName) {
+  return Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_3__["select"])('core/blocks').hasChildBlocks(blockName);
+};
+/**
+ * Returns a boolean indicating if a block has at least one child block with inserter support.
+ *
+ * @param {string} blockName Block type name.
+ *
+ * @return {boolean} True if a block contains at least one child blocks with inserter support
+ *                   and false otherwise.
+ */
+
+var hasChildBlocksWithInserterSupport = function hasChildBlocksWithInserterSupport(blockName) {
+  return Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_3__["select"])('core/blocks').hasChildBlocksWithInserterSupport(blockName);
+};
+/**
+ * Registers a new block style variation for the given block.
+ *
+ * @param {string} blockName      Name of block (example: “core/latest-posts”).
+ * @param {Object} styleVariation Object containing `name` which is the class name applied to the block and `label` which identifies the variation to the user.
+ */
+
+var registerBlockStyle = function registerBlockStyle(blockName, styleVariation) {
+  Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_3__["dispatch"])('core/blocks').addBlockStyles(blockName, styleVariation);
+};
+/**
+ * Unregisters a block style variation for the given block.
+ *
+ * @param {string} blockName          Name of block (example: “core/latest-posts”).
+ * @param {string} styleVariationName Name of class applied to the block.
+ */
+
+var unregisterBlockStyle = function unregisterBlockStyle(blockName, styleVariationName) {
+  Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_3__["dispatch"])('core/blocks').removeBlockStyles(blockName, styleVariationName);
+};
+
+
+/***/ }),
+
+/***/ "./packages/blocks/build-module/api/serializer.js":
+/*!********************************************************!*\
+  !*** ./packages/blocks/build-module/api/serializer.js ***!
+  \********************************************************/
+/*! exports provided: getBlockDefaultClassName, getBlockMenuDefaultClassName, getSaveElement, getSaveContent, getCommentAttributes, serializeAttributes, getBlockContent, getCommentDelimitedContent, serializeBlock, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getBlockDefaultClassName", function() { return getBlockDefaultClassName; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getBlockMenuDefaultClassName", function() { return getBlockMenuDefaultClassName; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getSaveElement", function() { return getSaveElement; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getSaveContent", function() { return getSaveContent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCommentAttributes", function() { return getCommentAttributes; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "serializeAttributes", function() { return serializeAttributes; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getBlockContent", function() { return getBlockContent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCommentDelimitedContent", function() { return getCommentDelimitedContent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "serializeBlock", function() { return serializeBlock; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return serialize; });
+/* harmony import */ var _babel_runtime_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectSpread */ "./node_modules/@babel/runtime/helpers/esm/objectSpread.js");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lodash */ "lodash");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/hooks */ "@wordpress/hooks");
+/* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_is_shallow_equal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/is-shallow-equal */ "@wordpress/is-shallow-equal");
+/* harmony import */ var _wordpress_is_shallow_equal__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_is_shallow_equal__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _registration__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./registration */ "./packages/blocks/build-module/api/registration.js");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./utils */ "./packages/blocks/build-module/api/utils.js");
+/* harmony import */ var _block_content_provider__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../block-content-provider */ "./packages/blocks/build-module/block-content-provider/index.js");
+
+
+
+/**
+ * External dependencies
+ */
+
+/**
+ * WordPress dependencies
+ */
+
+
+
+
+/**
+ * Internal dependencies
+ */
+
+
+
+
+/**
+ * @typedef {Object} WPBlockSerializationOptions Serialization Options.
+ *
+ * @property {boolean} isInnerBlocks Whether we are serializing inner blocks.
+ */
+
+/**
+ * Returns the block's default classname from its name.
+ *
+ * @param {string} blockName The block name.
+ *
+ * @return {string} The block's default class.
+ */
+
+function getBlockDefaultClassName(blockName) {
+  // Generated HTML classes for blocks follow the `wp-block-{name}` nomenclature.
+  // Blocks provided by WordPress drop the prefixes 'core/' or 'core-' (used in 'core-embed/').
+  var className = 'wp-block-' + blockName.replace(/\//, '-').replace(/^core-/, '');
+  return Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_3__["applyFilters"])('blocks.getBlockDefaultClassName', className, blockName);
+}
+/**
+ * Returns the block's default menu item classname from its name.
+ *
+ * @param {string} blockName The block name.
+ *
+ * @return {string} The block's default menu item class.
+ */
+
+function getBlockMenuDefaultClassName(blockName) {
+  // Generated HTML classes for blocks follow the `editor-block-list-item-{name}` nomenclature.
+  // Blocks provided by WordPress drop the prefixes 'core/' or 'core-' (used in 'core-embed/').
+  var className = 'editor-block-list-item-' + blockName.replace(/\//, '-').replace(/^core-/, '');
+  return Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_3__["applyFilters"])('blocks.getBlockMenuDefaultClassName', className, blockName);
+}
+/**
+ * Given a block type containing a save render implementation and attributes, returns the
+ * enhanced element to be saved or string when raw HTML expected.
+ *
+ * @param {string|Object} blockTypeOrName   Block type or name.
+ * @param {Object}        attributes        Block attributes.
+ * @param {?Array}        innerBlocks       Nested blocks.
+ *
+ * @return {Object|string} Save element or raw HTML string.
+ */
+
+function getSaveElement(blockTypeOrName, attributes) {
+  var innerBlocks = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
+  var blockType = Object(_utils__WEBPACK_IMPORTED_MODULE_6__["normalizeBlockType"])(blockTypeOrName);
+  var save = blockType.save; // Component classes are unsupported for save since serialization must
+  // occur synchronously. For improved interoperability with higher-order
+  // components which often return component class, emulate basic support.
+
+  if (save.prototype instanceof _wordpress_element__WEBPACK_IMPORTED_MODULE_1__["Component"]) {
+    var instance = new save({
+      attributes: attributes
+    });
+    save = instance.render.bind(instance);
+  }
+
+  var element = save({
+    attributes: attributes,
+    innerBlocks: innerBlocks
+  });
+
+  if (Object(lodash__WEBPACK_IMPORTED_MODULE_2__["isObject"])(element) && Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_3__["hasFilter"])('blocks.getSaveContent.extraProps')) {
+    /**
+     * Filters the props applied to the block save result element.
+     *
+     * @param {Object}      props      Props applied to save element.
+     * @param {WPBlockType} blockType  Block type definition.
+     * @param {Object}      attributes Block attributes.
+     */
+    var props = Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_3__["applyFilters"])('blocks.getSaveContent.extraProps', Object(_babel_runtime_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, element.props), blockType, attributes);
+
+    if (!_wordpress_is_shallow_equal__WEBPACK_IMPORTED_MODULE_4___default()(props, element.props)) {
+      element = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["cloneElement"])(element, props);
+    }
+  }
+  /**
+   * Filters the save result of a block during serialization.
+   *
+   * @param {WPElement}   element    Block save result.
+   * @param {WPBlockType} blockType  Block type definition.
+   * @param {Object}      attributes Block attributes.
+   */
+
+
+  element = Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_3__["applyFilters"])('blocks.getSaveElement', element, blockType, attributes);
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_block_content_provider__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    innerBlocks: innerBlocks
+  }, element);
+}
+/**
+ * Given a block type containing a save render implementation and attributes, returns the
+ * static markup to be saved.
+ *
+ * @param {string|Object} blockTypeOrName Block type or name.
+ * @param {Object}        attributes      Block attributes.
+ * @param {?Array}        innerBlocks     Nested blocks.
+ *
+ * @return {string} Save content.
+ */
+
+function getSaveContent(blockTypeOrName, attributes, innerBlocks) {
+  var blockType = Object(_utils__WEBPACK_IMPORTED_MODULE_6__["normalizeBlockType"])(blockTypeOrName);
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["renderToString"])(getSaveElement(blockType, attributes, innerBlocks));
+}
+/**
+ * Returns attributes which are to be saved and serialized into the block
+ * comment delimiter.
+ *
+ * When a block exists in memory it contains as its attributes both those
+ * parsed the block comment delimiter _and_ those which matched from the
+ * contents of the block.
+ *
+ * This function returns only those attributes which are needed to persist and
+ * which cannot be matched from the block content.
+ *
+ * @param {Object<string,*>} blockType     Block type.
+ * @param {Object<string,*>} attributes Attributes from in-memory block data.
+ *
+ * @return {Object<string,*>} Subset of attributes for comment serialization.
+ */
+
+function getCommentAttributes(blockType, attributes) {
+  return Object(lodash__WEBPACK_IMPORTED_MODULE_2__["reduce"])(blockType.attributes, function (result, attributeSchema, key) {
+    var value = attributes[key]; // Ignore undefined values.
+
+    if (undefined === value) {
+      return result;
+    } // Ignore all attributes but the ones with an "undefined" source
+    // "undefined" source refers to attributes saved in the block comment.
+
+
+    if (attributeSchema.source !== undefined) {
+      return result;
+    } // Ignore default value.
+
+
+    if ('default' in attributeSchema && attributeSchema.default === value) {
+      return result;
+    } // Otherwise, include in comment set.
+
+
+    result[key] = value;
+    return result;
+  }, {});
+}
+/**
+ * Given an attributes object, returns a string in the serialized attributes
+ * format prepared for post content.
+ *
+ * @param {Object} attributes Attributes object.
+ *
+ * @return {string} Serialized attributes.
+ */
+
+function serializeAttributes(attributes) {
+  return JSON.stringify(attributes) // Don't break HTML comments.
+  .replace(/--/g, "\\u002d\\u002d") // Don't break non-standard-compliant tools.
+  .replace(/</g, "\\u003c").replace(/>/g, "\\u003e").replace(/&/g, "\\u0026") // Bypass server stripslashes behavior which would unescape stringify's
+  // escaping of quotation mark.
+  //
+  // See: https://developer.wordpress.org/reference/functions/wp_kses_stripslashes/
+  .replace(/\\"/g, "\\u0022");
+}
+/**
+ * Given a block object, returns the Block's Inner HTML markup.
+ *
+ * @param {Object} block Block instance.
+ *
+ * @return {string} HTML.
+ */
+
+function getBlockContent(block) {
+  // @todo why not getBlockInnerHtml?
+  // If block was parsed as invalid or encounters an error while generating
+  // save content, use original content instead to avoid content loss. If a
+  // block contains nested content, exempt it from this condition because we
+  // otherwise have no access to its original content and content loss would
+  // still occur.
+  var saveContent = block.originalContent;
+
+  if (block.isValid || block.innerBlocks.length) {
+    try {
+      saveContent = getSaveContent(block.name, block.attributes, block.innerBlocks);
+    } catch (error) {}
+  }
+
+  return saveContent;
+}
+/**
+ * Returns the content of a block, including comment delimiters.
+ *
+ * @param {string} rawBlockName Block name.
+ * @param {Object} attributes   Block attributes.
+ * @param {string} content      Block save content.
+ *
+ * @return {string} Comment-delimited block content.
+ */
+
+function getCommentDelimitedContent(rawBlockName, attributes, content) {
+  var serializedAttributes = !Object(lodash__WEBPACK_IMPORTED_MODULE_2__["isEmpty"])(attributes) ? serializeAttributes(attributes) + ' ' : ''; // Strip core blocks of their namespace prefix.
+
+  var blockName = Object(lodash__WEBPACK_IMPORTED_MODULE_2__["startsWith"])(rawBlockName, 'core/') ? rawBlockName.slice(5) : rawBlockName; // @todo make the `wp:` prefix potentially configurable.
+
+  if (!content) {
+    return "<!-- wp:".concat(blockName, " ").concat(serializedAttributes, "/-->");
+  }
+
+  return "<!-- wp:".concat(blockName, " ").concat(serializedAttributes, "-->\n") + content + "\n<!-- /wp:".concat(blockName, " -->");
+}
+/**
+ * Returns the content of a block, including comment delimiters, determining
+ * serialized attributes and content form from the current state of the block.
+ *
+ * @param {Object}                      block   Block instance.
+ * @param {WPBlockSerializationOptions} options Serialization options.
+ *
+ * @return {string} Serialized block.
+ */
+
+function serializeBlock(block) {
+  var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
+      _ref$isInnerBlocks = _ref.isInnerBlocks,
+      isInnerBlocks = _ref$isInnerBlocks === void 0 ? false : _ref$isInnerBlocks;
+
+  var blockName = block.name;
+  var saveContent = getBlockContent(block);
+
+  if (blockName === Object(_registration__WEBPACK_IMPORTED_MODULE_5__["getUnregisteredTypeHandlerName"])() || !isInnerBlocks && blockName === Object(_registration__WEBPACK_IMPORTED_MODULE_5__["getFreeformContentHandlerName"])()) {
+    return saveContent;
+  }
+
+  var blockType = Object(_registration__WEBPACK_IMPORTED_MODULE_5__["getBlockType"])(blockName);
+  var saveAttributes = getCommentAttributes(blockType, block.attributes);
+  return getCommentDelimitedContent(blockName, saveAttributes, saveContent);
+}
+/**
+ * Takes a block or set of blocks and returns the serialized post content.
+ *
+ * @param {Array}                       blocks  Block(s) to serialize.
+ * @param {WPBlockSerializationOptions} options Serialization options.
+ *
+ * @return {string} The post content.
+ */
+
+function serialize(blocks, options) {
+  return Object(lodash__WEBPACK_IMPORTED_MODULE_2__["castArray"])(blocks).map(function (block) {
+    return serializeBlock(block, options);
+  }).join('\n\n');
+}
+
+
+/***/ }),
+
+/***/ "./packages/blocks/build-module/api/templates.js":
+/*!*******************************************************!*\
+  !*** ./packages/blocks/build-module/api/templates.js ***!
+  \*******************************************************/
+/*! exports provided: doBlocksMatchTemplate, synchronizeBlocksWithTemplate */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doBlocksMatchTemplate", function() { return doBlocksMatchTemplate; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "synchronizeBlocksWithTemplate", function() { return synchronizeBlocksWithTemplate; });
+/* harmony import */ var _babel_runtime_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectSpread */ "./node_modules/@babel/runtime/helpers/esm/objectSpread.js");
+/* harmony import */ var _babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/slicedToArray */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lodash */ "lodash");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _factory__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./factory */ "./packages/blocks/build-module/api/factory.js");
+/* harmony import */ var _registration__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./registration */ "./packages/blocks/build-module/api/registration.js");
+
+
+
+/**
+ * External dependencies
+ */
+
+/**
+ * WordPress dependencies
+ */
+
+
+/**
+ * Internal dependencies
+ */
+
+
+
+/**
+ * Checks whether a list of blocks matches a template by comparing the block names.
+ *
+ * @param {Array} blocks    Block list.
+ * @param {Array} template  Block template.
+ *
+ * @return {boolean}        Whether the list of blocks matches a templates
+ */
+
+function doBlocksMatchTemplate() {
+  var blocks = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var template = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
+  return blocks.length === template.length && Object(lodash__WEBPACK_IMPORTED_MODULE_2__["every"])(template, function (_ref, index) {
+    var _ref2 = Object(_babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_1__["default"])(_ref, 3),
+        name = _ref2[0],
+        innerBlocksTemplate = _ref2[2];
+
+    var block = blocks[index];
+    return name === block.name && doBlocksMatchTemplate(block.innerBlocks, innerBlocksTemplate);
+  });
+}
+/**
+ * Synchronize a block list with a block template.
+ *
+ * Synchronizing a block list with a block template means that we loop over the blocks
+ * keep the block as is if it matches the block at the same position in the template
+ * (If it has the same name) and if doesn't match, we create a new block based on the template.
+ * Extra blocks not present in the template are removed.
+ *
+ * @param {Array} blocks    Block list.
+ * @param {Array} template  Block template.
+ *
+ * @return {Array}          Updated Block list.
+ */
+
+function synchronizeBlocksWithTemplate() {
+  var blocks = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var template = arguments.length > 1 ? arguments[1] : undefined;
+
+  // If no template is provided, return blocks unmodified.
+  if (!template) {
+    return blocks;
+  }
+
+  return Object(lodash__WEBPACK_IMPORTED_MODULE_2__["map"])(template, function (_ref3, index) {
+    var _ref4 = Object(_babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_1__["default"])(_ref3, 3),
+        name = _ref4[0],
+        attributes = _ref4[1],
+        innerBlocksTemplate = _ref4[2];
+
+    var block = blocks[index];
+
+    if (block && block.name === name) {
+      var innerBlocks = synchronizeBlocksWithTemplate(block.innerBlocks, innerBlocksTemplate);
+      return Object(_babel_runtime_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, block, {
+        innerBlocks: innerBlocks
+      });
+    } // To support old templates that were using the "children" format
+    // for the attributes using "html" strings now, we normalize the template attributes
+    // before creating the blocks.
+
+
+    var blockType = Object(_registration__WEBPACK_IMPORTED_MODULE_5__["getBlockType"])(name);
+
+    var isHTMLAttribute = function isHTMLAttribute(attributeDefinition) {
+      return Object(lodash__WEBPACK_IMPORTED_MODULE_2__["get"])(attributeDefinition, ['source']) === 'html';
+    };
+
+    var isQueryAttribute = function isQueryAttribute(attributeDefinition) {
+      return Object(lodash__WEBPACK_IMPORTED_MODULE_2__["get"])(attributeDefinition, ['source']) === 'query';
+    };
+
+    var normalizeAttributes = function normalizeAttributes(schema, values) {
+      return Object(lodash__WEBPACK_IMPORTED_MODULE_2__["mapValues"])(values, function (value, key) {
+        return normalizeAttribute(schema[key], value);
+      });
+    };
+
+    var normalizeAttribute = function normalizeAttribute(definition, value) {
+      if (isHTMLAttribute(definition) && Object(lodash__WEBPACK_IMPORTED_MODULE_2__["isArray"])(value)) {
+        // Introduce a deprecated call at this point
+        // When we're confident that "children" format should be removed from the templates.
+        return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["renderToString"])(value);
+      }
+
+      if (isQueryAttribute(definition) && value) {
+        return value.map(function (subValues) {
+          return normalizeAttributes(definition.query, subValues);
+        });
+      }
+
+      return value;
+    };
+
+    var normalizedAttributes = normalizeAttributes(Object(lodash__WEBPACK_IMPORTED_MODULE_2__["get"])(blockType, ['attributes'], {}), attributes);
+    return Object(_factory__WEBPACK_IMPORTED_MODULE_4__["createBlock"])(name, normalizedAttributes, synchronizeBlocksWithTemplate([], innerBlocksTemplate));
+  });
+}
+
+
+/***/ }),
+
+/***/ "./packages/blocks/build-module/api/utils.js":
+/*!***************************************************!*\
+  !*** ./packages/blocks/build-module/api/utils.js ***!
+  \***************************************************/
+/*! exports provided: isUnmodifiedDefaultBlock, isValidIcon, normalizeIconObject, normalizeBlockType */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isUnmodifiedDefaultBlock", function() { return isUnmodifiedDefaultBlock; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isValidIcon", function() { return isValidIcon; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "normalizeIconObject", function() { return normalizeIconObject; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "normalizeBlockType", function() { return normalizeBlockType; });
+/* harmony import */ var _babel_runtime_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectSpread */ "./node_modules/@babel/runtime/helpers/esm/objectSpread.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "lodash");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var tinycolor2__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tinycolor2 */ "./node_modules/tinycolor2/tinycolor.js");
+/* harmony import */ var tinycolor2__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(tinycolor2__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _registration__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./registration */ "./packages/blocks/build-module/api/registration.js");
+/* harmony import */ var _factory__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./factory */ "./packages/blocks/build-module/api/factory.js");
+
+
+/**
+ * External dependencies
+ */
+
+
+/**
+ * WordPress dependencies
+ */
+
+
+/**
+ * Internal dependencies
+ */
+
+
+
+/**
+ * Array of icon colors containing a color to be used if the icon color
+ * was not explicitly set but the icon background color was.
+ *
+ * @type {Object}
+ */
+
+var ICON_COLORS = ['#191e23', '#f8f9f9'];
+/**
+ * Determines whether the block is a default block
+ * and its attributes are equal to the default attributes
+ * which means the block is unmodified.
+ *
+ * @param  {WPBlock} block Block Object
+ *
+ * @return {boolean}       Whether the block is an unmodified default block
+ */
+
+function isUnmodifiedDefaultBlock(block) {
+  var defaultBlockName = Object(_registration__WEBPACK_IMPORTED_MODULE_4__["getDefaultBlockName"])();
+
+  if (block.name !== defaultBlockName) {
+    return false;
+  } // Cache a created default block if no cache exists or the default block
+  // name changed.
+
+
+  if (!isUnmodifiedDefaultBlock.block || isUnmodifiedDefaultBlock.block.name !== defaultBlockName) {
+    isUnmodifiedDefaultBlock.block = Object(_factory__WEBPACK_IMPORTED_MODULE_5__["createBlock"])(defaultBlockName);
+  }
+
+  var newDefaultBlock = isUnmodifiedDefaultBlock.block;
+  var blockType = Object(_registration__WEBPACK_IMPORTED_MODULE_4__["getBlockType"])(defaultBlockName);
+  return Object(lodash__WEBPACK_IMPORTED_MODULE_1__["every"])(blockType.attributes, function (value, key) {
+    return newDefaultBlock.attributes[key] === block.attributes[key];
+  });
+}
+/**
+ * Function that checks if the parameter is a valid icon.
+ *
+ * @param {*} icon  Parameter to be checked.
+ *
+ * @return {boolean} True if the parameter is a valid icon and false otherwise.
+ */
+
+function isValidIcon(icon) {
+  return !!icon && (Object(lodash__WEBPACK_IMPORTED_MODULE_1__["isString"])(icon) || Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["isValidElement"])(icon) || Object(lodash__WEBPACK_IMPORTED_MODULE_1__["isFunction"])(icon) || icon instanceof _wordpress_element__WEBPACK_IMPORTED_MODULE_3__["Component"]);
+}
+/**
+ * Function that receives an icon as set by the blocks during the registration
+ * and returns a new icon object that is normalized so we can rely on just on possible icon structure
+ * in the codebase.
+ *
+ * @param {WPBlockTypeIconRender} icon Render behavior of a block type icon;
+ *                                     one of a Dashicon slug, an element, or a
+ *                                     component.
+ *
+ * @return {WPBlockTypeIconDescriptor} Object describing the icon.
+ */
+
+function normalizeIconObject(icon) {
+  if (isValidIcon(icon)) {
+    return {
+      src: icon
+    };
+  }
+
+  if (Object(lodash__WEBPACK_IMPORTED_MODULE_1__["has"])(icon, ['background'])) {
+    var tinyBgColor = tinycolor2__WEBPACK_IMPORTED_MODULE_2___default()(icon.background);
+    return Object(_babel_runtime_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, icon, {
+      foreground: icon.foreground ? icon.foreground : Object(tinycolor2__WEBPACK_IMPORTED_MODULE_2__["mostReadable"])(tinyBgColor, ICON_COLORS, {
+        includeFallbackColors: true,
+        level: 'AA',
+        size: 'large'
+      }).toHexString(),
+      shadowColor: tinyBgColor.setAlpha(0.3).toRgbString()
+    });
+  }
+
+  return icon;
+}
+/**
+ * Normalizes block type passed as param. When string is passed then
+ * it converts it to the matching block type object.
+ * It passes the original object otherwise.
+ *
+ * @param {string|Object} blockTypeOrName  Block type or name.
+ *
+ * @return {?Object} Block type.
+ */
+
+function normalizeBlockType(blockTypeOrName) {
+  if (Object(lodash__WEBPACK_IMPORTED_MODULE_1__["isString"])(blockTypeOrName)) {
+    return Object(_registration__WEBPACK_IMPORTED_MODULE_4__["getBlockType"])(blockTypeOrName);
+  }
+
+  return blockTypeOrName;
+}
+
+
+/***/ }),
+
+/***/ "./packages/blocks/build-module/api/validation/index.js":
+/*!**************************************************************!*\
+  !*** ./packages/blocks/build-module/api/validation/index.js ***!
+  \**************************************************************/
+/*! exports provided: isValidCharacterReference, DecodeEntityParser, getTextPiecesSplitOnWhitespace, getTextWithCollapsedWhitespace, getMeaningfulAttributePairs, isEquivalentTextTokens, getNormalizedStyleValue, getStyleProperties, isEqualAttributesOfName, isEqualTagAttributePairs, isEqualTokensOfType, getNextNonWhitespaceToken, isClosedByToken, isEquivalentHTML, getBlockContentValidationResult, isValidBlockContent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isValidCharacterReference", function() { return isValidCharacterReference; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DecodeEntityParser", function() { return DecodeEntityParser; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getTextPiecesSplitOnWhitespace", function() { return getTextPiecesSplitOnWhitespace; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getTextWithCollapsedWhitespace", function() { return getTextWithCollapsedWhitespace; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getMeaningfulAttributePairs", function() { return getMeaningfulAttributePairs; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isEquivalentTextTokens", function() { return isEquivalentTextTokens; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getNormalizedStyleValue", function() { return getNormalizedStyleValue; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getStyleProperties", function() { return getStyleProperties; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isEqualAttributesOfName", function() { return isEqualAttributesOfName; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isEqualTagAttributePairs", function() { return isEqualTagAttributePairs; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isEqualTokensOfType", function() { return isEqualTokensOfType; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getNextNonWhitespaceToken", function() { return getNextNonWhitespaceToken; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isClosedByToken", function() { return isClosedByToken; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isEquivalentHTML", function() { return isEquivalentHTML; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getBlockContentValidationResult", function() { return getBlockContentValidationResult; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isValidBlockContent", function() { return isValidBlockContent; });
+/* harmony import */ var _babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/toConsumableArray */ "./node_modules/@babel/runtime/helpers/esm/toConsumableArray.js");
+/* harmony import */ var _babel_runtime_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectSpread */ "./node_modules/@babel/runtime/helpers/esm/objectSpread.js");
+/* harmony import */ var _babel_runtime_helpers_esm_toArray__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/esm/toArray */ "./node_modules/@babel/runtime/helpers/esm/toArray.js");
+/* harmony import */ var _babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime/helpers/esm/slicedToArray */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
+/* harmony import */ var _babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime/helpers/esm/classCallCheck */ "./node_modules/@babel/runtime/helpers/esm/classCallCheck.js");
+/* harmony import */ var _babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @babel/runtime/helpers/esm/createClass */ "./node_modules/@babel/runtime/helpers/esm/createClass.js");
+/* harmony import */ var simple_html_tokenizer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! simple-html-tokenizer */ "./node_modules/simple-html-tokenizer/dist/es6/index.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! lodash */ "lodash");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _wordpress_html_entities__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @wordpress/html-entities */ "@wordpress/html-entities");
+/* harmony import */ var _wordpress_html_entities__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_wordpress_html_entities__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _logger__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./logger */ "./packages/blocks/build-module/api/validation/logger.js");
+/* harmony import */ var _serializer__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../serializer */ "./packages/blocks/build-module/api/serializer.js");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../utils */ "./packages/blocks/build-module/api/utils.js");
+
+
+
+
+
+
+
+/**
+ * External dependencies
+ */
+
+
+/**
+ * WordPress dependencies
+ */
+
+
+/**
+ * Internal dependencies
+ */
+
+
+
+
+/**
+ * Globally matches any consecutive whitespace
+ *
+ * @type {RegExp}
+ */
+
+var REGEXP_WHITESPACE = /[\t\n\r\v\f ]+/g;
+/**
+ * Matches a string containing only whitespace
+ *
+ * @type {RegExp}
+ */
+
+var REGEXP_ONLY_WHITESPACE = /^[\t\n\r\v\f ]*$/;
+/**
+ * Matches a CSS URL type value
+ *
+ * @type {RegExp}
+ */
+
+var REGEXP_STYLE_URL_TYPE = /^url\s*\(['"\s]*(.*?)['"\s]*\)$/;
+/**
+ * Boolean attributes are attributes whose presence as being assigned is
+ * meaningful, even if only empty.
+ *
+ * See: https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#boolean-attributes
+ * Extracted from: https://html.spec.whatwg.org/multipage/indices.html#attributes-3
+ *
+ * Object.keys( [ ...document.querySelectorAll( '#attributes-1 > tbody > tr' ) ]
+ *     .filter( ( tr ) => tr.lastChild.textContent.indexOf( 'Boolean attribute' ) !== -1 )
+ *     .reduce( ( result, tr ) => Object.assign( result, {
+ *         [ tr.firstChild.textContent.trim() ]: true
+ *     } ), {} ) ).sort();
+ *
+ * @type {Array}
+ */
+
+var BOOLEAN_ATTRIBUTES = ['allowfullscreen', 'allowpaymentrequest', 'allowusermedia', 'async', 'autofocus', 'autoplay', 'checked', 'controls', 'default', 'defer', 'disabled', 'download', 'formnovalidate', 'hidden', 'ismap', 'itemscope', 'loop', 'multiple', 'muted', 'nomodule', 'novalidate', 'open', 'playsinline', 'readonly', 'required', 'reversed', 'selected', 'typemustmatch'];
+/**
+ * Enumerated attributes are attributes which must be of a specific value form.
+ * Like boolean attributes, these are meaningful if specified, even if not of a
+ * valid enumerated value.
+ *
+ * See: https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#enumerated-attribute
+ * Extracted from: https://html.spec.whatwg.org/multipage/indices.html#attributes-3
+ *
+ * Object.keys( [ ...document.querySelectorAll( '#attributes-1 > tbody > tr' ) ]
+ *     .filter( ( tr ) => /^("(.+?)";?\s*)+/.test( tr.lastChild.textContent.trim() ) )
+ *     .reduce( ( result, tr ) => Object.assign( result, {
+ *         [ tr.firstChild.textContent.trim() ]: true
+ *     } ), {} ) ).sort();
+ *
+ * @type {Array}
+ */
+
+var ENUMERATED_ATTRIBUTES = ['autocapitalize', 'autocomplete', 'charset', 'contenteditable', 'crossorigin', 'decoding', 'dir', 'draggable', 'enctype', 'formenctype', 'formmethod', 'http-equiv', 'inputmode', 'kind', 'method', 'preload', 'scope', 'shape', 'spellcheck', 'translate', 'type', 'wrap'];
+/**
+ * Meaningful attributes are those who cannot be safely ignored when omitted in
+ * one HTML markup string and not another.
+ *
+ * @type {Array}
+ */
+
+var MEANINGFUL_ATTRIBUTES = [].concat(BOOLEAN_ATTRIBUTES, ENUMERATED_ATTRIBUTES);
+/**
+ * Array of functions which receive a text string on which to apply normalizing
+ * behavior for consideration in text token equivalence, carefully ordered from
+ * least-to-most expensive operations.
+ *
+ * @type {Array}
+ */
+
+var TEXT_NORMALIZATIONS = [lodash__WEBPACK_IMPORTED_MODULE_7__["identity"], getTextWithCollapsedWhitespace];
+/**
+ * Regular expression matching a named character reference. In lieu of bundling
+ * a full set of references, the pattern covers the minimal necessary to test
+ * positively against the full set.
+ *
+ * "The ampersand must be followed by one of the names given in the named
+ * character references section, using the same case."
+ *
+ * Tested aginst "12.5 Named character references":
+ *
+ * ```
+ * const references = [ ...document.querySelectorAll(
+ *     '#named-character-references-table tr[id^=entity-] td:first-child'
+ * ) ].map( ( code ) => code.textContent )
+ * references.every( ( reference ) => /^[\da-z]+$/i.test( reference ) )
+ * ```
+ *
+ * @see https://html.spec.whatwg.org/multipage/syntax.html#character-references
+ * @see https://html.spec.whatwg.org/multipage/named-characters.html#named-character-references
+ *
+ * @type {RegExp}
+ */
+
+var REGEXP_NAMED_CHARACTER_REFERENCE = /^[\da-z]+$/i;
+/**
+ * Regular expression matching a decimal character reference.
+ *
+ * "The ampersand must be followed by a U+0023 NUMBER SIGN character (#),
+ * followed by one or more ASCII digits, representing a base-ten integer"
+ *
+ * @see https://html.spec.whatwg.org/multipage/syntax.html#character-references
+ *
+ * @type {RegExp}
+ */
+
+var REGEXP_DECIMAL_CHARACTER_REFERENCE = /^#\d+$/;
+/**
+ * Regular expression matching a hexadecimal character reference.
+ *
+ * "The ampersand must be followed by a U+0023 NUMBER SIGN character (#), which
+ * must be followed by either a U+0078 LATIN SMALL LETTER X character (x) or a
+ * U+0058 LATIN CAPITAL LETTER X character (X), which must then be followed by
+ * one or more ASCII hex digits, representing a hexadecimal integer"
+ *
+ * @see https://html.spec.whatwg.org/multipage/syntax.html#character-references
+ *
+ * @type {RegExp}
+ */
+
+var REGEXP_HEXADECIMAL_CHARACTER_REFERENCE = /^#x[\da-f]+$/i;
+/**
+ * Returns true if the given string is a valid character reference segment, or
+ * false otherwise. The text should be stripped of `&` and `;` demarcations.
+ *
+ * @param {string} text Text to test.
+ *
+ * @return {boolean} Whether text is valid character reference.
+ */
+
+function isValidCharacterReference(text) {
+  return REGEXP_NAMED_CHARACTER_REFERENCE.test(text) || REGEXP_DECIMAL_CHARACTER_REFERENCE.test(text) || REGEXP_HEXADECIMAL_CHARACTER_REFERENCE.test(text);
+}
+/**
+ * Subsitute EntityParser class for `simple-html-tokenizer` which uses the
+ * implementation of `decodeEntities` from `html-entities`, in order to avoid
+ * bundling a massive named character reference.
+ *
+ * @see https://github.com/tildeio/simple-html-tokenizer/tree/master/src/entity-parser.ts
+ */
+
+var DecodeEntityParser =
+/*#__PURE__*/
+function () {
+  function DecodeEntityParser() {
+    Object(_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_4__["default"])(this, DecodeEntityParser);
+  }
+
+  Object(_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_5__["default"])(DecodeEntityParser, [{
+    key: "parse",
+
+    /**
+     * Returns a substitute string for an entity string sequence between `&`
+     * and `;`, or undefined if no substitution should occur.
+     *
+     * @param {string} entity Entity fragment discovered in HTML.
+     *
+     * @return {?string} Entity substitute value.
+     */
+    value: function parse(entity) {
+      if (isValidCharacterReference(entity)) {
+        return Object(_wordpress_html_entities__WEBPACK_IMPORTED_MODULE_8__["decodeEntities"])('&' + entity + ';');
+      }
+    }
+  }]);
+
+  return DecodeEntityParser;
+}();
+/**
+ * Given a specified string, returns an array of strings split by consecutive
+ * whitespace, ignoring leading or trailing whitespace.
+ *
+ * @param {string} text Original text.
+ *
+ * @return {string[]} Text pieces split on whitespace.
+ */
+
+function getTextPiecesSplitOnWhitespace(text) {
+  return text.trim().split(REGEXP_WHITESPACE);
+}
+/**
+ * Given a specified string, returns a new trimmed string where all consecutive
+ * whitespace is collapsed to a single space.
+ *
+ * @param {string} text Original text.
+ *
+ * @return {string} Trimmed text with consecutive whitespace collapsed.
+ */
+
+function getTextWithCollapsedWhitespace(text) {
+  // This is an overly simplified whitespace comparison. The specification is
+  // more prescriptive of whitespace behavior in inline and block contexts.
+  //
+  // See: https://medium.com/@patrickbrosset/when-does-white-space-matter-in-html-b90e8a7cdd33
+  return getTextPiecesSplitOnWhitespace(text).join(' ');
+}
+/**
+ * Returns attribute pairs of the given StartTag token, including only pairs
+ * where the value is non-empty or the attribute is a boolean attribute, an
+ * enumerated attribute, or a custom data- attribute.
+ *
+ * @see MEANINGFUL_ATTRIBUTES
+ *
+ * @param {Object} token StartTag token.
+ *
+ * @return {Array[]} Attribute pairs.
+ */
+
+function getMeaningfulAttributePairs(token) {
+  return token.attributes.filter(function (pair) {
+    var _pair = Object(_babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_3__["default"])(pair, 2),
+        key = _pair[0],
+        value = _pair[1];
+
+    return value || key.indexOf('data-') === 0 || Object(lodash__WEBPACK_IMPORTED_MODULE_7__["includes"])(MEANINGFUL_ATTRIBUTES, key);
+  });
+}
+/**
+ * Returns true if two text tokens (with `chars` property) are equivalent, or
+ * false otherwise.
+ *
+ * @param {Object} actual   Actual token.
+ * @param {Object} expected Expected token.
+ * @param {Object} logger   Validation logger object.
+ *
+ * @return {boolean} Whether two text tokens are equivalent.
+ */
+
+function isEquivalentTextTokens(actual, expected) {
+  var logger = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : Object(_logger__WEBPACK_IMPORTED_MODULE_9__["createLogger"])();
+  // This function is intentionally written as syntactically "ugly" as a hot
+  // path optimization. Text is progressively normalized in order from least-
+  // to-most operationally expensive, until the earliest point at which text
+  // can be confidently inferred as being equal.
+  var actualChars = actual.chars;
+  var expectedChars = expected.chars;
+
+  for (var i = 0; i < TEXT_NORMALIZATIONS.length; i++) {
+    var normalize = TEXT_NORMALIZATIONS[i];
+    actualChars = normalize(actualChars);
+    expectedChars = normalize(expectedChars);
+
+    if (actualChars === expectedChars) {
+      return true;
+    }
+  }
+
+  logger.warning('Expected text `%s`, saw `%s`.', expected.chars, actual.chars);
+  return false;
+}
+/**
+ * Given a style value, returns a normalized style value for strict equality
+ * comparison.
+ *
+ * @param {string} value Style value.
+ *
+ * @return {string} Normalized style value.
+ */
+
+function getNormalizedStyleValue(value) {
+  return value // Normalize URL type to omit whitespace or quotes
+  .replace(REGEXP_STYLE_URL_TYPE, 'url($1)');
+}
+/**
+ * Given a style attribute string, returns an object of style properties.
+ *
+ * @param {string} text Style attribute.
+ *
+ * @return {Object} Style properties.
+ */
+
+function getStyleProperties(text) {
+  var pairs = text // Trim ending semicolon (avoid including in split)
+  .replace(/;?\s*$/, '') // Split on property assignment
+  .split(';') // For each property assignment...
+  .map(function (style) {
+    // ...split further into key-value pairs
+    var _style$split = style.split(':'),
+        _style$split2 = Object(_babel_runtime_helpers_esm_toArray__WEBPACK_IMPORTED_MODULE_2__["default"])(_style$split),
+        key = _style$split2[0],
+        valueParts = _style$split2.slice(1);
+
+    var value = valueParts.join(':');
+    return [key.trim(), getNormalizedStyleValue(value.trim())];
+  });
+  return Object(lodash__WEBPACK_IMPORTED_MODULE_7__["fromPairs"])(pairs);
+}
+/**
+ * Attribute-specific equality handlers
+ *
+ * @type {Object}
+ */
+
+var isEqualAttributesOfName = Object(_babel_runtime_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({
+  class: function _class(actual, expected) {
+    // Class matches if members are the same, even if out of order or
+    // superfluous whitespace between.
+    return !lodash__WEBPACK_IMPORTED_MODULE_7__["xor"].apply(void 0, Object(_babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])([actual, expected].map(getTextPiecesSplitOnWhitespace))).length;
+  },
+  style: function style(actual, expected) {
+    return lodash__WEBPACK_IMPORTED_MODULE_7__["isEqual"].apply(void 0, Object(_babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])([actual, expected].map(getStyleProperties)));
+  }
+}, Object(lodash__WEBPACK_IMPORTED_MODULE_7__["fromPairs"])(BOOLEAN_ATTRIBUTES.map(function (attribute) {
+  return [attribute, lodash__WEBPACK_IMPORTED_MODULE_7__["stubTrue"]];
+})));
+/**
+ * Given two sets of attribute tuples, returns true if the attribute sets are
+ * equivalent.
+ *
+ * @param {Array[]} actual   Actual attributes tuples.
+ * @param {Array[]} expected Expected attributes tuples.
+ * @param {Object}  logger   Validation logger object.
+ *
+ * @return {boolean} Whether attributes are equivalent.
+ */
+
+function isEqualTagAttributePairs(actual, expected) {
+  var logger = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : Object(_logger__WEBPACK_IMPORTED_MODULE_9__["createLogger"])();
+
+  // Attributes is tokenized as tuples. Their lengths should match. This also
+  // avoids us needing to check both attributes sets, since if A has any keys
+  // which do not exist in B, we know the sets to be different.
+  if (actual.length !== expected.length) {
+    logger.warning('Expected attributes %o, instead saw %o.', expected, actual);
+    return false;
+  } // Convert tuples to object for ease of lookup
+
+
+  var _map = [actual, expected].map(lodash__WEBPACK_IMPORTED_MODULE_7__["fromPairs"]),
+      _map2 = Object(_babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_3__["default"])(_map, 2),
+      actualAttributes = _map2[0],
+      expectedAttributes = _map2[1];
+
+  for (var name in actualAttributes) {
+    // As noted above, if missing member in B, assume different
+    if (!expectedAttributes.hasOwnProperty(name)) {
+      logger.warning('Encountered unexpected attribute `%s`.', name);
+      return false;
+    }
+
+    var actualValue = actualAttributes[name];
+    var expectedValue = expectedAttributes[name];
+    var isEqualAttributes = isEqualAttributesOfName[name];
+
+    if (isEqualAttributes) {
+      // Defer custom attribute equality handling
+      if (!isEqualAttributes(actualValue, expectedValue)) {
+        logger.warning('Expected attribute `%s` of value `%s`, saw `%s`.', name, expectedValue, actualValue);
+        return false;
+      }
+    } else if (actualValue !== expectedValue) {
+      // Otherwise strict inequality should bail
+      logger.warning('Expected attribute `%s` of value `%s`, saw `%s`.', name, expectedValue, actualValue);
+      return false;
+    }
+  }
+
+  return true;
+}
+/**
+ * Token-type-specific equality handlers
+ *
+ * @type {Object}
+ */
+
+var isEqualTokensOfType = {
+  StartTag: function StartTag(actual, expected) {
+    var logger = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : Object(_logger__WEBPACK_IMPORTED_MODULE_9__["createLogger"])();
+
+    if (actual.tagName !== expected.tagName) {
+      logger.warning('Expected tag name `%s`, instead saw `%s`.', expected.tagName, actual.tagName);
+      return false;
+    }
+
+    return isEqualTagAttributePairs.apply(void 0, Object(_babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])([actual, expected].map(getMeaningfulAttributePairs)).concat([logger]));
+  },
+  Chars: isEquivalentTextTokens,
+  Comment: isEquivalentTextTokens
+};
+/**
+ * Given an array of tokens, returns the first token which is not purely
+ * whitespace.
+ *
+ * Mutates the tokens array.
+ *
+ * @param {Object[]} tokens Set of tokens to search.
+ *
+ * @return {Object} Next non-whitespace token.
+ */
+
+function getNextNonWhitespaceToken(tokens) {
+  var token;
+
+  while (token = tokens.shift()) {
+    if (token.type !== 'Chars') {
+      return token;
+    }
+
+    if (!REGEXP_ONLY_WHITESPACE.test(token.chars)) {
+      return token;
+    }
+  }
+}
+/**
+ * Tokenize an HTML string, gracefully handling any errors thrown during
+ * underlying tokenization.
+ *
+ * @param {string} html   HTML string to tokenize.
+ * @param {Object} logger Validation logger object.
+ *
+ * @return {Object[]|null} Array of valid tokenized HTML elements, or null on error
+ */
+
+function getHTMLTokens(html) {
+  var logger = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : Object(_logger__WEBPACK_IMPORTED_MODULE_9__["createLogger"])();
+
+  try {
+    return new simple_html_tokenizer__WEBPACK_IMPORTED_MODULE_6__["Tokenizer"](new DecodeEntityParser()).tokenize(html);
+  } catch (e) {
+    logger.warning('Malformed HTML detected: %s', html);
+  }
+
+  return null;
+}
+/**
+ * Returns true if the next HTML token closes the current token.
+ *
+ * @param {Object} currentToken Current token to compare with.
+ * @param {Object|undefined} nextToken Next token to compare against.
+ *
+ * @return {boolean} true if `nextToken` closes `currentToken`, false otherwise
+ */
+
+
+function isClosedByToken(currentToken, nextToken) {
+  // Ensure this is a self closed token
+  if (!currentToken.selfClosing) {
+    return false;
+  } // Check token names and determine if nextToken is the closing tag for currentToken
+
+
+  if (nextToken && nextToken.tagName === currentToken.tagName && nextToken.type === 'EndTag') {
+    return true;
+  }
+
+  return false;
+}
+/**
+ * Returns true if the given HTML strings are effectively equivalent, or
+ * false otherwise. Invalid HTML is not considered equivalent, even if the
+ * strings directly match.
+ *
+ * @param {string} actual   Actual HTML string.
+ * @param {string} expected Expected HTML string.
+ * @param {Object} logger   Validation logger object.
+ *
+ * @return {boolean} Whether HTML strings are equivalent.
+ */
+
+function isEquivalentHTML(actual, expected) {
+  var logger = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : Object(_logger__WEBPACK_IMPORTED_MODULE_9__["createLogger"])();
+
+  // Tokenize input content and reserialized save content
+  var _map3 = [actual, expected].map(function (html) {
+    return getHTMLTokens(html, logger);
+  }),
+      _map4 = Object(_babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_3__["default"])(_map3, 2),
+      actualTokens = _map4[0],
+      expectedTokens = _map4[1]; // If either is malformed then stop comparing - the strings are not equivalent
+
+
+  if (!actualTokens || !expectedTokens) {
+    return false;
+  }
+
+  var actualToken, expectedToken;
+
+  while (actualToken = getNextNonWhitespaceToken(actualTokens)) {
+    expectedToken = getNextNonWhitespaceToken(expectedTokens); // Inequal if exhausted all expected tokens
+
+    if (!expectedToken) {
+      logger.warning('Expected end of content, instead saw %o.', actualToken);
+      return false;
+    } // Inequal if next non-whitespace token of each set are not same type
+
+
+    if (actualToken.type !== expectedToken.type) {
+      logger.warning('Expected token of type `%s` (%o), instead saw `%s` (%o).', expectedToken.type, expectedToken, actualToken.type, actualToken);
+      return false;
+    } // Defer custom token type equality handling, otherwise continue and
+    // assume as equal
+
+
+    var isEqualTokens = isEqualTokensOfType[actualToken.type];
+
+    if (isEqualTokens && !isEqualTokens(actualToken, expectedToken, logger)) {
+      return false;
+    } // Peek at the next tokens (actual and expected) to see if they close
+    // a self-closing tag
+
+
+    if (isClosedByToken(actualToken, expectedTokens[0])) {
+      // Consume the next expected token that closes the current actual
+      // self-closing token
+      getNextNonWhitespaceToken(expectedTokens);
+    } else if (isClosedByToken(expectedToken, actualTokens[0])) {
+      // Consume the next actual token that closes the current expected
+      // self-closing token
+      getNextNonWhitespaceToken(actualTokens);
+    }
+  }
+
+  if (expectedToken = getNextNonWhitespaceToken(expectedTokens)) {
+    // If any non-whitespace tokens remain in expected token set, this
+    // indicates inequality
+    logger.warning('Expected %o, instead saw end of content.', expectedToken);
+    return false;
+  }
+
+  return true;
+}
+/**
+ * Returns an object with `isValid` property set to `true` if the parsed block
+ * is valid given the input content. A block is considered valid if, when serialized
+ * with assumed attributes, the content matches the original value. If block is
+ * invalid, this function returns all validations issues as well.
+ *
+ * @param {string|Object} blockTypeOrName      Block type.
+ * @param {Object}        attributes           Parsed block attributes.
+ * @param {string}        originalBlockContent Original block content.
+ * @param {Object}        logger           	   Validation logger object.
+ *
+ * @return {Object} Whether block is valid and contains validation messages.
+ */
+
+function getBlockContentValidationResult(blockTypeOrName, attributes, originalBlockContent) {
+  var logger = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : Object(_logger__WEBPACK_IMPORTED_MODULE_9__["createQueuedLogger"])();
+  var blockType = Object(_utils__WEBPACK_IMPORTED_MODULE_11__["normalizeBlockType"])(blockTypeOrName);
+  var generatedBlockContent;
+
+  try {
+    generatedBlockContent = Object(_serializer__WEBPACK_IMPORTED_MODULE_10__["getSaveContent"])(blockType, attributes);
+  } catch (error) {
+    logger.error('Block validation failed because an error occurred while generating block content:\n\n%s', error.toString());
+    return {
+      isValid: false,
+      validationIssues: logger.getItems()
+    };
+  }
+
+  var isValid = isEquivalentHTML(originalBlockContent, generatedBlockContent, logger);
+
+  if (!isValid) {
+    logger.error('Block validation failed for `%s` (%o).\n\nContent generated by `save` function:\n\n%s\n\nContent retrieved from post body:\n\n%s', blockType.name, blockType, generatedBlockContent, originalBlockContent);
+  }
+
+  return {
+    isValid: isValid,
+    validationIssues: logger.getItems()
+  };
+}
+/**
+ * Returns true if the parsed block is valid given the input content. A block
+ * is considered valid if, when serialized with assumed attributes, the content
+ * matches the original value.
+ *
+ * Logs to console in development environments when invalid.
+ *
+ * @param {string|Object} blockTypeOrName      Block type.
+ * @param {Object}        attributes           Parsed block attributes.
+ * @param {string}        originalBlockContent Original block content.
+ *
+ * @return {boolean} Whether block is valid.
+ */
+
+function isValidBlockContent(blockTypeOrName, attributes, originalBlockContent) {
+  var _getBlockContentValid = getBlockContentValidationResult(blockTypeOrName, attributes, originalBlockContent, Object(_logger__WEBPACK_IMPORTED_MODULE_9__["createLogger"])()),
+      isValid = _getBlockContentValid.isValid;
+
+  return isValid;
+}
+
+
+/***/ }),
+
+/***/ "./packages/blocks/build-module/api/validation/logger.js":
+/*!***************************************************************!*\
+  !*** ./packages/blocks/build-module/api/validation/logger.js ***!
+  \***************************************************************/
+/*! exports provided: createLogger, createQueuedLogger */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createLogger", function() { return createLogger; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createQueuedLogger", function() { return createQueuedLogger; });
+function createLogger() {
+  /**
+   * Creates a log handler with block validation prefix.
+   *
+   * @param {Function} logger Original logger function.
+   *
+   * @return {Function} Augmented logger function.
+   */
+  function createLogHandler(logger) {
+    var log = function log(message) {
+      for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+        args[_key - 1] = arguments[_key];
+      }
+
+      return logger.apply(void 0, ['Block validation: ' + message].concat(args));
+    }; // In test environments, pre-process the sprintf message to improve
+    // readability of error messages. We'd prefer to avoid pulling in this
+    // dependency in runtime environments, and it can be dropped by a combo
+    // of Webpack env substitution + UglifyJS dead code elimination.
+
+
+    if (false) {}
+
+    return log;
+  }
+
+  return {
+    // eslint-disable-next-line no-console
+    error: createLogHandler(console.error),
+    // eslint-disable-next-line no-console
+    warning: createLogHandler(console.warn),
+    getItems: function getItems() {
+      return [];
+    }
+  };
+}
+function createQueuedLogger() {
+  /**
+   * The list of enqueued log actions to print.
+   *
+   * @type {Array}
+   */
+  var queue = [];
+  var logger = createLogger();
+  return {
+    error: function error() {
+      for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+        args[_key2] = arguments[_key2];
+      }
+
+      queue.push({
+        log: logger.error,
+        args: args
+      });
+    },
+    warning: function warning() {
+      for (var _len3 = arguments.length, args = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+        args[_key3] = arguments[_key3];
+      }
+
+      queue.push({
+        log: logger.warning,
+        args: args
+      });
+    },
+    getItems: function getItems() {
+      return queue;
+    }
+  };
+}
+
+
+/***/ }),
+
+/***/ "./packages/blocks/build-module/block-content-provider/index.js":
+/*!**********************************************************************!*\
+  !*** ./packages/blocks/build-module/block-content-provider/index.js ***!
+  \**********************************************************************/
+/*! exports provided: withBlockContentContext, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "withBlockContentContext", function() { return withBlockContentContext; });
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/compose */ "@wordpress/compose");
+/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_compose__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../api */ "./packages/blocks/build-module/api/index.js");
+
+
+
+/**
+ * WordPress dependencies
+ */
+
+
+/**
+ * Internal dependencies
+ */
+
+
+
+var _createContext = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createContext"])(function () {}),
+    Consumer = _createContext.Consumer,
+    Provider = _createContext.Provider;
+/**
+ * An internal block component used in block content serialization to inject
+ * nested block content within the `save` implementation of the ancestor
+ * component in which it is nested. The component provides a pre-bound
+ * `BlockContent` component via context, which is used by the developer-facing
+ * `InnerBlocks.Content` component to render block content.
+ *
+ * @example
+ *
+ * ```jsx
+ * <BlockContentProvider innerBlocks={ innerBlocks }>
+ * 	{ blockSaveElement }
+ * </BlockContentProvider>
+ * ```
+ *
+ * @return {WPElement} Element with BlockContent injected via context.
+ */
+
+
+var BlockContentProvider = function BlockContentProvider(_ref) {
+  var children = _ref.children,
+      innerBlocks = _ref.innerBlocks;
+
+  var BlockContent = function BlockContent() {
+    // Value is an array of blocks, so defer to block serializer
+    var html = Object(_api__WEBPACK_IMPORTED_MODULE_3__["serialize"])(innerBlocks, {
+      isInnerBlocks: true
+    }); // Use special-cased raw HTML tag to avoid default escaping
+
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["RawHTML"], null, html);
+  };
+
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(Provider, {
+    value: BlockContent
+  }, children);
+};
+/**
+ * A Higher Order Component used to inject BlockContent using context to the
+ * wrapped component.
+ *
+ * @return {Component} Enhanced component with injected BlockContent as prop.
+ */
+
+
+var withBlockContentContext = Object(_wordpress_compose__WEBPACK_IMPORTED_MODULE_2__["createHigherOrderComponent"])(function (OriginalComponent) {
+  return function (props) {
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(Consumer, null, function (context) {
+      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(OriginalComponent, Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, props, {
+        BlockContent: context
+      }));
+    });
+  };
+}, 'withBlockContentContext');
+/* harmony default export */ __webpack_exports__["default"] = (BlockContentProvider);
+
+
+/***/ }),
+
+/***/ "./packages/blocks/build-module/index.js":
+/*!***********************************************!*\
+  !*** ./packages/blocks/build-module/index.js ***!
+  \***********************************************/
+/*! exports provided: withBlockContentContext, createBlock, cloneBlock, getPossibleBlockTransformations, switchToBlockType, getBlockTransforms, findTransform, parse, getBlockAttributes, parseWithAttributeSchema, pasteHandler, rawHandler, getPhrasingContentSchema, serialize, getBlockContent, getBlockDefaultClassName, getBlockMenuDefaultClassName, getSaveElement, getSaveContent, isValidBlockContent, getCategories, setCategories, updateCategory, registerBlockType, unregisterBlockType, setFreeformContentHandlerName, getFreeformContentHandlerName, setUnregisteredTypeHandlerName, getUnregisteredTypeHandlerName, setDefaultBlockName, getDefaultBlockName, setGroupingBlockName, getGroupingBlockName, getBlockType, getBlockTypes, getBlockSupport, hasBlockSupport, isReusableBlock, getChildBlockNames, hasChildBlocks, hasChildBlocksWithInserterSupport, unstable__bootstrapServerSideBlockDefinitions, registerBlockStyle, unregisterBlockStyle, isUnmodifiedDefaultBlock, normalizeIconObject, isValidIcon, doBlocksMatchTemplate, synchronizeBlocksWithTemplate, children, node */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./store */ "./packages/blocks/build-module/store/index.js");
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./api */ "./packages/blocks/build-module/api/index.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "createBlock", function() { return _api__WEBPACK_IMPORTED_MODULE_1__["createBlock"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "cloneBlock", function() { return _api__WEBPACK_IMPORTED_MODULE_1__["cloneBlock"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getPossibleBlockTransformations", function() { return _api__WEBPACK_IMPORTED_MODULE_1__["getPossibleBlockTransformations"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "switchToBlockType", function() { return _api__WEBPACK_IMPORTED_MODULE_1__["switchToBlockType"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getBlockTransforms", function() { return _api__WEBPACK_IMPORTED_MODULE_1__["getBlockTransforms"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "findTransform", function() { return _api__WEBPACK_IMPORTED_MODULE_1__["findTransform"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "parse", function() { return _api__WEBPACK_IMPORTED_MODULE_1__["parse"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getBlockAttributes", function() { return _api__WEBPACK_IMPORTED_MODULE_1__["getBlockAttributes"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "parseWithAttributeSchema", function() { return _api__WEBPACK_IMPORTED_MODULE_1__["parseWithAttributeSchema"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "pasteHandler", function() { return _api__WEBPACK_IMPORTED_MODULE_1__["pasteHandler"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "rawHandler", function() { return _api__WEBPACK_IMPORTED_MODULE_1__["rawHandler"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getPhrasingContentSchema", function() { return _api__WEBPACK_IMPORTED_MODULE_1__["getPhrasingContentSchema"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "serialize", function() { return _api__WEBPACK_IMPORTED_MODULE_1__["serialize"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getBlockContent", function() { return _api__WEBPACK_IMPORTED_MODULE_1__["getBlockContent"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getBlockDefaultClassName", function() { return _api__WEBPACK_IMPORTED_MODULE_1__["getBlockDefaultClassName"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getBlockMenuDefaultClassName", function() { return _api__WEBPACK_IMPORTED_MODULE_1__["getBlockMenuDefaultClassName"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getSaveElement", function() { return _api__WEBPACK_IMPORTED_MODULE_1__["getSaveElement"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getSaveContent", function() { return _api__WEBPACK_IMPORTED_MODULE_1__["getSaveContent"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "isValidBlockContent", function() { return _api__WEBPACK_IMPORTED_MODULE_1__["isValidBlockContent"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getCategories", function() { return _api__WEBPACK_IMPORTED_MODULE_1__["getCategories"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "setCategories", function() { return _api__WEBPACK_IMPORTED_MODULE_1__["setCategories"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "updateCategory", function() { return _api__WEBPACK_IMPORTED_MODULE_1__["updateCategory"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "registerBlockType", function() { return _api__WEBPACK_IMPORTED_MODULE_1__["registerBlockType"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "unregisterBlockType", function() { return _api__WEBPACK_IMPORTED_MODULE_1__["unregisterBlockType"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "setFreeformContentHandlerName", function() { return _api__WEBPACK_IMPORTED_MODULE_1__["setFreeformContentHandlerName"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getFreeformContentHandlerName", function() { return _api__WEBPACK_IMPORTED_MODULE_1__["getFreeformContentHandlerName"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "setUnregisteredTypeHandlerName", function() { return _api__WEBPACK_IMPORTED_MODULE_1__["setUnregisteredTypeHandlerName"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getUnregisteredTypeHandlerName", function() { return _api__WEBPACK_IMPORTED_MODULE_1__["getUnregisteredTypeHandlerName"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "setDefaultBlockName", function() { return _api__WEBPACK_IMPORTED_MODULE_1__["setDefaultBlockName"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getDefaultBlockName", function() { return _api__WEBPACK_IMPORTED_MODULE_1__["getDefaultBlockName"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "setGroupingBlockName", function() { return _api__WEBPACK_IMPORTED_MODULE_1__["setGroupingBlockName"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getGroupingBlockName", function() { return _api__WEBPACK_IMPORTED_MODULE_1__["getGroupingBlockName"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getBlockType", function() { return _api__WEBPACK_IMPORTED_MODULE_1__["getBlockType"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getBlockTypes", function() { return _api__WEBPACK_IMPORTED_MODULE_1__["getBlockTypes"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getBlockSupport", function() { return _api__WEBPACK_IMPORTED_MODULE_1__["getBlockSupport"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "hasBlockSupport", function() { return _api__WEBPACK_IMPORTED_MODULE_1__["hasBlockSupport"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "isReusableBlock", function() { return _api__WEBPACK_IMPORTED_MODULE_1__["isReusableBlock"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getChildBlockNames", function() { return _api__WEBPACK_IMPORTED_MODULE_1__["getChildBlockNames"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "hasChildBlocks", function() { return _api__WEBPACK_IMPORTED_MODULE_1__["hasChildBlocks"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "hasChildBlocksWithInserterSupport", function() { return _api__WEBPACK_IMPORTED_MODULE_1__["hasChildBlocksWithInserterSupport"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "unstable__bootstrapServerSideBlockDefinitions", function() { return _api__WEBPACK_IMPORTED_MODULE_1__["unstable__bootstrapServerSideBlockDefinitions"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "registerBlockStyle", function() { return _api__WEBPACK_IMPORTED_MODULE_1__["registerBlockStyle"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "unregisterBlockStyle", function() { return _api__WEBPACK_IMPORTED_MODULE_1__["unregisterBlockStyle"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "isUnmodifiedDefaultBlock", function() { return _api__WEBPACK_IMPORTED_MODULE_1__["isUnmodifiedDefaultBlock"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "normalizeIconObject", function() { return _api__WEBPACK_IMPORTED_MODULE_1__["normalizeIconObject"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "isValidIcon", function() { return _api__WEBPACK_IMPORTED_MODULE_1__["isValidIcon"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doBlocksMatchTemplate", function() { return _api__WEBPACK_IMPORTED_MODULE_1__["doBlocksMatchTemplate"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "synchronizeBlocksWithTemplate", function() { return _api__WEBPACK_IMPORTED_MODULE_1__["synchronizeBlocksWithTemplate"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "children", function() { return _api__WEBPACK_IMPORTED_MODULE_1__["children"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "node", function() { return _api__WEBPACK_IMPORTED_MODULE_1__["node"]; });
+
+/* harmony import */ var _block_content_provider__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./block-content-provider */ "./packages/blocks/build-module/block-content-provider/index.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "withBlockContentContext", function() { return _block_content_provider__WEBPACK_IMPORTED_MODULE_2__["withBlockContentContext"]; });
+
+// A "block" is the abstract term used to describe units of markup that,
+// when composed together, form the content or layout of a page.
+// The API for blocks is exposed via `wp.blocks`.
+//
+// Supported blocks are registered by calling `registerBlockType`. Once registered,
+// the block is made available as an option to the editor interface.
+//
+// Blocks are inferred from the HTML source of a post through a parsing mechanism
+// and then stored as objects in state, from which it is then rendered for editing.
+
+/**
+ * Internal dependencies
+ */
+
+
+
+
+
+/***/ }),
+
+/***/ "./packages/blocks/build-module/store/actions.js":
+/*!*******************************************************!*\
+  !*** ./packages/blocks/build-module/store/actions.js ***!
+  \*******************************************************/
+/*! exports provided: addBlockTypes, removeBlockTypes, addBlockStyles, removeBlockStyles, setDefaultBlockName, setFreeformFallbackBlockName, setUnregisteredFallbackBlockName, setGroupingBlockName, setCategories, updateCategory */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addBlockTypes", function() { return addBlockTypes; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeBlockTypes", function() { return removeBlockTypes; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addBlockStyles", function() { return addBlockStyles; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeBlockStyles", function() { return removeBlockStyles; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setDefaultBlockName", function() { return setDefaultBlockName; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setFreeformFallbackBlockName", function() { return setFreeformFallbackBlockName; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setUnregisteredFallbackBlockName", function() { return setUnregisteredFallbackBlockName; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setGroupingBlockName", function() { return setGroupingBlockName; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setCategories", function() { return setCategories; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateCategory", function() { return updateCategory; });
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ "lodash");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);
+/**
+ * External dependencies
+ */
+
+/**
+ * Returns an action object used in signalling that block types have been added.
+ *
+ * @param {Array|Object} blockTypes Block types received.
+ *
+ * @return {Object} Action object.
+ */
+
+function addBlockTypes(blockTypes) {
+  return {
+    type: 'ADD_BLOCK_TYPES',
+    blockTypes: Object(lodash__WEBPACK_IMPORTED_MODULE_0__["castArray"])(blockTypes)
+  };
+}
+/**
+ * Returns an action object used to remove a registered block type.
+ *
+ * @param {string|Array} names Block name.
+ *
+ * @return {Object} Action object.
+ */
+
+function removeBlockTypes(names) {
+  return {
+    type: 'REMOVE_BLOCK_TYPES',
+    names: Object(lodash__WEBPACK_IMPORTED_MODULE_0__["castArray"])(names)
+  };
+}
+/**
+ * Returns an action object used in signalling that new block styles have been added.
+ *
+ * @param {string}       blockName  Block name.
+ * @param {Array|Object} styles     Block styles.
+ *
+ * @return {Object} Action object.
+ */
+
+function addBlockStyles(blockName, styles) {
+  return {
+    type: 'ADD_BLOCK_STYLES',
+    styles: Object(lodash__WEBPACK_IMPORTED_MODULE_0__["castArray"])(styles),
+    blockName: blockName
+  };
+}
+/**
+ * Returns an action object used in signalling that block styles have been removed.
+ *
+ * @param {string}       blockName  Block name.
+ * @param {Array|string} styleNames Block style names.
+ *
+ * @return {Object} Action object.
+ */
+
+function removeBlockStyles(blockName, styleNames) {
+  return {
+    type: 'REMOVE_BLOCK_STYLES',
+    styleNames: Object(lodash__WEBPACK_IMPORTED_MODULE_0__["castArray"])(styleNames),
+    blockName: blockName
+  };
+}
+/**
+ * Returns an action object used to set the default block name.
+ *
+ * @param {string} name Block name.
+ *
+ * @return {Object} Action object.
+ */
+
+function setDefaultBlockName(name) {
+  return {
+    type: 'SET_DEFAULT_BLOCK_NAME',
+    name: name
+  };
+}
+/**
+ * Returns an action object used to set the name of the block used as a fallback
+ * for non-block content.
+ *
+ * @param {string} name Block name.
+ *
+ * @return {Object} Action object.
+ */
+
+function setFreeformFallbackBlockName(name) {
+  return {
+    type: 'SET_FREEFORM_FALLBACK_BLOCK_NAME',
+    name: name
+  };
+}
+/**
+ * Returns an action object used to set the name of the block used as a fallback
+ * for unregistered blocks.
+ *
+ * @param {string} name Block name.
+ *
+ * @return {Object} Action object.
+ */
+
+function setUnregisteredFallbackBlockName(name) {
+  return {
+    type: 'SET_UNREGISTERED_FALLBACK_BLOCK_NAME',
+    name: name
+  };
+}
+/**
+ * Returns an action object used to set the name of the block used
+ * when grouping other blocks
+ * eg: in "Group/Ungroup" interactions
+ *
+ * @param {string} name Block name.
+ *
+ * @return {Object} Action object.
+ */
+
+function setGroupingBlockName(name) {
+  return {
+    type: 'SET_GROUPING_BLOCK_NAME',
+    name: name
+  };
+}
+/**
+ * Returns an action object used to set block categories.
+ *
+ * @param {Object[]} categories Block categories.
+ *
+ * @return {Object} Action object.
+ */
+
+function setCategories(categories) {
+  return {
+    type: 'SET_CATEGORIES',
+    categories: categories
+  };
+}
+/**
+ * Returns an action object used to update a category.
+ *
+ * @param {string} slug     Block category slug.
+ * @param {Object} category Object containing the category properties that should be updated.
+ *
+ * @return {Object} Action object.
+ */
+
+function updateCategory(slug, category) {
+  return {
+    type: 'UPDATE_CATEGORY',
+    slug: slug,
+    category: category
+  };
+}
+
+
+/***/ }),
+
+/***/ "./packages/blocks/build-module/store/index.js":
+/*!*****************************************************!*\
+  !*** ./packages/blocks/build-module/store/index.js ***!
+  \*****************************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./reducer */ "./packages/blocks/build-module/store/reducer.js");
+/* harmony import */ var _selectors__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./selectors */ "./packages/blocks/build-module/store/selectors.js");
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./actions */ "./packages/blocks/build-module/store/actions.js");
+/**
+ * WordPress dependencies
+ */
+
+/**
+ * Internal dependencies
+ */
+
+
+
+
+Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_0__["registerStore"])('core/blocks', {
+  reducer: _reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
+  selectors: _selectors__WEBPACK_IMPORTED_MODULE_2__,
+  actions: _actions__WEBPACK_IMPORTED_MODULE_3__
+});
+
+
+/***/ }),
+
+/***/ "./packages/blocks/build-module/store/reducer.js":
+/*!*******************************************************!*\
+  !*** ./packages/blocks/build-module/store/reducer.js ***!
+  \*******************************************************/
+/*! exports provided: DEFAULT_CATEGORIES, blockTypes, blockStyles, createBlockNameSetterReducer, defaultBlockName, freeformFallbackBlockName, unregisteredFallbackBlockName, groupingBlockName, categories, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DEFAULT_CATEGORIES", function() { return DEFAULT_CATEGORIES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "blockTypes", function() { return blockTypes; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "blockStyles", function() { return blockStyles; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createBlockNameSetterReducer", function() { return createBlockNameSetterReducer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "defaultBlockName", function() { return defaultBlockName; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "freeformFallbackBlockName", function() { return freeformFallbackBlockName; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "unregisteredFallbackBlockName", function() { return unregisteredFallbackBlockName; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "groupingBlockName", function() { return groupingBlockName; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "categories", function() { return categories; });
+/* harmony import */ var _babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/defineProperty */ "./node_modules/@babel/runtime/helpers/esm/defineProperty.js");
+/* harmony import */ var _babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/toConsumableArray */ "./node_modules/@babel/runtime/helpers/esm/toConsumableArray.js");
+/* harmony import */ var _babel_runtime_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectSpread */ "./node_modules/@babel/runtime/helpers/esm/objectSpread.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! lodash */ "lodash");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__);
+
+
+
+
+/**
+ * External dependencies
+ */
+
+/**
+ * WordPress dependencies
+ */
+
+
+
+/**
+ * Module Constants
+ */
+
+var DEFAULT_CATEGORIES = [{
+  slug: 'common',
+  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__["__"])('Common Blocks')
+}, {
+  slug: 'formatting',
+  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__["__"])('Formatting')
+}, {
+  slug: 'layout',
+  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__["__"])('Layout Elements')
+}, {
+  slug: 'widgets',
+  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__["__"])('Widgets')
+}, {
+  slug: 'embed',
+  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__["__"])('Embeds')
+}, {
+  slug: 'reusable',
+  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__["__"])('Reusable Blocks')
+}];
+/**
+ * Reducer managing the block types
+ *
+ * @param {Object} state  Current state.
+ * @param {Object} action Dispatched action.
+ *
+ * @return {Object} Updated state.
+ */
+
+function blockTypes() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case 'ADD_BLOCK_TYPES':
+      return Object(_babel_runtime_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_2__["default"])({}, state, Object(lodash__WEBPACK_IMPORTED_MODULE_3__["keyBy"])(Object(lodash__WEBPACK_IMPORTED_MODULE_3__["map"])(action.blockTypes, function (blockType) {
+        return Object(lodash__WEBPACK_IMPORTED_MODULE_3__["omit"])(blockType, 'styles ');
+      }), 'name'));
+
+    case 'REMOVE_BLOCK_TYPES':
+      return Object(lodash__WEBPACK_IMPORTED_MODULE_3__["omit"])(state, action.names);
+  }
+
+  return state;
+}
+/**
+ * Reducer managing the block style variations.
+ *
+ * @param {Object} state  Current state.
+ * @param {Object} action Dispatched action.
+ *
+ * @return {Object} Updated state.
+ */
+
+function blockStyles() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case 'ADD_BLOCK_TYPES':
+      return Object(_babel_runtime_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_2__["default"])({}, state, Object(lodash__WEBPACK_IMPORTED_MODULE_3__["mapValues"])(Object(lodash__WEBPACK_IMPORTED_MODULE_3__["keyBy"])(action.blockTypes, 'name'), function (blockType) {
+        return Object(lodash__WEBPACK_IMPORTED_MODULE_3__["uniqBy"])([].concat(Object(_babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_1__["default"])(Object(lodash__WEBPACK_IMPORTED_MODULE_3__["get"])(blockType, ['styles'], [])), Object(_babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_1__["default"])(Object(lodash__WEBPACK_IMPORTED_MODULE_3__["get"])(state, [blockType.name], []))), function (style) {
+          return style.name;
+        });
+      }));
+
+    case 'ADD_BLOCK_STYLES':
+      return Object(_babel_runtime_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_2__["default"])({}, state, Object(_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])({}, action.blockName, Object(lodash__WEBPACK_IMPORTED_MODULE_3__["uniqBy"])([].concat(Object(_babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_1__["default"])(Object(lodash__WEBPACK_IMPORTED_MODULE_3__["get"])(state, [action.blockName], [])), Object(_babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_1__["default"])(action.styles)), function (style) {
+        return style.name;
+      })));
+
+    case 'REMOVE_BLOCK_STYLES':
+      return Object(_babel_runtime_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_2__["default"])({}, state, Object(_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])({}, action.blockName, Object(lodash__WEBPACK_IMPORTED_MODULE_3__["filter"])(Object(lodash__WEBPACK_IMPORTED_MODULE_3__["get"])(state, [action.blockName], []), function (style) {
+        return action.styleNames.indexOf(style.name) === -1;
+      })));
+  }
+
+  return state;
+}
+/**
+ * Higher-order Reducer creating a reducer keeping track of given block name.
+ *
+ * @param {string} setActionType  Action type.
+ *
+ * @return {Function} Reducer.
+ */
+
+function createBlockNameSetterReducer(setActionType) {
+  return function () {
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+    var action = arguments.length > 1 ? arguments[1] : undefined;
+
+    switch (action.type) {
+      case 'REMOVE_BLOCK_TYPES':
+        if (action.names.indexOf(state) !== -1) {
+          return null;
+        }
+
+        return state;
+
+      case setActionType:
+        return action.name || null;
+    }
+
+    return state;
+  };
+}
+var defaultBlockName = createBlockNameSetterReducer('SET_DEFAULT_BLOCK_NAME');
+var freeformFallbackBlockName = createBlockNameSetterReducer('SET_FREEFORM_FALLBACK_BLOCK_NAME');
+var unregisteredFallbackBlockName = createBlockNameSetterReducer('SET_UNREGISTERED_FALLBACK_BLOCK_NAME');
+var groupingBlockName = createBlockNameSetterReducer('SET_GROUPING_BLOCK_NAME');
+/**
+ * Reducer managing the categories
+ *
+ * @param {Object} state  Current state.
+ * @param {Object} action Dispatched action.
+ *
+ * @return {Object} Updated state.
+ */
+
+function categories() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : DEFAULT_CATEGORIES;
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case 'SET_CATEGORIES':
+      return action.categories || [];
+
+    case 'UPDATE_CATEGORY':
+      {
+        if (!action.category || Object(lodash__WEBPACK_IMPORTED_MODULE_3__["isEmpty"])(action.category)) {
+          return state;
+        }
+
+        var categoryToChange = Object(lodash__WEBPACK_IMPORTED_MODULE_3__["find"])(state, ['slug', action.slug]);
+
+        if (categoryToChange) {
+          return Object(lodash__WEBPACK_IMPORTED_MODULE_3__["map"])(state, function (category) {
+            if (category.slug === action.slug) {
+              return Object(_babel_runtime_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_2__["default"])({}, category, action.category);
+            }
+
+            return category;
+          });
+        }
+      }
+  }
+
+  return state;
+}
+/* harmony default export */ __webpack_exports__["default"] = (Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_4__["combineReducers"])({
+  blockTypes: blockTypes,
+  blockStyles: blockStyles,
+  defaultBlockName: defaultBlockName,
+  freeformFallbackBlockName: freeformFallbackBlockName,
+  unregisteredFallbackBlockName: unregisteredFallbackBlockName,
+  groupingBlockName: groupingBlockName,
+  categories: categories
+}));
+
+
+/***/ }),
+
+/***/ "./packages/blocks/build-module/store/selectors.js":
+/*!*********************************************************!*\
+  !*** ./packages/blocks/build-module/store/selectors.js ***!
+  \*********************************************************/
+/*! exports provided: getBlockTypes, getBlockType, getBlockStyles, getCategories, getDefaultBlockName, getFreeformFallbackBlockName, getUnregisteredFallbackBlockName, getGroupingBlockName, getChildBlockNames, getBlockSupport, hasBlockSupport, isMatchingSearchTerm, hasChildBlocks, hasChildBlocksWithInserterSupport */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getBlockTypes", function() { return getBlockTypes; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getBlockType", function() { return getBlockType; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getBlockStyles", function() { return getBlockStyles; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCategories", function() { return getCategories; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getDefaultBlockName", function() { return getDefaultBlockName; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getFreeformFallbackBlockName", function() { return getFreeformFallbackBlockName; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getUnregisteredFallbackBlockName", function() { return getUnregisteredFallbackBlockName; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getGroupingBlockName", function() { return getGroupingBlockName; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getChildBlockNames", function() { return getChildBlockNames; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getBlockSupport", function() { return getBlockSupport; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hasBlockSupport", function() { return hasBlockSupport; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isMatchingSearchTerm", function() { return isMatchingSearchTerm; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hasChildBlocks", function() { return hasChildBlocks; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hasChildBlocksWithInserterSupport", function() { return hasChildBlocksWithInserterSupport; });
+/* harmony import */ var rememo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! rememo */ "./node_modules/rememo/es/rememo.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "lodash");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
+/**
+ * External dependencies
+ */
+
+
+/**
+ * Given a block name or block type object, returns the corresponding
+ * normalized block type object.
+ *
+ * @param {Object}          state      Blocks state.
+ * @param {(string|Object)} nameOrType Block name or type object
+ *
+ * @return {Object} Block type object.
+ */
+
+var getNormalizedBlockType = function getNormalizedBlockType(state, nameOrType) {
+  return 'string' === typeof nameOrType ? getBlockType(state, nameOrType) : nameOrType;
+};
+/**
+ * Returns all the available block types.
+ *
+ * @param {Object} state Data state.
+ *
+ * @return {Array} Block Types.
+ */
+
+
+var getBlockTypes = Object(rememo__WEBPACK_IMPORTED_MODULE_0__["default"])(function (state) {
+  return Object.values(state.blockTypes);
+}, function (state) {
+  return [state.blockTypes];
+});
+/**
+ * Returns a block type by name.
+ *
+ * @param {Object} state Data state.
+ * @param {string} name Block type name.
+ *
+ * @return {Object?} Block Type.
+ */
+
+function getBlockType(state, name) {
+  return state.blockTypes[name];
+}
+/**
+ * Returns block styles by block name.
+ *
+ * @param {Object} state Data state.
+ * @param {string} name  Block type name.
+ *
+ * @return {Array?} Block Styles.
+ */
+
+function getBlockStyles(state, name) {
+  return state.blockStyles[name];
+}
+/**
+ * Returns all the available categories.
+ *
+ * @param {Object} state Data state.
+ *
+ * @return {Array} Categories list.
+ */
+
+function getCategories(state) {
+  return state.categories;
+}
+/**
+ * Returns the name of the default block name.
+ *
+ * @param {Object} state Data state.
+ *
+ * @return {string?} Default block name.
+ */
+
+function getDefaultBlockName(state) {
+  return state.defaultBlockName;
+}
+/**
+ * Returns the name of the block for handling non-block content.
+ *
+ * @param {Object} state Data state.
+ *
+ * @return {string?} Name of the block for handling non-block content.
+ */
+
+function getFreeformFallbackBlockName(state) {
+  return state.freeformFallbackBlockName;
+}
+/**
+ * Returns the name of the block for handling unregistered blocks.
+ *
+ * @param {Object} state Data state.
+ *
+ * @return {string?} Name of the block for handling unregistered blocks.
+ */
+
+function getUnregisteredFallbackBlockName(state) {
+  return state.unregisteredFallbackBlockName;
+}
+/**
+ * Returns the name of the block for handling unregistered blocks.
+ *
+ * @param {Object} state Data state.
+ *
+ * @return {string?} Name of the block for handling unregistered blocks.
+ */
+
+function getGroupingBlockName(state) {
+  return state.groupingBlockName;
+}
+/**
+ * Returns an array with the child blocks of a given block.
+ *
+ * @param {Object} state     Data state.
+ * @param {string} blockName Block type name.
+ *
+ * @return {Array} Array of child block names.
+ */
+
+var getChildBlockNames = Object(rememo__WEBPACK_IMPORTED_MODULE_0__["default"])(function (state, blockName) {
+  return Object(lodash__WEBPACK_IMPORTED_MODULE_1__["map"])(Object(lodash__WEBPACK_IMPORTED_MODULE_1__["filter"])(state.blockTypes, function (blockType) {
+    return Object(lodash__WEBPACK_IMPORTED_MODULE_1__["includes"])(blockType.parent, blockName);
+  }), function (_ref) {
+    var name = _ref.name;
+    return name;
+  });
+}, function (state) {
+  return [state.blockTypes];
+});
+/**
+ * Returns the block support value for a feature, if defined.
+ *
+ * @param  {Object}          state           Data state.
+ * @param  {(string|Object)} nameOrType      Block name or type object
+ * @param  {string}          feature         Feature to retrieve
+ * @param  {*}               defaultSupports Default value to return if not
+ *                                           explicitly defined
+ *
+ * @return {?*} Block support value
+ */
+
+var getBlockSupport = function getBlockSupport(state, nameOrType, feature, defaultSupports) {
+  var blockType = getNormalizedBlockType(state, nameOrType);
+  return Object(lodash__WEBPACK_IMPORTED_MODULE_1__["get"])(blockType, ['supports', feature], defaultSupports);
+};
+/**
+ * Returns true if the block defines support for a feature, or false otherwise.
+ *
+ * @param  {Object}         state           Data state.
+ * @param {(string|Object)} nameOrType      Block name or type object.
+ * @param {string}          feature         Feature to test.
+ * @param {boolean}         defaultSupports Whether feature is supported by
+ *                                          default if not explicitly defined.
+ *
+ * @return {boolean} Whether block supports feature.
+ */
+
+function hasBlockSupport(state, nameOrType, feature, defaultSupports) {
+  return !!getBlockSupport(state, nameOrType, feature, defaultSupports);
+}
+/**
+ * Returns true if the block type by the given name or object value matches a
+ * search term, or false otherwise.
+ *
+ * @param {Object}          state      Blocks state.
+ * @param {(string|Object)} nameOrType Block name or type object.
+ * @param {string}          searchTerm Search term by which to filter.
+ *
+ * @return {Object[]} Whether block type matches search term.
+ */
+
+function isMatchingSearchTerm(state, nameOrType, searchTerm) {
+  var blockType = getNormalizedBlockType(state, nameOrType);
+  var getNormalizedSearchTerm = Object(lodash__WEBPACK_IMPORTED_MODULE_1__["flow"])([// Disregard diacritics.
+  //  Input: "média"
+  lodash__WEBPACK_IMPORTED_MODULE_1__["deburr"], // Lowercase.
+  //  Input: "MEDIA"
+  function (term) {
+    return term.toLowerCase();
+  }, // Strip leading and trailing whitespace.
+  //  Input: " media "
+  function (term) {
+    return term.trim();
+  }]);
+  var normalizedSearchTerm = getNormalizedSearchTerm(searchTerm);
+  var isSearchMatch = Object(lodash__WEBPACK_IMPORTED_MODULE_1__["flow"])([getNormalizedSearchTerm, function (normalizedCandidate) {
+    return Object(lodash__WEBPACK_IMPORTED_MODULE_1__["includes"])(normalizedCandidate, normalizedSearchTerm);
+  }]);
+  return isSearchMatch(blockType.title) || Object(lodash__WEBPACK_IMPORTED_MODULE_1__["some"])(blockType.keywords, isSearchMatch) || isSearchMatch(blockType.category);
+}
+/**
+ * Returns a boolean indicating if a block has child blocks or not.
+ *
+ * @param {Object} state     Data state.
+ * @param {string} blockName Block type name.
+ *
+ * @return {boolean} True if a block contains child blocks and false otherwise.
+ */
+
+var hasChildBlocks = function hasChildBlocks(state, blockName) {
+  return getChildBlockNames(state, blockName).length > 0;
+};
+/**
+ * Returns a boolean indicating if a block has at least one child block with inserter support.
+ *
+ * @param {Object} state     Data state.
+ * @param {string} blockName Block type name.
+ *
+ * @return {boolean} True if a block contains at least one child blocks with inserter support
+ *                   and false otherwise.
+ */
+
+var hasChildBlocksWithInserterSupport = function hasChildBlocksWithInserterSupport(state, blockName) {
+  return Object(lodash__WEBPACK_IMPORTED_MODULE_1__["some"])(getChildBlockNames(state, blockName), function (childBlockName) {
+    return hasBlockSupport(state, childBlockName, 'inserter', true);
+  });
+};
+
+
+/***/ }),
+
+/***/ "@wordpress/autop":
+/*!****************************************!*\
+  !*** external {"this":["wp","autop"]} ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(function() { module.exports = this["wp"]["autop"]; }());
+
+/***/ }),
+
+/***/ "@wordpress/blob":
+/*!***************************************!*\
+  !*** external {"this":["wp","blob"]} ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(function() { module.exports = this["wp"]["blob"]; }());
+
+/***/ }),
+
+/***/ "@wordpress/block-serialization-default-parser":
+/*!******************************************************************!*\
+  !*** external {"this":["wp","blockSerializationDefaultParser"]} ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(function() { module.exports = this["wp"]["blockSerializationDefaultParser"]; }());
+
+/***/ }),
+
+/***/ "@wordpress/compose":
+/*!******************************************!*\
+  !*** external {"this":["wp","compose"]} ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(function() { module.exports = this["wp"]["compose"]; }());
+
+/***/ }),
+
+/***/ "@wordpress/data":
+/*!***************************************!*\
+  !*** external {"this":["wp","data"]} ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(function() { module.exports = this["wp"]["data"]; }());
+
+/***/ }),
+
+/***/ "@wordpress/dom":
+/*!**************************************!*\
+  !*** external {"this":["wp","dom"]} ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(function() { module.exports = this["wp"]["dom"]; }());
+
+/***/ }),
+
+/***/ "@wordpress/element":
+/*!******************************************!*\
+  !*** external {"this":["wp","element"]} ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(function() { module.exports = this["wp"]["element"]; }());
+
+/***/ }),
+
+/***/ "@wordpress/hooks":
+/*!****************************************!*\
+  !*** external {"this":["wp","hooks"]} ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(function() { module.exports = this["wp"]["hooks"]; }());
+
+/***/ }),
+
+/***/ "@wordpress/html-entities":
+/*!***********************************************!*\
+  !*** external {"this":["wp","htmlEntities"]} ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(function() { module.exports = this["wp"]["htmlEntities"]; }());
+
+/***/ }),
+
+/***/ "@wordpress/i18n":
+/*!***************************************!*\
+  !*** external {"this":["wp","i18n"]} ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(function() { module.exports = this["wp"]["i18n"]; }());
+
+/***/ }),
+
+/***/ "@wordpress/is-shallow-equal":
+/*!*************************************************!*\
+  !*** external {"this":["wp","isShallowEqual"]} ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(function() { module.exports = this["wp"]["isShallowEqual"]; }());
+
+/***/ }),
+
+/***/ "@wordpress/shortcode":
+/*!********************************************!*\
+  !*** external {"this":["wp","shortcode"]} ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(function() { module.exports = this["wp"]["shortcode"]; }());
+
+/***/ }),
+
+/***/ "lodash":
+/*!**********************************!*\
+  !*** external {"this":"lodash"} ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(function() { module.exports = this["lodash"]; }());
+
+/***/ })
+
+/******/ });
+//# sourceMappingURL=index.js.map

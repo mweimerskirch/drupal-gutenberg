@@ -1,1 +1,562 @@
-this.wp=this.wp||{},this.wp.blockSerializationDefaultParser=function(n){var t={};function r(e){if(t[e])return t[e].exports;var u=t[e]={i:e,l:!1,exports:{}};return n[e].call(u.exports,u,u.exports,r),u.l=!0,u.exports}return r.m=n,r.c=t,r.d=function(n,t,e){r.o(n,t)||Object.defineProperty(n,t,{configurable:!1,enumerable:!0,get:e})},r.r=function(n){Object.defineProperty(n,"__esModule",{value:!0})},r.n=function(n){var t=n&&n.__esModule?function(){return n.default}:function(){return n};return r.d(t,"a",t),t},r.o=function(n,t){return Object.prototype.hasOwnProperty.call(n,t)},r.p="",r(r.s=325)}({23:function(n,t,r){"use strict";var e=r(38);var u=r(37);function o(n,t){return Object(e.a)(n)||function(n,t){var r=[],e=!0,u=!1,o=void 0;try{for(var i,c=n[Symbol.iterator]();!(e=(i=c.next()).done)&&(r.push(i.value),!t||r.length!==t);e=!0);}catch(n){u=!0,o=n}finally{try{e||null==c.return||c.return()}finally{if(u)throw o}}return r}(n,t)||Object(u.a)()}r.d(t,"a",function(){return o})},325:function(n,t,r){"use strict";r.r(t),r.d(t,"parse",function(){return f});var e,u,o,i,c=r(23),s=/<!--\s+(\/)?wp:([a-z][a-z0-9_-]*\/)?([a-z][a-z0-9_-]*)\s+({(?:(?=([^}]+|}+(?=})|(?!}\s+\/?-->)[^])*)\5|[^]*?)}\s+)?(\/)?-->/g;function l(n,t,r,e,u){return{blockName:n,attrs:t,innerBlocks:r,innerHTML:e,innerContent:u}}function a(n){return l(null,{},[],n,[n])}var f=function(n){e=n,u=0,o=[],i=[],s.lastIndex=0;do{}while(p());return o};function p(){var n=function(){var n=s.exec(e);if(null===n)return["no-more-tokens"];var t=n.index,r=Object(c.a)(n,7),u=r[0],o=r[1],i=r[2],l=r[3],a=r[4],f=r[6],p=u.length,b=!!o,v=!!f,h=(i||"core/")+l,k=!!a,d=k?function(n){try{return JSON.parse(n)}catch(n){return null}}(a):{};if(v)return["void-block",h,d,t,p];if(b)return["block-closer",h,null,t,p];return["block-opener",h,d,t,p]}(),t=Object(c.a)(n,5),r=t[0],f=t[1],p=t[2],k=t[3],d=t[4],O=i.length,g=k>u?u:null;switch(r){case"no-more-tokens":if(0===O)return b(),!1;if(1===O)return h(),!1;for(;0<i.length;)h();return!1;case"void-block":return 0===O?(null!==g&&o.push(a(e.substr(g,k-g))),o.push(l(f,p,[],"",[])),u=k+d,!0):(v(l(f,p,[],"",[]),k,d),u=k+d,!0);case"block-opener":return i.push(function(n,t,r,e,u){return{block:n,tokenStart:t,tokenLength:r,prevOffset:e||t+r,leadingHtmlStart:u}}(l(f,p,[],"",[]),k,d,k+d,g)),u=k+d,!0;case"block-closer":if(0===O)return b(),!1;if(1===O)return h(k),u=k+d,!0;var y=i.pop(),w=e.substr(y.prevOffset,k-y.prevOffset);return y.block.innerHTML+=w,y.block.innerContent.push(w),y.prevOffset=k+d,v(y.block,y.tokenStart,y.tokenLength,k+d),u=k+d,!0;default:return b(),!1}}function b(n){var t=n||e.length-u;0!==t&&o.push(a(e.substr(u,t)))}function v(n,t,r,u){var o=i[i.length-1];o.block.innerBlocks.push(n);var c=e.substr(o.prevOffset,t-o.prevOffset);c&&(o.block.innerHTML+=c,o.block.innerContent.push(c)),o.block.innerContent.push(null),o.prevOffset=u||t+r}function h(n){var t=i.pop(),r=t.block,u=t.leadingHtmlStart,c=t.prevOffset,s=t.tokenStart,l=n?e.substr(c,n-c):e.substr(c);l&&(r.innerHTML+=l,r.innerContent.push(l)),null!==u&&o.push(a(e.substr(u,s-u))),o.push(r)}},37:function(n,t,r){"use strict";function e(){throw new TypeError("Invalid attempt to destructure non-iterable instance")}r.d(t,"a",function(){return e})},38:function(n,t,r){"use strict";function e(n){if(Array.isArray(n))return n}r.d(t,"a",function(){return e})}});
+this["wp"] = this["wp"] || {}; this["wp"]["blockSerializationDefaultParser"] =
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = "./packages/block-serialization-default-parser/build-module/index.js");
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ "./node_modules/@babel/runtime/helpers/esm/arrayWithHoles.js":
+/*!*******************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/arrayWithHoles.js ***!
+  \*******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _arrayWithHoles; });
+function _arrayWithHoles(arr) {
+  if (Array.isArray(arr)) return arr;
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/esm/iterableToArrayLimit.js":
+/*!*************************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/iterableToArrayLimit.js ***!
+  \*************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _iterableToArrayLimit; });
+function _iterableToArrayLimit(arr, i) {
+  var _arr = [];
+  var _n = true;
+  var _d = false;
+  var _e = undefined;
+
+  try {
+    for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+      _arr.push(_s.value);
+
+      if (i && _arr.length === i) break;
+    }
+  } catch (err) {
+    _d = true;
+    _e = err;
+  } finally {
+    try {
+      if (!_n && _i["return"] != null) _i["return"]();
+    } finally {
+      if (_d) throw _e;
+    }
+  }
+
+  return _arr;
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/esm/nonIterableRest.js":
+/*!********************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/nonIterableRest.js ***!
+  \********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _nonIterableRest; });
+function _nonIterableRest() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance");
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/slicedToArray.js ***!
+  \******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _slicedToArray; });
+/* harmony import */ var _arrayWithHoles__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./arrayWithHoles */ "./node_modules/@babel/runtime/helpers/esm/arrayWithHoles.js");
+/* harmony import */ var _iterableToArrayLimit__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./iterableToArrayLimit */ "./node_modules/@babel/runtime/helpers/esm/iterableToArrayLimit.js");
+/* harmony import */ var _nonIterableRest__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./nonIterableRest */ "./node_modules/@babel/runtime/helpers/esm/nonIterableRest.js");
+
+
+
+function _slicedToArray(arr, i) {
+  return Object(_arrayWithHoles__WEBPACK_IMPORTED_MODULE_0__["default"])(arr) || Object(_iterableToArrayLimit__WEBPACK_IMPORTED_MODULE_1__["default"])(arr, i) || Object(_nonIterableRest__WEBPACK_IMPORTED_MODULE_2__["default"])();
+}
+
+/***/ }),
+
+/***/ "./packages/block-serialization-default-parser/build-module/index.js":
+/*!***************************************************************************!*\
+  !*** ./packages/block-serialization-default-parser/build-module/index.js ***!
+  \***************************************************************************/
+/*! exports provided: parse */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "parse", function() { return parse; });
+/* harmony import */ var _babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/slicedToArray */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
+
+var document;
+var offset;
+var output;
+var stack;
+/**
+ * Matches block comment delimiters
+ *
+ * While most of this pattern is straightforward the attribute parsing
+ * incorporates a tricks to make sure we don't choke on specific input
+ *
+ *  - since JavaScript has no possessive quantifier or atomic grouping
+ *    we are emulating it with a trick
+ *
+ *    we want a possessive quantifier or atomic group to prevent backtracking
+ *    on the `}`s should we fail to match the remainder of the pattern
+ *
+ *    we can emulate this with a positive lookahead and back reference
+ *    (a++)*c === ((?=(a+))\1)*c
+ *
+ *    let's examine an example:
+ *      - /(a+)*c/.test('aaaaaaaaaaaaad') fails after over 49,000 steps
+ *      - /(a++)*c/.test('aaaaaaaaaaaaad') fails after 85 steps
+ *      - /(?>a+)*c/.test('aaaaaaaaaaaaad') fails after 126 steps
+ *
+ *    this is because the possessive `++` and the atomic group `(?>)`
+ *    tell the engine that all those `a`s belong together as a single group
+ *    and so it won't split it up when stepping backwards to try and match
+ *
+ *    if we use /((?=(a+))\1)*c/ then we get the same behavior as the atomic group
+ *    or possessive and prevent the backtracking because the `a+` is matched but
+ *    not captured. thus, we find the long string of `a`s and remember it, then
+ *    reference it as a whole unit inside our pattern
+ *
+ *    @see http://instanceof.me/post/52245507631/regex-emulate-atomic-grouping-with-lookahead
+ *    @see http://blog.stevenlevithan.com/archives/mimic-atomic-groups
+ *    @see https://javascript.info/regexp-infinite-backtracking-problem
+ *
+ *    once browsers reliably support atomic grouping or possessive
+ *    quantifiers natively we should remove this trick and simplify
+ *
+ * @type RegExp
+ *
+ * @since 3.8.0
+ * @since 4.6.1 added optimization to prevent backtracking on attribute parsing
+ */
+
+var tokenizer = /<!--\s+(\/)?wp:([a-z][a-z0-9_-]*\/)?([a-z][a-z0-9_-]*)\s+({(?:(?=([^}]+|}+(?=})|(?!}\s+\/?-->)[^])*)\5|[^]*?)}\s+)?(\/)?-->/g;
+
+function Block(blockName, attrs, innerBlocks, innerHTML, innerContent) {
+  return {
+    blockName: blockName,
+    attrs: attrs,
+    innerBlocks: innerBlocks,
+    innerHTML: innerHTML,
+    innerContent: innerContent
+  };
+}
+
+function Freeform(innerHTML) {
+  return Block(null, {}, [], innerHTML, [innerHTML]);
+}
+
+function Frame(block, tokenStart, tokenLength, prevOffset, leadingHtmlStart) {
+  return {
+    block: block,
+    tokenStart: tokenStart,
+    tokenLength: tokenLength,
+    prevOffset: prevOffset || tokenStart + tokenLength,
+    leadingHtmlStart: leadingHtmlStart
+  };
+}
+/**
+ * Parser function, that converts input HTML into a block based structure.
+ *
+ * @param {string} doc The HTML document to parse.
+ *
+ * @example
+ * Input post:
+ * ```html
+ * <!-- wp:columns {"columns":3} -->
+ * <div class="wp-block-columns has-3-columns"><!-- wp:column -->
+ * <div class="wp-block-column"><!-- wp:paragraph -->
+ * <p>Left</p>
+ * <!-- /wp:paragraph --></div>
+ * <!-- /wp:column -->
+ *
+ * <!-- wp:column -->
+ * <div class="wp-block-column"><!-- wp:paragraph -->
+ * <p><strong>Middle</strong></p>
+ * <!-- /wp:paragraph --></div>
+ * <!-- /wp:column -->
+ *
+ * <!-- wp:column -->
+ * <div class="wp-block-column"></div>
+ * <!-- /wp:column --></div>
+ * <!-- /wp:columns -->
+ * ```
+ *
+ * Parsing code:
+ * ```js
+ * import { parse } from '@wordpress/block-serialization-default-parser';
+ *
+ * parse( post ) === [
+ *     {
+ *         blockName: "core/columns",
+ *         attrs: {
+ *             columns: 3
+ *         },
+ *         innerBlocks: [
+ *             {
+ *                 blockName: "core/column",
+ *                 attrs: null,
+ *                 innerBlocks: [
+ *                     {
+ *                         blockName: "core/paragraph",
+ *                         attrs: null,
+ *                         innerBlocks: [],
+ *                         innerHTML: "\n<p>Left</p>\n"
+ *                     }
+ *                 ],
+ *                 innerHTML: '\n<div class="wp-block-column"></div>\n'
+ *             },
+ *             {
+ *                 blockName: "core/column",
+ *                 attrs: null,
+ *                 innerBlocks: [
+ *                     {
+ *                         blockName: "core/paragraph",
+ *                         attrs: null,
+ *                         innerBlocks: [],
+ *                         innerHTML: "\n<p><strong>Middle</strong></p>\n"
+ *                     }
+ *                 ],
+ *                 innerHTML: '\n<div class="wp-block-column"></div>\n'
+ *             },
+ *             {
+ *                 blockName: "core/column",
+ *                 attrs: null,
+ *                 innerBlocks: [],
+ *                 innerHTML: '\n<div class="wp-block-column"></div>\n'
+ *             }
+ *         ],
+ *         innerHTML: '\n<div class="wp-block-columns has-3-columns">\n\n\n\n</div>\n'
+ *     }
+ * ];
+ * ```
+ * @return {Array} A block-based representation of the input HTML.
+ */
+
+
+var parse = function parse(doc) {
+  document = doc;
+  offset = 0;
+  output = [];
+  stack = [];
+  tokenizer.lastIndex = 0;
+
+  do {// twiddle our thumbs
+  } while (proceed());
+
+  return output;
+};
+
+function proceed() {
+  var next = nextToken();
+
+  var _next = Object(_babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(next, 5),
+      tokenType = _next[0],
+      blockName = _next[1],
+      attrs = _next[2],
+      startOffset = _next[3],
+      tokenLength = _next[4];
+
+  var stackDepth = stack.length; // we may have some HTML soup before the next block
+
+  var leadingHtmlStart = startOffset > offset ? offset : null;
+
+  switch (tokenType) {
+    case 'no-more-tokens':
+      // if not in a block then flush output
+      if (0 === stackDepth) {
+        addFreeform();
+        return false;
+      } // Otherwise we have a problem
+      // This is an error
+      // we have options
+      //  - treat it all as freeform text
+      //  - assume an implicit closer (easiest when not nesting)
+      // for the easy case we'll assume an implicit closer
+
+
+      if (1 === stackDepth) {
+        addBlockFromStack();
+        return false;
+      } // for the nested case where it's more difficult we'll
+      // have to assume that multiple closers are missing
+      // and so we'll collapse the whole stack piecewise
+
+
+      while (0 < stack.length) {
+        addBlockFromStack();
+      }
+
+      return false;
+
+    case 'void-block':
+      // easy case is if we stumbled upon a void block
+      // in the top-level of the document
+      if (0 === stackDepth) {
+        if (null !== leadingHtmlStart) {
+          output.push(Freeform(document.substr(leadingHtmlStart, startOffset - leadingHtmlStart)));
+        }
+
+        output.push(Block(blockName, attrs, [], '', []));
+        offset = startOffset + tokenLength;
+        return true;
+      } // otherwise we found an inner block
+
+
+      addInnerBlock(Block(blockName, attrs, [], '', []), startOffset, tokenLength);
+      offset = startOffset + tokenLength;
+      return true;
+
+    case 'block-opener':
+      // track all newly-opened blocks on the stack
+      stack.push(Frame(Block(blockName, attrs, [], '', []), startOffset, tokenLength, startOffset + tokenLength, leadingHtmlStart));
+      offset = startOffset + tokenLength;
+      return true;
+
+    case 'block-closer':
+      // if we're missing an opener we're in trouble
+      // This is an error
+      if (0 === stackDepth) {
+        // we have options
+        //  - assume an implicit opener
+        //  - assume _this_ is the opener
+        //  - give up and close out the document
+        addFreeform();
+        return false;
+      } // if we're not nesting then this is easy - close the block
+
+
+      if (1 === stackDepth) {
+        addBlockFromStack(startOffset);
+        offset = startOffset + tokenLength;
+        return true;
+      } // otherwise we're nested and we have to close out the current
+      // block and add it as a innerBlock to the parent
+
+
+      var stackTop = stack.pop();
+      var html = document.substr(stackTop.prevOffset, startOffset - stackTop.prevOffset);
+      stackTop.block.innerHTML += html;
+      stackTop.block.innerContent.push(html);
+      stackTop.prevOffset = startOffset + tokenLength;
+      addInnerBlock(stackTop.block, stackTop.tokenStart, stackTop.tokenLength, startOffset + tokenLength);
+      offset = startOffset + tokenLength;
+      return true;
+
+    default:
+      // This is an error
+      addFreeform();
+      return false;
+  }
+}
+/**
+ * Parse JSON if valid, otherwise return null
+ *
+ * Note that JSON coming from the block comment
+ * delimiters is constrained to be an object
+ * and cannot be things like `true` or `null`
+ *
+ * @param {string} input JSON input string to parse
+ * @return {Object|null} parsed JSON if valid
+ */
+
+
+function parseJSON(input) {
+  try {
+    return JSON.parse(input);
+  } catch (e) {
+    return null;
+  }
+}
+
+function nextToken() {
+  // aye the magic
+  // we're using a single RegExp to tokenize the block comment delimiters
+  // we're also using a trick here because the only difference between a
+  // block opener and a block closer is the leading `/` before `wp:` (and
+  // a closer has no attributes). we can trap them both and process the
+  // match back in Javascript to see which one it was.
+  var matches = tokenizer.exec(document); // we have no more tokens
+
+  if (null === matches) {
+    return ['no-more-tokens'];
+  }
+
+  var startedAt = matches.index;
+
+  var _matches = Object(_babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(matches, 7),
+      match = _matches[0],
+      closerMatch = _matches[1],
+      namespaceMatch = _matches[2],
+      nameMatch = _matches[3],
+      attrsMatch = _matches[4],
+
+  /* internal/unused */
+  voidMatch = _matches[6];
+
+  var length = match.length;
+  var isCloser = !!closerMatch;
+  var isVoid = !!voidMatch;
+  var namespace = namespaceMatch || 'core/';
+  var name = namespace + nameMatch;
+  var hasAttrs = !!attrsMatch;
+  var attrs = hasAttrs ? parseJSON(attrsMatch) : {}; // This state isn't allowed
+  // This is an error
+
+  if (isCloser && (isVoid || hasAttrs)) {// we can ignore them since they don't hurt anything
+    // we may warn against this at some point or reject it
+  }
+
+  if (isVoid) {
+    return ['void-block', name, attrs, startedAt, length];
+  }
+
+  if (isCloser) {
+    return ['block-closer', name, null, startedAt, length];
+  }
+
+  return ['block-opener', name, attrs, startedAt, length];
+}
+
+function addFreeform(rawLength) {
+  var length = rawLength ? rawLength : document.length - offset;
+
+  if (0 === length) {
+    return;
+  }
+
+  output.push(Freeform(document.substr(offset, length)));
+}
+
+function addInnerBlock(block, tokenStart, tokenLength, lastOffset) {
+  var parent = stack[stack.length - 1];
+  parent.block.innerBlocks.push(block);
+  var html = document.substr(parent.prevOffset, tokenStart - parent.prevOffset);
+
+  if (html) {
+    parent.block.innerHTML += html;
+    parent.block.innerContent.push(html);
+  }
+
+  parent.block.innerContent.push(null);
+  parent.prevOffset = lastOffset ? lastOffset : tokenStart + tokenLength;
+}
+
+function addBlockFromStack(endOffset) {
+  var _stack$pop = stack.pop(),
+      block = _stack$pop.block,
+      leadingHtmlStart = _stack$pop.leadingHtmlStart,
+      prevOffset = _stack$pop.prevOffset,
+      tokenStart = _stack$pop.tokenStart;
+
+  var html = endOffset ? document.substr(prevOffset, endOffset - prevOffset) : document.substr(prevOffset);
+
+  if (html) {
+    block.innerHTML += html;
+    block.innerContent.push(html);
+  }
+
+  if (null !== leadingHtmlStart) {
+    output.push(Freeform(document.substr(leadingHtmlStart, tokenStart - leadingHtmlStart)));
+  }
+
+  output.push(block);
+}
+
+
+/***/ })
+
+/******/ });
+//# sourceMappingURL=index.js.map

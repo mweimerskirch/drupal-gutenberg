@@ -1,1 +1,1004 @@
-this.wp=this.wp||{},this.wp.reduxRoutine=function(t){var r={};function n(e){if(r[e])return r[e].exports;var u=r[e]={i:e,l:!1,exports:{}};return t[e].call(u.exports,u,u.exports,n),u.l=!0,u.exports}return n.m=t,n.c=r,n.d=function(t,r,e){n.o(t,r)||Object.defineProperty(t,r,{configurable:!1,enumerable:!0,get:e})},n.r=function(t){Object.defineProperty(t,"__esModule",{value:!0})},n.n=function(t){var r=t&&t.__esModule?function(){return t.default}:function(){return t};return n.d(r,"a",r),r},n.o=function(t,r){return Object.prototype.hasOwnProperty.call(t,r)},n.p="",n(n.s=206)}({140:function(t,r,n){"use strict";Object.defineProperty(r,"__esModule",{value:!0});var e={all:Symbol("all"),error:Symbol("error"),fork:Symbol("fork"),join:Symbol("join"),race:Symbol("race"),call:Symbol("call"),cps:Symbol("cps"),subscribe:Symbol("subscribe")};r.default=e},141:function(t,r,n){"use strict";Object.defineProperty(r,"__esModule",{value:!0}),r.createChannel=r.subscribe=r.cps=r.apply=r.call=r.invoke=r.delay=r.race=r.join=r.fork=r.error=r.all=void 0;var e=function(t){return t&&t.__esModule?t:{default:t}}(n(140));r.all=function(t){return{type:e.default.all,value:t}},r.error=function(t){return{type:e.default.error,error:t}},r.fork=function(t){for(var r=arguments.length,n=Array(r>1?r-1:0),u=1;u<r;u++)n[u-1]=arguments[u];return{type:e.default.fork,iterator:t,args:n}},r.join=function(t){return{type:e.default.join,task:t}},r.race=function(t){return{type:e.default.race,competitors:t}},r.delay=function(t){return new Promise(function(r){setTimeout(function(){return r(!0)},t)})},r.invoke=function(t){for(var r=arguments.length,n=Array(r>1?r-1:0),u=1;u<r;u++)n[u-1]=arguments[u];return{type:e.default.call,func:t,context:null,args:n}},r.call=function(t,r){for(var n=arguments.length,u=Array(n>2?n-2:0),o=2;o<n;o++)u[o-2]=arguments[o];return{type:e.default.call,func:t,context:r,args:u}},r.apply=function(t,r,n){return{type:e.default.call,func:t,context:r,args:n}},r.cps=function(t){for(var r=arguments.length,n=Array(r>1?r-1:0),u=1;u<r;u++)n[u-1]=arguments[u];return{type:e.default.cps,func:t,args:n}},r.subscribe=function(t){return{type:e.default.subscribe,channel:t}},r.createChannel=function(t){var r=[];return t(function(t){return r.forEach(function(r){return r(t)})}),{subscribe:function(t){return r.push(t),function(){return r.splice(r.indexOf(t),1)}}}}},187:function(t,r,n){"use strict";Object.defineProperty(r,"__esModule",{value:!0}),r.wrapControls=r.asyncControls=r.create=void 0;var e=n(141);Object.keys(e).forEach(function(t){"default"!==t&&Object.defineProperty(r,t,{enumerable:!0,get:function(){return e[t]}})});var u=f(n(241)),o=f(n(239)),c=f(n(237));function f(t){return t&&t.__esModule?t:{default:t}}r.create=u.default,r.asyncControls=o.default,r.wrapControls=c.default},2:function(t,r){!function(){t.exports=this.lodash}()},206:function(t,r,n){"use strict";n.r(r);var e=n(187),u=n(2),o=n(94),c=n.n(o);function f(t){return Object(u.isPlainObject)(t)&&Object(u.isString)(t.type)}function i(){var t=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{},r=arguments.length>1?arguments[1]:void 0,n=Object(u.map)(t,function(t,r){return function(n,e,u,o,i){if(!function(t,r){return f(t)&&t.type===r}(n,r))return!1;var a=t(n);return c()(a)?a.then(o,i):o(a),!0}});n.push(function(t,n){return!!f(t)&&(r(t),n(),!0)});var o=Object(e.create)(n);return function(t){return new Promise(function(n,e){return o(t,function(t){f(t)&&r(t),n(t)},e)})}}function a(){var t=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{};return function(r){var n=i(t,r.dispatch);return function(t){return function(r){return function(t){return!!t&&"Generator"===t[Symbol.toStringTag]}(r)?n(r):t(r)}}}}n.d(r,"default",function(){return a})},237:function(t,r,n){"use strict";Object.defineProperty(r,"__esModule",{value:!0}),r.cps=r.call=void 0;var e=function(t){return t&&t.__esModule?t:{default:t}}(n(96));var u=r.call=function(t,r,n,u,o){if(!e.default.call(t))return!1;try{r(t.func.apply(t.context,t.args))}catch(t){o(t)}return!0},o=r.cps=function(t,r,n,u,o){var c;return!!e.default.cps(t)&&((c=t.func).call.apply(c,[null].concat(function(t){if(Array.isArray(t)){for(var r=0,n=Array(t.length);r<t.length;r++)n[r]=t[r];return n}return Array.from(t)}(t.args),[function(t,n){t?o(t):r(n)}])),!0)};r.default=[u,o]},238:function(t,r,n){"use strict";Object.defineProperty(r,"__esModule",{value:!0});r.default=function(){var t=[];return{subscribe:function(r){return t.push(r),function(){t=t.filter(function(t){return t!==r})}},dispatch:function(r){t.slice().forEach(function(t){return t(r)})}}}},239:function(t,r,n){"use strict";Object.defineProperty(r,"__esModule",{value:!0}),r.race=r.join=r.fork=r.promise=void 0;var e=c(n(96)),u=n(141),o=c(n(238));function c(t){return t&&t.__esModule?t:{default:t}}var f=r.promise=function(t,r,n,u,o){return!!e.default.promise(t)&&(t.then(r,o),!0)},i=new Map,a=r.fork=function(t,r,n){if(!e.default.fork(t))return!1;var c=Symbol("fork"),f=(0,o.default)();i.set(c,f),n(t.iterator.apply(null,t.args),function(t){return f.dispatch(t)},function(t){return f.dispatch((0,u.error)(t))});var a=f.subscribe(function(){a(),i.delete(c)});return r(c),!0},l=r.join=function(t,r,n,u,o){if(!e.default.join(t))return!1;var c=i.get(t.task);return c?function(){var t=c.subscribe(function(n){t(),r(n)})}():o("join error : task not found"),!0},s=r.race=function(t,r,n,u,o){if(!e.default.race(t))return!1;var c=!1,f=function(t,n,e){c||(c=!0,t[n]=e,r(t))},i=function(t){c||o(t)};return e.default.array(t.competitors)?function(){var r=t.competitors.map(function(){return!1});t.competitors.forEach(function(t,e){n(t,function(t){return f(r,e,t)},i)})}():function(){var r=Object.keys(t.competitors).reduce(function(t,r){return t[r]=!1,t},{});Object.keys(t.competitors).forEach(function(e){n(t.competitors[e],function(t){return f(r,e,t)},i)})}(),!0};r.default=[f,a,l,s,function(t,r){if(!e.default.subscribe(t))return!1;if(!e.default.channel(t.channel))throw new Error('the first argument of "subscribe" must be a valid channel');var n=t.channel.subscribe(function(t){n&&n(),r(t)});return!0}]},240:function(t,r,n){"use strict";Object.defineProperty(r,"__esModule",{value:!0}),r.iterator=r.array=r.object=r.error=r.any=void 0;var e=function(t){return t&&t.__esModule?t:{default:t}}(n(96));var u=r.any=function(t,r,n,e){return e(t),!0},o=r.error=function(t,r,n,u,o){return!!e.default.error(t)&&(o(t.error),!0)},c=r.object=function(t,r,n,u,o){if(!e.default.all(t)||!e.default.obj(t.value))return!1;var c={},f=Object.keys(t.value),i=0,a=!1;return f.map(function(r){n(t.value[r],function(t){return function(t,r){a||(c[t]=r,++i===f.length&&u(c))}(r,t)},function(t){return function(t,r){a||(a=!0,o(r))}(0,t)})}),!0},f=r.array=function(t,r,n,u,o){if(!e.default.all(t)||!e.default.array(t.value))return!1;var c=[],f=0,i=!1;return t.value.map(function(r,e){n(r,function(r){return function(r,n){i||(c[r]=n,++f===t.value.length&&u(c))}(e,r)},function(t){return function(t,r){i||(i=!0,o(r))}(0,t)})}),!0},i=r.iterator=function(t,r,n,u,o){return!!e.default.iterator(t)&&(n(t,r,o),!0)};r.default=[o,i,f,c,u]},241:function(t,r,n){"use strict";Object.defineProperty(r,"__esModule",{value:!0});var e=o(n(240)),u=o(n(96));function o(t){return t&&t.__esModule?t:{default:t}}function c(t){if(Array.isArray(t)){for(var r=0,n=Array(t.length);r<t.length;r++)n[r]=t[r];return n}return Array.from(t)}r.default=function(){var t=arguments.length<=0||void 0===arguments[0]?[]:arguments[0],r=[].concat(c(t),c(e.default));return function t(n){var e=arguments.length<=1||void 0===arguments[1]?function(){}:arguments[1],o=arguments.length<=2||void 0===arguments[2]?function(){}:arguments[2];!function(n){var u=function(t){return function(r){try{var u=t?n.throw(r):n.next(r),f=u.value;if(u.done)return e(f);c(f)}catch(t){return o(t)}}},c=function n(e){r.some(function(r){return r(e,n,t,u(!1),u(!0))})};u(!1)()}(u.default.iterator(n)?n:regeneratorRuntime.mark(function t(){return regeneratorRuntime.wrap(function(t){for(;;)switch(t.prev=t.next){case 0:return t.next=2,n;case 2:return t.abrupt("return",t.sent);case 3:case"end":return t.stop()}},t,this)})())}}},94:function(t,r){t.exports=function(t){return!!t&&("object"==typeof t||"function"==typeof t)&&"function"==typeof t.then}},96:function(t,r,n){"use strict";Object.defineProperty(r,"__esModule",{value:!0});var e="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(t){return typeof t}:function(t){return t&&"function"==typeof Symbol&&t.constructor===Symbol?"symbol":typeof t},u=function(t){return t&&t.__esModule?t:{default:t}}(n(140));var o={obj:function(t){return"object"===(void 0===t?"undefined":e(t))&&!!t},all:function(t){return o.obj(t)&&t.type===u.default.all},error:function(t){return o.obj(t)&&t.type===u.default.error},array:Array.isArray,func:function(t){return"function"==typeof t},promise:function(t){return t&&o.func(t.then)},iterator:function(t){return t&&o.func(t.next)&&o.func(t.throw)},fork:function(t){return o.obj(t)&&t.type===u.default.fork},join:function(t){return o.obj(t)&&t.type===u.default.join},race:function(t){return o.obj(t)&&t.type===u.default.race},call:function(t){return o.obj(t)&&t.type===u.default.call},cps:function(t){return o.obj(t)&&t.type===u.default.cps},subscribe:function(t){return o.obj(t)&&t.type===u.default.subscribe},channel:function(t){return o.obj(t)&&o.func(t.subscribe)}};r.default=o}}).default;
+this["wp"] = this["wp"] || {}; this["wp"]["reduxRoutine"] =
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = "./packages/redux-routine/build-module/index.js");
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ "./node_modules/is-promise/index.js":
+/*!******************************************!*\
+  !*** ./node_modules/is-promise/index.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = isPromise;
+
+function isPromise(obj) {
+  return !!obj && (typeof obj === 'object' || typeof obj === 'function') && typeof obj.then === 'function';
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/rungen/dist/controls/async.js":
+/*!****************************************************!*\
+  !*** ./node_modules/rungen/dist/controls/async.js ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.race = exports.join = exports.fork = exports.promise = undefined;
+
+var _is = __webpack_require__(/*! ../utils/is */ "./node_modules/rungen/dist/utils/is.js");
+
+var _is2 = _interopRequireDefault(_is);
+
+var _helpers = __webpack_require__(/*! ../utils/helpers */ "./node_modules/rungen/dist/utils/helpers.js");
+
+var _dispatcher = __webpack_require__(/*! ../utils/dispatcher */ "./node_modules/rungen/dist/utils/dispatcher.js");
+
+var _dispatcher2 = _interopRequireDefault(_dispatcher);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var promise = exports.promise = function promise(value, next, rungen, yieldNext, raiseNext) {
+  if (!_is2.default.promise(value)) return false;
+  value.then(next, raiseNext);
+  return true;
+};
+
+var forkedTasks = new Map();
+var fork = exports.fork = function fork(value, next, rungen) {
+  if (!_is2.default.fork(value)) return false;
+  var task = Symbol('fork');
+  var dispatcher = (0, _dispatcher2.default)();
+  forkedTasks.set(task, dispatcher);
+  rungen(value.iterator.apply(null, value.args), function (result) {
+    return dispatcher.dispatch(result);
+  }, function (err) {
+    return dispatcher.dispatch((0, _helpers.error)(err));
+  });
+  var unsubscribe = dispatcher.subscribe(function () {
+    unsubscribe();
+    forkedTasks.delete(task);
+  });
+  next(task);
+  return true;
+};
+
+var join = exports.join = function join(value, next, rungen, yieldNext, raiseNext) {
+  if (!_is2.default.join(value)) return false;
+  var dispatcher = forkedTasks.get(value.task);
+  if (!dispatcher) {
+    raiseNext('join error : task not found');
+  } else {
+    (function () {
+      var unsubscribe = dispatcher.subscribe(function (result) {
+        unsubscribe();
+        next(result);
+      });
+    })();
+  }
+  return true;
+};
+
+var race = exports.race = function race(value, next, rungen, yieldNext, raiseNext) {
+  if (!_is2.default.race(value)) return false;
+  var finished = false;
+  var success = function success(result, k, v) {
+    if (finished) return;
+    finished = true;
+    result[k] = v;
+    next(result);
+  };
+
+  var fail = function fail(err) {
+    if (finished) return;
+    raiseNext(err);
+  };
+  if (_is2.default.array(value.competitors)) {
+    (function () {
+      var result = value.competitors.map(function () {
+        return false;
+      });
+      value.competitors.forEach(function (competitor, index) {
+        rungen(competitor, function (output) {
+          return success(result, index, output);
+        }, fail);
+      });
+    })();
+  } else {
+    (function () {
+      var result = Object.keys(value.competitors).reduce(function (p, c) {
+        p[c] = false;
+        return p;
+      }, {});
+      Object.keys(value.competitors).forEach(function (index) {
+        rungen(value.competitors[index], function (output) {
+          return success(result, index, output);
+        }, fail);
+      });
+    })();
+  }
+  return true;
+};
+
+var subscribe = function subscribe(value, next) {
+  if (!_is2.default.subscribe(value)) return false;
+  if (!_is2.default.channel(value.channel)) {
+    throw new Error('the first argument of "subscribe" must be a valid channel');
+  }
+  var unsubscribe = value.channel.subscribe(function (ret) {
+    unsubscribe && unsubscribe();
+    next(ret);
+  });
+
+  return true;
+};
+
+exports.default = [promise, fork, join, race, subscribe];
+
+/***/ }),
+
+/***/ "./node_modules/rungen/dist/controls/builtin.js":
+/*!******************************************************!*\
+  !*** ./node_modules/rungen/dist/controls/builtin.js ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.iterator = exports.array = exports.object = exports.error = exports.any = undefined;
+
+var _is = __webpack_require__(/*! ../utils/is */ "./node_modules/rungen/dist/utils/is.js");
+
+var _is2 = _interopRequireDefault(_is);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var any = exports.any = function any(value, next, rungen, yieldNext) {
+  yieldNext(value);
+  return true;
+};
+
+var error = exports.error = function error(value, next, rungen, yieldNext, raiseNext) {
+  if (!_is2.default.error(value)) return false;
+  raiseNext(value.error);
+  return true;
+};
+
+var object = exports.object = function object(value, next, rungen, yieldNext, raiseNext) {
+  if (!_is2.default.all(value) || !_is2.default.obj(value.value)) return false;
+  var result = {};
+  var keys = Object.keys(value.value);
+  var count = 0;
+  var hasError = false;
+  var gotResultSuccess = function gotResultSuccess(key, ret) {
+    if (hasError) return;
+    result[key] = ret;
+    count++;
+    if (count === keys.length) {
+      yieldNext(result);
+    }
+  };
+
+  var gotResultError = function gotResultError(key, error) {
+    if (hasError) return;
+    hasError = true;
+    raiseNext(error);
+  };
+
+  keys.map(function (key) {
+    rungen(value.value[key], function (ret) {
+      return gotResultSuccess(key, ret);
+    }, function (err) {
+      return gotResultError(key, err);
+    });
+  });
+
+  return true;
+};
+
+var array = exports.array = function array(value, next, rungen, yieldNext, raiseNext) {
+  if (!_is2.default.all(value) || !_is2.default.array(value.value)) return false;
+  var result = [];
+  var count = 0;
+  var hasError = false;
+  var gotResultSuccess = function gotResultSuccess(key, ret) {
+    if (hasError) return;
+    result[key] = ret;
+    count++;
+    if (count === value.value.length) {
+      yieldNext(result);
+    }
+  };
+
+  var gotResultError = function gotResultError(key, error) {
+    if (hasError) return;
+    hasError = true;
+    raiseNext(error);
+  };
+
+  value.value.map(function (v, key) {
+    rungen(v, function (ret) {
+      return gotResultSuccess(key, ret);
+    }, function (err) {
+      return gotResultError(key, err);
+    });
+  });
+
+  return true;
+};
+
+var iterator = exports.iterator = function iterator(value, next, rungen, yieldNext, raiseNext) {
+  if (!_is2.default.iterator(value)) return false;
+  rungen(value, next, raiseNext);
+  return true;
+};
+
+exports.default = [error, iterator, array, object, any];
+
+/***/ }),
+
+/***/ "./node_modules/rungen/dist/controls/wrap.js":
+/*!***************************************************!*\
+  !*** ./node_modules/rungen/dist/controls/wrap.js ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.cps = exports.call = undefined;
+
+var _is = __webpack_require__(/*! ../utils/is */ "./node_modules/rungen/dist/utils/is.js");
+
+var _is2 = _interopRequireDefault(_is);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+var call = exports.call = function call(value, next, rungen, yieldNext, raiseNext) {
+  if (!_is2.default.call(value)) return false;
+  try {
+    next(value.func.apply(value.context, value.args));
+  } catch (err) {
+    raiseNext(err);
+  }
+  return true;
+};
+
+var cps = exports.cps = function cps(value, next, rungen, yieldNext, raiseNext) {
+  var _value$func;
+
+  if (!_is2.default.cps(value)) return false;
+  (_value$func = value.func).call.apply(_value$func, [null].concat(_toConsumableArray(value.args), [function (err, result) {
+    if (err) raiseNext(err);else next(result);
+  }]));
+  return true;
+};
+
+exports.default = [call, cps];
+
+/***/ }),
+
+/***/ "./node_modules/rungen/dist/create.js":
+/*!********************************************!*\
+  !*** ./node_modules/rungen/dist/create.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _builtin = __webpack_require__(/*! ./controls/builtin */ "./node_modules/rungen/dist/controls/builtin.js");
+
+var _builtin2 = _interopRequireDefault(_builtin);
+
+var _is = __webpack_require__(/*! ./utils/is */ "./node_modules/rungen/dist/utils/is.js");
+
+var _is2 = _interopRequireDefault(_is);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+var create = function create() {
+  var userControls = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
+
+  var controls = [].concat(_toConsumableArray(userControls), _toConsumableArray(_builtin2.default));
+
+  var runtime = function runtime(input) {
+    var success = arguments.length <= 1 || arguments[1] === undefined ? function () {} : arguments[1];
+    var error = arguments.length <= 2 || arguments[2] === undefined ? function () {} : arguments[2];
+
+    var iterate = function iterate(gen) {
+      var yieldValue = function yieldValue(isError) {
+        return function (ret) {
+          try {
+            var _ref = isError ? gen.throw(ret) : gen.next(ret);
+
+            var value = _ref.value;
+            var done = _ref.done;
+
+            if (done) return success(value);
+            next(value);
+          } catch (e) {
+            return error(e);
+          }
+        };
+      };
+
+      var next = function next(ret) {
+        controls.some(function (control) {
+          return control(ret, next, runtime, yieldValue(false), yieldValue(true));
+        });
+      };
+
+      yieldValue(false)();
+    };
+
+    var iterator = _is2.default.iterator(input) ? input : regeneratorRuntime.mark(function _callee() {
+      return regeneratorRuntime.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return input;
+
+            case 2:
+              return _context.abrupt('return', _context.sent);
+
+            case 3:
+            case 'end':
+              return _context.stop();
+          }
+        }
+      }, _callee, this);
+    })();
+
+    iterate(iterator, success, error);
+  };
+
+  return runtime;
+};
+
+exports.default = create;
+
+/***/ }),
+
+/***/ "./node_modules/rungen/dist/index.js":
+/*!*******************************************!*\
+  !*** ./node_modules/rungen/dist/index.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.wrapControls = exports.asyncControls = exports.create = undefined;
+
+var _helpers = __webpack_require__(/*! ./utils/helpers */ "./node_modules/rungen/dist/utils/helpers.js");
+
+Object.keys(_helpers).forEach(function (key) {
+  if (key === "default") return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _helpers[key];
+    }
+  });
+});
+
+var _create = __webpack_require__(/*! ./create */ "./node_modules/rungen/dist/create.js");
+
+var _create2 = _interopRequireDefault(_create);
+
+var _async = __webpack_require__(/*! ./controls/async */ "./node_modules/rungen/dist/controls/async.js");
+
+var _async2 = _interopRequireDefault(_async);
+
+var _wrap = __webpack_require__(/*! ./controls/wrap */ "./node_modules/rungen/dist/controls/wrap.js");
+
+var _wrap2 = _interopRequireDefault(_wrap);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.create = _create2.default;
+exports.asyncControls = _async2.default;
+exports.wrapControls = _wrap2.default;
+
+/***/ }),
+
+/***/ "./node_modules/rungen/dist/utils/dispatcher.js":
+/*!******************************************************!*\
+  !*** ./node_modules/rungen/dist/utils/dispatcher.js ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var createDispatcher = function createDispatcher() {
+  var listeners = [];
+
+  return {
+    subscribe: function subscribe(listener) {
+      listeners.push(listener);
+      return function () {
+        listeners = listeners.filter(function (l) {
+          return l !== listener;
+        });
+      };
+    },
+    dispatch: function dispatch(action) {
+      listeners.slice().forEach(function (listener) {
+        return listener(action);
+      });
+    }
+  };
+};
+
+exports.default = createDispatcher;
+
+/***/ }),
+
+/***/ "./node_modules/rungen/dist/utils/helpers.js":
+/*!***************************************************!*\
+  !*** ./node_modules/rungen/dist/utils/helpers.js ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.createChannel = exports.subscribe = exports.cps = exports.apply = exports.call = exports.invoke = exports.delay = exports.race = exports.join = exports.fork = exports.error = exports.all = undefined;
+
+var _keys = __webpack_require__(/*! ./keys */ "./node_modules/rungen/dist/utils/keys.js");
+
+var _keys2 = _interopRequireDefault(_keys);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var all = exports.all = function all(value) {
+  return {
+    type: _keys2.default.all,
+    value: value
+  };
+};
+
+var error = exports.error = function error(err) {
+  return {
+    type: _keys2.default.error,
+    error: err
+  };
+};
+
+var fork = exports.fork = function fork(iterator) {
+  for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+    args[_key - 1] = arguments[_key];
+  }
+
+  return {
+    type: _keys2.default.fork,
+    iterator: iterator,
+    args: args
+  };
+};
+
+var join = exports.join = function join(task) {
+  return {
+    type: _keys2.default.join,
+    task: task
+  };
+};
+
+var race = exports.race = function race(competitors) {
+  return {
+    type: _keys2.default.race,
+    competitors: competitors
+  };
+};
+
+var delay = exports.delay = function delay(timeout) {
+  return new Promise(function (resolve) {
+    setTimeout(function () {
+      return resolve(true);
+    }, timeout);
+  });
+};
+
+var invoke = exports.invoke = function invoke(func) {
+  for (var _len2 = arguments.length, args = Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
+    args[_key2 - 1] = arguments[_key2];
+  }
+
+  return {
+    type: _keys2.default.call,
+    func: func,
+    context: null,
+    args: args
+  };
+};
+
+var call = exports.call = function call(func, context) {
+  for (var _len3 = arguments.length, args = Array(_len3 > 2 ? _len3 - 2 : 0), _key3 = 2; _key3 < _len3; _key3++) {
+    args[_key3 - 2] = arguments[_key3];
+  }
+
+  return {
+    type: _keys2.default.call,
+    func: func,
+    context: context,
+    args: args
+  };
+};
+
+var apply = exports.apply = function apply(func, context, args) {
+  return {
+    type: _keys2.default.call,
+    func: func,
+    context: context,
+    args: args
+  };
+};
+
+var cps = exports.cps = function cps(func) {
+  for (var _len4 = arguments.length, args = Array(_len4 > 1 ? _len4 - 1 : 0), _key4 = 1; _key4 < _len4; _key4++) {
+    args[_key4 - 1] = arguments[_key4];
+  }
+
+  return {
+    type: _keys2.default.cps,
+    func: func,
+    args: args
+  };
+};
+
+var subscribe = exports.subscribe = function subscribe(channel) {
+  return {
+    type: _keys2.default.subscribe,
+    channel: channel
+  };
+};
+
+var createChannel = exports.createChannel = function createChannel(callback) {
+  var listeners = [];
+  var subscribe = function subscribe(l) {
+    listeners.push(l);
+    return function () {
+      return listeners.splice(listeners.indexOf(l), 1);
+    };
+  };
+  var next = function next(val) {
+    return listeners.forEach(function (l) {
+      return l(val);
+    });
+  };
+  callback(next);
+
+  return {
+    subscribe: subscribe
+  };
+};
+
+/***/ }),
+
+/***/ "./node_modules/rungen/dist/utils/is.js":
+/*!**********************************************!*\
+  !*** ./node_modules/rungen/dist/utils/is.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+var _keys = __webpack_require__(/*! ./keys */ "./node_modules/rungen/dist/utils/keys.js");
+
+var _keys2 = _interopRequireDefault(_keys);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var is = {
+  obj: function obj(value) {
+    return (typeof value === 'undefined' ? 'undefined' : _typeof(value)) === 'object' && !!value;
+  },
+  all: function all(value) {
+    return is.obj(value) && value.type === _keys2.default.all;
+  },
+  error: function error(value) {
+    return is.obj(value) && value.type === _keys2.default.error;
+  },
+  array: Array.isArray,
+  func: function func(value) {
+    return typeof value === 'function';
+  },
+  promise: function promise(value) {
+    return value && is.func(value.then);
+  },
+  iterator: function iterator(value) {
+    return value && is.func(value.next) && is.func(value.throw);
+  },
+  fork: function fork(value) {
+    return is.obj(value) && value.type === _keys2.default.fork;
+  },
+  join: function join(value) {
+    return is.obj(value) && value.type === _keys2.default.join;
+  },
+  race: function race(value) {
+    return is.obj(value) && value.type === _keys2.default.race;
+  },
+  call: function call(value) {
+    return is.obj(value) && value.type === _keys2.default.call;
+  },
+  cps: function cps(value) {
+    return is.obj(value) && value.type === _keys2.default.cps;
+  },
+  subscribe: function subscribe(value) {
+    return is.obj(value) && value.type === _keys2.default.subscribe;
+  },
+  channel: function channel(value) {
+    return is.obj(value) && is.func(value.subscribe);
+  }
+};
+
+exports.default = is;
+
+/***/ }),
+
+/***/ "./node_modules/rungen/dist/utils/keys.js":
+/*!************************************************!*\
+  !*** ./node_modules/rungen/dist/utils/keys.js ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var keys = {
+  all: Symbol('all'),
+  error: Symbol('error'),
+  fork: Symbol('fork'),
+  join: Symbol('join'),
+  race: Symbol('race'),
+  call: Symbol('call'),
+  cps: Symbol('cps'),
+  subscribe: Symbol('subscribe')
+};
+
+exports.default = keys;
+
+/***/ }),
+
+/***/ "./packages/redux-routine/build-module/index.js":
+/*!******************************************************!*\
+  !*** ./packages/redux-routine/build-module/index.js ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return createMiddleware; });
+/* harmony import */ var _is_generator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./is-generator */ "./packages/redux-routine/build-module/is-generator.js");
+/* harmony import */ var _runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./runtime */ "./packages/redux-routine/build-module/runtime.js");
+/**
+ * Internal dependencies
+ */
+
+
+/**
+ * Creates a Redux middleware, given an object of controls where each key is an
+ * action type for which to act upon, the value a function which returns either
+ * a promise which is to resolve when evaluation of the action should continue,
+ * or a value. The value or resolved promise value is assigned on the return
+ * value of the yield assignment. If the control handler returns undefined, the
+ * execution is not continued.
+ *
+ * @param {Object} controls Object of control handlers.
+ *
+ * @return {Function} Co-routine runtime
+ */
+
+function createMiddleware() {
+  var controls = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  return function (store) {
+    var runtime = Object(_runtime__WEBPACK_IMPORTED_MODULE_1__["default"])(controls, store.dispatch);
+    return function (next) {
+      return function (action) {
+        if (!Object(_is_generator__WEBPACK_IMPORTED_MODULE_0__["default"])(action)) {
+          return next(action);
+        }
+
+        return runtime(action);
+      };
+    };
+  };
+}
+
+
+/***/ }),
+
+/***/ "./packages/redux-routine/build-module/is-action.js":
+/*!**********************************************************!*\
+  !*** ./packages/redux-routine/build-module/is-action.js ***!
+  \**********************************************************/
+/*! exports provided: isAction, isActionOfType */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isAction", function() { return isAction; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isActionOfType", function() { return isActionOfType; });
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ "lodash");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);
+/**
+ * External dependencies
+ */
+
+/**
+ * Returns true if the given object quacks like an action.
+ *
+ * @param {*} object Object to test
+ *
+ * @return {boolean}  Whether object is an action.
+ */
+
+function isAction(object) {
+  return Object(lodash__WEBPACK_IMPORTED_MODULE_0__["isPlainObject"])(object) && Object(lodash__WEBPACK_IMPORTED_MODULE_0__["isString"])(object.type);
+}
+/**
+ * Returns true if the given object quacks like an action and has a specific
+ * action type
+ *
+ * @param {*}      object       Object to test
+ * @param {string} expectedType The expected type for the action.
+ *
+ * @return {boolean} Whether object is an action and is of specific type.
+ */
+
+function isActionOfType(object, expectedType) {
+  return isAction(object) && object.type === expectedType;
+}
+
+
+/***/ }),
+
+/***/ "./packages/redux-routine/build-module/is-generator.js":
+/*!*************************************************************!*\
+  !*** ./packages/redux-routine/build-module/is-generator.js ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return isGenerator; });
+/**
+ * Returns true if the given object is a generator, or false otherwise.
+ *
+ * @see https://www.ecma-international.org/ecma-262/6.0/#sec-generator-objects
+ *
+ * @param {*} object Object to test.
+ *
+ * @return {boolean} Whether object is a generator.
+ */
+function isGenerator(object) {
+  return !!object && object[Symbol.toStringTag] === 'Generator';
+}
+
+
+/***/ }),
+
+/***/ "./packages/redux-routine/build-module/runtime.js":
+/*!********************************************************!*\
+  !*** ./packages/redux-routine/build-module/runtime.js ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return createRuntime; });
+/* harmony import */ var rungen__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! rungen */ "./node_modules/rungen/dist/index.js");
+/* harmony import */ var rungen__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(rungen__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "lodash");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var is_promise__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! is-promise */ "./node_modules/is-promise/index.js");
+/* harmony import */ var is_promise__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(is_promise__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _is_action__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./is-action */ "./packages/redux-routine/build-module/is-action.js");
+/**
+ * External dependencies
+ */
+
+
+
+/**
+ * Internal dependencies
+ */
+
+
+/**
+ * Create a co-routine runtime.
+ *
+ * @param {Object}    controls Object of control handlers.
+ * @param {Function}  dispatch Unhandled action dispatch.
+ *
+ * @return {Function} co-routine runtime
+ */
+
+function createRuntime() {
+  var controls = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var dispatch = arguments.length > 1 ? arguments[1] : undefined;
+  var rungenControls = Object(lodash__WEBPACK_IMPORTED_MODULE_1__["map"])(controls, function (control, actionType) {
+    return function (value, next, iterate, yieldNext, yieldError) {
+      if (!Object(_is_action__WEBPACK_IMPORTED_MODULE_3__["isActionOfType"])(value, actionType)) {
+        return false;
+      }
+
+      var routine = control(value);
+
+      if (is_promise__WEBPACK_IMPORTED_MODULE_2___default()(routine)) {
+        // Async control routine awaits resolution.
+        routine.then(yieldNext, yieldError);
+      } else {
+        yieldNext(routine);
+      }
+
+      return true;
+    };
+  });
+
+  var unhandledActionControl = function unhandledActionControl(value, next) {
+    if (!Object(_is_action__WEBPACK_IMPORTED_MODULE_3__["isAction"])(value)) {
+      return false;
+    }
+
+    dispatch(value);
+    next();
+    return true;
+  };
+
+  rungenControls.push(unhandledActionControl);
+  var rungenRuntime = Object(rungen__WEBPACK_IMPORTED_MODULE_0__["create"])(rungenControls);
+  return function (action) {
+    return new Promise(function (resolve, reject) {
+      return rungenRuntime(action, function (result) {
+        if (Object(_is_action__WEBPACK_IMPORTED_MODULE_3__["isAction"])(result)) {
+          dispatch(result);
+        }
+
+        resolve(result);
+      }, reject);
+    });
+  };
+}
+
+
+/***/ }),
+
+/***/ "lodash":
+/*!**********************************!*\
+  !*** external {"this":"lodash"} ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(function() { module.exports = this["lodash"]; }());
+
+/***/ })
+
+/******/ })["default"];
+//# sourceMappingURL=index.js.map

@@ -1,1 +1,1239 @@
-this.wp=this.wp||{},this.wp.url=function(e){var r={};function t(n){if(r[n])return r[n].exports;var o=r[n]={i:n,l:!1,exports:{}};return e[n].call(o.exports,o,o.exports,t),o.l=!0,o.exports}return t.m=e,t.c=r,t.d=function(e,r,n){t.o(e,r)||Object.defineProperty(e,r,{configurable:!1,enumerable:!0,get:n})},t.r=function(e){Object.defineProperty(e,"__esModule",{value:!0})},t.n=function(e){var r=e&&e.__esModule?function(){return e.default}:function(){return e};return t.d(r,"a",r),r},t.o=function(e,r){return Object.prototype.hasOwnProperty.call(e,r)},t.p="",t(t.s=234)}({138:function(e,r,t){"use strict";var n=String.prototype.replace,o=/%20/g;e.exports={default:"RFC3986",formatters:{RFC1738:function(e){return n.call(e,o,"+")},RFC3986:function(e){return e}},RFC1738:"RFC1738",RFC3986:"RFC3986"}},139:function(e,r,t){"use strict";var n=Object.prototype.hasOwnProperty,o=function(){for(var e=[],r=0;r<256;++r)e.push("%"+((r<16?"0":"")+r.toString(16)).toUpperCase());return e}(),i=function(e,r){for(var t=r&&r.plainObjects?Object.create(null):{},n=0;n<e.length;++n)void 0!==e[n]&&(t[n]=e[n]);return t};e.exports={arrayToObject:i,assign:function(e,r){return Object.keys(r).reduce(function(e,t){return e[t]=r[t],e},e)},compact:function(e){for(var r=[{obj:{o:e},prop:"o"}],t=[],n=0;n<r.length;++n)for(var o=r[n],i=o.obj[o.prop],c=Object.keys(i),a=0;a<c.length;++a){var u=c[a],l=i[u];"object"==typeof l&&null!==l&&-1===t.indexOf(l)&&(r.push({obj:i,prop:u}),t.push(l))}return function(e){for(var r;e.length;){var t=e.pop();if(r=t.obj[t.prop],Array.isArray(r)){for(var n=[],o=0;o<r.length;++o)void 0!==r[o]&&n.push(r[o]);t.obj[t.prop]=n}}return r}(r)},decode:function(e){try{return decodeURIComponent(e.replace(/\+/g," "))}catch(r){return e}},encode:function(e){if(0===e.length)return e;for(var r="string"==typeof e?e:String(e),t="",n=0;n<r.length;++n){var i=r.charCodeAt(n);45===i||46===i||95===i||126===i||i>=48&&i<=57||i>=65&&i<=90||i>=97&&i<=122?t+=r.charAt(n):i<128?t+=o[i]:i<2048?t+=o[192|i>>6]+o[128|63&i]:i<55296||i>=57344?t+=o[224|i>>12]+o[128|i>>6&63]+o[128|63&i]:(n+=1,i=65536+((1023&i)<<10|1023&r.charCodeAt(n)),t+=o[240|i>>18]+o[128|i>>12&63]+o[128|i>>6&63]+o[128|63&i])}return t},isBuffer:function(e){return null!==e&&void 0!==e&&!!(e.constructor&&e.constructor.isBuffer&&e.constructor.isBuffer(e))},isRegExp:function(e){return"[object RegExp]"===Object.prototype.toString.call(e)},merge:function e(r,t,o){if(!t)return r;if("object"!=typeof t){if(Array.isArray(r))r.push(t);else{if("object"!=typeof r)return[r,t];(o.plainObjects||o.allowPrototypes||!n.call(Object.prototype,t))&&(r[t]=!0)}return r}if("object"!=typeof r)return[r].concat(t);var c=r;return Array.isArray(r)&&!Array.isArray(t)&&(c=i(r,o)),Array.isArray(r)&&Array.isArray(t)?(t.forEach(function(t,i){n.call(r,i)?r[i]&&"object"==typeof r[i]?r[i]=e(r[i],t,o):r.push(t):r[i]=t}),r):Object.keys(t).reduce(function(r,i){var c=t[i];return n.call(r,i)?r[i]=e(r[i],c,o):r[i]=c,r},c)}}},232:function(e,r,t){"use strict";var n=t(139),o=Object.prototype.hasOwnProperty,i={allowDots:!1,allowPrototypes:!1,arrayLimit:20,decoder:n.decode,delimiter:"&",depth:5,parameterLimit:1e3,plainObjects:!1,strictNullHandling:!1},c=function(e,r,t){if(e){var n=t.allowDots?e.replace(/\.([^.[]+)/g,"[$1]"):e,i=/(\[[^[\]]*])/g,c=/(\[[^[\]]*])/.exec(n),a=c?n.slice(0,c.index):n,u=[];if(a){if(!t.plainObjects&&o.call(Object.prototype,a)&&!t.allowPrototypes)return;u.push(a)}for(var l=0;null!==(c=i.exec(n))&&l<t.depth;){if(l+=1,!t.plainObjects&&o.call(Object.prototype,c[1].slice(1,-1))&&!t.allowPrototypes)return;u.push(c[1])}return c&&u.push("["+n.slice(c.index)+"]"),function(e,r,t){for(var n=r,o=e.length-1;o>=0;--o){var i,c=e[o];if("[]"===c)i=(i=[]).concat(n);else{i=t.plainObjects?Object.create(null):{};var a="["===c.charAt(0)&&"]"===c.charAt(c.length-1)?c.slice(1,-1):c,u=parseInt(a,10);!isNaN(u)&&c!==a&&String(u)===a&&u>=0&&t.parseArrays&&u<=t.arrayLimit?(i=[])[u]=n:i[a]=n}n=i}return n}(u,r,t)}};e.exports=function(e,r){var t=r?n.assign({},r):{};if(null!==t.decoder&&void 0!==t.decoder&&"function"!=typeof t.decoder)throw new TypeError("Decoder has to be a function.");if(t.ignoreQueryPrefix=!0===t.ignoreQueryPrefix,t.delimiter="string"==typeof t.delimiter||n.isRegExp(t.delimiter)?t.delimiter:i.delimiter,t.depth="number"==typeof t.depth?t.depth:i.depth,t.arrayLimit="number"==typeof t.arrayLimit?t.arrayLimit:i.arrayLimit,t.parseArrays=!1!==t.parseArrays,t.decoder="function"==typeof t.decoder?t.decoder:i.decoder,t.allowDots="boolean"==typeof t.allowDots?t.allowDots:i.allowDots,t.plainObjects="boolean"==typeof t.plainObjects?t.plainObjects:i.plainObjects,t.allowPrototypes="boolean"==typeof t.allowPrototypes?t.allowPrototypes:i.allowPrototypes,t.parameterLimit="number"==typeof t.parameterLimit?t.parameterLimit:i.parameterLimit,t.strictNullHandling="boolean"==typeof t.strictNullHandling?t.strictNullHandling:i.strictNullHandling,""===e||null===e||void 0===e)return t.plainObjects?Object.create(null):{};for(var a="string"==typeof e?function(e,r){for(var t={},n=r.ignoreQueryPrefix?e.replace(/^\?/,""):e,c=r.parameterLimit===1/0?void 0:r.parameterLimit,a=n.split(r.delimiter,c),u=0;u<a.length;++u){var l,s,f=a[u],p=f.indexOf("]="),d=-1===p?f.indexOf("="):p+1;-1===d?(l=r.decoder(f,i.decoder),s=r.strictNullHandling?null:""):(l=r.decoder(f.slice(0,d),i.decoder),s=r.decoder(f.slice(d+1),i.decoder)),o.call(t,l)?t[l]=[].concat(t[l]).concat(s):t[l]=s}return t}(e,t):e,u=t.plainObjects?Object.create(null):{},l=Object.keys(a),s=0;s<l.length;++s){var f=l[s],p=c(f,a[f],t);u=n.merge(u,p,t)}return n.compact(u)}},233:function(e,r,t){"use strict";var n=t(139),o=t(138),i={brackets:function(e){return e+"[]"},indices:function(e,r){return e+"["+r+"]"},repeat:function(e){return e}},c=Date.prototype.toISOString,a={delimiter:"&",encode:!0,encoder:n.encode,encodeValuesOnly:!1,serializeDate:function(e){return c.call(e)},skipNulls:!1,strictNullHandling:!1},u=function e(r,t,o,i,c,u,l,s,f,p,d,y){var b=r;if("function"==typeof l)b=l(t,b);else if(b instanceof Date)b=p(b);else if(null===b){if(i)return u&&!y?u(t,a.encoder):t;b=""}if("string"==typeof b||"number"==typeof b||"boolean"==typeof b||n.isBuffer(b))return u?[d(y?t:u(t,a.encoder))+"="+d(u(b,a.encoder))]:[d(t)+"="+d(String(b))];var g,v=[];if(void 0===b)return v;if(Array.isArray(l))g=l;else{var h=Object.keys(b);g=s?h.sort(s):h}for(var m=0;m<g.length;++m){var O=g[m];c&&null===b[O]||(v=Array.isArray(b)?v.concat(e(b[O],o(t,O),o,i,c,u,l,s,f,p,d,y)):v.concat(e(b[O],t+(f?"."+O:"["+O+"]"),o,i,c,u,l,s,f,p,d,y)))}return v};e.exports=function(e,r){var t=e,c=r?n.assign({},r):{};if(null!==c.encoder&&void 0!==c.encoder&&"function"!=typeof c.encoder)throw new TypeError("Encoder has to be a function.");var l=void 0===c.delimiter?a.delimiter:c.delimiter,s="boolean"==typeof c.strictNullHandling?c.strictNullHandling:a.strictNullHandling,f="boolean"==typeof c.skipNulls?c.skipNulls:a.skipNulls,p="boolean"==typeof c.encode?c.encode:a.encode,d="function"==typeof c.encoder?c.encoder:a.encoder,y="function"==typeof c.sort?c.sort:null,b=void 0!==c.allowDots&&c.allowDots,g="function"==typeof c.serializeDate?c.serializeDate:a.serializeDate,v="boolean"==typeof c.encodeValuesOnly?c.encodeValuesOnly:a.encodeValuesOnly;if(void 0===c.format)c.format=o.default;else if(!Object.prototype.hasOwnProperty.call(o.formatters,c.format))throw new TypeError("Unknown format option provided.");var h,m,O=o.formatters[c.format];"function"==typeof c.filter?t=(m=c.filter)("",t):Array.isArray(c.filter)&&(h=m=c.filter);var j,w=[];if("object"!=typeof t||null===t)return"";j=c.arrayFormat in i?c.arrayFormat:"indices"in c?c.indices?"indices":"repeat":"indices";var A=i[j];h||(h=Object.keys(t)),y&&h.sort(y);for(var x=0;x<h.length;++x){var P=h[x];f&&null===t[P]||(w=w.concat(u(t[P],P,A,s,f,p?d:null,m,y,b,g,O,v)))}var D=w.join(l),R=!0===c.addQueryPrefix?"?":"";return D.length>0?R+D:""}},234:function(e,r,t){"use strict";t.r(r),t.d(r,"isURL",function(){return a}),t.d(r,"isEmail",function(){return u}),t.d(r,"getProtocol",function(){return l}),t.d(r,"isValidProtocol",function(){return s}),t.d(r,"getAuthority",function(){return f}),t.d(r,"isValidAuthority",function(){return p}),t.d(r,"getPath",function(){return d}),t.d(r,"isValidPath",function(){return y}),t.d(r,"getQueryString",function(){return b}),t.d(r,"isValidQueryString",function(){return g}),t.d(r,"getFragment",function(){return v}),t.d(r,"isValidFragment",function(){return h}),t.d(r,"addQueryArgs",function(){return m}),t.d(r,"getQueryArg",function(){return O}),t.d(r,"hasQueryArg",function(){return j}),t.d(r,"removeQueryArgs",function(){return w}),t.d(r,"prependHTTP",function(){return A}),t.d(r,"safeDecodeURI",function(){return x}),t.d(r,"filterURLForDisplay",function(){return P}),t.d(r,"safeDecodeURIComponent",function(){return D});var n=t(83),o=/^(?:https?:)?\/\/\S+$/i,i=/^(mailto:)?[a-z0-9._%+-]+@[a-z0-9][a-z0-9.-]*\.[a-z]{2,63}$/i,c=/^(?:[a-z]+:|#|\?|\.|\/)/i;function a(e){return o.test(e)}function u(e){return i.test(e)}function l(e){var r=/^([^\s:]+:)/.exec(e);if(r)return r[1]}function s(e){return!!e&&/^[a-z\-.\+]+[0-9]*:$/i.test(e)}function f(e){var r=/^[^\/\s:]+:(?:\/\/)?\/?([^\/\s#?]+)[\/#?]{0,1}\S*$/.exec(e);if(r)return r[1]}function p(e){return!!e&&/^[^\s#?]+$/.test(e)}function d(e){var r=/^[^\/\s:]+:(?:\/\/)?[^\/\s#?]+[\/]([^\s#?]+)[#?]{0,1}\S*$/.exec(e);if(r)return r[1]}function y(e){return!!e&&/^[^\s#?]+$/.test(e)}function b(e){var r=/^\S+?\?([^\s#]+)/.exec(e);if(r)return r[1]}function g(e){return!!e&&/^[^\s#?\/]+$/.test(e)}function v(e){var r=/^\S+?(#[^\s\?]*)/.exec(e);if(r)return r[1]}function h(e){return!!e&&/^#[^\s#?\/]*$/.test(e)}function m(){var e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:"",r=arguments.length>1?arguments[1]:void 0;if(!r||!Object.keys(r).length)return e;var t=e,o=e.indexOf("?");return-1!==o&&(r=Object.assign(Object(n.parse)(e.substr(o+1)),r),t=t.substr(0,o)),t+"?"+Object(n.stringify)(r)}function O(e,r){var t=e.indexOf("?");return(-1!==t?Object(n.parse)(e.substr(t+1)):{})[r]}function j(e,r){return void 0!==O(e,r)}function w(e){for(var r=e.indexOf("?"),t=-1!==r?Object(n.parse)(e.substr(r+1)):{},o=-1!==r?e.substr(0,r):e,i=arguments.length,c=new Array(i>1?i-1:0),a=1;a<i;a++)c[a-1]=arguments[a];return c.forEach(function(e){return delete t[e]}),o+"?"+Object(n.stringify)(t)}function A(e){return c.test(e)||i.test(e)?e:"http://"+e}function x(e){try{return decodeURI(e)}catch(r){return e}}function P(e){var r=e.replace(/^(?:https?:)\/\/(?:www\.)?/,"");return r.match(/^[^\/]+\/$/)?r.replace("/",""):r}function D(e){try{return decodeURIComponent(e)}catch(r){return e}}},83:function(e,r,t){"use strict";var n=t(233),o=t(232),i=t(138);e.exports={formats:i,parse:o,stringify:n}}});
+this["wp"] = this["wp"] || {}; this["wp"]["url"] =
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = "./packages/url/build-module/index.js");
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ "./node_modules/qs/lib/formats.js":
+/*!****************************************!*\
+  !*** ./node_modules/qs/lib/formats.js ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var replace = String.prototype.replace;
+var percentTwenties = /%20/g;
+
+module.exports = {
+    'default': 'RFC3986',
+    formatters: {
+        RFC1738: function (value) {
+            return replace.call(value, percentTwenties, '+');
+        },
+        RFC3986: function (value) {
+            return value;
+        }
+    },
+    RFC1738: 'RFC1738',
+    RFC3986: 'RFC3986'
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/qs/lib/index.js":
+/*!**************************************!*\
+  !*** ./node_modules/qs/lib/index.js ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var stringify = __webpack_require__(/*! ./stringify */ "./node_modules/qs/lib/stringify.js");
+var parse = __webpack_require__(/*! ./parse */ "./node_modules/qs/lib/parse.js");
+var formats = __webpack_require__(/*! ./formats */ "./node_modules/qs/lib/formats.js");
+
+module.exports = {
+    formats: formats,
+    parse: parse,
+    stringify: stringify
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/qs/lib/parse.js":
+/*!**************************************!*\
+  !*** ./node_modules/qs/lib/parse.js ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var utils = __webpack_require__(/*! ./utils */ "./node_modules/qs/lib/utils.js");
+
+var has = Object.prototype.hasOwnProperty;
+
+var defaults = {
+    allowDots: false,
+    allowPrototypes: false,
+    arrayLimit: 20,
+    decoder: utils.decode,
+    delimiter: '&',
+    depth: 5,
+    parameterLimit: 1000,
+    plainObjects: false,
+    strictNullHandling: false
+};
+
+var parseValues = function parseQueryStringValues(str, options) {
+    var obj = {};
+    var cleanStr = options.ignoreQueryPrefix ? str.replace(/^\?/, '') : str;
+    var limit = options.parameterLimit === Infinity ? undefined : options.parameterLimit;
+    var parts = cleanStr.split(options.delimiter, limit);
+
+    for (var i = 0; i < parts.length; ++i) {
+        var part = parts[i];
+
+        var bracketEqualsPos = part.indexOf(']=');
+        var pos = bracketEqualsPos === -1 ? part.indexOf('=') : bracketEqualsPos + 1;
+
+        var key, val;
+        if (pos === -1) {
+            key = options.decoder(part, defaults.decoder);
+            val = options.strictNullHandling ? null : '';
+        } else {
+            key = options.decoder(part.slice(0, pos), defaults.decoder);
+            val = options.decoder(part.slice(pos + 1), defaults.decoder);
+        }
+        if (has.call(obj, key)) {
+            obj[key] = [].concat(obj[key]).concat(val);
+        } else {
+            obj[key] = val;
+        }
+    }
+
+    return obj;
+};
+
+var parseObject = function (chain, val, options) {
+    var leaf = val;
+
+    for (var i = chain.length - 1; i >= 0; --i) {
+        var obj;
+        var root = chain[i];
+
+        if (root === '[]') {
+            obj = [];
+            obj = obj.concat(leaf);
+        } else {
+            obj = options.plainObjects ? Object.create(null) : {};
+            var cleanRoot = root.charAt(0) === '[' && root.charAt(root.length - 1) === ']' ? root.slice(1, -1) : root;
+            var index = parseInt(cleanRoot, 10);
+            if (
+                !isNaN(index)
+                && root !== cleanRoot
+                && String(index) === cleanRoot
+                && index >= 0
+                && (options.parseArrays && index <= options.arrayLimit)
+            ) {
+                obj = [];
+                obj[index] = leaf;
+            } else {
+                obj[cleanRoot] = leaf;
+            }
+        }
+
+        leaf = obj;
+    }
+
+    return leaf;
+};
+
+var parseKeys = function parseQueryStringKeys(givenKey, val, options) {
+    if (!givenKey) {
+        return;
+    }
+
+    // Transform dot notation to bracket notation
+    var key = options.allowDots ? givenKey.replace(/\.([^.[]+)/g, '[$1]') : givenKey;
+
+    // The regex chunks
+
+    var brackets = /(\[[^[\]]*])/;
+    var child = /(\[[^[\]]*])/g;
+
+    // Get the parent
+
+    var segment = brackets.exec(key);
+    var parent = segment ? key.slice(0, segment.index) : key;
+
+    // Stash the parent if it exists
+
+    var keys = [];
+    if (parent) {
+        // If we aren't using plain objects, optionally prefix keys
+        // that would overwrite object prototype properties
+        if (!options.plainObjects && has.call(Object.prototype, parent)) {
+            if (!options.allowPrototypes) {
+                return;
+            }
+        }
+
+        keys.push(parent);
+    }
+
+    // Loop through children appending to the array until we hit depth
+
+    var i = 0;
+    while ((segment = child.exec(key)) !== null && i < options.depth) {
+        i += 1;
+        if (!options.plainObjects && has.call(Object.prototype, segment[1].slice(1, -1))) {
+            if (!options.allowPrototypes) {
+                return;
+            }
+        }
+        keys.push(segment[1]);
+    }
+
+    // If there's a remainder, just add whatever is left
+
+    if (segment) {
+        keys.push('[' + key.slice(segment.index) + ']');
+    }
+
+    return parseObject(keys, val, options);
+};
+
+module.exports = function (str, opts) {
+    var options = opts ? utils.assign({}, opts) : {};
+
+    if (options.decoder !== null && options.decoder !== undefined && typeof options.decoder !== 'function') {
+        throw new TypeError('Decoder has to be a function.');
+    }
+
+    options.ignoreQueryPrefix = options.ignoreQueryPrefix === true;
+    options.delimiter = typeof options.delimiter === 'string' || utils.isRegExp(options.delimiter) ? options.delimiter : defaults.delimiter;
+    options.depth = typeof options.depth === 'number' ? options.depth : defaults.depth;
+    options.arrayLimit = typeof options.arrayLimit === 'number' ? options.arrayLimit : defaults.arrayLimit;
+    options.parseArrays = options.parseArrays !== false;
+    options.decoder = typeof options.decoder === 'function' ? options.decoder : defaults.decoder;
+    options.allowDots = typeof options.allowDots === 'boolean' ? options.allowDots : defaults.allowDots;
+    options.plainObjects = typeof options.plainObjects === 'boolean' ? options.plainObjects : defaults.plainObjects;
+    options.allowPrototypes = typeof options.allowPrototypes === 'boolean' ? options.allowPrototypes : defaults.allowPrototypes;
+    options.parameterLimit = typeof options.parameterLimit === 'number' ? options.parameterLimit : defaults.parameterLimit;
+    options.strictNullHandling = typeof options.strictNullHandling === 'boolean' ? options.strictNullHandling : defaults.strictNullHandling;
+
+    if (str === '' || str === null || typeof str === 'undefined') {
+        return options.plainObjects ? Object.create(null) : {};
+    }
+
+    var tempObj = typeof str === 'string' ? parseValues(str, options) : str;
+    var obj = options.plainObjects ? Object.create(null) : {};
+
+    // Iterate over the keys and setup the new object
+
+    var keys = Object.keys(tempObj);
+    for (var i = 0; i < keys.length; ++i) {
+        var key = keys[i];
+        var newObj = parseKeys(key, tempObj[key], options);
+        obj = utils.merge(obj, newObj, options);
+    }
+
+    return utils.compact(obj);
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/qs/lib/stringify.js":
+/*!******************************************!*\
+  !*** ./node_modules/qs/lib/stringify.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var utils = __webpack_require__(/*! ./utils */ "./node_modules/qs/lib/utils.js");
+var formats = __webpack_require__(/*! ./formats */ "./node_modules/qs/lib/formats.js");
+
+var arrayPrefixGenerators = {
+    brackets: function brackets(prefix) { // eslint-disable-line func-name-matching
+        return prefix + '[]';
+    },
+    indices: function indices(prefix, key) { // eslint-disable-line func-name-matching
+        return prefix + '[' + key + ']';
+    },
+    repeat: function repeat(prefix) { // eslint-disable-line func-name-matching
+        return prefix;
+    }
+};
+
+var toISO = Date.prototype.toISOString;
+
+var defaults = {
+    delimiter: '&',
+    encode: true,
+    encoder: utils.encode,
+    encodeValuesOnly: false,
+    serializeDate: function serializeDate(date) { // eslint-disable-line func-name-matching
+        return toISO.call(date);
+    },
+    skipNulls: false,
+    strictNullHandling: false
+};
+
+var stringify = function stringify( // eslint-disable-line func-name-matching
+    object,
+    prefix,
+    generateArrayPrefix,
+    strictNullHandling,
+    skipNulls,
+    encoder,
+    filter,
+    sort,
+    allowDots,
+    serializeDate,
+    formatter,
+    encodeValuesOnly
+) {
+    var obj = object;
+    if (typeof filter === 'function') {
+        obj = filter(prefix, obj);
+    } else if (obj instanceof Date) {
+        obj = serializeDate(obj);
+    } else if (obj === null) {
+        if (strictNullHandling) {
+            return encoder && !encodeValuesOnly ? encoder(prefix, defaults.encoder) : prefix;
+        }
+
+        obj = '';
+    }
+
+    if (typeof obj === 'string' || typeof obj === 'number' || typeof obj === 'boolean' || utils.isBuffer(obj)) {
+        if (encoder) {
+            var keyValue = encodeValuesOnly ? prefix : encoder(prefix, defaults.encoder);
+            return [formatter(keyValue) + '=' + formatter(encoder(obj, defaults.encoder))];
+        }
+        return [formatter(prefix) + '=' + formatter(String(obj))];
+    }
+
+    var values = [];
+
+    if (typeof obj === 'undefined') {
+        return values;
+    }
+
+    var objKeys;
+    if (Array.isArray(filter)) {
+        objKeys = filter;
+    } else {
+        var keys = Object.keys(obj);
+        objKeys = sort ? keys.sort(sort) : keys;
+    }
+
+    for (var i = 0; i < objKeys.length; ++i) {
+        var key = objKeys[i];
+
+        if (skipNulls && obj[key] === null) {
+            continue;
+        }
+
+        if (Array.isArray(obj)) {
+            values = values.concat(stringify(
+                obj[key],
+                generateArrayPrefix(prefix, key),
+                generateArrayPrefix,
+                strictNullHandling,
+                skipNulls,
+                encoder,
+                filter,
+                sort,
+                allowDots,
+                serializeDate,
+                formatter,
+                encodeValuesOnly
+            ));
+        } else {
+            values = values.concat(stringify(
+                obj[key],
+                prefix + (allowDots ? '.' + key : '[' + key + ']'),
+                generateArrayPrefix,
+                strictNullHandling,
+                skipNulls,
+                encoder,
+                filter,
+                sort,
+                allowDots,
+                serializeDate,
+                formatter,
+                encodeValuesOnly
+            ));
+        }
+    }
+
+    return values;
+};
+
+module.exports = function (object, opts) {
+    var obj = object;
+    var options = opts ? utils.assign({}, opts) : {};
+
+    if (options.encoder !== null && options.encoder !== undefined && typeof options.encoder !== 'function') {
+        throw new TypeError('Encoder has to be a function.');
+    }
+
+    var delimiter = typeof options.delimiter === 'undefined' ? defaults.delimiter : options.delimiter;
+    var strictNullHandling = typeof options.strictNullHandling === 'boolean' ? options.strictNullHandling : defaults.strictNullHandling;
+    var skipNulls = typeof options.skipNulls === 'boolean' ? options.skipNulls : defaults.skipNulls;
+    var encode = typeof options.encode === 'boolean' ? options.encode : defaults.encode;
+    var encoder = typeof options.encoder === 'function' ? options.encoder : defaults.encoder;
+    var sort = typeof options.sort === 'function' ? options.sort : null;
+    var allowDots = typeof options.allowDots === 'undefined' ? false : options.allowDots;
+    var serializeDate = typeof options.serializeDate === 'function' ? options.serializeDate : defaults.serializeDate;
+    var encodeValuesOnly = typeof options.encodeValuesOnly === 'boolean' ? options.encodeValuesOnly : defaults.encodeValuesOnly;
+    if (typeof options.format === 'undefined') {
+        options.format = formats['default'];
+    } else if (!Object.prototype.hasOwnProperty.call(formats.formatters, options.format)) {
+        throw new TypeError('Unknown format option provided.');
+    }
+    var formatter = formats.formatters[options.format];
+    var objKeys;
+    var filter;
+
+    if (typeof options.filter === 'function') {
+        filter = options.filter;
+        obj = filter('', obj);
+    } else if (Array.isArray(options.filter)) {
+        filter = options.filter;
+        objKeys = filter;
+    }
+
+    var keys = [];
+
+    if (typeof obj !== 'object' || obj === null) {
+        return '';
+    }
+
+    var arrayFormat;
+    if (options.arrayFormat in arrayPrefixGenerators) {
+        arrayFormat = options.arrayFormat;
+    } else if ('indices' in options) {
+        arrayFormat = options.indices ? 'indices' : 'repeat';
+    } else {
+        arrayFormat = 'indices';
+    }
+
+    var generateArrayPrefix = arrayPrefixGenerators[arrayFormat];
+
+    if (!objKeys) {
+        objKeys = Object.keys(obj);
+    }
+
+    if (sort) {
+        objKeys.sort(sort);
+    }
+
+    for (var i = 0; i < objKeys.length; ++i) {
+        var key = objKeys[i];
+
+        if (skipNulls && obj[key] === null) {
+            continue;
+        }
+
+        keys = keys.concat(stringify(
+            obj[key],
+            key,
+            generateArrayPrefix,
+            strictNullHandling,
+            skipNulls,
+            encode ? encoder : null,
+            filter,
+            sort,
+            allowDots,
+            serializeDate,
+            formatter,
+            encodeValuesOnly
+        ));
+    }
+
+    var joined = keys.join(delimiter);
+    var prefix = options.addQueryPrefix === true ? '?' : '';
+
+    return joined.length > 0 ? prefix + joined : '';
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/qs/lib/utils.js":
+/*!**************************************!*\
+  !*** ./node_modules/qs/lib/utils.js ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var has = Object.prototype.hasOwnProperty;
+
+var hexTable = (function () {
+    var array = [];
+    for (var i = 0; i < 256; ++i) {
+        array.push('%' + ((i < 16 ? '0' : '') + i.toString(16)).toUpperCase());
+    }
+
+    return array;
+}());
+
+var compactQueue = function compactQueue(queue) {
+    var obj;
+
+    while (queue.length) {
+        var item = queue.pop();
+        obj = item.obj[item.prop];
+
+        if (Array.isArray(obj)) {
+            var compacted = [];
+
+            for (var j = 0; j < obj.length; ++j) {
+                if (typeof obj[j] !== 'undefined') {
+                    compacted.push(obj[j]);
+                }
+            }
+
+            item.obj[item.prop] = compacted;
+        }
+    }
+
+    return obj;
+};
+
+var arrayToObject = function arrayToObject(source, options) {
+    var obj = options && options.plainObjects ? Object.create(null) : {};
+    for (var i = 0; i < source.length; ++i) {
+        if (typeof source[i] !== 'undefined') {
+            obj[i] = source[i];
+        }
+    }
+
+    return obj;
+};
+
+var merge = function merge(target, source, options) {
+    if (!source) {
+        return target;
+    }
+
+    if (typeof source !== 'object') {
+        if (Array.isArray(target)) {
+            target.push(source);
+        } else if (typeof target === 'object') {
+            if (options.plainObjects || options.allowPrototypes || !has.call(Object.prototype, source)) {
+                target[source] = true;
+            }
+        } else {
+            return [target, source];
+        }
+
+        return target;
+    }
+
+    if (typeof target !== 'object') {
+        return [target].concat(source);
+    }
+
+    var mergeTarget = target;
+    if (Array.isArray(target) && !Array.isArray(source)) {
+        mergeTarget = arrayToObject(target, options);
+    }
+
+    if (Array.isArray(target) && Array.isArray(source)) {
+        source.forEach(function (item, i) {
+            if (has.call(target, i)) {
+                if (target[i] && typeof target[i] === 'object') {
+                    target[i] = merge(target[i], item, options);
+                } else {
+                    target.push(item);
+                }
+            } else {
+                target[i] = item;
+            }
+        });
+        return target;
+    }
+
+    return Object.keys(source).reduce(function (acc, key) {
+        var value = source[key];
+
+        if (has.call(acc, key)) {
+            acc[key] = merge(acc[key], value, options);
+        } else {
+            acc[key] = value;
+        }
+        return acc;
+    }, mergeTarget);
+};
+
+var assign = function assignSingleSource(target, source) {
+    return Object.keys(source).reduce(function (acc, key) {
+        acc[key] = source[key];
+        return acc;
+    }, target);
+};
+
+var decode = function (str) {
+    try {
+        return decodeURIComponent(str.replace(/\+/g, ' '));
+    } catch (e) {
+        return str;
+    }
+};
+
+var encode = function encode(str) {
+    // This code was originally written by Brian White (mscdex) for the io.js core querystring library.
+    // It has been adapted here for stricter adherence to RFC 3986
+    if (str.length === 0) {
+        return str;
+    }
+
+    var string = typeof str === 'string' ? str : String(str);
+
+    var out = '';
+    for (var i = 0; i < string.length; ++i) {
+        var c = string.charCodeAt(i);
+
+        if (
+            c === 0x2D // -
+            || c === 0x2E // .
+            || c === 0x5F // _
+            || c === 0x7E // ~
+            || (c >= 0x30 && c <= 0x39) // 0-9
+            || (c >= 0x41 && c <= 0x5A) // a-z
+            || (c >= 0x61 && c <= 0x7A) // A-Z
+        ) {
+            out += string.charAt(i);
+            continue;
+        }
+
+        if (c < 0x80) {
+            out = out + hexTable[c];
+            continue;
+        }
+
+        if (c < 0x800) {
+            out = out + (hexTable[0xC0 | (c >> 6)] + hexTable[0x80 | (c & 0x3F)]);
+            continue;
+        }
+
+        if (c < 0xD800 || c >= 0xE000) {
+            out = out + (hexTable[0xE0 | (c >> 12)] + hexTable[0x80 | ((c >> 6) & 0x3F)] + hexTable[0x80 | (c & 0x3F)]);
+            continue;
+        }
+
+        i += 1;
+        c = 0x10000 + (((c & 0x3FF) << 10) | (string.charCodeAt(i) & 0x3FF));
+        out += hexTable[0xF0 | (c >> 18)]
+            + hexTable[0x80 | ((c >> 12) & 0x3F)]
+            + hexTable[0x80 | ((c >> 6) & 0x3F)]
+            + hexTable[0x80 | (c & 0x3F)];
+    }
+
+    return out;
+};
+
+var compact = function compact(value) {
+    var queue = [{ obj: { o: value }, prop: 'o' }];
+    var refs = [];
+
+    for (var i = 0; i < queue.length; ++i) {
+        var item = queue[i];
+        var obj = item.obj[item.prop];
+
+        var keys = Object.keys(obj);
+        for (var j = 0; j < keys.length; ++j) {
+            var key = keys[j];
+            var val = obj[key];
+            if (typeof val === 'object' && val !== null && refs.indexOf(val) === -1) {
+                queue.push({ obj: obj, prop: key });
+                refs.push(val);
+            }
+        }
+    }
+
+    return compactQueue(queue);
+};
+
+var isRegExp = function isRegExp(obj) {
+    return Object.prototype.toString.call(obj) === '[object RegExp]';
+};
+
+var isBuffer = function isBuffer(obj) {
+    if (obj === null || typeof obj === 'undefined') {
+        return false;
+    }
+
+    return !!(obj.constructor && obj.constructor.isBuffer && obj.constructor.isBuffer(obj));
+};
+
+module.exports = {
+    arrayToObject: arrayToObject,
+    assign: assign,
+    compact: compact,
+    decode: decode,
+    encode: encode,
+    isBuffer: isBuffer,
+    isRegExp: isRegExp,
+    merge: merge
+};
+
+
+/***/ }),
+
+/***/ "./packages/url/build-module/index.js":
+/*!********************************************!*\
+  !*** ./packages/url/build-module/index.js ***!
+  \********************************************/
+/*! exports provided: isURL, isEmail, getProtocol, isValidProtocol, getAuthority, isValidAuthority, getPath, isValidPath, getQueryString, isValidQueryString, getFragment, isValidFragment, addQueryArgs, getQueryArg, hasQueryArg, removeQueryArgs, prependHTTP, safeDecodeURI, filterURLForDisplay, safeDecodeURIComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isURL", function() { return isURL; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isEmail", function() { return isEmail; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getProtocol", function() { return getProtocol; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isValidProtocol", function() { return isValidProtocol; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getAuthority", function() { return getAuthority; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isValidAuthority", function() { return isValidAuthority; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getPath", function() { return getPath; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isValidPath", function() { return isValidPath; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getQueryString", function() { return getQueryString; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isValidQueryString", function() { return isValidQueryString; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getFragment", function() { return getFragment; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isValidFragment", function() { return isValidFragment; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addQueryArgs", function() { return addQueryArgs; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getQueryArg", function() { return getQueryArg; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hasQueryArg", function() { return hasQueryArg; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeQueryArgs", function() { return removeQueryArgs; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "prependHTTP", function() { return prependHTTP; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "safeDecodeURI", function() { return safeDecodeURI; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "filterURLForDisplay", function() { return filterURLForDisplay; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "safeDecodeURIComponent", function() { return safeDecodeURIComponent; });
+/* harmony import */ var qs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! qs */ "./node_modules/qs/lib/index.js");
+/* harmony import */ var qs__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(qs__WEBPACK_IMPORTED_MODULE_0__);
+/**
+ * External dependencies
+ */
+
+var URL_REGEXP = /^(?:https?:)?\/\/\S+$/i;
+var EMAIL_REGEXP = /^(mailto:)?[a-z0-9._%+-]+@[a-z0-9][a-z0-9.-]*\.[a-z]{2,63}$/i;
+var USABLE_HREF_REGEXP = /^(?:[a-z]+:|#|\?|\.|\/)/i;
+/**
+ * @typedef {{[key: string]: QueryArgParsed}} QueryArgObject
+ */
+
+/**
+ * @typedef {string|string[]|QueryArgObject} QueryArgParsed
+ */
+
+/**
+ * Determines whether the given string looks like a URL.
+ *
+ * @param {string} url The string to scrutinise.
+ *
+ * @example
+ * ```js
+ * const isURL = isURL( 'https://wordpress.org' ); // true
+ * ```
+ *
+ * @return {boolean} Whether or not it looks like a URL.
+ */
+
+function isURL(url) {
+  return URL_REGEXP.test(url);
+}
+/**
+ * Determines whether the given string looks like an email.
+ *
+ * @param {string} email The string to scrutinise.
+ *
+ * @example
+ * ```js
+ * const isEmail = isEmail( 'hello@wordpress.org' ); // true
+ * ```
+ *
+ * @return {boolean} Whether or not it looks like an email.
+ */
+
+function isEmail(email) {
+  return EMAIL_REGEXP.test(email);
+}
+/**
+ * Returns the protocol part of the URL.
+ *
+ * @param {string} url The full URL.
+ *
+ * @example
+ * ```js
+ * const protocol1 = getProtocol( 'tel:012345678' ); // 'tel:'
+ * const protocol2 = getProtocol( 'https://wordpress.org' ); // 'https:'
+ * ```
+ *
+ * @return {string|void} The protocol part of the URL.
+ */
+
+function getProtocol(url) {
+  var matches = /^([^\s:]+:)/.exec(url);
+
+  if (matches) {
+    return matches[1];
+  }
+}
+/**
+ * Tests if a url protocol is valid.
+ *
+ * @param {string} protocol The url protocol.
+ *
+ * @example
+ * ```js
+ * const isValid = isValidProtocol( 'https:' ); // true
+ * const isNotValid = isValidProtocol( 'https :' ); // false
+ * ```
+ *
+ * @return {boolean} True if the argument is a valid protocol (e.g. http:, tel:).
+ */
+
+function isValidProtocol(protocol) {
+  if (!protocol) {
+    return false;
+  }
+
+  return /^[a-z\-.\+]+[0-9]*:$/i.test(protocol);
+}
+/**
+ * Returns the authority part of the URL.
+ *
+ * @param {string} url The full URL.
+ *
+ * @example
+ * ```js
+ * const authority1 = getAuthority( 'https://wordpress.org/help/' ); // 'wordpress.org'
+ * const authority2 = getAuthority( 'https://localhost:8080/test/' ); // 'localhost:8080'
+ * ```
+ *
+ * @return {string|void} The authority part of the URL.
+ */
+
+function getAuthority(url) {
+  var matches = /^[^\/\s:]+:(?:\/\/)?\/?([^\/\s#?]+)[\/#?]{0,1}\S*$/.exec(url);
+
+  if (matches) {
+    return matches[1];
+  }
+}
+/**
+ * Checks for invalid characters within the provided authority.
+ *
+ * @param {string} authority A string containing the URL authority.
+ *
+ * @example
+ * ```js
+ * const isValid = isValidAuthority( 'wordpress.org' ); // true
+ * const isNotValid = isValidAuthority( 'wordpress#org' ); // false
+ * ```
+ *
+ * @return {boolean} True if the argument contains a valid authority.
+ */
+
+function isValidAuthority(authority) {
+  if (!authority) {
+    return false;
+  }
+
+  return /^[^\s#?]+$/.test(authority);
+}
+/**
+ * Returns the path part of the URL.
+ *
+ * @param {string} url The full URL.
+ *
+ * @example
+ * ```js
+ * const path1 = getPath( 'http://localhost:8080/this/is/a/test?query=true' ); // 'this/is/a/test'
+ * const path2 = getPath( 'https://wordpress.org/help/faq/' ); // 'help/faq'
+ * ```
+ *
+ * @return {string|void} The path part of the URL.
+ */
+
+function getPath(url) {
+  var matches = /^[^\/\s:]+:(?:\/\/)?[^\/\s#?]+[\/]([^\s#?]+)[#?]{0,1}\S*$/.exec(url);
+
+  if (matches) {
+    return matches[1];
+  }
+}
+/**
+ * Checks for invalid characters within the provided path.
+ *
+ * @param {string} path The URL path.
+ *
+ * @example
+ * ```js
+ * const isValid = isValidPath( 'test/path/' ); // true
+ * const isNotValid = isValidPath( '/invalid?test/path/' ); // false
+ * ```
+ *
+ * @return {boolean} True if the argument contains a valid path
+ */
+
+function isValidPath(path) {
+  if (!path) {
+    return false;
+  }
+
+  return /^[^\s#?]+$/.test(path);
+}
+/**
+ * Returns the query string part of the URL.
+ *
+ * @param {string} url The full URL.
+ *
+ * @example
+ * ```js
+ * const queryString1 = getQueryString( 'http://localhost:8080/this/is/a/test?query=true#fragment' ); // 'query=true'
+ * const queryString2 = getQueryString( 'https://wordpress.org#fragment?query=false&search=hello' ); // 'query=false&search=hello'
+ * ```
+ *
+ * @return {string|void} The query string part of the URL.
+ */
+
+function getQueryString(url) {
+  var matches = /^\S+?\?([^\s#]+)/.exec(url);
+
+  if (matches) {
+    return matches[1];
+  }
+}
+/**
+ * Checks for invalid characters within the provided query string.
+ *
+ * @param {string} queryString The query string.
+ *
+ * @example
+ * ```js
+ * const isValid = isValidQueryString( 'query=true&another=false' ); // true
+ * const isNotValid = isValidQueryString( 'query=true?another=false' ); // false
+ * ```
+ *
+ * @return {boolean} True if the argument contains a valid query string.
+ */
+
+function isValidQueryString(queryString) {
+  if (!queryString) {
+    return false;
+  }
+
+  return /^[^\s#?\/]+$/.test(queryString);
+}
+/**
+ * Returns the fragment part of the URL.
+ *
+ * @param {string} url The full URL
+ *
+ * @example
+ * ```js
+ * const fragment1 = getFragment( 'http://localhost:8080/this/is/a/test?query=true#fragment' ); // '#fragment'
+ * const fragment2 = getFragment( 'https://wordpress.org#another-fragment?query=true' ); // '#another-fragment'
+ * ```
+ *
+ * @return {string|void} The fragment part of the URL.
+ */
+
+function getFragment(url) {
+  var matches = /^\S+?(#[^\s\?]*)/.exec(url);
+
+  if (matches) {
+    return matches[1];
+  }
+}
+/**
+ * Checks for invalid characters within the provided fragment.
+ *
+ * @param {string} fragment The url fragment.
+ *
+ * @example
+ * ```js
+ * const isValid = isValidFragment( '#valid-fragment' ); // true
+ * const isNotValid = isValidFragment( '#invalid-#fragment' ); // false
+ * ```
+ *
+ * @return {boolean} True if the argument contains a valid fragment.
+ */
+
+function isValidFragment(fragment) {
+  if (!fragment) {
+    return false;
+  }
+
+  return /^#[^\s#?\/]*$/.test(fragment);
+}
+/**
+ * Appends arguments as querystring to the provided URL. If the URL already
+ * includes query arguments, the arguments are merged with (and take precedent
+ * over) the existing set.
+ *
+ * @param {string} [url='']  URL to which arguments should be appended. If omitted,
+ *                           only the resulting querystring is returned.
+ * @param {Object} args      Query arguments to apply to URL.
+ *
+ * @example
+ * ```js
+ * const newURL = addQueryArgs( 'https://google.com', { q: 'test' } ); // https://google.com/?q=test
+ * ```
+ *
+ * @return {string} URL with arguments applied.
+ */
+
+function addQueryArgs() {
+  var url = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+  var args = arguments.length > 1 ? arguments[1] : undefined;
+
+  // If no arguments are to be appended, return original URL.
+  if (!args || !Object.keys(args).length) {
+    return url;
+  }
+
+  var baseUrl = url; // Determine whether URL already had query arguments.
+
+  var queryStringIndex = url.indexOf('?');
+
+  if (queryStringIndex !== -1) {
+    // Merge into existing query arguments.
+    args = Object.assign(Object(qs__WEBPACK_IMPORTED_MODULE_0__["parse"])(url.substr(queryStringIndex + 1)), args); // Change working base URL to omit previous query arguments.
+
+    baseUrl = baseUrl.substr(0, queryStringIndex);
+  }
+
+  return baseUrl + '?' + Object(qs__WEBPACK_IMPORTED_MODULE_0__["stringify"])(args);
+}
+/**
+ * Returns a single query argument of the url
+ *
+ * @param {string} url URL.
+ * @param {string} arg Query arg name.
+ *
+ * @example
+ * ```js
+ * const foo = getQueryArg( 'https://wordpress.org?foo=bar&bar=baz', 'foo' ); // bar
+ * ```
+ *
+ * @return {QueryArgParsed|undefined} Query arg value.
+ */
+
+function getQueryArg(url, arg) {
+  var queryStringIndex = url.indexOf('?');
+  var query = queryStringIndex !== -1 ? Object(qs__WEBPACK_IMPORTED_MODULE_0__["parse"])(url.substr(queryStringIndex + 1)) : {};
+  return query[arg];
+}
+/**
+ * Determines whether the URL contains a given query arg.
+ *
+ * @param {string} url URL.
+ * @param {string} arg Query arg name.
+ *
+ * @example
+ * ```js
+ * const hasBar = hasQueryArg( 'https://wordpress.org?foo=bar&bar=baz', 'bar' ); // true
+ * ```
+ *
+ * @return {boolean} Whether or not the URL contains the query arg.
+ */
+
+function hasQueryArg(url, arg) {
+  return getQueryArg(url, arg) !== undefined;
+}
+/**
+ * Removes arguments from the query string of the url
+ *
+ * @param {string}    url  URL.
+ * @param {...string} args Query Args.
+ *
+ * @example
+ * ```js
+ * const newUrl = removeQueryArgs( 'https://wordpress.org?foo=bar&bar=baz&baz=foobar', 'foo', 'bar' ); // https://wordpress.org?baz=foobar
+ * ```
+ *
+ * @return {string} Updated URL.
+ */
+
+function removeQueryArgs(url) {
+  var queryStringIndex = url.indexOf('?');
+  var query = queryStringIndex !== -1 ? Object(qs__WEBPACK_IMPORTED_MODULE_0__["parse"])(url.substr(queryStringIndex + 1)) : {};
+  var baseUrl = queryStringIndex !== -1 ? url.substr(0, queryStringIndex) : url;
+
+  for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+    args[_key - 1] = arguments[_key];
+  }
+
+  args.forEach(function (arg) {
+    return delete query[arg];
+  });
+  return baseUrl + '?' + Object(qs__WEBPACK_IMPORTED_MODULE_0__["stringify"])(query);
+}
+/**
+ * Prepends "http://" to a url, if it looks like something that is meant to be a TLD.
+ *
+ * @param {string} url The URL to test.
+ *
+ * @example
+ * ```js
+ * const actualURL = prependHTTP( 'wordpress.org' ); // http://wordpress.org
+ * ```
+ *
+ * @return {string} The updated URL.
+ */
+
+function prependHTTP(url) {
+  url = url.trim();
+
+  if (!USABLE_HREF_REGEXP.test(url) && !EMAIL_REGEXP.test(url)) {
+    return 'http://' + url;
+  }
+
+  return url;
+}
+/**
+ * Safely decodes a URI with `decodeURI`. Returns the URI unmodified if
+ * `decodeURI` throws an error.
+ *
+ * @param {string} uri URI to decode.
+ *
+ * @example
+ * ```js
+ * const badUri = safeDecodeURI( '%z' ); // does not throw an Error, simply returns '%z'
+ * ```
+ *
+ * @return {string} Decoded URI if possible.
+ */
+
+function safeDecodeURI(uri) {
+  try {
+    return decodeURI(uri);
+  } catch (uriError) {
+    return uri;
+  }
+}
+/**
+ * Returns a URL for display.
+ *
+ * @param {string} url Original URL.
+ *
+ * @example
+ * ```js
+ * const displayUrl = filterURLForDisplay( 'https://www.wordpress.org/gutenberg/' ); // wordpress.org/gutenberg
+ * ```
+ *
+ * @return {string} Displayed URL.
+ */
+
+function filterURLForDisplay(url) {
+  // Remove protocol and www prefixes.
+  var filteredURL = url.replace(/^(?:https?:)\/\/(?:www\.)?/, ''); // Ends with / and only has that single slash, strip it.
+
+  if (filteredURL.match(/^[^\/]+\/$/)) {
+    return filteredURL.replace('/', '');
+  }
+
+  return filteredURL;
+}
+/**
+ * Safely decodes a URI component with `decodeURIComponent`. Returns the URI component unmodified if
+ * `decodeURIComponent` throws an error.
+ *
+ * @param {string} uriComponent URI component to decode.
+ *
+ * @return {string} Decoded URI component if possible.
+ */
+
+function safeDecodeURIComponent(uriComponent) {
+  try {
+    return decodeURIComponent(uriComponent);
+  } catch (uriComponentError) {
+    return uriComponent;
+  }
+}
+
+
+/***/ })
+
+/******/ });
+//# sourceMappingURL=index.js.map

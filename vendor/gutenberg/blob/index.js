@@ -1,1 +1,154 @@
-this.wp=this.wp||{},this.wp.blob=function(e){var n={};function t(r){if(n[r])return n[r].exports;var o=n[r]={i:r,l:!1,exports:{}};return e[r].call(o.exports,o,o.exports,t),o.l=!0,o.exports}return t.m=e,t.c=n,t.d=function(e,n,r){t.o(e,n)||Object.defineProperty(e,n,{configurable:!1,enumerable:!0,get:r})},t.r=function(e){Object.defineProperty(e,"__esModule",{value:!0})},t.n=function(e){var n=e&&e.__esModule?function(){return e.default}:function(){return e};return t.d(n,"a",n),n},t.o=function(e,n){return Object.prototype.hasOwnProperty.call(e,n)},t.p="",t(t.s=326)}({326:function(e,n,t){"use strict";t.r(n),t.d(n,"createBlobURL",function(){return c}),t.d(n,"getBlobByURL",function(){return f}),t.d(n,"revokeBlobURL",function(){return l}),t.d(n,"isBlobURL",function(){return a});var r=window.URL,o=r.createObjectURL,u=r.revokeObjectURL,i={};function c(e){var n=o(e);return i[n]=e,n}function f(e){return i[e]}function l(e){i[e]&&u(e),delete i[e]}function a(e){return!(!e||!e.indexOf)&&0===e.indexOf("blob:")}}});
+this["wp"] = this["wp"] || {}; this["wp"]["blob"] =
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = "./packages/blob/build-module/index.js");
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ "./packages/blob/build-module/index.js":
+/*!*********************************************!*\
+  !*** ./packages/blob/build-module/index.js ***!
+  \*********************************************/
+/*! exports provided: createBlobURL, getBlobByURL, revokeBlobURL, isBlobURL */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createBlobURL", function() { return createBlobURL; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getBlobByURL", function() { return getBlobByURL; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "revokeBlobURL", function() { return revokeBlobURL; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isBlobURL", function() { return isBlobURL; });
+/**
+ * Browser dependencies
+ */
+var _window$URL = window.URL,
+    createObjectURL = _window$URL.createObjectURL,
+    revokeObjectURL = _window$URL.revokeObjectURL;
+var cache = {};
+/**
+ * Create a blob URL from a file.
+ *
+ * @param {File} file The file to create a blob URL for.
+ *
+ * @return {string} The blob URL.
+ */
+
+function createBlobURL(file) {
+  var url = createObjectURL(file);
+  cache[url] = file;
+  return url;
+}
+/**
+ * Retrieve a file based on a blob URL. The file must have been created by
+ * `createBlobURL` and not removed by `revokeBlobURL`, otherwise it will return
+ * `undefined`.
+ *
+ * @param {string} url The blob URL.
+ *
+ * @return {?File} The file for the blob URL.
+ */
+
+function getBlobByURL(url) {
+  return cache[url];
+}
+/**
+ * Remove the resource and file cache from memory.
+ *
+ * @param {string} url The blob URL.
+ */
+
+function revokeBlobURL(url) {
+  if (cache[url]) {
+    revokeObjectURL(url);
+  }
+
+  delete cache[url];
+}
+/**
+ * Check whether a url is a blob url.
+ *
+ * @param {string} url The URL.
+ *
+ * @return {boolean} Is the url a blob url?
+ */
+
+function isBlobURL(url) {
+  if (!url || !url.indexOf) {
+    return false;
+  }
+
+  return url.indexOf('blob:') === 0;
+}
+
+
+/***/ })
+
+/******/ });
+//# sourceMappingURL=index.js.map

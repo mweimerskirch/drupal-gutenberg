@@ -1,1 +1,1376 @@
-this.wp=this.wp||{},this.wp.mediaUtils=function(e){var t={};function n(r){if(t[r])return t[r].exports;var i=t[r]={i:r,l:!1,exports:{}};return e[r].call(i.exports,i,i.exports,n),i.l=!0,i.exports}return n.m=e,n.c=t,n.d=function(e,t,r){n.o(e,t)||Object.defineProperty(e,t,{configurable:!1,enumerable:!0,get:r})},n.r=function(e){Object.defineProperty(e,"__esModule",{value:!0})},n.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return n.d(t,"a",t),t},n.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},n.p="",n(n.s=209)}({0:function(e,t){!function(){e.exports=this.wp.element}()},1:function(e,t){!function(){e.exports=this.wp.i18n}()},10:function(e,t,n){"use strict";function r(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}function i(e,t,n){return t&&r(e.prototype,t),n&&r(e,n),e}n.d(t,"a",function(){return i})},11:function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}n.d(t,"a",function(){return r})},12:function(e,t,n){"use strict";n.d(t,"a",function(){return o});var r=n(31),i=n(5);function o(e,t){return!t||"object"!==Object(r.a)(t)&&"function"!=typeof t?Object(i.a)(e):t}},13:function(e,t,n){"use strict";function r(e,t){return(r=Object.setPrototypeOf||function(e,t){return e.__proto__=t,e})(e,t)}function i(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function");e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,writable:!0,configurable:!0}}),t&&r(e,t)}n.d(t,"a",function(){return i})},14:function(e,t,n){"use strict";function r(e){return(r=Object.setPrototypeOf?Object.getPrototypeOf:function(e){return e.__proto__||Object.getPrototypeOf(e)})(e)}n.d(t,"a",function(){return r})},15:function(e,t,n){"use strict";function r(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}n.d(t,"a",function(){return r})},17:function(e,t,n){"use strict";var r=n(32);function i(e){return function(e){if(Array.isArray(e)){for(var t=0,n=new Array(e.length);t<e.length;t++)n[t]=e[t];return n}}(e)||Object(r.a)(e)||function(){throw new TypeError("Invalid attempt to spread non-iterable instance")}()}n.d(t,"a",function(){return i})},2:function(e,t){!function(){e.exports=this.lodash}()},209:function(e,t,n){"use strict";n.r(t);var r=n(11),i=n(10),o=n(12),a=n(14),c=n(5),u=n(13),l=n(2),s=n(0),f=n(1),p=window.wp,d=function(e){return Object(l.pick)(e,["sizes","mime","type","subtype","id","url","alt","link","caption"])},b=function(e){return p.media.query({order:"ASC",orderby:"post__in",post__in:e,posts_per_page:-1,query:!0,type:"image"})},y=function(e){function t(e){var n,i=e.allowedTypes,u=e.gallery,l=void 0!==u&&u,s=e.modalClass,d=e.multiple,b=void 0!==d&&d,y=e.title,m=void 0===y?Object(f.__)("Select or Upload Media"):y;if(Object(r.a)(this,t),(n=Object(o.a)(this,Object(a.a)(t).apply(this,arguments))).openModal=n.openModal.bind(Object(c.a)(n)),n.onOpen=n.onOpen.bind(Object(c.a)(n)),n.onSelect=n.onSelect.bind(Object(c.a)(n)),n.onUpdate=n.onUpdate.bind(Object(c.a)(n)),n.onClose=n.onClose.bind(Object(c.a)(n)),l)n.buildAndSetGalleryFrame();else{var h={title:m,button:{text:Object(f.__)("Select")},multiple:b};i&&(h.library={type:i}),n.frame=p.media(h)}return s&&n.frame.$el.addClass(s),n.initializeListeners(),n}return Object(u.a)(t,e),Object(i.a)(t,[{key:"initializeListeners",value:function(){this.frame.on("select",this.onSelect),this.frame.on("update",this.onUpdate),this.frame.on("open",this.onOpen),this.frame.on("close",this.onClose)}},{key:"buildAndSetGalleryFrame",value:function(){var e=this.props,t=e.addToGallery,n=void 0!==t&&t,r=e.allowedTypes,i=e.multiple,o=void 0!==i&&i,a=e.value,c=void 0===a?null:a;if(c!==this.lastGalleryValue){var u;this.lastGalleryValue=c,this.frame&&this.frame.remove(),u=n?"gallery-library":c?"gallery-edit":"gallery",this.GalleryDetailsMediaFrame||(this.GalleryDetailsMediaFrame=p.media.view.MediaFrame.Post.extend({createStates:function(){this.states.add([new p.media.controller.Library({id:"gallery",title:p.media.view.l10n.createGalleryTitle,priority:40,toolbar:"main-gallery",filterable:"uploaded",multiple:"add",editable:!1,library:p.media.query(Object(l.defaults)({type:"image"},this.options.library))}),new p.media.controller.GalleryEdit({library:this.options.selection,editing:this.options.editing,menu:"gallery",displaySettings:!1,multiple:!0}),new p.media.controller.GalleryAdd])}}));var s=b(c),f=new p.media.model.Selection(s.models,{props:s.props.toJSON(),multiple:o});this.frame=new this.GalleryDetailsMediaFrame({mimeType:r,state:u,multiple:o,selection:f,editing:!!c}),p.media.frame=this.frame,this.initializeListeners()}}},{key:"componentWillUnmount",value:function(){this.frame.remove()}},{key:"onUpdate",value:function(e){var t=this.props,n=t.onSelect,r=t.multiple,i=void 0!==r&&r,o=this.frame.state(),a=e||o.get("selection");a&&a.models.length&&n(i?a.models.map(function(e){return d(e.toJSON())}):d(a.models[0].toJSON()))}},{key:"onSelect",value:function(){var e=this.props,t=e.onSelect,n=e.multiple,r=void 0!==n&&n,i=this.frame.state().get("selection").toJSON();t(r?i:i[0])}},{key:"onOpen",value:function(){if(this.updateCollection(),this.props.value){if(!this.props.gallery){var e=this.frame.state().get("selection");Object(l.castArray)(this.props.value).forEach(function(t){e.add(p.media.attachment(t))})}b(Object(l.castArray)(this.props.value)).more()}}},{key:"onClose",value:function(){var e=this.props.onClose;e&&e()}},{key:"updateCollection",value:function(){var e=this.frame.content.get();if(e&&e.collection){var t=e.collection;t.toArray().forEach(function(e){return e.trigger("destroy",e)}),t.mirroring._hasMore=!0,t.more()}}},{key:"openModal",value:function(){this.props.gallery&&this.props.value&&this.props.value.length>0&&this.buildAndSetGalleryFrame(),this.frame.open()}},{key:"render",value:function(){return this.props.render({open:this.openModal})}}]),t}(s.Component),m=n(21),h=n.n(m),v=n(8),O=n(41),j=n(17),g=n(23),w=n(35),_=n.n(w),S=n(36);function x(e){return e?Object(l.flatMap)(e,function(e,t){var n=e.split("/"),r=Object(g.a)(n,1)[0],i=t.split("|");return[e].concat(Object(j.a)(Object(l.map)(i,function(e){return"".concat(r,"/").concat(e)})))}):e}function k(e){return E.apply(this,arguments)}function E(){return(E=Object(O.a)(h.a.mark(function e(t){var n,r,i,o,a,c,u,p,d,b,y,m,O,g,w,_,k,E,P,T,A,C,F,G,U,L,z,D,I;return h.a.wrap(function(e){for(;;)switch(e.prev=e.next){case 0:n=t.allowedTypes,r=t.additionalData,i=void 0===r?{}:r,o=t.filesList,a=t.maxUploadFileSize,c=t.onError,u=void 0===c?l.noop:c,p=t.onFileChange,d=t.wpAllowedMimeTypes,b=void 0===d?null:d,y=Object(j.a)(o),m=[],O=function(e,t){Object(S.revokeBlobURL)(Object(l.get)(m,[e,"url"])),m[e]=t,p(Object(l.compact)(m))},g=function(e){return!n||Object(l.some)(n,function(t){return Object(l.includes)(t,"/")?t===e:Object(l.startsWith)(e,"".concat(t,"/"))})},w=x(b),_=function(e){return Object(l.includes)(w,e)},k=function(e){e.message=[Object(s.createElement)("strong",{key:"filename"},e.file.name),": ",e.message],u(e)},E=[],P=!0,T=!1,A=void 0,e.prev=12,C=y[Symbol.iterator]();case 14:if(P=(F=C.next()).done){e.next=34;break}if(G=F.value,!w||_(G.type)){e.next=19;break}return k({code:"MIME_TYPE_NOT_ALLOWED_FOR_USER",message:Object(f.__)("Sorry, this file type is not permitted for security reasons."),file:G}),e.abrupt("continue",31);case 19:if(g(G.type)){e.next=22;break}return k({code:"MIME_TYPE_NOT_SUPPORTED",message:Object(f.__)("Sorry, this file type is not supported here."),file:G}),e.abrupt("continue",31);case 22:if(!(a&&G.size>a)){e.next=25;break}return k({code:"SIZE_ABOVE_LIMIT",message:Object(f.__)("This file exceeds the maximum upload size for this site."),file:G}),e.abrupt("continue",31);case 25:if(!(G.size<=0)){e.next=28;break}return k({code:"EMPTY_FILE",message:Object(f.__)("This file is empty."),file:G}),e.abrupt("continue",31);case 28:E.push(G),m.push({url:Object(S.createBlobURL)(G)}),p(m);case 31:P=!0,e.next=14;break;case 34:e.next=40;break;case 36:e.prev=36,e.t0=e.catch(12),T=!0,A=e.t0;case 40:e.prev=40,e.prev=41,P||null==C.return||C.return();case 43:if(e.prev=43,!T){e.next=46;break}throw A;case 46:return e.finish(43);case 47:return e.finish(40);case 48:U=0;case 49:if(!(U<E.length)){e.next=68;break}return L=E[U],e.prev=51,e.next=54,M(L,i);case 54:z=e.sent,D=Object(v.a)({},Object(l.omit)(z,["alt_text","source_url"]),{alt:z.alt_text,caption:Object(l.get)(z,["caption","raw"],""),title:z.title.raw,url:z.source_url}),O(U,D),e.next=65;break;case 59:e.prev=59,e.t1=e.catch(51),O(U,null),I=void 0,I=Object(l.has)(e.t1,["message"])?Object(l.get)(e.t1,["message"]):Object(f.sprintf)(Object(f.__)("Error while uploading file %s to the media library."),L.name),u({code:"GENERAL",message:I,file:L});case 65:++U,e.next=49;break;case 68:case"end":return e.stop()}},e,null,[[12,36,40,48],[41,,43,47],[51,59]])}))).apply(this,arguments)}function M(e,t){var n=new window.FormData;return n.append("file",e,e.name||e.type.replace("/",".")),Object(l.forEach)(t,function(e,t){return n.append(t,e)}),_()({path:"/wp/v2/media",body:n,method:"POST"})}n.d(t,"MediaUpload",function(){return y}),n.d(t,"uploadMedia",function(){return k})},21:function(e,t){!function(){e.exports=this.regeneratorRuntime}()},23:function(e,t,n){"use strict";var r=n(38);var i=n(37);function o(e,t){return Object(r.a)(e)||function(e,t){var n=[],r=!0,i=!1,o=void 0;try{for(var a,c=e[Symbol.iterator]();!(r=(a=c.next()).done)&&(n.push(a.value),!t||n.length!==t);r=!0);}catch(e){i=!0,o=e}finally{try{r||null==c.return||c.return()}finally{if(i)throw o}}return n}(e,t)||Object(i.a)()}n.d(t,"a",function(){return o})},31:function(e,t,n){"use strict";function r(e){return(r="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e})(e)}function i(e){return(i="function"==typeof Symbol&&"symbol"===r(Symbol.iterator)?function(e){return r(e)}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":r(e)})(e)}n.d(t,"a",function(){return i})},32:function(e,t,n){"use strict";function r(e){if(Symbol.iterator in Object(e)||"[object Arguments]"===Object.prototype.toString.call(e))return Array.from(e)}n.d(t,"a",function(){return r})},35:function(e,t){!function(){e.exports=this.wp.apiFetch}()},36:function(e,t){!function(){e.exports=this.wp.blob}()},37:function(e,t,n){"use strict";function r(){throw new TypeError("Invalid attempt to destructure non-iterable instance")}n.d(t,"a",function(){return r})},38:function(e,t,n){"use strict";function r(e){if(Array.isArray(e))return e}n.d(t,"a",function(){return r})},41:function(e,t,n){"use strict";function r(e,t,n,r,i,o,a){try{var c=e[o](a),u=c.value}catch(e){return void n(e)}c.done?t(u):Promise.resolve(u).then(r,i)}function i(e){return function(){var t=this,n=arguments;return new Promise(function(i,o){var a=e.apply(t,n);function c(e){r(a,i,o,c,u,"next",e)}function u(e){r(a,i,o,c,u,"throw",e)}c(void 0)})}}n.d(t,"a",function(){return i})},5:function(e,t,n){"use strict";function r(e){if(void 0===e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return e}n.d(t,"a",function(){return r})},8:function(e,t,n){"use strict";n.d(t,"a",function(){return i});var r=n(15);function i(e){for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{},i=Object.keys(n);"function"==typeof Object.getOwnPropertySymbols&&(i=i.concat(Object.getOwnPropertySymbols(n).filter(function(e){return Object.getOwnPropertyDescriptor(n,e).enumerable}))),i.forEach(function(t){Object(r.a)(e,t,n[t])})}return e}}});
+this["wp"] = this["wp"] || {}; this["wp"]["mediaUtils"] =
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = "./packages/media-utils/build-module/index.js");
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ "./node_modules/@babel/runtime/helpers/esm/arrayWithHoles.js":
+/*!*******************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/arrayWithHoles.js ***!
+  \*******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _arrayWithHoles; });
+function _arrayWithHoles(arr) {
+  if (Array.isArray(arr)) return arr;
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/esm/arrayWithoutHoles.js":
+/*!**********************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/arrayWithoutHoles.js ***!
+  \**********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _arrayWithoutHoles; });
+function _arrayWithoutHoles(arr) {
+  if (Array.isArray(arr)) {
+    for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {
+      arr2[i] = arr[i];
+    }
+
+    return arr2;
+  }
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/esm/assertThisInitialized.js":
+/*!**************************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/assertThisInitialized.js ***!
+  \**************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _assertThisInitialized; });
+function _assertThisInitialized(self) {
+  if (self === void 0) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+
+  return self;
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js ***!
+  \*********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _asyncToGenerator; });
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
+  try {
+    var info = gen[key](arg);
+    var value = info.value;
+  } catch (error) {
+    reject(error);
+    return;
+  }
+
+  if (info.done) {
+    resolve(value);
+  } else {
+    Promise.resolve(value).then(_next, _throw);
+  }
+}
+
+function _asyncToGenerator(fn) {
+  return function () {
+    var self = this,
+        args = arguments;
+    return new Promise(function (resolve, reject) {
+      var gen = fn.apply(self, args);
+
+      function _next(value) {
+        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
+      }
+
+      function _throw(err) {
+        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
+      }
+
+      _next(undefined);
+    });
+  };
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/esm/classCallCheck.js":
+/*!*******************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/classCallCheck.js ***!
+  \*******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _classCallCheck; });
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/esm/createClass.js":
+/*!****************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/createClass.js ***!
+  \****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _createClass; });
+function _defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
+
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
+  return Constructor;
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/esm/defineProperty.js":
+/*!*******************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/defineProperty.js ***!
+  \*******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _defineProperty; });
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/esm/getPrototypeOf.js":
+/*!*******************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/getPrototypeOf.js ***!
+  \*******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _getPrototypeOf; });
+function _getPrototypeOf(o) {
+  _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+    return o.__proto__ || Object.getPrototypeOf(o);
+  };
+  return _getPrototypeOf(o);
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/esm/inherits.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/inherits.js ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _inherits; });
+/* harmony import */ var _setPrototypeOf__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./setPrototypeOf */ "./node_modules/@babel/runtime/helpers/esm/setPrototypeOf.js");
+
+function _inherits(subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function");
+  }
+
+  subClass.prototype = Object.create(superClass && superClass.prototype, {
+    constructor: {
+      value: subClass,
+      writable: true,
+      configurable: true
+    }
+  });
+  if (superClass) Object(_setPrototypeOf__WEBPACK_IMPORTED_MODULE_0__["default"])(subClass, superClass);
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/esm/iterableToArray.js":
+/*!********************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/iterableToArray.js ***!
+  \********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _iterableToArray; });
+function _iterableToArray(iter) {
+  if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/esm/iterableToArrayLimit.js":
+/*!*************************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/iterableToArrayLimit.js ***!
+  \*************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _iterableToArrayLimit; });
+function _iterableToArrayLimit(arr, i) {
+  var _arr = [];
+  var _n = true;
+  var _d = false;
+  var _e = undefined;
+
+  try {
+    for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+      _arr.push(_s.value);
+
+      if (i && _arr.length === i) break;
+    }
+  } catch (err) {
+    _d = true;
+    _e = err;
+  } finally {
+    try {
+      if (!_n && _i["return"] != null) _i["return"]();
+    } finally {
+      if (_d) throw _e;
+    }
+  }
+
+  return _arr;
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/esm/nonIterableRest.js":
+/*!********************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/nonIterableRest.js ***!
+  \********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _nonIterableRest; });
+function _nonIterableRest() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance");
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/esm/nonIterableSpread.js":
+/*!**********************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/nonIterableSpread.js ***!
+  \**********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _nonIterableSpread; });
+function _nonIterableSpread() {
+  throw new TypeError("Invalid attempt to spread non-iterable instance");
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/esm/objectSpread.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/objectSpread.js ***!
+  \*****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _objectSpread; });
+/* harmony import */ var _defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./defineProperty */ "./node_modules/@babel/runtime/helpers/esm/defineProperty.js");
+
+function _objectSpread(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i] != null ? arguments[i] : {};
+    var ownKeys = Object.keys(source);
+
+    if (typeof Object.getOwnPropertySymbols === 'function') {
+      ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {
+        return Object.getOwnPropertyDescriptor(source, sym).enumerable;
+      }));
+    }
+
+    ownKeys.forEach(function (key) {
+      Object(_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(target, key, source[key]);
+    });
+  }
+
+  return target;
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/esm/possibleConstructorReturn.js":
+/*!******************************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/possibleConstructorReturn.js ***!
+  \******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _possibleConstructorReturn; });
+/* harmony import */ var _helpers_esm_typeof__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../helpers/esm/typeof */ "./node_modules/@babel/runtime/helpers/esm/typeof.js");
+/* harmony import */ var _assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./assertThisInitialized */ "./node_modules/@babel/runtime/helpers/esm/assertThisInitialized.js");
+
+
+function _possibleConstructorReturn(self, call) {
+  if (call && (Object(_helpers_esm_typeof__WEBPACK_IMPORTED_MODULE_0__["default"])(call) === "object" || typeof call === "function")) {
+    return call;
+  }
+
+  return Object(_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__["default"])(self);
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/esm/setPrototypeOf.js":
+/*!*******************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/setPrototypeOf.js ***!
+  \*******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _setPrototypeOf; });
+function _setPrototypeOf(o, p) {
+  _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+    o.__proto__ = p;
+    return o;
+  };
+
+  return _setPrototypeOf(o, p);
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/slicedToArray.js ***!
+  \******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _slicedToArray; });
+/* harmony import */ var _arrayWithHoles__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./arrayWithHoles */ "./node_modules/@babel/runtime/helpers/esm/arrayWithHoles.js");
+/* harmony import */ var _iterableToArrayLimit__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./iterableToArrayLimit */ "./node_modules/@babel/runtime/helpers/esm/iterableToArrayLimit.js");
+/* harmony import */ var _nonIterableRest__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./nonIterableRest */ "./node_modules/@babel/runtime/helpers/esm/nonIterableRest.js");
+
+
+
+function _slicedToArray(arr, i) {
+  return Object(_arrayWithHoles__WEBPACK_IMPORTED_MODULE_0__["default"])(arr) || Object(_iterableToArrayLimit__WEBPACK_IMPORTED_MODULE_1__["default"])(arr, i) || Object(_nonIterableRest__WEBPACK_IMPORTED_MODULE_2__["default"])();
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/esm/toConsumableArray.js":
+/*!**********************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/toConsumableArray.js ***!
+  \**********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _toConsumableArray; });
+/* harmony import */ var _arrayWithoutHoles__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./arrayWithoutHoles */ "./node_modules/@babel/runtime/helpers/esm/arrayWithoutHoles.js");
+/* harmony import */ var _iterableToArray__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./iterableToArray */ "./node_modules/@babel/runtime/helpers/esm/iterableToArray.js");
+/* harmony import */ var _nonIterableSpread__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./nonIterableSpread */ "./node_modules/@babel/runtime/helpers/esm/nonIterableSpread.js");
+
+
+
+function _toConsumableArray(arr) {
+  return Object(_arrayWithoutHoles__WEBPACK_IMPORTED_MODULE_0__["default"])(arr) || Object(_iterableToArray__WEBPACK_IMPORTED_MODULE_1__["default"])(arr) || Object(_nonIterableSpread__WEBPACK_IMPORTED_MODULE_2__["default"])();
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/esm/typeof.js":
+/*!***********************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/typeof.js ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _typeof; });
+function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof2 = function _typeof2(obj) { return typeof obj; }; } else { _typeof2 = function _typeof2(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof2(obj); }
+
+function _typeof(obj) {
+  if (typeof Symbol === "function" && _typeof2(Symbol.iterator) === "symbol") {
+    _typeof = function _typeof(obj) {
+      return _typeof2(obj);
+    };
+  } else {
+    _typeof = function _typeof(obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : _typeof2(obj);
+    };
+  }
+
+  return _typeof(obj);
+}
+
+/***/ }),
+
+/***/ "./packages/media-utils/build-module/components/index.js":
+/*!***************************************************************!*\
+  !*** ./packages/media-utils/build-module/components/index.js ***!
+  \***************************************************************/
+/*! exports provided: MediaUpload */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _media_upload__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./media-upload */ "./packages/media-utils/build-module/components/media-upload/index.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "MediaUpload", function() { return _media_upload__WEBPACK_IMPORTED_MODULE_0__["default"]; });
+
+
+
+
+/***/ }),
+
+/***/ "./packages/media-utils/build-module/components/media-upload/index.js":
+/*!****************************************************************************!*\
+  !*** ./packages/media-utils/build-module/components/media-upload/index.js ***!
+  \****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/classCallCheck */ "./node_modules/@babel/runtime/helpers/esm/classCallCheck.js");
+/* harmony import */ var _babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/createClass */ "./node_modules/@babel/runtime/helpers/esm/createClass.js");
+/* harmony import */ var _babel_runtime_helpers_esm_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/esm/possibleConstructorReturn */ "./node_modules/@babel/runtime/helpers/esm/possibleConstructorReturn.js");
+/* harmony import */ var _babel_runtime_helpers_esm_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime/helpers/esm/getPrototypeOf */ "./node_modules/@babel/runtime/helpers/esm/getPrototypeOf.js");
+/* harmony import */ var _babel_runtime_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime/helpers/esm/assertThisInitialized */ "./node_modules/@babel/runtime/helpers/esm/assertThisInitialized.js");
+/* harmony import */ var _babel_runtime_helpers_esm_inherits__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @babel/runtime/helpers/esm/inherits */ "./node_modules/@babel/runtime/helpers/esm/inherits.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! lodash */ "lodash");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_8__);
+
+
+
+
+
+
+
+/**
+ * External dependencies
+ */
+
+/**
+ * WordPress dependencies
+ */
+
+
+
+var _window = window,
+    wp = _window.wp;
+
+var getFeaturedImageMediaFrame = function getFeaturedImageMediaFrame() {
+  return wp.media.view.MediaFrame.Select.extend({
+    /**
+     * Enables the Set Featured Image Button.
+     *
+     * @param {Object} toolbar toolbar for featured image state
+     * @return {void}
+     */
+    featuredImageToolbar: function featuredImageToolbar(toolbar) {
+      this.createSelectToolbar(toolbar, {
+        text: wp.media.view.l10n.setFeaturedImage,
+        state: this.options.state
+      });
+    },
+
+    /**
+     * Create the default states.
+     *
+     * @return {void}
+     */
+    createStates: function createStates() {
+      this.on('toolbar:create:featured-image', this.featuredImageToolbar, this);
+      this.states.add([new wp.media.controller.FeaturedImage()]);
+    }
+  });
+}; // Getter for the sake of unit tests.
+
+
+var getGalleryDetailsMediaFrame = function getGalleryDetailsMediaFrame() {
+  /**
+   * Custom gallery details frame.
+   *
+   * @see https://github.com/xwp/wp-core-media-widgets/blob/905edbccfc2a623b73a93dac803c5335519d7837/wp-admin/js/widgets/media-gallery-widget.js
+   * @class GalleryDetailsMediaFrame
+   * @class
+   */
+  return wp.media.view.MediaFrame.Post.extend({
+    /**
+     * Create the default states.
+     *
+     * @return {void}
+     */
+    createStates: function createStates() {
+      this.states.add([new wp.media.controller.Library({
+        id: 'gallery',
+        title: wp.media.view.l10n.createGalleryTitle,
+        priority: 40,
+        toolbar: 'main-gallery',
+        filterable: 'uploaded',
+        multiple: 'add',
+        editable: false,
+        library: wp.media.query(Object(lodash__WEBPACK_IMPORTED_MODULE_6__["defaults"])({
+          type: 'image'
+        }, this.options.library))
+      }), new wp.media.controller.GalleryEdit({
+        library: this.options.selection,
+        editing: this.options.editing,
+        menu: 'gallery',
+        displaySettings: false,
+        multiple: true
+      }), new wp.media.controller.GalleryAdd()]);
+    }
+  });
+}; // the media library image object contains numerous attributes
+// we only need this set to display the image in the library
+
+
+var slimImageObject = function slimImageObject(img) {
+  var attrSet = ['sizes', 'mime', 'type', 'subtype', 'id', 'url', 'alt', 'link', 'caption'];
+  return Object(lodash__WEBPACK_IMPORTED_MODULE_6__["pick"])(img, attrSet);
+};
+
+var getAttachmentsCollection = function getAttachmentsCollection(ids) {
+  return wp.media.query({
+    order: 'ASC',
+    orderby: 'post__in',
+    post__in: ids,
+    posts_per_page: -1,
+    query: true,
+    type: 'image'
+  });
+};
+
+var MediaUpload =
+/*#__PURE__*/
+function (_Component) {
+  Object(_babel_runtime_helpers_esm_inherits__WEBPACK_IMPORTED_MODULE_5__["default"])(MediaUpload, _Component);
+
+  function MediaUpload(_ref) {
+    var _this;
+
+    var allowedTypes = _ref.allowedTypes,
+        _ref$gallery = _ref.gallery,
+        gallery = _ref$gallery === void 0 ? false : _ref$gallery,
+        _ref$unstableFeatured = _ref.unstableFeaturedImageFlow,
+        unstableFeaturedImageFlow = _ref$unstableFeatured === void 0 ? false : _ref$unstableFeatured,
+        modalClass = _ref.modalClass,
+        _ref$multiple = _ref.multiple,
+        multiple = _ref$multiple === void 0 ? false : _ref$multiple,
+        _ref$title = _ref.title,
+        title = _ref$title === void 0 ? Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_8__["__"])('Select or Upload Media') : _ref$title;
+
+    Object(_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_0__["default"])(this, MediaUpload);
+
+    _this = Object(_babel_runtime_helpers_esm_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__["default"])(this, Object(_babel_runtime_helpers_esm_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__["default"])(MediaUpload).apply(this, arguments));
+    _this.openModal = _this.openModal.bind(Object(_babel_runtime_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__["default"])(_this));
+    _this.onOpen = _this.onOpen.bind(Object(_babel_runtime_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__["default"])(_this));
+    _this.onSelect = _this.onSelect.bind(Object(_babel_runtime_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__["default"])(_this));
+    _this.onUpdate = _this.onUpdate.bind(Object(_babel_runtime_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__["default"])(_this));
+    _this.onClose = _this.onClose.bind(Object(_babel_runtime_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__["default"])(_this));
+
+    if (gallery) {
+      _this.buildAndSetGalleryFrame();
+    } else {
+      var frameConfig = {
+        title: title,
+        button: {
+          text: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_8__["__"])('Select')
+        },
+        multiple: multiple
+      };
+
+      if (!!allowedTypes) {
+        frameConfig.library = {
+          type: allowedTypes
+        };
+      }
+
+      _this.frame = wp.media(frameConfig);
+    }
+
+    if (modalClass) {
+      _this.frame.$el.addClass(modalClass);
+    }
+
+    if (unstableFeaturedImageFlow) {
+      _this.buildAndSetFeatureImageFrame();
+    }
+
+    _this.initializeListeners();
+
+    return _this;
+  }
+
+  Object(_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_1__["default"])(MediaUpload, [{
+    key: "initializeListeners",
+    value: function initializeListeners() {
+      // When an image is selected in the media frame...
+      this.frame.on('select', this.onSelect);
+      this.frame.on('update', this.onUpdate);
+      this.frame.on('open', this.onOpen);
+      this.frame.on('close', this.onClose);
+    }
+  }, {
+    key: "buildAndSetGalleryFrame",
+    value: function buildAndSetGalleryFrame() {
+      var _this$props = this.props,
+          _this$props$addToGall = _this$props.addToGallery,
+          addToGallery = _this$props$addToGall === void 0 ? false : _this$props$addToGall,
+          allowedTypes = _this$props.allowedTypes,
+          _this$props$multiple = _this$props.multiple,
+          multiple = _this$props$multiple === void 0 ? false : _this$props$multiple,
+          _this$props$value = _this$props.value,
+          value = _this$props$value === void 0 ? null : _this$props$value; // If the value did not changed there is no need to rebuild the frame,
+      // we can continue to use the existing one.
+
+      if (value === this.lastGalleryValue) {
+        return;
+      }
+
+      this.lastGalleryValue = value; // If a frame already existed remove it.
+
+      if (this.frame) {
+        this.frame.remove();
+      }
+
+      var currentState;
+
+      if (addToGallery) {
+        currentState = 'gallery-library';
+      } else {
+        currentState = value ? 'gallery-edit' : 'gallery';
+      }
+
+      if (!this.GalleryDetailsMediaFrame) {
+        this.GalleryDetailsMediaFrame = getGalleryDetailsMediaFrame();
+      }
+
+      var attachments = getAttachmentsCollection(value);
+      var selection = new wp.media.model.Selection(attachments.models, {
+        props: attachments.props.toJSON(),
+        multiple: multiple
+      });
+      this.frame = new this.GalleryDetailsMediaFrame({
+        mimeType: allowedTypes,
+        state: currentState,
+        multiple: multiple,
+        selection: selection,
+        editing: value ? true : false
+      });
+      wp.media.frame = this.frame;
+      this.initializeListeners();
+    }
+  }, {
+    key: "buildAndSetFeatureImageFrame",
+    value: function buildAndSetFeatureImageFrame() {
+      var featuredImageFrame = getFeaturedImageMediaFrame();
+      var attachments = getAttachmentsCollection(this.props.value);
+      var selection = new wp.media.model.Selection(attachments.models, {
+        props: attachments.props.toJSON()
+      });
+      this.frame = new featuredImageFrame({
+        mimeType: this.props.allowedTypes,
+        state: 'featured-image',
+        multiple: this.props.multiple,
+        selection: selection,
+        editing: this.props.value ? true : false
+      });
+      wp.media.frame = this.frame;
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      this.frame.remove();
+    }
+  }, {
+    key: "onUpdate",
+    value: function onUpdate(selections) {
+      var _this$props2 = this.props,
+          onSelect = _this$props2.onSelect,
+          _this$props2$multiple = _this$props2.multiple,
+          multiple = _this$props2$multiple === void 0 ? false : _this$props2$multiple;
+      var state = this.frame.state();
+      var selectedImages = selections || state.get('selection');
+
+      if (!selectedImages || !selectedImages.models.length) {
+        return;
+      }
+
+      if (multiple) {
+        onSelect(selectedImages.models.map(function (model) {
+          return slimImageObject(model.toJSON());
+        }));
+      } else {
+        onSelect(slimImageObject(selectedImages.models[0].toJSON()));
+      }
+    }
+  }, {
+    key: "onSelect",
+    value: function onSelect() {
+      var _this$props3 = this.props,
+          onSelect = _this$props3.onSelect,
+          _this$props3$multiple = _this$props3.multiple,
+          multiple = _this$props3$multiple === void 0 ? false : _this$props3$multiple; // Get media attachment details from the frame state
+
+      var attachment = this.frame.state().get('selection').toJSON();
+      onSelect(multiple ? attachment : attachment[0]);
+    }
+  }, {
+    key: "onOpen",
+    value: function onOpen() {
+      this.updateCollection();
+
+      if (!this.props.value) {
+        return;
+      }
+
+      if (!this.props.gallery) {
+        var selection = this.frame.state().get('selection');
+        Object(lodash__WEBPACK_IMPORTED_MODULE_6__["castArray"])(this.props.value).forEach(function (id) {
+          selection.add(wp.media.attachment(id));
+        });
+      } // load the images so they are available in the media modal.
+
+
+      getAttachmentsCollection(Object(lodash__WEBPACK_IMPORTED_MODULE_6__["castArray"])(this.props.value)).more();
+    }
+  }, {
+    key: "onClose",
+    value: function onClose() {
+      var onClose = this.props.onClose;
+
+      if (onClose) {
+        onClose();
+      }
+    }
+  }, {
+    key: "updateCollection",
+    value: function updateCollection() {
+      var frameContent = this.frame.content.get();
+
+      if (frameContent && frameContent.collection) {
+        var collection = frameContent.collection; // clean all attachments we have in memory.
+
+        collection.toArray().forEach(function (model) {
+          return model.trigger('destroy', model);
+        }); // reset has more flag, if library had small amount of items all items may have been loaded before.
+
+        collection.mirroring._hasMore = true; // request items
+
+        collection.more();
+      }
+    }
+  }, {
+    key: "openModal",
+    value: function openModal() {
+      if (this.props.gallery && this.props.value && this.props.value.length > 0) {
+        this.buildAndSetGalleryFrame();
+      }
+
+      this.frame.open();
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return this.props.render({
+        open: this.openModal
+      });
+    }
+  }]);
+
+  return MediaUpload;
+}(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__["Component"]);
+
+/* harmony default export */ __webpack_exports__["default"] = (MediaUpload);
+
+
+/***/ }),
+
+/***/ "./packages/media-utils/build-module/index.js":
+/*!****************************************************!*\
+  !*** ./packages/media-utils/build-module/index.js ***!
+  \****************************************************/
+/*! exports provided: MediaUpload, uploadMedia */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components */ "./packages/media-utils/build-module/components/index.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "MediaUpload", function() { return _components__WEBPACK_IMPORTED_MODULE_0__["MediaUpload"]; });
+
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils */ "./packages/media-utils/build-module/utils/index.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "uploadMedia", function() { return _utils__WEBPACK_IMPORTED_MODULE_1__["uploadMedia"]; });
+
+
+
+
+
+/***/ }),
+
+/***/ "./packages/media-utils/build-module/utils/index.js":
+/*!**********************************************************!*\
+  !*** ./packages/media-utils/build-module/utils/index.js ***!
+  \**********************************************************/
+/*! exports provided: uploadMedia */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _upload_media__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./upload-media */ "./packages/media-utils/build-module/utils/upload-media.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "uploadMedia", function() { return _upload_media__WEBPACK_IMPORTED_MODULE_0__["uploadMedia"]; });
+
+
+
+
+/***/ }),
+
+/***/ "./packages/media-utils/build-module/utils/upload-media.js":
+/*!*****************************************************************!*\
+  !*** ./packages/media-utils/build-module/utils/upload-media.js ***!
+  \*****************************************************************/
+/*! exports provided: getMimeTypesArray, uploadMedia */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getMimeTypesArray", function() { return getMimeTypesArray; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "uploadMedia", function() { return uploadMedia; });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "@babel/runtime/regenerator");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectSpread */ "./node_modules/@babel/runtime/helpers/esm/objectSpread.js");
+/* harmony import */ var _babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/esm/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js");
+/* harmony import */ var _babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime/helpers/esm/toConsumableArray */ "./node_modules/@babel/runtime/helpers/esm/toConsumableArray.js");
+/* harmony import */ var _babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime/helpers/esm/slicedToArray */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! lodash */ "lodash");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/api-fetch */ "@wordpress/api-fetch");
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _wordpress_blob__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @wordpress/blob */ "@wordpress/blob");
+/* harmony import */ var _wordpress_blob__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blob__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_9__);
+
+
+
+
+
+
+
+/**
+ * External dependencies
+ */
+
+/**
+ * WordPress dependencies
+ */
+
+
+
+
+/**
+ * Browsers may use unexpected mime types, and they differ from browser to browser.
+ * This function computes a flexible array of mime types from the mime type structured provided by the server.
+ * Converts { jpg|jpeg|jpe: "image/jpeg" } into [ "image/jpeg", "image/jpg", "image/jpeg", "image/jpe" ]
+ * The computation of this array instead of directly using the object,
+ * solves the problem in chrome where mp3 files have audio/mp3 as mime type instead of audio/mpeg.
+ * https://bugs.chromium.org/p/chromium/issues/detail?id=227004
+ *
+ * @param {?Object} wpMimeTypesObject Mime type object received from the server.
+ *                                    Extensions are keys separated by '|' and values are mime types associated with an extension.
+ *
+ * @return {?Array} An array of mime types or the parameter passed if it was "falsy".
+ */
+
+function getMimeTypesArray(wpMimeTypesObject) {
+  if (!wpMimeTypesObject) {
+    return wpMimeTypesObject;
+  }
+
+  return Object(lodash__WEBPACK_IMPORTED_MODULE_6__["flatMap"])(wpMimeTypesObject, function (mime, extensionsString) {
+    var _mime$split = mime.split('/'),
+        _mime$split2 = Object(_babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_4__["default"])(_mime$split, 1),
+        type = _mime$split2[0];
+
+    var extensions = extensionsString.split('|');
+    return [mime].concat(Object(_babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_3__["default"])(Object(lodash__WEBPACK_IMPORTED_MODULE_6__["map"])(extensions, function (extension) {
+      return "".concat(type, "/").concat(extension);
+    })));
+  });
+}
+/**
+ *	Media Upload is used by audio, image, gallery, video, and file blocks to
+ *	handle uploading a media file when a file upload button is activated.
+ *
+ *	TODO: future enhancement to add an upload indicator.
+ *
+ * @param   {Object}   $0                    Parameters object passed to the function.
+ * @param   {?Array}   $0.allowedTypes       Array with the types of media that can be uploaded, if unset all types are allowed.
+ * @param   {?Object}  $0.additionalData     Additional data to include in the request.
+ * @param   {Array}    $0.filesList          List of files.
+ * @param   {?number}  $0.maxUploadFileSize  Maximum upload size in bytes allowed for the site.
+ * @param   {Function} $0.onError            Function called when an error happens.
+ * @param   {Function} $0.onFileChange       Function called each time a file or a temporary representation of the file is available.
+ * @param   {?Object}  $0.wpAllowedMimeTypes List of allowed mime types and file extensions.
+ */
+
+function uploadMedia(_x) {
+  return _uploadMedia.apply(this, arguments);
+}
+/**
+ * @param {File}    file           Media File to Save.
+ * @param {?Object} additionalData Additional data to include in the request.
+ *
+ * @return {Promise} Media Object Promise.
+ */
+
+function _uploadMedia() {
+  _uploadMedia = Object(_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  /*#__PURE__*/
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(_ref) {
+    var allowedTypes, _ref$additionalData, additionalData, filesList, maxUploadFileSize, _ref$onError, onError, onFileChange, _ref$wpAllowedMimeTyp, wpAllowedMimeTypes, files, filesSet, setAndUpdateFiles, isAllowedType, allowedMimeTypesForUser, isAllowedMimeTypeForUser, triggerError, validFiles, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, _mediaFile, idx, mediaFile, savedMedia, mediaObject, message;
+
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            allowedTypes = _ref.allowedTypes, _ref$additionalData = _ref.additionalData, additionalData = _ref$additionalData === void 0 ? {} : _ref$additionalData, filesList = _ref.filesList, maxUploadFileSize = _ref.maxUploadFileSize, _ref$onError = _ref.onError, onError = _ref$onError === void 0 ? lodash__WEBPACK_IMPORTED_MODULE_6__["noop"] : _ref$onError, onFileChange = _ref.onFileChange, _ref$wpAllowedMimeTyp = _ref.wpAllowedMimeTypes, wpAllowedMimeTypes = _ref$wpAllowedMimeTyp === void 0 ? null : _ref$wpAllowedMimeTyp;
+            // Cast filesList to array
+            files = Object(_babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_3__["default"])(filesList);
+            filesSet = [];
+
+            setAndUpdateFiles = function setAndUpdateFiles(idx, value) {
+              Object(_wordpress_blob__WEBPACK_IMPORTED_MODULE_8__["revokeBlobURL"])(Object(lodash__WEBPACK_IMPORTED_MODULE_6__["get"])(filesSet, [idx, 'url']));
+              filesSet[idx] = value;
+              onFileChange(Object(lodash__WEBPACK_IMPORTED_MODULE_6__["compact"])(filesSet));
+            }; // Allowed type specified by consumer
+
+
+            isAllowedType = function isAllowedType(fileType) {
+              if (!allowedTypes) {
+                return true;
+              }
+
+              return Object(lodash__WEBPACK_IMPORTED_MODULE_6__["some"])(allowedTypes, function (allowedType) {
+                // If a complete mimetype is specified verify if it matches exactly the mime type of the file.
+                if (Object(lodash__WEBPACK_IMPORTED_MODULE_6__["includes"])(allowedType, '/')) {
+                  return allowedType === fileType;
+                } // Otherwise a general mime type is used and we should verify if the file mimetype starts with it.
+
+
+                return Object(lodash__WEBPACK_IMPORTED_MODULE_6__["startsWith"])(fileType, "".concat(allowedType, "/"));
+              });
+            }; // Allowed types for the current WP_User
+
+
+            allowedMimeTypesForUser = getMimeTypesArray(wpAllowedMimeTypes);
+
+            isAllowedMimeTypeForUser = function isAllowedMimeTypeForUser(fileType) {
+              return Object(lodash__WEBPACK_IMPORTED_MODULE_6__["includes"])(allowedMimeTypesForUser, fileType);
+            }; // Build the error message including the filename
+
+
+            triggerError = function triggerError(error) {
+              error.message = [Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["createElement"])("strong", {
+                key: "filename"
+              }, error.file.name), ': ', error.message];
+              onError(error);
+            };
+
+            validFiles = [];
+            _iteratorNormalCompletion = true;
+            _didIteratorError = false;
+            _iteratorError = undefined;
+            _context.prev = 12;
+            _iterator = files[Symbol.iterator]();
+
+          case 14:
+            if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
+              _context.next = 34;
+              break;
+            }
+
+            _mediaFile = _step.value;
+
+            if (!(allowedMimeTypesForUser && !isAllowedMimeTypeForUser(_mediaFile.type))) {
+              _context.next = 19;
+              break;
+            }
+
+            triggerError({
+              code: 'MIME_TYPE_NOT_ALLOWED_FOR_USER',
+              message: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_9__["__"])('Sorry, this file type is not permitted for security reasons.'),
+              file: _mediaFile
+            });
+            return _context.abrupt("continue", 31);
+
+          case 19:
+            if (isAllowedType(_mediaFile.type)) {
+              _context.next = 22;
+              break;
+            }
+
+            triggerError({
+              code: 'MIME_TYPE_NOT_SUPPORTED',
+              message: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_9__["__"])('Sorry, this file type is not supported here.'),
+              file: _mediaFile
+            });
+            return _context.abrupt("continue", 31);
+
+          case 22:
+            if (!(maxUploadFileSize && _mediaFile.size > maxUploadFileSize)) {
+              _context.next = 25;
+              break;
+            }
+
+            triggerError({
+              code: 'SIZE_ABOVE_LIMIT',
+              message: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_9__["__"])('This file exceeds the maximum upload size for this site.'),
+              file: _mediaFile
+            });
+            return _context.abrupt("continue", 31);
+
+          case 25:
+            if (!(_mediaFile.size <= 0)) {
+              _context.next = 28;
+              break;
+            }
+
+            triggerError({
+              code: 'EMPTY_FILE',
+              message: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_9__["__"])('This file is empty.'),
+              file: _mediaFile
+            });
+            return _context.abrupt("continue", 31);
+
+          case 28:
+            validFiles.push(_mediaFile); // Set temporary URL to create placeholder media file, this is replaced
+            // with final file from media gallery when upload is `done` below
+
+            filesSet.push({
+              url: Object(_wordpress_blob__WEBPACK_IMPORTED_MODULE_8__["createBlobURL"])(_mediaFile)
+            });
+            onFileChange(filesSet);
+
+          case 31:
+            _iteratorNormalCompletion = true;
+            _context.next = 14;
+            break;
+
+          case 34:
+            _context.next = 40;
+            break;
+
+          case 36:
+            _context.prev = 36;
+            _context.t0 = _context["catch"](12);
+            _didIteratorError = true;
+            _iteratorError = _context.t0;
+
+          case 40:
+            _context.prev = 40;
+            _context.prev = 41;
+
+            if (!_iteratorNormalCompletion && _iterator.return != null) {
+              _iterator.return();
+            }
+
+          case 43:
+            _context.prev = 43;
+
+            if (!_didIteratorError) {
+              _context.next = 46;
+              break;
+            }
+
+            throw _iteratorError;
+
+          case 46:
+            return _context.finish(43);
+
+          case 47:
+            return _context.finish(40);
+
+          case 48:
+            idx = 0;
+
+          case 49:
+            if (!(idx < validFiles.length)) {
+              _context.next = 68;
+              break;
+            }
+
+            mediaFile = validFiles[idx];
+            _context.prev = 51;
+            _context.next = 54;
+            return createMediaFromFile(mediaFile, additionalData);
+
+          case 54:
+            savedMedia = _context.sent;
+            mediaObject = Object(_babel_runtime_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, Object(lodash__WEBPACK_IMPORTED_MODULE_6__["omit"])(savedMedia, ['alt_text', 'source_url']), {
+              alt: savedMedia.alt_text,
+              caption: Object(lodash__WEBPACK_IMPORTED_MODULE_6__["get"])(savedMedia, ['caption', 'raw'], ''),
+              title: savedMedia.title.raw,
+              url: savedMedia.source_url
+            });
+            setAndUpdateFiles(idx, mediaObject);
+            _context.next = 65;
+            break;
+
+          case 59:
+            _context.prev = 59;
+            _context.t1 = _context["catch"](51);
+            // Reset to empty on failure.
+            setAndUpdateFiles(idx, null);
+            message = void 0;
+
+            if (Object(lodash__WEBPACK_IMPORTED_MODULE_6__["has"])(_context.t1, ['message'])) {
+              message = Object(lodash__WEBPACK_IMPORTED_MODULE_6__["get"])(_context.t1, ['message']);
+            } else {
+              message = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_9__["sprintf"])( // translators: %s: file name
+              Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_9__["__"])('Error while uploading file %s to the media library.'), mediaFile.name);
+            }
+
+            onError({
+              code: 'GENERAL',
+              message: message,
+              file: mediaFile
+            });
+
+          case 65:
+            ++idx;
+            _context.next = 49;
+            break;
+
+          case 68:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee, null, [[12, 36, 40, 48], [41,, 43, 47], [51, 59]]);
+  }));
+  return _uploadMedia.apply(this, arguments);
+}
+
+function createMediaFromFile(file, additionalData) {
+  // Create upload payload
+  var data = new window.FormData();
+  data.append('file', file, file.name || file.type.replace('/', '.'));
+  Object(lodash__WEBPACK_IMPORTED_MODULE_6__["forEach"])(additionalData, function (value, key) {
+    return data.append(key, value);
+  });
+  return _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_7___default()({
+    path: '/wp/v2/media',
+    body: data,
+    method: 'POST'
+  });
+}
+
+
+/***/ }),
+
+/***/ "@babel/runtime/regenerator":
+/*!**********************************************!*\
+  !*** external {"this":"regeneratorRuntime"} ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(function() { module.exports = this["regeneratorRuntime"]; }());
+
+/***/ }),
+
+/***/ "@wordpress/api-fetch":
+/*!*******************************************!*\
+  !*** external {"this":["wp","apiFetch"]} ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(function() { module.exports = this["wp"]["apiFetch"]; }());
+
+/***/ }),
+
+/***/ "@wordpress/blob":
+/*!***************************************!*\
+  !*** external {"this":["wp","blob"]} ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(function() { module.exports = this["wp"]["blob"]; }());
+
+/***/ }),
+
+/***/ "@wordpress/element":
+/*!******************************************!*\
+  !*** external {"this":["wp","element"]} ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(function() { module.exports = this["wp"]["element"]; }());
+
+/***/ }),
+
+/***/ "@wordpress/i18n":
+/*!***************************************!*\
+  !*** external {"this":["wp","i18n"]} ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(function() { module.exports = this["wp"]["i18n"]; }());
+
+/***/ }),
+
+/***/ "lodash":
+/*!**********************************!*\
+  !*** external {"this":"lodash"} ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(function() { module.exports = this["lodash"]; }());
+
+/***/ })
+
+/******/ });
+//# sourceMappingURL=index.js.map
