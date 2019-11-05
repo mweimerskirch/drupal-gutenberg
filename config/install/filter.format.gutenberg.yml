@@ -5,7 +5,6 @@ dependencies:
     module:
       - gutenberg
   module:
-    - editor
     - gutenberg
 name: 'Gutenberg Blocks text format'
 format: gutenberg
@@ -36,4 +35,17 @@ filters:
     provider: gutenberg
     status: true
     weight: 1
+    settings: {  }
+  filter_field_mapping:
+    id: filter_field_mapping
+    provider: gutenberg
+    status: true
+    weight: 0
+    settings:
+      enable_filter: '0'
+  filter_media_entity_block:
+    id: filter_media_entity_block
+    provider: gutenberg
+    status: true
+    weight: 0
     settings: {  }

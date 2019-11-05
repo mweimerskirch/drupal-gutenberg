@@ -240,6 +240,7 @@ class Gutenberg extends EditorBase implements ContainerFactoryPluginInterface {
       // Gutenberg initialization.
       'gutenberg/g-media-attributes',
       'gutenberg/blocks-edit',
+      'gutenberg/drupal-blocks',
     ];
   
     return $libraries;
