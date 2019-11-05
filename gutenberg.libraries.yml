@@ -1,3 +1,4 @@
+# Global/3rd party libraries
 react:
   version: 16.8.4
   js:
@@ -32,6 +33,8 @@ g-media-attributes:
   js:
     vendor/g-media-attributes/index.js:
       minified: true
+
+# Drupal Gutenberg libraries
 admin:
   version: 1.0.0
   css:
@@ -50,6 +53,8 @@ blocks-edit:
   css:
     base: {  }
     theme:
+      # TODO: Move all editor css from Gutenberg packages to here,
+      #       so developers can alter the library registry in one place.
       css/block-library.css: {  }
   js: {  }
 blocks-view:
@@ -122,6 +127,8 @@ drupal-i18n:
     js/i18n.js: {  }
   dependencies:
     - gutenberg/i18n
+
+# Gutenberg Packages
 special-media-selection:
   js:
     js/special-media-selection.js: {  }
@@ -688,3 +695,4 @@ wordcount:
   dependencies:
     - gutenberg/lodash
     - gutenberg/polyfill
+# End Gutenberg packages
