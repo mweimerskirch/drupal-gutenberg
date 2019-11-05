@@ -73,12 +73,11 @@
   var requestPaths = {
     'save-page': {
       method: 'PUT',
-      regex: /\/wp\/v2\/page\/(\d*)/g,
+      regex: /\/wp\/v2\/pages\/(\d*)/g,
       process: function process(matches, data) {
         var date = new Date().toISOString();
 
         window.wp.node = {
-          pathType: 'save-post',
           id: 1,
           type: 'page',
           date: date,
@@ -87,10 +86,10 @@
             raw: document.title,
             rendered: document.title
           },
-          status: 'pending',
+          status: 'draft',
           content: {
-            raw: data,
-            rendered: data
+            raw: data.content,
+            rendered: data.content
           }
         };
 
@@ -509,6 +508,15 @@
 
     'load-autosaves': {
       method: 'GET',
+      regex: /\/wp\/v2\/(.*)\/autosaves\?(.*)/g,
+      process: function process() {
+        return new Promise(function (resolve) {
+          resolve([]);
+        });
+      }
+    },
+    'save-autosaves': {
+      method: 'POST',
       regex: /\/wp\/v2\/(.*)\/autosaves\?(.*)/g,
       process: function process() {
         return new Promise(function (resolve) {

@@ -260,6 +260,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                               return data.dispatch('core/editor').savePost();
 
                             case 2:
+
                               formSubmitted = true;
 
                               $source.click();
@@ -318,7 +319,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
         id: 1,
         parent: 0,
         permalink_template: '',
-        revisions: { count: 0, last_id: 0 },
+        revisions: { count: 0, last_id: 1 },
         status: 'auto-draft',
         theme_style: true,
         type: 'page',
@@ -337,7 +338,8 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
         titlePlaceholder: Drupal.t('Add title'),
         bodyPlaceholder: Drupal.t('Add text or type / to add content'),
         isRTL: false,
-        autosaveInterval: 10000,
+        localAutosaveInterval: 0,
+        autosaveInterval: 0,
         template: drupalSettings.gutenberg.template || '',
         templateLock: drupalSettings.gutenberg['template-lock'] === 'none' ? false : drupalSettings.gutenberg['template-lock'] || false
       };

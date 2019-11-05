@@ -329,6 +329,7 @@
         if (!formSubmitted) {
           (async () => {
             await data.dispatch('core/editor').savePost();
+
             formSubmitted = true;
             // Submit again to save content on Drupal.
             // We need to submit the form via button click.
@@ -430,7 +431,7 @@
         id: 1,
         parent: 0,
         permalink_template: '',
-        revisions: { count: 0, last_id: 0 },
+        revisions: { count: 0, last_id: 1 },
         status: 'auto-draft',
         theme_style: true,
         type: 'page',
@@ -449,7 +450,8 @@
         titlePlaceholder: Drupal.t('Add title'),
         bodyPlaceholder: Drupal.t('Add text or type / to add content'),
         isRTL: false,
-        autosaveInterval: 10000, // Must set > 0 for undo and redo to work.
+        localAutosaveInterval: 0,
+        autosaveInterval: 0, // Must set > 0 for undo and redo to work.
         // Following properties were from G-JS.
         // canAutosave: false, // to disable Editor Autosave featured (default: true)
         // canPublish: false, // to disable Editor Publish featured (default: true)
