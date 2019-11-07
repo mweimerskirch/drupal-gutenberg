@@ -533,7 +533,9 @@ html-entities:
     - gutenberg/polyfill
 i18n:
   js:
-    vendor/gutenberg/i18n/index.js: {  }
+    # vendor/gutenberg/i18n/index.js: {  }
+    js/i18n.js: {   }
+    js/drupal-gutenberg-translations.js: {   }
   css:
     theme: {  }
   dependencies:

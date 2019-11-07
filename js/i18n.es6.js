@@ -1,21 +1,9 @@
-((Drupal, drupalTranslations, wp) => {
-  // Not really using translations? Get out.
-  if (!drupalTranslations) {
-    return false;
-  }
-
-  const translations = {
-    '': {
-      lang: 'pt',
-      plural_forms: 'nplurals=2; plural=(n != 1)',
-    },
-  };
-
-  Object.entries(drupalTranslations.strings['']).map(t => {
-    translations[t[0]] = t[1];
-  });
-
-  wp.i18n.setLocaleData(translations);
-
-  console.log(wp.i18n);
-})(Drupal, drupalTranslations, wp);
+((Drupal, wp) => {
+  const translate = value => Drupal.t(value);
+  wp.i18n = {};
+  wp.i18n.__ = translate;
+  wp.i18n._x = translate;
+  wp.i18n._n = (single, plural, number) =>
+    Drupal.formatPlural(number, single, plural);
+  wp.i18n.sprintf = translate;
+})(Drupal, wp);

@@ -3,25 +3,17 @@
 * See the following change record for more information,
 * https://www.drupal.org/node/2815083
 * @preserve
-**/'use strict';
+**/"use strict";
 
-(function (Drupal, drupalTranslations, wp) {
-  if (!drupalTranslations) {
-    return false;
-  }
-
-  var translations = {
-    '': {
-      lang: 'pt',
-      plural_forms: 'nplurals=2; plural=(n != 1)'
-    }
+(function (Drupal, wp) {
+  var translate = function translate(value) {
+    return Drupal.t(value);
   };
-
-  Object.entries(drupalTranslations.strings['']).map(function (t) {
-    translations[t[0]] = t[1];
-  });
-
-  wp.i18n.setLocaleData(translations);
-
-  console.log(wp.i18n);
-})(Drupal, drupalTranslations, wp);
+  wp.i18n = {};
+  wp.i18n.__ = translate;
+  wp.i18n._x = translate;
+  wp.i18n._n = function (single, plural, number) {
+    return Drupal.formatPlural(number, single, plural);
+  };
+  wp.i18n.sprintf = translate;
+})(Drupal, wp);
