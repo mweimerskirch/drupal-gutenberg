@@ -121,7 +121,7 @@
       await registerDrupalBlocks(contentType);
       await registerDrupalMedia();
 
-      this._initGutenberg(element);
+      await this._initGutenberg(element);
 
       if (drupalSettings.gutenberg._listeners.init) {
         drupalSettings.gutenberg._listeners.init.forEach(callback => {
@@ -370,6 +370,14 @@
         }
       });
 
+      // Clear template validation.
+      // see https://github.com/WordPress/gutenberg/issues/11681
+      // Wrapped on a setTimeout because initializeEditor isn't really a
+      // full async function, yet.
+      setTimeout(() => {
+        data.dispatch('core/block-editor').setTemplateValidity(true);
+      }, 0);
+
       return true;
     },
 
@@ -432,11 +440,8 @@
      *
      * @param {HTMLElement} element
      *   The element where the editor will be initialized.
-     *
-     * @return {any}
-     *   Returns whatever from initializeEditor().
      */
-    _initGutenberg(element) {
+    async _initGutenberg(element) {
       const { editPost, data } = wp;
       const $textArea = $(element);
       const target = `editor-${$textArea.data('drupal-selector')}`; // 'editor-' + $textArea.data('drupal-selector');
@@ -554,7 +559,11 @@
         }
       });
 
-      return editPost.initializeEditor(target, 'page', 1, editorSettings);
+      // To avoid restore backup notices from local autosave.
+      sessionStorage.removeItem('wp-autosave-block-editor-post-1');
+      localStorage.removeItem('wp-autosave-block-editor-post-1');
+
+      await editPost.initializeEditor(target, 'page', 1, editorSettings);
     },
   };
 

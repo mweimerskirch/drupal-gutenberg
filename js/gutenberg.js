@@ -97,8 +97,10 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                 return registerDrupalMedia();
 
               case 17:
+                _context2.next = 19;
+                return _this._initGutenberg(element);
 
-                _this._initGutenberg(element);
+              case 19:
 
                 if (drupalSettings.gutenberg._listeners.init) {
                   drupalSettings.gutenberg._listeners.init.forEach(function (callback) {
@@ -295,9 +297,13 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                   }
                 });
 
+                setTimeout(function () {
+                  data.dispatch('core/block-editor').setTemplateValidity(true);
+                }, 0);
+
                 return _context2.abrupt('return', true);
 
-              case 48:
+              case 50:
               case 'end':
                 return _context2.stop();
             }
@@ -315,104 +321,123 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
       return true;
     },
     _initGutenberg: function _initGutenberg(element) {
-      var editPost = wp.editPost,
-          data = wp.data;
+      var _this2 = this;
 
-      var $textArea = $(element);
-      var target = 'editor-' + $textArea.data('drupal-selector');
-      var $editor = $('<div id="' + target + '" class="gutenberg__editor"></div>');
-      $editor.insertAfter($textArea);
-      $textArea.hide();
+      return _asyncToGenerator(regeneratorRuntime.mark(function _callee3() {
+        var editPost, data, $textArea, target, $editor, editorSettings, colors, fontSizes, hasOpenedSidebar, hasClosedSidebar;
+        return regeneratorRuntime.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                hasClosedSidebar = function hasClosedSidebar() {
+                  if (!$(document.body).hasClass('gutenberg-sidebar-open')) {
+                    return;
+                  }
 
-      wp.node = {
-        categories: [],
-        content: {
-          block_version: 0,
-          protected: false,
-          raw: $(element).val(),
-          rendered: ''
-        },
-        featured_media: 0,
-        id: 1,
-        parent: 0,
-        permalink_template: '',
-        revisions: { count: 0, last_id: 1 },
-        status: 'auto-draft',
-        theme_style: true,
-        type: 'page',
-        slug: ''
-      };
+                  $(document.body).removeClass('gutenberg-sidebar-open');
 
-      var editorSettings = {
-        alignWide: true,
-        availableTemplates: [],
-        allowedBlockTypes: true,
-        disableCustomColors: false,
-        disablePostFormats: false,
-        mediaLibrary: true,
+                  $('.gutenberg-sidebar').append($('.edit-post-sidebar .components-panel .tab'));
+                };
 
-        imageSizes: drupalSettings.gutenberg['image-sizes'],
-        titlePlaceholder: Drupal.t('Add title'),
-        bodyPlaceholder: Drupal.t('Add text or type / to add content'),
-        isRTL: false,
-        localAutosaveInterval: 0,
-        autosaveInterval: 0,
-        template: drupalSettings.gutenberg.template || '',
-        templateLock: drupalSettings.gutenberg['template-lock'] === 'none' ? false : drupalSettings.gutenberg['template-lock'] || false
-      };
+                hasOpenedSidebar = function hasOpenedSidebar(sidebarName) {
+                  if ($(document.body).hasClass('gutenberg-sidebar-open')) {
+                    return;
+                  }
 
-      var colors = drupalSettings.gutenberg && drupalSettings.gutenberg['theme-support'] && drupalSettings.gutenberg['theme-support'].colors ? [].concat(_toConsumableArray(drupalSettings.gutenberg['theme-support'].colors)) : null;
-      var fontSizes = drupalSettings.gutenberg && drupalSettings.gutenberg['theme-support'] && drupalSettings.gutenberg['theme-support'].fontSizes ? [].concat(_toConsumableArray(drupalSettings.gutenberg['theme-support'].fontSizes)) : null;
+                  var tab = sidebarName.replace(/edit-post\//g, '');
+                  tab = tab.replace(/drupal\//g, '');
 
-      if (colors) {
-        editorSettings.colors = colors;
-      }
+                  var $tabG = $('.edit-post-sidebar .components-panel .tab');
+                  $('.gutenberg-sidebar').append($tabG);
 
-      if (fontSizes) {
-        editorSettings.fontSizes = fontSizes;
-      }
+                  setTimeout(function () {
+                    var $tabD = $('.gutenberg-sidebar .tab.' + tab);
+                    $('.edit-post-sidebar .components-panel').append($tabD);
+                  }, 0);
 
-      function hasOpenedSidebar(sidebarName) {
-        if ($(document.body).hasClass('gutenberg-sidebar-open')) {
-          return;
-        }
+                  $(document.body).addClass('gutenberg-sidebar-open');
+                };
 
-        var tab = sidebarName.replace(/edit-post\//g, '');
-        tab = tab.replace(/drupal\//g, '');
+                editPost = wp.editPost, data = wp.data;
+                $textArea = $(element);
+                target = 'editor-' + $textArea.data('drupal-selector');
+                $editor = $('<div id="' + target + '" class="gutenberg__editor"></div>');
 
-        var $tabG = $('.edit-post-sidebar .components-panel .tab');
-        $('.gutenberg-sidebar').append($tabG);
+                $editor.insertAfter($textArea);
+                $textArea.hide();
 
-        setTimeout(function () {
-          var $tabD = $('.gutenberg-sidebar .tab.' + tab);
-          $('.edit-post-sidebar .components-panel').append($tabD);
-        }, 0);
+                wp.node = {
+                  categories: [],
+                  content: {
+                    block_version: 0,
+                    protected: false,
+                    raw: $(element).val(),
+                    rendered: ''
+                  },
+                  featured_media: 0,
+                  id: 1,
+                  parent: 0,
+                  permalink_template: '',
+                  revisions: { count: 0, last_id: 1 },
+                  status: 'auto-draft',
+                  theme_style: true,
+                  type: 'page',
+                  slug: ''
+                };
 
-        $(document.body).addClass('gutenberg-sidebar-open');
-      }
+                editorSettings = {
+                  alignWide: true,
+                  availableTemplates: [],
+                  allowedBlockTypes: true,
+                  disableCustomColors: false,
+                  disablePostFormats: false,
+                  mediaLibrary: true,
 
-      function hasClosedSidebar() {
-        if (!$(document.body).hasClass('gutenberg-sidebar-open')) {
-          return;
-        }
+                  imageSizes: drupalSettings.gutenberg['image-sizes'],
+                  titlePlaceholder: Drupal.t('Add title'),
+                  bodyPlaceholder: Drupal.t('Add text or type / to add content'),
+                  isRTL: false,
+                  localAutosaveInterval: 0,
+                  autosaveInterval: 0,
+                  template: drupalSettings.gutenberg.template || '',
+                  templateLock: drupalSettings.gutenberg['template-lock'] === 'none' ? false : drupalSettings.gutenberg['template-lock'] || false
+                };
+                colors = drupalSettings.gutenberg && drupalSettings.gutenberg['theme-support'] && drupalSettings.gutenberg['theme-support'].colors ? [].concat(_toConsumableArray(drupalSettings.gutenberg['theme-support'].colors)) : null;
+                fontSizes = drupalSettings.gutenberg && drupalSettings.gutenberg['theme-support'] && drupalSettings.gutenberg['theme-support'].fontSizes ? [].concat(_toConsumableArray(drupalSettings.gutenberg['theme-support'].fontSizes)) : null;
 
-        $(document.body).removeClass('gutenberg-sidebar-open');
 
-        $('.gutenberg-sidebar').append($('.edit-post-sidebar .components-panel .tab'));
-      }
+                if (colors) {
+                  editorSettings.colors = colors;
+                }
 
-      data.subscribe(function () {
-        var isOpen = data.select('core/edit-post').isEditorSidebarOpened();
-        var sidebar = data.select('core/edit-post').getActiveGeneralSidebarName();
+                if (fontSizes) {
+                  editorSettings.fontSizes = fontSizes;
+                }
 
-        if (isOpen && sidebar === 'edit-post/document') {
-          hasOpenedSidebar(sidebar);
-        } else {
-          hasClosedSidebar();
-        }
-      });
+                data.subscribe(function () {
+                  var isOpen = data.select('core/edit-post').isEditorSidebarOpened();
+                  var sidebar = data.select('core/edit-post').getActiveGeneralSidebarName();
 
-      return editPost.initializeEditor(target, 'page', 1, editorSettings);
+                  if (isOpen && sidebar === 'edit-post/document') {
+                    hasOpenedSidebar(sidebar);
+                  } else {
+                    hasClosedSidebar();
+                  }
+                });
+
+                sessionStorage.removeItem('wp-autosave-block-editor-post-1');
+                localStorage.removeItem('wp-autosave-block-editor-post-1');
+
+                _context3.next = 19;
+                return editPost.initializeEditor(target, 'page', 1, editorSettings);
+
+              case 19:
+              case 'end':
+                return _context3.stop();
+            }
+          }
+        }, _callee3, _this2);
+      }))();
     }
   };
 
