@@ -92,6 +92,5 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
   });
   dispatch('core/blocks').setCategories([category].concat(_toConsumableArray(currentCategories)));
 
-  console.log('SHOULD BE AFTER!');
   registerBlockType(category.slug + '/simple-text', _extends({ category: category.slug }, settings));
 })(Drupal, wp);

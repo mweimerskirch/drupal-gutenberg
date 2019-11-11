@@ -63,6 +63,5 @@
   const currentCategories = select('core/blocks').getCategories().filter(item => item.slug !== category.slug);
   dispatch('core/blocks').setCategories([ category, ...currentCategories ]);
 
-  console.log('SHOULD BE AFTER!');
   registerBlockType(`${category.slug}/simple-text`, { category: category.slug, ...settings });
 })(Drupal, wp);
