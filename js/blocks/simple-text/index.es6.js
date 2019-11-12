@@ -11,10 +11,12 @@
     title: __('Simple text'),
     description: __('Simple text block.'),
     icon: 'editor-textcolor',
+    // Just to avoid being shown at blocks list (inserter)
+    parent: ['core/paragraph'],
     attributes: {
       tag: {
         type: 'string',
-        default: 'h1',
+        default: 'p',
       },
       text: {
         type: 'string',
@@ -40,6 +42,7 @@
               tagName={tag}
               value={text}
               placeholder={placeholder}
+              allowedFormats={[]}
               onChange={newValue => setAttributes({ text: newValue })}
             />
           </div>
@@ -52,6 +55,7 @@
       // const CustomTag = `${tag}`;
 
       return text;
+      // return <CustomTag className={className}>{text}</CustomTag>;
     },
   };
 

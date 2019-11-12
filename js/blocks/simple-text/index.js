@@ -26,10 +26,12 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
     title: __('Simple text'),
     description: __('Simple text block.'),
     icon: 'editor-textcolor',
+
+    parent: ['core/paragraph'],
     attributes: {
       tag: {
         type: 'string',
-        default: 'h1'
+        default: 'p'
       },
       text: {
         type: 'string'
@@ -64,6 +66,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
             tagName: tag,
             value: text,
             placeholder: placeholder,
+            allowedFormats: [],
             onChange: function onChange(newValue) {
               return setAttributes({ text: newValue });
             }
