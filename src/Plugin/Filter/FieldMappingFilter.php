@@ -55,7 +55,7 @@ class FieldMappingFilter extends FilterBase implements ContainerFactoryPluginInt
 
     // $lines = explode("\n", $text);
 
-    $text = preg_replace_callback('#(<!-- .*\{.*"mappingField".*} -->)([\s\S]*?)(<!-- \/[\s\S]*?-->)#', [$this, 'renderWithoutMappingFields'], $text);
+    $text = preg_replace_callback('#((<!-- .*\{.*"mappingField".*} -->)([\s\S]*?)(<!-- \/[\s\S]*?-->)|(<!-- .*\{.*"mappingField".*} \/-->))#', [$this, 'renderWithoutMappingFields'], $text);
 
     // $text = implode("\n", $lines);
 
@@ -69,7 +69,7 @@ class FieldMappingFilter extends FilterBase implements ContainerFactoryPluginInt
     $comment_begin = $match[1];
     $comment_end = $match[3];
 
-    return $comment_begin . $comment_end;
+    return ''; // $comment_begin . $comment_end;
   }
 
   /**
