@@ -570,8 +570,13 @@ function gutenberg_entity_presave($entity) {
     preg_match_all($re, $tag, $attrs, PREG_SET_ORDER, 0);
     $attributes = json_decode($attrs[0][3], true);
 
+    // Remove line breaks
+    $re = '/\r?\n|\r/';
+    $value = $matches[0][3];
+    $value = preg_replace($re, '', $value);
+
     if (in_array($item['field'], $value_fields)) {
-      $entity->set($item['field'], $matches[0][3]);
+      $entity->set($item['field'], strip_tags($value));
     }
 
     // Set text fields
