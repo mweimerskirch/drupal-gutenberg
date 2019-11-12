@@ -9,6 +9,8 @@ const settings = {
   description: __('Section block for template use.'),
   icon: 'media-document',
   attributes: {},
+  // Just to avoid being shown at blocks list (inserter)
+  parent: ['core/paragraph'],
 
   edit({ className }) {
     return <InnerBlocks templateLock={false} />;
@@ -25,7 +27,7 @@ const settings = {
 
 const category = {
   slug: 'drupal',
-  title: __('Drupal'),
+  title: __('Drupal Blocks'),
 };
 
 const currentCategories = select('core/blocks').getCategories().filter(item => item.slug !== category.slug);

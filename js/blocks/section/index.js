@@ -26,6 +26,8 @@ var settings = {
   icon: 'media-document',
   attributes: {},
 
+  parent: ['core/paragraph'],
+
   edit: function edit(_ref) {
     var className = _ref.className;
 
@@ -44,7 +46,7 @@ var settings = {
 
 var category = {
   slug: 'drupal',
-  title: __('Drupal')
+  title: __('Drupal Blocks')
 };
 
 var currentCategories = select('core/blocks').getCategories().filter(function (item) {

@@ -61,7 +61,7 @@
 
   const category = {
     slug: 'drupal',
-    title: __('Drupal'),
+    title: __('Drupal Blocks'),
   };
 
   const currentCategories = select('core/blocks').getCategories().filter(item => item.slug !== category.slug);

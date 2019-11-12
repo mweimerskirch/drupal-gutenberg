@@ -87,7 +87,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
   var category = {
     slug: 'drupal',
-    title: __('Drupal')
+    title: __('Drupal Blocks')
   };
 
   var currentCategories = select('core/blocks').getCategories().filter(function (item) {
