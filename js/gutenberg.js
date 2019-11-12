@@ -297,13 +297,9 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                   }
                 });
 
-                setTimeout(function () {
-                  data.dispatch('core/block-editor').setTemplateValidity(true);
-                }, 0);
-
                 return _context2.abrupt('return', true);
 
-              case 50:
+              case 49:
               case 'end':
                 return _context2.stop();
             }
@@ -422,6 +418,10 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                     hasOpenedSidebar(sidebar);
                   } else {
                     hasClosedSidebar();
+                  }
+
+                  if (!data.select('core/block-editor').isValidTemplate()) {
+                    data.dispatch('core/block-editor').setTemplateValidity(true);
                   }
                 });
 

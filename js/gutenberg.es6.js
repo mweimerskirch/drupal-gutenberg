@@ -370,14 +370,6 @@
         }
       });
 
-      // Clear template validation.
-      // see https://github.com/WordPress/gutenberg/issues/11681
-      // Wrapped on a setTimeout because initializeEditor isn't really a
-      // full async function, yet.
-      setTimeout(() => {
-        data.dispatch('core/block-editor').setTemplateValidity(true);
-      }, 0);
-
       return true;
     },
 
@@ -556,6 +548,13 @@
           hasOpenedSidebar(sidebar);
         } else {
           hasClosedSidebar();
+        }
+
+        // Clear template validation.
+        // Force template validity to true.
+        if (!data.select('core/block-editor').isValidTemplate()) {
+          // see https://github.com/WordPress/gutenberg/issues/11681
+          data.dispatch('core/block-editor').setTemplateValidity(true);
         }
       });
 
