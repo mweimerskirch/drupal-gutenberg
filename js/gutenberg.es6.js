@@ -97,8 +97,6 @@
       //   render: AdditionalFieldsPluginSidebar,
       // });
 
-      await registerDrupalStore(data);
-
       // Add 'mapping field' and 'mapping attribute' attributes to all blocks.
       await addFilter(
         'blocks.registerBlockType',
@@ -117,6 +115,8 @@
           return settings;
         },
       );
+
+      await registerDrupalStore(data);
 
       await registerDrupalBlocks(contentType);
       await registerDrupalMedia();

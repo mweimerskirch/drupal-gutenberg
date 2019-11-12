@@ -70,10 +70,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                 unregisterBlockType = blocks.unregisterBlockType, registerBlockType = blocks.registerBlockType, getBlockType = blocks.getBlockType;
                 registerDrupalStore = DrupalGutenberg.registerDrupalStore, registerDrupalBlocks = DrupalGutenberg.registerDrupalBlocks, registerDrupalMedia = DrupalGutenberg.registerDrupalMedia;
                 _context2.next = 11;
-                return registerDrupalStore(data);
-
-              case 11:
-                _context2.next = 13;
                 return addFilter('blocks.registerBlockType', 'drupalgutenberg/custom-attributes', function (settings) {
                   settings.attributes = Object.assign(settings.attributes, {
                     mappingField: {
@@ -87,6 +83,10 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                   });
                   return settings;
                 });
+
+              case 11:
+                _context2.next = 13;
+                return registerDrupalStore(data);
 
               case 13:
                 _context2.next = 15;
