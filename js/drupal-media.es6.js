@@ -53,6 +53,10 @@
           type: 'boolean',
           default: false,
         },
+        allowedTypes: {
+          type: 'array',
+          default: ['image', 'video', 'audio', 'application'],
+        },
       },
       edit({ attributes, className, setAttributes }) {
         return (

@@ -62,6 +62,10 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
         lockViewMode: {
           type: 'boolean',
           default: false
+        },
+        allowedTypes: {
+          type: 'array',
+          default: ['image', 'video', 'audio', 'application']
         }
       },
       edit: function edit(_ref) {

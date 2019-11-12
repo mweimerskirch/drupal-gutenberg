@@ -146,7 +146,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
         }
 
         var content = isMediaLibraryEnabled ? React.createElement(MediaUpload, { onSelect: this.insertMedia,
-          allowedTypes: ['image', 'video', 'audio', 'application'],
+          allowedTypes: attributes.allowedTypes,
           multiple: false,
           handlesMediaEntity: true }) : React.createElement(
           Fragment,
