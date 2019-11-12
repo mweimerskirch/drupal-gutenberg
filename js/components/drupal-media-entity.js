@@ -23,9 +23,11 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
       FormFileUpload = components.FormFileUpload,
       SelectControl = components.SelectControl,
       IconButton = components.IconButton,
-      PanelBody = components.PanelBody;
+      PanelBody = components.PanelBody,
+      Toolbar = components.Toolbar;
   var BlockIcon = blockEditor.BlockIcon,
       MediaUpload = blockEditor.MediaUpload,
+      BlockControls = blockEditor.BlockControls,
       InspectorControls = blockEditor.InspectorControls;
   var Component = element.Component,
       Fragment = element.Fragment;
@@ -97,7 +99,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
             isMediaLibraryEnabled = _props2.isMediaLibraryEnabled,
             mediaContent = _props2.mediaContent,
             mediaViewModes = _props2.mediaViewModes,
-            attributes = _props2.attributes;
+            attributes = _props2.attributes,
+            setAttributes = _props2.setAttributes;
 
         var instructions = __('Upload a media file or pick one from your media library.');
         var placeholderClassName = ['block-editor-media-placeholder', 'editor-media-placeholder', className].join(' ');
@@ -106,7 +109,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
           var inspectorControls = React.createElement(
             InspectorControls,
             null,
-            React.createElement(
+            !attributes.lockViewMode && React.createElement(
               PanelBody,
               { title: __('Media entity settings') },
               React.createElement(SelectControl, { label: __('View mode'),
@@ -125,7 +128,20 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
             Fragment,
             null,
             React.createElement('div', { dangerouslySetInnerHTML: { __html: html } }),
-            inspectorControls
+            inspectorControls,
+            React.createElement(
+              BlockControls,
+              null,
+              React.createElement(Toolbar, {
+                controls: [{
+                  icon: 'no',
+                  title: __('Clear media'),
+                  onClick: function onClick() {
+                    return setAttributes({ mediaEntityIds: [] });
+                  }
+                }]
+              })
+            )
           );
         }
 
@@ -154,7 +170,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
         return React.createElement(
           Placeholder,
-          { icon: React.createElement(BlockIcon, { icon: DrupalIcon }),
+          { icon: React.createElement(BlockIcon, { icon: 'admin-media' }),
             label: __('Drupal Media Entity'),
             instructions: instructions,
             className: placeholderClassName },

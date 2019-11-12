@@ -44,7 +44,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
     blocks.registerBlockType(blockId, {
       title: Drupal.t('Drupal Media Entity'),
-      icon: DrupalIcon,
+      icon: 'admin-media',
       category: 'drupal_media',
       supports: {
         align: false,
@@ -58,6 +58,10 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
         viewMode: {
           type: 'string',
           default: 'default'
+        },
+        lockViewMode: {
+          type: 'boolean',
+          default: false
         }
       },
       edit: function edit(_ref) {

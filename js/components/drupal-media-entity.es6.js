@@ -1,8 +1,8 @@
 /* eslint func-names: ["error", "never"] */
 (function (wp, $, Drupal, DrupalGutenberg, drupalSettings) {
   const {element, blockEditor, components, data} = wp;
-  const {Placeholder, Button, FormFileUpload, SelectControl, IconButton, PanelBody} = components;
-  const {BlockIcon, MediaUpload, InspectorControls} = blockEditor;
+  const {Placeholder, Button, FormFileUpload, SelectControl, IconButton, PanelBody, Toolbar} = components;
+  const {BlockIcon, MediaUpload, BlockControls, InspectorControls} = blockEditor;
   const {Component, Fragment} = element;
   const {DrupalIcon} = DrupalGutenberg.Components;
   const __ = Drupal.t;
@@ -57,6 +57,7 @@
         mediaContent,
         mediaViewModes,
         attributes,
+        setAttributes,
       } = this.props;
       const instructions = __('Upload a media file or pick one from your media library.');
       const placeholderClassName = [
@@ -68,12 +69,14 @@
       if (Array.isArray(mediaViewModes) && mediaViewModes.length) {
         const inspectorControls = (
           <InspectorControls>
-            <PanelBody title={__('Media entity settings')}>
-              <SelectControl label={__('View mode')}
-                             value={attributes.viewMode}
-                             options={mediaViewModes}
-                             onChange={this.changeViewMode}/>
-            </PanelBody>
+            {!attributes.lockViewMode && (
+              <PanelBody title={__('Media entity settings')}>
+                <SelectControl label={__('View mode')}
+                              value={attributes.viewMode}
+                              options={mediaViewModes}
+                              onChange={this.changeViewMode}/>
+              </PanelBody>
+            )}
           </InspectorControls>
         );
 
@@ -86,6 +89,18 @@
           <Fragment>
             <div dangerouslySetInnerHTML={{__html: html}}/>
             {inspectorControls}
+            <BlockControls>
+              <Toolbar
+                controls={[
+                  {
+                    icon: 'no',
+                    title: __( 'Clear media' ),
+                    onClick: () => setAttributes( { mediaEntityIds: [] } ),
+                  },
+                ]}
+              />
+            </BlockControls>
+
           </Fragment>
         );
       }
@@ -112,7 +127,7 @@
         );
 
       return (
-        <Placeholder icon={<BlockIcon icon={DrupalIcon}/>}
+        <Placeholder icon={<BlockIcon icon="admin-media"/>}
                      label={__('Drupal Media Entity')}
                      instructions={instructions}
                      className={placeholderClassName}>

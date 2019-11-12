@@ -15,6 +15,7 @@ use Symfony\Component\Yaml\Yaml;
 use Drupal\Core\Discovery\YamlDiscovery;
 use Drupal\image\Entity\ImageStyle;
 use Drupal\gutenberg\Controller\UtilsController;
+use Drupal\Component\Utility\Xss;
 
 /**
  * Implements hook_form_alter().
@@ -510,6 +511,7 @@ function gutenberg_entity_presave($entity) {
   // gutenberg text format
   // TODO: We already have this on node_edit_form_alter,
   //       let's move it to a function.
+  $value_fields = ['title'];
   $text_fields = [];
   $file_fields = []; // used for media
 
@@ -522,15 +524,24 @@ function gutenberg_entity_presave($entity) {
       ->getFieldStorageDefinition()
       ->getPropertyDefinitions();
 
+    if (in_array('value', array_keys($field_properties))) {
+      $value_fields[] = $value;
+    }
+  
     // Check for "rich-text" fields
     if (in_array('format', array_keys($field_properties))) {
       $text_fields[] = $value;
     }
 
-    // Check for images
     if (isset($field_properties['entity'])) {
       $settings = $definition->getSettings();
+
+      // Check for images/files
       if ($settings['target_type'] === 'file') {
+        $file_fields[] = $value;
+      }
+
+      if ($settings['target_type'] === 'media') {
         $file_fields[] = $value;
       }
     }
@@ -544,7 +555,8 @@ function gutenberg_entity_presave($entity) {
   // iterate over all mapped fields and set its values
   $mapped_fields = _gutenberg_get_mapped_fields(json_decode($config->get($node_type . '_template')));
   foreach ($mapped_fields as $item) {
-    $re = '/(<!-- .*?\{.*"mappingField":"' . $item['field']  . '".*} -->)([\s\S]*?)(<!-- \/[\s\S]*?-->|\/-->)/m';
+    $re = '/((<!-- .*?\{.*"mappingField":"' . $item['field'] . '".*} -->)([\s\S]*?)(<!-- \/[\s\S]*?-->|\/-->)|(<!-- .*?\{.*"mappingField":"' . $item['field'] . '".*} \/-->))/m';
+    // $re = '/((<!-- .*?\{.*"mappingField":"' . $item['field'] . '".*} -->)([\s\S]*?)(<!-- \/[\s\S]*?-->)|(<!-- .*?\{.*"mappingField":"' . $item['field']  . '".*} -->)([\s\S]*?)(<!-- \/[\s\S]*?\/-->))/m';
     // $re = '/(<!--[\s\S]+?\{[\s\S]+?"mappingField":"' . $item['field']  . '"[\s\S]+?} -->)([\s\S]+?)(<!-- \/[\s\S]+?-->|\/-->)/m';
     // matches:
     // 0: all block
@@ -552,19 +564,24 @@ function gutenberg_entity_presave($entity) {
     // 2: content
     // 3: closing block comment tag
     preg_match_all($re, $str, $matches, PREG_SET_ORDER, 0);
-
     // get block attributes
-    $re = '/<!-- .*?({[\s\S]*}) -->/m';
-    preg_match_all($re, $matches[0][1], $attrs, PREG_SET_ORDER, 0);
-    $attributes = json_decode($attrs[0][1], true);
-    
+    $re = '/((<!-- .*?({[\s\S]*?}).*-->)|(<!-- .*?({[\s\S]*?}).*\/-->))/m';
+    $tag = $matches[0][2] !== '' ? $matches[0][2] : $matches[0][1];
+    preg_match_all($re, $tag, $attrs, PREG_SET_ORDER, 0);
+    $attributes = json_decode($attrs[0][3], true);
+
+    if (in_array($item['field'], $value_fields)) {
+      $entity->set($item['field'], $matches[0][3]);
+    }
+
     // Set text fields
     if (in_array($item['field'], $text_fields)) {
-      $entity->set($item['field'], $matches[0][2]);
+      $entity->set($item['field'], $matches[0][3]);
     }
 
     if (in_array($item['field'], $file_fields)) {
-      $entity->set($item['field'], ['target_id' => $attributes['id']]);
+      $value = is_array($attributes[$item['attribute']]) ? $attributes[$item['attribute']][0] : $attributes[$item['attribute']];
+      $entity->set($item['field'], ['target_id' => $value]);
     }
   }
 }

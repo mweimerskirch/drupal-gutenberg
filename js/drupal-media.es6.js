@@ -34,7 +34,7 @@
 
     blocks.registerBlockType(blockId, {
       title: Drupal.t('Drupal Media Entity'),
-      icon: DrupalIcon,
+      icon: 'admin-media',
       category: 'drupal_media',
       supports: {
         align: false,
@@ -48,6 +48,10 @@
         viewMode: {
           type: 'string',
           default: 'default',
+        },
+        lockViewMode: {
+          type: 'boolean',
+          default: false,
         },
       },
       edit({ attributes, className, setAttributes }) {
