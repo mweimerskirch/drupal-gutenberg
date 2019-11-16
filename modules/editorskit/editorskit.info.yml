@@ -1,0 +1,7 @@
+name: EditorsKit
+type: module
+description: Gutenberg Page Building Toolkit – EditorsKit
+package: "Gutenberg (Experimental)"
+core: 8.x
+dependencies:
+  - gutenberg
