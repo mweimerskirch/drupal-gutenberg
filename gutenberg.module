@@ -376,6 +376,11 @@ function gutenberg_form_node_form_alter(&$form, FormStateInterface $form_state) 
   // Move status to Published/meta pane.
   $form['status']['#group'] = 'meta';
 
+  // Move langcode to Published/meta pane.
+  if (isset($form['langcode'])) {
+    $form['langcode']['#group'] = 'meta';
+  }
+
   $excluded_fields = [
     'status',
     'title',
