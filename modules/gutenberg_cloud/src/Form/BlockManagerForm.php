@@ -70,7 +70,7 @@ class BlockManagerForm extends ConfigFormBase {
   public static function create(ContainerInterface $container) {
     return new static(
       $container->get('messenger'),
-      $container->get('guternberg_cloud.block_manager'),
+      $container->get('gutenberg_cloud.block_manager'),
       $container->get('library.discovery')
     );
   }
