@@ -198,6 +198,7 @@ block-directory:
     - gutenberg/data
     - gutenberg/element
     - gutenberg/i18n
+    - gutenberg/plugins
     - gutenberg/polyfill
 block-editor:
   js:
@@ -253,6 +254,7 @@ block-library:
     - gutenberg/deprecated
     - gutenberg/editor
     - gutenberg/element
+    - gutenberg/escape-html
     - gutenberg/i18n
     - gutenberg/is-shallow-equal
     - gutenberg/keycodes
@@ -337,6 +339,7 @@ core-data:
     - gutenberg/api-fetch
     - gutenberg/data
     - gutenberg/deprecated
+    - gutenberg/element
     - gutenberg/is-shallow-equal
     - gutenberg/polyfill
     - gutenberg/url
@@ -437,7 +440,6 @@ edit-widgets:
     - gutenberg/components
     - gutenberg/compose
     - gutenberg/data
-    - gutenberg/data-controls
     - gutenberg/element
     - gutenberg/hooks
     - gutenberg/i18n
@@ -456,7 +458,6 @@ editor:
     - gutenberg/react
     - gutenberg/api-fetch
     - gutenberg/autop
-    - gutenberg/block-directory
     - gutenberg/block-editor
     - gutenberg/blocks
     - gutenberg/components
@@ -470,7 +471,6 @@ editor:
     - gutenberg/hooks
     - gutenberg/html-entities
     - gutenberg/i18n
-    - gutenberg/is-shallow-equal
     - gutenberg/keycodes
     - gutenberg/media-utils
     - gutenberg/notices
@@ -533,9 +533,8 @@ html-entities:
     - gutenberg/polyfill
 i18n:
   js:
-    # vendor/gutenberg/i18n/index.js: {  }
-    js/i18n.js: {   }
-    js/drupal-gutenberg-translations.js: {   }
+    js/i18n.js: {  }
+    js/drupal-gutenberg-translations.js: {  }
   css:
     theme: {  }
   dependencies:
