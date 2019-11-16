@@ -21,10 +21,10 @@ class CloudBlock extends CloudBlockBase {
    *   Cloud block structure.
    */
   public function __construct($block) {
-    try {
+    if (is_object($block)) {
       $this->mapFromBlock($block);
     }
-    catch (\TypeError $e) {
+    else {
       parent::__construct($block);
     }
   }
