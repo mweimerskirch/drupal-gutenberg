@@ -73,5 +73,13 @@ foreach ($packages as $package) {
   }
 }
 
+// Customize i18n package sources
+if (isset($yaml['i18n'])) {
+  $yaml['i18n']['js'] = [
+    'js/i18n.js' => [],
+    'js/drupal-gutenberg-translations.js' => [],
+  ];
+}
+
 // print_r(Yaml::dump($yaml, 4, 2, false, true));
 file_put_contents('../gutenberg.libraries.yml', Yaml::dump($yaml, 4, 2, false, true));
