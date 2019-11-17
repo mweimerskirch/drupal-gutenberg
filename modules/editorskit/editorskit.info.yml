@@ -1,6 +1,6 @@
 name: EditorsKit
 type: module
-description: Gutenberg Page Building Toolkit – EditorsKit
+description: "Gutenberg Page Building Toolkit – EditorsKit<br/><em>This module is experimental, that means it is subject to non-backward compatible changes or removal in any future version.</em>"
 package: "Gutenberg (Experimental)"
 core: 8.x
 dependencies:
