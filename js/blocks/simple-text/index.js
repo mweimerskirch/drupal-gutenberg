@@ -66,6 +66,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
             tagName: tag,
             value: text,
             placeholder: placeholder,
+            keepPlaceholderOnFocus: true,
             allowedFormats: [],
             onChange: function onChange(newValue) {
               return setAttributes({ text: newValue });

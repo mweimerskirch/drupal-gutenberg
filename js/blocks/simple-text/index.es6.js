@@ -42,6 +42,7 @@
               tagName={tag}
               value={text}
               placeholder={placeholder}
+              keepPlaceholderOnFocus={true}
               allowedFormats={[]}
               onChange={newValue => setAttributes({ text: newValue })}
             />
