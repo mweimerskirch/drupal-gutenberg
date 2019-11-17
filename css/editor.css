@@ -333,10 +333,6 @@ body .gutenberg__editor .edit-post-layout .edit-post-header .gutenberg-header-se
   display: none;
 }
 
-.edit-post-sidebar .field--name-title {
-  padding: 0 10px;
-}
-
 .edit-post-sidebar .editor-block-inspector__card {
   border-bottom: 1px solid #bfbfbf;
 }
