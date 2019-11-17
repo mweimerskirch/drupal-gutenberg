@@ -15,7 +15,6 @@ use Symfony\Component\Yaml\Yaml;
 use Drupal\Core\Discovery\YamlDiscovery;
 use Drupal\image\Entity\ImageStyle;
 use Drupal\gutenberg\Controller\UtilsController;
-use Drupal\Component\Utility\Xss;
 
 /**
  * Implements hook_form_alter().
@@ -535,7 +534,7 @@ function gutenberg_entity_presave($entity) {
     if (in_array('value', array_keys($field_properties))) {
       $value_fields[] = $value;
     }
-  
+
     // Check for "rich-text" fields
     if (in_array('format', array_keys($field_properties))) {
       $text_fields[] = $value;
@@ -600,7 +599,7 @@ function gutenberg_entity_presave($entity) {
 }
 
 /**
- * 
+ * Gets all mapped fields on the template (recursive).
  */
 function _gutenberg_get_mapped_fields($template, &$result = []) {
   foreach ($template as $key => $block) {
@@ -622,7 +621,7 @@ function _gutenberg_get_mapped_fields($template, &$result = []) {
 }
 
 /**
- *
+ * Gets default theme settings.
  */
 function _gutenberg_get_default_theme_settings() {
   $settings = &drupal_static(__FUNCTION__);
@@ -642,7 +641,7 @@ function _gutenberg_get_default_theme_settings() {
 }
 
 /**
- *
+ * Gets settings from all modules.
  */
 function _gutenberg_get_all_modules_settings() {
   $settings = &drupal_static(__FUNCTION__);
