@@ -421,6 +421,10 @@ body .gutenberg__editor .edit-post-layout .edit-post-header .gutenberg-header-se
   .edit-post-layout__content .components-editor-notices__snackbar {
     left: 0;
   }
+
+  .edit-post-layout__footer {
+    left: 0;
+  }
 }
 
 #gutenberg-loading {
