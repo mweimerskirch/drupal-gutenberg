@@ -103,7 +103,6 @@ edit-node:
     - core/drupalSettings
     - core/drupal.debounce
     - core/drupal.displace
-    - media_library/ui
     - editor/drupal.editor
     - gutenberg/init
     - gutenberg/url
