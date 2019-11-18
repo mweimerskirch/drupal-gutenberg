@@ -602,6 +602,10 @@ function gutenberg_entity_presave($entity) {
  * Gets all mapped fields on the template (recursive).
  */
 function _gutenberg_get_mapped_fields($template, &$result = []) {
+  if (empty($template)) {
+    return [];
+  }
+
   foreach ($template as $key => $block) {
     if (isset($block[1]) && isset($block[1]->mappingField)) {
       $item = [];
