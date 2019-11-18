@@ -574,7 +574,7 @@ function gutenberg_entity_presave($entity) {
     // 3: closing block comment tag
     preg_match_all($re, $str, $matches, PREG_SET_ORDER, 0);
     // get block attributes
-    $re = '/((<!-- .*?({[\s\S]*?}).*-->)|(<!-- .*?({[\s\S]*?}).*\/-->))/m';
+    $re = '/((<!-- .*?({[\s\S]*}).*-->)|(<!-- .*?({[\s\S]*}).*\/-->))/m';
     $tag = $matches[0][2] !== '' ? $matches[0][2] : $matches[0][1];
     preg_match_all($re, $tag, $attrs, PREG_SET_ORDER, 0);
     $attributes = json_decode($attrs[0][3], true);
