@@ -58,12 +58,13 @@
           default: ['image', 'video', 'audio', 'application'],
         },
       },
-      edit({ attributes, className, setAttributes }) {
+      edit({ attributes, className, setAttributes, isSelected }) {
         return (
           <Fragment>
             <DrupalMediaEntity attributes={attributes}
                                className={className}
                                setAttributes={setAttributes}
+                               isSelected={isSelected}
                                isMediaLibraryEnabled={isMediaLibraryEnabled}/>
           </Fragment>
         );

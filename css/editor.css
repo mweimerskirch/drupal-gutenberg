@@ -188,6 +188,21 @@ body .gutenberg__editor .edit-post-layout .components-popover {
   top: 56px !important;
 }
 
+.media-entity-search-input {
+  margin: 0 !important;
+}
+
+.media-entity-search-input input {
+  padding: 0 4px !important;
+  line-height: 28px !important;
+}
+
+@media (min-width: 600px) {
+  .media-entity-search-input input {
+    width: 240px !important;
+  }
+}
+
 .editor-block-types-list__item-title {
   padding: 4px 2px;
   min-height: 68px;
@@ -421,7 +436,6 @@ body .gutenberg__editor .edit-post-layout .edit-post-header .gutenberg-header-se
   .edit-post-layout__content .components-editor-notices__snackbar {
     left: 0;
   }
-
   .edit-post-layout__footer {
     left: 0;
   }

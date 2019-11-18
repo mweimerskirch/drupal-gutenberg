@@ -71,7 +71,8 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       edit: function edit(_ref) {
         var attributes = _ref.attributes,
             className = _ref.className,
-            setAttributes = _ref.setAttributes;
+            setAttributes = _ref.setAttributes,
+            isSelected = _ref.isSelected;
 
         return React.createElement(
           Fragment,
@@ -79,6 +80,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
           React.createElement(DrupalMediaEntity, { attributes: attributes,
             className: className,
             setAttributes: setAttributes,
+            isSelected: isSelected,
             isMediaLibraryEnabled: isMediaLibraryEnabled })
         );
       },

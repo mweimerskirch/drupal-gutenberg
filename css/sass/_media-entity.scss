@@ -1,0 +1,14 @@
+.media-entity-search-input {
+  margin: 0 !important;
+
+  input {
+    padding: 0 4px !important;
+    line-height: 28px !important;
+  }
+
+  @media (min-width: 600px) {
+    input {
+      width: 240px !important;
+    }
+  }
+}

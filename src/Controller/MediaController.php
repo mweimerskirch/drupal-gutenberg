@@ -238,7 +238,7 @@ class MediaController extends ControllerBase {
    */
   public function autocomplete(Request $request) {
     return new JsonResponse(
-      $this->mediaService->getMediaEntityAutoCompleteData($request->get('filename', ''))
+      $this->mediaService->getMediaEntityAutoCompleteData($request->get('search', ''))
     );
   }
 

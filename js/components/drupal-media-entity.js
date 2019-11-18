@@ -24,11 +24,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
       SelectControl = components.SelectControl,
       IconButton = components.IconButton,
       PanelBody = components.PanelBody,
-      Toolbar = components.Toolbar;
+      Toolbar = components.Toolbar,
+      BaseControl = components.BaseControl;
   var BlockIcon = blockEditor.BlockIcon,
       MediaUpload = blockEditor.MediaUpload,
       BlockControls = blockEditor.BlockControls,
-      InspectorControls = blockEditor.InspectorControls;
+      InspectorControls = blockEditor.InspectorControls,
+      URLInput = blockEditor.URLInput;
   var Component = element.Component,
       Fragment = element.Fragment;
   var DrupalIcon = DrupalGutenberg.Components.DrupalIcon;
@@ -54,20 +56,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
     }
 
     _createClass(DrupalMediaEntity, [{
-      key: 'insertMedia',
-      value: function insertMedia(mediaEntityId) {
-        this.props.setAttributes({
-          mediaEntityIds: [mediaEntityId]
-        });
-      }
-    }, {
-      key: 'changeViewMode',
-      value: function changeViewMode(viewMode) {
-        this.props.setAttributes({
-          viewMode: viewMode
-        });
-      }
-    }, {
       key: 'onUpload',
       value: function onUpload(event) {
         var _this2 = this;
@@ -90,6 +78,33 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
         });
       }
     }, {
+      key: 'changeViewMode',
+      value: function changeViewMode(viewMode) {
+        var setAttributes = this.props.setAttributes;
+
+        setAttributes({
+          viewMode: viewMode
+        });
+      }
+    }, {
+      key: 'insertMedia',
+      value: function insertMedia(mediaEntityId) {
+        var setAttributes = this.props.setAttributes;
+
+
+        if (isNaN(mediaEntityId)) {
+          var regex = /\((\d*)\)$/;
+          var match = regex.exec(mediaEntityId);
+          mediaEntityId = match[1];
+        }
+
+        setAttributes({
+          mediaEntityIds: [mediaEntityId]
+        });
+
+        this.setState({ value: '' });
+      }
+    }, {
       key: 'render',
       value: function render() {
         var _this3 = this;
@@ -100,7 +115,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
             mediaContent = _props2.mediaContent,
             mediaViewModes = _props2.mediaViewModes,
             attributes = _props2.attributes,
-            setAttributes = _props2.setAttributes;
+            setAttributes = _props2.setAttributes,
+            isSelected = _props2.isSelected;
+        var value = this.state.value;
+
 
         var instructions = __('Upload a media file or pick one from your media library.');
         var placeholderClassName = ['block-editor-media-placeholder', 'editor-media-placeholder', className].join(' ');
@@ -112,10 +130,12 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
             !attributes.lockViewMode && React.createElement(
               PanelBody,
               { title: __('Media entity settings') },
-              React.createElement(SelectControl, { label: __('View mode'),
+              React.createElement(SelectControl, {
+                label: __('View mode'),
                 value: attributes.viewMode,
                 options: mediaViewModes,
-                onChange: this.changeViewMode })
+                onChange: this.changeViewMode
+              })
             )
           );
 
@@ -145,37 +165,68 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
           );
         }
 
-        var content = isMediaLibraryEnabled ? React.createElement(MediaUpload, { onSelect: this.insertMedia,
+        var fetchMedia = function fetchMedia(search) {
+          return new Promise(function (resolve) {
+            fetch(drupalSettings.path.baseUrl + 'editor/media/autocomplete?search=' + search).then(function (response) {
+              return response.json();
+            }).then(function (json) {
+              resolve(json);
+            });
+          });
+        };
+
+        var processMediaResult = function processMediaResult(url, post) {
+          _this3.setState({ value: url });
+        };
+
+        var linkId = 'search_media_0001';
+
+        var content = isMediaLibraryEnabled ? React.createElement(MediaUpload, {
+          onSelect: this.insertMedia,
           allowedTypes: attributes.allowedTypes,
           multiple: false,
-          handlesMediaEntity: true }) : React.createElement(
+          handlesMediaEntity: true
+        }) : React.createElement(
           Fragment,
           null,
-          React.createElement('input', { type: 'text',
-            value: this.state.value,
-            onChange: function onChange(e) {
-              return _this3.setState({ value: e.target.value });
-            } }),
+          React.createElement(URLInput, {
+            className: 'media-entity-search-input',
+            value: value,
+            placeholder: __('Type media ID or text to search media'),
+
+            autoFocus: false,
+
+            onChange: processMediaResult,
+            disableSuggestions: !isSelected,
+            id: linkId,
+            hasBorder: true,
+            __experimentalFetchLinkSuggestions: fetchMedia
+          }),
           React.createElement(
             Button,
-            { isLarge: true,
+            {
+              isLarge: true,
               isPrimary: true,
               title: __('Insert'),
               onClick: function onClick() {
-                return _this3.insertMedia(_this3.state.value);
-              } },
+                return _this3.insertMedia(value);
+              }
+            },
             __('Insert')
           )
         );
 
         return React.createElement(
           Placeholder,
-          { icon: React.createElement(BlockIcon, { icon: 'admin-media' }),
+          {
+            icon: React.createElement(BlockIcon, { icon: 'admin-media' }),
             label: __('Drupal Media Entity'),
             instructions: instructions,
-            className: placeholderClassName },
-          React.createElement(FormFileUpload, { onChange: this.onUpload,
-            accept: "image/*,video/*,audio/*,application/*",
+            className: placeholderClassName
+          },
+          React.createElement(FormFileUpload, {
+            onChange: this.onUpload,
+            accept: 'image/*,video/*,audio/*,application/*',
             multiple: false,
             render: function render(_ref) {
               var openFileDialog = _ref.openFileDialog;
@@ -185,10 +236,12 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                 null,
                 React.createElement(
                   IconButton,
-                  { isLarge: true,
+                  {
+                    isLarge: true,
                     onClick: openFileDialog,
                     className: ['block-editor-media-placeholder__button', 'editor-media-placeholder__button', 'block-editor-media-placeholder__upload-button'].join(' '),
-                    icon: 'upload' },
+                    icon: 'upload'
+                  },
                   __('Upload')
                 )
               );

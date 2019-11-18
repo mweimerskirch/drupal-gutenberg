@@ -317,15 +317,19 @@ class MediaService {
   /**
    * Get media entity results for autocomplete endpoint.
    *
-   * @param \Drupal\gutenberg\Service\string $filename
-   *   Filename to search.
+   * @param \Drupal\gutenberg\Service\string $search
+   *   Text to search. Can be an ID.
    *
    * @return array
    */
-  public function getMediaEntityAutoCompleteData(string $filename) {
+  public function getMediaEntityAutoCompleteData(string $search) {
     try {
       $query = $this->entityTypeManager->getStorage('media')->getQuery();
-      $query->condition('name', $filename, 'CONTAINS');
+      if (is_numeric($search)) {
+        $query->condition('id', $search);
+      } else {
+        $query->condition('name', $search, 'CONTAINS');
+      }
       $query->condition('uid', \Drupal::currentUser()->id());
       $query->sort('created', 'DESC');
       $media_ids = $query->execute();
@@ -334,8 +338,9 @@ class MediaService {
       return array_values(
         array_map(function (MediaInterface $media_entity) {
           return [
-            'name' => $media_entity->getName(),
-            'media_id' => $media_entity->id(),
+            'title' => $media_entity->getName(),
+            'url' => $media_entity->getName() . ' (' . $media_entity->id() . ')',
+            'id' => $media_entity->id(),
             'media_type' => $media_entity->bundle(),
             'file_id' => $media_entity->getSource()->getSourceFieldValue($media_entity),
           ];
