@@ -141,7 +141,7 @@ function gutenberg_form_alter(&$form, FormStateInterface $form_state, $form_id) 
 
     // Get blocks definition
     // $definitions = $blockManager->getDefinitionsForContexts($contextRepository->getAvailableContexts());
-    $definitions = $blockManager->getDefinitions($contextRepository->getAvailableContexts());
+    $definitions = $blockManager->getFilteredDefinitions('block_ui', $contextRepository->getAvailableContexts());
     $groups = $blockManager->getGroupedDefinitions($definitions);
 
     $form['gutenberg']['categories_drupal'] = [
