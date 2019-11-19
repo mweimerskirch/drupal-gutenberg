@@ -33,7 +33,11 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
           return React.createElement(
             'div',
             null,
-            React.createElement('div', { className: this.props.className, dangerouslySetInnerHTML: { __html: this.props.blockContent.html } })
+            React.createElement('div', {
+              className: this.props.className,
+
+              dangerouslySetInnerHTML: { __html: this.props.blockContent.html }
+            })
           );
         }
 
@@ -64,6 +68,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
       formElements.forEach(function (element) {
         element.setAttribute('readonly', true);
         element.setAttribute('required', false);
+        element.setAttribute('disabled', true);
       });
     }
 

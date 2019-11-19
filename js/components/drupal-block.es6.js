@@ -8,12 +8,16 @@
       if (this.props.blockContent) {
         return (
           <div>
-            <div className={this.props.className} dangerouslySetInnerHTML={{__html: this.props.blockContent.html}} />
+            <div
+              className={this.props.className}
+              // eslint-disable-next-line react/no-danger
+              dangerouslySetInnerHTML={{ __html: this.props.blockContent.html }}
+            />
           </div>
         );
       }
 
-      return(
+      return (
         <div className="loading-drupal-block">{Drupal.t('Loading')}...</div>
       );
     }
@@ -27,15 +31,18 @@
 
     if (block && block.html) {
       node.innerHTML = block.html;
-      const formElements = node.querySelectorAll('input, select, button, textarea');
+      const formElements = node.querySelectorAll(
+        'input, select, button, textarea',
+      );
       formElements.forEach(element => {
         element.setAttribute('readonly', true);
         element.setAttribute('required', false);
+        element.setAttribute('disabled', true);
       });
     }
 
     return {
-      blockContent: { html: node.innerHTML }//getBlock(id), // `/editor/blocks/load/${blockId}`
+      blockContent: { html: node.innerHTML }, // getBlock(id), // `/editor/blocks/load/${blockId}`
     };
   })(DrupalBlock);
 
