@@ -238,7 +238,7 @@
     const defaultData = {
       mediaContent: {},
       mediaViewModes: [],
-      mediaUpload: getSettings().__experimentalMediaUpload,
+      mediaUpload: getSettings().mediaUpload,
     };
 
     if (!mediaEntityIds.length) {
@@ -286,7 +286,7 @@
     return {
       mediaContent: mediaEntity,
       mediaViewModes,
-      mediaUpload: getSettings().__experimentalMediaUpload,
+      mediaUpload: getSettings().mediaUpload,
     };
   })(DrupalMediaEntity);
 

@@ -269,7 +269,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
     var defaultData = {
       mediaContent: {},
       mediaViewModes: [],
-      mediaUpload: getSettings().__experimentalMediaUpload
+      mediaUpload: getSettings().mediaUpload
     };
 
     if (!mediaEntityIds.length) {
@@ -313,7 +313,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
     return {
       mediaContent: mediaEntity,
       mediaViewModes: mediaViewModes,
-      mediaUpload: getSettings().__experimentalMediaUpload
+      mediaUpload: getSettings().mediaUpload
     };
   })(DrupalMediaEntity);
 
