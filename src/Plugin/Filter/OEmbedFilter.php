@@ -37,7 +37,7 @@ class OEmbedFilter extends FilterBase {
 
     $lines = explode("\n", $text);
 
-    $lines = preg_replace_callback('#^(<figure.*?>)?\s*(https?://\S+?)\s*(</figure>)?$#', [$this, 'embed'], $lines);
+    $lines = preg_replace_callback('#^(<figure.*?>)\s*(https?://\S+?)\s*(</figure>)?$#', [$this, 'embed'], $lines);
 
     $text = implode("\n", $lines);
 
