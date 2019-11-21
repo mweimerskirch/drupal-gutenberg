@@ -48,7 +48,6 @@ class OEmbedFilter extends FilterBase {
    * Callback function to process each URL.
    */
   private function embed($match) {
-
     static $providers = [];
 
     if (empty($providers)) {
@@ -94,7 +93,10 @@ class OEmbedFilter extends FilterBase {
       }
 
       catch (RequestException $e) {
-        watchdog_exception('oembed', $e->getMessage());
+        watchdog_exception('oembed', $e);
+      }
+      catch (\Throwable $e) {
+        watchdog_exception('oembed', $e);
       }
 
       if (!empty($response)) {
@@ -118,7 +120,10 @@ class OEmbedFilter extends FilterBase {
       }
 
       catch (RequestException $e) {
-        watchdog_exception('oembed', $e->getMessage());
+        watchdog_exception('oembed', $e);
+      }
+      catch (\Throwable $e) {
+        watchdog_exception('oembed', $e);
       }
 
       if (!empty($response)) {
