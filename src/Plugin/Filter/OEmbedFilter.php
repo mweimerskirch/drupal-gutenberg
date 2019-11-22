@@ -35,11 +35,11 @@ class OEmbedFilter extends FilterBase {
    */
   public function process($text, $langcode) {
 
-    $lines = explode("\n", $text);
+    $blocks = preg_split('/^.?(\n)?$/m', $text);
 
-    $lines = preg_replace_callback('#^(<figure.*?>)\s*(https?://\S+?)\s*(</figure>)?$#', [$this, 'embed'], $lines);
+    $blocks = preg_replace_callback('/^(<figure.*?>)\s*(https?:\/\/\S+?)\s*(.*?<\/figure>)?$/m', [$this, 'embed'], $blocks);
 
-    $text = implode("\n", $lines);
+    $text = implode("\n", $blocks);
 
     return new FilterProcessResult($text);
   }
