@@ -47,7 +47,7 @@ const settings = {
               identifier="subtitle"
               tagName="div"
               value={subtitle}
-              placeholder={__('Subitle')}
+              placeholder={__('Subtitle')}
               onChange={nextSubtitle => {
                 setAttributes({
                   subtitle: nextSubtitle,

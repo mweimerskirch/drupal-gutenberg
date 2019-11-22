@@ -91,7 +91,7 @@ var settings = {
             identifier: 'subtitle',
             tagName: 'div',
             value: subtitle,
-            placeholder: __('Subitle'),
+            placeholder: __('Subtitle'),
             onChange: function onChange(nextSubtitle) {
               setAttributes({
                 subtitle: nextSubtitle
