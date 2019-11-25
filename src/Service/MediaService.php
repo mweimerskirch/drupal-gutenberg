@@ -138,6 +138,9 @@ class MediaService {
    * @throws \Drupal\gutenberg\Service\MediaTypeNotFoundException
    */
   public function renderDialog(array $media_types) {
+    $media_types = array_filter($media_types)
+      ? $media_types
+      : ['application', 'image', 'audio', 'video', 'text'];
     $allowed_media_type_ids = [];
     foreach ($media_types as $media_type) {
       $allowed_media_type_ids = array_merge($allowed_media_type_ids, $this->mediaTypeGuesser->guess($media_type));
