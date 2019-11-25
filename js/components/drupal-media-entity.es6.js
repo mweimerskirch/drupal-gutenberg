@@ -35,7 +35,8 @@
     }
 
     onUpload(event) {
-      const { allowedTypes, mediaUpload, onError } = this.props;
+      const { attributes, mediaUpload, onError } = this.props;
+      const { allowedTypes } = attributes;
 
       mediaUpload({
         allowedTypes,

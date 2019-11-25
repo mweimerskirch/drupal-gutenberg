@@ -61,9 +61,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
         var _this2 = this;
 
         var _props = this.props,
-            allowedTypes = _props.allowedTypes,
+            attributes = _props.attributes,
             mediaUpload = _props.mediaUpload,
             onError = _props.onError;
+        var allowedTypes = attributes.allowedTypes;
 
 
         mediaUpload({
