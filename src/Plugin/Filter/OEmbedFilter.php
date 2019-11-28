@@ -37,7 +37,7 @@ class OEmbedFilter extends FilterBase {
 
     $blocks = preg_split('/^.?(\n)?$/m', $text);
 
-    $blocks = preg_replace_callback('/^(<figure.*?>)\s*(https?:\/\/\S+?)\s*(.*?<\/figure>)?$/m', [$this, 'embed'], $blocks);
+    $blocks = preg_replace_callback('/^(<figure.*?class=".*wp-block-embed.*">)\s*(https?:\/\/\S+?)\s*(.*?<\/figure>)?$/m', [$this, 'embed'], $blocks);
 
     $text = implode("\n", $blocks);
 
