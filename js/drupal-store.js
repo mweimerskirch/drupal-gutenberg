@@ -34,7 +34,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             });
           case 'SET_MEDIA_ENTITY':
             return _extends({}, state, {
-              mediaEntities: _extends({}, state.mediaEntities, _defineProperty({}, action.id, action.mediaEntity))
+              mediaEntities: _extends({}, state.mediaEntities, _defineProperty({}, action.item, action.mediaEntity))
             });
           default:
             return state;
@@ -50,10 +50,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             block: block
           };
         },
-        setMediaEntity: function setMediaEntity(id, mediaEntity) {
+        setMediaEntity: function setMediaEntity(item, mediaEntity) {
           return {
             type: 'SET_MEDIA_ENTITY',
-            id: id,
+            item: item,
             mediaEntity: mediaEntity
           };
         }
@@ -65,10 +65,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
           return blocks[item];
         },
-        getMediaEntity: function getMediaEntity(state, id) {
+        getMediaEntity: function getMediaEntity(state, item) {
           var mediaEntities = state.mediaEntities;
 
-          return mediaEntities[id];
+          return mediaEntities[item];
         }
       },
 
@@ -108,24 +108,23 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             }, _callee, _this);
           }))();
         },
-        getMediaEntity: function getMediaEntity(entityId) {
+        getMediaEntity: function getMediaEntity(item) {
           var _this2 = this;
 
           return _asyncToGenerator(regeneratorRuntime.mark(function _callee2() {
-            var response, _data;
-
+            var response, mediaEntity;
             return regeneratorRuntime.wrap(function _callee2$(_context2) {
               while (1) {
                 switch (_context2.prev = _context2.next) {
                   case 0:
                     _context2.next = 2;
-                    return fetch('\n            ' + drupalSettings.path.baseUrl + 'editor/media/render/' + entityId + '\n          ');
+                    return fetch('\n            ' + drupalSettings.path.baseUrl + 'editor/media/render/' + item + '\n          ');
 
                   case 2:
                     response = _context2.sent;
 
                     if (!response.ok) {
-                      _context2.next = 10;
+                      _context2.next = 11;
                       break;
                     }
 
@@ -133,35 +132,40 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                     return response.json();
 
                   case 6:
-                    _data = _context2.sent;
+                    mediaEntity = _context2.sent;
 
-                    if (!(_data && _data.view_modes)) {
-                      _context2.next = 10;
+                    if (!(mediaEntity && mediaEntity.view_modes)) {
+                      _context2.next = 11;
                       break;
                     }
 
-                    dispatch('drupal').setMediaEntity(entityId, _data.view_modes);
-                    return _context2.abrupt('return', _data.view_modes);
+                    dispatch('drupal').setMediaEntity(item, mediaEntity);
+                    console.log('mediaEntity', mediaEntity);
+                    return _context2.abrupt('return', {
+                      type: 'GET_MEDIA_ENTITY',
+                      item: item,
+                      mediaEntity: mediaEntity
+                    });
 
-                  case 10:
+                  case 11:
                     if (!(response.status === 404)) {
-                      _context2.next = 13;
+                      _context2.next = 14;
                       break;
                     }
 
                     Drupal.notifyError("Media entity couldn't be found.");
                     return _context2.abrupt('return', null);
 
-                  case 13:
+                  case 14:
                     if (response.ok) {
-                      _context2.next = 16;
+                      _context2.next = 17;
                       break;
                     }
 
-                    Drupal.notifyError("An error occurred while fetching data.");
+                    Drupal.notifyError('An error occurred while fetching data.');
                     return _context2.abrupt('return', null);
 
-                  case 16:
+                  case 17:
                   case 'end':
                     return _context2.stop();
                 }

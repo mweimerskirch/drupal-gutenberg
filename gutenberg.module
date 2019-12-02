@@ -15,11 +15,24 @@ use Symfony\Component\Yaml\Yaml;
 use Drupal\Core\Discovery\YamlDiscovery;
 use Drupal\image\Entity\ImageStyle;
 use Drupal\gutenberg\Controller\UtilsController;
-
+use Drupal\gutenberg\Ajax\ReloadBlockCommand;
+use Drupal\Core\Ajax\AjaxResponse;
+use Drupal\Core\Ajax\CloseModalDialogCommand;
 /**
  * Implements hook_form_alter().
  */
 function gutenberg_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  // TODO: There's got to be a better way to alter all media forms regardless the type.
+  if (
+    $form_id == 'media_video_edit_form' ||
+    $form_id == 'media_image_edit_form' ||
+    $form_id == 'media_audio_edit_form' ||
+    $form_id == 'media_file_edit_form' ||
+    $form_id == 'media_remote_video_edit_form'
+  ) {
+    _gutenberg_media_form_alter($form, $form_state, $form_id);
+  }
+
   if ($form_id == 'node_type_edit_form' || $form_id == 'node_type_add_form') {
     $config = \Drupal::service('config.factory')->getEditable('gutenberg.settings');
 
@@ -465,6 +478,72 @@ function gutenberg_form_node_form_details_after_build(array $element, FormStateI
   foreach ($element['#fields_with_details'] as $value) {
     $element['#attached']['drupalSettings']['gutenberg']['metaboxes'][] = $element[$value]['widget'][0]['#id'];
   }
+  return $element;
+}
+
+/**
+ * 
+ */
+function _gutenberg_media_form_alter(array &$form, FormStateInterface $form_state, string $form_id) {
+  $is_gutenberg = !is_null(\Drupal::request()->query->get('gutenberg'));
+  if (!$is_gutenberg) {
+    return;
+  }
+
+  $form['actions']['delete']['#access'] = false;
+  unset($form['actions']['delete']);
+  $form['#after_build'][] = 'gutenberg_form_media_edit_form_after_build';
+  // dpm('test');
+  // $form['actions']['submit']['#ajax'] = false;
+  $form['actions']['submit']['#submit'][] = 'gutenberg_form_media_edit_form_submit';
+  $form['actions']['submit']['#ajax'] = [
+    // 'callback' => '::submitForm',
+    'callback' => 'gutenberg_form_media_edit_form_submit',
+    'event' => 'click',
+  ];
+
+  $form['actions']['cancel'] = [
+    '#weight' => 99,
+    '#type' => 'button',
+    '#value' => t('Cancel'),
+    '#ajax' => [
+      'callback' => 'gutenberg_form_media_edit_form_cancel',
+      'event' => 'click',  
+    ],
+  ];
+  $form['#submit'][] = 'gutenberg_form_media_edit_form_submit';
+  // kint($form);
+}
+
+/**
+ * 
+ */
+function gutenberg_form_media_edit_form_submit(array $form, FormStateInterface $form_state) {
+  $form_state->disableRedirect();
+  $command = new CloseModalDialogCommand();
+  $response = new AjaxResponse();
+  $response->addCommand($command);
+  $response->addCommand( new ReloadBlockCommand('INSTANCE_ID'));
+  return $response;
+}
+
+/**
+ * 
+ */
+function gutenberg_form_media_edit_form_cancel(array $form, FormStateInterface $form_state) {
+  $form_state->disableRedirect();
+  $command = new CloseModalDialogCommand();
+  $response = new AjaxResponse();
+  $response->addCommand($command);
+  // $response->addCommand( new ReloadBlockCommand('INSTANCE_ID'));
+  return $response;
+}
+
+/**
+ * 
+ */
+function gutenberg_form_media_edit_form_after_build(array $element, FormStateInterface $form_state) {
+  // kint($element);
   return $element;
 }
 

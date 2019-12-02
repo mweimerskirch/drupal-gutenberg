@@ -28,8 +28,10 @@
       super(...arguments);
       this.state = {
         value: '',
+        loading: false,
       };
       this.insertMedia = this.insertMedia.bind(this);
+      this.openMediaEdit = this.openMediaEdit.bind(this);
       this.onUpload = this.onUpload.bind(this);
       this.changeViewMode = this.changeViewMode.bind(this);
     }
@@ -78,6 +80,25 @@
       this.setState({ value: '' });
     }
 
+    openMediaEdit(mediaEntityIds, clientId) {
+      this.setState({ loading: true });
+
+      const elementSettings = {
+        progress: { type: 'throbber' },
+        dialogType: 'modal',
+        dialog: { width: 800 },
+        dialogRenderer: null,
+        url: `/media/${mediaEntityIds[0]}/edit?gutenberg`,
+        base: clientId,
+      };
+
+      Drupal.ajax(elementSettings)
+        .execute()
+        .done(() => {
+          this.setState({ loading: false });
+        });
+    }
+
     render() {
       const {
         className,
@@ -87,9 +108,12 @@
         attributes,
         setAttributes,
         isSelected,
+        clientId,
       } = this.props;
 
-      const { value } = this.state;
+      const { value, loading } = this.state;
+      const { mediaEntityIds } = attributes;
+      const { view_modes: viewModes } = mediaContent;
 
       const instructions = __(
         'Upload a media file or pick one from your media library.',
@@ -116,9 +140,9 @@
           </InspectorControls>
         );
 
-        let html = mediaContent.default.processedHtml;
-        if (mediaContent[attributes.viewMode]) {
-          html = mediaContent[attributes.viewMode].processedHtml;
+        let html = viewModes.default.processedHtml;
+        if (viewModes[attributes.viewMode]) {
+          html = viewModes[attributes.viewMode].processedHtml;
         }
 
         return (
@@ -129,12 +153,23 @@
               <Toolbar
                 controls={[
                   {
+                    icon: 'edit',
+                    title: __('Edit media'),
+                    onClick: () => this.openMediaEdit(mediaEntityIds, clientId),
+                  },
+                  {
                     icon: 'no',
                     title: __('Clear media'),
                     onClick: () => setAttributes({ mediaEntityIds: [] }),
                   },
                 ]}
-              />
+              >
+                {loading && (
+                  <div className="ajax-progress ajax-progress-throbber">
+                    <div className="throbber">&nbsp;</div>
+                  </div>
+                )}
+              </Toolbar>
             </BlockControls>
           </Fragment>
         );
@@ -252,23 +287,24 @@
       return defaultData;
     }
 
+    const { view_modes: viewModes } = mediaEntity;
     const mediaViewModes = [];
 
-    if (Object.keys(mediaEntity).length) {
+    if (Object.keys(viewModes).length) {
       // eslint-disable-next-line no-restricted-syntax
-      for (const viewMode in mediaEntity) {
-        if (!mediaEntity.hasOwnProperty(viewMode)) {
+      for (const viewMode in viewModes) {
+        if (!viewModes.hasOwnProperty(viewMode)) {
           continue;
         }
 
         mediaViewModes.push({
-          value: mediaEntity[viewMode]['view_mode'],
-          label: mediaEntity[viewMode]['view_mode_name'],
+          value: viewModes[viewMode]['view_mode'],
+          label: viewModes[viewMode]['view_mode_name'],
         });
 
         // Process media HTML.
         const node = document.createElement('div');
-        node.innerHTML = mediaEntity[viewMode].html;
+        node.innerHTML = viewModes[viewMode].html;
         const formElements = node.querySelectorAll(
           'input, select, button, textarea, a',
         );
@@ -280,7 +316,7 @@
             element.removeAttribute('href');
           }
         });
-        mediaEntity[viewMode].processedHtml = node.innerHTML;
+        viewModes[viewMode].processedHtml = node.innerHTML;
       }
     }
 

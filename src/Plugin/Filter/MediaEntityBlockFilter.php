@@ -69,7 +69,12 @@ class MediaEntityBlockFilter extends FilterBase implements ContainerFactoryPlugi
     if (json_last_error() !== JSON_ERROR_NONE || empty($block_config['mediaEntityIds'])) {
       return '';
     }
-    return $this->mediaEntityRenderer->render(reset($block_config['mediaEntityIds']), $block_config['viewMode'] ?? 'default');
+    $media_ouput = $this->mediaEntityRenderer->render(reset($block_config['mediaEntityIds']), $block_config['viewMode'] ?? 'default');
+    $output = $media_ouput;
+    if (isset($block_config['caption'])) {
+      $output = '<figure class="wp-block-drupalmedia-drupal-media-entity">' . $media_ouput . '<figcaption>' . $block_config['caption'] . '</figcaption></figure>';
+    }
+    return $output;
   }
 
 }

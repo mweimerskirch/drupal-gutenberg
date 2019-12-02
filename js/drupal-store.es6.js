@@ -24,8 +24,8 @@
               ...state,
               mediaEntities: {
                 ...state.mediaEntities,
-                [action.id]: action.mediaEntity,
-              }
+                [action.item]: action.mediaEntity,
+              },
             };
           default:
             return state;
@@ -40,13 +40,13 @@
             block,
           };
         },
-        setMediaEntity(id, mediaEntity) {
+        setMediaEntity(item, mediaEntity) {
           return {
             type: 'SET_MEDIA_ENTITY',
-            id,
+            item,
             mediaEntity,
           };
-        }
+        },
       },
 
       selectors: {
@@ -54,10 +54,10 @@
           const { blocks } = state;
           return blocks[item];
         },
-        getMediaEntity(state, id) {
+        getMediaEntity(state, item) {
           const { mediaEntities } = state;
-          return mediaEntities[id];
-        }
+          return mediaEntities[item];
+        },
       },
 
       resolvers: {
@@ -73,17 +73,22 @@
             block,
           };
         },
-        async getMediaEntity(entityId) {
+        async getMediaEntity(item) {
           const response = await fetch(`
-            ${drupalSettings.path.baseUrl}editor/media/render/${entityId}
+            ${drupalSettings.path.baseUrl}editor/media/render/${item}
           `);
 
           if (response.ok) {
-            const data = await response.json();
+            const mediaEntity = await response.json();
 
-            if (data && data.view_modes) {
-              dispatch('drupal').setMediaEntity(entityId, data.view_modes);
-              return data.view_modes;
+            if (mediaEntity && mediaEntity.view_modes) {
+              dispatch('drupal').setMediaEntity(item, mediaEntity);
+              console.log('mediaEntity', mediaEntity);
+              return {
+                type: 'GET_MEDIA_ENTITY',
+                item,
+                mediaEntity,
+              };
             }
           }
 
@@ -93,10 +98,10 @@
           }
 
           if (!response.ok) {
-            Drupal.notifyError("An error occurred while fetching data.");
+            Drupal.notifyError('An error occurred while fetching data.');
             return null;
           }
-        }
+        },
       },
     });
   }

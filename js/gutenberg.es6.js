@@ -56,6 +56,40 @@
   });
 
   /**
+   * Add new command for reloading a block.
+   */
+  Drupal.AjaxCommands.prototype.reloadBlock = function() {
+    // Place content in current-msg div.
+    // $('#current-msg h2').html(response.subject);
+    // $('#current-msg p').html(response.content);
+    // // Remove from unread list.
+    // $('#msg-' + response.mid).remove();
+    // // Add message to read list.
+    // $('#read-msgs').append('<li>' + response.subject + '</li>');
+    // console.log('reloadBlock', ajax, response, status);
+    const { select, dispatch } = wp.data;
+    const selectedBlock = select('core/block-editor').getSelectedBlock();
+    const { clientId } = selectedBlock;
+    const { mediaEntityIds } = selectedBlock.attributes;
+
+    (async () => {
+      await dispatch('core/block-editor').updateBlock(clientId, {
+        attributes: { mediaEntityIds: [] },
+      });
+      console.log('yo 1!', clientId, mediaEntityIds);
+      setTimeout(() => {
+        dispatch('core/block-editor').updateBlock(clientId, {
+          attributes: { mediaEntityIds },
+        });
+      }, 100);
+      // await dispatch('core/block-editor').updateBlock(clientId, {
+      //   attributes: { mediaEntityIds },
+      // });
+      // console.log('yo 2!', clientId, mediaEntityIds);
+    })();
+  };
+
+  /**
    * @namespace
    */
   Drupal.editors.gutenberg = {

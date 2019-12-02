@@ -10,34 +10,19 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 (function (wp, $, Drupal, drupalSettings, DrupalGutenberg) {
   var data = wp.data,
       blocks = wp.blocks,
-      element = wp.element;
+      element = wp.element,
+      blockEditor = wp.blockEditor;
   var Fragment = element.Fragment;
+  var RichText = blockEditor.RichText;
   var _DrupalGutenberg$Comp = DrupalGutenberg.Components,
       DrupalIcon = _DrupalGutenberg$Comp.DrupalIcon,
       DrupalMediaEntity = _DrupalGutenberg$Comp.DrupalMediaEntity;
-
+  var select = data.select;
 
   var gutenberg = drupalSettings.gutenberg || {};
   var isMediaLibraryEnabled = gutenberg['media-library-enabled'] || false;
   var isMediaEnabled = gutenberg['media-enabled'] || false;
-
-  var registerDrupalMedia = function registerDrupalMedia() {
-    return new Promise(function (resolve) {
-      var category = {
-        slug: 'drupal_media',
-        title: Drupal.t('Drupal Media')
-      };
-
-      var categories = [].concat(_toConsumableArray(data.select('core/blocks').getCategories()), [category]);
-
-      if (isMediaEnabled) {
-        data.dispatch('core/blocks').setCategories(categories);
-        registerBlock();
-      }
-
-      resolve();
-    });
-  };
+  var __ = Drupal.t;
 
   var registerBlock = function registerBlock() {
     var blockId = 'drupalmedia/drupal-media-entity';
@@ -59,6 +44,10 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
           type: 'string',
           default: 'default'
         },
+        caption: {
+          type: 'string',
+          default: ''
+        },
         lockViewMode: {
           type: 'boolean',
           default: false
@@ -72,21 +61,54 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
         var attributes = _ref.attributes,
             className = _ref.className,
             setAttributes = _ref.setAttributes,
-            isSelected = _ref.isSelected;
+            isSelected = _ref.isSelected,
+            clientId = _ref.clientId;
+        var mediaEntityIds = attributes.mediaEntityIds,
+            caption = attributes.caption;
+
 
         return React.createElement(
-          Fragment,
-          null,
-          React.createElement(DrupalMediaEntity, { attributes: attributes,
+          'figure',
+          { className: className },
+          React.createElement(DrupalMediaEntity, {
+            attributes: attributes,
             className: className,
             setAttributes: setAttributes,
             isSelected: isSelected,
-            isMediaLibraryEnabled: isMediaLibraryEnabled })
+            isMediaLibraryEnabled: isMediaLibraryEnabled,
+            clientId: clientId
+          }),
+          mediaEntityIds && mediaEntityIds.length > 0 && (!RichText.isEmpty(caption) || isSelected) && React.createElement(RichText, {
+            tagName: 'figcaption',
+            placeholder: __('Write caption…'),
+            value: caption,
+            onChange: function onChange(value) {
+              return setAttributes({ caption: value });
+            }
+          })
         );
       },
       save: function save() {
         return null;
       }
+    });
+  };
+
+  var registerDrupalMedia = function registerDrupalMedia() {
+    return new Promise(function (resolve) {
+      var category = {
+        slug: 'drupal_media',
+        title: Drupal.t('Drupal Media')
+      };
+
+      var categories = [].concat(_toConsumableArray(data.select('core/blocks').getCategories()), [category]);
+
+      if (isMediaEnabled) {
+        data.dispatch('core/blocks').setCategories(categories);
+        registerBlock();
+      }
+
+      resolve();
     });
   };
 

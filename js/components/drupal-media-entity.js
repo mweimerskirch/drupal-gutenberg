@@ -47,9 +47,11 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
       var _this = _possibleConstructorReturn(this, (DrupalMediaEntity.__proto__ || Object.getPrototypeOf(DrupalMediaEntity)).apply(this, arguments));
 
       _this.state = {
-        value: ''
+        value: '',
+        loading: false
       };
       _this.insertMedia = _this.insertMedia.bind(_this);
+      _this.openMediaEdit = _this.openMediaEdit.bind(_this);
       _this.onUpload = _this.onUpload.bind(_this);
       _this.changeViewMode = _this.changeViewMode.bind(_this);
       return _this;
@@ -106,9 +108,29 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
         this.setState({ value: '' });
       }
     }, {
+      key: 'openMediaEdit',
+      value: function openMediaEdit(mediaEntityIds, clientId) {
+        var _this3 = this;
+
+        this.setState({ loading: true });
+
+        var elementSettings = {
+          progress: { type: 'throbber' },
+          dialogType: 'modal',
+          dialog: { width: 800 },
+          dialogRenderer: null,
+          url: '/media/' + mediaEntityIds[0] + '/edit?gutenberg',
+          base: clientId
+        };
+
+        Drupal.ajax(elementSettings).execute().done(function () {
+          _this3.setState({ loading: false });
+        });
+      }
+    }, {
       key: 'render',
       value: function render() {
-        var _this3 = this;
+        var _this4 = this;
 
         var _props2 = this.props,
             className = _props2.className,
@@ -117,8 +139,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
             mediaViewModes = _props2.mediaViewModes,
             attributes = _props2.attributes,
             setAttributes = _props2.setAttributes,
-            isSelected = _props2.isSelected;
-        var value = this.state.value;
+            isSelected = _props2.isSelected,
+            clientId = _props2.clientId;
+        var _state = this.state,
+            value = _state.value,
+            loading = _state.loading;
+        var mediaEntityIds = attributes.mediaEntityIds;
+        var viewModes = mediaContent.view_modes;
 
 
         var instructions = __('Upload a media file or pick one from your media library.');
@@ -140,9 +167,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
             )
           );
 
-          var html = mediaContent.default.processedHtml;
-          if (mediaContent[attributes.viewMode]) {
-            html = mediaContent[attributes.viewMode].processedHtml;
+          var html = viewModes.default.processedHtml;
+          if (viewModes[attributes.viewMode]) {
+            html = viewModes[attributes.viewMode].processedHtml;
           }
 
           return React.createElement(
@@ -153,15 +180,33 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
             React.createElement(
               BlockControls,
               null,
-              React.createElement(Toolbar, {
-                controls: [{
-                  icon: 'no',
-                  title: __('Clear media'),
-                  onClick: function onClick() {
-                    return setAttributes({ mediaEntityIds: [] });
-                  }
-                }]
-              })
+              React.createElement(
+                Toolbar,
+                {
+                  controls: [{
+                    icon: 'edit',
+                    title: __('Edit media'),
+                    onClick: function onClick() {
+                      return _this4.openMediaEdit(mediaEntityIds, clientId);
+                    }
+                  }, {
+                    icon: 'no',
+                    title: __('Clear media'),
+                    onClick: function onClick() {
+                      return setAttributes({ mediaEntityIds: [] });
+                    }
+                  }]
+                },
+                loading && React.createElement(
+                  'div',
+                  { className: 'ajax-progress ajax-progress-throbber' },
+                  React.createElement(
+                    'div',
+                    { className: 'throbber' },
+                    '\xA0'
+                  )
+                )
+              )
             )
           );
         }
@@ -177,7 +222,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
         };
 
         var processMediaResult = function processMediaResult(url, post) {
-          _this3.setState({ value: url });
+          _this4.setState({ value: url });
         };
 
         var linkId = 'search_media_0001';
@@ -210,7 +255,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
               isPrimary: true,
               title: __('Insert'),
               onClick: function onClick() {
-                return _this3.insertMedia(value);
+                return _this4.insertMedia(value);
               }
             },
             __('Insert')
@@ -283,21 +328,23 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
       return defaultData;
     }
 
+    var viewModes = mediaEntity.view_modes;
+
     var mediaViewModes = [];
 
-    if (Object.keys(mediaEntity).length) {
-      for (var viewMode in mediaEntity) {
-        if (!mediaEntity.hasOwnProperty(viewMode)) {
+    if (Object.keys(viewModes).length) {
+      for (var viewMode in viewModes) {
+        if (!viewModes.hasOwnProperty(viewMode)) {
           continue;
         }
 
         mediaViewModes.push({
-          value: mediaEntity[viewMode]['view_mode'],
-          label: mediaEntity[viewMode]['view_mode_name']
+          value: viewModes[viewMode]['view_mode'],
+          label: viewModes[viewMode]['view_mode_name']
         });
 
         var node = document.createElement('div');
-        node.innerHTML = mediaEntity[viewMode].html;
+        node.innerHTML = viewModes[viewMode].html;
         var formElements = node.querySelectorAll('input, select, button, textarea, a');
         formElements.forEach(function (element) {
           element.setAttribute('readonly', true);
@@ -307,7 +354,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
             element.removeAttribute('href');
           }
         });
-        mediaEntity[viewMode].processedHtml = node.innerHTML;
+        viewModes[viewMode].processedHtml = node.innerHTML;
       }
     }
 

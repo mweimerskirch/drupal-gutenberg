@@ -241,6 +241,34 @@
         });
       }
     },
+    'load-media-edit-dialog': {
+      method: 'GET',
+      regex: /load-media-edit-dialog/g,
+      process(matches, data) {
+        Drupal.toggleGutenbergLoader('show');
+        return new Promise((resolve, reject) => {
+          $.ajax({
+              method: 'GET',
+              url: `${drupalSettings.path.baseUrl}media/6/edit`,
+              processData: false,
+              contentType: false,
+              accepts: {
+                json: 'application/json, text/javascript, */*; q=0.01',
+              },
+            })
+            .done(result => {
+              resolve(result);
+            })
+            .fail(error => {
+              error && error.responseJSON && error.responseJSON.error && Drupal.notifyError(error.responseJSON.error);
+              reject(error);
+            })
+            .always(() => {
+              Drupal.toggleGutenbergLoader('hide');
+            });
+        });
+      }
+    },
     categories: {
       method: 'GET',
       regex: /\/wp\/v2\/categories\?(.*)/g,

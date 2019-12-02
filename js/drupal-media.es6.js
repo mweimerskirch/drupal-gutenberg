@@ -1,33 +1,14 @@
 /* eslint func-names: ["error", "never"] */
 (function(wp, $, Drupal, drupalSettings, DrupalGutenberg) {
-  const { data, blocks, element } = wp;
+  const { data, blocks, element, blockEditor } = wp;
   const { Fragment } = element;
+  const { RichText } = blockEditor;
   const { DrupalIcon, DrupalMediaEntity } = DrupalGutenberg.Components;
-
+  const { select } = data;
   const gutenberg = drupalSettings.gutenberg || {};
   const isMediaLibraryEnabled = gutenberg['media-library-enabled'] || false;
   const isMediaEnabled = gutenberg['media-enabled'] || false;
-
-  const registerDrupalMedia = () => {
-    return new Promise(resolve => {
-      const category = {
-        slug: 'drupal_media',
-        title: Drupal.t('Drupal Media'),
-      };
-
-      const categories = [
-        ...data.select('core/blocks').getCategories(),
-        category,
-      ];
-
-      if (isMediaEnabled) {
-        data.dispatch('core/blocks').setCategories(categories);
-        registerBlock();
-      }
-
-      resolve();
-    });
-  };
+  const __ = Drupal.t;
 
   const registerBlock = () => {
     const blockId = 'drupalmedia/drupal-media-entity';
@@ -49,6 +30,10 @@
           type: 'string',
           default: 'default',
         },
+        caption: {
+          type: 'string',
+          default: '',
+        },
         lockViewMode: {
           type: 'boolean',
           default: false,
@@ -58,15 +43,30 @@
           default: ['image', 'video', 'audio', 'application'],
         },
       },
-      edit({ attributes, className, setAttributes, isSelected }) {
+      edit({ attributes, className, setAttributes, isSelected, clientId }) {
+        const { mediaEntityIds, caption } = attributes;
+
         return (
-          <Fragment>
-            <DrupalMediaEntity attributes={attributes}
-                               className={className}
-                               setAttributes={setAttributes}
-                               isSelected={isSelected}
-                               isMediaLibraryEnabled={isMediaLibraryEnabled}/>
-          </Fragment>
+          <figure className={className}>
+            <DrupalMediaEntity
+              attributes={attributes}
+              className={className}
+              setAttributes={setAttributes}
+              isSelected={isSelected}
+              isMediaLibraryEnabled={isMediaLibraryEnabled}
+              clientId={clientId}
+            />
+            {mediaEntityIds &&
+              mediaEntityIds.length > 0 &&
+              (!RichText.isEmpty(caption) || isSelected) && (
+                <RichText
+                  tagName="figcaption"
+                  placeholder={__('Write caption…')}
+                  value={caption}
+                  onChange={value => setAttributes({ caption: value })}
+                />
+              )}
+          </figure>
         );
       },
       save() {
@@ -74,6 +74,26 @@
       },
     });
   };
+
+  const registerDrupalMedia = () =>
+    new Promise(resolve => {
+      const category = {
+        slug: 'drupal_media',
+        title: Drupal.t('Drupal Media'),
+      };
+
+      const categories = [
+        ...data.select('core/blocks').getCategories(),
+        category,
+      ];
+
+      if (isMediaEnabled) {
+        data.dispatch('core/blocks').setCategories(categories);
+        registerBlock();
+      }
+
+      resolve();
+    });
 
   window.DrupalGutenberg = window.DrupalGutenberg || {};
   window.DrupalGutenberg.registerDrupalMedia = registerDrupalMedia;

@@ -125,3 +125,17 @@ gutenberg.media.autocomplete:
   requirements:
     _permission: 'gutenberg administer'
     _method: 'GET'
+gutenberg.media_edit_form:
+  path: '/gutenberg/form/media_edit/{media}'
+  options:
+    parameters:
+      media:
+        type: entity:media
+  defaults:
+    _form: '\Drupal\gutenberg\Form\MediaEditForm'
+    _title: 'MediaEditForm'
+    parameters:
+      file:
+        type: entity:media
+  requirements:
+    _permission: 'gutenberg administer'

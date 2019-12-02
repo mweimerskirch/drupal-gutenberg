@@ -42,23 +42,62 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     });
   };
 
+  Drupal.AjaxCommands.prototype.reloadBlock = function () {
+    var _this = this;
+
+    var _wp$data = wp.data,
+        select = _wp$data.select,
+        dispatch = _wp$data.dispatch;
+
+    var selectedBlock = select('core/block-editor').getSelectedBlock();
+    var clientId = selectedBlock.clientId;
+    var mediaEntityIds = selectedBlock.attributes.mediaEntityIds;
+
+
+    _asyncToGenerator(regeneratorRuntime.mark(function _callee() {
+      return regeneratorRuntime.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return dispatch('core/block-editor').updateBlock(clientId, {
+                attributes: { mediaEntityIds: [] }
+              });
+
+            case 2:
+              console.log('yo 1!', clientId, mediaEntityIds);
+              setTimeout(function () {
+                dispatch('core/block-editor').updateBlock(clientId, {
+                  attributes: { mediaEntityIds: mediaEntityIds }
+                });
+              }, 100);
+
+            case 4:
+            case 'end':
+              return _context.stop();
+          }
+        }
+      }, _callee, _this);
+    }))();
+  };
+
   Drupal.editors.gutenberg = {
     attach: function attach(element, format) {
-      var _this = this;
+      var _this2 = this;
 
-      return _asyncToGenerator(regeneratorRuntime.mark(function _callee2() {
+      return _asyncToGenerator(regeneratorRuntime.mark(function _callee3() {
         var _format$editorSetting, contentType, allowedBlocks, blackList, data, blocks, hooks, dispatch, addFilter, unregisterBlockType, registerBlockType, getBlockType, registerDrupalStore, registerDrupalBlocks, registerDrupalMedia, coreBlock, key, value, categories, metaboxesContainer, metaboxForm, isFormValid, formSubmitted;
 
-        return regeneratorRuntime.wrap(function _callee2$(_context2) {
+        return regeneratorRuntime.wrap(function _callee3$(_context3) {
           while (1) {
-            switch (_context2.prev = _context2.next) {
+            switch (_context3.prev = _context3.next) {
               case 0:
                 if (!drupalSettings.gutenbergLoaded) {
-                  _context2.next = 2;
+                  _context3.next = 2;
                   break;
                 }
 
-                return _context2.abrupt('return', false);
+                return _context3.abrupt('return', false);
 
               case 2:
                 drupalSettings.gutenbergLoaded = true;
@@ -69,7 +108,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                 addFilter = hooks.addFilter;
                 unregisterBlockType = blocks.unregisterBlockType, registerBlockType = blocks.registerBlockType, getBlockType = blocks.getBlockType;
                 registerDrupalStore = DrupalGutenberg.registerDrupalStore, registerDrupalBlocks = DrupalGutenberg.registerDrupalBlocks, registerDrupalMedia = DrupalGutenberg.registerDrupalMedia;
-                _context2.next = 11;
+                _context3.next = 11;
                 return addFilter('blocks.registerBlockType', 'drupalgutenberg/custom-attributes', function (settings) {
                   settings.attributes = Object.assign(settings.attributes, {
                     mappingField: {
@@ -85,20 +124,20 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                 });
 
               case 11:
-                _context2.next = 13;
+                _context3.next = 13;
                 return registerDrupalStore(data);
 
               case 13:
-                _context2.next = 15;
+                _context3.next = 15;
                 return registerDrupalBlocks(contentType);
 
               case 15:
-                _context2.next = 17;
+                _context3.next = 17;
                 return registerDrupalMedia();
 
               case 17:
-                _context2.next = 19;
-                return _this._initGutenberg(element);
+                _context3.next = 19;
+                return _this2._initGutenberg(element);
 
               case 19:
 
@@ -270,12 +309,12 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                   data.dispatch('core/edit-post').openGeneralSidebar('edit-post/document');
 
                   if (!formSubmitted) {
-                    _asyncToGenerator(regeneratorRuntime.mark(function _callee() {
-                      return regeneratorRuntime.wrap(function _callee$(_context) {
+                    _asyncToGenerator(regeneratorRuntime.mark(function _callee2() {
+                      return regeneratorRuntime.wrap(function _callee2$(_context2) {
                         while (1) {
-                          switch (_context.prev = _context.next) {
+                          switch (_context2.prev = _context2.next) {
                             case 0:
-                              _context.next = 2;
+                              _context2.next = 2;
                               return data.dispatch('core/editor').savePost();
 
                             case 2:
@@ -286,10 +325,10 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
                             case 4:
                             case 'end':
-                              return _context.stop();
+                              return _context2.stop();
                           }
                         }
-                      }, _callee, _this);
+                      }, _callee2, _this2);
                     }))();
 
                     e.preventDefault();
@@ -297,14 +336,14 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                   }
                 });
 
-                return _context2.abrupt('return', true);
+                return _context3.abrupt('return', true);
 
               case 49:
               case 'end':
-                return _context2.stop();
+                return _context3.stop();
             }
           }
-        }, _callee2, _this);
+        }, _callee3, _this2);
       }))();
     },
     attachInlineEditor: function attachInlineEditor(element, format, mainToolbarId, floatedToolbarId) {
@@ -317,13 +356,13 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
       return true;
     },
     _initGutenberg: function _initGutenberg(element) {
-      var _this2 = this;
+      var _this3 = this;
 
-      return _asyncToGenerator(regeneratorRuntime.mark(function _callee3() {
+      return _asyncToGenerator(regeneratorRuntime.mark(function _callee4() {
         var editPost, data, $textArea, target, $editor, editorSettings, colors, fontSizes, hasOpenedSidebar, hasClosedSidebar;
-        return regeneratorRuntime.wrap(function _callee3$(_context3) {
+        return regeneratorRuntime.wrap(function _callee4$(_context4) {
           while (1) {
-            switch (_context3.prev = _context3.next) {
+            switch (_context4.prev = _context4.next) {
               case 0:
                 hasClosedSidebar = function hasClosedSidebar() {
                   if (!$(document.body).hasClass('gutenberg-sidebar-open')) {
@@ -428,15 +467,15 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                 sessionStorage.removeItem('wp-autosave-block-editor-post-1');
                 localStorage.removeItem('wp-autosave-block-editor-post-1');
 
-                _context3.next = 19;
+                _context4.next = 19;
                 return editPost.initializeEditor(target, 'page', 1, editorSettings);
 
               case 19:
               case 'end':
-                return _context3.stop();
+                return _context4.stop();
             }
           }
-        }, _callee3, _this2);
+        }, _callee4, _this3);
       }))();
     }
   };

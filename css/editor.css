@@ -203,6 +203,15 @@ body .gutenberg__editor .edit-post-layout .components-popover {
   }
 }
 
+.wp-block-drupalmedia-drupal-media-entity {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.wp-block-drupalmedia-drupal-media-entity figcaption {
+  text-align: center;
+}
+
 .editor-block-types-list__item-title {
   padding: 4px 2px;
   min-height: 68px;
