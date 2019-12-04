@@ -49,7 +49,7 @@ class MediaEntityBlockFilter extends FilterBase implements ContainerFactoryPlugi
    * {@inheritDoc}
    */
   public function process($text, $langcode) {
-    $content = preg_replace_callback('#<!-- wp:drupalmedia\/drupal-media-entity (\{.*\}) \/-->#', [$this, 'render'], $text);
+    $content = preg_replace_callback('#(<!-- wp:drupalmedia\/drupal-media-entity (\{.*\}) \/-->)#', [$this, 'render'], $text);
     return new FilterProcessResult($content);
   }
 
@@ -62,19 +62,25 @@ class MediaEntityBlockFilter extends FilterBase implements ContainerFactoryPlugi
    * @return string
    */
   protected function render(array $match) {
-    if (!isset($match[1])) {
+    if (!isset($match[2])) {
       return '';
     }
-    $block_config = json_decode($match[1], TRUE);
+
+    $full_block_comment = str_replace('/-->', '-->', $match[1]);
+    $block_config = json_decode($match[2], TRUE);
+
     if (json_last_error() !== JSON_ERROR_NONE || empty($block_config['mediaEntityIds'])) {
       return '';
     }
+
     $media_ouput = $this->mediaEntityRenderer->render(reset($block_config['mediaEntityIds']), $block_config['viewMode'] ?? 'default');
     $output = $media_ouput;
+
     if (isset($block_config['caption'])) {
       $output = '<figure class="wp-block-drupalmedia-drupal-media-entity">' . $media_ouput . '<figcaption>' . $block_config['caption'] . '</figcaption></figure>';
     }
-    return $output;
+
+    return $full_block_comment . "\n" . $output . "\n<!-- /wp:drupalmedia/drupal-media-entity -->\n";
   }
 
 }
