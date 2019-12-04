@@ -104,6 +104,7 @@ edit-node:
     - core/drupalSettings
     - core/drupal.debounce
     - core/drupal.displace
+    - core/drupal.ajax
     - editor/drupal.editor
     - gutenberg/init
     - gutenberg/url
