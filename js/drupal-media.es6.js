@@ -1,6 +1,7 @@
 /* eslint func-names: ["error", "never"] */
 (function(wp, $, Drupal, drupalSettings, DrupalGutenberg) {
-  const { blocks, blockEditor } = wp;
+  const { blocks, blockEditor, data } = wp;
+  const { dispatch } = data;
   const { RichText } = blockEditor;
   const { DrupalMediaEntity } = DrupalGutenberg.Components;
   const gutenberg = drupalSettings.gutenberg || {};
@@ -53,6 +54,9 @@
               isSelected={isSelected}
               isMediaLibraryEnabled={isMediaLibraryEnabled}
               clientId={clientId}
+              onError={err => {
+                dispatch('core/notices').createWarningNotice(err[2]);
+              }}
             />
             {mediaEntityIds &&
               mediaEntityIds.length > 0 &&

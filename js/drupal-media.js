@@ -7,7 +7,9 @@
 
 (function (wp, $, Drupal, drupalSettings, DrupalGutenberg) {
   var blocks = wp.blocks,
-      blockEditor = wp.blockEditor;
+      blockEditor = wp.blockEditor,
+      data = wp.data;
+  var dispatch = data.dispatch;
   var RichText = blockEditor.RichText;
   var DrupalMediaEntity = DrupalGutenberg.Components.DrupalMediaEntity;
 
@@ -68,7 +70,10 @@
             setAttributes: setAttributes,
             isSelected: isSelected,
             isMediaLibraryEnabled: isMediaLibraryEnabled,
-            clientId: clientId
+            clientId: clientId,
+            onError: function onError(err) {
+              dispatch('core/notices').createWarningNotice(err[2]);
+            }
           }),
           mediaEntityIds && mediaEntityIds.length > 0 && (!RichText.isEmpty(caption) || isSelected) && React.createElement(RichText, {
             tagName: 'figcaption',
