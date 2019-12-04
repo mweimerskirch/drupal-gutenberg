@@ -1,10 +1,8 @@
 /* eslint func-names: ["error", "never"] */
 (function(wp, $, Drupal, drupalSettings, DrupalGutenberg) {
-  const { data, blocks, element, blockEditor } = wp;
-  const { Fragment } = element;
+  const { blocks, blockEditor } = wp;
   const { RichText } = blockEditor;
-  const { DrupalIcon, DrupalMediaEntity } = DrupalGutenberg.Components;
-  const { select } = data;
+  const { DrupalMediaEntity } = DrupalGutenberg.Components;
   const gutenberg = drupalSettings.gutenberg || {};
   const isMediaLibraryEnabled = gutenberg['media-library-enabled'] || false;
   const isMediaEnabled = gutenberg['media-enabled'] || false;
@@ -14,9 +12,9 @@
     const blockId = 'drupalmedia/drupal-media-entity';
 
     blocks.registerBlockType(blockId, {
-      title: Drupal.t('Drupal Media Entity'),
+      title: Drupal.t('Media Entity'),
       icon: 'admin-media',
-      category: 'drupal_media',
+      category: 'common',
       supports: {
         align: false,
         html: false,
@@ -77,18 +75,7 @@
 
   const registerDrupalMedia = () =>
     new Promise(resolve => {
-      const category = {
-        slug: 'drupal_media',
-        title: Drupal.t('Drupal Media'),
-      };
-
-      const categories = [
-        ...data.select('core/blocks').getCategories(),
-        category,
-      ];
-
       if (isMediaEnabled) {
-        data.dispatch('core/blocks').setCategories(categories);
         registerBlock();
       }
 

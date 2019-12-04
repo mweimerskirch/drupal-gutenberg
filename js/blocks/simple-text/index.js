@@ -7,16 +7,11 @@
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
 (function (Drupal, wp) {
   var blocks = wp.blocks,
-      data = wp.data,
       element = wp.element,
       editor = wp.editor;
   var registerBlockType = blocks.registerBlockType;
-  var dispatch = data.dispatch,
-      select = data.select;
   var Fragment = element.Fragment;
   var RichText = editor.RichText;
 
@@ -76,25 +71,12 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       );
     },
     save: function save(_ref2) {
-      var className = _ref2.className,
-          attributes = _ref2.attributes;
-      var text = attributes.text,
-          tag = attributes.tag;
-
+      var attributes = _ref2.attributes;
+      var text = attributes.text;
 
       return text;
     }
   };
 
-  var category = {
-    slug: 'drupal',
-    title: __('Drupal Blocks')
-  };
-
-  var currentCategories = select('core/blocks').getCategories().filter(function (item) {
-    return item.slug !== category.slug;
-  });
-  dispatch('core/blocks').setCategories([category].concat(_toConsumableArray(currentCategories)));
-
-  registerBlockType(category.slug + '/simple-text', _extends({ category: category.slug }, settings));
+  registerBlockType('drupal/simple-text', _extends({ category: 'common' }, settings));
 })(Drupal, wp);

@@ -1,8 +1,7 @@
 /* eslint func-names: ["error", "never"] */
 (function(Drupal, wp) {
-  const { blocks, data, element, editor } = wp;
+  const { blocks, element, editor } = wp;
   const { registerBlockType } = blocks;
-  const { dispatch, select } = data;
   const { Fragment } = element;
   const { RichText } = editor;
   const __ = Drupal.t;
@@ -42,7 +41,7 @@
               tagName={tag}
               value={text}
               placeholder={placeholder}
-              keepPlaceholderOnFocus={true}
+              keepPlaceholderOnFocus
               allowedFormats={[]}
               onChange={newValue => setAttributes({ text: newValue })}
             />
@@ -51,22 +50,11 @@
       );
     },
 
-    save({ className, attributes }) {
-      const { text, tag } = attributes;
-      // const CustomTag = `${tag}`;
-
+    save({ attributes }) {
+      const { text } = attributes;
       return text;
-      // return <CustomTag className={className}>{text}</CustomTag>;
     },
   };
 
-  const category = {
-    slug: 'drupal',
-    title: __('Drupal Blocks'),
-  };
-
-  const currentCategories = select('core/blocks').getCategories().filter(item => item.slug !== category.slug);
-  dispatch('core/blocks').setCategories([ category, ...currentCategories ]);
-
-  registerBlockType(`${category.slug}/simple-text`, { category: category.slug, ...settings });
+  registerBlockType(`drupal/simple-text`, { category: 'common', ...settings });
 })(Drupal, wp);

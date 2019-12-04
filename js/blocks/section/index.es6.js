@@ -1,7 +1,6 @@
-const { blocks, data, editor } = wp;
+const { blocks, blockEditor } = wp;
 const { registerBlockType } = blocks;
-const { dispatch, select } = data;
-const { InnerBlocks } = editor;
+const { InnerBlocks } = blockEditor;
 const __ = Drupal.t;
 
 const settings = {
@@ -12,7 +11,7 @@ const settings = {
   // Just to avoid being shown at blocks list (inserter)
   parent: ['core/paragraph'],
 
-  edit({ className }) {
+  edit() {
     return <InnerBlocks templateLock={false} />;
   },
 
@@ -25,12 +24,4 @@ const settings = {
   },
 };
 
-const category = {
-  slug: 'drupal',
-  title: __('Drupal Blocks'),
-};
-
-const currentCategories = select('core/blocks').getCategories().filter(item => item.slug !== category.slug);
-dispatch('core/blocks').setCategories([ category, ...currentCategories ]);
-
-registerBlockType(`${category.slug}/section`, { category: category.slug, ...settings });
+registerBlockType(`drupal/section`, { category: 'common', ...settings });

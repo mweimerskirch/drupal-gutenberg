@@ -232,7 +232,7 @@
       return (
         <Placeholder
           icon={<BlockIcon icon="admin-media" />}
-          label={__('Drupal Media Entity')}
+          label={__('Media Entity')}
           instructions={instructions}
           className={placeholderClassName}
         >

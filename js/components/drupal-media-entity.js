@@ -266,7 +266,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
           Placeholder,
           {
             icon: React.createElement(BlockIcon, { icon: 'admin-media' }),
-            label: __('Drupal Media Entity'),
+            label: __('Media Entity'),
             instructions: instructions,
             className: placeholderClassName
           },

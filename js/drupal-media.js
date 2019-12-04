@@ -5,19 +5,11 @@
 * @preserve
 **/'use strict';
 
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
 (function (wp, $, Drupal, drupalSettings, DrupalGutenberg) {
-  var data = wp.data,
-      blocks = wp.blocks,
-      element = wp.element,
+  var blocks = wp.blocks,
       blockEditor = wp.blockEditor;
-  var Fragment = element.Fragment;
   var RichText = blockEditor.RichText;
-  var _DrupalGutenberg$Comp = DrupalGutenberg.Components,
-      DrupalIcon = _DrupalGutenberg$Comp.DrupalIcon,
-      DrupalMediaEntity = _DrupalGutenberg$Comp.DrupalMediaEntity;
-  var select = data.select;
+  var DrupalMediaEntity = DrupalGutenberg.Components.DrupalMediaEntity;
 
   var gutenberg = drupalSettings.gutenberg || {};
   var isMediaLibraryEnabled = gutenberg['media-library-enabled'] || false;
@@ -28,9 +20,9 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
     var blockId = 'drupalmedia/drupal-media-entity';
 
     blocks.registerBlockType(blockId, {
-      title: Drupal.t('Drupal Media Entity'),
+      title: Drupal.t('Media Entity'),
       icon: 'admin-media',
-      category: 'drupal_media',
+      category: 'common',
       supports: {
         align: false,
         html: false,
@@ -96,15 +88,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
   var registerDrupalMedia = function registerDrupalMedia() {
     return new Promise(function (resolve) {
-      var category = {
-        slug: 'drupal_media',
-        title: Drupal.t('Drupal Media')
-      };
-
-      var categories = [].concat(_toConsumableArray(data.select('core/blocks').getCategories()), [category]);
-
       if (isMediaEnabled) {
-        data.dispatch('core/blocks').setCategories(categories);
         registerBlock();
       }
 
