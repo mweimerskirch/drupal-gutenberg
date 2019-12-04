@@ -100,6 +100,7 @@ edit-node:
   dependencies:
     - core/jquery
     - core/drupal
+    - core/drupal.dialog.ajax #Required for dialogs
     - core/drupalSettings
     - core/drupal.debounce
     - core/drupal.displace
