@@ -13,7 +13,7 @@
     const blockId = 'drupalmedia/drupal-media-entity';
 
     blocks.registerBlockType(blockId, {
-      title: Drupal.t('Media Entity'),
+      title: Drupal.t('Media'),
       icon: 'admin-media',
       category: 'common',
       supports: {
