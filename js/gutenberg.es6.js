@@ -135,7 +135,7 @@
       await addFilter(
         'blocks.registerBlockType',
         'drupalgutenberg/custom-attributes',
-        settings => {
+        (settings, name) => {
           settings.attributes = Object.assign(settings.attributes, {
             mappingField: {
               type: 'string',
@@ -146,6 +146,13 @@
               default: '',
             },
           });
+
+          if (name === 'core/block') {
+            settings.attributes.ref = {
+              type: 'number',
+            };
+          }
+
           return settings;
         },
       );
@@ -216,14 +223,14 @@
         });
 
       // Add `ref` attribute to core/block.
-      const coreBlock = getBlockType('core/block');
-      unregisterBlockType('core/block');
-      coreBlock.attributes = {
-        ref: {
-          type: 'number',
-        },
-      };
-      registerBlockType('core/block', coreBlock);
+      // const coreBlock = getBlockType('core/block');
+      // unregisterBlockType('core/block');
+      // coreBlock.attributes = {
+      //   ref: {
+      //     type: 'number',
+      //   },
+      // };
+      // registerBlockType('core/block', coreBlock);
 
       // Process allowed blocks.
       /* eslint no-restricted-syntax: ["error", "never"] */
