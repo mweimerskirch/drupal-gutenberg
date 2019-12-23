@@ -6,7 +6,6 @@
  */
 
 use Drupal\Core\Entity\EntityFormInterface;
-use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\node\NodeInterface;
@@ -15,7 +14,6 @@ use Symfony\Component\Yaml\Yaml;
 use Drupal\Core\Discovery\YamlDiscovery;
 use Drupal\image\Entity\ImageStyle;
 use Drupal\gutenberg\Controller\UtilsController;
-use Drupal\gutenberg\Ajax\ReloadBlockCommand;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\CloseModalDialogCommand;
 /**
@@ -482,7 +480,7 @@ function gutenberg_form_node_form_details_after_build(array $element, FormStateI
 }
 
 /**
- * 
+ *
  */
 function _gutenberg_media_form_alter(array &$form, FormStateInterface $form_state, string $form_id) {
   $is_gutenberg = !is_null(\Drupal::request()->query->get('gutenberg'));
@@ -508,7 +506,7 @@ function _gutenberg_media_form_alter(array &$form, FormStateInterface $form_stat
     '#value' => t('Cancel'),
     '#ajax' => [
       'callback' => 'gutenberg_form_media_edit_form_cancel',
-      'event' => 'click',  
+      'event' => 'click',
     ],
   ];
   $form['#submit'][] = 'gutenberg_form_media_edit_form_submit';
@@ -516,31 +514,29 @@ function _gutenberg_media_form_alter(array &$form, FormStateInterface $form_stat
 }
 
 /**
- * 
+ *
  */
 function gutenberg_form_media_edit_form_submit(array $form, FormStateInterface $form_state) {
   $form_state->disableRedirect();
   $command = new CloseModalDialogCommand();
   $response = new AjaxResponse();
   $response->addCommand($command);
-  $response->addCommand( new ReloadBlockCommand('INSTANCE_ID'));
   return $response;
 }
 
 /**
- * 
+ *
  */
 function gutenberg_form_media_edit_form_cancel(array $form, FormStateInterface $form_state) {
   $form_state->disableRedirect();
   $command = new CloseModalDialogCommand();
   $response = new AjaxResponse();
   $response->addCommand($command);
-  // $response->addCommand( new ReloadBlockCommand('INSTANCE_ID'));
   return $response;
 }
 
 /**
- * 
+ *
  */
 function gutenberg_form_media_edit_form_after_build(array $element, FormStateInterface $form_state) {
   // kint($element);
