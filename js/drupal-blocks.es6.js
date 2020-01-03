@@ -88,12 +88,12 @@
     });
   }
 
-  function registerDrupalBlocks(contentType) {
+  function registerDrupalBlocks(contentType, nodeId) {
     return new Promise(resolve => {
       $.ajax(
         `${
           drupalSettings.path.baseUrl
-        }editor/blocks/load_by_type/${contentType}`,
+        }editor/blocks/load_by_type/${contentType}/${nodeId}`,
       ).done(definitions => {
         const category = {
           slug: 'drupal',

@@ -86,7 +86,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
       var _this2 = this;
 
       return _asyncToGenerator(regeneratorRuntime.mark(function _callee3() {
-        var _format$editorSetting, contentType, allowedBlocks, blackList, data, blocks, hooks, dispatch, addFilter, unregisterBlockType, registerBlockType, getBlockType, registerDrupalStore, registerDrupalBlocks, registerDrupalMedia, key, value, categories, metaboxesContainer, metaboxForm, isFormValid, formSubmitted;
+        var _format$editorSetting, contentType, allowedBlocks, blackList, nodeId, data, blocks, hooks, dispatch, addFilter, unregisterBlockType, registerBlockType, getBlockType, registerDrupalStore, registerDrupalBlocks, registerDrupalMedia, key, value, categories, metaboxesContainer, metaboxForm, isFormValid, formSubmitted;
 
         return regeneratorRuntime.wrap(function _callee3$(_context3) {
           while (1) {
@@ -102,7 +102,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
               case 2:
                 drupalSettings.gutenbergLoaded = true;
 
-                _format$editorSetting = format.editorSettings, contentType = _format$editorSetting.contentType, allowedBlocks = _format$editorSetting.allowedBlocks, blackList = _format$editorSetting.blackList;
+                _format$editorSetting = format.editorSettings, contentType = _format$editorSetting.contentType, allowedBlocks = _format$editorSetting.allowedBlocks, blackList = _format$editorSetting.blackList, nodeId = _format$editorSetting.nodeId;
                 data = wp.data, blocks = wp.blocks, hooks = wp.hooks;
                 dispatch = data.dispatch;
                 addFilter = hooks.addFilter;
@@ -136,7 +136,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
               case 13:
                 _context3.next = 15;
-                return registerDrupalBlocks(contentType);
+                return registerDrupalBlocks(contentType, nodeId);
 
               case 15:
                 _context3.next = 17;

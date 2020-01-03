@@ -112,7 +112,7 @@
       }
       drupalSettings.gutenbergLoaded = true;
 
-      const { contentType, allowedBlocks, blackList } = format.editorSettings;
+      const { contentType, allowedBlocks, blackList, nodeId } = format.editorSettings;
       const { data, blocks, hooks } = wp;
       const { dispatch } = data;
       const { addFilter } = hooks;
@@ -160,7 +160,7 @@
 
       await registerDrupalStore(data);
 
-      await registerDrupalBlocks(contentType);
+      await registerDrupalBlocks(contentType, nodeId);
       await registerDrupalMedia();
 
       await this._initGutenberg(element);
