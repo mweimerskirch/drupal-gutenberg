@@ -89,11 +89,13 @@ abstract class BaseDataProvider implements DataProviderInterface {
       ],
     ];
 
-    foreach ($styles as $style) {
-      /** @var \Drupal\image\Entity\ImageStyle $style */
-      $sizes[$style->getName()] = [
-        'source_url' => file_url_transform_relative($style->buildUrl($uri)),
-      ];
+    if (!preg_match('/\.svg$/', $source_url)) {
+      foreach ($styles as $style) {
+        /** @var \Drupal\image\Entity\ImageStyle $style */
+        $sizes[$style->getName()] = [
+          'source_url' => file_url_transform_relative($style->buildUrl($uri)),
+        ];
+      }
     }
 
     return $sizes;
