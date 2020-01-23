@@ -211,9 +211,11 @@ class Gutenberg extends EditorBase implements ContainerFactoryPluginInterface {
         return;
       }
       $node_type = $route_match->getParameter('node_type')->get('type');
+      $node_id = null;
     }
     else {
       $node_type = $node->type->getString();
+      $node_id= $node->id();
     }
   
     // $node = \Drupal::request()->attributes->get('node');
@@ -221,10 +223,14 @@ class Gutenberg extends EditorBase implements ContainerFactoryPluginInterface {
 
     $blocks_settings = UtilsController::getBlocksSettings();
 
+    $allowed_blocks = $config->get($node_type . '_allowed_blocks');
+    \Drupal::moduleHandler()->alter('allowed_gutenberg_blocks', $allowed_blocks, $node_type, $node_id);
+
     $settings = [
       'contentType' => $node_type,
-      'allowedBlocks' => $config->get($node_type . '_allowed_blocks'),
+      'allowedBlocks' => $allowed_blocks,
       'blackList' => $blocks_settings['blacklist'],
+      'nodeId' => $node_id,
     ];
 
     return $settings;
