@@ -1,0 +1,7 @@
+{
+    "name": "drupal/gutenberg",
+    "type": "drupal-module",
+    "require": {
+        "drupal/core": "^8 || ^9"
+    }
+}
