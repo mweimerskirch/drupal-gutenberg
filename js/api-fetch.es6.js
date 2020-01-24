@@ -543,7 +543,7 @@
         return new Promise((resolve, reject) => {
           $.ajax({
             method: 'GET',
-            url: `${drupalSettings.path.baseUrl}editor/search?${matches[1]}`,
+            url: `${drupalSettings.path.baseUrl}${drupalSettings.path.pathPrefix}editor/search?${matches[1]}`,
             accepts: {
               json: 'application/json, text/javascript, */*; q=0.01',
             },
