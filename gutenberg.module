@@ -265,7 +265,19 @@ function gutenberg_form_node_form_alter(&$form, FormStateInterface $form_state) 
   $form['#attached']['drupalSettings']['gutenberg']['template'] = json_decode($config->get($node_type . '_template'));
   $form['#attached']['drupalSettings']['gutenberg']['template-lock'] = $config->get($node_type . '_template_lock');
 
+  /**
+   * DEPRECATED >>>
+   */
   $mapped_fields = _gutenberg_get_mapped_fields(json_decode($config->get($node_type . '_template')));
+  foreach ($mapped_fields as $item) {
+    $form[$item['field']]['#access'] = FALSE;
+  }
+  /**
+   * <<< DEPRECATED
+   */
+
+  $mapped_fields = _gutenberg_get_mapping_fields(json_decode($config->get($node_type . '_template')));
+
   foreach ($mapped_fields as $item) {
     $form[$item['field']]['#access'] = FALSE;
   }
@@ -591,6 +603,10 @@ function gutenberg_entity_presave($entity) {
     return;
   }
 
+  /**
+   * DEPRECATED >>>
+   * To be removed on 1.12 or 1.13 (2.0?)
+   */
   // get first text field, that's the one that'll have
   // gutenberg text format
   // TODO: We already have this on node_edit_form_alter,
@@ -673,10 +689,65 @@ function gutenberg_entity_presave($entity) {
       $entity->set($item['field'], ['target_id' => $value]);
     }
   }
+  /**
+   * <<< DEPRECATED
+   */
+  $mapped_fields = _gutenberg_get_mapping_fields(json_decode($config->get($node_type . '_template')));
+
+  $re = '/((<!-- .*?\{.*"mappingFields":.*} -->)([\s\S]*?)(<!-- \/[\s\S]*?-->|\/-->)|(<!-- .*?\{.*"mappingFields":.*} \/-->))/m';
+  preg_match_all($re, $str, $blocks, PREG_SET_ORDER, 0);
+
+  // Let's build the field's array of values.
+  $fields = [];
+  // For each block match
+  foreach ($blocks as $block) {
+    // get block attributes
+    $re = '/((^<!-- .*?({[\s\S]*}).*-->$))/m';
+    $tag = $block[2] !== '' ? $block[2] : $block[1];
+    preg_match_all($re, $tag, $attrs, PREG_SET_ORDER, 0);
+    $attributes = json_decode($attrs[0][3], true);
+
+    // Remove line breaks from block's "inner" content.
+    // $content is the "inner" content.
+    $re = '/\r?\n|\r/';
+    $content = $block[3];
+    $content = preg_replace($re, '', $content);
+
+    foreach ($attributes['mappingFields'] as $mField) {
+      if (!isset($fields[$mField['field']])) {
+        $fields[$mField['field']] = [];
+      }
+
+      $value = isset($mField['attribute']) ? $attributes[$mField['attribute']] : $content;
+      // Value doesn't support array yet.
+      if (is_array($value)) {
+        $value = $value[0];
+      }
+      $value = strip_tags($value);
+
+      if (isset($mField['property'])) {
+        $fields[$mField['field']][$mField['property']] = $value;
+      }
+      else {
+        $fields[$mField['field']] = $value;
+      }
+    }
+  }
+
+  foreach ($fields as $key => $value) {
+    try {
+      $entity->set($key, $value);
+    }
+    // The field/property might not exist.
+    catch (\Exception $e) {
+      \Drupal::logger('gutenberg')->error(t('Mapping field: @message', ['@message' => $e->getMessage()]));
+    }
+  }
 }
 
 /**
  * Gets all mapped fields on the template (recursive).
+ * @deprecated in gutenberg:8.x-1.11
  */
 function _gutenberg_get_mapped_fields($template, &$result = []) {
   if (empty($template)) {
@@ -695,6 +766,37 @@ function _gutenberg_get_mapped_fields($template, &$result = []) {
 
     if (isset($block[2])) {
       _gutenberg_get_mapped_fields($block[2], $result);
+    }
+  }
+
+  return $result;
+}
+
+/**
+ * Gets all mapping fields on the template (recursive).
+ */
+function _gutenberg_get_mapping_fields($template, &$result = []) {
+  if (empty($template)) {
+    return [];
+  }
+
+  foreach ($template as $key => $block) {
+    if (isset($block[1]) && isset($block[1]->mappingFields)) {
+      foreach ($block[1]->mappingFields as $field) {
+        $item = [];
+        $item['field'] = $field->field;
+        if (isset($field->property)) {
+          $item['property'] = $field->property;
+        }
+        if (isset($field->attribute)) {
+          $item['attribute'] = $field->attribute;
+        }
+        $result[] = $item;
+      }
+    }
+
+    if (isset($block[2])) {
+      _gutenberg_get_mapping_fields($block[2], $result);
     }
   }
 

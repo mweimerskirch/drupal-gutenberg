@@ -48,3 +48,9 @@ filters:
     status: true
     weight: 0
     settings: {  }
+  filter_mapping_fields:
+    id: filter_mapping_fields
+    provider: gutenberg
+    status: true
+    weight: 0
+    settings: {  }

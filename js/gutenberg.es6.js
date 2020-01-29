@@ -132,6 +132,7 @@
       // });
 
       // Add 'mapping field' and 'mapping attribute' attributes to all blocks.
+      // @deprecated in gutenberg:8.x-1.11
       await addFilter(
         'blocks.registerBlockType',
         'drupalgutenberg/custom-attributes',
@@ -153,6 +154,20 @@
             };
           }
 
+          return settings;
+        },
+      );
+
+      await addFilter(
+        'blocks.registerBlockType',
+        'drupalgutenberg/mapping-fields-attributes',
+        (settings) => {
+          settings.attributes = Object.assign(settings.attributes, {
+            mappingFields: {
+              type: 'array',
+            },
+          });
+      
           return settings;
         },
       );
