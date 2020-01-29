@@ -8,8 +8,9 @@ const settings = {
   description: __('Section block for template use.'),
   icon: 'media-document',
   attributes: {},
-  // Just to avoid being shown at blocks list (inserter)
-  parent: ['core/paragraph'],
+  supports: {
+    inserter: false,
+  },
 
   edit() {
     return <InnerBlocks templateLock={false} />;

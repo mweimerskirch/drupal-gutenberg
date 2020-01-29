@@ -10,8 +10,9 @@
     title: __('Simple text'),
     description: __('Simple text block.'),
     icon: 'editor-textcolor',
-    // Just to avoid being shown at blocks list (inserter)
-    parent: ['core/paragraph'],
+    supports: {
+      inserter: false,
+    },
     attributes: {
       tag: {
         type: 'string',
