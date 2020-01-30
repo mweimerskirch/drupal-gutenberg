@@ -44,7 +44,7 @@ class MediaUploader implements MediaUploaderInterface {
 
     // @todo: find better solution for saving file itself.
     $data = file_get_contents($uploaded_file->getPathname());
-    $file_name = $this->getRandomFileName($uploaded_file->getClientOriginalExtension() ?: '');
+    $file_name = $this->sanitizeFileName($uploaded_file);
     $file = file_save_data($data, "{$directory}/{$file_name}", FileSystemInterface::EXISTS_RENAME);
 //    $file->setTemporary();
     $file->setFilename($uploaded_file->getClientOriginalName());
@@ -73,4 +73,16 @@ class MediaUploader implements MediaUploaderInterface {
     return $extension ? sprintf('%s.%s', $name, $extension) : $name;
   }
 
+  protected function sanitizeFileName($uploaded_file) {
+    $filename = pathinfo($uploaded_file->getClientOriginalName(), PATHINFO_FILENAME);
+    $extension = $uploaded_file->getClientOriginalExtension();
+
+    $filename = \Drupal::transliteration()->transliterate($filename); // Remove accents, etc
+    $filename = str_replace(' ', '-', $filename);
+    $filename = preg_replace( '/[^a-zA-Z0-9\-]/i', '', $filename); // remove non-alphanumeric characters
+    $filename = preg_replace('/^-+/', '', $filename); // strip leading dashes
+    $filename = preg_replace('/-+$/', '', $filename); // strip trailing dashes
+
+    return $filename . '.' . $extension;
+  }
 }
