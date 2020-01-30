@@ -16,9 +16,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
           case 0:
             hooks = wp.hooks;
             addFilter = hooks.addFilter;
-
-            console.log('register');
-            _context.next = 5;
+            _context.next = 4;
             return addFilter('blocks.registerBlockType', 'drupalgutenberg/mapping-fields-attributes', function (settings) {
               settings.attributes = Object.assign(settings.attributes, {
                 mappingFields: {
@@ -29,7 +27,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
               return settings;
             });
 
-          case 5:
+          case 4:
           case 'end':
             return _context.stop();
         }
