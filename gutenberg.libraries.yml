@@ -47,12 +47,19 @@ bartik:
   css:
     theme:
       css/bartik.css: {  }
+filters:
+  js:
+    js/filters/mapping-fields.js: {  }
+  dependencies:
+    - gutenberg/hook
+  
 drupal-blocks:
   js:
     js/blocks/section/index.js: {  }
     js/blocks/simple-text/index.js: {  }
   dependencies:
     - gutenberg/blocks-edit
+    - gutenberg/filters
     # - gutenberg/g-media-attributes
 blocks-edit:
   dependencies:
@@ -113,6 +120,7 @@ edit-node:
     - gutenberg/drupal-data
     - gutenberg/editor
     - gutenberg/edit-post
+    - gutenberg/filters
     - gutenberg/format-library
     - gutenberg/g-media-attributes
     - gutenberg/special-media-selection

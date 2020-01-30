@@ -21,8 +21,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     title: __('Simple text'),
     description: __('Simple text block.'),
     icon: 'editor-textcolor',
-
-    parent: ['core/paragraph'],
+    supports: {
+      inserter: false
+    },
     attributes: {
       tag: {
         type: 'string',

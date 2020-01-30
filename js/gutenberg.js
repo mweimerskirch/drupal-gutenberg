@@ -132,33 +132,21 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
               case 11:
                 _context3.next = 13;
-                return addFilter('blocks.registerBlockType', 'drupalgutenberg/mapping-fields-attributes', function (settings) {
-                  settings.attributes = Object.assign(settings.attributes, {
-                    mappingFields: {
-                      type: 'array'
-                    }
-                  });
-
-                  return settings;
-                });
+                return registerDrupalStore(data);
 
               case 13:
                 _context3.next = 15;
-                return registerDrupalStore(data);
+                return registerDrupalBlocks(contentType);
 
               case 15:
                 _context3.next = 17;
-                return registerDrupalBlocks(contentType);
+                return registerDrupalMedia();
 
               case 17:
                 _context3.next = 19;
-                return registerDrupalMedia();
-
-              case 19:
-                _context3.next = 21;
                 return _this2._initGutenberg(element);
 
-              case 21:
+              case 19:
 
                 if (drupalSettings.gutenberg._listeners.init) {
                   drupalSettings.gutenberg._listeners.init.forEach(function (callback) {
@@ -347,7 +335,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
                 return _context3.abrupt('return', true);
 
-              case 47:
+              case 45:
               case 'end':
                 return _context3.stop();
             }

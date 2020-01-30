@@ -158,20 +158,6 @@
         },
       );
 
-      await addFilter(
-        'blocks.registerBlockType',
-        'drupalgutenberg/mapping-fields-attributes',
-        (settings) => {
-          settings.attributes = Object.assign(settings.attributes, {
-            mappingFields: {
-              type: 'array',
-            },
-          });
-      
-          return settings;
-        },
-      );
-
       await registerDrupalStore(data);
 
       await registerDrupalBlocks(contentType);
