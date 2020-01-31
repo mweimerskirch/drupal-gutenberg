@@ -86,7 +86,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
         if (allowedTypes.length === 0) {
-          allowedTypes.push('*');
+          allowedTypes = MediaBrowser.defaultProps.allowedTypes;
         }
 
         fetch('\n        ' + drupalSettings.path.baseUrl + 'editor/media/search/' + allowedTypes.join('+') + '/*').then(function (response) {
@@ -107,6 +107,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
         var allowedTypes = this.props.allowedTypes;
 
+
+        if (allowedTypes.length === 0) {
+          allowedTypes = MediaBrowser.defaultProps.allowedTypes;
+        }
 
         mediaUpload({
           allowedTypes: allowedTypes,
@@ -427,7 +431,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
   }(Component);
 
   MediaBrowser.defaultProps = {
-    allowedTypes: ['image']
+    allowedTypes: ['image', 'video', 'audio', 'application', 'text']
   };
 
   window.DrupalGutenberg = window.DrupalGutenberg || {};

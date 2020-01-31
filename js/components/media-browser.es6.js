@@ -48,10 +48,10 @@
     }
 
     getMediaFiles() {
-      const { allowedTypes } = this.props;
+      let { allowedTypes } = this.props;
 
       if (allowedTypes.length === 0) {
-        allowedTypes.push('*');
+        allowedTypes = MediaBrowser.defaultProps.allowedTypes;
       }
 
       fetch(`
@@ -69,7 +69,11 @@
     }
 
     addFiles(files) {
-      const { allowedTypes } = this.props;
+      let { allowedTypes } = this.props;
+
+      if (allowedTypes.length === 0) {
+        allowedTypes = MediaBrowser.defaultProps.allowedTypes;
+      }
 
       mediaUpload({
         allowedTypes,
@@ -313,7 +317,7 @@
   }
 
   MediaBrowser.defaultProps = {
-    allowedTypes: ['image'],
+    allowedTypes: ['image', 'video', 'audio', 'application', 'text'],
   };
 
   window.DrupalGutenberg = window.DrupalGutenberg || {};
