@@ -13,6 +13,7 @@
     "Drupal": true,
     "DrupalGutenberg": true,
     "wp": true,
+    "sprintf": true,
     "drupalSettings": true,
     "drupalTranslations": true,
     "domready": true,

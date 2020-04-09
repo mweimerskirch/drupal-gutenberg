@@ -3,17 +3,41 @@
 * See the following change record for more information,
 * https://www.drupal.org/node/2815083
 * @preserve
-**/"use strict";
+**/'use strict';
 
-(function (Drupal, wp) {
-  var translate = function translate(value) {
+(function (Drupal, wp, sprintf) {
+  wp.i18n = {};
+
+  wp.i18n.__ = function (value) {
     return Drupal.t(value);
   };
-  wp.i18n = {};
-  wp.i18n.__ = translate;
-  wp.i18n._x = translate;
-  wp.i18n._n = function (single, plural, number) {
-    return Drupal.formatPlural(number, single, plural);
+  wp.i18n._x = function (value, context) {
+    return Drupal.t(value, {}, { context: context });
   };
-  wp.i18n.sprintf = translate;
-})(Drupal, wp);
+  wp.i18n._n = function (single, plural, number) {
+    return sprintf(Drupal.formatPlural(number, single, plural), number);
+  };
+  wp.i18n._nx = function (single, plural, number, context) {
+    return sprintf(Drupal.formatPlural(number, single, plural, {}, { context: context }), number);
+  };
+
+  wp.i18n.isRTL = function () {
+    return Drupal.t('ltr', {}, { context: 'text direction' }) === 'rtl';
+  };
+  wp.i18n.setLocaleData = function () {
+    console.warn('wp.i18n.setLocaleData() is a noop.');
+  };
+  wp.i18n.sprintf = function (format) {
+    for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+      args[_key - 1] = arguments[_key];
+    }
+
+    try {
+      return sprintf.apply(undefined, [format].concat(args));
+    } catch (error) {
+      console.warn('sprintf error: \n\n' + error.toString());
+
+      return format;
+    }
+  };
+})(Drupal, wp, sprintf);

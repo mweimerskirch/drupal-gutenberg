@@ -20,6 +20,11 @@ moment:
   js:
     vendor/moment.min.js:
       minified: true
+sprintf:
+  version: 1.1.2
+  js:
+    vendor/sprintf.min.js:
+      minified: true
 regenerator-runtime:
   version: 1.0.0
   js:
@@ -52,7 +57,7 @@ filters:
     js/filters/mapping-fields.js: {  }
   dependencies:
     - gutenberg/hook
-  
+
 drupal-blocks:
   js:
     js/blocks/section/index.js: {  }
@@ -548,6 +553,7 @@ i18n:
     theme: {  }
   dependencies:
     - gutenberg/polyfill
+    - gutenberg/sprintf
 is-shallow-equal:
   js:
     vendor/gutenberg/is-shallow-equal/index.js: {  }

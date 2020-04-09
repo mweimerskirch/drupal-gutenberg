@@ -13,6 +13,6 @@
   },
   "devDependencies": {
     "drupal-js-build": "^1.2.0",
-    "drupal-gutenberg-translations": "^1.0.2"
+    "drupal-gutenberg-translations": "^1.1.0"
   }
 }
