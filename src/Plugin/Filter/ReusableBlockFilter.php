@@ -35,10 +35,14 @@ class ReusableBlockFilter extends FilterBase {
    * Callback function to process each block.
    */
   private function renderBlock($match) {
+    $block = NULL;
     $comment = $match[0];
     $attributes = json_decode($match[1]);
-    $bid = $attributes->ref;
-    $block = BlockContent::load($bid);
+
+    if (!empty($attributes->ref)) {
+      $bid = $attributes->ref;
+      $block = BlockContent::load($bid);
+    }
 
     if (!$block) {
       return $comment;
