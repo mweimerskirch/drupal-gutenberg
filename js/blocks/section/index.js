@@ -20,8 +20,9 @@ var settings = {
   description: __('Section block for template use.'),
   icon: 'media-document',
   attributes: {},
-
-  parent: ['core/paragraph'],
+  supports: {
+    inserter: false
+  },
 
   edit: function edit() {
     return React.createElement(InnerBlocks, { templateLock: false });
