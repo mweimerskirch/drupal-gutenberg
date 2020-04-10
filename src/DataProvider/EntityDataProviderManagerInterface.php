@@ -19,7 +19,6 @@ interface EntityDataProviderManagerInterface {
    * @param string $entity_type
    *   Entity type machine name.
    *
-   * @return void
    * @throws \Exception
    */
   public function registerDataProvider(DataProviderInterface $data_provider, string $entity_type);
@@ -35,6 +34,8 @@ interface EntityDataProviderManagerInterface {
    *   (optional) Additional data to process.
    *
    * @return mixed
+   *   The data for the specified entity type.
+   *
    * @throws \Exception
    */
   public function getData(string $entity_type, ContentEntityInterface $entity, array $data = []);
@@ -46,6 +47,7 @@ interface EntityDataProviderManagerInterface {
    *   Machine name of a data provider (entity type machine name).
    *
    * @return bool
+   *   TRUE if the specified entity type exists, FALSE otherwise.
    */
   public function isRegistered(string $data_provider);
 

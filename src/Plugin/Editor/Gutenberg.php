@@ -52,7 +52,7 @@ class Gutenberg extends EditorBase implements ContainerFactoryPluginInterface {
   protected $gutenbergPluginManager;
 
   /**
-   * The renderer.
+   * Drupal\Core\Render\RendererInterface instance.
    *
    * @var \Drupal\Core\Render\RendererInterface
    */
@@ -67,7 +67,7 @@ class Gutenberg extends EditorBase implements ContainerFactoryPluginInterface {
    *   The plugin_id for the plugin instance.
    * @param mixed $plugin_definition
    *   The plugin implementation definition.
-   * @param GutenbergPluginManager $gutenberg_plugin_manager
+   * @param \Drupal\gutenberg\GutenbergPluginManager $gutenberg_plugin_manager
    *   The Gutenberg plugin manager.
    * @param \Drupal\Core\Extension\ModuleHandlerInterface $module_handler
    *   The module handler to invoke hooks on.
@@ -112,8 +112,6 @@ class Gutenberg extends EditorBase implements ContainerFactoryPluginInterface {
    * {@inheritdoc}
    */
   public function settingsForm(array $form, FormStateInterface $form_state, Editor $editor) {
-    $settings = $editor->getSettings();
-
     // Gutenberg plugin settings, if any.
     $form['plugin_settings'] = [
       '#type' => 'vertical_tabs',
@@ -132,75 +130,22 @@ class Gutenberg extends EditorBase implements ContainerFactoryPluginInterface {
   }
 
   /**
-   * {@inheritdoc}
-   */
-  public function settingsFormSubmit(array $form, FormStateInterface $form_state) {
-    // // Modify the toolbar settings by reference. The values in
-    // // $form_state->getValue(array('editor', 'settings')) will be saved directly
-    // // by editor_form_filter_admin_format_submit().
-    // $toolbar_settings = &$form_state->getValue(['editor', 'settings', 'toolbar']);
-    // // The rows key is not built into the form structure, so decode the button
-    // // groups data into this new key and remove the button_groups key.
-    // $toolbar_settings['rows'] = json_decode($toolbar_settings['button_groups'], TRUE);
-    // unset($toolbar_settings['button_groups']);
-    // // Remove the plugin settings' vertical tabs state; no need to save that.
-    // if ($form_state->hasValue(['editor', 'settings', 'plugins'])) {
-    //   $form_state->unsetValue(['editor', 'settings', 'plugin_settings']);
-    // }
-  }
-
-  /**
    * Returns a list of language codes supported by CKEditor.
    *
    * @return array
    *   An associative array keyed by language codes.
    */
   public function getLangcodes() {
-    // // Cache the file system based language list calculation because this would
-    // // be expensive to calculate all the time. The cache is cleared on core
-    // // upgrades which is the only situation the CKEditor file listing should
-    // // change.
-    // $langcode_cache = \Drupal::cache()->get('storypage.langcodes');
-    // if (!empty($langcode_cache)) {
-    //   $langcodes = $langcode_cache->data;
-    // }
-    // if (empty($langcodes)) {
-    //   $langcodes = [];
-    //   // Collect languages included with CKEditor based on file listing.
-    //   $files = scandir('core/assets/vendor/ckeditor/lang');
-    //   foreach ($files as $file) {
-    //     if ($file[0] !== '.' && preg_match('/\.js$/', $file)) {
-    //       $langcode = basename($file, '.js');
-    //       $langcodes[$langcode] = $langcode;
-    //     }
-    //   }
-    //   \Drupal::cache()->set('ckeditor.langcodes', $langcodes);
-    // }
-    // // Get language mapping if available to map to Drupal language codes.
-    // // This is configurable in the user interface and not expensive to get, so
-    // // we don't include it in the cached language list.
-    // $language_mappings = $this->moduleHandler->moduleExists('language') ? language_get_browser_drupal_langcode_mappings() : [];
-    // foreach ($langcodes as $langcode) {
-    //   // If this language code is available in a Drupal mapping, use that to
-    //   // compute a possibility for matching from the Drupal langcode to the
-    //   // CKEditor langcode.
-    //   // For instance, CKEditor uses the langcode 'no' for Norwegian, Drupal
-    //   // uses 'nb'. This would then remove the 'no' => 'no' mapping and replace
-    //   // it with 'nb' => 'no'. Now Drupal knows which CKEditor translation to
-    //   // load.
-    //   if (isset($language_mappings[$langcode]) && !isset($langcodes[$language_mappings[$langcode]])) {
-    //     $langcodes[$language_mappings[$langcode]] = $langcode;
-    //     unset($langcodes[$langcode]);
-    //   }
-    // }
-    // return $langcodes;
     return ['en' => 'en'];
   }
 
   /**
+   * Get javascript settings.
    *
+   * @param \Drupal\editor\Entity\Editor $editor
+   *   A configured text editor object.
    */
-  public function getJSSettings(Editor $editor) {
+  public function getJsSettings(Editor $editor) {
     $config = \Drupal::service('config.factory')->getEditable('gutenberg.settings');
 
     $node = \Drupal::routeMatch()->getParameter('node');
@@ -215,9 +160,6 @@ class Gutenberg extends EditorBase implements ContainerFactoryPluginInterface {
     else {
       $node_type = $node->type->getString();
     }
-  
-    // $node = \Drupal::request()->attributes->get('node');
-    // $type_name = $node->bundle();
 
     $blocks_settings = UtilsController::getBlocksSettings();
 
@@ -236,28 +178,28 @@ class Gutenberg extends EditorBase implements ContainerFactoryPluginInterface {
   public function getLibraries(Editor $editor) {
     $libraries = [
       'gutenberg/edit-node',
-      // Media attributes overrides must come after all 
+      // Media attributes overrides must come after all
       // Gutenberg initialization.
       'gutenberg/g-media-attributes',
       'gutenberg/blocks-edit',
       'gutenberg/drupal-blocks',
     ];
-  
+
     return $libraries;
   }
 
   /**
    * Builds the "toolbar" configuration part of the CKEditor JS settings.
    *
-   * @see getJSSettings()
-   *
    * @param \Drupal\editor\Entity\Editor $editor
    *   A configured text editor object.
    *
    * @return array
    *   An array containing the "toolbar" configuration.
+   *
+   * @see getJsSettings()
    */
-  public function buildToolbarJSSetting(Editor $editor) {
+  public function buildToolbarJsSetting(Editor $editor) {
     $toolbar = [];
 
     return $toolbar;
@@ -266,15 +208,15 @@ class Gutenberg extends EditorBase implements ContainerFactoryPluginInterface {
   /**
    * Builds the "contentsCss" configuration part of the CKEditor JS settings.
    *
-   * @see getJSSettings()
-   *
    * @param \Drupal\editor\Entity\Editor $editor
    *   A configured text editor object.
    *
    * @return array
    *   An array containing the "contentsCss" configuration.
+   *
+   * @see getJsSettings()
    */
-  public function buildContentsCssJSSetting(Editor $editor) {
+  public function buildContentsCssJsSetting(Editor $editor) {
     return [];
   }
 

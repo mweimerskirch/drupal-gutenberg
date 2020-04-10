@@ -32,6 +32,8 @@ class MediaTypeGuesser implements MediaTypeGuesserInterface {
   protected $entityTypeManager;
 
   /**
+   * The file extension guesser.
+   *
    * @var \Drupal\gutenberg\FileExtensionGuesserInterface
    */
   protected $fileExtensionGuesser;
@@ -40,7 +42,9 @@ class MediaTypeGuesser implements MediaTypeGuesserInterface {
    * MediaTypeGuesser constructor.
    *
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
+   *   The entity type manager.
    * @param \Drupal\gutenberg\FileExtensionGuesserInterface $file_extension_guesser
+   *   The file extension guesser.
    */
   public function __construct(EntityTypeManagerInterface $entity_type_manager, FileExtensionGuesserInterface $file_extension_guesser) {
     $this->entityTypeManager = $entity_type_manager;
@@ -76,14 +80,16 @@ class MediaTypeGuesser implements MediaTypeGuesserInterface {
   }
 
   /**
-   * Negotiate which media type should be chosen. If in guessed media types
-   * exist one of the default (existing in the Drupal Core) - choose this one,
-   * if not choose first one.
+   * Negotiate which media type should be chosen.
+   *
+   * If in guessed media types exist one of the default (existing in the
+   * Drupal Core) - choose this one, if not choose first one.
    *
    * @param array $media_types
    *   Array of found media types.
    *
    * @return string
+   *   The chosen media type.
    */
   public function negotiateMediaTypes(array $media_types) {
     if (!$media_types) {

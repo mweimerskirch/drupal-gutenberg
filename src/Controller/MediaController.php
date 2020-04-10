@@ -21,11 +21,15 @@ use Drupal\editor\Entity\Editor;
 class MediaController extends ControllerBase {
 
   /**
+   * The media service.
+   *
    * @var \Drupal\gutenberg\Service\MediaService
    */
   protected $mediaService;
 
   /**
+   * The media selection processor manager.
+   *
    * @var \Drupal\gutenberg\MediaSelectionProcessor\MediaSelectionProcessorManagerInterface
    */
   protected $mediaSelectionProcessorManager;
@@ -34,7 +38,9 @@ class MediaController extends ControllerBase {
    * MediaController constructor.
    *
    * @param \Drupal\gutenberg\Service\MediaService $media_service
+   *   The media service.
    * @param \Drupal\gutenberg\MediaSelectionProcessor\MediaSelectionProcessorManagerInterface $media_selection_processor_manager
+   *   The media selection processor manager.
    */
   public function __construct(MediaService $media_service, MediaSelectionProcessorManagerInterface $media_selection_processor_manager) {
     $this->mediaService = $media_service;
@@ -52,12 +58,14 @@ class MediaController extends ControllerBase {
   }
 
   /**
-   * Render Drupal's media library dialog
+   * Render Drupal's media library dialog.
    *
    * @param \Symfony\Component\HttpFoundation\Request $request
    *   Current request.
    *
    * @return \Symfony\Component\HttpFoundation\JsonResponse
+   *   The JSON response.
+   *
    * @throws \Exception
    */
   public function dialog(Request $request) {
@@ -80,6 +88,8 @@ class MediaController extends ControllerBase {
    *   Media data (numeric or stringified JSON for media data processing).
    *
    * @return \Symfony\Component\HttpFoundation\JsonResponse
+   *   The JSON response.
+   *
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
@@ -105,6 +115,7 @@ class MediaController extends ControllerBase {
    *   Media data (numeric or stringified JSON for media data processing).
    *
    * @return \Symfony\Component\HttpFoundation\JsonResponse
+   *   The JSON response.
    */
   public function render(string $media) {
     $media_entities = $this->mediaSelectionProcessorManager->processData($media);
@@ -138,6 +149,8 @@ class MediaController extends ControllerBase {
    *   Editor entity instance.
    *
    * @return \Symfony\Component\HttpFoundation\JsonResponse
+   *   The JSON response.
+   *
    * @throws \Exception
    */
   public function upload(Request $request, ?Editor $editor) {
@@ -165,6 +178,8 @@ class MediaController extends ControllerBase {
    *   Loaded found file entity instance.
    *
    * @return \Symfony\Component\HttpFoundation\JsonResponse
+   *   The JSON response.
+   *
    * @throws \Exception
    */
   public function load(Request $request, ?File $file) {
@@ -209,10 +224,11 @@ class MediaController extends ControllerBase {
    *
    * @return \Symfony\Component\HttpFoundation\JsonResponse
    *   The JSON response.
+   *
    * @throws \Exception
    */
   public function updateData(Request $request, $fid) {
-    $data = json_decode($request->getContent(), true);
+    $data = json_decode($request->getContent(), TRUE);
 
     if (json_last_error() !== JSON_ERROR_NONE) {
       throw new \Exception("Request data couldn't be parsed.");
@@ -235,6 +251,7 @@ class MediaController extends ControllerBase {
    *   Current request.
    *
    * @return \Symfony\Component\HttpFoundation\JsonResponse
+   *   The JSON response.
    */
   public function autocomplete(Request $request) {
     return new JsonResponse(

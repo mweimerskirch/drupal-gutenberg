@@ -25,10 +25,11 @@ interface MediaTypeGuesserInterface {
    * @param \Drupal\gutenberg\string $general_mime_type
    *   General mime type (image, video, audio, ...).
    * @param int $return_option
-   *   If self::RETURN_ALL - return all guessed media types. If self::RETURN_NEGOTIATED -
-   *   returns only one negotiated media type.
+   *   If self::RETURN_ALL - return all guessed media types.
+   *   If self::RETURN_NEGOTIATED - returns only one negotiated media type.
    *
    * @return string|array
+   *   The guessed media types.
    */
   public function guess(string $general_mime_type, $return_option = self::RETURN_ALL);
 

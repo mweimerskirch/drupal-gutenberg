@@ -20,6 +20,7 @@ interface DataProviderInterface {
    *   Array of additional data to process.
    *
    * @return array
+   *   The array data.
    */
   public function getData(ContentEntityInterface $entity, array $data = []);
 

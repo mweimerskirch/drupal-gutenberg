@@ -10,6 +10,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
+ * Class FieldMappingFilter.
+ *
  * @Filter(
  *   id = "filter_field_mapping",
  *   title = @Translation("Gutenberg field mapping filter"),
@@ -54,11 +56,9 @@ class FieldMappingFilter extends FilterBase implements ContainerFactoryPluginInt
   public function process($text, $langcode) {
 
     // $lines = explode("\n", $text);
-
     $text = preg_replace_callback('#((<!-- .*\{.*"mappingField".*} -->)([\s\S]*?)(<!-- \/[\s\S]*?-->)|(<!-- .*\{.*"mappingField".*} \/-->))#', [$this, 'renderWithoutMappingFields'], $text);
 
     // $text = implode("\n", $lines);
-
     return new FilterProcessResult($text);
   }
 
@@ -69,7 +69,7 @@ class FieldMappingFilter extends FilterBase implements ContainerFactoryPluginInt
     $comment_begin = $match[1];
     $comment_end = $match[3];
 
-    return ''; // $comment_begin . $comment_end;
+    return '';
   }
 
   /**
@@ -80,7 +80,6 @@ class FieldMappingFilter extends FilterBase implements ContainerFactoryPluginInt
       '#type' => 'checkbox',
       '#title' => $this->t('Enabled'),
       '#default_value' => $this->settings['enable_filter'],
-      // '#description' => $this->t('A list of oEmbed providers. Add your own by adding a new line and using this pattern: [Url to match] | [oEmbed endpoint] | [Use regex (true or false)]'),
     ];
     return $form;
   }

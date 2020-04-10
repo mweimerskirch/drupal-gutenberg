@@ -7,9 +7,10 @@ use Drupal\Core\Render\RendererInterface;
 use Drupal\filter\FilterProcessResult;
 use Drupal\filter\Plugin\FilterBase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\Core\Form\FormStateInterface;
 
 /**
+ * Class MappingFieldsFilter.
+ *
  * @Filter(
  *   id = "filter_mapping_fields",
  *   title = @Translation("Gutenberg mapping fields filter"),
@@ -67,4 +68,5 @@ class MappingFieldsFilter extends FilterBase implements ContainerFactoryPluginIn
 
     return '';
   }
+
 }

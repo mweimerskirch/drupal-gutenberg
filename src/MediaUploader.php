@@ -8,13 +8,15 @@ use Drupal\editor\Entity\Editor;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
- * Upload files from Gutenberg editor upload method
+ * Upload files from Gutenberg editor upload method.
  *
  * @package Drupal\gutenberg
  */
 class MediaUploader implements MediaUploaderInterface {
 
   /**
+   * The file system service.
+   *
    * @var \Drupal\Core\File\FileSystemInterface
    */
   protected $fileSystem;
@@ -23,6 +25,7 @@ class MediaUploader implements MediaUploaderInterface {
    * MediaUploader constructor.
    *
    * @param \Drupal\Core\File\FileSystemInterface $file_system
+   *   The file system service.
    */
   public function __construct(FileSystemInterface $file_system) {
     $this->fileSystem = $file_system;
@@ -48,7 +51,8 @@ class MediaUploader implements MediaUploaderInterface {
 
     try {
       $file->save();
-    } catch (\Throwable $exception) {
+    }
+    catch (\Throwable $exception) {
       return NULL;
     }
 
@@ -62,6 +66,7 @@ class MediaUploader implements MediaUploaderInterface {
    *   (optional) File extension.
    *
    * @return string
+   *   The file name.
    */
   protected function getRandomFileName(string $extension = '') {
     $name = (new Random())->name(50, TRUE);

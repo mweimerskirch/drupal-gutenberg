@@ -71,8 +71,8 @@ class BlocksController extends ControllerBase {
    *
    * @param \Symfony\Component\HttpFoundation\Request $request
    *   The request.
-   * @param \Symfony\Component\HttpFoundation\Request $request
-   *   The request.
+   * @param string $content_type
+   *   The content type to fetch settings from.
    *
    * @return \Symfony\Component\HttpFoundation\JsonResponse
    *   The JSON response.

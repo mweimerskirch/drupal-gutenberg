@@ -12,6 +12,8 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 class DefaultMediaSelectionProcessor implements MediaSelectionProcessorInterface {
 
   /**
+   * Entity type manager instance.
+   *
    * @var \Drupal\Core\Entity\EntityTypeManagerInterface
    */
   protected $entityTypeManager;
@@ -20,6 +22,7 @@ class DefaultMediaSelectionProcessor implements MediaSelectionProcessorInterface
    * DefaultMediaSelectionProcessor constructor.
    *
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
+   *   The entity type manager.
    */
   public function __construct(EntityTypeManagerInterface $entity_type_manager) {
     $this->entityTypeManager = $entity_type_manager;

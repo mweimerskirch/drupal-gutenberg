@@ -6,6 +6,8 @@ use Drupal\filter\FilterProcessResult;
 use Drupal\filter\Plugin\FilterBase;
 
 /**
+ * Class CommentDelimiterFilter.
+ *
  * @Filter(
  *   id = "filter_comment_delimiter",
  *   title = @Translation("Gutenberg comment delimiter filter"),
@@ -37,4 +39,5 @@ class CommentDelimiterFilter extends FilterBase {
   private function renderContent($match) {
     return '';
   }
+
 }

@@ -38,6 +38,11 @@ abstract class BaseDataProvider implements DataProviderInterface {
    * BaseDataProvider constructor.
    *
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
+   *   The entity type manager.
+   * @param \Drupal\Core\Database\Connection $connection
+   *   The database connection.
+   * @param \Drupal\Core\Image\ImageFactory $image_factory
+   *   The image factory.
    */
   public function __construct(EntityTypeManagerInterface $entity_type_manager, Connection $connection, ImageFactory $image_factory) {
     $this->entityTypeManager = $entity_type_manager;
@@ -52,6 +57,7 @@ abstract class BaseDataProvider implements DataProviderInterface {
    *   File entity ID.
    *
    * @return array
+   *   The file data.
    */
   protected function getFileData(string $fid) {
     $query = $this->connection->select('file_managed_data', 'data', []);
@@ -65,9 +71,13 @@ abstract class BaseDataProvider implements DataProviderInterface {
    * Get sizes of image styles for the source.
    *
    * @param \Drupal\gutenberg\DataProvider\string $source_url
+   *   The source URL.
    * @param \Drupal\gutenberg\DataProvider\string $uri
+   *   The URI.
    *
    * @return array
+   *   The sizes of the image styles.
+   *
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */

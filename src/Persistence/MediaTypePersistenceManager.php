@@ -15,11 +15,15 @@ use Drupal\file\Entity\File;
 class MediaTypePersistenceManager implements MediaTypePersistenceManagerInterface {
 
   /**
+   * The entity type manager.
+   *
    * @var \Drupal\Core\Entity\EntityTypeManagerInterface
    */
   protected $entityTypeManager;
 
   /**
+   * The current user.
+   *
    * @var \Drupal\Core\Session\AccountInterface
    */
   protected $account;
@@ -28,7 +32,9 @@ class MediaTypePersistenceManager implements MediaTypePersistenceManagerInterfac
    * MediaTypePersistenceManager constructor.
    *
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
+   *   The entity type manager.
    * @param \Drupal\Core\Session\AccountInterface $account
+   *   The current user.
    */
   public function __construct(EntityTypeManagerInterface $entity_type_manager, AccountInterface $account) {
     $this->entityTypeManager = $entity_type_manager;
@@ -54,7 +60,8 @@ class MediaTypePersistenceManager implements MediaTypePersistenceManagerInterfac
 
     try {
       $media_entity->save();
-    } catch (EntityStorageException $exception) {
+    }
+    catch (EntityStorageException $exception) {
       return NULL;
     }
 

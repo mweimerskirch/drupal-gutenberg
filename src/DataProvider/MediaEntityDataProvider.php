@@ -41,7 +41,8 @@ class MediaEntityDataProvider extends BaseDataProvider {
         'raw' => $file_data['title'] ?? '',
         'rendered' => $file_data['title'] ?? '',
       ],
-      'alt' => $file_data['alt_text'] ?? '', // prop used on inline-image
+      // Prop used on inline-image.
+      'alt' => $file_data['alt_text'] ?? '',
       'alt_text' => $file_data['alt_text'] ?? '',
       'data' => [
         'entity_type' => $data['media_type'],

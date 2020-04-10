@@ -264,8 +264,6 @@ class BlockManagerForm extends ConfigFormBase {
     $details['#attached']['library'][] = 'core/drupal.dialog.ajax';
     $details['#attached']['library'][] = 'gutenberg_cloud/details';
 
-
-
     $response = new AjaxResponse();
     $response->addCommand(new OpenModalDialogCommand($block->getLabel(), $details, ['width' => '80%']));
 

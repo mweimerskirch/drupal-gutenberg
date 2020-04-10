@@ -16,8 +16,6 @@ interface MediaSelectionProcessorManagerInterface {
    *   Media selection processor instance.
    * @param \Drupal\gutenberg\MediaSelectionProcessor\string $processor_name
    *   Processor name.
-   *
-   * @return mixed
    */
   public function registerProcessor(MediaSelectionProcessorInterface $processor, string $processor_name);
 
@@ -30,16 +28,20 @@ interface MediaSelectionProcessorManagerInterface {
    *   Data to process.
    *
    * @return mixed
+   *   The processed media selection data.
    */
   public function process(string $processor_name, array $data);
 
   /**
-   * Process selection data. If numeric string is provided, default processor will be fired.
+   * Process selection data.
+   *
+   * If numeric string is provided, default processor will be fired.
    *
    * @param string $data
    *   Serialized data to process.
    *
    * @return \Drupal\media\MediaInterface[]
+   *   List of media entities.
    */
   public function processData(string $data);
 

@@ -9,7 +9,8 @@ use Drupal\Component\Annotation\Plugin;
  *
  * Plugin Namespace: Plugin\GutenbergPlugin.
  *
- * For a working example, see \Drupal\gutenberg\Plugin\GutenbergPlugin\DrupalImage
+ * For a working example, see
+ * \Drupal\gutenberg\Plugin\GutenbergPlugin\DrupalImage
  *
  * @see \Drupal\gutenberg\GutenbergPluginManager
  * @see hook_gutenberg_plugin_info_alter()
@@ -29,9 +30,9 @@ class GutenbergPlugin extends Plugin {
   /**
    * The human-readable name of the Gutenberg plugin.
    *
-   * @ingroup plugin_translatable
-   *
    * @var \Drupal\Core\Annotation\Translation
+   *
+   * @ingroup plugin_translatable
    */
   public $label;
 

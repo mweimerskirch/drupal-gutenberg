@@ -22,22 +22,23 @@
  * @param \Drupal\Core\Entity\Query\Sql\Query $query
  *   Entity query object.
  */
-function hook_gutenberg_media_search_query_alter(Symfony\Component\HttpFoundation\Request $request, string $type = NULL, string $search = NULL, Drupal\Core\Entity\Query\Sql\Query $query) {
+function hook_gutenberg_media_search_query_alter(Request $request, string $type = NULL, string $search = NULL, Query $query) {
   if ($type == 'image') {
     $query->condition('uri', 'public://avatars/%', 'NOT LIKE');
   }
 }
 
 /**
- * ☠️ DEPRECATED ☠️
+ * DEPRECATED.
+ *
  * You can use Drupal libraries. Check gutenberg.libraries.yml for an example.
  * Modify the list of CSS and JS files for blocks.
  *
- * @param $js_files_edit
+ * @param array $js_files_edit
  *   An array of all js files to be included on the editor.
- * @param $css_files_edit
+ * @param array $css_files_edit
  *   An array of all css files to be included on the editor.
- * @param $css_files_view
+ * @param array $css_files_view
  *   An array of all css files to be included on the node view.
  */
 function hook_gutenberg_blocks_alter(array &$js_files_edit, array &$css_files_edit, array &$css_files_view) {

@@ -7,6 +7,8 @@ use Drupal\media_library\MediaLibraryState;
 use Drupal\media_library\MediaLibraryUiBuilder;
 
 /**
+ * Class GutenbergMediaLibraryUiBuilder.
+ *
  * This is temporary fix for the issue that causes problem with file upload
  * on initial media library dialog render.
  *
@@ -23,13 +25,13 @@ class GutenbergMediaLibraryUiBuilder extends MediaLibraryUiBuilder {
     $allowed_type_ids = $state->getAllowedTypeIds();
 
     // @todo: this is temporary fix that allows for rendering at least one tab
-    //   to make it clickable on frontend side by Gutenberg.
+    // to make it clickable on frontend side by Gutenberg.
     if (!$allowed_type_ids) {
       return [];
     }
 
     // @todo: Add a class to the li element.
-    //   https://www.drupal.org/project/drupal/issues/3029227
+    // https://www.drupal.org/project/drupal/issues/3029227
     $menu = [
       '#theme' => 'links',
       '#links' => [],

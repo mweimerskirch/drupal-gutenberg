@@ -15,11 +15,15 @@ class MediaEntityRenderer implements MediaEntityRendererInterface {
   use AssertMediaTrait;
 
   /**
+   * Drupal\Core\Render\RendererInterface instance.
+   *
    * @var \Drupal\Core\Render\RendererInterface
    */
   protected $renderer;
 
   /**
+   * Entity type manager instance.
+   *
    * @var \Drupal\Core\Entity\EntityTypeManagerInterface
    */
   protected $entityTypeManager;
@@ -28,7 +32,9 @@ class MediaEntityRenderer implements MediaEntityRendererInterface {
    * MediaEntityRenderer constructor.
    *
    * @param \Drupal\Core\Render\RendererInterface $renderer
+   *   The renderer.
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
+   *   The entity type manager.
    */
   public function __construct(RendererInterface $renderer, EntityTypeManagerInterface $entity_type_manager) {
     $this->renderer = $renderer;

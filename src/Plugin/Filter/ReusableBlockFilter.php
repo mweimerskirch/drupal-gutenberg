@@ -7,6 +7,8 @@ use Drupal\filter\Plugin\FilterBase;
 use Drupal\block_content\Entity\BlockContent;
 
 /**
+ * Class ReusableBlockFilter.
+ *
  * @Filter(
  *   id = "filter_reusable_block",
  *   title = @Translation("Gutenberg Reusable Block filter"),

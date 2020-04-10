@@ -6,10 +6,12 @@ use Drupal\Core\Controller\ControllerBase;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Drupal\node\Entity\Node;
+
 /**
  * Returns responses for our image routes.
  */
 class SearchController extends ControllerBase {
+
   /**
    * Search content.
    *
@@ -30,7 +32,7 @@ class SearchController extends ControllerBase {
     $node_ids = $query->execute();
     $nodes = Node::loadMultiple($node_ids);
     $result = [];
-    foreach($nodes as $node) {
+    foreach ($nodes as $node) {
       $result[] = [
         'id' => $node->id(),
         'title' => $node->getTitle(),
@@ -40,4 +42,5 @@ class SearchController extends ControllerBase {
 
     return new JsonResponse($result);
   }
+
 }

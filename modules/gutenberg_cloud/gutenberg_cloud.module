@@ -1,6 +1,11 @@
 <?php
 
 /**
+ * @file
+ * Provides integration with Gutenberg cloud.
+ */
+
+/**
  * Implements hook_gutenberg_blocks_alter().
  */
 function gutenberg_cloud_gutenberg_blocks_alter(array &$js_files_edit, array &$css_files_edit, array &$css_files_view) {
@@ -9,7 +14,7 @@ function gutenberg_cloud_gutenberg_blocks_alter(array &$js_files_edit, array &$c
 
   $base_url = $cloudBlocksManager->getCdnUrl();
 
-  foreach($blocks as $block) {
+  foreach ($blocks as $block) {
     if ($block->getEditCss()) {
       $css_files_edit[] = $block->getAssetUrl('edit_css', $base_url);
     }
@@ -36,7 +41,7 @@ function gutenberg_cloud_theme() {
         'author_url' => NULL,
         'picture' => NULL,
         'tags' => [],
-      ]
-    ]
+      ],
+    ],
   ];
 }

@@ -65,6 +65,7 @@ class MediaSelectionProcessorManager implements MediaSelectionProcessorManagerIn
    *   Name of media selection processor.
    *
    * @return bool
+   *   TRUE if the specified processor type exists, FALSE otherwise.
    */
   public function isRegistered(string $processor_name) {
     return array_key_exists($processor_name, $this->processors);

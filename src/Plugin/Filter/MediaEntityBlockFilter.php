@@ -9,6 +9,8 @@ use Drupal\gutenberg\MediaEntityRendererInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
+ * Class MediaEntityBlockFilter.
+ *
  * @Filter(
  *   id = "filter_media_entity_block",
  *   title = @Translation("Gutenberg Media Entity Block filter"),
@@ -21,6 +23,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class MediaEntityBlockFilter extends FilterBase implements ContainerFactoryPluginInterface {
 
   /**
+   * The media entity renderer.
+   *
    * @var \Drupal\gutenberg\MediaEntityRendererInterface
    */
   protected $mediaEntityRenderer;
@@ -54,12 +58,16 @@ class MediaEntityBlockFilter extends FilterBase implements ContainerFactoryPlugi
   }
 
   /**
-   * Callbacks to preg replace from ::process method and returns rendered media entity.
+   * The render function.
+   *
+   * Callbacks to preg replace from ::process method and returns rendered media
+   * entity.
    *
    * @param array $match
    *   Array of preg matched items.
    *
    * @return string
+   *   The rendered media entity.
    */
   protected function render(array $match) {
     if (!isset($match[2])) {

@@ -4,7 +4,6 @@ namespace Drupal\gutenberg\Service;
 
 use Drupal\Core\Database\Connection;
 use Drupal\Core\Entity\EntityDisplayRepositoryInterface;
-use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityTypeBundleInfoInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
@@ -21,64 +20,91 @@ use Drupal\media_library\MediaLibraryState;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * The media service class.
+ */
 class MediaService {
 
   /**
+   * The media type guesser.
+   *
    * @var \Drupal\gutenberg\MediaTypeGuesserInterface
    */
   protected $mediaTypeGuesser;
 
   /**
+   * The entity type manager.
+   *
    * @var \Drupal\Core\Entity\EntityTypeManagerInterface
    */
   protected $entityTypeManager;
 
   /**
+   * The media type persistence manager.
+   *
    * @var \Drupal\gutenberg\Persistence\MediaTypePersistenceManager
    */
   protected $mediaTypePersisterManager;
 
   /**
+   * The entity data provider manager.
+   *
    * @var \Drupal\gutenberg\DataProvider\EntityDataProviderManager
    */
   protected $entityDataProviderManager;
 
   /**
+   * The module handler.
+   *
    * @var \Drupal\Core\Extension\ModuleHandlerInterface
    */
   protected $moduleHandler;
 
   /**
+   * The media uploader.
+   *
    * @var \Drupal\gutenberg\MediaUploaderInterface
    */
   protected $mediaUploader;
 
   /**
+   * Drupal\Core\Render\RendererInterface instance.
+   *
    * @var \Drupal\Core\Render\RendererInterface
    */
   protected $renderer;
 
   /**
+   * The entity type bundle info.
+   *
    * @var \Drupal\Core\Entity\EntityTypeBundleInfoInterface
    */
   protected $entityTypeBundleInfo;
 
   /**
+   * The media entity renderer.
+   *
    * @var \Drupal\gutenberg\MediaEntityRendererInterface
    */
   protected $mediaEntityRenderer;
 
   /**
+   * The media library UI builder.
+   *
    * @var \Drupal\media_library\MediaLibraryUiBuilder|null
    */
   protected $builder;
 
   /**
+   * The database connection.
+   *
    * @var \Drupal\Core\Database\Connection
    */
   protected $connection;
 
   /**
+   * The entity display repository.
+   *
    * @var \Drupal\Core\Entity\EntityDisplayRepositoryInterface
    */
   protected $entityDisplayRepository;
@@ -87,16 +113,27 @@ class MediaService {
    * MediaController constructor.
    *
    * @param \Drupal\gutenberg\MediaTypeGuesserInterface $media_type_guesser
+   *   The media type guesser.
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
+   *   The entity type manager.
    * @param \Drupal\gutenberg\Persistence\MediaTypePersistenceManager $media_type_persistence_manager
+   *   The media type persistence manager.
    * @param \Drupal\gutenberg\DataProvider\EntityDataProviderManager $entity_data_provider_manager
+   *   The entity data provider manager.
    * @param \Drupal\Core\Extension\ModuleHandlerInterface $module_handler
+   *   The module handler.
    * @param \Drupal\gutenberg\MediaUploaderInterface $media_uploader
+   *   The media uploader.
    * @param \Drupal\Core\Render\RendererInterface $renderer
+   *   The renderer.
    * @param \Drupal\Core\Entity\EntityTypeBundleInfoInterface $entity_type_bundle_info
+   *   The entity type bundle service.
    * @param \Drupal\gutenberg\MediaEntityRendererInterface $media_entity_renderer
+   *   The media entity renderer.
    * @param \Drupal\Core\Database\Connection $connection
+   *   The database connection.
    * @param \Drupal\Core\Entity\EntityDisplayRepositoryInterface $entity_display_repository
+   *   The entity display repository.
    */
   public function __construct(
     MediaTypeGuesserInterface $media_type_guesser,
@@ -135,6 +172,8 @@ class MediaService {
    *   Array of media types.
    *
    * @return string
+   *   The rendered element.
+   *
    * @throws \Drupal\gutenberg\Service\MediaTypeNotFoundException
    */
   public function renderDialog(array $media_types) {
@@ -164,8 +203,8 @@ class MediaService {
    * @param \Drupal\media\MediaInterface $media_entity
    *   Media entity instance.
    *
-   *
    * @return array
+   *   The rendered view modes.
    */
   public function getRenderedMediaEntity(MediaInterface $media_entity) {
     $rendered_view_modes = [];
@@ -198,6 +237,8 @@ class MediaService {
    *   Editor entity instance.
    *
    * @return mixed
+   *   The media entity data.
+   *
    * @throws \Drupal\gutenberg\Service\FileEntityNotSavedException
    * @throws \Drupal\gutenberg\Service\MediaEntityNotSavedException
    * @throws \Drupal\gutenberg\Service\MediaEntityNotMatchedException
@@ -234,6 +275,8 @@ class MediaService {
    *   File entity instance.
    *
    * @return mixed
+   *   The file entity data.
+   *
    * @throws \Exception
    */
   public function loadFileData(FileInterface $file) {
@@ -247,6 +290,8 @@ class MediaService {
    *   Media entity instance.
    *
    * @return mixed
+   *   The file entity data for the specified media.
+   *
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
@@ -267,6 +312,8 @@ class MediaService {
    *   Specific filename to search for.
    *
    * @return array
+   *   The found file entities.
+   *
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
@@ -287,7 +334,12 @@ class MediaService {
     }
     $query->sort('created', 'DESC');
 
-    $this->moduleHandler->invokeAll('gutenberg_media_search_query_alter', [$request, $type, $search, $query]);
+    $this->moduleHandler->invokeAll('gutenberg_media_search_query_alter', [
+      $request,
+      $type,
+      $search,
+      $query,
+    ]);
 
     $files = $this->entityTypeManager->getStorage('file')->loadMultiple($query->execute());
     $result = [];
@@ -304,8 +356,9 @@ class MediaService {
    *
    * @param string $fid
    *   File entity ID.
+   * @param array $data
+   *   Media data.
    *
-   * @return void
    * @throws \Exception
    */
   public function updateMediaData(string $fid, array $data) {
@@ -324,13 +377,15 @@ class MediaService {
    *   Text to search. Can be an ID.
    *
    * @return array
+   *   The media entity results.
    */
   public function getMediaEntityAutoCompleteData(string $search) {
     try {
       $query = $this->entityTypeManager->getStorage('media')->getQuery();
       if (is_numeric($search)) {
         $query->condition('id', $search);
-      } else {
+      }
+      else {
         $query->condition('name', $search, 'CONTAINS');
       }
       $query->condition('uid', \Drupal::currentUser()->id());
@@ -349,8 +404,9 @@ class MediaService {
           ];
         }, $media_entities)
       );
-    } catch (\Throwable $exception) {
-        return [];
+    }
+    catch (\Throwable $exception) {
+      return [];
     }
   }
 

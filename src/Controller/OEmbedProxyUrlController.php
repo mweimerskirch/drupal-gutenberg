@@ -20,6 +20,7 @@ class OEmbedProxyUrlController extends ControllerBase {
    * HTTP request.
    *
    * @return bool|\Symfony\Component\HttpFoundation\JsonResponse
+   *   The JSON response.
    *
    * @throws \GuzzleHttp\Exception\GuzzleException
    */

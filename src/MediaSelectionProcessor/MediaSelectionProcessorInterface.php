@@ -3,7 +3,7 @@
 namespace Drupal\gutenberg\MediaSelectionProcessor;
 
 /**
- * Interface MediaSelectionProcessorInterface
+ * Interface MediaSelectionProcessorInterface.
  *
  * @package Drupal\gutenberg\MediaSelectionProcessor
  */
@@ -16,6 +16,7 @@ interface MediaSelectionProcessorInterface {
    *   Array of data to process.
    *
    * @return \Drupal\media\MediaInterface[]
+   *   The list of media entities.
    */
   public function process(array $data);
 

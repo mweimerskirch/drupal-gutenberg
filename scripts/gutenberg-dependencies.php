@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Gets Gutenberg dependencies.
+ */
+
 use Symfony\Component\Yaml\Yaml;
 use Drupal\gutenberg\ScanDir;
 
@@ -8,8 +13,12 @@ if (PHP_SAPI !== 'cli') {
 }
 
 /**
- * 
+ * Gets the root dir.
+ *
+ * @return string
+ *   The root dir.
  */
+// phpcs:ignore
 function getRootDir() {
   $dirs = explode(DIRECTORY_SEPARATOR, __DIR__);
 
@@ -33,7 +42,7 @@ $total = count($files);
 $packages = [];
 
 foreach ($files as $file) {
-  if (substr( $file, 0, 1 ) !== '.' && $file !== NULL) {
+  if (substr($file, 0, 1) !== '.' && $file !== NULL) {
     $packages[] = $file;
   }
 }
@@ -41,14 +50,9 @@ foreach ($files as $file) {
 foreach ($packages as $package) {
   unset($yaml[$package]);
 
-  $package_settings = include_once('../vendor/gutenberg/' . $package . '/index.asset.php');
+  $package_settings = include_once '../vendor/gutenberg/' . $package . '/index.asset.php';
   $deps = $package_settings['dependencies'];
   $version = $package_settings['version'];
-
-  // $deps = file_get_contents('../vendor/gutenberg/' . $package . '/index.deps.json');
-  // if (!empty($deps)) {
-  //   $deps = json_decode($deps);
-  // }
 
   $jsFiles = ScanDir::scan('../vendor/gutenberg/' . $package, 'js');
   $cssFiles = ScanDir::scan('../vendor/gutenberg/' . $package, 'css');
@@ -73,7 +77,7 @@ foreach ($packages as $package) {
   }
 }
 
-// Customize i18n package sources
+// Customize i18n package sources.
 if (isset($yaml['i18n'])) {
   $yaml['i18n']['js'] = [
     'js/i18n.js' => [],
@@ -81,5 +85,4 @@ if (isset($yaml['i18n'])) {
   ];
 }
 
-// print_r(Yaml::dump($yaml, 4, 2, false, true));
-file_put_contents('../gutenberg.libraries.yml', Yaml::dump($yaml, 4, 2, false, true));
+file_put_contents('../gutenberg.libraries.yml', Yaml::dump($yaml, 4, 2, FALSE, TRUE));

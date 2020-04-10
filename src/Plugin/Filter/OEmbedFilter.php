@@ -9,6 +9,8 @@ use Drupal\Core\Form\FormStateInterface;
 define('OEMBED_DEFAULT_PROVIDER', 'http://open.iframe.ly/api/oembed');
 
 /**
+ * Class OEmbedFilter.
+ *
  * @Filter(
  *   id = "filter_oembed",
  *   title = @Translation("Gutenberg oEmbed filter"),
@@ -149,15 +151,16 @@ class OEmbedFilter extends FilterBase {
   }
 
   /**
-   * Locally create HTML after pattern study for sites that don't support oEmbed.
+   * Get contents.
+   *
+   * Locally create HTML after pattern study for sites that don't support
+   * oEmbed.
    */
   private function getContents($provider, $url) {
-    // variable_get('oembed_maxwidth', 0);
     $width = $this->settings['oembed_maxwidth'];
 
     switch ($provider) {
       case 'google-maps':
-        // $url    = str_replace('&', '&amp;', $url); Though Google encodes ampersand, it seems to work without it.
         $height = (int) ($width / 1.3);
         $embed = "<iframe width='{$width}' height='{$height}' frameborder='0' scrolling='no' marginheight='0' marginwidth='0' src='{$url}&output=embed'></iframe><br /><small><a href='{$url}&source=embed' style='color:#0000FF;text-align:left'>View Larger Map</a></small>";
         break;

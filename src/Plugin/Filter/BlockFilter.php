@@ -10,6 +10,8 @@ use Drupal\gutenberg\BlocksRendererHelper;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
+ * Class BlockFilter.
+ *
  * @Filter(
  *   id = "filter_block",
  *   title = @Translation("Gutenberg Block filter"),
@@ -112,22 +114,4 @@ class BlockFilter extends FilterBase implements ContainerFactoryPluginInterface 
     return $comment . $content;
   }
 
-  /**
-   * Define settings for text filter.
-   */
-  // public function settingsForm(array $form, FormStateInterface $form_state) {
-  //   $form['oembed_providers'] = array(
-  //     '#type' => 'textarea',
-  //     '#title' => $this->t('Providers'),
-  //     '#default_value' => $this->settings['oembed_providers'],
-  //     '#description' => $this->t('A list of oEmbed providers. Add your own by adding a new line and using this pattern: [Url to match] | [oEmbed endpoint] | [Use regex (true or false)]'),
-  //   );
-  //   $form['oembed_maxwidth'] = array(
-  //     '#type' => 'textfield',
-  //     '#title' => $this->t('Maximum width of media embed'),
-  //     '#default_value' => $this->settings['oembed_maxwidth'],
-  //     '#description' => $this->t('Set the maximum width of an embedded media. The unit is in pixels, but only put a number in the textbox.'),
-  //   );
-  //   return $form;
-  // }
 }

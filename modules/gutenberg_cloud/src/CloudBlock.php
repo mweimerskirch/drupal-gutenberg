@@ -32,7 +32,7 @@ class CloudBlock extends CloudBlockBase {
   /**
    * Getter for raw block.
    *
-   * @return \stdClass|null
+   * @return object|null
    *   Block object, defaults to null.
    */
   public function getRaw() {
@@ -75,7 +75,7 @@ class CloudBlock extends CloudBlockBase {
   /**
    * Map the API block to CloudBlock properties.
    *
-   * @param \stdClass $block
+   * @param object $block
    *   Cloud Block from API.
    */
   protected function mapFromBlock(\stdClass $block) {

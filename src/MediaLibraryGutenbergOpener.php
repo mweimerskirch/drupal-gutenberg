@@ -26,8 +26,9 @@ class MediaLibraryGutenbergOpener implements MediaLibraryOpenerInterface {
    * {@inheritdoc}
    */
   public function getSelectionResponse(MediaLibraryState $state, array $selected_ids) {
-    // This is not being triggered by Gutenberg and it's handled on React side, but we
-    // need to implement the interface, so we just return an empty AJAX response.
+    // This is not being triggered by Gutenberg and it's handled on React side,
+    // but we need to implement the interface, so we just return an empty AJAX
+    // response.
     return new AjaxResponse();
   }
 

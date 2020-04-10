@@ -4,27 +4,17 @@
  * @file
  * Install, update and uninstall functions for the gutenberg module.
  */
+
 use Drupal\Core\Database\Database;
 
 /**
- * Add 'data' blob field to 'file_managed' table.
+ * Implements hook_schema().
  */
-// function gutenberg_update_8101() {
-//   $spec = array(
-//     'type' => 'blob',
-//     'size' => 'big',
-//     'description' => 'A serialized configuration object data.',
-//     'not null' => FALSE,
-//   );
-//   $schema = Database::getConnection()->schema();
-//   $schema->addField('file_managed', 'data', $spec);
-// }
-
 function gutenberg_schema() {
   $schema['file_managed_data'] = [
     'description' => '',
     'fields' => [
-      'fid' => [      
+      'fid' => [
         'description' => 'The {file_managed}.fid this record affects.',
         'type' => 'int',
         'unsigned' => TRUE,
@@ -35,7 +25,7 @@ function gutenberg_schema() {
         'type' => 'blob',
         'size' => 'big',
         'description' => 'A serialized configuration object data.',
-        'not null' => FALSE,    
+        'not null' => FALSE,
       ],
     ],
   ];

@@ -16,11 +16,13 @@ use Drupal\image\Entity\ImageStyle;
 use Drupal\gutenberg\Controller\UtilsController;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\CloseModalDialogCommand;
+
 /**
  * Implements hook_form_alter().
  */
 function gutenberg_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-  // TODO: There's got to be a better way to alter all media forms regardless the type.
+  // TODO: There's got to be a better way to alter all media forms regardless
+  // the type.
   if (
     $form_id == 'media_video_edit_form' ||
     $form_id == 'media_image_edit_form' ||
@@ -37,7 +39,7 @@ function gutenberg_form_alter(&$form, FormStateInterface $form_state, $form_id) 
     $form['gutenberg'] = [
       '#type' => 'details',
       '#title' => t('Gutenberg experience'),
-      '#description' => t(''),
+      '#description' => '',
       '#group' => 'additional_settings',
       '#weight' => 999,
       'enable_gutenberg_experience' => [
@@ -63,7 +65,7 @@ function gutenberg_form_alter(&$form, FormStateInterface $form_state, $form_id) 
       '#states' => [
         'visible' => [
           'input[name="enable_gutenberg_experience"]' => ['checked' => TRUE],
-        ]
+        ],
       ],
     ];
 
@@ -80,7 +82,7 @@ function gutenberg_form_alter(&$form, FormStateInterface $form_state, $form_id) 
       '#states' => [
         'visible' => [
           'input[name="enable_gutenberg_experience"]' => ['checked' => TRUE],
-        ]
+        ],
       ],
     ];
 
@@ -90,7 +92,7 @@ function gutenberg_form_alter(&$form, FormStateInterface $form_state, $form_id) 
       '#states' => [
         'visible' => [
           'input[name="enable_gutenberg_experience"]' => ['checked' => TRUE],
-        ]
+        ],
       ],
     ];
 
@@ -115,13 +117,13 @@ function gutenberg_form_alter(&$form, FormStateInterface $form_state, $form_id) 
 
       $default_values = array_combine(
         array_map(
-          function($block){
+          function ($block) {
             return $block['id'];
           },
           $category['blocks']
         ),
         array_map(
-          function($block){
+          function ($block) {
             return $block['default'] ? $block['id'] : 0;
           },
           $category['blocks']
@@ -143,7 +145,7 @@ function gutenberg_form_alter(&$form, FormStateInterface $form_state, $form_id) 
       '#states' => [
         'visible' => [
           'input[name="enable_gutenberg_experience"]' => ['checked' => TRUE],
-        ]
+        ],
       ],
     ];
 
@@ -161,14 +163,14 @@ function gutenberg_form_alter(&$form, FormStateInterface $form_state, $form_id) 
     ];
 
     $default_values = array_fill_keys(
-      array_map(function($key){
+      array_map(function ($key) {
         return str_replace('drupalblock/', '', $key);
       }, $settings['default_drupal_blocks']),
-      true
+      TRUE
     );
 
     foreach ($groups as $key => $blocks) {
-      $group_reference = preg_replace('@[^a-z0-9-]+@','_', strtolower($key));
+      $group_reference = preg_replace('@[^a-z0-9-]+@', '_', strtolower($key));
       $options = [];
       $input_default_values = [];
 
@@ -208,12 +210,17 @@ function gutenberg_form_alter(&$form, FormStateInterface $form_state, $form_id) 
 }
 
 /**
+ * Alters the node form submit.
  *
+ * @param array $form
+ *   The form definition array.
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ *   The current state of the form.
  */
 function _gutenberg_node_type_form_submit(array $form, FormStateInterface $form_state) {
-  $gutenberg_enabled =  $form_state->getValue('enable_gutenberg_experience');
-  $template =  $form_state->getValue('gutenberg_template');
-  $template_lock =  $form_state->getValue('gutenberg_template_lock');
+  $gutenberg_enabled = $form_state->getValue('enable_gutenberg_experience');
+  $template = $form_state->getValue('gutenberg_template');
+  $template_lock = $form_state->getValue('gutenberg_template_lock');
 
   $config = \Drupal::service('config.factory')->getEditable('gutenberg.settings');
   $config->set($form_state->getValue('type') . '_enable_full', $gutenberg_enabled)->save();
@@ -225,7 +232,7 @@ function _gutenberg_node_type_form_submit(array $form, FormStateInterface $form_
     $config->clear($form_state->getValue('type') . '_gutenberg_template_lock')->save();
     return;
   }
-  //Save template settings
+  // Save template settings.
   $config->set($form_state->getValue('type') . '_template', $template)->save();
   $config->set($form_state->getValue('type') . '_template_lock', $template_lock)->save();
 
@@ -261,18 +268,18 @@ function gutenberg_form_node_form_alter(&$form, FormStateInterface $form_state) 
     return;
   }
 
-  // Set template options to global var
+  // Set template options to global var.
   $form['#attached']['drupalSettings']['gutenberg']['template'] = json_decode($config->get($node_type . '_template'));
   $form['#attached']['drupalSettings']['gutenberg']['template-lock'] = $config->get($node_type . '_template_lock');
 
-  /**
+  /*
    * DEPRECATED >>>
    */
   $mapped_fields = _gutenberg_get_mapped_fields(json_decode($config->get($node_type . '_template')));
   foreach ($mapped_fields as $item) {
     $form[$item['field']]['#access'] = FALSE;
   }
-  /**
+  /*
    * <<< DEPRECATED
    */
 
@@ -285,7 +292,7 @@ function gutenberg_form_node_form_alter(&$form, FormStateInterface $form_state) 
   $module_settings = _gutenberg_get_all_modules_settings();
   foreach ($module_settings as $settings) {
     if (isset($settings['libraries-edit'])) {
-      foreach($settings['libraries-edit'] as $library) {
+      foreach ($settings['libraries-edit'] as $library) {
         $form['#attached']['library'][] = $library;
       }
     }
@@ -366,21 +373,15 @@ function gutenberg_form_node_form_alter(&$form, FormStateInterface $form_state) 
   }
 
   // Let's move the remaining fields to a "special"
-  // form group that can be used lated by JS to move to
+  // form group that can be used later by JS to move to
   // Gutenberg's sidebar.
-  // $form['additional_fields'] = [
-  //   '#type' => 'details',
-  //   '#access' => TRUE,
-  //   '#title' => t('More settings'),
-  //   '#weight' => 99,
-  //   '#group' => 'advanced',
-  // ];
   $form['metabox_fields'] = [
     '#type' => 'details',
     '#access' => TRUE,
     '#title' => t('More settings'),
     '#weight' => 99,
-    '#group' => 'advanced', // group fallback in case JS fails to move to metaboxes.
+    // Group fallback in case JS fails to move to metaboxes.
+    '#group' => 'advanced',
   ];
 
   // Some other module might have already init this container.
@@ -417,7 +418,7 @@ function gutenberg_form_node_form_alter(&$form, FormStateInterface $form_state) 
     'langcode',
   ];
 
-  /**
+  /*
    * Rationale behind this "messy" algo:
    * If there's any details fieldset on the form, add it to a special array
    * and then, on the form after build, add its #id to a JS array.
@@ -437,7 +438,8 @@ function gutenberg_form_node_form_alter(&$form, FormStateInterface $form_state) 
         && isset($form[$value]['widget'][0]['#type'])
         && $form[$value]['widget'][0]['#type'] === 'details') {
         $fields_with_details[] = $value;
-      } else {
+      }
+      else {
         $form[$value]['#group'] = 'metabox_fields';
         $metabox_has_fields = TRUE;
       }
@@ -467,6 +469,9 @@ function gutenberg_form_node_form_alter(&$form, FormStateInterface $form_state) 
   }
 }
 
+/**
+ * Handle messages.
+ */
 function gutenberg_handle_messages(&$form) {
   $messages = \Drupal::messenger()->deleteAll();
   $form['#attached']['drupalSettings']['gutenberg']['messages'] = $messages;
@@ -492,7 +497,7 @@ function gutenberg_form_node_form_details_after_build(array $element, FormStateI
 }
 
 /**
- *
+ * Alter media form.
  */
 function _gutenberg_media_form_alter(array &$form, FormStateInterface $form_state, string $form_id) {
   $is_gutenberg = !is_null(\Drupal::request()->query->get('gutenberg'));
@@ -500,14 +505,11 @@ function _gutenberg_media_form_alter(array &$form, FormStateInterface $form_stat
     return;
   }
 
-  $form['actions']['delete']['#access'] = false;
+  $form['actions']['delete']['#access'] = FALSE;
   unset($form['actions']['delete']);
   $form['#after_build'][] = 'gutenberg_form_media_edit_form_after_build';
-  // dpm('test');
-  // $form['actions']['submit']['#ajax'] = false;
   $form['actions']['submit']['#submit'][] = 'gutenberg_form_media_edit_form_submit';
   $form['actions']['submit']['#ajax'] = [
-    // 'callback' => '::submitForm',
     'callback' => 'gutenberg_form_media_edit_form_submit',
     'event' => 'click',
   ];
@@ -522,11 +524,10 @@ function _gutenberg_media_form_alter(array &$form, FormStateInterface $form_stat
     ],
   ];
   $form['#submit'][] = 'gutenberg_form_media_edit_form_submit';
-  // kint($form);
 }
 
 /**
- *
+ * Alter media edit form submit.
  */
 function gutenberg_form_media_edit_form_submit(array $form, FormStateInterface $form_state) {
   $form_state->disableRedirect();
@@ -537,7 +538,7 @@ function gutenberg_form_media_edit_form_submit(array $form, FormStateInterface $
 }
 
 /**
- *
+ * Alter media edit form cancel.
  */
 function gutenberg_form_media_edit_form_cancel(array $form, FormStateInterface $form_state) {
   $form_state->disableRedirect();
@@ -548,10 +549,9 @@ function gutenberg_form_media_edit_form_cancel(array $form, FormStateInterface $
 }
 
 /**
- *
+ * Alter media edit form.
  */
 function gutenberg_form_media_edit_form_after_build(array $element, FormStateInterface $form_state) {
-  // kint($element);
   return $element;
 }
 
@@ -574,7 +574,7 @@ function gutenberg_preprocess_node(&$variables) {
   $module_settings = _gutenberg_get_all_modules_settings();
   foreach ($module_settings as $settings) {
     if (isset($settings['libraries-view'])) {
-      foreach($settings['libraries-view'] as $library) {
+      foreach ($settings['libraries-view'] as $library) {
         $variables['#attached']['library'][] = $library;
       }
     }
@@ -603,17 +603,18 @@ function gutenberg_entity_presave($entity) {
     return;
   }
 
-  /**
+  /*
    * DEPRECATED >>>
    * To be removed on 1.12 or 1.13 (2.0?)
    */
-  // get first text field, that's the one that'll have
+  // Get first text field, that's the one that'll have
   // gutenberg text format
   // TODO: We already have this on node_edit_form_alter,
-  //       let's move it to a function.
+  // let's move it to a function.
   $value_fields = ['title'];
   $text_fields = [];
-  $file_fields = []; // used for media
+  // Used for media.
+  $file_fields = [];
 
   // Iterate over all node fields and apply gutenberg text format
   // on first text field found.
@@ -628,7 +629,7 @@ function gutenberg_entity_presave($entity) {
       $value_fields[] = $value;
     }
 
-    // Check for "rich-text" fields
+    // Check for "rich-text" fields.
     if (in_array('format', array_keys($field_properties))) {
       $text_fields[] = $value;
     }
@@ -636,7 +637,7 @@ function gutenberg_entity_presave($entity) {
     if (isset($field_properties['entity'])) {
       $settings = $definition->getSettings();
 
-      // Check for images/files
+      // Check for images/files.
       if ($settings['target_type'] === 'file') {
         $file_fields[] = $value;
       }
@@ -652,25 +653,23 @@ function gutenberg_entity_presave($entity) {
   }
 
   $str = $entity->get($text_fields[0])->getString();
-  // iterate over all mapped fields and set its values
+  // Iterate over all mapped fields and set its values.
   $mapped_fields = _gutenberg_get_mapped_fields(json_decode($config->get($node_type . '_template')));
   foreach ($mapped_fields as $item) {
     $re = '/((<!-- .*?\{.*"mappingField":"' . $item['field'] . '".*} -->)([\s\S]*?)(<!-- \/[\s\S]*?-->|\/-->)|(<!-- .*?\{.*"mappingField":"' . $item['field'] . '".*} \/-->))/m';
-    // $re = '/((<!-- .*?\{.*"mappingField":"' . $item['field'] . '".*} -->)([\s\S]*?)(<!-- \/[\s\S]*?-->)|(<!-- .*?\{.*"mappingField":"' . $item['field']  . '".*} -->)([\s\S]*?)(<!-- \/[\s\S]*?\/-->))/m';
-    // $re = '/(<!--[\s\S]+?\{[\s\S]+?"mappingField":"' . $item['field']  . '"[\s\S]+?} -->)([\s\S]+?)(<!-- \/[\s\S]+?-->|\/-->)/m';
     // matches:
     // 0: all block
     // 1: opening block comment tag (get attributes from here)
     // 2: content
-    // 3: closing block comment tag
+    // 3: closing block comment tag.
     preg_match_all($re, $str, $matches, PREG_SET_ORDER, 0);
-    // get block attributes
+    // Get block attributes.
     $re = '/((<!-- .*?({[\s\S]*}).*-->)|(<!-- .*?({[\s\S]*}).*\/-->))/m';
     $tag = $matches[0][2] !== '' ? $matches[0][2] : $matches[0][1];
     preg_match_all($re, $tag, $attrs, PREG_SET_ORDER, 0);
-    $attributes = json_decode($attrs[0][3], true);
+    $attributes = json_decode($attrs[0][3], TRUE);
 
-    // Remove line breaks
+    // Remove line breaks.
     $re = '/\r?\n|\r/';
     $value = $matches[0][3];
     $value = preg_replace($re, '', $value);
@@ -679,7 +678,7 @@ function gutenberg_entity_presave($entity) {
       $entity->set($item['field'], strip_tags($value));
     }
 
-    // Set text fields
+    // Set text fields.
     if (in_array($item['field'], $text_fields)) {
       $entity->set($item['field'], $matches[0][3]);
     }
@@ -689,7 +688,7 @@ function gutenberg_entity_presave($entity) {
       $entity->set($item['field'], ['target_id' => $value]);
     }
   }
-  /**
+  /*
    * <<< DEPRECATED
    */
   $mapped_fields = _gutenberg_get_mapping_fields(json_decode($config->get($node_type . '_template')));
@@ -699,13 +698,13 @@ function gutenberg_entity_presave($entity) {
 
   // Let's build the field's array of values.
   $fields = [];
-  // For each block match
+  // For each block match.
   foreach ($blocks as $block) {
-    // get block attributes
+    // Get block attributes.
     $re = '/((^<!-- .*?({[\s\S]*}).*-->$))/m';
     $tag = $block[2] !== '' ? $block[2] : $block[1];
     preg_match_all($re, $tag, $attrs, PREG_SET_ORDER, 0);
-    $attributes = json_decode($attrs[0][3], true);
+    $attributes = json_decode($attrs[0][3], TRUE);
 
     // Remove line breaks from block's "inner" content.
     // $content is the "inner" content.
@@ -747,7 +746,9 @@ function gutenberg_entity_presave($entity) {
 
 /**
  * Gets all mapped fields on the template (recursive).
+ *
  * @deprecated in gutenberg:8.x-1.11
+ * @see https://www.drupal.org/node/3109876
  */
 function _gutenberg_get_mapped_fields($template, &$result = []) {
   if (empty($template)) {
@@ -829,7 +830,7 @@ function _gutenberg_get_default_theme_settings() {
 function _gutenberg_get_all_modules_settings() {
   $settings = &drupal_static(__FUNCTION__);
 
-  if(!isset($settings)) {
+  if (!isset($settings)) {
     $directories = \Drupal::service('module_handler')->getModuleDirectories();
     $discovery = new YamlDiscovery('gutenberg', $directories);
     $settings = $discovery->findAll();
@@ -838,10 +839,13 @@ function _gutenberg_get_all_modules_settings() {
   return $settings;
 }
 
+/**
+ * Gets allowed blocks.
+ */
 function _gutenberg_get_allowed_blocks() {
   $settings = &drupal_static(__FUNCTION__);
 
-  if(!isset($settings)) {
+  if (!isset($settings)) {
     $module_handler = \Drupal::service('module_handler');
     $path = $module_handler->getModule('gutenberg')->getPath();
 
@@ -880,14 +884,6 @@ function gutenberg_theme_suggestions_node_edit_form_alter(array &$suggestions, a
   }
 
   $suggestions = ['node_edit_form__gutenberg'];
-}
-
-/**
- * Implements hook_theme_registry_alter.
- */
-function gutenberg_theme_registry_alter(&$theme_registry) {
-  // dsm($theme_registry);
-  // $theme_registry['page']['path'] = drupal_get_path('module', 'my_module') . '/templates';
 }
 
 /**
@@ -974,7 +970,7 @@ function gutenberg_element_info_alter(array &$info) {
  * @return array
  *   Processed render element.
  */
-function _gutenberg_text_format_processor($element, FormStateInterface $form_state, array &$complete_form) {
+function _gutenberg_text_format_processor(array $element, FormStateInterface $form_state, array &$complete_form) {
   // Check first if the format is in the list. It might be disabled or the
   // current user has not rights to access it.
   if (!empty($element['format']) && isset($element['format']['format']['#options']['gutenberg'])) {
@@ -1018,7 +1014,6 @@ function _gutenberg_text_format_processor($element, FormStateInterface $form_sta
 function gutenberg_views_pre_render(ViewExecutable $view) {
   if ($view->id() == "reusable_blocks" && $view->current_display == 'page_1') {
     // Attached Gutenberg's basic style to reusable blocks view.
-    // $view->element['#attached']['library'][] = 'gutenberg/frontend';
     $view->element['#attached']['library'][] = 'gutenberg/admin';
     $view->element['#attached']['library'][] = 'gutenberg/blocks-view';
   }
@@ -1030,7 +1025,7 @@ function gutenberg_views_pre_render(ViewExecutable $view) {
 function gutenberg_page_attachments(array &$page) {
   $settings = _gutenberg_get_default_theme_settings();
 
-  if(!isset($settings['theme-support']['colors'])) {
+  if (!isset($settings['theme-support']['colors'])) {
     return;
   }
 
@@ -1046,10 +1041,10 @@ function gutenberg_page_attachments(array &$page) {
 
   $page['#attached']['html_head'][] = [
     [
-    '#tag' => 'style',
-    '#value' => $renderPalette,
+      '#tag' => 'style',
+      '#value' => $renderPalette,
     ],
-    'gutenberg_palette'
+    'gutenberg_palette',
   ];
 }
 

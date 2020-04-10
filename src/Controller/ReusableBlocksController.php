@@ -39,11 +39,12 @@ class ReusableBlocksController extends ControllerBase {
       return new JsonResponse([
         'id' => (int) $block->id(),
         'title' => ['raw' => $block->info->value],
-        'content' => ['protected' => false, 'raw' => $block->body->value],
+        'content' => ['protected' => FALSE, 'raw' => $block->body->value],
         'type' => 'wp_block',
         'status' => 'publish',
         'slug' => 'reusable_block_' . $block->id(),
-        'headers' => $headers, // kind of a hack but accepted by Gutenberg ;)
+      // Kind of a hack but accepted by Gutenberg ;)
+        'headers' => $headers,
       ], 200, $headers);
     }
 
@@ -58,7 +59,7 @@ class ReusableBlocksController extends ControllerBase {
       $result[] = [
         'id' => (int) $block->id(),
         'title' => ['raw' => $block->info->value],
-        'content' => ['protected' => false, 'raw' => $block->body->value],
+        'content' => ['protected' => FALSE, 'raw' => $block->body->value],
         'type' => 'wp_block',
         'status' => 'publish',
         'slug' => 'reusable_block_' . $block->id(),
