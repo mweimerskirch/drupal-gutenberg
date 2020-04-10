@@ -5,6 +5,7 @@ namespace Drupal\gutenberg\Plugin\Filter;
 use Drupal\filter\FilterProcessResult;
 use Drupal\filter\Plugin\FilterBase;
 use Drupal\Core\Form\FormStateInterface;
+use GuzzleHttp\Exception\RequestException;
 
 define('OEMBED_DEFAULT_PROVIDER', 'http://open.iframe.ly/api/oembed');
 
