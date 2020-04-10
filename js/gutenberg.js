@@ -224,8 +224,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
                 data.dispatch('core/edit-post').openGeneralSidebar('edit-post/document');
 
-                data.dispatch('core/nux').disableTips();
-
                 data.dispatch('core/edit-post').setAvailableMetaBoxesPerLocation({
                   advanced: ['drupalSettings']
                 });
@@ -341,7 +339,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
                 return _context3.abrupt('return', true);
 
-              case 45:
+              case 44:
               case 'end':
                 return _context3.stop();
             }

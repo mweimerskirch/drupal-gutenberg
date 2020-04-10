@@ -261,7 +261,7 @@
       data.dispatch('core/edit-post').openGeneralSidebar('edit-post/document');
 
       // Disable tips.
-      data.dispatch('core/nux').disableTips();
+      // data.dispatch('core/nux').disableTips();
 
       // Unregister Blck Manager plugin.
       // const { unregisterPlugin } = wp.plugins;
