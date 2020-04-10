@@ -72,4 +72,20 @@ body .gutenberg {
   }
 }
 
+ul.block-editor-block-navigation__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.components-panel__header.edit-post-sidebar__panel-tabs ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.wp-block {
+  max-width: 720px;
+}
+
 /*# sourceMappingURL=editor.css.map */
