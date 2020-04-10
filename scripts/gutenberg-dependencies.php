@@ -83,6 +83,9 @@ if (isset($yaml['i18n'])) {
     'js/i18n.js' => [],
     'js/drupal-gutenberg-translations.js' => [],
   ];
+
+  $yaml['i18n']['dependencies'][] = 'gutenberg/sprintf';
+
 }
 
 file_put_contents('../gutenberg.libraries.yml', Yaml::dump($yaml, 4, 2, FALSE, TRUE));
