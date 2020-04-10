@@ -63,6 +63,17 @@ DEVELOPMENT
 
 For custom block development, check the `example_block` sub-module.
 
+Updating WordPress Gutenberg Packages
+-----
+
+This module uses the compiled JS packages from WordPress Gutenberg. Basically we just need to copy the files to `vendor/gutenberg`.
+
+Steps to update WordPress Gutenberg packages:
+ * Git clone WordPress Gutenberg repository `https://github.com/WordPress/gutenberg`
+ * Run `npm install` and `npm run build` - this will create a new subfolder `build` with all compiled WordPress Gutenberg packages
+ * Copy all folders from `build` folder to the module's folder `vendor\gutenberg` (remove the old package folders before copy)
+ * At module's folder, go to `scripts` and run `php gutenberg-dependencies.php` - this will regenerate the `gutenberg.libraries.yml` config file
+
 Vendor packages
 -----
 
@@ -84,4 +95,3 @@ Current maintainers:
  * Marco Fernandes (marcofernandes) - https://www.drupal.org/u/marcofernandes
  * Thor Andre Gretland (thorandre) - https://www.drupal.org/u/thorandre
  * Roberto Ornelas (roborn) - https://www.drupal.org/u/roborn
- * Paweł Pregiel (ppregiel) - https://www.drupal.org/u/ppregiel
