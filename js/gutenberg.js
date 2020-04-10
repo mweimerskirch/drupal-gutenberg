@@ -5,7 +5,7 @@
 * @preserve
 **/'use strict';
 
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
@@ -356,7 +356,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
       var _this3 = this;
 
       return _asyncToGenerator(regeneratorRuntime.mark(function _callee4() {
-        var editPost, data, $textArea, target, $editor, editorSettings, colors, fontSizes, hasOpenedSidebar, hasClosedSidebar;
+        var editPost, data, $textArea, target, $editor, defaultThemeSupport, editorSettings, hasOpenedSidebar, hasClosedSidebar;
         return regeneratorRuntime.wrap(function _callee4$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
@@ -417,11 +417,14 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                   slug: ''
                 };
 
-                editorSettings = {
-                  alignWide: true,
+                defaultThemeSupport = {
+                  disableCustomColors: false,
+                  disableCustomFontSizes: false,
+                  alignWide: true
+                };
+                editorSettings = _extends({}, defaultThemeSupport, drupalSettings.gutenberg['theme-support'], {
                   availableTemplates: [],
                   allowedBlockTypes: true,
-                  disableCustomColors: false,
                   disablePostFormats: false,
                   mediaLibrary: true,
 
@@ -433,18 +436,8 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                   autosaveInterval: 0,
                   template: drupalSettings.gutenberg.template || '',
                   templateLock: drupalSettings.gutenberg['template-lock'] === 'none' ? false : drupalSettings.gutenberg['template-lock'] || false
-                };
-                colors = drupalSettings.gutenberg && drupalSettings.gutenberg['theme-support'] && drupalSettings.gutenberg['theme-support'].colors ? [].concat(_toConsumableArray(drupalSettings.gutenberg['theme-support'].colors)) : null;
-                fontSizes = drupalSettings.gutenberg && drupalSettings.gutenberg['theme-support'] && drupalSettings.gutenberg['theme-support'].fontSizes ? [].concat(_toConsumableArray(drupalSettings.gutenberg['theme-support'].fontSizes)) : null;
+                });
 
-
-                if (colors) {
-                  editorSettings.colors = colors;
-                }
-
-                if (fontSizes) {
-                  editorSettings.fontSizes = fontSizes;
-                }
 
                 data.subscribe(function () {
                   var isOpen = data.select('core/edit-post').isEditorSidebarOpened();
@@ -464,10 +457,10 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                 sessionStorage.removeItem('wp-autosave-block-editor-post-1');
                 localStorage.removeItem('wp-autosave-block-editor-post-1');
 
-                _context4.next = 19;
+                _context4.next = 16;
                 return editPost.initializeEditor(target, 'page', 1, editorSettings);
 
-              case 19:
+              case 16:
               case 'end':
                 return _context4.stop();
             }

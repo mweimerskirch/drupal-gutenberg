@@ -502,11 +502,17 @@
         slug: '',
       };
 
-      const editorSettings = {
+      const defaultThemeSupport = {
+        disableCustomColors: false,
+        disableCustomFontSizes: false,
         alignWide: true,
+      };
+
+      const editorSettings = {
+        ...defaultThemeSupport,
+        ...drupalSettings.gutenberg['theme-support'],
         availableTemplates: [],
         allowedBlockTypes: true,
-        disableCustomColors: false,
         disablePostFormats: false,
         mediaLibrary: true,
         // See issue: https://www.drupal.org/project/gutenberg/issues/3035313
@@ -525,27 +531,6 @@
           drupalSettings.gutenberg['template-lock'] === 'none'
             ? false : drupalSettings.gutenberg['template-lock'] || false,
       };
-
-      const colors =
-        drupalSettings.gutenberg &&
-        drupalSettings.gutenberg['theme-support'] &&
-        drupalSettings.gutenberg['theme-support'].colors
-          ? [...drupalSettings.gutenberg['theme-support'].colors]
-          : null;
-      const fontSizes =
-        drupalSettings.gutenberg &&
-        drupalSettings.gutenberg['theme-support'] &&
-        drupalSettings.gutenberg['theme-support'].fontSizes
-          ? [...drupalSettings.gutenberg['theme-support'].fontSizes]
-          : null;
-
-      if (colors) {
-        editorSettings.colors = colors;
-      }
-
-      if (fontSizes) {
-        editorSettings.fontSizes = fontSizes;
-      }
 
       function hasOpenedSidebar(sidebarName) {
         if ($(document.body).hasClass('gutenberg-sidebar-open')) {

@@ -819,6 +819,9 @@ function _gutenberg_get_default_theme_settings() {
       $file_contents = file_get_contents($file_path);
       $settings = Yaml::parse($file_contents);
     }
+    else {
+      $settings = [];
+    }
   }
 
   return $settings;
