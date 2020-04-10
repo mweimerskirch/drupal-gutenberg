@@ -278,8 +278,16 @@
       // console.log('metabox locations', data.select('core/edit-post').getActiveMetaBoxLocations());
 
       setTimeout(() => {
+        let $metaBoxContainer = $('.edit-post-meta-boxes-area__container');
         drupalSettings.gutenberg.metaboxes.forEach(id => {
-          $(`#${id}`).appendTo($('.edit-post-meta-boxes-area__container'));
+          let $metabox = $(`#${id}`);
+          let metabox = $metabox.get(0);
+
+          // Re-initialize the original editors used within the metabox elements
+          // which can break after they've been moved.
+          Drupal.behaviors.editor.detach(metabox, drupalSettings);
+          $metabox.appendTo($metaBoxContainer);
+          Drupal.behaviors.editor.attach(metabox, drupalSettings);
         });
       }, 0);
 

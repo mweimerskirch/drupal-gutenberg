@@ -481,7 +481,7 @@ body .gutenberg__editor .edit-post-layout .edit-post-sidebar {
   display: none;
 }
 
-.field--gutenberg .filter-wrapper {
+.field--gutenberg > .text-format-wrapper > .filter-wrapper {
   display: none;
 }
 

@@ -57,8 +57,10 @@ body .gutenberg__editor .edit-post-layout .edit-post-sidebar {
     }
   }
 
-  .filter-wrapper {
-    display: none;
+  > .text-format-wrapper {
+    > .filter-wrapper {
+      display: none;
+    }
   }
 }
 

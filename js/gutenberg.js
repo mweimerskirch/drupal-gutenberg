@@ -232,8 +232,14 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
 
                 setTimeout(function () {
+                  var $metaBoxContainer = $('.edit-post-meta-boxes-area__container');
                   drupalSettings.gutenberg.metaboxes.forEach(function (id) {
-                    $('#' + id).appendTo($('.edit-post-meta-boxes-area__container'));
+                    var $metabox = $('#' + id);
+                    var metabox = $metabox.get(0);
+
+                    Drupal.behaviors.editor.detach(metabox, drupalSettings);
+                    $metabox.appendTo($metaBoxContainer);
+                    Drupal.behaviors.editor.attach(metabox, drupalSettings);
                   });
                 }, 0);
 
