@@ -26,7 +26,7 @@
       icon: 'admin-media',
       category: 'common',
       supports: {
-        align: false,
+        align: true,
         html: false,
         reusable: false
       },
