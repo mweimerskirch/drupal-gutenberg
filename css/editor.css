@@ -45,6 +45,23 @@ body .gutenberg {
   display: none;
 }
 
+.edit-post-header__settings .components-button.editor-post-save-draft {
+  display: none;
+}
+
+.edit-post-header__settings .components-button.editor-post-publish-panel__toggle {
+  display: none;
+}
+
+.edit-post-header__settings .editor-post-saved-state {
+  display: none;
+}
+
+.edit-post-sidebar select {
+  background-repeat: no-repeat;
+  background-position: center right;
+}
+
 .gutenberg__editor {
   position: relative;
 }
@@ -86,6 +103,30 @@ ul.block-editor-block-navigation__list {
 
 .wp-block {
   max-width: 720px;
+}
+
+.media-entity-search-input {
+  margin: 0 !important;
+}
+
+.media-entity-search-input input {
+  padding: 0 4px !important;
+  line-height: 28px !important;
+}
+
+@media (min-width: 600px) {
+  .media-entity-search-input input {
+    width: 240px !important;
+  }
+}
+
+.wp-block-drupalmedia-drupal-media-entity {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.wp-block-drupalmedia-drupal-media-entity figcaption {
+  text-align: center;
 }
 
 /*# sourceMappingURL=editor.css.map */

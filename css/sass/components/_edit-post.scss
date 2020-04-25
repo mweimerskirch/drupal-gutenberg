@@ -1,0 +1,20 @@
+.edit-post-header__settings {
+  .components-button.editor-post-save-draft {
+    display: none;
+  }
+
+  .components-button.editor-post-publish-panel__toggle {
+    display: none;
+  }
+
+  .editor-post-saved-state {
+    display: none;
+  }
+}
+
+.edit-post-sidebar {
+  select {
+    background-repeat: no-repeat;
+    background-position: center right;
+  }
+}
