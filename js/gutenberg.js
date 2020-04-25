@@ -65,14 +65,14 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
               });
 
             case 2:
-              console.log('yo 1!', clientId, mediaEntityIds);
+
               setTimeout(function () {
                 dispatch('core/block-editor').updateBlock(clientId, {
                   attributes: { mediaEntityIds: mediaEntityIds }
                 });
               }, 100);
 
-            case 4:
+            case 3:
             case 'end':
               return _context.stop();
           }
@@ -86,7 +86,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
       var _this2 = this;
 
       return _asyncToGenerator(regeneratorRuntime.mark(function _callee3() {
-        var _format$editorSetting, contentType, allowedBlocks, blackList, data, blocks, hooks, dispatch, addFilter, unregisterBlockType, registerBlockType, getBlockType, registerDrupalStore, registerDrupalBlocks, registerDrupalMedia, key, value, categories, metaboxesContainer, metaboxForm, isFormValid, formSubmitted;
+        var _format$editorSetting, contentType, allowedBlocks, blackList, data, blocks, hooks, plugins, dispatch, addFilter, unregisterPlugin, unregisterBlockType, registerBlockType, getBlockType, registerDrupalStore, registerDrupalBlocks, registerDrupalMedia, key, value, categories, metaboxesContainer, metaboxForm, isFormValid, formSubmitted;
 
         return regeneratorRuntime.wrap(function _callee3$(_context3) {
           while (1) {
@@ -103,12 +103,13 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                 drupalSettings.gutenbergLoaded = true;
 
                 _format$editorSetting = format.editorSettings, contentType = _format$editorSetting.contentType, allowedBlocks = _format$editorSetting.allowedBlocks, blackList = _format$editorSetting.blackList;
-                data = wp.data, blocks = wp.blocks, hooks = wp.hooks;
+                data = wp.data, blocks = wp.blocks, hooks = wp.hooks, plugins = wp.plugins;
                 dispatch = data.dispatch;
                 addFilter = hooks.addFilter;
+                unregisterPlugin = plugins.unregisterPlugin;
                 unregisterBlockType = blocks.unregisterBlockType, registerBlockType = blocks.registerBlockType, getBlockType = blocks.getBlockType;
                 registerDrupalStore = DrupalGutenberg.registerDrupalStore, registerDrupalBlocks = DrupalGutenberg.registerDrupalBlocks, registerDrupalMedia = DrupalGutenberg.registerDrupalMedia;
-                _context3.next = 11;
+                _context3.next = 12;
                 return addFilter('blocks.registerBlockType', 'drupalgutenberg/custom-attributes', function (settings, name) {
                   settings.attributes = Object.assign(settings.attributes, {
                     mappingField: {
@@ -130,23 +131,23 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                   return settings;
                 });
 
-              case 11:
-                _context3.next = 13;
+              case 12:
+                _context3.next = 14;
                 return registerDrupalStore(data);
 
-              case 13:
-                _context3.next = 15;
+              case 14:
+                _context3.next = 16;
                 return registerDrupalBlocks(contentType);
 
-              case 15:
-                _context3.next = 17;
+              case 16:
+                _context3.next = 18;
                 return registerDrupalMedia();
 
-              case 17:
-                _context3.next = 19;
+              case 18:
+                _context3.next = 20;
                 return _this2._initGutenberg(element);
 
-              case 19:
+              case 20:
 
                 if (drupalSettings.gutenberg._listeners.init) {
                   drupalSettings.gutenberg._listeners.init.forEach(function (callback) {
@@ -219,6 +220,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                   return true;
                 });
 
+                unregisterPlugin('edit-post-block-patterns');
 
                 data.dispatch('core/blocks').setCategories(categories);
 
@@ -228,6 +230,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                   advanced: ['drupalSettings']
                 });
 
+                data.dispatch('core/edit-post').removeEditorPanel('post-status');
 
                 setTimeout(function () {
                   var $metaBoxContainer = $('.edit-post-meta-boxes-area__container');
@@ -339,7 +342,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
                 return _context3.abrupt('return', true);
 
-              case 44:
+              case 47:
               case 'end':
                 return _context3.stop();
             }

@@ -76,7 +76,7 @@
       await dispatch('core/block-editor').updateBlock(clientId, {
         attributes: { mediaEntityIds: [] },
       });
-      console.log('yo 1!', clientId, mediaEntityIds);
+
       setTimeout(() => {
         dispatch('core/block-editor').updateBlock(clientId, {
           attributes: { mediaEntityIds },
@@ -113,9 +113,10 @@
       drupalSettings.gutenbergLoaded = true;
 
       const { contentType, allowedBlocks, blackList } = format.editorSettings;
-      const { data, blocks, hooks } = wp;
+      const { data, blocks, hooks, plugins } = wp;
       const { dispatch } = data;
       const { addFilter } = hooks;
+      const { unregisterPlugin } = plugins;
       const { unregisterBlockType, registerBlockType, getBlockType } = blocks;
       const {
         registerDrupalStore,
@@ -255,27 +256,19 @@
           return true;
         });
 
+      // edit-post-block-patterns
+      unregisterPlugin('edit-post-block-patterns');
+
       data.dispatch('core/blocks').setCategories(categories);
 
       // On page load always select sidebar's document tab.
       data.dispatch('core/edit-post').openGeneralSidebar('edit-post/document');
 
-      // Disable tips.
-      // data.dispatch('core/nux').disableTips();
-
-      // Unregister Blck Manager plugin.
-      // const { unregisterPlugin } = wp.plugins;
-      // unregisterPlugin('edit-post');
-
-      // blocks.registerBlockStyle('core/image', {
-      //   name: 'colorbox',
-      //   label: 'Colorbox image',
-      // });
-
       data.dispatch('core/edit-post').setAvailableMetaBoxesPerLocation({
         advanced: ['drupalSettings'],
       });
-      // console.log('metabox locations', data.select('core/edit-post').getActiveMetaBoxLocations());
+
+      data.dispatch('core/edit-post').removeEditorPanel('post-status');
 
       setTimeout(() => {
         let $metaBoxContainer = $('.edit-post-meta-boxes-area__container');
