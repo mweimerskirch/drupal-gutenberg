@@ -8,7 +8,7 @@
   font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
-.gutenberg__editor .edit-post-visual-editor div[data-type="core/paragraph"] {
+.gutenberg__editor .edit-post-visual-editor [data-type="core/paragraph"] {
   font-size: 15px;
 }
 

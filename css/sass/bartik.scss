@@ -6,7 +6,7 @@
   .edit-post-visual-editor {
     font-family: Georgia, 'Times New Roman', Times, serif;
 
-    div[data-type="core/paragraph"] {
+    [data-type="core/paragraph"] {
       font-size: 15px;
     }
   }
