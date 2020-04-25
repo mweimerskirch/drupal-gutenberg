@@ -105,6 +105,10 @@ ul.block-editor-block-navigation__list {
   max-width: 720px;
 }
 
+.wp-block[data-align="wide"] img, .wp-block[data-align="full"] img {
+  width: 100%;
+}
+
 .media-entity-search-input {
   margin: 0 !important;
 }
