@@ -13,12 +13,12 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
   var blocks = wp.blocks,
       data = wp.data,
       element = wp.element,
-      editor = wp.editor;
+      blockEditor = wp.blockEditor;
   var registerBlockType = blocks.registerBlockType;
   var dispatch = data.dispatch,
       select = data.select;
   var Fragment = element.Fragment;
-  var RichText = editor.RichText;
+  var RichText = blockEditor.RichText;
 
   var __ = Drupal.t;
 

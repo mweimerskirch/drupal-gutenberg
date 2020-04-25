@@ -243,7 +243,7 @@
             render={({ openFileDialog }) => {
               return (
                 <Fragment>
-                  <IconButton
+                  <Button
                     isLarge
                     onClick={openFileDialog}
                     className={[
@@ -254,7 +254,7 @@
                     icon="upload"
                   >
                     {__('Upload')}
-                  </IconButton>
+                  </Button>
                 </Fragment>
               );
             }}

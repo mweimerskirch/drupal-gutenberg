@@ -1,10 +1,10 @@
 /* eslint func-names: ["error", "never"] */
 (function(Drupal, wp) {
-  const { blocks, data, element, editor } = wp;
+  const { blocks, data, element, blockEditor } = wp;
   const { registerBlockType } = blocks;
   const { dispatch, select } = data;
   const { Fragment } = element;
-  const { RichText } = editor;
+  const { RichText } = blockEditor;
   const __ = Drupal.t;
 
   const settings = {

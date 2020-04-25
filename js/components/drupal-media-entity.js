@@ -281,7 +281,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                 Fragment,
                 null,
                 React.createElement(
-                  IconButton,
+                  Button,
                   {
                     isLarge: true,
                     onClick: openFileDialog,

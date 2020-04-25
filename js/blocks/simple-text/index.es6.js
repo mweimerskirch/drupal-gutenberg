@@ -1,9 +1,9 @@
 /* eslint func-names: ["error", "never"] */
 (function(Drupal, wp) {
-  const { blocks, element, editor } = wp;
+  const { blocks, element, blockEditor } = wp;
   const { registerBlockType } = blocks;
   const { Fragment } = element;
-  const { RichText } = editor;
+  const { RichText } = blockEditor;
   const __ = Drupal.t;
 
   const settings = {

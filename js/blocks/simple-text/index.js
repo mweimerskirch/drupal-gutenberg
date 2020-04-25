@@ -10,10 +10,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 (function (Drupal, wp) {
   var blocks = wp.blocks,
       element = wp.element,
-      editor = wp.editor;
+      blockEditor = wp.blockEditor;
   var registerBlockType = blocks.registerBlockType;
   var Fragment = element.Fragment;
-  var RichText = editor.RichText;
+  var RichText = blockEditor.RichText;
 
   var __ = Drupal.t;
 

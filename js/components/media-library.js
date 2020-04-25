@@ -108,7 +108,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
         return React.createElement(
           Button,
           { isLarge: true,
-            isDefault: true,
+            isSecondary: true,
             title: __('Media Library'),
             onClick: this.openDialog },
           __('Media Library')

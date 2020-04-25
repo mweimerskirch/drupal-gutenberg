@@ -75,7 +75,7 @@
 
       return (
         <Button isLarge
-                isDefault
+                isSecondary
                 title={__('Media Library')}
                 onClick={this.openDialog}>
           {__('Media Library')}
