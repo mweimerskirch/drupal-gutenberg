@@ -8,16 +8,128 @@
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
 (function () {
-  var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee(wp) {
-    var hooks, addFilter;
+  var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee(wp, Drupal) {
+    var blockEditor, components, compose, hooks, addFilter, createHigherOrderComponent, Card, CardBody, CardHeader, PanelBody, PanelRow, InspectorAdvancedControls, InspectorControls, __, hasMappingFields, withInspectorControl;
+
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            hooks = wp.hooks;
+            hasMappingFields = function hasMappingFields(attributes) {
+              return Object.keys(attributes).includes('mappingFields');
+            };
+
+            blockEditor = wp.blockEditor, components = wp.components, compose = wp.compose, hooks = wp.hooks;
             addFilter = hooks.addFilter;
-            _context.next = 4;
-            return addFilter('blocks.registerBlockType', 'drupalgutenberg/mapping-fields-attributes', function (settings) {
+            createHigherOrderComponent = compose.createHigherOrderComponent;
+            Card = components.Card, CardBody = components.CardBody, CardHeader = components.CardHeader, PanelBody = components.PanelBody, PanelRow = components.PanelRow;
+            InspectorAdvancedControls = blockEditor.InspectorAdvancedControls, InspectorControls = blockEditor.InspectorControls;
+            __ = Drupal.t;
+            withInspectorControl = createHigherOrderComponent(function (BlockEdit) {
+              return function (props) {
+                var isSelected = props.isSelected,
+                    attributes = props.attributes;
+
+                var hasMapping = hasMappingFields(attributes);
+                if (hasMapping && isSelected) {
+                  return [React.createElement(BlockEdit, props), React.createElement(
+                    InspectorControls,
+                    null,
+                    !attributes.lockViewMode && React.createElement(
+                      PanelBody,
+                      { title: __('Field mapping'), initialOpen: false },
+                      attributes.mappingFields.map(function (field) {
+                        return React.createElement(
+                          Card,
+                          null,
+                          field.label && React.createElement(
+                            CardHeader,
+                            null,
+                            React.createElement(
+                              'strong',
+                              null,
+                              __(field.label)
+                            )
+                          ),
+                          React.createElement(
+                            CardBody,
+                            null,
+                            !field.attribute && React.createElement(
+                              'span',
+                              null,
+                              __('The block content'),
+                              ' '
+                            ),
+                            field.attribute && React.createElement(
+                              'span',
+                              null,
+                              __('The block attribute'),
+                              ' ',
+                              React.createElement(
+                                'strong',
+                                null,
+                                field.attribute
+                              ),
+                              ' '
+                            ),
+                            React.createElement(
+                              'span',
+                              null,
+                              __('is mapped to the field[property]'),
+                              ' '
+                            ),
+                            React.createElement(
+                              'span',
+                              null,
+                              React.createElement(
+                                'strong',
+                                null,
+                                field.field
+                              )
+                            ),
+                            field.property && React.createElement(
+                              'span',
+                              null,
+                              React.createElement(
+                                'strong',
+                                null,
+                                '[',
+                                field.property,
+                                ']'
+                              )
+                            ),
+                            !field.property && React.createElement(
+                              'span',
+                              null,
+                              React.createElement(
+                                'strong',
+                                null,
+                                '[',
+                                __('value'),
+                                ']'
+                              )
+                            )
+                          )
+                        );
+                      })
+                    )
+                  ), React.createElement(
+                    InspectorAdvancedControls,
+                    null,
+                    React.createElement(
+                      'h2',
+                      null,
+                      'Mapping Fields!'
+                    )
+                  )];
+                }
+
+                return React.createElement(BlockEdit, props);
+              };
+            }, 'withInspectorControl');
+
+
+            addFilter('blocks.registerBlockType', 'drupalgutenberg/mapping-fields-attributes', function (settings) {
               settings.attributes = Object.assign(settings.attributes, {
                 mappingFields: {
                   type: 'array'
@@ -27,7 +139,9 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
               return settings;
             });
 
-          case 4:
+            addFilter('editor.BlockEdit', 'core/editor/mapping-fields-attributes/with-inspector-control', withInspectorControl);
+
+          case 10:
           case 'end':
             return _context.stop();
         }
@@ -35,7 +149,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     }, _callee, undefined);
   }));
 
-  return function (_x) {
+  return function (_x, _x2) {
     return _ref.apply(this, arguments);
   };
-})()(wp);
+})()(wp, Drupal);
