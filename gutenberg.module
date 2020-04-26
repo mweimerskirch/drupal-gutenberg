@@ -459,6 +459,13 @@ function gutenberg_form_node_form_alter(&$form, FormStateInterface $form_state) 
     $form['#attached']['library'][] = 'gutenberg/bartik';
   }
 
+  // Check if current theme is Seven (admin)
+  $theme = \Drupal::theme()->getActiveTheme();
+  if ($theme->getName() === 'seven') {
+    $form['#attached']['library'][] = 'gutenberg/seven';
+  }
+
+
   $form['#attached']['drupalSettings']['gutenberg']['metaboxes'][] = 'edit-metabox-fields';
 
   /** @var \Drupal\Core\Extension\ModuleHandlerInterface $module_handler */
