@@ -268,7 +268,17 @@
         advanced: ['drupalSettings'],
       });
 
+      // Disable status panel from sidebar
       data.dispatch('core/edit-post').removeEditorPanel('post-status');
+
+      // Disable Welcome Guide
+      const isWelcomeGuide = data
+        .select('core/edit-post')
+        .isFeatureActive('welcomeGuide');
+
+      if (isWelcomeGuide) {
+        data.dispatch('core/edit-post').toggleFeature('welcomeGuide');
+      }
 
       setTimeout(() => {
         let $metaBoxContainer = $('.edit-post-meta-boxes-area__container');
@@ -578,27 +588,64 @@
           hasClosedSidebar();
         }
 
+        // We need to deal with the top left logo when in fullscreen mode.
         const isFullscreenMode = data
           .select('core/edit-post')
           .isFeatureActive('fullscreenMode');
 
-        if (isFullscreenMode) {
-          setTimeout(() => {
-            const { DrupalIcon } = DrupalGutenberg.Components;
-            const { render } = wp.element;
-            const params = new URLSearchParams(window.location.search);
-            const backUrl =
-              params.get('destination') ||
-              drupalSettings.path.baseUrl +
-                drupalSettings.path.currentPath.replace('/edit', '');
-            const domContainer = $(
-              '.edit-post-header a.edit-post-fullscreen-mode-close',
-            );
-            domContainer.attr('href', backUrl);
+        setTimeout(() => {
+          const fullscreenLink = $(
+            '.edit-post-header a.edit-post-fullscreen-mode-close:not(.drupal)',
+          );
 
-            render(<DrupalIcon />, domContainer[0]);
-          });
-        }
+          const drupalFullscreenLink = $(
+            '.edit-post-header a.edit-post-fullscreen-mode-close.drupal',
+          );
+
+          if (
+            isFullscreenMode &&
+            fullscreenLink.length > 0 &&
+            drupalFullscreenLink.length === 0
+          ) {
+            // Define back URL
+            const params = new URLSearchParams(window.location.search);
+            let backUrl = `${drupalSettings.path.baseUrl}admin/content`;
+
+            if (
+              RegExp(/node\/\d+\/edit/g).test(drupalSettings.path.currentPath)
+            ) {
+              backUrl =
+                drupalSettings.path.baseUrl +
+                drupalSettings.path.currentPath.replace('/edit', '');
+            }
+
+            backUrl = params.get('destination') || backUrl;
+
+            // Add container for the new button
+            const domContainer = $('<div style="display: contents"></div>');
+            fullscreenLink.after(domContainer);
+
+            const icon = (
+              <svg version="1.1" role="img" aria-hidden="true" focusable="false" id="Layer_1" x="0px" y="0px" viewBox="0 0 2160 2880" enable-background="new 0 0 2160 2880" className="dashicon">
+                <path d="M1842.9,677.1C1638.9,473.1,1368,360,1080,360C485.1,360,0,845.1,0,1440s485.1,1080,1080,1080  s1080-485.1,1080-1080C2160,1152,2046.9,881.1,1842.9,677.1z M1080,2141.1c-325.7,0-591.4-265.7-591.4-591.4  c0-276,185.1-461.1,348-624c108-108,212.6-212.6,243.4-329.1c30.9,116.6,133.7,221.1,243.4,329.1c162.9,162.9,348,348,348,624  C1671.4,1875.4,1405.7,2141.1,1080,2141.1z" />
+              </svg>
+            );
+
+            const { render } = wp.element;
+            const { Button } = wp.components;
+            const drupalButton = (
+              <Button
+                className="edit-post-fullscreen-mode-close drupal"
+                icon={icon}
+                iconSize={36}
+                href={backUrl}
+                label={Drupal.t('Back')}
+              />
+            );
+
+            render(drupalButton, domContainer[0]);
+          }
+        });
 
         // Clear template validation.
         // Force template validity to true.

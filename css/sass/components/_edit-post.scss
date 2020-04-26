@@ -22,11 +22,18 @@
 .edit-post-header {
   .edit-post-fullscreen-mode-close {
     background-color: #0678be;
+    display: none;
 
-    svg {
-      width: 48px;
-      height: 48px
+    &.drupal {
+      .is-fullscreen-mode & {
+        display: flex;
+      }
     }
+
+    // svg {
+    //   width: 48px;
+    //   height: 48px
+    // }
   }
 }
 

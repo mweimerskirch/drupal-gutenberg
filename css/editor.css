@@ -64,11 +64,11 @@ body .gutenberg {
 
 .edit-post-header .edit-post-fullscreen-mode-close {
   background-color: #0678be;
+  display: none;
 }
 
-.edit-post-header .edit-post-fullscreen-mode-close svg {
-  width: 48px;
-  height: 48px;
+.is-fullscreen-mode .edit-post-header .edit-post-fullscreen-mode-close.drupal {
+  display: flex;
 }
 
 .edit-post-layout {
