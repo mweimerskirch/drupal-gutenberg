@@ -52,6 +52,11 @@ bartik:
   css:
     theme:
       css/bartik.css: {  }
+seven:
+  version: 1.0.0
+  css:
+    theme:
+      css/seven.css: {  }
 filters:
   js:
     js/filters/mapping-fields.js: {  }
