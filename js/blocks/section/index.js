@@ -9,11 +9,31 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 var _wp = wp,
     blocks = _wp.blocks,
-    blockEditor = _wp.blockEditor;
+    blockEditor = _wp.blockEditor,
+    data = _wp.data;
+var compose = wp.compose.compose;
+var withSelect = data.withSelect;
 var registerBlockType = blocks.registerBlockType;
 var InnerBlocks = blockEditor.InnerBlocks;
 
 var __ = Drupal.t;
+
+var SECTION_TEMPLATE = [['core/paragraph', { placeholder: 'Summary' }]];
+
+function SectionEdit(_ref) {
+  var hasInnerBlocks = _ref.hasInnerBlocks;
+
+  return React.createElement(
+    'main',
+    null,
+    React.createElement(InnerBlocks, {
+      templateLock: false,
+      renderAppender: hasInnerBlocks ? undefined : function () {
+        return React.createElement(InnerBlocks.ButtonBlockAppender, null);
+      }
+    })
+  );
+}
 
 var settings = {
   title: __('Section'),
@@ -24,11 +44,21 @@ var settings = {
     inserter: false
   },
 
-  edit: function edit() {
-    return React.createElement(InnerBlocks, { templateLock: false });
-  },
-  save: function save(_ref) {
-    var className = _ref.className;
+  edit: compose([withSelect(function (select, _ref2) {
+    var clientId = _ref2.clientId;
+
+    var _select = select('core/block-editor'),
+        getBlock = _select.getBlock;
+
+    var block = getBlock(clientId);
+
+    return {
+      hasInnerBlocks: !!(block && block.innerBlocks.length)
+    };
+  })])(SectionEdit),
+
+  save: function save(_ref3) {
+    var className = _ref3.className;
 
     return React.createElement(
       'main',
