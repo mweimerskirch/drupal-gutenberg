@@ -71,6 +71,10 @@ body .gutenberg {
   height: 48px;
 }
 
+.edit-post-layout {
+  transition: ease-in-out 0.2s all;
+}
+
 body.is-fullscreen-mode .edit-post-layout {
   left: 0 !important;
   top: 0 !important;
