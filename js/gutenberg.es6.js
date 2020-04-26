@@ -578,6 +578,28 @@
           hasClosedSidebar();
         }
 
+        const isFullscreenMode = data
+          .select('core/edit-post')
+          .isFeatureActive('fullscreenMode');
+
+        if (isFullscreenMode) {
+          setTimeout(() => {
+            const { DrupalIcon } = DrupalGutenberg.Components;
+            const { render } = wp.element;
+            const params = new URLSearchParams(window.location.search);
+            const backUrl =
+              params.get('destination') ||
+              drupalSettings.path.baseUrl +
+                drupalSettings.path.currentPath.replace('/edit', '');
+            const domContainer = $(
+              '.edit-post-header a.edit-post-fullscreen-mode-close',
+            );
+            domContainer.attr('href', backUrl);
+
+            render(<DrupalIcon />, domContainer[0]);
+          });
+        }
+
         // Clear template validation.
         // Force template validity to true.
         if (!data.select('core/block-editor').isValidTemplate()) {

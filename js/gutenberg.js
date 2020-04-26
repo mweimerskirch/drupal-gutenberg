@@ -456,6 +456,22 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                     hasClosedSidebar();
                   }
 
+                  var isFullscreenMode = data.select('core/edit-post').isFeatureActive('fullscreenMode');
+
+                  if (isFullscreenMode) {
+                    setTimeout(function () {
+                      var DrupalIcon = DrupalGutenberg.Components.DrupalIcon;
+                      var render = wp.element.render;
+
+                      var params = new URLSearchParams(window.location.search);
+                      var backUrl = params.get('destination') || drupalSettings.path.baseUrl + drupalSettings.path.currentPath.replace('/edit', '');
+                      var domContainer = $('.edit-post-header a.edit-post-fullscreen-mode-close');
+                      domContainer.attr('href', backUrl);
+
+                      render(React.createElement(DrupalIcon, null), domContainer[0]);
+                    });
+                  }
+
                   if (!data.select('core/block-editor').isValidTemplate()) {
                     data.dispatch('core/block-editor').setTemplateValidity(true);
                   }

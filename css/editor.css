@@ -62,6 +62,21 @@ body .gutenberg {
   background-position: center right;
 }
 
+.edit-post-header .edit-post-fullscreen-mode-close {
+  background-color: #0678be;
+}
+
+.edit-post-header .edit-post-fullscreen-mode-close svg {
+  width: 48px;
+  height: 48px;
+}
+
+body.is-fullscreen-mode .edit-post-layout {
+  left: 0 !important;
+  top: 0 !important;
+  z-index: 999 !important;
+}
+
 .gutenberg__editor {
   position: relative;
 }
