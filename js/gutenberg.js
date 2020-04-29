@@ -425,9 +425,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
 
                 data.subscribe(function () {
-                  var isOpen = data.select('core/edit-post').isEditorSidebarOpened();
-                  var sidebar = data.select('core/edit-post').getActiveGeneralSidebarName();
-
                   var isFullscreenMode = data.select('core/edit-post').isFeatureActive('fullscreenMode');
 
                   setTimeout(function () {

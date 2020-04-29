@@ -544,11 +544,6 @@
       };
 
       data.subscribe(() => {
-        const isOpen = data.select('core/edit-post').isEditorSidebarOpened();
-        const sidebar = data
-          .select('core/edit-post')
-          .getActiveGeneralSidebarName();
-
         // We need to deal with the top left logo when in fullscreen mode.
         const isFullscreenMode = data
           .select('core/edit-post')
