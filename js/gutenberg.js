@@ -370,40 +370,11 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
       var _this3 = this;
 
       return _asyncToGenerator(regeneratorRuntime.mark(function _callee4() {
-        var editPost, data, $textArea, target, $editor, defaultThemeSupport, editorSettings, hasOpenedSidebar, hasClosedSidebar;
+        var editPost, data, $textArea, target, $editor, defaultThemeSupport, editorSettings;
         return regeneratorRuntime.wrap(function _callee4$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
-                hasClosedSidebar = function hasClosedSidebar() {
-                  if (!$(document.body).hasClass('gutenberg-sidebar-open')) {
-                    return;
-                  }
-
-                  $(document.body).removeClass('gutenberg-sidebar-open');
-
-                  $('.gutenberg-sidebar').append($('.edit-post-sidebar .components-panel .tab'));
-                };
-
-                hasOpenedSidebar = function hasOpenedSidebar(sidebarName) {
-                  if ($(document.body).hasClass('gutenberg-sidebar-open')) {
-                    return;
-                  }
-
-                  var tab = sidebarName.replace(/edit-post\//g, '');
-                  tab = tab.replace(/drupal\//g, '');
-
-                  var $tabG = $('.edit-post-sidebar .components-panel .tab');
-                  $('.gutenberg-sidebar').append($tabG);
-
-                  setTimeout(function () {
-                    var $tabD = $('.gutenberg-sidebar .tab.' + tab);
-                    $('.edit-post-sidebar .components-panel').append($tabD);
-                  }, 0);
-
-                  $(document.body).addClass('gutenberg-sidebar-open');
-                };
-
                 editPost = wp.editPost, data = wp.data;
                 $textArea = $(element);
                 target = 'editor-' + $textArea.data('drupal-selector');
@@ -457,12 +428,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                   var isOpen = data.select('core/edit-post').isEditorSidebarOpened();
                   var sidebar = data.select('core/edit-post').getActiveGeneralSidebarName();
 
-                  if (isOpen && sidebar === 'edit-post/document') {
-                    hasOpenedSidebar(sidebar);
-                  } else {
-                    hasClosedSidebar();
-                  }
-
                   var isFullscreenMode = data.select('core/edit-post').isFeatureActive('fullscreenMode');
 
                   setTimeout(function () {
@@ -512,10 +477,10 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                 sessionStorage.removeItem('wp-autosave-block-editor-post-1');
                 localStorage.removeItem('wp-autosave-block-editor-post-1');
 
-                _context4.next = 16;
+                _context4.next = 14;
                 return editPost.initializeEditor(target, 'page', 1, editorSettings);
 
-              case 16:
+              case 14:
               case 'end':
                 return _context4.stop();
             }

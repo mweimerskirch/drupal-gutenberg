@@ -120,6 +120,18 @@ ul.block-editor-block-navigation__list {
   list-style: none;
 }
 
+.components-panel__body.node-setting-plugin.is-opened {
+  padding: 0;
+}
+
+.components-panel__body.node-setting-plugin.is-opened .components-panel__body-title {
+  display: none;
+}
+
+.entity-meta {
+  border: 0 !important;
+}
+
 .wp-block {
   max-width: 720px;
 }

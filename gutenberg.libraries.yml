@@ -60,6 +60,7 @@ seven:
 filters:
   js:
     js/filters/mapping-fields.js: {  }
+    js/filters/sidebar.js: {  }
   dependencies:
     - gutenberg/hook
 
