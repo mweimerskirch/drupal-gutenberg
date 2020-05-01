@@ -220,7 +220,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                   return true;
                 });
 
-                unregisterPlugin('edit-post-block-patterns');
 
                 data.dispatch('core/blocks').setCategories(categories);
 
@@ -349,7 +348,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
                 return _context3.abrupt('return', true);
 
-              case 49:
+              case 48:
               case 'end':
                 return _context3.stop();
             }

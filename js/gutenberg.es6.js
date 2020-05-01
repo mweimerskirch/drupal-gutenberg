@@ -256,9 +256,6 @@
           return true;
         });
 
-      // edit-post-block-patterns
-      unregisterPlugin('edit-post-block-patterns');
-
       data.dispatch('core/blocks').setCategories(categories);
 
       // On page load always select sidebar's document tab.
