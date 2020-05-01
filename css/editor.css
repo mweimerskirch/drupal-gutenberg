@@ -63,7 +63,6 @@ body .gutenberg {
 }
 
 .edit-post-header .edit-post-fullscreen-mode-close {
-  background-color: #0678be;
   display: none;
 }
 
@@ -102,15 +101,15 @@ input[type="search"] {
 }
 
 @media (min-width: 782px) {
-  .block-editor-editor-skeleton {
+  .interface-interface-skeleton {
     top: 39px;
     left: 0;
   }
-  .toolbar-horizontal.toolbar-tray-open .block-editor-editor-skeleton {
+  .toolbar-horizontal.toolbar-tray-open .interface-interface-skeleton {
     top: 78px;
     left: 0;
   }
-  .toolbar-vertical.toolbar-tray-open .block-editor-editor-skeleton {
+  .toolbar-vertical.toolbar-tray-open .interface-interface-skeleton {
     top: 39px;
     left: 240px;
   }
