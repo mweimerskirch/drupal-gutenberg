@@ -543,51 +543,7 @@
             ? false : drupalSettings.gutenberg['template-lock'] || false,
       };
 
-      function hasOpenedSidebar(sidebarName) {
-        if ($(document.body).hasClass('gutenberg-sidebar-open')) {
-          return;
-        }
-
-        let tab = sidebarName.replace(/edit-post\//g, '');
-        tab = tab.replace(/drupal\//g, '');
-
-        // Make sure node's "tabs" are in the original placeholder.
-        const $tabG = $('.edit-post-sidebar .components-panel .tab');
-        $('.gutenberg-sidebar').append($tabG);
-
-        // Should move tab only when sidebar is fully generated.
-        setTimeout(() => {
-          const $tabD = $(`.gutenberg-sidebar .tab.${tab}`);
-          $('.edit-post-sidebar .components-panel').append($tabD);
-        }, 0);
-
-        $(document.body).addClass('gutenberg-sidebar-open');
-      }
-
-      function hasClosedSidebar() {
-        if (!$(document.body).hasClass('gutenberg-sidebar-open')) {
-          return;
-        }
-
-        $(document.body).removeClass('gutenberg-sidebar-open');
-        // Move tab before sidebar is "destroyed".
-        $('.gutenberg-sidebar').append(
-          $('.edit-post-sidebar .components-panel .tab'),
-        );
-      }
-
       data.subscribe(() => {
-        const isOpen = data.select('core/edit-post').isEditorSidebarOpened();
-        const sidebar = data
-          .select('core/edit-post')
-          .getActiveGeneralSidebarName();
-
-        if (isOpen && sidebar === 'edit-post/document') {
-          hasOpenedSidebar(sidebar);
-        } else {
-          hasClosedSidebar();
-        }
-
         // We need to deal with the top left logo when in fullscreen mode.
         const isFullscreenMode = data
           .select('core/edit-post')

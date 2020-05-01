@@ -1,0 +1,6 @@
+{
+  "name": "drupal/gutenberg",
+  "description": "Drupal Gutenberg",
+  "type": "drupal-module",
+  "require": {}
+}
