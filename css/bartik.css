@@ -7,10 +7,7 @@
 .gutenberg__editor .editor-styles-wrapper {
   font-family: Georgia, 'Times New Roman', Times, serif;
   font-size: 15px;
-}
-
-.gutenberg__editor .editor-styles-wrapper [data-type="core/paragraph"] {
-  font-size: 15px;
+  line-height: 1.8;
 }
 
 .wp-block-embed-youtube iframe {
