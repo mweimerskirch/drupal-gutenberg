@@ -4,11 +4,12 @@
 /**
  * Some default styles for default theme: Bartik
  */
-.gutenberg__editor .edit-post-visual-editor {
+.gutenberg__editor .editor-styles-wrapper {
   font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 15px;
 }
 
-.gutenberg__editor .edit-post-visual-editor [data-type="core/paragraph"] {
+.gutenberg__editor .editor-styles-wrapper [data-type="core/paragraph"] {
   font-size: 15px;
 }
 

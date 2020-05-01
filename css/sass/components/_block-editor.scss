@@ -10,6 +10,11 @@
   }
 }
 
+// Seven theme is a bit aggresive regarding font size
+.block-editor-block-list__layout {
+  font-size: 15px;
+}
+
 @media (min-width: 782px) {
   .block-editor-editor-skeleton {
     top: 39px;

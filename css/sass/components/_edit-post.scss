@@ -48,3 +48,7 @@ body.is-fullscreen-mode {
     z-index: 999 !important;
   }
 }
+
+input[type="search"] {
+  box-sizing: border-box;
+}

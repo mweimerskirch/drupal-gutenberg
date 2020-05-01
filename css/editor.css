@@ -81,6 +81,10 @@ body.is-fullscreen-mode .edit-post-layout {
   z-index: 999 !important;
 }
 
+input[type="search"] {
+  box-sizing: border-box;
+}
+
 .gutenberg__editor {
   position: relative;
 }
@@ -91,6 +95,10 @@ body.is-fullscreen-mode .edit-post-layout {
 
 .gutenberg__editor *:focus {
   outline-width: 0;
+}
+
+.block-editor-block-list__layout {
+  font-size: 15px;
 }
 
 @media (min-width: 782px) {

@@ -3,8 +3,9 @@
  */
 
 .gutenberg__editor {
-  .edit-post-visual-editor {
+  .editor-styles-wrapper {
     font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 15px;
 
     [data-type="core/paragraph"] {
       font-size: 15px;
