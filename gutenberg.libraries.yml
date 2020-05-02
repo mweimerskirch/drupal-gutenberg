@@ -115,6 +115,7 @@ edit-node:
     js/drupal-media.js: {  }
     js/gutenberg.js: {  }
     js/admin.js: {  }
+    js/welcome-guide.js: {  }
   dependencies:
     - core/jquery
     - core/drupal
