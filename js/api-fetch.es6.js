@@ -27,10 +27,6 @@
         title: false, // show title on editor
       },
       taxonomies: [],
-      viewable: false,
-      saveable: false,
-      publishable: false,
-      autosaveable: false,
     },
     block: {
       capabilities: {},

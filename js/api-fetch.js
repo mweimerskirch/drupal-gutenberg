@@ -31,11 +31,7 @@
         revisions: false,
         thumbnail: false,
         title: false },
-      taxonomies: [],
-      viewable: false,
-      saveable: false,
-      publishable: false,
-      autosaveable: false
+      taxonomies: []
     },
     block: {
       capabilities: {},
