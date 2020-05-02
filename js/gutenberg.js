@@ -328,8 +328,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                   $(element).data({ 'editor-value-is-changed': true });
                   $(element).attr('data-editor-value-is-changed', true);
 
-                  data.dispatch('core/edit-post').openGeneralSidebar('edit-post/document');
-
                   if (!formSubmitted) {
                     _asyncToGenerator(regeneratorRuntime.mark(function _callee2() {
                       return regeneratorRuntime.wrap(function _callee2$(_context2) {

@@ -393,10 +393,6 @@
         $(element).data({ 'editor-value-is-changed': true });
         $(element).attr('data-editor-value-is-changed', true);
 
-        data
-          .dispatch('core/edit-post')
-          .openGeneralSidebar('edit-post/document');
-
         // Clear content "dirty" state.
         if (!formSubmitted) {
           (async () => {
