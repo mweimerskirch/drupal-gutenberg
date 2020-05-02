@@ -5,10 +5,13 @@
 * @preserve
 **/'use strict';
 
-(function (wp, Drupal) {
+(function (wp) {
   var element = wp.element,
       plugins = wp.plugins,
-      editPost = wp.editPost;
+      editPost = wp.editPost,
+      data = wp.data;
+  var dispatch = data.dispatch,
+      select = data.select;
   var useRef = element.useRef,
       useEffect = element.useEffect;
   var registerPlugin = plugins.registerPlugin;
@@ -29,13 +32,22 @@
     return React.createElement('div', { ref: ref });
   };
 
-  var MyDocumentSettingTest = function MyDocumentSettingTest() {
+  var NodeDocumentSettings = function NodeDocumentSettings() {
     return React.createElement(
       PluginDocumentSettingPanel,
-      { opened: true, className: 'node-setting-plugin', title: 'Node' },
+      { className: 'node-settings-plugin', title: 'Node' },
       React.createElement(FormPanel, null)
     );
   };
 
-  registerPlugin('document-setting-test', { render: MyDocumentSettingTest });
+  registerPlugin('node-document-settings', {
+    render: NodeDocumentSettings,
+    icon: null
+  });
+
+  var isOpened = select('core/edit-post').isEditorPanelOpened('node-document-settings/undefined');
+
+  if (!isOpened) {
+    dispatch('core/edit-post').toggleEditorPanelOpened('node-document-settings/undefined');
+  }
 })(wp, Drupal);

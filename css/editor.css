@@ -131,11 +131,11 @@ ul.block-editor-block-navigation__list {
   list-style: none;
 }
 
-.components-panel__body.node-setting-plugin.is-opened {
+.components-panel__body.node-settings-plugin.is-opened {
   padding: 0;
 }
 
-.components-panel__body.node-setting-plugin.is-opened .components-panel__body-title {
+.components-panel__body.node-settings-plugin.is-opened .components-panel__body-title {
   display: none;
 }
 

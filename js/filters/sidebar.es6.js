@@ -1,9 +1,10 @@
-((wp, Drupal) => {
-  const { element, plugins, editPost } = wp;
+(wp => {
+  const { element, plugins, editPost, data } = wp;
+  const { dispatch, select } = data;
   const { useRef, useEffect } = element;
   const { registerPlugin } = plugins;
   const { PluginDocumentSettingPanel } = editPost;
- 
+
   const FormPanel = () => {
     const ref = useRef(null);
 
@@ -11,23 +12,37 @@
       ref.current.appendChild(document.getElementById('edit-advanced'));
 
       return () => {
-        document.getElementById('gutenberg-sidebar').appendChild(document.getElementById('edit-advanced'));
-      }
+        document
+          .getElementById('gutenberg-sidebar')
+          .appendChild(document.getElementById('edit-advanced'));
+      };
     }, []);
 
-    return (
-      <div ref={ref}></div>
+    return <div ref={ref} />;
+  };
+
+  const NodeDocumentSettings = () => (
+    <PluginDocumentSettingPanel className="node-settings-plugin" title="Node">
+      <FormPanel />
+    </PluginDocumentSettingPanel>
+  );
+
+  registerPlugin('node-document-settings', {
+    render: NodeDocumentSettings,
+    icon: null,
+  });
+
+  // Something "fishy" about PluginDocumentSettingPanel component:
+  // opened prop doesn't work;
+  // the plugin is registered as node-document-settings/undefined;
+  // https://github.com/WordPress/gutenberg/issues/22049
+  const isOpened = select('core/edit-post').isEditorPanelOpened(
+    'node-document-settings/undefined',
+  );
+
+  if (!isOpened) {
+    dispatch('core/edit-post').toggleEditorPanelOpened(
+      'node-document-settings/undefined',
     );
   }
-
-  const MyDocumentSettingTest = () => {
-    return (
-      <PluginDocumentSettingPanel opened={true} className="node-setting-plugin" title="Node">
-        <FormPanel />
-      </PluginDocumentSettingPanel>
-    )
-  };
-  
-  registerPlugin( 'document-setting-test', { render: MyDocumentSettingTest } );
-
 })(wp, Drupal);
