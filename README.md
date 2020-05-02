@@ -69,7 +69,7 @@ Updating WordPress Gutenberg Packages
 This module uses the compiled JS packages from WordPress Gutenberg. Basically we just need to copy the files to `vendor/gutenberg`.
 
 Steps to update WordPress Gutenberg packages:
- * Two option to get the WordPress Gutenberg packages:
+ * There's two options to get the WordPress Gutenberg packages:
    * Option 1:
      * Download a release from Github ex: https://github.com/WordPress/gutenberg/releases/tag/v8.0.0
      * Unzip the file.
