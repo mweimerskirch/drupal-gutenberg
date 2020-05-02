@@ -113,11 +113,10 @@
       drupalSettings.gutenbergLoaded = true;
 
       const { contentType, allowedBlocks, blackList } = format.editorSettings;
-      const { data, blocks, hooks, plugins } = wp;
+      const { data, blocks, hooks } = wp;
       const { dispatch } = data;
       const { addFilter } = hooks;
-      const { unregisterPlugin } = plugins;
-      const { unregisterBlockType, registerBlockType, getBlockType } = blocks;
+      const { unregisterBlockType } = blocks;
       const {
         registerDrupalStore,
         registerDrupalBlocks,
@@ -224,16 +223,6 @@
           unregisterBlockType(value);
         });
 
-      // Add `ref` attribute to core/block.
-      // const coreBlock = getBlockType('core/block');
-      // unregisterBlockType('core/block');
-      // coreBlock.attributes = {
-      //   ref: {
-      //     type: 'number',
-      //   },
-      // };
-      // registerBlockType('core/block', coreBlock);
-
       // Process allowed blocks.
       /* eslint no-restricted-syntax: ["error", "never"] */
       for (const key in allowedBlocks) {
@@ -278,10 +267,10 @@
       }
 
       setTimeout(() => {
-        let $metaBoxContainer = $('.edit-post-meta-boxes-area__container');
+        const $metaBoxContainer = $('.edit-post-meta-boxes-area__container');
         drupalSettings.gutenberg.metaboxes.forEach(id => {
-          let $metabox = $(`#${id}`);
-          let metabox = $metabox.get(0);
+          const $metabox = $(`#${id}`);
+          const metabox = $metabox.get(0);
 
           // Re-initialize the original editors used within the metabox elements
           // which can break after they've been moved.
@@ -303,9 +292,6 @@
       metaboxForm.addClass('metabox-location-advanced');
       metaboxesContainer.append(metaboxForm);
 
-      // Disable inline image block.
-      // data.dispatch('core/editor').unregisterToken('core/image');
-
       // Disable form validation
       // We need some ninja hacks because every button in Gutenberg will
       // cause the form to submit.
@@ -321,14 +307,25 @@
 
       let isFormValid = false;
 
+      // Calling openGeneralSidebar() is not working properly when sidebar
+      // is hidden. To overcome this we need to call it twice.
+      $('#edit-submit, #edit-preview').on('mousedown', e => {
+        const { openGeneralSidebar } = data.dispatch('core/edit-post');
+
+        isFormValid = element.form.reportValidity();
+
+        if (!isFormValid) {
+          openGeneralSidebar('edit-post/document');
+          openGeneralSidebar('edit-post/document');
+
+          e.preventDefault();
+          e.stopPropagation();
+          return false;
+        }
+      });
+
       $('#edit-submit, #edit-preview').on('click', e => {
         $(e.currentTarget).attr('active', true);
-
-        // TODO: check if document tab and More Settings field set
-        // are already open to avoid sidebar visual flicker.
-        data
-          .dispatch('core/edit-post')
-          .openGeneralSidebar('edit-post/document');
 
         // Expand "More Settings" set.
         $('#edit-additional-fields').attr('open', '');

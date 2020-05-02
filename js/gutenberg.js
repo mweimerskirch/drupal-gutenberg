@@ -86,7 +86,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
       var _this2 = this;
 
       return _asyncToGenerator(regeneratorRuntime.mark(function _callee3() {
-        var _format$editorSetting, contentType, allowedBlocks, blackList, data, blocks, hooks, plugins, dispatch, addFilter, unregisterPlugin, unregisterBlockType, registerBlockType, getBlockType, registerDrupalStore, registerDrupalBlocks, registerDrupalMedia, key, value, categories, isWelcomeGuide, metaboxesContainer, metaboxForm, isFormValid, formSubmitted;
+        var _format$editorSetting, contentType, allowedBlocks, blackList, data, blocks, hooks, dispatch, addFilter, unregisterBlockType, registerDrupalStore, registerDrupalBlocks, registerDrupalMedia, key, value, categories, isWelcomeGuide, metaboxesContainer, metaboxForm, isFormValid, formSubmitted;
 
         return regeneratorRuntime.wrap(function _callee3$(_context3) {
           while (1) {
@@ -103,13 +103,12 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                 drupalSettings.gutenbergLoaded = true;
 
                 _format$editorSetting = format.editorSettings, contentType = _format$editorSetting.contentType, allowedBlocks = _format$editorSetting.allowedBlocks, blackList = _format$editorSetting.blackList;
-                data = wp.data, blocks = wp.blocks, hooks = wp.hooks, plugins = wp.plugins;
+                data = wp.data, blocks = wp.blocks, hooks = wp.hooks;
                 dispatch = data.dispatch;
                 addFilter = hooks.addFilter;
-                unregisterPlugin = plugins.unregisterPlugin;
-                unregisterBlockType = blocks.unregisterBlockType, registerBlockType = blocks.registerBlockType, getBlockType = blocks.getBlockType;
+                unregisterBlockType = blocks.unregisterBlockType;
                 registerDrupalStore = DrupalGutenberg.registerDrupalStore, registerDrupalBlocks = DrupalGutenberg.registerDrupalBlocks, registerDrupalMedia = DrupalGutenberg.registerDrupalMedia;
-                _context3.next = 12;
+                _context3.next = 11;
                 return addFilter('blocks.registerBlockType', 'drupalgutenberg/custom-attributes', function (settings, name) {
                   settings.attributes = Object.assign(settings.attributes, {
                     mappingField: {
@@ -131,23 +130,23 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                   return settings;
                 });
 
-              case 12:
-                _context3.next = 14;
+              case 11:
+                _context3.next = 13;
                 return registerDrupalStore(data);
 
-              case 14:
-                _context3.next = 16;
+              case 13:
+                _context3.next = 15;
                 return registerDrupalBlocks(contentType);
 
-              case 16:
-                _context3.next = 18;
+              case 15:
+                _context3.next = 17;
                 return registerDrupalMedia();
 
-              case 18:
-                _context3.next = 20;
+              case 17:
+                _context3.next = 19;
                 return _this2._initGutenberg(element);
 
-              case 20:
+              case 19:
 
                 if (drupalSettings.gutenberg._listeners.init) {
                   drupalSettings.gutenberg._listeners.init.forEach(function (callback) {
@@ -269,11 +268,24 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
                 isFormValid = false;
 
+                $('#edit-submit, #edit-preview').on('mousedown', function (e) {
+                  var _data$dispatch = data.dispatch('core/edit-post'),
+                      openGeneralSidebar = _data$dispatch.openGeneralSidebar;
+
+                  isFormValid = element.form.reportValidity();
+
+                  if (!isFormValid) {
+                    openGeneralSidebar('edit-post/document');
+                    openGeneralSidebar('edit-post/document');
+
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return false;
+                  }
+                });
 
                 $('#edit-submit, #edit-preview').on('click', function (e) {
                   $(e.currentTarget).attr('active', true);
-
-                  data.dispatch('core/edit-post').openGeneralSidebar('edit-post/document');
 
                   $('#edit-additional-fields').attr('open', '');
 
