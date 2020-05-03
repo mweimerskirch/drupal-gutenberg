@@ -46,7 +46,22 @@
     li[aria-current="step"] {
       svg {
         circle {
-          fill: #0678be;
+          fill: $primary-color;
+        }
+      }
+    }
+  }
+}
+
+// Hide Welcome Guide & Help menu items from Tools menu
+.edit-post-more-menu__content {
+  .components-popover__content {
+    .components-dropdown-menu__menu {
+      .components-menu-group:nth-child(3) {
+        div[role='group'] {
+          *:nth-child(4), *:nth-child(5) {
+            display: none;
+          }
         }
       }
     }

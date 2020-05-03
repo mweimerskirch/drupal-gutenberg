@@ -78,6 +78,10 @@ body .gutenberg {
   fill: #0678be;
 }
 
+.edit-post-more-menu__content .components-popover__content .components-dropdown-menu__menu .components-menu-group:nth-child(3) div[role='group'] *:nth-child(4), .edit-post-more-menu__content .components-popover__content .components-dropdown-menu__menu .components-menu-group:nth-child(3) div[role='group'] *:nth-child(5) {
+  display: none;
+}
+
 body.is-fullscreen-mode .edit-post-layout {
   left: 0 !important;
   top: 0 !important;

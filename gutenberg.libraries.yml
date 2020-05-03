@@ -61,6 +61,7 @@ filters:
   js:
     js/filters/mapping-fields.js: {  }
     js/filters/sidebar.js: {  }
+    js/filters/tools-menu.js: {  }
   dependencies:
     - gutenberg/hook
 
