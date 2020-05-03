@@ -5,21 +5,18 @@ const { registerBlockType } = blocks;
 const { InnerBlocks } = blockEditor;
 const __ = Drupal.t;
 
-const SECTION_TEMPLATE = [['core/paragraph', { placeholder: 'Summary' }]];
+const style = {
+  minHeight: '40px',
+  margin: '0 -40px',
+  padding: '0 40px',
+};
 
-function SectionEdit({ hasInnerBlocks }) {
+const template = [['core/paragraph', {}]];
+
+function SectionEdit() {
   return (
-    <main>
-      <InnerBlocks
-        templateLock={false}
-        renderAppender={
-          hasInnerBlocks
-            ? undefined
-            : () => (
-                <InnerBlocks.ButtonBlockAppender />
-              )
-        }
-      />
+    <main style={style}>
+      <InnerBlocks templateLock={false} template={template} />
     </main>
   );
 }
