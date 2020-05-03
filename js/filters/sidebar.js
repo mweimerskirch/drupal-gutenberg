@@ -35,7 +35,11 @@
   var NodeDocumentSettings = function NodeDocumentSettings() {
     return React.createElement(
       PluginDocumentSettingPanel,
-      { className: 'node-settings-plugin', title: 'Node' },
+      {
+        name: 'panel',
+        className: 'node-settings-plugin',
+        title: 'Node'
+      },
       React.createElement(FormPanel, null)
     );
   };
@@ -45,9 +49,9 @@
     icon: null
   });
 
-  var isOpened = select('core/edit-post').isEditorPanelOpened('node-document-settings/undefined');
+  var isOpened = select('core/edit-post').isEditorPanelOpened('node-document-settings/panel');
 
   if (!isOpened) {
-    dispatch('core/edit-post').toggleEditorPanelOpened('node-document-settings/undefined');
+    dispatch('core/edit-post').toggleEditorPanelOpened('node-document-settings/panel');
   }
 })(wp, Drupal);

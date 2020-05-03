@@ -22,7 +22,11 @@
   };
 
   const NodeDocumentSettings = () => (
-    <PluginDocumentSettingPanel className="node-settings-plugin" title="Node">
+    <PluginDocumentSettingPanel
+      name="panel"
+      className="node-settings-plugin"
+      title="Node"
+    >
       <FormPanel />
     </PluginDocumentSettingPanel>
   );
@@ -34,15 +38,15 @@
 
   // Something "fishy" about PluginDocumentSettingPanel component:
   // opened prop doesn't work;
-  // the plugin is registered as node-document-settings/undefined;
+  // the plugin is registered as node-document-settings/panel;
   // https://github.com/WordPress/gutenberg/issues/22049
   const isOpened = select('core/edit-post').isEditorPanelOpened(
-    'node-document-settings/undefined',
+    'node-document-settings/panel',
   );
 
   if (!isOpened) {
     dispatch('core/edit-post').toggleEditorPanelOpened(
-      'node-document-settings/undefined',
+      'node-document-settings/panel',
     );
   }
 })(wp, Drupal);
