@@ -79,6 +79,11 @@ foreach ($packages as $package) {
   }
 }
 
+// Customize editor package sources.
+if (isset($yaml['editor'])) {
+  unset($yaml['editor']['css']['theme']['vendor/gutenberg/editor/editor-styles.css']);
+}
+
 // Customize i18n package sources.
 if (isset($yaml['i18n'])) {
   $yaml['i18n']['js'] = [
