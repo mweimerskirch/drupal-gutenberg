@@ -57,6 +57,11 @@ seven:
   css:
     theme:
       css/seven.css: {  }
+claro:
+  version: 1.0.0
+  css:
+    theme:
+      css/claro.css: {  }
 filters:
   js:
     js/filters/mapping-fields.js: {  }
@@ -468,7 +473,7 @@ editor:
     vendor/gutenberg/editor/index.js: {  }
   css:
     theme:
-      vendor/gutenberg/editor/editor-styles.css: {  }
+      # vendor/gutenberg/editor/editor-styles.css: {  }
       vendor/gutenberg/editor/style.css: {  }
   dependencies:
     - gutenberg/lodash

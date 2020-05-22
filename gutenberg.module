@@ -435,6 +435,11 @@ function gutenberg_form_node_form_alter(&$form, FormStateInterface $form_state) 
     $form['#attached']['library'][] = 'gutenberg/seven';
   }
 
+  // Check if current theme is Claro (admin)
+  $theme = \Drupal::theme()->getActiveTheme();
+  if ($theme->getName() === 'claro') {
+    $form['#attached']['library'][] = 'gutenberg/claro';
+  }
 
   $form['#attached']['drupalSettings']['gutenberg']['metaboxes'][] = 'edit-metabox-fields';
 
