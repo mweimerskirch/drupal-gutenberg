@@ -21,7 +21,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *   id = "gutenberg",
  *   label = @Translation("Gutenberg"),
  *   supports_content_filtering = TRUE,
- *   supports_inline_editing = TRUE,
+ *   supports_inline_editing = FALSE,
  *   is_xss_safe = FALSE,
  *   supported_element_types = {
  *     "textarea"
