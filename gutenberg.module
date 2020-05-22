@@ -96,7 +96,7 @@ function gutenberg_form_alter(&$form, FormStateInterface $form_state, $form_id) 
       ],
     ];
 
-    $settings = _gutenberg_get_allowed_blocks();
+    $settings = UtilsController::getAllowedBlocks();
     $blocks_settings = UtilsController::getBlocksSettings();
 
     foreach ($settings['categories'] as $category) {
@@ -272,24 +272,13 @@ function gutenberg_form_node_form_alter(&$form, FormStateInterface $form_state) 
   $form['#attached']['drupalSettings']['gutenberg']['template'] = json_decode($config->get($node_type . '_template'));
   $form['#attached']['drupalSettings']['gutenberg']['template-lock'] = $config->get($node_type . '_template_lock');
 
-  /*
-   * DEPRECATED >>>
-   */
-  $mapped_fields = _gutenberg_get_mapped_fields(json_decode($config->get($node_type . '_template')));
-  foreach ($mapped_fields as $item) {
-    $form[$item['field']]['#access'] = FALSE;
-  }
-  /*
-   * <<< DEPRECATED
-   */
-
   $mapped_fields = _gutenberg_get_mapping_fields(json_decode($config->get($node_type . '_template')));
 
   foreach ($mapped_fields as $item) {
     $form[$item['field']]['#access'] = FALSE;
   }
 
-  $module_settings = _gutenberg_get_all_modules_settings();
+  $module_settings = UtilsController::getAllModulesSettings();
   foreach ($module_settings as $settings) {
     if (isset($settings['libraries-edit'])) {
       foreach ($settings['libraries-edit'] as $library) {
@@ -298,7 +287,7 @@ function gutenberg_form_node_form_alter(&$form, FormStateInterface $form_state) 
     }
   }
 
-  $theme_settings = _gutenberg_get_default_theme_settings();
+  $theme_settings = UtilsController::getDefaultThemeSettings();
   if (isset($theme_settings['libraries-edit'])) {
     foreach ($theme_settings['libraries-edit'] as $value) {
       $form['#attached']['library'][] = $value;
@@ -324,27 +313,7 @@ function gutenberg_form_node_form_alter(&$form, FormStateInterface $form_state) 
   }
   $form['#attached']['drupalSettings']['gutenberg']['image-sizes'] = $sizes;
 
-  $text_fields = [];
-
-  // Iterate over all node fields and apply gutenberg text format
-  // on first text field found.
-  $field_names = array_keys($node->getFields());
-
-  foreach ($field_names as $value) {
-    $field_properties = array_keys($node
-      ->getFieldDefinition($value)
-      ->getFieldStorageDefinition()
-      ->getPropertyDefinitions());
-
-    if (in_array('format', $field_properties)) {
-      $text_fields[] = $value;
-    }
-  }
-
-  // No point going forward when no text fields on the form.
-  if (count($text_fields) === 0) {
-    return;
-  }
+  $text_fields = UtilsController::getNodeTextFields($node);
 
   $form['#attributes']['class'][] = 'metabox-base-form';
 
@@ -427,6 +396,7 @@ function gutenberg_form_node_form_alter(&$form, FormStateInterface $form_state) 
    */
   $metabox_has_fields = FALSE;
   $fields_with_details = [];
+  $field_names = UtilsController::getNodeFieldNames($node);
   foreach ($field_names as $value) {
     if (
       array_key_exists($value, $form)
@@ -578,7 +548,7 @@ function gutenberg_preprocess_node(&$variables) {
 
   $variables['#attached']['library'][] = 'gutenberg/blocks-view';
 
-  $module_settings = _gutenberg_get_all_modules_settings();
+  $module_settings = UtilsController::getAllModulesSettings();
   foreach ($module_settings as $settings) {
     if (isset($settings['libraries-view'])) {
       foreach ($settings['libraries-view'] as $library) {
@@ -610,98 +580,17 @@ function gutenberg_entity_presave($entity) {
     return;
   }
 
-  /*
-   * DEPRECATED >>>
-   * To be removed on 1.12 or 1.13 (2.0?)
-   */
-  // Get first text field, that's the one that'll have
-  // gutenberg text format
-  // TODO: We already have this on node_edit_form_alter,
-  // let's move it to a function.
-  $value_fields = ['title'];
-  $text_fields = [];
-  // Used for media.
-  $file_fields = [];
-
-  // Iterate over all node fields and apply gutenberg text format
-  // on first text field found.
-  $field_names = array_keys($entity->getFields());
-  foreach ($field_names as $value) {
-    $definition = $entity->getFieldDefinition($value);
-    $field_properties = $definition
-      ->getFieldStorageDefinition()
-      ->getPropertyDefinitions();
-
-    if (in_array('value', array_keys($field_properties))) {
-      $value_fields[] = $value;
-    }
-
-    // Check for "rich-text" fields.
-    if (in_array('format', array_keys($field_properties))) {
-      $text_fields[] = $value;
-    }
-
-    if (isset($field_properties['entity'])) {
-      $settings = $definition->getSettings();
-
-      // Check for images/files.
-      if ($settings['target_type'] === 'file') {
-        $file_fields[] = $value;
-      }
-
-      if ($settings['target_type'] === 'media') {
-        $file_fields[] = $value;
-      }
-    }
-  }
+   $text_fields = UtilsController::getNodeTextFields($entity);
 
   if (count($text_fields) === 0) {
     return;
   }
 
-  $str = $entity->get($text_fields[0])->getString();
-  // Iterate over all mapped fields and set its values.
-  $mapped_fields = _gutenberg_get_mapped_fields(json_decode($config->get($node_type . '_template')));
-  foreach ($mapped_fields as $item) {
-    $re = '/((<!-- .*?\{.*"mappingField":"' . $item['field'] . '".*} -->)([\s\S]*?)(<!-- \/[\s\S]*?-->|\/-->)|(<!-- .*?\{.*"mappingField":"' . $item['field'] . '".*} \/-->))/m';
-    // matches:
-    // 0: all block
-    // 1: opening block comment tag (get attributes from here)
-    // 2: content
-    // 3: closing block comment tag.
-    preg_match_all($re, $str, $matches, PREG_SET_ORDER, 0);
-    // Get block attributes.
-    $re = '/((<!-- .*?({[\s\S]*}).*-->)|(<!-- .*?({[\s\S]*}).*\/-->))/m';
-    $tag = $matches[0][2] !== '' ? $matches[0][2] : $matches[0][1];
-    preg_match_all($re, $tag, $attrs, PREG_SET_ORDER, 0);
-    $attributes = json_decode($attrs[0][3], TRUE);
-
-    // Remove line breaks.
-    $re = '/\r?\n|\r/';
-    $value = $matches[0][3];
-    $value = preg_replace($re, '', $value);
-
-    if (in_array($item['field'], $value_fields)) {
-      $entity->set($item['field'], strip_tags($value));
-    }
-
-    // Set text fields.
-    if (in_array($item['field'], $text_fields)) {
-      $entity->set($item['field'], $matches[0][3]);
-    }
-
-    if (in_array($item['field'], $file_fields)) {
-      $value = is_array($attributes[$item['attribute']]) ? $attributes[$item['attribute']][0] : $attributes[$item['attribute']];
-      $entity->set($item['field'], ['target_id' => $value]);
-    }
-  }
-  /*
-   * <<< DEPRECATED
-   */
-  $mapped_fields = _gutenberg_get_mapping_fields(json_decode($config->get($node_type . '_template')));
+  $text_fields = [];
+  $field_content = $entity->get($text_fields[0])->getString();
 
   $re = '/((<!-- .*?\{.*"mappingFields":.*} -->)([\s\S]*?)(<!-- \/[\s\S]*?-->|\/-->)|(<!-- .*?\{.*"mappingFields":.*} \/-->))/m';
-  preg_match_all($re, $str, $blocks, PREG_SET_ORDER, 0);
+  preg_match_all($re, $field_content, $blocks, PREG_SET_ORDER, 0);
 
   // Let's build the field's array of values.
   $fields = [];
@@ -752,35 +641,6 @@ function gutenberg_entity_presave($entity) {
 }
 
 /**
- * Gets all mapped fields on the template (recursive).
- *
- * @deprecated in gutenberg:8.x-1.11
- * @see https://www.drupal.org/node/3109876
- */
-function _gutenberg_get_mapped_fields($template, &$result = []) {
-  if (empty($template)) {
-    return [];
-  }
-
-  foreach ($template as $key => $block) {
-    if (isset($block[1]) && isset($block[1]->mappingField)) {
-      $item = [];
-      $item['field'] = $block[1]->mappingField;
-      if (isset($block[1]->mappingAttribute)) {
-        $item['attribute'] = $block[1]->mappingAttribute;
-      }
-      $result[] = $item;
-    }
-
-    if (isset($block[2])) {
-      _gutenberg_get_mapped_fields($block[2], $result);
-    }
-  }
-
-  return $result;
-}
-
-/**
  * Gets all mapping fields on the template (recursive).
  */
 function _gutenberg_get_mapping_fields($template, &$result = []) {
@@ -809,64 +669,6 @@ function _gutenberg_get_mapping_fields($template, &$result = []) {
   }
 
   return $result;
-}
-
-/**
- * Gets default theme settings.
- */
-function _gutenberg_get_default_theme_settings() {
-  $settings = &drupal_static(__FUNCTION__);
-
-  if (!isset($settings)) {
-    $theme_name = \Drupal::config('system.theme')->get('default');
-    $theme_path = drupal_get_path('theme', $theme_name);
-
-    $file_path = DRUPAL_ROOT . '/' . $theme_path . '/' . $theme_name . '.gutenberg.yml';
-    if (file_exists($file_path)) {
-      $file_contents = file_get_contents($file_path);
-      $settings = Yaml::parse($file_contents);
-    }
-    else {
-      $settings = [];
-    }
-  }
-
-  return $settings;
-}
-
-/**
- * Gets settings from all modules.
- */
-function _gutenberg_get_all_modules_settings() {
-  $settings = &drupal_static(__FUNCTION__);
-
-  if (!isset($settings)) {
-    $directories = \Drupal::service('module_handler')->getModuleDirectories();
-    $discovery = new YamlDiscovery('gutenberg', $directories);
-    $settings = $discovery->findAll();
-  }
-
-  return $settings;
-}
-
-/**
- * Gets allowed blocks.
- */
-function _gutenberg_get_allowed_blocks() {
-  $settings = &drupal_static(__FUNCTION__);
-
-  if (!isset($settings)) {
-    $module_handler = \Drupal::service('module_handler');
-    $path = $module_handler->getModule('gutenberg')->getPath();
-
-    $file_path = DRUPAL_ROOT . '/' . $path . '/' . 'gutenberg.blocks.yml';
-    if (file_exists($file_path)) {
-      $file_contents = file_get_contents($file_path);
-      $settings = Yaml::parse($file_contents);
-    }
-  }
-
-  return $settings;
 }
 
 /**
@@ -1033,7 +835,7 @@ function gutenberg_views_pre_render(ViewExecutable $view) {
  * Implements hook_page_attachments().
  */
 function gutenberg_page_attachments(array &$page) {
-  $settings = _gutenberg_get_default_theme_settings();
+  $settings = UtilsController::getDefaultThemeSettings();
 
   if (!isset($settings['theme-support']['colors'])) {
     return;
