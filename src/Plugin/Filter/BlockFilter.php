@@ -70,7 +70,15 @@ class BlockFilter extends FilterBase implements ContainerFactoryPluginInterface 
 
     $text = implode("\n", $lines);
 
-    return new FilterProcessResult($text);
+    $result = new FilterProcessResult($text);
+
+    // Add cache metadata from Drupal blocks.
+    $metadata = $this->cacheabilityMetadata($text);
+    $result->setCacheTags($metadata['tags']);
+    $result->setCacheContexts($metadata['contexts']);
+    $result->setCacheMaxAge($metadata['max-age']);
+
+    return $result;
   }
 
   /**
@@ -114,4 +122,40 @@ class BlockFilter extends FilterBase implements ContainerFactoryPluginInterface 
     return $comment . $content;
   }
 
+  /**
+   * Helper function to collect cache metadata from Drupal blocks.
+   *
+   * @param string $text
+   *
+   * @return array
+   */
+  private function cacheabilityMetadata($text) {
+    $metadata = [
+      'tags'     => [],
+      'contexts' => [],
+      'max-age'  => 0,
+    ];
+
+    preg_match_all('#<!-- wp:drupalblock\/.*\s(\{.*\})\s\/-->#', $text, $matches);
+
+    if (!empty($matches[1])) {
+      foreach ($matches[1] as $match) {
+        $attributes = json_decode($match);
+        $block      = $this->blocksRenderer->getBlockFromPluginId($attributes->blockId, []);
+        $build      = $block->build();
+
+        $metadata['tags']     = array_merge($metadata['tags'], $build['#cache']['tags']);
+        $metadata['contexts'] = array_merge($metadata['contexts'], $build['#cache']['contexts']);
+
+        if ($build['#cache']['max-age'] < $metadata['max-age']) {
+          $metadata['max-age'] = $build['#cache']['max-age'];
+        }
+      }
+
+      $metadata['tags']     = array_unique($metadata['tags']);
+      $metadata['contexts'] = array_unique($metadata['contexts']);
+    }
+
+    return $metadata;
+  }
 }
