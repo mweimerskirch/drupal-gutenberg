@@ -585,13 +585,12 @@ function gutenberg_entity_presave($entity) {
     return;
   }
 
-   $text_fields = UtilsController::getNodeTextFields($entity);
+  $text_fields = UtilsController::getNodeTextFields($entity);
 
   if (count($text_fields) === 0) {
     return;
   }
 
-  $text_fields = [];
   $field_content = $entity->get($text_fields[0])->getString();
 
   $re = '/((<!-- .*?\{.*"mappingFields":.*} -->)([\s\S]*?)(<!-- \/[\s\S]*?-->|\/-->)|(<!-- .*?\{.*"mappingFields":.*} \/-->))/m';
