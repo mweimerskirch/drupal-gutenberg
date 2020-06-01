@@ -35,17 +35,15 @@ $autoloader = require_once getRootDir() . '/autoload.php';
 // Could require bootstrap but maybe it's a "overkill"...?
 require_once '../src/ScanDir.php';
 
-$ignore_dirs = ['edit-site', 'edit-navigation', 'edit-widgets'];
 $yaml = Yaml::parse(file_get_contents('../gutenberg.libraries.yml'));
-$dirs = scandir('../vendor/gutenberg');
-
-$dirs = array_diff($dirs, $ignore_dirs);
+$files = scandir('../vendor/gutenberg');
+$total = count($files);
 
 $packages = [];
 
-foreach ($dirs as $dir) {
-  if (substr($dir, 0, 1) !== '.' && $dir !== NULL) {
-    $packages[] = $dir;
+foreach ($files as $file) {
+  if (substr($file, 0, 1) !== '.' && $file !== NULL) {
+    $packages[] = $file;
   }
 }
 
@@ -77,11 +75,6 @@ foreach ($packages as $package) {
     $dep = str_replace('wp-', '', $dep);
     $yaml[$package]['dependencies'][] = 'gutenberg/' . $dep;
   }
-}
-
-// Customize editor package sources.
-if (isset($yaml['editor'])) {
-  unset($yaml['editor']['css']['theme']['vendor/gutenberg/editor/editor-styles.css']);
 }
 
 // Customize i18n package sources.

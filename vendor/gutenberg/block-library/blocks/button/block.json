@@ -19,6 +19,18 @@
 			"source": "html",
 			"selector": "a"
 		},
+		"backgroundColor": {
+			"type": "string"
+		},
+		"textColor": {
+			"type": "string"
+		},
+		"customBackgroundColor": {
+			"type": "string"
+		},
+		"customTextColor": {
+			"type": "string"
+		},
 		"linkTarget": {
 			"type": "string",
 			"source": "attribute",
@@ -37,16 +49,10 @@
 		"borderRadius": {
 			"type": "number"
 		},
-		"style": {
-			"type": "object"
-		},
-		"backgroundColor": {
-			"type": "string"
-		},
-		"textColor": {
-			"type": "string"
-		},
 		"gradient": {
+			"type": "string"
+		},
+		"customGradient": {
 			"type": "string"
 		}
 	}

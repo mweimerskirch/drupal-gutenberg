@@ -18,19 +18,20 @@ var InnerBlocks = blockEditor.InnerBlocks;
 
 var __ = Drupal.t;
 
-var style = {
-  minHeight: '40px',
-  margin: '0 -40px',
-  padding: '0 40px'
-};
+var SECTION_TEMPLATE = [['core/paragraph', { placeholder: 'Summary' }]];
 
-var template = [['core/paragraph', {}]];
+function SectionEdit(_ref) {
+  var hasInnerBlocks = _ref.hasInnerBlocks;
 
-function SectionEdit() {
   return React.createElement(
     'main',
-    { style: style },
-    React.createElement(InnerBlocks, { templateLock: false, template: template })
+    null,
+    React.createElement(InnerBlocks, {
+      templateLock: false,
+      renderAppender: hasInnerBlocks ? undefined : function () {
+        return React.createElement(InnerBlocks.ButtonBlockAppender, null);
+      }
+    })
   );
 }
 
@@ -43,8 +44,8 @@ var settings = {
     inserter: false
   },
 
-  edit: compose([withSelect(function (select, _ref) {
-    var clientId = _ref.clientId;
+  edit: compose([withSelect(function (select, _ref2) {
+    var clientId = _ref2.clientId;
 
     var _select = select('core/block-editor'),
         getBlock = _select.getBlock;
@@ -56,8 +57,8 @@ var settings = {
     };
   })])(SectionEdit),
 
-  save: function save(_ref2) {
-    var className = _ref2.className;
+  save: function save(_ref3) {
+    var className = _ref3.className;
 
     return React.createElement(
       'main',

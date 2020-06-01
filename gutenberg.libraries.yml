@@ -57,16 +57,9 @@ seven:
   css:
     theme:
       css/seven.css: {  }
-claro:
-  version: 1.0.0
-  css:
-    theme:
-      css/claro.css: {  }
 filters:
   js:
     js/filters/mapping-fields.js: {  }
-    js/filters/sidebar.js: {  }
-    js/filters/tools-menu.js: {  }
   dependencies:
     - gutenberg/hook
 
@@ -121,7 +114,6 @@ edit-node:
     js/drupal-media.js: {  }
     js/gutenberg.js: {  }
     js/admin.js: {  }
-    js/welcome-guide.js: {  }
   dependencies:
     - core/jquery
     - core/drupal
@@ -192,8 +184,6 @@ api-fetch:
   css:
     theme: {  }
   dependencies:
-    - gutenberg/deprecated
-    - gutenberg/element
     - gutenberg/i18n
     - gutenberg/polyfill
     - gutenberg/url
@@ -256,7 +246,6 @@ block-editor:
     - gutenberg/keycodes
     - gutenberg/polyfill
     - gutenberg/primitives
-    - gutenberg/priority-queue
     - gutenberg/rich-text
     - gutenberg/token-list
     - gutenberg/url
@@ -341,6 +330,7 @@ components:
     - gutenberg/lodash
     - gutenberg/moment
     - gutenberg/react
+    - gutenberg/react-dom
     - gutenberg/a11y
     - gutenberg/compose
     - gutenberg/deprecated
@@ -375,7 +365,6 @@ core-data:
     - gutenberg/api-fetch
     - gutenberg/blocks
     - gutenberg/data
-    - gutenberg/data-controls
     - gutenberg/deprecated
     - gutenberg/element
     - gutenberg/i18n
@@ -437,6 +426,24 @@ dom-ready:
     theme: {  }
   dependencies:
     - gutenberg/polyfill
+edit-navigation:
+  js:
+    vendor/gutenberg/edit-navigation/index.js: {  }
+  css:
+    theme:
+      vendor/gutenberg/edit-navigation/style.css: {  }
+  dependencies:
+    - gutenberg/lodash
+    - gutenberg/block-editor
+    - gutenberg/block-library
+    - gutenberg/blocks
+    - gutenberg/components
+    - gutenberg/compose
+    - gutenberg/data
+    - gutenberg/element
+    - gutenberg/i18n
+    - gutenberg/keyboard-shortcuts
+    - gutenberg/polyfill
 edit-post:
   js:
     vendor/gutenberg/edit-post/index.js: {  }
@@ -454,7 +461,6 @@ edit-post:
     - gutenberg/compose
     - gutenberg/core-data
     - gutenberg/data
-    - gutenberg/data-controls
     - gutenberg/editor
     - gutenberg/element
     - gutenberg/hooks
@@ -468,12 +474,56 @@ edit-post:
     - gutenberg/primitives
     - gutenberg/url
     - gutenberg/viewport
+edit-site:
+  js:
+    vendor/gutenberg/edit-site/index.js: {  }
+  css:
+    theme:
+      vendor/gutenberg/edit-site/style.css: {  }
+  dependencies:
+    - gutenberg/lodash
+    - gutenberg/block-editor
+    - gutenberg/block-library
+    - gutenberg/blocks
+    - gutenberg/components
+    - gutenberg/compose
+    - gutenberg/core-data
+    - gutenberg/data
+    - gutenberg/editor
+    - gutenberg/element
+    - gutenberg/hooks
+    - gutenberg/i18n
+    - gutenberg/media-utils
+    - gutenberg/notices
+    - gutenberg/polyfill
+    - gutenberg/primitives
+    - gutenberg/url
+edit-widgets:
+  js:
+    vendor/gutenberg/edit-widgets/index.js: {  }
+  css:
+    theme:
+      vendor/gutenberg/edit-widgets/style.css: {  }
+  dependencies:
+    - gutenberg/lodash
+    - gutenberg/block-editor
+    - gutenberg/block-library
+    - gutenberg/blocks
+    - gutenberg/components
+    - gutenberg/compose
+    - gutenberg/data
+    - gutenberg/element
+    - gutenberg/hooks
+    - gutenberg/i18n
+    - gutenberg/media-utils
+    - gutenberg/notices
+    - gutenberg/polyfill
 editor:
   js:
     vendor/gutenberg/editor/index.js: {  }
   css:
     theme:
-      # vendor/gutenberg/editor/editor-styles.css: {  }
+      vendor/gutenberg/editor/editor-styles.css: {  }
       vendor/gutenberg/editor/style.css: {  }
   dependencies:
     - gutenberg/lodash

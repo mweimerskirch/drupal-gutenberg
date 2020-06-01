@@ -21,6 +21,12 @@
       text: {
         type: 'string',
       },
+      mappingField: {
+        type: 'string',
+      },
+      mappingAttribute: {
+        type: 'string',
+      },
       placeholder: {
         type: 'string',
         default: 'Insert text',

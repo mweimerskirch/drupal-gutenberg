@@ -32,6 +32,12 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       text: {
         type: 'string'
       },
+      mappingField: {
+        type: 'string'
+      },
+      mappingAttribute: {
+        type: 'string'
+      },
       placeholder: {
         type: 'string',
         default: 'Insert text'

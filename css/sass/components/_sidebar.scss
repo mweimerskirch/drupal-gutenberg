@@ -7,17 +7,3 @@
     }
   }
 }
-
-.components-panel__body {
-  &.node-settings-plugin.is-opened {
-    padding: 0;
-
-    .components-panel__body-title {
-      display: none;
-    }
-  }
-}
-
-.entity-meta {
-  border: 0 !important;
-}

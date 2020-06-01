@@ -3,10 +3,12 @@
  */
 
 .gutenberg__editor {
-  .editor-styles-wrapper {
+  .edit-post-visual-editor {
     font-family: Georgia, 'Times New Roman', Times, serif;
-    font-size: 15px;
-    line-height: 1.8;
+
+    [data-type="core/paragraph"] {
+      font-size: 15px;
+    }
   }
 }
 

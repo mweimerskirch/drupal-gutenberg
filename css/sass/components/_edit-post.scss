@@ -21,7 +21,7 @@
 
 .edit-post-header {
   .edit-post-fullscreen-mode-close {
-    // background-color: #0678be;
+    background-color: #0678be;
     display: none;
 
     &.drupal {
@@ -41,41 +41,10 @@
   transition: ease-in-out 0.2s all;
 }
 
-.edit-post-welcome-guide {
-  .components-guide__page-control {
-    li[aria-current="step"] {
-      svg {
-        circle {
-          fill: $primary-color;
-        }
-      }
-    }
-  }
-}
-
-// Hide Welcome Guide & Help menu items from Tools menu
-.edit-post-more-menu__content {
-  .components-popover__content {
-    .components-dropdown-menu__menu {
-      .components-menu-group:nth-child(3) {
-        div[role='group'] {
-          *:nth-child(4), *:nth-child(5) {
-            display: none;
-          }
-        }
-      }
-    }
-  }
-}
-
 body.is-fullscreen-mode {
   .edit-post-layout {
     left: 0 !important;
     top: 0 !important;
     z-index: 999 !important;
   }
-}
-
-input[type="search"] {
-  box-sizing: border-box;
 }

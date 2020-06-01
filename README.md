@@ -69,13 +69,8 @@ Updating WordPress Gutenberg Packages
 This module uses the compiled JS packages from WordPress Gutenberg. Basically we just need to copy the files to `vendor/gutenberg`.
 
 Steps to update WordPress Gutenberg packages:
- * There's two options to get the WordPress Gutenberg packages:
-   * Option 1:
-     * Download a release from Github ex: https://github.com/WordPress/gutenberg/releases/tag/v8.0.0
-     * Unzip the file.
-   * Option 2:
-     * Git clone WordPress Gutenberg repository `https://github.com/WordPress/gutenberg`
-     * Run `npm install` and `npm run build` - this will create a new subfolder `build` with all compiled WordPress Gutenberg packages
+ * Git clone WordPress Gutenberg repository `https://github.com/WordPress/gutenberg`
+ * Run `npm install` and `npm run build` - this will create a new subfolder `build` with all compiled WordPress Gutenberg packages
  * Copy all folders from `build` folder to the module's folder `vendor\gutenberg` (remove the old package folders before copy)
  * At module's folder, go to `scripts` and run `php gutenberg-dependencies.php` - this will regenerate the `gutenberg.libraries.yml` config file
 
