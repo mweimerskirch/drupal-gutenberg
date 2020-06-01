@@ -6,7 +6,6 @@
     page: {
       id: 1,
       labels: {
-        singular_name: 'Node',
         Document: Drupal.t('Node'),
         document: Drupal.t('Node'),
         posts: Drupal.t('Nodes'),
@@ -34,9 +33,6 @@
     },
     block: {
       capabilities: {},
-      labels: {
-        singular_name: 'Block',
-      },
       name: 'Blocks',
       rest_base: 'blocks',
       slug: 'wp_block',

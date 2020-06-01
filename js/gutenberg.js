@@ -65,14 +65,14 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
               });
 
             case 2:
-
+              console.log('yo 1!', clientId, mediaEntityIds);
               setTimeout(function () {
                 dispatch('core/block-editor').updateBlock(clientId, {
                   attributes: { mediaEntityIds: mediaEntityIds }
                 });
               }, 100);
 
-            case 3:
+            case 4:
             case 'end':
               return _context.stop();
           }
@@ -86,7 +86,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
       var _this2 = this;
 
       return _asyncToGenerator(regeneratorRuntime.mark(function _callee3() {
-        var _format$editorSetting, contentType, allowedBlocks, blackList, data, blocks, hooks, plugins, dispatch, addFilter, unregisterPlugin, unregisterBlockType, registerBlockType, getBlockType, registerDrupalStore, registerDrupalBlocks, registerDrupalMedia, key, value, categories, isWelcomeGuide, metaboxesContainer, metaboxForm, isFormValid, formSubmitted;
+        var _format$editorSetting, contentType, allowedBlocks, blackList, data, blocks, hooks, dispatch, addFilter, unregisterBlockType, registerBlockType, getBlockType, registerDrupalStore, registerDrupalBlocks, registerDrupalMedia, key, value, categories, metaboxesContainer, metaboxForm, isFormValid, formSubmitted;
 
         return regeneratorRuntime.wrap(function _callee3$(_context3) {
           while (1) {
@@ -103,13 +103,12 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                 drupalSettings.gutenbergLoaded = true;
 
                 _format$editorSetting = format.editorSettings, contentType = _format$editorSetting.contentType, allowedBlocks = _format$editorSetting.allowedBlocks, blackList = _format$editorSetting.blackList;
-                data = wp.data, blocks = wp.blocks, hooks = wp.hooks, plugins = wp.plugins;
+                data = wp.data, blocks = wp.blocks, hooks = wp.hooks;
                 dispatch = data.dispatch;
                 addFilter = hooks.addFilter;
-                unregisterPlugin = plugins.unregisterPlugin;
                 unregisterBlockType = blocks.unregisterBlockType, registerBlockType = blocks.registerBlockType, getBlockType = blocks.getBlockType;
                 registerDrupalStore = DrupalGutenberg.registerDrupalStore, registerDrupalBlocks = DrupalGutenberg.registerDrupalBlocks, registerDrupalMedia = DrupalGutenberg.registerDrupalMedia;
-                _context3.next = 12;
+                _context3.next = 11;
                 return addFilter('blocks.registerBlockType', 'drupalgutenberg/custom-attributes', function (settings, name) {
                   settings.attributes = Object.assign(settings.attributes, {
                     mappingField: {
@@ -131,23 +130,23 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                   return settings;
                 });
 
-              case 12:
-                _context3.next = 14;
+              case 11:
+                _context3.next = 13;
                 return registerDrupalStore(data);
 
-              case 14:
-                _context3.next = 16;
+              case 13:
+                _context3.next = 15;
                 return registerDrupalBlocks(contentType);
 
-              case 16:
-                _context3.next = 18;
+              case 15:
+                _context3.next = 17;
                 return registerDrupalMedia();
 
-              case 18:
-                _context3.next = 20;
+              case 17:
+                _context3.next = 19;
                 return _this2._initGutenberg(element);
 
-              case 20:
+              case 19:
 
                 if (drupalSettings.gutenberg._listeners.init) {
                   drupalSettings.gutenberg._listeners.init.forEach(function (callback) {
@@ -220,24 +219,17 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                   return true;
                 });
 
-                unregisterPlugin('edit-post-block-patterns');
 
                 data.dispatch('core/blocks').setCategories(categories);
 
                 data.dispatch('core/edit-post').openGeneralSidebar('edit-post/document');
 
+                data.dispatch('core/nux').disableTips();
+
                 data.dispatch('core/edit-post').setAvailableMetaBoxesPerLocation({
                   advanced: ['drupalSettings']
                 });
 
-                data.dispatch('core/edit-post').removeEditorPanel('post-status');
-
-                isWelcomeGuide = data.select('core/edit-post').isFeatureActive('welcomeGuide');
-
-
-                if (isWelcomeGuide) {
-                  data.dispatch('core/edit-post').toggleFeature('welcomeGuide');
-                }
 
                 setTimeout(function () {
                   var $metaBoxContainer = $('.edit-post-meta-boxes-area__container');
@@ -349,7 +341,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
                 return _context3.abrupt('return', true);
 
-              case 49:
+              case 45:
               case 'end':
                 return _context3.stop();
             }
@@ -462,47 +454,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                   } else {
                     hasClosedSidebar();
                   }
-
-                  var isFullscreenMode = data.select('core/edit-post').isFeatureActive('fullscreenMode');
-
-                  setTimeout(function () {
-                    var fullscreenLink = $('.edit-post-header a.edit-post-fullscreen-mode-close:not(.drupal)');
-
-                    var drupalFullscreenLink = $('.edit-post-header a.edit-post-fullscreen-mode-close.drupal');
-
-                    if (isFullscreenMode && fullscreenLink.length > 0 && drupalFullscreenLink.length === 0) {
-                      var params = new URLSearchParams(window.location.search);
-                      var backUrl = drupalSettings.path.baseUrl + 'admin/content';
-
-                      if (RegExp(/node\/\d+\/edit/g).test(drupalSettings.path.currentPath)) {
-                        backUrl = drupalSettings.path.baseUrl + drupalSettings.path.currentPath.replace('/edit', '');
-                      }
-
-                      backUrl = params.get('destination') || backUrl;
-
-                      var domContainer = $('<div style="display: contents"></div>');
-                      fullscreenLink.after(domContainer);
-
-                      var icon = React.createElement(
-                        'svg',
-                        { version: '1.1', role: 'img', 'aria-hidden': 'true', focusable: 'false', id: 'Layer_1', x: '0px', y: '0px', viewBox: '0 0 2160 2880', 'enable-background': 'new 0 0 2160 2880', className: 'dashicon' },
-                        React.createElement('path', { d: 'M1842.9,677.1C1638.9,473.1,1368,360,1080,360C485.1,360,0,845.1,0,1440s485.1,1080,1080,1080  s1080-485.1,1080-1080C2160,1152,2046.9,881.1,1842.9,677.1z M1080,2141.1c-325.7,0-591.4-265.7-591.4-591.4  c0-276,185.1-461.1,348-624c108-108,212.6-212.6,243.4-329.1c30.9,116.6,133.7,221.1,243.4,329.1c162.9,162.9,348,348,348,624  C1671.4,1875.4,1405.7,2141.1,1080,2141.1z' })
-                      );
-
-                      var render = wp.element.render;
-                      var Button = wp.components.Button;
-
-                      var drupalButton = React.createElement(Button, {
-                        className: 'edit-post-fullscreen-mode-close drupal',
-                        icon: icon,
-                        iconSize: 36,
-                        href: backUrl,
-                        label: Drupal.t('Back')
-                      });
-
-                      render(drupalButton, domContainer[0]);
-                    }
-                  });
 
                   if (!data.select('core/block-editor').isValidTemplate()) {
                     data.dispatch('core/block-editor').setTemplateValidity(true);
