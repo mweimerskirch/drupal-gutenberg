@@ -79,7 +79,7 @@ class MediaUploader implements MediaUploaderInterface {
 
     $filename = \Drupal::transliteration()->transliterate($filename); // Remove accents, etc
     $filename = str_replace(' ', '-', $filename);
-    $filename = preg_replace( '/[^a-zA-Z0-9\-]/i', '', $filename); // remove non-alphanumeric characters
+    $filename = preg_replace( '/[^a-zA-Z0-9\-._]/i', '', $filename); // remove non-alphanumeric characters
     $filename = preg_replace('/^-+/', '', $filename); // strip leading dashes
     $filename = preg_replace('/-+$/', '', $filename); // strip trailing dashes
 
