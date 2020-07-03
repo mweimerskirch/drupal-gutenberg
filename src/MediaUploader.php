@@ -46,7 +46,7 @@ class MediaUploader implements MediaUploaderInterface {
     $data = file_get_contents($uploaded_file->getPathname());
     $file_name = $this->getRandomFileName($uploaded_file->getClientOriginalExtension() ?: '');
     $file = file_save_data($data, "{$directory}/{$file_name}", FileSystemInterface::EXISTS_RENAME);
-    $file->setTemporary();
+//    $file->setTemporary();
     $file->setFilename($uploaded_file->getClientOriginalName());
 
     try {
