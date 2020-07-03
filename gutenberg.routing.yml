@@ -38,7 +38,7 @@ gutenberg.media.render:
     _permission: 'gutenberg administer'
     _method: 'GET'
 gutenberg.blocks.load:
-  path: '/editor/blocks/load_by_type/{content_type}'
+  path: '/editor/blocks/load_by_type/{content_type}/{node_id}'
   defaults:
     _controller: '\Drupal\gutenberg\Controller\BlocksController::loadByType'
     content_type: 'none'

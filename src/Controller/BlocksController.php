@@ -77,18 +77,20 @@ class BlocksController extends ControllerBase {
    * @return \Symfony\Component\HttpFoundation\JsonResponse
    *   The JSON response.
    */
-  public function loadByType(Request $request, $content_type) {
+  public function loadByType(Request $request, $content_type, $node_id) {
     $blockManager = \Drupal::service('plugin.manager.block');
     $contextRepository = \Drupal::service('context.repository');
     $config = \Drupal::service('config.factory')->getEditable('gutenberg.settings');
-    $config_values = $config->get($content_type . '_allowed_drupal_blocks');
+    $allowed_drupal_blocks = $config->get($content_type . '_allowed_drupal_blocks');
+
+    \Drupal::moduleHandler()->alter('allowed_drupal_blocks', $allowed_drupal_blocks, $content_type, $node_id);
 
     // Get blocks definition.
     $definitions = $blockManager->getDefinitionsForContexts($contextRepository->getAvailableContexts());
     $definitions = $blockManager->getSortedDefinitions($definitions);
 
     $return = [];
-    foreach ($config_values as $key => $value) {
+    foreach ($allowed_drupal_blocks as $key => $value) {
       if ($value) {
         $return[$key] = $definitions[$key];
       }
