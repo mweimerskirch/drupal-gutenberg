@@ -563,7 +563,7 @@ function gutenberg_form_media_edit_form_after_build(array $element, FormStateInt
 }
 
 /**
- * Implements template_preprocess_field().
+ * Implements template_preprocess_node().
  */
 function gutenberg_preprocess_node(&$variables) {
   $config = \Drupal::service('config.factory')->getEditable('gutenberg.settings');
