@@ -144,11 +144,12 @@ class BlockFilter extends FilterBase implements ContainerFactoryPluginInterface 
         $block      = $this->blocksRenderer->getBlockFromPluginId($attributes->blockId, []);
         $build      = $block->build();
 
-        $metadata['tags']     = array_merge($metadata['tags'], $build['#cache']['tags']);
-        $metadata['contexts'] = array_merge($metadata['contexts'], $build['#cache']['contexts']);
+        $metadata['tags']     = array_merge($metadata['tags'], isset($build['#cache']['tags']) ? $build['#cache']['tags'] :  $block->getCacheTags());
+        $metadata['contexts'] = array_merge($metadata['contexts'], isset($build['#cache']['contexts']) ? $build['#cache']['contexts'] :  $block->getCacheContexts());
 
-        if ($build['#cache']['max-age'] < $metadata['max-age']) {
-          $metadata['max-age'] = $build['#cache']['max-age'];
+        $max_age = isset($build['#cache']['max-age']) ? $build['#cache']['max-age'] : $block->getCacheMaxAge();
+        if ($max_age < $metadata['max-age']) {
+          $metadata['max-age'] = $max_age;
         }
       }
 
