@@ -16,6 +16,20 @@ use Drupal\image\Entity\ImageStyle;
 use Drupal\gutenberg\Controller\UtilsController;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\CloseModalDialogCommand;
+use Drupal\Core\Asset\AttachedAssetsInterface;
+
+/**
+ * Implements hook_js_alter().
+ */
+function gutenberg_js_alter(&$javascript, AttachedAssetsInterface $assets) {
+  // For an unknown reason the scripts that depend on jquery.ui.widget are
+  // loaded before its dependency. Therefore we modify the weight here to
+  // ensure the widget-min.js is invoked earlier.
+  // See https://www.drupal.org/project/gutenberg/issues/3219569
+  if (isset($javascript['core/assets/vendor/jquery.ui/ui/widget-min.js'])) {
+    $javascript['core/assets/vendor/jquery.ui/ui/widget-min.js']['weight'] = -12;
+  }
+}
 
 /**
  * Implements hook_form_alter().
